@@ -274,6 +274,7 @@ destroy(message)
 end on
 
 event close;DISCONNECT USING SQLCA;
+//
  
 
 end event
