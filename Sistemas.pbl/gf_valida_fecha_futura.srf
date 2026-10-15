@@ -1,0 +1,24 @@
+﻿global type gf_valida_fecha_futura from function_object
+end type
+
+forward prototypes
+global function boolean gf_valida_fecha_futura (datetime adt_fecha_tran)
+end prototypes
+
+global function boolean gf_valida_fecha_futura (datetime adt_fecha_tran);datetime ldt_fecha_actual
+time lt_time
+integer li_ann, li_mes
+
+lt_time = time('00:00:00')
+
+	ldt_fecha_actual = gf_fecha_serv() //datetime(date(string(gf_last_day(li_mes, li_ann))+'/'+string(li_mes)+'/'+string(li_ann)),23:59:59)
+	ldt_fecha_actual = datetime(relativedate(date(ldt_fecha_actual),60),lt_time)
+	
+	if adt_fecha_tran > ldt_fecha_actual then
+		gf_mensaje('','Fecha fuera de Rango, Verifique !!!',1,1,'E')
+		return false
+	end if
+	
+return true
+end function
+

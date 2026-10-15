@@ -1,0 +1,16 @@
+﻿global type str_secuencia_doc from structure
+	long		ano
+	long		secuencia
+	string		datawindow
+	string		sec_manual
+	integer		banco
+	integer		cod_banco
+	string		tran
+	string		subtran
+	string		aplicacion
+	string		banco_cuenta
+	string		referencia
+	string		categoria
+	string		descripcion
+end type
+

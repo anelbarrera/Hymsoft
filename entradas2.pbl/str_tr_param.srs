@@ -1,0 +1,18 @@
+﻿//objectcomments Estructura de parametros
+global type str_tr_param from structure
+	integer		anio
+	string		clave_cia
+	integer		num_pais
+	string		recupera_de_salida
+	string		integrado_independiente
+	integer		subfactura_sn
+	integer		imp_x_renglones
+	integer		imp_gastos_en_sal_trasp
+	integer		imp_no_ped_traspaso
+	integer		detalle_bultos
+	integer		imp_totales_desp_lin10
+	integer		decimales_sino
+	integer		inserta_lin_totales
+	integer		totales_en_linea_10
+end type
+

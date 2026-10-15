@@ -1,0 +1,21 @@
+﻿//objectcomments Retorna la Medida de la unidad del producto
+global type gf_medi_prod from function_object
+end type
+
+forward prototypes
+global function long gf_medi_prod (string unidad_prod)
+end prototypes
+
+global function long gf_medi_prod (string unidad_prod);//Tipo de medida de la unidad del producto	(UNIDADES, UNIDAD DE PESO, CONVERSIONES, ETC)
+// Devuleve 10 en caso de que sea una medida
+
+long ll_ucom
+
+  SELECT inamedid.medi_tipo_medida
+  INTO :ll_ucom
+  FROM inamedid
+  WHERE inamedid.medi_medida = :unidad_prod  ;
+
+return(ll_ucom)
+end function
+

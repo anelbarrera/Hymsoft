@@ -1,0 +1,45 @@
+﻿//objectcomments Recupera la cantidad de dias del vencimiento de la factura
+global type gf_recupera_dias from function_object
+end type
+
+forward prototypes
+global function datetime gf_recupera_dias (integer ai_codigo_dias, date adt_fecha)
+end prototypes
+
+global function datetime gf_recupera_dias (integer ai_codigo_dias, date adt_fecha);//Función que recupera el numero de dias que tiene el cliente para pagar la factura
+ //Cuando es Credito, se le setea la fecha de la factura + los días a pagar a fin del plazo
+//Variables de memoria
+string	ls_frecuencia
+integer	li_cantidad, li_dias
+datetime ld_fecha_final
+  
+   //Recupera la cantidad de dias de la periodicidad
+    
+  
+  SELECT dgaperio.peri_frecuencia,   //Extrae la frecuencia M=mes, D=dias, etc.
+         dgaperio.peri_valor_d_s  
+    INTO :ls_frecuencia,   
+         :li_cantidad  
+    FROM dgaperio  
+   WHERE ( dgaperio.peri_aplicacion = "FA" ) AND  
+         ( dgaperio.peri_periodo = :ai_codigo_dias ) ;
+			
+		if sqlca.sqlcode = -1 then
+			mensaje("Información (wf_recupera_días)","Error al Seleccionar registros en dgaperio",sqlca.sqlerrtext)
+			return ld_fecha_final
+		end if					
+			
+		CHOOSE CASE ls_frecuencia
+			CASE "D"
+				li_dias	=	li_cantidad
+			CASE "M"
+				li_dias	=  li_cantidad	*	30
+			CASE "A"
+				li_dias	=	li_cantidad	*	365
+		END CHOOSE
+
+  		ld_fecha_final  =  datetime(gf_suma_fecha_valor(li_dias, adt_fecha))		
+
+return ld_fecha_final
+end function
+

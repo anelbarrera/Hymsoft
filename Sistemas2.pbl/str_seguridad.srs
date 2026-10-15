@@ -1,0 +1,5 @@
+﻿global type str_seguridad from structure
+	string		codigo
+	string		nombre
+end type
+

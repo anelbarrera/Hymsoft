@@ -1,0 +1,15 @@
+﻿//objectcomments Estructura de Desglose de Cantidades (Utilizada por Compras, Facturación e Inventarios)
+global type str_desglose from structure
+	string		dataobject
+	datastore		ds
+	decimal {4}	cantidad
+	string		cadena[5]
+	long		numero[4]
+	string		grupo_tam
+	string		g_color
+	integer		anno
+	string		medida
+	string		filtro
+	string		param
+end type
+

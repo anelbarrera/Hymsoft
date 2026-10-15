@@ -1,0 +1,133 @@
+﻿global type gf_win_used_by_user from function_object
+end type
+
+forward prototypes
+global subroutine gf_win_used_by_user (string as_ventana, boolean ab_estado)
+end prototypes
+
+global subroutine gf_win_used_by_user (string as_ventana, boolean ab_estado);String		ls_desc
+DateTime		ldt_ahora
+
+//Es una prueba para ver el rendimiento sin la función
+
+Return  //()
+
+
+ldt_ahora = gf_fecha_serv()
+
+IF ab_estado THEN
+	ls_desc = "Abrio " + as_ventana// + " el " + string(ldt_ahora)
+	// Inserto en Bitacora
+	  INSERT INTO ssaudito  
+         ( audi_usuario_apl,   
+           audi_usuario_win,   
+           audi_maquina,   
+           audi_cod_aplicacion,   
+           audi_cod_empresa,   
+           audi_g_financiero,   
+           audi_g_seguridad,   
+           audi_num_ip,   
+           audi_fecha_hora,   
+           audi_ventana,   
+           audi_descip )  
+  VALUES ( :str.usuario,   
+           :str.win_user,   
+           :str.maquina,   
+           :str.aplicacion,   
+           :str.empresa,   
+           :str.g_financiero,   
+           :str.grupo,   
+           :str.ip,   
+           :ldt_ahora,   
+           :as_ventana,   
+           :ls_desc )  ;
+
+	// No despliego mensaje de Error
+	If Sqlca.Sqlcode = 0 Then
+		Commit using sqlca;
+	End If
+	
+	// Inserto en Historico
+	  INSERT INTO ssaudith  
+         ( audi_usuario_apl,   
+           audi_usuario_win,   
+           audi_maquina,   
+           audi_cod_aplicacion,   
+           audi_cod_empresa,   
+           audi_g_financiero,   
+           audi_g_seguridad,   
+           audi_num_ip,   
+           audi_fecha_hora,   
+           audi_ventana,   
+           audi_descrip ) 
+  VALUES ( :str.usuario,   
+           :str.win_user,   
+           :str.maquina,   
+           :str.aplicacion,   
+           :str.empresa,   
+           :str.g_financiero,   
+           :str.grupo,   
+           :str.ip,   
+           :ldt_ahora,   
+           :as_ventana,   
+           :ls_desc )  ;
+
+	// No despliego mensaje de Error
+	If Sqlca.Sqlcode = 0 Then
+		Commit using sqlca;
+	End If
+
+ELSE
+	ls_desc = "Cerro " + as_ventana// + " el " + string(ldt_ahora)
+	
+	// Inserto en Historico
+	  INSERT INTO ssaudith  
+         ( audi_usuario_apl,   
+           audi_usuario_win,   
+           audi_maquina,   
+           audi_cod_aplicacion,   
+           audi_cod_empresa,   
+           audi_g_financiero,   
+           audi_g_seguridad,   
+           audi_num_ip,   
+           audi_fecha_hora,   
+           audi_ventana,   
+           audi_descrip ) 
+  VALUES ( :str.usuario,   
+           :str.win_user,   
+           :str.maquina,   
+           :str.aplicacion,   
+           :str.empresa,   
+           :str.g_financiero,   
+           :str.grupo,   
+           :str.ip,   
+           :ldt_ahora,   
+           :as_ventana,   
+           :ls_desc )  ;
+
+	// No despliego mensaje de Error
+	If Sqlca.Sqlcode = 0 Then
+		Commit using sqlca;
+	End If
+	
+	// Borro de la Bitacora
+	  DELETE FROM ssaudito  
+   WHERE ( ssaudito.audi_usuario_apl = :str.usuario ) AND  
+         ( ssaudito.audi_usuario_win = :str.win_user ) AND  
+         ( ssaudito.audi_maquina 	= :str.maquina ) AND  
+         ( ssaudito.audi_cod_aplicacion = :str.aplicacion ) AND  
+         ( ssaudito.audi_g_seguridad = :str.grupo ) AND  
+         ( ssaudito.audi_ventana = :as_ventana )   ;
+
+	// No despliego mensaje de Error
+	If Sqlca.Sqlcode = 0 Then
+		Commit using sqlca;
+	Else
+		Mensaje("Aviso", "gf_win_used_by_user() No Logró Registrar en la Vitácora.", sqlca.sqlerrtext)
+	End If	
+END IF
+rollback ;
+commit ;
+
+end subroutine
+

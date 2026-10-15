@@ -1,0 +1,63 @@
+﻿//objectcomments Función que convierte el ENTERO y FRACCIÓN a DECIMAL utilizando como base el enlace de la medida (Modificación de gf_conv_cantidad)
+global type gf_fa_convert_cant from function_object
+end type
+
+forward prototypes
+global function double gf_fa_convert_cant (ref long al_entero, ref double ad_fraccion, readonly character ac_tipo, readonly string as_medida)
+end prototypes
+
+global function double gf_fa_convert_cant (ref long al_entero, ref double ad_fraccion, readonly character ac_tipo, readonly string as_medida);/******************************************************************************************
+ *																														*
+ * Function: gf_fa_convert_cant																				*
+ *																														*
+ * Purpose: 	Rutina que convierte de DECIMAL a ENTERO, FRACCIÓN; y de ENTERO, FRACCIÓN	*
+ *			a DECIMAL utilizando la tabla de Medida (inamedid) como base.  						*
+ * 		Dependiendo del tipo	(ac_tipo).																	*
+ *																														*
+ *	Scope: global																									*
+ *																														*
+ *	Arguments: al_entero 	{Parte Entera}																	*
+ *				  ad_fraccion 	{Fracción}																		*
+ *				  ac_tipo		{Tipo de Conversión A decimal -> entero, fracción					*
+ *															  C entero, fracción -> decimal}					*
+ *				  as_medida		{Unidad de Medida}															*
+ *																														*
+ *	Returns: decimal {sólo para ac_tipo = 'C', es el número resultante}							*
+ *																														*
+ * Created:	5 / Abril / 1999																					*
+ * Last Modified: 6 / Abril / 1999																			*
+ ******************************************************************************************/
+
+Double		ld_cantidad, ld_entero
+Long			ll_entero
+
+
+SELECT inamedid.medi_cantidad  
+  INTO :ld_cantidad  
+  FROM inamedid  
+ WHERE inamedid.medi_medida = :as_medida;
+
+CHOOSE CASE upper (ac_tipo)
+	CASE 'A'
+		ld_entero	= ad_fraccion
+		If ld_entero = 0.0 Or IsNull (ad_fraccion) Then 
+			al_entero = 0
+			Return 0
+		End If
+		ll_entero	= truncate (ld_entero, 0)		
+		ad_fraccion = mod (ld_entero, ll_entero)
+		ad_fraccion = round (ad_fraccion * ld_cantidad,0)
+		al_entero   = long (ll_entero)
+		Return 0		
+
+	CASE 'C'
+		//messagebox (string(ad_entero),string(ad_fraccion) + " / " + string (ld_cantidad ))
+		ld_entero = ad_fraccion
+		If (ad_fraccion > 0.0) And (ld_cantidad > 0.0) Then ld_entero /= ld_cantidad
+		//messagebox ("cantidad",string(ad_fraccion))
+		ld_cantidad = al_entero + ld_entero
+		Return (ld_cantidad)
+END CHOOSE
+		
+end function
+

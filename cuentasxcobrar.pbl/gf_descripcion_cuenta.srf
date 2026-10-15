@@ -1,0 +1,19 @@
+﻿global type gf_descripcion_cuenta from function_object
+end type
+
+forward prototypes
+global function string gf_descripcion_cuenta (string as_cuenta)
+end prototypes
+
+global function string gf_descripcion_cuenta (string as_cuenta);string ls_descripcion  
+  
+  SELECT dgmplanc.mg_descripcion  
+    INTO :ls_descripcion 
+    FROM dgmplanc  
+   WHERE ( dgmplanc.mg_g_financiero = :str.g_financiero ) AND  
+         ( dgmplanc.mg_empresa = :str.empresa ) AND  
+         ( dgmplanc.mg_cuenta = :as_cuenta )   ;
+
+return ls_descripcion
+end function
+

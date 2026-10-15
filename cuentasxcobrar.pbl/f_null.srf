@@ -1,0 +1,29 @@
+﻿global type f_null from function_object
+end type
+
+forward prototypes
+global function string f_null (string as_hilera)
+end prototypes
+
+global function string f_null (string as_hilera);//	Esta función se utiliza para convertir un string nulo a espacios para
+//	efectos de concatenación con otros strings si es string.
+//	
+//	Entrada:
+//	
+//		as_hilera		string 	 La variable a evaluar
+//		
+//	Salidas:
+//		
+//		Se retorna "" si la variable fue encontrada nula, de lo contrario, retorna la variable
+//		
+//	Nota: Si usted concatena una varias hileras y una de ellas es nula, la hilera resultante
+//			va a ser también nula. Si esa hilera nula esta en un messagebox, el messagebox
+//			no se despliega.
+
+if isnull(as_hilera) then
+	return ""
+else
+	return as_hilera
+end if
+end function
+

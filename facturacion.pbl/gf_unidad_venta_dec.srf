@@ -1,0 +1,30 @@
+﻿//objectcomments devuelve decimal
+global type gf_unidad_venta_dec from function_object
+end type
+
+forward prototypes
+global function double gf_unidad_venta_dec (string unidad_venta, long tipo_medida)
+end prototypes
+
+global function double gf_unidad_venta_dec (string unidad_venta, long tipo_medida);	//* Carga Los Datos de Converción de la Unidad del Producto a la Nueva unidad o 
+	// Cantidad de unidades minimas de la unidad de Venta
+			
+	//Devuelve 1 si la unidad del producto es PZ : Piezas
+	//  "      12        "                    DO : Docenas
+	//  "      300        "                   GR : Gruesas
+
+	double ld_mconver_venta
+
+  SELECT inamedid.medi_cantidad
+  INTO  :ld_mconver_venta
+  FROM  inamedid  
+  WHERE inamedid.medi_tipo_medida = :tipo_medida and
+		  inamedid.medi_medida = :unidad_venta;
+						  
+	if sqlca.sqlcode = -1 then
+		gf_mensaje("","Error en el Select "+sqlca.sqlerrtext,1,1,"E")
+	end if
+
+return(ld_mconver_venta)
+end function
+

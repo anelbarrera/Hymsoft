@@ -1,0 +1,8 @@
+﻿//objectcomments Estructura para Los Cargos de la Proforma
+global type str_fa_cargo from structure
+	string		proforma
+	double		monto
+	double		bultos
+	double		ano
+end type
+

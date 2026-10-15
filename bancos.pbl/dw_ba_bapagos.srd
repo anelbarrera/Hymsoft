@@ -1,0 +1,98 @@
+﻿//objectcomments  
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=1 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=bapa_g_financiero dbname="bapagos.bapa_g_financiero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=bapa_empresa dbname="bapagos.bapa_empresa" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=bapa_secuencia dbname="bapagos.bapa_secuencia" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=bapa_concepto_pago dbname="bapagos.bapa_concepto_pago" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=bapa_ruc dbname="bapagos.bapa_ruc" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=bapa_digito_verificador dbname="bapagos.bapa_digito_verificador" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=bapa_tipo_persona dbname="bapagos.bapa_tipo_persona" )
+ column=(type=char(60) update=yes updatewhereclause=yes name=bapa_a_nombre_de dbname="bapagos.bapa_a_nombre_de" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=bapa_monto_factura dbname="bapagos.bapa_monto_factura" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=bapa_numero_factura dbname="bapagos.bapa_numero_factura" )
+ column=(type=datetime update=yes updatewhereclause=yes name=bapa_fecha_factura dbname="bapagos.bapa_fecha_factura" )
+ column=(type=datetime update=yes updatewhereclause=yes name=bapa_fecha_orden dbname="bapagos.bapa_fecha_orden" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=bapa_monto_agrupado dbname="bapagos.bapa_monto_agrupado" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=bapa_itbm dbname="bapagos.bapa_itbm" )
+ column=(type=long update=yes updatewhereclause=yes name=bapa_cantidad_registros dbname="bapagos.bapa_cantidad_registros" )
+ retrieve="  SELECT bapagos.bapa_g_financiero,   
+         bapagos.bapa_empresa,   
+         bapagos.bapa_secuencia,   
+         bapagos.bapa_concepto_pago,   
+         bapagos.bapa_ruc,   
+         bapagos.bapa_digito_verificador,   
+         bapagos.bapa_tipo_persona,   
+         bapagos.bapa_a_nombre_de,   
+         bapagos.bapa_monto_factura,   
+         bapagos.bapa_numero_factura,   
+         bapagos.bapa_fecha_factura,   
+         bapagos.bapa_fecha_orden,   
+         bapagos.bapa_monto_agrupado,   
+         bapagos.bapa_itbm,   
+         bapagos.bapa_cantidad_registros  
+    FROM bapagos  
+   WHERE ( bapagos.bapa_g_financiero = :finan ) AND  
+         ( bapagos.bapa_empresa = :empr ) AND  
+         ( bapagos.bapa_monto_agrupado >= 50 ) AND 
+			( bapagos.bapa_concepto_pago not in ('','00'))
+   UNION   
+  SELECT max(bapagos.bapa_g_financiero),   
+         max(bapagos.bapa_empresa),   
+         max(bapagos.bapa_secuencia),   
+         max(bapagos.bapa_concepto_pago),   
+         bapagos.bapa_ruc,   
+         bapagos.bapa_digito_verificador,   
+         max(bapagos.bapa_tipo_persona),   
+         max(bapagos.bapa_a_nombre_de),   
+         max(bapagos.bapa_monto_factura),   
+         max(bapagos.bapa_numero_factura),   
+         max(bapagos.bapa_fecha_factura),   
+         max(bapagos.bapa_fecha_orden),   
+			sum(bapagos.bapa_monto_agrupado) monto_agrupado,   
+         sum(bapagos.bapa_itbm),
+         sum(1) cantidad_registros  
+    FROM bapagos  
+   WHERE ( bapagos.bapa_g_financiero = :finan ) AND  
+         ( bapagos.bapa_empresa = :empr ) AND  
+         ( bapagos.bapa_monto_agrupado < 50 ) AND 
+			( bapagos.bapa_concepto_pago not in ('','00'))
+group by bapagos.bapa_ruc,   
+         bapagos.bapa_digito_verificador
+" update="bapagos" updatewhere=0 updatekeyinplace=no arguments=(("finan", number),("empr", number))  sort="bapa_concepto_pago A " )
+text(band=header alignment="2" text="Bapa G Financiero" border="0" color="0" x="9" y="8" height="64" width="494"  name=bapa_g_financiero_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Empresa" border="0" color="0" x="512" y="8" height="64" width="393"  name=bapa_empresa_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Concepto Pago" border="0" color="0" x="2075" y="8" height="64" width="562"  name=bapa_concepto_pago_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Ruc" border="0" color="0" x="2647" y="8" height="64" width="576"  name=bapa_ruc_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Digito Verificador" border="0" color="0" x="3232" y="8" height="64" width="603"  name=bapa_digito_verificador_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Tipo Persona" border="0" color="0" x="3845" y="8" height="64" width="503"  name=bapa_tipo_persona_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa A Nombre De" border="0" color="0" x="4357" y="8" height="64" width="1673"  name=bapa_a_nombre_de_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Monto Factura" border="0" color="0" x="6039" y="8" height="64" width="539"  name=bapa_monto_factura_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Numero Factura" border="0" color="0" x="6587" y="8" height="64" width="581"  name=bapa_numero_factura_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Fecha Factura" border="0" color="0" x="7177" y="8" height="64" width="603"  name=bapa_fecha_factura_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Fecha Orden" border="0" color="0" x="7790" y="8" height="64" width="603"  name=bapa_fecha_orden_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Monto Agrupado" border="0" color="0" x="8402" y="8" height="64" width="590"  name=bapa_monto_agrupado_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Cantidad Registros" border="0" color="0" x="9001" y="8" height="64" width="658"  name=bapa_cantidad_registros_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Bapa Secuencia" border="0" color="0" x="914" y="8" height="64" width="1152"  name=obj_4935494  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="9" y="8" height="76" width="494" format="[general]"  name=bapa_g_financiero edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="512" y="8" height="76" width="393" format="[general]"  name=bapa_empresa edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="2075" y="8" height="76" width="562" format="[general]"  name=bapa_concepto_pago edit.limit=2 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="2647" y="8" height="76" width="576" format="[general]"  name=bapa_ruc edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="3232" y="8" height="76" width="603" format="[general]"  name=bapa_digito_verificador edit.limit=2 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="3845" y="8" height="76" width="503" format="[general]"  name=bapa_tipo_persona edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="4357" y="8" height="76" width="1673" format="[general]"  name=bapa_a_nombre_de edit.limit=60 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="6039" y="8" height="76" width="539" format="[general]"  name=bapa_monto_factura edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="6587" y="8" height="76" width="581" format="[general]"  name=bapa_numero_factura edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="7177" y="8" height="76" width="603" format="[shortdate] [time]"  name=bapa_fecha_factura edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="7790" y="8" height="76" width="603" format="[shortdate] [time]"  name=bapa_fecha_orden edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="0" x="8402" y="8" height="76" width="590" format="[general]"  name=bapa_monto_agrupado edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="1" tabsequence=32766 border="0" color="0" x="9001" y="8" height="76" width="658" format="[general]"  name=bapa_cantidad_registros edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="914" y="8" height="76" width="1152" format="[general]"  name=bapa_secuencia edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="1" tabsequence=0 border="0" color="0" x="9673" y="8" height="76" width="393" format="[General]"  name=bapa_itbm  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bapa Itbm" border="2" color="0" x="9669" y="8" height="64" width="398"  name=t_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1090519039" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

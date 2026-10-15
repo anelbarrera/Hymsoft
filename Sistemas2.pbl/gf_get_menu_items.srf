@@ -1,0 +1,81 @@
+﻿global type gf_get_menu_items from function_object
+end type
+
+forward prototypes
+global subroutine gf_get_menu_items (menu ma_item, window ventana)
+end prototypes
+
+global subroutine gf_get_menu_items (menu ma_item, window ventana);////*******************************************************************************************
+//// Se deshabilitan las Opciones a las cuales el usuario no tiene permiso en los item del
+////	menu que se pase como argumento
+//// Herick	07/09/1998
+////*******************************************************************************************
+//
+//Integer	li_a, li_b, li_c, li_m
+//Long		ll_i, ll_idx
+//String	ls_ventana
+////
+//Long ll_file
+//
+//
+//ls_ventana = ventana.ClassName()
+////
+//ll_file = FileOpen("C:\" + ls_ventana + ".txt", LineMode!, Write!, LockWrite!)
+//messagebox("", ll_file)
+//
+//FOR li_m=1 TO UpperBound(ma_item.item[])
+//	FOR li_a=1 TO UpperBound(ma_item.item[li_m].item[])
+//		FOR li_b=1 TO UpperBound(ma_item.item[li_m].item[li_a].item[])
+//			FOR li_c=1 TO UpperBound(ma_item.item[li_m].item[li_a].item[li_b].item[])
+//				FOR ll_i = 1 TO 1
+////					IF (ma_item.item[li_m].item[li_a].item[li_b].item[li_c].tag = str.menus[ll_i]) &
+////						AND (str.ventanas[ll_i] = ls_ventana) THEN
+///*						ma_item.item[li_m].item[li_a].item[li_b].item[li_c].visible = false
+//						ma_item.item[li_m].item[li_a].item[li_b].item[li_c].enabled = false
+//*/			ll_idx++
+//			FileWrite(ll_file, ma_item.item[li_m].item[li_a].item[li_b].item[li_c].tag + "~t" + string(ll_idx))
+////						Exit
+////					END IF
+//				NEXT			
+//			NEXT
+//				FOR ll_i = 1 TO 1
+////					IF (ma_item.item[li_m].item[li_a].item[li_b].tag = str.menus[ll_i])  &
+////						AND (str.ventanas[ll_i] = ls_ventana) THEN
+///*						ma_item.item[li_m].item[li_a].item[li_b].visible = false
+//						ma_item.item[li_m].item[li_a].item[li_b].enabled = false
+//*/			ll_idx ++
+//			FileWrite(ll_file, ma_item.item[li_m].item[li_a].item[li_b].tag + "~t" + string(ll_idx))
+////						Exit
+////					END IF
+//				NEXT			
+//		NEXT
+//				FOR ll_i = 1 TO 1
+////messagebox("Herick", ma_item.item[li_m].item[li_a].tag + "~r~n" + str.menus[ll_i] + &
+////							"~r~n" + str.ventanas[ll_i] + "~t" + ls_ventana + &
+////							"~r~n m: " + string(li_m) + " a: " + string(li_a) + " i: " + string(ll_i))
+////					IF (ma_item.item[li_m].item[li_a].tag = str.menus[ll_i])  &
+////						AND (str.ventanas[ll_i] = ls_ventana) THEN
+///*						ma_item.item[li_m].item[li_a].visible = false
+//						ma_item.item[li_m].item[li_a].enabled = false
+//*/			ll_idx ++
+//			FileWrite(ll_file, ma_item.item[li_m].item[li_a].tag + "~t" + string(ll_idx))
+////						Exit
+////					END IF
+//				NEXT			
+//	NEXT
+//
+//  FOR ll_i = 1 TO 1
+////	  IF (ma_item.item[li_m].tag = str.menus[ll_i])  &
+////											AND (str.ventanas[ll_i] = ls_ventana) THEN
+///*		 ma_item.item[li_m].visible = false
+//		 ma_item.item[li_m].enabled = false
+//*/			ll_idx ++
+//			FileWrite(ll_file, ma_item.item[li_m].tag + "~t" + string(ll_idx))
+////		 Exit
+////	  END IF
+//  NEXT			
+//NEXT
+//
+//Messagebox("", FileClose(ll_file))
+end subroutine
+

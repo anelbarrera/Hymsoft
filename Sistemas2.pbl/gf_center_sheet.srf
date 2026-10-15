@@ -1,0 +1,18 @@
+﻿//objectcomments Centra una Hoja en el Frame
+global type gf_center_sheet from function_object
+end type
+
+forward prototypes
+global subroutine gf_center_sheet (window ventana)
+end prototypes
+
+global subroutine gf_center_sheet (window ventana);Integer li_ScreenH, li_ScreenW
+
+
+li_ScreenH = str.frame.WorkSpaceHeight()
+li_ScreenW = str.frame.WorkSpaceWidth()
+
+ventana.y = (li_ScreenH - ventana.Height) / 2
+ventana.x = (li_ScreenW - ventana.Width) / 2
+end subroutine
+

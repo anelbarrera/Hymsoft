@@ -1,0 +1,7 @@
+﻿global type str_dg_fa_dynamic_find from structure
+	string		param
+	str_dg_dynamic_find		str_df
+	string		titulo
+	string		texto
+end type
+

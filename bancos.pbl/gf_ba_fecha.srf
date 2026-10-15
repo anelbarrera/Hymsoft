@@ -1,0 +1,38 @@
+﻿global type gf_ba_fecha from function_object
+end type
+
+forward prototypes
+global function string gf_ba_fecha (integer mes)
+end prototypes
+
+global function string gf_ba_fecha (integer mes);String ls_return
+
+CHOOSE CASE mes
+	CASE 1
+		ls_return = "Enero"
+	CASE 2
+		ls_return = "Febrero"		
+	CASE 3
+		ls_return = "Marzo"		
+	CASE 4
+		ls_return = "Abril"		
+	CASE 5
+		ls_return = "Mayo"		
+	CASE 6
+		ls_return = "Junio"		
+	CASE 7
+		ls_return = "Julio"		
+	CASE 8
+		ls_return = "Agosto"		
+	CASE 9
+		ls_return = "Septiembre"		
+	CASE 10
+		ls_return = "Octubre"		
+	CASE 11
+		ls_return = "Noviembre"		
+	CASE 12
+		ls_return = "Diciembre"		
+END CHOOSE
+Return(ls_return)
+end function
+

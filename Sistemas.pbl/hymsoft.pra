@@ -1,0 +1,65 @@
+﻿{
+    "appicon": "C:\\Sistemas\\Hymsoft\\Art\\ICONO HYMOFT.ico",
+    "appfonts": [
+        {
+            "height": -9,
+            "weight": 700,
+            "italic": 0,
+            "underline": 0,
+            "characterSet": 0,
+            "pitchfamily": 34,
+            "facename": "Arial"
+        },
+        {
+            "height": -9,
+            "weight": 700,
+            "italic": 0,
+            "underline": 0,
+            "characterSet": 0,
+            "pitchfamily": 34,
+            "facename": "Arial"
+        },
+        {
+            "height": -8,
+            "weight": 700,
+            "italic": 0,
+            "underline": 0,
+            "characterSet": 0,
+            "pitchfamily": 34,
+            "facename": "Arial"
+        },
+        {
+            "height": -10,
+            "weight": 400,
+            "italic": 0,
+            "underline": 0,
+            "characterSet": 0,
+            "pitchfamily": 34,
+            "facename": "Arial"
+        }
+    ],
+    "textcolor": 0,
+    "backgroundcolor": 16777215,
+    "tx-control": {
+        "type": 5,
+        "version": 3,
+        "keys": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    }
+}

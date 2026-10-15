@@ -1,0 +1,324 @@
+﻿global type gf_in_copiar_secuencia from function_object
+end type
+
+forward prototypes
+global subroutine gf_in_copiar_secuencia (long ll_secuencia_sel, integer li_ann_sel, long ll_secuencia_repl, ref boolean lb_salvo, integer li_empresa)
+end prototypes
+
+global subroutine gf_in_copiar_secuencia (long ll_secuencia_sel, integer li_ann_sel, long ll_secuencia_repl, ref boolean lb_salvo, integer li_empresa);// Esta función permite cambiar el tipo de factura de un 
+// pedido de factura , el año de la misma o el número del pedido
+// Siempre y cuando no haya sido Impresa
+
+String ls_sqlerrtext
+
+  INSERT INTO intmovim  
+         ( tmov_g_financiero,   
+           tmov_empresa,   
+           tmov_aplicacion,   
+           tmov_tipo_transaccion,   
+           tmov_secuencia,   
+           tmov_concepto,   
+           tmov_anual,   
+           tmov_descripcion,   
+           tmov_fecha,   
+           tmov_autoriza,   
+           tmov_documento,   
+           tmov_fecha_registro,   
+           tmov_terceros,   
+           tmov_comentario,   
+           tmov_tipo_costo,   
+           tmov_id,   
+           tmov_tipo,   
+           tmov_estado,   
+           tmov_anulado,   
+           tmov_total_cargos,   
+           tmov_fecha_actualizacion,   
+           tmov_documento_entrada,   
+           tmov_estado_costo,   
+           tmov_forma_costeo,   
+           tmov_tipo_trafico,   
+           tmov_documento_comercial,   
+           tmov_fecha_cierre_mensual,   
+           tmov_cuenta,   
+           tmov_nombre_tercero,   
+           tmov_pase,   
+           tmov_moneda,   
+           tmov_cambio,   
+           tmov_constante,   
+           tmov_descuento,   
+           tmov_tipo_gasto,   
+           tmov_por_admin,   
+           tmov_no_pedido,   
+           tmov_precio_base,   
+           tmov_pasada_a_empresa,   
+           tmov_rebaja_reserva,   
+           tmov_marca,   
+           tmov_descuento_subdeta,   
+           tmov_itbm,   
+           tmov_itbm_subdeta,   
+           tmov_secuencia_actual,   
+           tmov_centro_costo,   
+           tmov_codigo_uso,   
+           tmov_descuento_ncr,   
+           tmov_tipo_movimiento,   
+           tmov_activada_por,   
+           tmov_fecha_activacion )  
+     SELECT intmovim.tmov_g_financiero,   
+            :li_empresa,   
+            intmovim.tmov_aplicacion,   
+            intmovim.tmov_tipo_transaccion,   
+            :ll_secuencia_repl,   
+            intmovim.tmov_concepto,   
+            intmovim.tmov_anual,   
+            intmovim.tmov_descripcion,   
+            intmovim.tmov_fecha,   
+            intmovim.tmov_autoriza,   
+            intmovim.tmov_documento,   
+            intmovim.tmov_fecha_registro,   
+            intmovim.tmov_terceros,   
+            intmovim.tmov_comentario,   
+            intmovim.tmov_tipo_costo,   
+            intmovim.tmov_id,   
+            intmovim.tmov_tipo,   
+            0,   
+            intmovim.tmov_anulado,   
+            intmovim.tmov_total_cargos,   
+            intmovim.tmov_fecha_actualizacion,   
+            intmovim.tmov_documento_entrada,   
+            intmovim.tmov_estado_costo,   
+            intmovim.tmov_forma_costeo,   
+            intmovim.tmov_tipo_trafico,   
+            intmovim.tmov_documento_comercial,   
+            intmovim.tmov_fecha_cierre_mensual,   
+            intmovim.tmov_cuenta,   
+            intmovim.tmov_nombre_tercero,   
+            intmovim.tmov_pase,   
+            intmovim.tmov_moneda,   
+            intmovim.tmov_cambio,   
+            intmovim.tmov_constante,   
+            intmovim.tmov_descuento,   
+            intmovim.tmov_tipo_gasto,   
+            intmovim.tmov_por_admin,   
+            intmovim.tmov_no_pedido,   
+            intmovim.tmov_precio_base,   
+            intmovim.tmov_pasada_a_empresa,   
+            intmovim.tmov_rebaja_reserva,   
+            intmovim.tmov_marca,   
+            intmovim.tmov_descuento_subdeta,   
+            intmovim.tmov_itbm,   
+            intmovim.tmov_itbm_subdeta,   
+            intmovim.tmov_secuencia_actual,   
+            intmovim.tmov_centro_costo,   
+            intmovim.tmov_codigo_uso,   
+            intmovim.tmov_descuento_ncr,   
+            intmovim.tmov_tipo_movimiento,   
+            intmovim.tmov_activada_por,   
+            intmovim.tmov_fecha_activacion
+       FROM intmovim  
+      WHERE ( intmovim.tmov_g_financiero = :str.g_financiero ) AND  
+            ( intmovim.tmov_empresa = :str.empresa ) AND  
+            ( intmovim.tmov_aplicacion = 'IN' ) AND  
+            ( intmovim.tmov_tipo_transaccion = 'EN' ) AND  
+            ( intmovim.tmov_secuencia = :ll_secuencia_sel ) AND  
+            ( intmovim.tmov_anual = :li_ann_sel )   ;
+
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al Insertar registro en intmovim",ls_sqlerrtext)
+			return
+		end if			
+
+////***********************************************
+  INSERT INTO indgasto  
+         ( gast_g_financiero,   
+           gast_empresa,   
+           gast_aplicacion,   
+           gast_transaccion,   
+           gast_concepto,   
+           gast_secuencia,   
+           gast_linea,   
+           gast_ann,   
+           gast_descripcion,   
+           gast_valor,   
+           gast_anulado,   
+           gast_tipo,   
+           gast_cta_contable,   
+           gast_cod_gasto )  
+     SELECT indgasto.gast_g_financiero,   
+            :li_empresa,   
+            indgasto.gast_aplicacion,   
+            indgasto.gast_transaccion,   
+            indgasto.gast_concepto,   
+            indgasto.gast_secuencia,   
+            indgasto.gast_linea,   
+            indgasto.gast_ann,   
+            indgasto.gast_descripcion,   
+            indgasto.gast_valor,   
+            indgasto.gast_anulado,   
+            indgasto.gast_tipo,   
+            indgasto.gast_cta_contable,   
+            indgasto.gast_cod_gasto  
+       FROM indgasto 
+   WHERE ( indgasto.gast_g_financiero = :str.g_financiero ) AND  
+         ( indgasto.gast_empresa = :str.empresa ) AND  
+         ( indgasto.gast_aplicacion = 'IN' ) AND  
+         ( indgasto.gast_transaccion = 'EN' ) AND  
+         ( indgasto.gast_secuencia = :ll_secuencia_sel ) AND  
+         ( indgasto.gast_ann = :li_ann_sel );
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en indgasto",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+  INSERT INTO indmovim  
+         ( dmov_g_financiero,   
+           dmov_empresa,   
+           dmov_aplicacion,   
+           dmov_tipo_transaccion,   
+           dmov_concepto,   
+           dmov_secuencia,   
+           dmov_anual,   
+           dmov_linea,   
+           dmov_documento,   
+           dmov_linea_referencia,   
+           dmov_bodega,   
+           dmov_ubicacion,   
+           dmov_producto,   
+           dmov_cantidad,   
+           dmov_cant1,   
+           dmov_unidad_medida,   
+           dmov_costo,   
+           dmov_precio,   
+           dmov_cubicaje,   
+           dmov_peso,   
+           dmov_bulto,   
+           dmov_costo_cif,   
+           dmov_cargos,   
+           dmov_precio_ent,   
+           dmov_id,   
+           dmov_bodega_destino,   
+           dmov_ubicacion_destino,   
+           dmov_fabricante,   
+           dmov_anulado,   
+           dmov_id_precio,   
+           dmov_fecha_agotado,   
+           dmov_existe_detalle,   
+           dmov_num_orden,   
+           dmov_comentarios,   
+           dmov_clave,   
+           dmov_costo_fob,   
+           dmov_precio1,   
+           dmov_precio2,   
+           dmov_precio3,   
+           dmov_secuencia_ea,   
+           dmov_terceros_ea,   
+           dmov_numpo_ea,   
+           dmov_board,   
+           dmov_color,   
+           dmov_porcentaje_gasto,   
+           dmov_lote,   
+           dmov_fecha_registro,   
+           dmov_descuento,   
+           dmov_itbm,   
+           dmov_precio_descuento,   
+           dmov_descuento_ncr,   
+           dmov_monto_final,   
+           dmov_costo_promedio,   
+           dmov_modelo,   
+           dmov_orden_compra,   
+           dmov_ann_orden,   
+           dmov_linea_orden,   
+           dmov_transito,   
+           dmov_linea_transito,   
+           dmov_ann_transito,   
+           dmov_fecha_elaboracion,   
+           dmov_fecha_expiracion)  
+     SELECT indmovim.dmov_g_financiero,   
+            :li_empresa,   
+            indmovim.dmov_aplicacion,   
+            indmovim.dmov_tipo_transaccion,   
+            indmovim.dmov_concepto,   
+            :ll_secuencia_repl,   
+            indmovim.dmov_anual,   
+            indmovim.dmov_linea,   
+            indmovim.dmov_documento,   
+            indmovim.dmov_linea_referencia,   
+            indmovim.dmov_bodega,   
+            indmovim.dmov_ubicacion,   
+            indmovim.dmov_producto,   
+            indmovim.dmov_cantidad,   
+            indmovim.dmov_cant1,   
+            indmovim.dmov_unidad_medida,   
+            indmovim.dmov_costo,   
+            indmovim.dmov_precio,   
+            indmovim.dmov_cubicaje,   
+            indmovim.dmov_peso,   
+            indmovim.dmov_bulto,   
+            indmovim.dmov_costo_cif,   
+            indmovim.dmov_cargos,   
+            indmovim.dmov_precio_ent,   
+            indmovim.dmov_id,   
+            indmovim.dmov_bodega_destino,   
+            indmovim.dmov_ubicacion_destino,   
+            indmovim.dmov_fabricante,   
+            indmovim.dmov_anulado,   
+            indmovim.dmov_id_precio,   
+            indmovim.dmov_fecha_agotado,   
+            indmovim.dmov_existe_detalle,   
+            indmovim.dmov_num_orden,   
+            indmovim.dmov_comentarios,   
+            indmovim.dmov_clave,   
+            indmovim.dmov_costo_fob,   
+            indmovim.dmov_precio1,   
+            indmovim.dmov_precio2,   
+            indmovim.dmov_precio3,   
+            indmovim.dmov_secuencia_ea,   
+            indmovim.dmov_terceros_ea,   
+            indmovim.dmov_numpo_ea,   
+            indmovim.dmov_board,   
+            indmovim.dmov_color,   
+            indmovim.dmov_porcentaje_gasto,   
+            indmovim.dmov_lote,   
+            indmovim.dmov_fecha_registro,   
+            indmovim.dmov_descuento,   
+            indmovim.dmov_itbm,   
+            indmovim.dmov_precio_descuento,   
+            indmovim.dmov_descuento_ncr,   
+            indmovim.dmov_monto_final,   
+            indmovim.dmov_costo_promedio,   
+            indmovim.dmov_modelo,   
+            indmovim.dmov_orden_compra,   
+            indmovim.dmov_ann_orden,   
+            indmovim.dmov_linea_orden,   
+            indmovim.dmov_transito,   
+            indmovim.dmov_linea_transito,   
+            indmovim.dmov_ann_transito,   
+            indmovim.dmov_fecha_elaboracion,   
+            indmovim.dmov_fecha_expiracion  
+       FROM indmovim
+	WHERE ( indmovim.dmov_g_financiero = :str.g_financiero ) AND  
+         ( indmovim.dmov_empresa = :str.empresa ) AND  
+         ( indmovim.dmov_aplicacion = 'IN' ) AND  
+         ( indmovim.dmov_tipo_transaccion = 'EN' ) AND  
+         ( indmovim.dmov_secuencia = :ll_secuencia_sel ) AND  
+         ( indmovim.dmov_anual = :li_ann_sel )   ;
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en indmovim",ls_sqlerrtext)
+			return
+		end if			
+////************************************************
+commit using sqlca;
+lb_salvo = true
+mensaje("","La Copia fue Realizada Exitosamente","")
+return
+end subroutine
+

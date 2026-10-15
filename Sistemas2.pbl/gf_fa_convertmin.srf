@@ -1,0 +1,24 @@
+﻿//objectcomments Convierte a la Unidad Minima
+global type gf_fa_convertmin from function_object
+end type
+
+forward prototypes
+global function long gf_fa_convertmin (string as_med, long al_cantidad, long al_fraccion)
+end prototypes
+
+global function long gf_fa_convertmin (string as_med, long al_cantidad, long al_fraccion);/*Esta función recibe la cantidad y fracción y retorna todo convertido a fracción*/
+
+Long 		ll_ucom, ll_total,ll_mconvera
+/*Extrae el Tipo de medida "Peso/Unidades/volumen/etc "*/
+ll_ucom = gf_medi_prod(as_med)
+
+/*Retorna el Factor de Conversión a unidades mínimas*/
+ll_mconvera = gf_unidad_venta(as_med, ll_ucom)
+
+If ll_mconvera <= 0 Then ll_mconvera = 1
+
+ll_total = (al_cantidad * ll_mconvera) + al_fraccion
+
+Return (ll_total)
+end function
+

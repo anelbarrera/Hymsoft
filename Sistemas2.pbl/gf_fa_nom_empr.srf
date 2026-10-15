@@ -1,0 +1,40 @@
+﻿//objectcomments Recibe el numero del Grupo y la Empresa y Retorna el nombre de la empresa
+global type gf_fa_nom_empr from function_object
+end type
+
+forward prototypes
+global function string gf_fa_nom_empr (readonly integer g_f, readonly integer empresa)
+end prototypes
+
+global function string gf_fa_nom_empr (readonly integer g_f, readonly integer empresa);string ls_so,ls_co,ls_in
+ //   PARA SER USADA EJEMPLO:
+ // gf_fa_nom_empr("agrumento del gupo financiero", "agrumento de empresa")
+    SELECT dgmempre.empr_razon_social,   
+         dgmempre.empr_razon_comercial,   
+         dgmempre.empr_utiliza_nombre  
+    INTO :ls_so,
+	      :ls_co,
+			:ls_in           
+    FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :g_f ) AND 
+         ( dgmempre.empr_empresa = :empresa ) 
+			;
+if str.aplicacion ='PL' then 
+	SELECT para_utiliza_nombre 
+    INTO :ls_in           
+    FROM plmparam  
+   WHERE ( plmparam.para_g_financiero = :g_f ) AND 
+         ( plmparam.para_empresa = :empresa )   ;	
+end if
+CHOOSE CASE ls_in
+	CASE "S"
+	    Return(ls_so)
+	CASE "C"
+		Return(ls_co)	
+	CASE "A"	
+      Return(ls_co + " " + ls_so)
+END CHOOSE
+	return("s")
+	
+end function
+

@@ -1,0 +1,42 @@
+﻿//objectcomments Des. o Habilita opciones de Facturación, dependiendo de que sea Fac de Producto o Servicios
+global type gf_fa_pro_servi from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_pro_servi ()
+end prototypes
+
+global subroutine gf_fa_pro_servi ();If Not IsValid(m_fa_padre) Then 	str.frame.changemenu(m_fa_padre)
+
+//	
+//CHOOSE CASE w_fa_fondo.str_para.tipo
+//	
+//	CASE "S"
+//		m_fa_padre.m_controldefacturacion.m_-19.visible = false
+//		m_fa_padre.m_controldefacturacion.m_-18.visible = false
+//		m_fa_padre.m_controldefacturacion.m_-20.visible = false
+//		m_fa_padre.m_controldefacturacion.m_cotizacion.visible = false
+//		m_fa_padre.m_controldefacturacion.m_pedidosreservados.visible = false
+//		m_fa_padre.m_controldefacturacion.m_facturacion.visible = false
+//		m_fa_padre.m_controldefacturacion.m_devoluciones.visible = false
+//		m_fa_padre.m_controldefacturacion.m_cotizacindeservicios.visible = true
+//		m_fa_padre.m_controldefacturacion.m_ordendetrabajo.visible = true
+//		m_fa_padre.m_controldefacturacion.m_facturacindeservicios.visible = true
+//				
+//	CASE "P"
+//		m_fa_padre.m_controldefacturacion.m_-19.visible = false
+//		m_fa_padre.m_controldefacturacion.m_-18.visible = false
+//		m_fa_padre.m_controldefacturacion.m_-20.visible = false
+//		m_fa_padre.m_controldefacturacion.m_cotizacion.visible = true
+//		m_fa_padre.m_controldefacturacion.m_pedidosreservados.visible = true
+//		m_fa_padre.m_controldefacturacion.m_facturacion.visible = true
+//		m_fa_padre.m_controldefacturacion.m_cotizacindeservicios.visible = false
+//		m_fa_padre.m_controldefacturacion.m_ordendetrabajo.visible = false
+//		m_fa_padre.m_controldefacturacion.m_facturacindeservicios.visible = false
+//		
+//END CHOOSE
+//
+//
+//
+end subroutine
+

@@ -1,0 +1,30 @@
+﻿global type str_plantillacheque_array from structure
+	string		nombre[]
+	string		text[]
+	long		x[]
+	long		y[]
+	long		alto[]
+	long		ancho[]
+	string		visible[]
+	integer		borde[]
+	string		tipo[]
+	integer		tamaño_letra[]
+	integer		bold[]
+	string		italic[]
+	string		underline[]
+	integer		alineado[]
+	long		color[]
+	string		fondo
+	integer		num_plantilla
+	integer		cod_banco
+	string		num_cuenta
+	string		cheques
+	string		ano
+	integer		g_financiero
+	integer		empresa
+	character		datawindow
+	string		num_cheques[]
+	long		largo_cheque
+	long		ancho_cheque
+end type
+

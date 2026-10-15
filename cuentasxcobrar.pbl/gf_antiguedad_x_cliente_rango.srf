@@ -1,0 +1,211 @@
+﻿global type gf_antiguedad_x_cliente_rango from function_object
+end type
+
+forward prototypes
+global subroutine gf_antiguedad_x_cliente_rango (datetime fecha, integer grupof, integer empresa, long cliente, string idioma, datetime fecha_i)
+end prototypes
+
+global subroutine gf_antiguedad_x_cliente_rango (datetime fecha, integer grupof, integer empresa, long cliente, string idioma, datetime fecha_i);integer li_registros,li_registros2, li_dia_inicio, li_dia_fin, li_filas,li_filas2, li_row
+datetime ld_fecha_inicio, ld_fecha_final
+decimal ld_saldo, ld_saldo_d, ld_saldo_c, ld_temporal, ld_recibos, ld_facturas, &
+        ld_saldo_total, lii_cliente, ldec_saldo_anterior
+datastore dw_4, dw_5, dw_6
+string ls_ruc
+
+dw_4 = create ds_dg_import_file
+dw_5 = create ds_dg_import_file
+dw_6 = create ds_dg_import_file
+dw_4.dataobject = 'dw_cc_ext_antiguedad'
+dw_5.dataobject = 'dw_cc_inf_ayuda_antiguedad'
+dw_6.dataobject = 'dw_cc_inf_ccatempa'
+dw_4.settransobject(sqlca)
+dw_5.settransobject(sqlca)
+dw_6.settransobject(sqlca)
+
+dw_4.reset()
+ld_saldo_total = 0
+lii_cliente 	= cliente
+ls_ruc 			= string(lii_cliente)
+
+delete from ccatempa 
+where tmpa_g_financiero = :grupof 	and
+		tmpa_empresa		= :empresa			and
+		tmpa_tercero		= :lii_cliente ;
+	if sqlca.sqlcode = -1 then
+		mensaje('Aviso','Error al Limpira ccatempa',sqlca.sqlerrtext)
+		rollback;
+	else
+		commit using sqlca;
+	end if			
+
+dw_5.retrieve(grupof, empresa,1)
+li_registros 			= dw_5.rowcount()
+//Calcula el saldo anterior de cada cliente 1/9/2000
+ldec_saldo_anterior = gf_saldo_anterior(cliente,fecha_i,str.g_financiero, str.empresa)
+//messagebox("",'grup: '+string(grupof)+'emp: '+string(empresa)+' li_registros:'+string(li_registros))
+
+FOR li_filas 			= 1 TO li_registros
+	li_row 				= dw_4.insertrow(0)
+	li_dia_inicio		= dw_5.getitemnumber(li_filas, 'ccan_diaini')
+	li_dia_fin	 		= dw_5.getitemnumber(li_filas, 'ccan_diafin')
+	li_dia_inicio 		= li_dia_inicio * -1
+	li_dia_fin 			= li_dia_fin * -1
+	if li_dia_inicio 	= -1 then
+		li_dia_inicio 	= 0 
+	end if
+	
+	ld_saldo_d = 0
+	ld_saldo_c = 0
+	
+	ld_fecha_inicio	= datetime(relativedate( date( fecha), li_dia_inicio ), 00:00:00)
+	ld_fecha_final 	= datetime(relativedate( date( fecha), li_dia_fin ),00:00:00)
+	
+	if li_filas 		= li_registros then
+/* Ajuste para realizar la recupeacion de saldos en un solo Select 12/mar/2000 */
+/* Inicio - 1 - */
+
+//messagebox("",'grup: '+string(grupof)+'emp: '+string(empresa))
+
+
+	  SELECT SUM( case cctmovim.movi_naturaleza when 'D' then cctmovim.movi_monto else  - cctmovim.movi_monto end ),   
+				SUM( case cctmovim.movi_naturaleza when 'D' then cctmovim.movi_monto else  0  end ) ,   
+				SUM( case cctmovim.movi_naturaleza when 'C' then cctmovim.movi_monto else 0 end )   			
+		INTO :ld_saldo, :ld_saldo_d, :ld_saldo_c			
+		FROM cctmovim  
+		WHERE ( cctmovim.movi_g_financiero 	= :grupof) and //:str.g_financiero 	) AND  
+				( cctmovim.movi_empresa 		= :empresa) and //:str.empresa 		) AND  
+				( cctmovim.movi_tercero 		= :lii_cliente 		)   AND   						
+				( cctmovim.movi_fecha_tran   <= :ld_fecha_inicio	) AND  
+				( cctmovim.movi_estado 			= 'IM' 					) and
+				( cctmovim.movi_tercero 		<> 99999					) and
+				( cctmovim.movi_tran_contado 	<> 'S' 					)
+		GROUP BY cctmovim.movi_g_financiero, cctmovim.movi_empresa, cctmovim.movi_tercero ;  
+	else
+/* Ajuste para realizar la recupeacion de saldos en un solo Select 12/mar/2000 */
+/* Inicio - 2 - */
+  SELECT SUM( case cctmovim.movi_naturaleza when 'D' then cctmovim.movi_monto else  - cctmovim.movi_monto end ),   
+         SUM( case cctmovim.movi_naturaleza when 'D' then cctmovim.movi_monto else  0  end ) ,   
+         SUM( case cctmovim.movi_naturaleza when 'C' then cctmovim.movi_monto else 0 end )   			
+	INTO :ld_saldo, :ld_saldo_d, :ld_saldo_c			
+   FROM cctmovim  
+ 	WHERE ( cctmovim.movi_g_financiero 	= :grupof) and //:str.g_financiero 	) AND  
+			( cctmovim.movi_empresa 		= :empresa) and //:str.empresa 		) AND  
+		   ( cctmovim.movi_tercero 		= :lii_cliente 		) AND   						
+	      ( cctmovim.movi_fecha_tran 	>= :ld_fecha_final 	) AND
+			( cctmovim.movi_fecha_tran 	<= :ld_fecha_inicio  ) AND
+		   ( cctmovim.movi_estado 			= 'IM' 					)and
+			( cctmovim.movi_tercero 		<> 99999					) and
+			( cctmovim.movi_tran_contado 	<> 'S' 					)			
+	GROUP BY cctmovim.movi_g_financiero, cctmovim.movi_empresa, cctmovim.movi_tercero   ;
+	end if
+	if isnull(ld_saldo_d) then
+		ld_saldo_d = 0
+	end if
+	if isnull(ld_saldo_c) then
+		ld_saldo_c = 0
+	end if
+
+	dw_4.setitem(li_row, 'inicio',  li_dia_inicio)
+	dw_4.setitem(li_row, 'fin',     li_dia_fin)
+	dw_4.setitem(li_row, 'facturas',ld_saldo_d)
+	dw_4.setitem(li_row, 'recibos', ld_saldo_c)
+	ld_saldo = ld_saldo_d - ld_saldo_c
+
+NEXT
+commit using sqlca;
+					
+
+
+li_registros = dw_5.rowcount()
+li_registros2 = li_registros
+FOR li_filas 		= li_registros to 1 STEP -1
+	FOR li_filas2 	= li_registros2 to 1 STEP -1
+		ld_recibos 	= dw_4.getitemnumber(li_filas2, 'recibos')
+		ld_facturas = dw_4.getitemnumber(li_filas, 'facturas')
+		ld_temporal = ld_facturas - ld_recibos
+		if ld_temporal < 0 then
+			ld_recibos = ld_recibos - ld_facturas
+			dw_4.setitem(li_filas, 'facturas',0.00 )
+			dw_4.setitem(li_filas2, 'recibos',ld_recibos)
+			exit
+		end if
+		if ld_temporal >= 0 then
+			ld_facturas = ld_facturas - ld_recibos
+			dw_4.setitem(li_filas, 'facturas',ld_facturas)
+			dw_4.setitem(li_filas2, 'recibos',0.00)
+		end if
+	next
+next
+
+li_registros = dw_5.rowcount()
+dw_6.reset()
+FOR li_filas 		= 1 to  li_registros 
+	dw_6.insertrow(0)
+	ld_saldo = dw_4.getitemnumber(li_filas,1) - dw_4.getitemnumber(li_filas,2)
+	if isnull(ld_saldo) then
+		ld_saldo = 0
+	end if
+	ld_saldo_total = ld_saldo_total + ld_saldo
+	dw_4.setitem(li_filas, 'saldo',ld_saldo)
+	dw_6.setitem(li_filas, 'tmpa_g_financiero', grupof)
+	dw_6.setitem(li_filas, 'tmpa_empresa', empresa)
+	dw_6.setitem(li_filas, 'tmpa_tercero', lii_cliente)
+	dw_6.setitem(li_filas, 'tmpa_ruc_tercero', string(lii_cliente))
+	dw_6.setitem(li_filas, 'tmpa_maxdias', (dw_4.getitemnumber(li_filas, 'fin') * -1))
+	dw_6.setitem(li_filas, 'tmpa_orden', li_filas)	
+	dw_6.setitem(li_filas, 'tmpa_monto', ld_saldo)
+	dw_6.setitem(li_filas,'tmpa_usuario_maquina',str.maquina)
+	if li_filas = 1 then
+		if idioma = 'I' then
+			dw_6.setitem(li_filas, 'tmpa_descantig', 'Current')
+		else
+			dw_6.setitem(li_filas, 'tmpa_descantig', 'Corriente')
+		end if
+	elseif li_filas = li_registros then
+		if idioma = 'I' then
+			dw_6.setitem(li_filas, 'tmpa_descantig', string((dw_4.getitemnumber(li_filas, 'inicio') + 1) * -1) + ' Days +' )
+		else
+			dw_6.setitem(li_filas, 'tmpa_descantig', string((dw_4.getitemnumber(li_filas, 'inicio') + 1) * -1) + ' Dias y Más' )
+		end if		
+		dw_6.setitem(li_filas, 'tmpa_maxdias',1000000)
+	else
+		if idioma = 'I' then
+			dw_6.setitem(li_filas, 'tmpa_descantig', string((dw_4.getitemnumber(li_filas, 'inicio') + 1) * -1) + ' Days')
+		else
+			dw_6.setitem(li_filas, 'tmpa_descantig', string((dw_4.getitemnumber(li_filas, 'inicio') + 1) * -1) + ' Dias')
+		end if
+		dw_6.setitem(li_filas,'tmpa_saldo_anterior',ldec_saldo_anterior)
+		dw_6.setitem(li_filas,'tmpa_usuario_maquina',str.maquina)
+	end if		
+
+next
+if isnull(ld_saldo_total) then
+	ld_saldo_total = 0
+end if
+li_filas = dw_6.insertrow(0)
+dw_6.setitem(li_filas, 'tmpa_g_financiero', grupof)
+	dw_6.setitem(li_filas, 'tmpa_empresa', empresa)
+	dw_6.setitem(li_filas, 'tmpa_tercero', lii_cliente)
+	dw_6.setitem(li_filas, 'tmpa_ruc_tercero', string(lii_cliente))
+	dw_6.setitem(li_filas, 'tmpa_maxdias', 1000001)
+	if idioma = 'I' then
+		dw_6.setitem(li_filas, 'tmpa_descantig', 'Total Balance')
+	else
+		dw_6.setitem(li_filas, 'tmpa_descantig', 'Saldo Total')
+	end if
+
+	dw_6.setitem(li_filas, 'tmpa_monto', ld_saldo_total)
+	dw_6.setitem(li_filas, 'tmpa_orden', 21)	
+	dw_6.setitem(li_filas,'tmpa_saldo_anterior',ldec_saldo_anterior)
+	dw_6.setitem(li_filas,'tmpa_usuario_maquina',str.maquina)
+	if dw_6.update() = 1 then
+		commit using sqlca;
+	else
+		rollback using sqlca;
+	end if
+commit using sqlca;	
+destroy dw_4
+destroy dw_5
+destroy dw_6
+end subroutine
+

@@ -1,0 +1,27 @@
+﻿global type gf_buscar_ultima_linea from function_object
+end type
+
+forward prototypes
+global function long gf_buscar_ultima_linea (datawindow adw_detalle, long al_row, string as_campo_linea)
+end prototypes
+
+global function long gf_buscar_ultima_linea (datawindow adw_detalle, long al_row, string as_campo_linea);//función que busca la siguiente linea disponible para asignarla
+//llamada desde los eventos ue_adicionar de prof., ped., fact., lista empaque , etc
+long ll_linea, i, ll_encontro = 0
+string ls_expresion
+
+DO
+	ls_expresion = as_campo_linea+" = "+string(al_row)
+	ll_encontro = adw_detalle.find(ls_expresion,1,adw_detalle.rowcount())
+	if ll_encontro > 0 then
+		al_row ++
+	else
+		ll_linea = al_row
+	end if
+LOOP UNTIL ll_encontro = 0
+
+if isnull(ll_linea) or ll_linea = 0 then ll_linea = 1 
+
+return(ll_linea)
+end function
+

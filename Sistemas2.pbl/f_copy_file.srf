@@ -1,0 +1,73 @@
+﻿//objectcomments Copy a file
+global type f_copy_file from function_object
+end type
+
+forward prototypes
+global function integer f_copy_file (string a_s_from_file, string a_s_to_file)
+end prototypes
+
+global function integer f_copy_file (string a_s_from_file, string a_s_to_file);// Determine how many FileRead calls are needed to read the 
+// entire file.
+
+long	l_file_len
+int	i_loops, i_index, i_bytes_read
+string	s_copy_buffer
+
+l_file_len = FileLength (a_s_from_file)
+IF  l_file_len > 32765 THEN
+	IF Mod (l_file_len, 32765) = 0 THEN
+		i_loops = l_file_len / 32765
+	ELSE
+		i_loops = (l_file_len / 32765) + 1
+	END IF
+ELSE
+	i_loops = 1
+END IF
+
+integer	i_from_file, i_to_file			// File handles
+integer	i_rtn									// Status value returned by FileXXX calls
+long		l_file_pos
+
+// Open from file
+i_from_file = FileOpen (a_s_from_file, StreamMode!, Read!, LockReadWrite!)
+IF i_from_file = -1 THEN
+	messagebox ("","f_copy_file can't open '" + a_s_from_file + "'.")
+	RETURN -1
+END IF
+
+// Open to file
+i_to_file = FileOpen (a_s_to_file, StreamMode!, Write!, LockReadWrite!)
+IF i_to_file = -1 THEN
+	messagebox("","f_copy_file can't open '" + a_s_to_file + "'.")
+	RETURN -1
+END IF
+
+// Loop reading and writing the files...
+FOR i_index = 1 to i_loops
+	// Copy file
+	i_rtn = FileRead (i_from_file, s_copy_buffer)
+	IF i_rtn <= 0 THEN
+		messagebox("","f_copy_file can't read '" + a_s_from_file + "'.")
+		RETURN i_rtn
+	END IF
+
+	l_file_pos = l_file_pos + i_rtn
+	FileSeek (i_from_file, l_file_pos, FromBeginning!)
+
+	i_rtn = FileWrite (i_to_file, s_copy_buffer)
+	IF i_rtn = -1 THEN
+		messagebox("","f_copy_file can't write '" + a_s_to_file + "'.")
+		RETURN i_rtn
+	END IF
+NEXT
+
+// Close files
+IF FileClose (i_from_file) = -1 OR FileClose (i_to_file) = -1 THEN
+	messagebox("","f_copy_file can't close file.")
+	RETURN -1
+END IF
+
+// Copied file successfully
+RETURN 1
+end function
+

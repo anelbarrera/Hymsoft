@@ -1,0 +1,82 @@
+﻿global type gf_imprime_barras_coremusa from function_object
+end type
+
+forward prototypes
+global subroutine gf_imprime_barras_coremusa (string as_item, string as_descripcion, integer ai_cantidad, decimal ad_precio, string as_barra, string as_sucursal)
+end prototypes
+
+global subroutine gf_imprime_barras_coremusa (string as_item, string as_descripcion, integer ai_cantidad, decimal ad_precio, string as_barra, string as_sucursal);//FUNCION QUE IMPRIME CODIGO DE BARRA
+sqlca.autocommit = true
+long ll_archivo,li_anio,ld_valor
+integer li_mes,li_anio1
+datetime ld_fecha
+string ls_precio
+ll_archivo = FileOpen ("c:\sistemas\codigo_barra.txt" , LineMode!  , Write!  , LockWrite!  , Append!  )
+string ls_cantidad,ls_bcn,ls_descripcion
+string ls_barra,ls_producto,ls_razon,ls_anio, ls_item, ls_bc3
+
+if ai_cantidad = 0 or isnull(ai_cantidad) then
+	ls_cantidad = '1'
+else
+	ls_cantidad = string(ai_cantidad)
+end if
+//^XA Inicio de la etiqueta				
+//^FD Identifica el texto a imprmir
+//^FS Indicador de fin de linea
+//^XZ Finalización de la etiqueta
+//^FO X,Separacion entre lineas
+//Indica el tipo de codigo de barra 
+ls_bcn = char(94)+char(66)+char(67)+char(78) //^BCN
+ls_bc3 = char(94)+char(66)+char(67)+char(51) //^BC3N	  	
+				  
+		filewrite(ll_archivo,'^XA')	
+		filewrite(ll_archivo,'^MMT')			
+		filewrite(ll_archivo,'^PW831')
+//		filewrite(ll_archivo,'^LL0120')
+		filewrite(ll_archivo,'^LH20,20')
+//		filewrite(ll_archivo,'^LS0')
+		
+		ls_barra = as_item
+		
+		//Codigo de Barra
+		filewrite(ll_archivo,'^BY2,3,80^FT100,120^BCN,,N,N')
+		filewrite(ll_archivo,'^FD>:'+as_barra+'^FS')		
+		//Codigo del Producto
+		filewrite(ll_archivo,'^FT175,31^A0N,27,27^FH\^FD'+as_barra+'^FS') 
+		//Precio
+		//^FT481,112^A0N,30,33^FH\^FDRMKR^FS
+		ls_precio = string(ad_precio,"##,##0.00")
+		filewrite(ll_archivo,'^FT600,65^A0N,38,38^FH\^FD$'+ls_precio+'^FS')
+		//Descripcion
+		filewrite(ll_archivo,'^FT100,160^A0N,30,24^FH\^FD'+as_descripcion+'^FS')
+		//Copias
+		filewrite(ll_archivo,'^PQ'+ls_cantidad+',0,1,Y^XZ')
+		fileclose(ll_archivo)
+
+//		filewrite(ll_archivo,'CT~~CD,~CC^~CT~')	
+//		filewrite(ll_archivo,'^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2~SD10^JUS^LRN^CI0^XZ')
+//		filewrite(ll_archivo,'^XA')	
+//		filewrite(ll_archivo,'^MMT')			
+//		filewrite(ll_archivo,'^PW719')
+//		filewrite(ll_archivo,'^LL0200')
+//		filewrite(ll_archivo,'^LS0')	
+//		
+//		ls_barra = as_item
+//		
+//		//Codigo de Barra
+//		filewrite(ll_archivo,'^BY4,3,80^FT165,155^BCN,,N,N')
+//		filewrite(ll_archivo,'^FD>:'+as_item+'^FS')		
+//		//Codigo del Producto
+//		filewrite(ll_archivo,'^FT286,183^A0N,31,33^FH\^FD'+as_item+'^FS')
+//		//Descripcion
+//		filewrite(ll_archivo,'^FT44,50^A0N,28,28^FH\^FD'+as_descripcion+'^FS')	
+//		//Precio
+//		filewrite(ll_archivo,'^FT591,119^A0N,31,31^FH\^FD$'+string(ad_precio)+'^FS')	
+//		//Nombre de la empresa
+//		filewrite(ll_archivo,'^FO15,154^GB135,31,31^FS')
+//		filewrite(ll_archivo,'^FT15,178^A0N,25,28^FR^FH\^FDCOREMUSA^FS')
+//		//Copias
+//		filewrite(ll_archivo,'^PQ'+ls_cantidad+',0,1,Y^XZ')
+//		fileclose(ll_archivo)
+end subroutine
+

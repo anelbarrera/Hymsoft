@@ -1,0 +1,53 @@
+﻿//objectcomments Función que asigna una impresora al win.ini como por defecto
+global type gf_asigna_printer_default from function_object
+end type
+
+forward prototypes
+global subroutine gf_asigna_printer_default (string impresora)
+end prototypes
+
+global subroutine gf_asigna_printer_default (string impresora);String ls_impr_nueva,ls_dri,ls_key,ls_driver,ls_port,ls_printer,ls_impr_puerto_nuevo
+Integer li_rtn
+
+// Setea la Nueva Impresora por defecto en el WIN.INI
+// Paso 3:  Setea la nueva impresora por defecto
+ 
+ ls_impr_nueva = impresora
+ 
+ li_rtn = RegistrySet("HKEY_LOCAL_MACHINE\Config\0001\System\CurrentControlSet\Control\Print\Printers","default",ls_impr_nueva)
+ If li_rtn = 1 Then
+ Else	
+	Messagebox("Error en el Cambio de Impresora","")
+ End If	
+
+// Mas Importante
+// Paso 4: Toma la Nueva Impresora por defecto y el puerto
+ls_key = ""
+ls_driver = ""
+ls_port = ""
+ls_printer = ls_impr_nueva
+
+ls_key = "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Print\Environments\Windows 4.0\Drivers\" + ls_printer
+RegistryGet(ls_key,"Driver",ls_driver)
+
+ls_key = "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Print\Printers\" + ls_printer
+RegistryGet(ls_key,"Port",ls_port)
+
+ls_dri = left(ls_Driver,len(ls_Driver) - 4)
+
+ls_impr_puerto_nuevo = ls_impr_nueva + ","+ls_Dri + "," + ls_port
+
+// Setea la Nueva Impresora por defecto en el WIN.INI
+
+li_rtn = SetprofileString("c:\windows\win.ini","Windows","device",ls_impr_puerto_nuevo)
+
+//****
+
+If li_rtn = 1 Then 
+Else
+	Messagebox("Error en Asignación de Impresora al Win.ini","")
+End If 
+
+
+end subroutine
+

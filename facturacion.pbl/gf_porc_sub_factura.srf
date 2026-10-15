@@ -1,0 +1,11 @@
+﻿global type gf_porc_sub_factura from function_object
+end type
+
+forward prototypes
+global function decimal gf_porc_sub_factura ()
+end prototypes
+
+global function decimal gf_porc_sub_factura ();return str.porc
+
+end function
+

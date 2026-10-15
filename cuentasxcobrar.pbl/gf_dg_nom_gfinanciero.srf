@@ -1,0 +1,24 @@
+﻿global type gf_dg_nom_gfinanciero from function_object
+end type
+
+forward prototypes
+global function string gf_dg_nom_gfinanciero (integer g_financiero, integer empresa)
+end prototypes
+
+global function string gf_dg_nom_gfinanciero (integer g_financiero, integer empresa);/* retorna el nombre del grupo financiero que esta activa, 
+   se envia el numero del grupo financiero y de la empresa  para el estado de cuenta*/
+ string ls_nom_grupo, ls_error
+  
+   SELECT dgagrupf.grup_descripcion  
+    INTO :ls_nom_grupo
+    FROM dgagrupf  
+   WHERE dgagrupf.grup_g_financiero = :g_financiero   ;
+  if sqlca.sqldbcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		mensaje("Error","Ha ocurrido un error al recuperar la descripcion de la empresa",ls_error)
+		
+  end if
+
+return (ls_nom_grupo)
+end function
+

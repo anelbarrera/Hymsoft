@@ -1,0 +1,10 @@
+﻿global type gf_titulo_subtotal from function_object
+end type
+
+forward prototypes
+global function string gf_titulo_subtotal ()
+end prototypes
+
+global function string gf_titulo_subtotal ();return str.subtotal
+end function
+

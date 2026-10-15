@@ -1,0 +1,44 @@
+﻿//objectcomments Log error and display common error dialog.
+global type f_error_dialog from function_object
+end type
+
+forward prototypes
+global subroutine f_error_dialog (string a_s_title, string a_s_message, boolean a_b_halt)
+end prototypes
+
+global subroutine f_error_dialog (string a_s_title, string a_s_message, boolean a_b_halt);// Function para construir log error y desplegar error dialog.
+
+str_pass str_pass
+
+// Verificando parms de entrada.
+
+IF NOT Len (Trim (a_s_title)) > 0 THEN
+	a_s_title = "Application Exception"
+END IF
+
+IF NOT Len (Trim (a_s_message)) > 0 THEN
+	a_s_message = "Unknown exception"
+END IF
+
+IF IsNull (a_b_halt) THEN
+	a_b_halt = FALSE
+END IF
+
+
+// Log error con la version corriente y window title.
+
+//f_log_it ( a_s_title + " : " + a_s_message)
+
+
+// Dpespliega un mensaje de error de la aplicacion
+
+str_pass.s_win_title = a_s_title
+
+str_pass.s[1] = a_s_message
+
+str_pass.b[1] = a_b_halt
+
+mensaje_app(a_s_title, "Se ha Producido un Error en el Sistema, Se Creará un " + &
+							  "Registro de Error." , a_s_message)
+end subroutine
+

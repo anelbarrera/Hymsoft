@@ -1,0 +1,31 @@
+﻿global type gf_controla_modificaciones from function_object
+end type
+
+forward prototypes
+global subroutine gf_controla_modificaciones (ref integer ai_autoriza_s_n, string as_usuario, string as_clave)
+end prototypes
+
+global subroutine gf_controla_modificaciones (ref integer ai_autoriza_s_n, string as_usuario, string as_clave);Integer	li_modifica
+
+  SELECT ssmusuar.usua_autoriza_modificaciones  
+ INTO :li_modifica  
+ FROM ssmusuar  
+WHERE ( ssmusuar.usua_id = :as_usuario ) AND  
+		( ssmusuar.usua_clave = :as_clave ) AND  
+		( ssmusuar.usua_estado = 'A' )   ;
+
+	If sqlca.sqlcode = -1 then
+		messagebox('Atención ','Error al validar permiso para modificaciones,anulaciones o reversiones,activacion')
+		ai_autoriza_s_n =0
+		return
+	end if
+
+	/*Controla pero no tiene permiso = 2*/
+	If IsNull(li_modifica) or li_modifica =0 then  ai_autoriza_s_n =2 
+	
+	/*Controla, Modifica y tiene permiso*/		
+	If li_modifica = 1 then  ai_autoriza_s_n = 1	
+		
+
+end subroutine
+

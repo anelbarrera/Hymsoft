@@ -1,0 +1,249 @@
+﻿//objectcomments menu emergente
+forward
+global type m_cc_popupmenu from menu
+end type
+type explorer from menu within m_cc_popupmenu
+end type
+type m_ver from menu within explorer
+end type
+type m_icograndes from menu within m_ver
+end type
+type m_iconospequeos from menu within m_ver
+end type
+type m_lista from menu within m_ver
+end type
+type m_detalle from menu within m_ver
+end type
+type m_ver from menu within explorer
+m_icograndes m_icograndes
+m_iconospequeos m_iconospequeos
+m_lista m_lista
+m_detalle m_detalle
+end type
+type m_adicionar from menu within explorer
+end type
+type m_eliminar from menu within explorer
+end type
+type m_buscar from menu within explorer
+end type
+type m_editar from menu within explorer
+end type
+type m_adicionar0 from menu within explorer
+end type
+type explorer from menu within m_cc_popupmenu
+m_ver m_ver
+m_adicionar m_adicionar
+m_eliminar m_eliminar
+m_buscar m_buscar
+m_editar m_editar
+m_adicionar0 m_adicionar0
+end type
+global type m_cc_popupmenu from menu
+explorer explorer
+end type
+end forward
+
+global type m_cc_popupmenu from menu
+explorer explorer
+end type
+global m_cc_popupmenu m_cc_popupmenu
+
+on m_cc_popupmenu.create
+m_cc_popupmenu=this
+call super::create
+this.explorer=create explorer
+this.Item[UpperBound(this.Item)+1]=this.explorer
+end on
+
+on m_cc_popupmenu.destroy
+call super::destroy
+destroy(this.explorer)
+end on
+
+type explorer from menu within m_cc_popupmenu
+m_ver m_ver
+m_adicionar m_adicionar
+m_eliminar m_eliminar
+m_buscar m_buscar
+m_editar m_editar
+m_adicionar0 m_adicionar0
+end type
+
+on explorer.create
+call super::create
+this.text = "explorer"
+this.m_ver=create m_ver
+this.m_adicionar=create m_adicionar
+this.m_eliminar=create m_eliminar
+this.m_buscar=create m_buscar
+this.m_editar=create m_editar
+this.m_adicionar0=create m_adicionar0
+this.Item[UpperBound(this.Item)+1]=this.m_ver
+this.Item[UpperBound(this.Item)+1]=this.m_adicionar
+this.Item[UpperBound(this.Item)+1]=this.m_eliminar
+this.Item[UpperBound(this.Item)+1]=this.m_buscar
+this.Item[UpperBound(this.Item)+1]=this.m_editar
+this.Item[UpperBound(this.Item)+1]=this.m_adicionar0
+end on
+
+on explorer.destroy
+call super::destroy
+destroy(this.m_ver)
+destroy(this.m_adicionar)
+destroy(this.m_eliminar)
+destroy(this.m_buscar)
+destroy(this.m_editar)
+destroy(this.m_adicionar0)
+end on
+
+event clicked;///
+end event
+
+type m_ver from menu within explorer
+m_icograndes m_icograndes
+m_iconospequeos m_iconospequeos
+m_lista m_lista
+m_detalle m_detalle
+end type
+
+on m_ver.create
+call super::create
+this.text = "Ver"
+this.m_icograndes=create m_icograndes
+this.m_iconospequeos=create m_iconospequeos
+this.m_lista=create m_lista
+this.m_detalle=create m_detalle
+this.Item[UpperBound(this.Item)+1]=this.m_icograndes
+this.Item[UpperBound(this.Item)+1]=this.m_iconospequeos
+this.Item[UpperBound(this.Item)+1]=this.m_lista
+this.Item[UpperBound(this.Item)+1]=this.m_detalle
+end on
+
+on m_ver.destroy
+call super::destroy
+destroy(this.m_icograndes)
+destroy(this.m_iconospequeos)
+destroy(this.m_lista)
+destroy(this.m_detalle)
+end on
+
+type m_icograndes from menu within m_ver
+end type
+
+on m_icograndes.create
+call super::create
+this.text = "Iconos Grandes"
+end on
+
+on m_icograndes.destroy
+call super::destroy
+end on
+
+type m_iconospequeos from menu within m_ver
+end type
+
+on m_iconospequeos.create
+call super::create
+this.text = "Iconos Pequeños"
+end on
+
+on m_iconospequeos.destroy
+call super::destroy
+end on
+
+type m_lista from menu within m_ver
+end type
+
+on m_lista.create
+call super::create
+this.text = "Lista"
+end on
+
+on m_lista.destroy
+call super::destroy
+end on
+
+type m_detalle from menu within m_ver
+end type
+
+on m_detalle.create
+call super::create
+this.text = "Detalle"
+end on
+
+on m_detalle.destroy
+call super::destroy
+end on
+
+type m_adicionar from menu within explorer
+end type
+
+on m_adicionar.create
+call super::create
+this.text = "Insertar"
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_insertar')
+end event
+
+on m_adicionar.destroy
+call super::destroy
+end on
+
+type m_eliminar from menu within explorer
+end type
+
+on m_eliminar.create
+call super::create
+this.text = "Eliminar"
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_elim')
+end event
+
+on m_eliminar.destroy
+call super::destroy
+end on
+
+type m_buscar from menu within explorer
+end type
+
+on m_buscar.create
+call super::create
+this.visible = false
+this.text = "Buscar..."
+this.enabled = false
+this.toolbaritemvisible = false
+end on
+
+on m_buscar.destroy
+call super::destroy
+end on
+
+type m_editar from menu within explorer
+end type
+
+on m_editar.create
+call super::create
+this.text = "Editar"
+end on
+
+on m_editar.destroy
+call super::destroy
+end on
+
+type m_adicionar0 from menu within explorer
+end type
+
+on m_adicionar0.create
+call super::create
+this.text = "Adicionar"
+end on
+
+on m_adicionar0.destroy
+call super::destroy
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_adic_serv')
+end event
+

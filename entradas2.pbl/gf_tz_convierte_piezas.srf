@@ -1,0 +1,28 @@
+﻿//objectcomments Convierte cantidades cualquiera que sea la unidad de empaque a piezas
+global type gf_tz_convierte_piezas from function_object
+end type
+
+forward prototypes
+global function integer gf_tz_convierte_piezas (string unidad, integer cantidad, integer fraccion)
+end prototypes
+
+global function integer gf_tz_convierte_piezas (string unidad, integer cantidad, integer fraccion);// convierte cantidades a piezas
+Double ld_cantidad,ld_mconver
+
+//* Convierte las cantidades en Unidades de Empaque y piezas
+
+ SELECT inamedid.medi_cantidad
+ INTO	:ld_mconver
+ FROM inamedid  
+ WHERE inamedid.medi_medida = :unidad;
+
+ if ld_mconver = 0 then
+	 ld_mconver = 1
+ end if
+
+ ld_cantidad = (ld_mconver * cantidad) + fraccion   // Total de piezas
+
+return(ld_cantidad)
+
+end function
+

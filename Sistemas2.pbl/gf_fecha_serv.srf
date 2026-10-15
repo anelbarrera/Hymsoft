@@ -1,0 +1,22 @@
+﻿//objectcomments Esta Funcion Reemplasa a TODAY() y retorna en formato datetime la fecha del SERVIDOR
+global type gf_fecha_serv from function_object
+end type
+
+forward prototypes
+global function datetime gf_fecha_serv ()
+end prototypes
+
+global function datetime gf_fecha_serv ();/* Retorna la Fecha del Servidor */
+
+Datetime		ld_fecha
+
+DECLARE Fecha CURSOR FOR
+SELECT Getdate();
+
+Open Fecha;
+Fetch Fecha into :ld_fecha;
+close Fecha;
+Return(ld_fecha)
+
+end function
+

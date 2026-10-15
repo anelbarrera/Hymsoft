@@ -1,0 +1,41 @@
+﻿global type gf_mascara from function_object
+end type
+
+forward prototypes
+global function string gf_mascara ()
+end prototypes
+
+global function string gf_mascara ();DataStore	lds_mascaras_cuentas
+Integer		li_lineas
+String		ls_cadena, ls_mascara
+
+// CREACIÓN DEL DATASTORE DE MÁSCARAS DE CUENTAS
+
+lds_mascaras_cuentas = create datastore
+lds_mascaras_cuentas.DataObject = "dw_ma_co_niveles"
+
+lds_mascaras_cuentas.SetTransObject(sqlca)
+
+li_lineas = lds_mascaras_cuentas.Retrieve(str.g_financiero,str.empresa)
+
+lds_mascaras_cuentas.Setsort("nive_no_nivel A")
+lds_mascaras_cuentas.Sort()
+
+If li_lineas < 1 Then
+//	mensaje("Información","Por Favor, Antes de Ejecutar Esta Opción Proceda " + &
+//				"a Confeccionar la Máscara de las Cuentas.", "Máscara: " + &
+//				"Formato que se Crea en la Ventana de Niveles y Máscara de Cuentas " + &
+//				"Ubicada en la Opción de Manejo de Cuentas en Parámetros, Datos Generales.")
+	Return ""
+End If
+
+ls_cadena = lds_mascaras_cuentas.getitemstring(lds_mascaras_cuentas.rowcount(),"nive_mascara")
+
+// Herick// 
+//ls_cadena = Replace(ls_cadena,1,3,"XXX")
+
+destroy lds_mascaras_cuentas
+return(ls_cadena)
+
+end function
+

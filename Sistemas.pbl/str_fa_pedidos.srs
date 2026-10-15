@@ -1,0 +1,5 @@
+﻿global type str_fa_pedidos from structure
+	string		pedidos[]
+	integer		ann
+end type
+

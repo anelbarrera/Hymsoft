@@ -1,0 +1,64 @@
+﻿global type gf_hoy_word from function_object
+end type
+
+forward prototypes
+global function string gf_hoy_word ()
+end prototypes
+
+global function string gf_hoy_word ();	String	ls_dia, ls_mes, ls_num_dia, ls_ano
+	Date		ld_fecha
+	
+	
+	ld_fecha = today()
+	
+	ls_num_dia 	= string(day(ld_fecha))
+	ls_ano		= string(year(ld_fecha))
+	
+	ls_dia	= DayName(ld_fecha)
+	CHOOSE CASE ls_dia
+		CASE "Monday"
+			ls_dia = "Lunes"
+		CASE "Tuesday"
+			ls_dia = "Martes"
+		CASE "Wednesday"
+			ls_dia = "Miércoles"
+		CASE "Thursday"
+			ls_dia = "Jueves"
+		CASE "Friday"
+			ls_dia = "Viernes"
+		CASE "Saturday"
+			ls_dia = "Sábado"
+		CASE "Sunday"
+			ls_dia = "Domingo"
+	END CHOOSE
+
+	CHOOSE CASE month(ld_fecha)
+		CASE 1
+			ls_mes = "Enero"
+		CASE 2
+			ls_mes = "Febrero"
+		CASE 3
+			ls_mes = "Marzo"
+		CASE 4
+			ls_mes = "Abril"
+		CASE 5
+			ls_mes = "Mayo"
+		CASE 6
+			ls_mes = "Junio"
+		CASE 7
+			ls_mes = "Julio"
+		CASE 8
+			ls_mes = "Agosto"
+		CASE 9
+			ls_mes = "Septiembre"
+		CASE 10
+			ls_mes = "Octubre"
+		CASE 11
+			ls_mes = "Noviembre"
+		CASE 12
+			ls_mes = "Diciembre"
+	END CHOOSE
+	
+Return ls_dia + " " + ls_num_dia + " de " + ls_mes + " de " + ls_ano
+end function
+

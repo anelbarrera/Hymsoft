@@ -1,0 +1,47 @@
+﻿//objectcomments Función que retorna la fecha completa en palabras (dd de mm de yyyy)
+global type gf_fecha_palabras from function_object
+end type
+
+forward prototypes
+global function string gf_fecha_palabras (date fecha)
+end prototypes
+
+global function string gf_fecha_palabras (date fecha);// Funcion que retorna el dia completo para los cheques (dd de mm de yyyy)
+// gf_fecha_palabras(Date)
+
+string ls_dia_palabra, ls_mes_nombre
+
+CHOOSE CASE month(fecha)
+	CASE 1
+		ls_mes_nombre = "Enero"
+	CASE 2
+		ls_mes_nombre = "Febrero"
+	CASE 3
+		ls_mes_nombre = "Marzo"
+	CASE 4
+		ls_mes_nombre = "Abril"
+	CASE 5
+		ls_mes_nombre = "Mayo"
+   CASE 6
+		ls_mes_nombre = "Junio"
+	CASE 7
+		ls_mes_nombre = "Julio"
+	CASE 8
+		ls_mes_nombre = "Agosto"
+	CASE 09
+		ls_mes_nombre = "Septiembre"
+	CASE 10
+		ls_mes_nombre = "Octubre"
+	CASE 11
+		ls_mes_nombre = "Noviembre"
+	CASE 12
+		ls_mes_nombre = "Diciembre"
+	CASE ELSE
+		RETURN (" ")
+END CHOOSE
+
+ls_dia_palabra = string(day(fecha)) + ' de ' + ls_mes_nombre +' de '+ string(year(fecha))
+return(ls_dia_palabra)
+
+end function
+

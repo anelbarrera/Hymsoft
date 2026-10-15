@@ -1,0 +1,32 @@
+﻿global type gf_descripcion_tercero_cliente from function_object
+end type
+
+forward prototypes
+global function string gf_descripcion_tercero_cliente (long al_tercero_cliente)
+end prototypes
+
+global function string gf_descripcion_tercero_cliente (long al_tercero_cliente);//Llamada desde los Petty Cash
+
+string ls_descripcion, ls_codigo
+ 
+ SELECT isnull(dgmterce.terc_descripcion,'') , isnull(ccmclien.clie_ref_anterior,'')
+	INTO :ls_descripcion,
+		  :ls_codigo
+	FROM dgmterce,
+	 	  ccmclien,
+	  	  dgapais   
+  WHERE ( ccmclien.clie_tercero = dgmterce.terc_tercero ) and  
+		  ( dgmterce.terc_pais = dgapais.pais_pais ) and        
+		  ( ccmclien.clie_g_financiero = :str.g_financiero ) and        
+		  ( ccmclien.clie_empresa = :str.empresa ) and      
+		  ( ccmclien.clie_estado = 'A' ) and
+		  ( dgmterce.terc_tercero = :al_tercero_cliente ) ;
+		if sqlca.sqlcode = -1 then
+			mensaje('Aviso','Error al Seleccionar la Descripcion del Cliente',sqlca.sqlerrtext)
+		end if
+		
+		
+
+return ls_codigo+'   '+ls_descripcion
+end function
+

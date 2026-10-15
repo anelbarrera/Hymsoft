@@ -1,0 +1,6 @@
+﻿global type str_micro from structure
+	character		nombre
+	integer		posicion
+	integer		cantidad
+end type
+

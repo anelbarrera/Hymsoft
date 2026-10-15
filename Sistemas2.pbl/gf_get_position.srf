@@ -1,0 +1,88 @@
+﻿global type gf_get_position from function_object
+end type
+
+forward prototypes
+global function boolean gf_get_position (integer ai_plantilla, ref str_plantillacheque_array a_str_plantilla)
+end prototypes
+
+global function boolean gf_get_position (integer ai_plantilla, ref str_plantillacheque_array a_str_plantilla);long		ll_i = 1
+
+DECLARE cur_properties CURSOR FOR
+  SELECT badplche.plch_nombre_campo,
+         badplche.plch_x,
+         badplche.plch_y,
+         badplche.plch_alto,
+         badplche.plch_ancho,
+         badplche.plch_visible,
+         badplche.plch_borde,
+         badplche.plch_tipo,
+         badplche.plch_tamano,
+         badplche.plch_bold,
+         badplche.plch_italic,
+         badplche.plch_underline,
+         badplche.plch_alineado,
+         badplche.plch_color_letra,
+         badplche.plch_color_texto
+    FROM badplche
+   WHERE badplche.plch_no_plantilla = :ai_plantilla
+	AND badplche.plch_g_financiero = :str.g_financiero
+	AND badplche.plch_empresa = :str.empresa;
+	
+	if sqlca.sqlcode <> 0 then
+		CLOSE cur_properties;
+		return false
+	end if
+
+OPEN cur_properties;
+
+FETCH cur_properties INTO :a_str_plantilla.nombre[ll_i],
+						        :a_str_plantilla.x[ll_i],
+						        :a_str_plantilla.y[ll_i],
+						        :a_str_plantilla.alto[ll_i],
+						        :a_str_plantilla.ancho[ll_i],
+						        :a_str_plantilla.visible[ll_i],
+						        :a_str_plantilla.borde[ll_i],
+						        :a_str_plantilla.tipo[ll_i],   
+						        :a_str_plantilla.tamaño_letra[ll_i],   
+						        :a_str_plantilla.bold[ll_i],   
+						        :a_str_plantilla.italic[ll_i],   
+						        :a_str_plantilla.underline[ll_i],   
+						        :a_str_plantilla.alineado[ll_i],   
+						        :a_str_plantilla.color[ll_i],   
+						        :a_str_plantilla.text[ll_i] ;
+
+If sqlca.sqlcode <> 0 Then
+	CLOSE cur_properties;
+	Return false
+End If
+
+Do While sqlca.sqlcode = 0
+	ll_i++
+	FETCH cur_properties INTO :a_str_plantilla.nombre[ll_i],   
+						        :a_str_plantilla.x[ll_i],   
+						        :a_str_plantilla.y[ll_i],   
+						        :a_str_plantilla.alto[ll_i],   
+						        :a_str_plantilla.ancho[ll_i],   
+						        :a_str_plantilla.visible[ll_i],   
+						        :a_str_plantilla.borde[ll_i],   
+						        :a_str_plantilla.tipo[ll_i],   
+						        :a_str_plantilla.tamaño_letra[ll_i],   
+						        :a_str_plantilla.bold[ll_i],   
+						        :a_str_plantilla.italic[ll_i],   
+						        :a_str_plantilla.underline[ll_i],   
+						        :a_str_plantilla.alineado[ll_i],   
+						        :a_str_plantilla.color[ll_i],   
+						        :a_str_plantilla.text[ll_i] ;
+	
+	if sqlca.sqlcode <> 0 Then
+		close cur_properties;
+		return false
+	End If
+loop
+
+CLOSE cur_properties;
+
+return true
+
+end function
+

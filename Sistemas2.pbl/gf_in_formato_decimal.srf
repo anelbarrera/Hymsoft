@@ -1,0 +1,17 @@
+﻿global type gf_in_formato_decimal from function_object
+end type
+
+forward prototypes
+global function string gf_in_formato_decimal ()
+end prototypes
+
+global function string gf_in_formato_decimal ();/* retorna el formato numérico con una cantidad de específica de decimales 
+	(Según str.digito_decimal) */
+if str.digito_decimal > 0 Then
+	Return '#,##0.'+Fill('0',str.digito_decimal) 
+Else
+	Return '#,##0'	
+End If	
+
+end function
+

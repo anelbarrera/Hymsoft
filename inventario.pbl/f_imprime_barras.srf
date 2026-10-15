@@ -1,0 +1,285 @@
+﻿global type f_imprime_barras from function_object
+end type
+
+forward prototypes
+global subroutine f_imprime_barras (string as_codigo_barra, string as_tipo_etiqueta, string as_cantidad_etiquetas, string as_precio_utiliza, string as_seleccion, string as_descripcion, string as_descrip, long as_empaque, string as_desc_empaque, string as_ult_entrada, string as_precio1, string as_costo_cif, string as_fecha_ent)
+end prototypes
+
+global subroutine f_imprime_barras (string as_codigo_barra, string as_tipo_etiqueta, string as_cantidad_etiquetas, string as_precio_utiliza, string as_seleccion, string as_descripcion, string as_descrip, long as_empaque, string as_desc_empaque, string as_ult_entrada, string as_precio1, string as_costo_cif, string as_fecha_ent);//FUNCION QUE IMPRIME CODIGO DE BARRA
+sqlca.autocommit = true
+long ll_archivo,li_anio,ld_valor
+integer li_mes,li_anio1
+integer li_pos, li_pos2, li_rest
+datetime ld_fecha
+ll_archivo = FileOpen ("c:\Sistemas\codigo_barra.txt" , LineMode!  , Write!  , LockWrite!  , Append!  )
+string as_precio_utiliza2, ls_cantidad,ls_fd,ls_fs,ls_xz,ls_xa,ls_by,ls_pq,ls_fo,ls_bcn,ls_bc3,ls_pos,ls_pos1,ls_clave_costo,ls_descripcion, ls_medio, ls_gramaje
+string ls_barra,ls_producto,ls_razon, ls_ubicacion,ls_syntax,ls_codigo,mes_letra,ls_anio,ls_costo_cif
+decimal ld_precio_mayor,ld_precio_menor,ld_precio_afiliadas,ld_precio_otro,ld_precio_especial ,ld_costo
+decimal ld_precio,ld_precio_v,ld_cubicaje,ld_empaque,ld_peso
+decimal{2} ld_costo_cif, ld_porcentaje
+string ls_med, ls_medida,ls_emp_descrip,ls_emp_um,ls_peso_unidad_m,ls_descrip_tam, ls_tam
+
+//f_imprime_barras
+
+ld_fecha =datetime(str.fecha)
+li_mes = month(date(ld_fecha))
+
+CHOOSE case li_mes
+case 1
+mes_letra= 'A'
+case 2
+mes_letra= 'B'
+case 3
+mes_letra= 'C'
+case 4
+mes_letra= 'D'
+case 5
+mes_letra= 'E'
+case 6
+mes_letra= 'F'
+case 7
+mes_letra= 'G'
+case 8
+mes_letra= 'H'
+case 9
+mes_letra= 'I'
+case 10
+mes_letra= 'J'
+case 11
+mes_letra= 'K'
+case 12
+mes_letra= 'L'
+end CHOOSE
+li_anio= year(date(ld_fecha))
+li_anio1 = long(right(string(li_anio),1))
+
+
+if isnull(str.tercero) or str.tercero >  3 then str.tercero = 1 
+//^XA Inicio de la etiqueta
+//^FD Identifica el texto a imprmir
+//^FS Indicador de fin de linea
+//^XZ Finalización de la etiqueta
+//^FO 
+//Indica el tipo de codigo de barra 
+ls_bcn = char(94)+char(66)+char(67)+char(78)//^BCN
+ls_bc3 = char(94)+char(66)+char(67)+char(51)//^BC3N
+
+//IF as_seleccion = '1'  then  //INDICA QUE LA IMPRESION NO ES POR ENTRADAS
+	SELECT inmprodu.prod_barra,
+   		inmprodu.prod_producto,
+			inmprodu.prod_descripcion,
+			inmprodu.prod_precio_mayor,   
+			inmprodu.prod_precio_menor,   
+			inmprodu.prod_precio_afiliadas,   
+			inmprodu.prod_precio_otros,   
+			inmprodu.prod_precio_especial,
+			inmprodu.prod_medida,
+			inmprodu.prod_cubicaje,
+			inmprodu.prod_empaque,
+			inmprodu.prod_peso,
+			inmprodu.prod_empaque_descripcion,
+			inmprodu.prod_empaque_um,
+			inmprodu.prod_peso_unidad_medida,
+			inmprodu.prod_cod_clase_tam,
+			inmprodu.prod_gramaje
+	 INTO :ls_barra,   
+	   	:ls_codigo,
+			:ls_descripcion,
+			:ld_precio_mayor,   
+			:ld_precio_menor,   
+			:ld_precio_afiliadas,   
+			:ld_precio_otro,   
+			:ld_precio_especial,
+			:ls_med,
+			:ld_cubicaje,
+			:ld_empaque,
+			:ld_peso,
+			:ls_emp_descrip,
+			:ls_emp_um,
+			:ls_peso_unidad_m,
+			:ls_tam,
+			:ls_gramaje
+	 FROM inmprodu  
+	WHERE ( inmprodu.prod_g_financiero = :str.g_financiero ) AND  
+			( inmprodu.prod_empresa = :str.empresa ) AND  
+			( inmprodu.prod_producto = :as_codigo_barra )   ;
+	
+	
+	  SELECT inamedid.medi_descripcion  
+    INTO :ls_medida  
+    FROM inamedid  
+   WHERE inamedid.medi_medida = :ls_med   ;
+
+	  SELECT cracltam.acta_descripcion  
+    INTO :ls_descrip_tam  
+    FROM cracltam  
+   WHERE ( cracltam.acta_g_financiero = :str.g_financiero ) AND  
+         ( cracltam.acta_empresa = :str.empresa ) AND  
+         ( cracltam.acta_cod_clase_tam = :ls_tam )   ;
+
+
+//END IF		
+
+select max(mbod_ubicacion) into :ls_ubicacion 
+		from inmbodeg where  mbod_producto = :as_codigo_barra
+and not mbod_bodega = '03' and mbod_empresa = :str.empresa and mbod_g_financiero = :str.g_financiero ; 
+
+if ls_ubicacion = '' then ls_ubicacion = ' '
+
+SELECT dgmempre.empr_razon_social  
+INTO :ls_razon  
+FROM dgmempre  
+WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND  
+		(dgmempre.empr_empresa = :str.empresa );
+	
+asc(as_cantidad_etiquetas) //se convierte a ASCCI el numero o cantidad de etiquetas a imprimir
+ls_cantidad =as_cantidad_etiquetas
+
+	
+			//	messagebox('','Entro')
+				filewrite(ll_archivo,'^XA')
+				filewrite(ll_archivo,'^BY'+char(49))
+				filewrite(ll_archivo,'^PQ'+ls_cantidad)
+				filewrite(ll_archivo,'^LH0,0')
+				filewrite(ll_archivo,'^FO175,15^A0N50,25^FDCodigo:'+ls_codigo+'^FS') //175
+				//filewrite(ll_archivo,'^FO300,25^A0N50,25^FD'+ls_medida+'^FS')
+				IF len(as_codigo_barra) <=25  THEN ls_pos =string( (106 - (len(ls_descripcion)*6*4)))
+				filewrite(ll_archivo,'^FO175,65^A0N50,25^FD'+upper(ls_descripcion)+'^FS')
+				filewrite(ll_archivo,'^FO175,95^A0N50,25^FD'+string(ld_empaque,'###,###,##0')+' '+ls_medida+' X '+ls_emp_descrip+'^FS')
+				IF len(as_codigo_barra) <= 14 THEN ls_pos =string((178 -(len(as_codigo_barra)*(6*1.5))))
+				string ls_codigo_barra_temp
+//				if len(as_codigo_barra) = 8 then													
+//						filewrite(ll_archivo,'^BY2,3,117^FT16,257^BCN,,Y,N^FD>:'+left(as_codigo_barra,3)+'>5'+mid(as_codigo_barra,4,4)+'>6'+right(as_codigo_barra,1)+'^FS')
+//				else
+				if len(as_codigo_barra) = 13 then
+						//ls_codigo_barra_temp = left(as_codigo_barra,8)+'>5'+mid(as_codigo_barra,9,4)+'>6'+mid(as_codigo_barra,13,15)						
+						filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	//PEQUENA NO LEIDA '^BY1,3,117^FT16,257^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	al 31/08/2010
+				elseif len(as_codigo_barra) > 11 and len(as_codigo_barra) <> 13 then												
+//						ls_codigo_barra_temp = left(as_codigo_barra,8)+'>5'+mid(as_codigo_barra,9,4)+'>6'+mid(as_codigo_barra,13,15)
+						li_pos = pos(as_codigo_barra,'-',1)
+						li_pos2 = pos(as_codigo_barra,'-',li_pos + 1)
+						li_rest = li_pos2 - li_pos
+						ls_medio = mid(as_codigo_barra,li_pos +1, li_pos2 - (li_pos +1) )												
+						//^BY2,3,121^FT19,249^BCN,,Y,N^FD>:02-275-7-10R^FS						
+						if li_rest <= 4 then					
+							ls_codigo_barra_temp = as_codigo_barra
+						ELSE
+//							if pos(as_codigo_barra,'/',li_pos + 1) > 0 then //Si tiene /
+//								ls_codigo_barra_temp = left(as_codigo_barra,5)+'>5'+mid(as_codigo_barra,6,4)+'>6'+mid(as_codigo_barra,10,15)
+//							else
+							//si no tiene 2 guiones
+							if li_pos2 = 0 then
+								ls_codigo_barra_temp = left(as_codigo_barra,5)+'>5'+mid(as_codigo_barra,6,4)+'>6'+mid(as_codigo_barra,10,15)								
+							else
+								//Si despues del 2do guion es numeros
+								if isnumber(mid(as_codigo_barra,li_pos2 + 1,15)) then
+									ls_codigo_barra_temp = left(as_codigo_barra,li_pos2)+'>5'+mid(as_codigo_barra,li_pos2 + 1,15)
+								else//si hay algun caracter o letra despues del 2do guion
+									ls_codigo_barra_temp = as_codigo_barra
+								end if
+							end if
+						END IF							
+							filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+ls_codigo_barra_temp+'^FS')	//PEQUENA NO LEIDA '^BY1,3,117^FT16,257^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	al 31/08/2010
+//													'^BY2,3,121^FT19,249^BCN,,Y,N^FD>:03-UN03/>52010>6-10^FS' 03-UN03/2010-10						
+//													'^BY2,3,121^FT19,249^BCN,,Y,N^FD>:03-UN03/>52010>6-1^FS'
+//													'^BY1,3,116^FT16,217^BCN,,Y,N^FD>:04-MSET-001/002^FS					'
+//													 ^BY2,3,121^FT19,249^BCN,,Y,N^FD>:02-UN02->50953>61^FS
+																							  //01-GM>56468>61/004
+																							  //01-GM>53832>68/A
+																							  //01-GM>56468>61/9
+																							  
+				elseif len(as_codigo_barra) = 9 then
+						ls_codigo_barra_temp = left(as_codigo_barra,6)+'>5'+mid(as_codigo_barra,7,4)     //+'>6'+mid(as_codigo_barra,8,15)
+						//04-UH->51269
+						filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS') //185 antes de 55	//PEQUENA NO LEIDA '^BY1,3,117^FT16,257^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	al 31/08/2010					
+				elseif len(as_codigo_barra) = 10 then
+						li_pos = pos(as_codigo_barra,'-',1)
+						li_pos2 = pos(as_codigo_barra,'-',li_pos + 1)
+						li_rest = li_pos2 - li_pos
+						ls_medio = mid(as_codigo_barra,li_pos +1, li_pos2 - (li_pos +1) )												
+						if li_rest <= 4 then					
+							if isnumber(ls_medio) then
+								ls_codigo_barra_temp = left(as_codigo_barra,6)+'>5'+mid(as_codigo_barra,7,4)     //+'>6'+mid(as_codigo_barra,8,15)
+							else
+								ls_codigo_barra_temp = as_codigo_barra
+							end if
+						else
+							if isnumber(ls_medio) then
+								ls_codigo_barra_temp = left(as_codigo_barra,3)+'>5'+mid(as_codigo_barra,4,4)+'>6'+mid(as_codigo_barra,8,3)							
+							ELSE
+								ls_codigo_barra_temp = as_codigo_barra
+							END IF
+						end if
+						//04-UH->51269
+						//04->55067>62-1
+						
+//						^BY2,3,121^FT19,249^BCN,,Y,N^FD>:01->56510>6-20^FS
+
+						
+						filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+ls_codigo_barra_temp+'^FS')	//PEQUENA NO LEIDA '^BY1,3,117^FT16,257^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	al 31/08/2010					
+
+				elseif len(as_codigo_barra) = 11 then
+						li_pos = pos(as_codigo_barra,'-',1)
+						li_pos2 = pos(as_codigo_barra,'-',li_pos + 1)
+						li_rest = li_pos2 - li_pos
+						if li_rest <= 11 then //5 then //TENIA 5 ANTERIORMENTE									
+							filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	//185 antes de 55
+						else
+							ls_codigo_barra_temp = left(as_codigo_barra,3)+'>5'+mid(as_codigo_barra,4,4)+'>6'+mid(as_codigo_barra,8,15)
+							filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+ls_codigo_barra_temp+'^FS')	//PEQUENA NO LEIDA '^BY1,3,117^FT16,257^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	al 31/08/2010												
+						end if							
+						//							 01->55067>62-8       de 10 Caracteres
+						//							 01->55067>62-25		 de 11 Caracteres
+				elseif len(as_codigo_barra) >= 7 and len(as_codigo_barra) <= 8 then
+						li_pos = pos(as_codigo_barra,'-',1)
+						li_pos2 = pos(as_codigo_barra,'-',li_pos + 1)
+						li_rest = li_pos2 - li_pos
+						if li_rest <= 4 then								
+							filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	//185 antes de 55								
+						else
+							//	04->56285 //7 caracteres
+							ls_codigo_barra_temp = left(as_codigo_barra,3)+'>5'+mid(as_codigo_barra,4,10)     //+'>6'+mid(as_codigo_barra,8,15)
+							filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+ls_codigo_barra_temp+'^FS')	//PEQUENA NO LEIDA '^BY1,3,117^FT16,257^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')	al 31/08/2010										
+						end if
+				else
+						filewrite(ll_archivo,'^BY2,3,121^FT175,249^BCN,,Y,N^FD>:'+as_codigo_barra+'^FS')		//185 antes de 55
+						//							 						
+//													'^BY2,3,121^FT19,249^BCN,,Y,N^FD>:03-05^FS						'
+//					ls_codigo_barra_temp = left(as_codigo_barra,3)+'>5'+mid(as_codigo_barra,4,17)
+//					filewrite(ll_archivo,'^BY3,3,117^FT16,257^BCN,,Y,N^FD>:'+ls_codigo_barra_temp+'^FS')//'^FO25,125^BCN,135,50^FD'+as_codigo_barra+'^FS')//actual '^FO25,125^BCN,130,40^FD'
+//											'^BY2,3,117^FT8,217^BCN,,Y,N^FD>:01-UH-665^FS'				
+				end if											
+
+				filewrite(ll_archivo,'^FO465,60^A0N50,25^FDMed.:'+ls_gramaje+'^FS') //100
+				filewrite(ll_archivo,'^FO465,90^A0N50,25^FDCubicaje:  '+string(dec(ld_cubicaje),'###,###,##0.00')+'^FS') //125
+				filewrite(ll_archivo,'^FO465,120^A0N50,25^FDPeso:  '+string(dec(ld_peso),'###,###,##0.00')+' ' + ls_peso_unidad_m +'^FS') //150
+//				filewrite(ll_archivo,'^FO300,240^A0N50,25^FDEnt.:  '+as_fecha_ent + ' ' +as_ult_entrada+'^FS')
+//				as_precio_utiliza ='$'+ string(dec(as_precio_utiliza),'###,###,##0.00')
+				 
+				as_precio_utiliza = gf_clave_costos(dec(ld_precio_mayor) )
+				as_precio_utiliza2 = gf_clave_costos(dec(ld_precio_menor) )				
+				  SELECT dgmempre.empr_porcentaje_etiqueta  
+					 INTO :ld_porcentaje  
+					 FROM dgmempre  
+					WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND  
+							( dgmempre.empr_empresa = :str.empresa ) ;
+							if sqlca.sqlcode = -1 then
+								gf_mensaje('','Error al buscar Porc. '+sqlca.sqlerrtext,1,1,'E')
+								return	
+							end if
+
+				ld_costo_cif = dec(as_costo_cif)
+				ld_costo_cif = round(ld_costo_cif + (ld_costo_cif * ld_porcentaje),2)
+				as_costo_cif = gf_clave_costos(ld_costo_cif )
+
+				filewrite(ll_archivo,'^FO250,40^A0N50,18^FD'+ as_costo_cif +'^FS')// string(dec(as_costo_cif),'###,###,##0.00')+'^FS')				
+				filewrite(ll_archivo,'^FO465,150^A0N50,25^FDP.V1.:   '+as_precio_utiliza+'^FS')
+				filewrite(ll_archivo,'^FO465,180^A0N50,25^FDP.V2.:   '+as_precio_utiliza2 +'^FS')
+				filewrite(ll_archivo,'^FO465,210^A0N50,25^FDEnt.: ' +as_ult_entrada+'^FS')
+				filewrite(ll_archivo,'^FO420,270^A0N50,25^FDTamano: '+ls_descrip_tam+'^FS')
+				
+				filewrite(ll_archivo,'^XZ')	
+
+fileclose(ll_archivo)
+end subroutine
+

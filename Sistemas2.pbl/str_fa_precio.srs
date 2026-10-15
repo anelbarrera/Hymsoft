@@ -1,0 +1,9 @@
+﻿//objectcomments Estructura para Los Productos
+global type str_fa_precio from structure
+	string		item
+	long		ucom
+	string		uni
+	string		uni_selec
+	string		ruc
+end type
+

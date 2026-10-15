@@ -1,0 +1,26 @@
+﻿//objectcomments Para los informes de facturacion
+global type str_fa_informe from structure
+	string		opcion_menu
+	string		titulo_ventana
+	string		cadena_where
+	string		dwinforme
+	string		dwinforme2
+	string		compute[5]
+	string		encabezado[5]
+	string		descripcion[5]
+	string		codigo_reporte
+	string		descripcion_reporte
+	string		cod_encabezado
+	string		cod_tipo
+	window		ventana
+	string		periodo
+	string		fecha_periodo
+	integer		porcentaje
+	integer		precio
+	string		is_opcion
+	datetime		fecha_ini
+	datetime		fecha_fin
+	integer		anio
+	integer		mes
+end type
+

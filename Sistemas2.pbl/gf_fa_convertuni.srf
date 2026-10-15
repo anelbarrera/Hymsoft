@@ -1,0 +1,35 @@
+﻿//objectcomments Convierte a la Unidad que se Solicite
+global type gf_fa_convertuni from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_convertuni (readonly string as_med, readonly long al_fracciones, ref long al_cantidad, ref double al_fraccion)
+end prototypes
+
+global subroutine gf_fa_convertuni (readonly string as_med, readonly long al_fracciones, ref long al_cantidad, ref double al_fraccion);/*Esta Función Convierte de Unidad Minima a la Unidad que se Quiere*/
+Double ld_total,ld_ucom, ld_mconvera,ld_frac
+
+ 
+/*Extrae la Unidad comun "Pedo/Unidades/etc "*/
+ld_ucom = gf_medi_prod(as_med)
+
+
+/*Retorna el Factor de Converción a unidades minimas*/
+ld_mconvera = gf_unidad_venta(as_med, ld_ucom)
+
+/*Cambio realizado el 20/01/2000 por hgn
+Si la unidad de conversión es un decimal que no aplique*/
+
+//if int(ld_mconvera) <> ld_mconvera then return
+/* Fin del cambio                      */
+
+If ld_mconvera <= 0 Then ld_mconvera = 1
+
+ld_total = ( al_fracciones / ld_mconvera) 
+
+ld_frac = (Mod(al_fracciones, ld_mconvera))
+
+al_cantidad = Long(ld_total)
+al_fraccion = double(Truncate(ld_frac,2)) 
+end subroutine
+

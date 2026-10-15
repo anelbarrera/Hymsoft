@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<RibbonBar BuiltinTheme="0" Font="FaceName:Tahoma; TextSize:10" >
+  <RibbonItems>
+    <ApplicationButton Text="Sistema Hymsoft" Enabled="true" Tag="MyApp">
+      <ApplicationMenu>
+        <Master>
+          <Item Text="Confiuracion" PictureName="AccountSettingsBig!" Checked="false" Enabled="true" Tag="Settings"  Type="0" Clicked="ue_MasterMenuClicked" Selected="ue_MasterMenuSelected" />
+          <Item Text="Ayuda" PictureName="HelpBig!" Checked="false" Enabled="true" Tag="Help" Type="0" Selected="ue_MenuHelpSelected">         	
+            <Item Text="Readme" PictureName="C:\Sistemas\Hymsoft\Art\readme.png" Checked="false" Enabled="true" Tag="Readme" Type="0" Clicked="ue_MasterMenuClicked" Selected="ue_MasterMenuSelected" />
+            <Item Text="Acerca de" PictureName="AboutBig!" Checked="false" Enabled="true" Tag="About" Type="0" Clicked="ue_MasterMenuClicked" Selected="ue_MasterMenuSelected" />
+          </Item>
+        <Item Type="1"></Item>		
+          <Item Text="Salir" PictureName="C:\Sistemas\Hymsoft\Art\quit.png" Checked="false" Enabled="true" Tag="Quit" Type="0" Clicked="ue_MasterMenuClicked" Selected="ue_MasterMenuSelected" />
+        </Master>
+      </ApplicationMenu>
+    </ApplicationButton>
+    <Categories>
+      <Category Text="Clientes" Enabled="true" Tag="Home">
+        <Panel Text="Windows" PictureName="TabsSmall!" Enabled="true" Tag="Tabs">
+          <LargeButton Text="Lists" PictureName=".\image\List.png" Checked="false" DefaultCommand="true" Enabled="false" PowerTipText="Windows" PowerTipDescription="Windows operations" Tag="Lists" Clicked="ue_largebuttonclicked" Selected="ue_largebuttonselected">
+          </LargeButton>
+          <Group NewLine="true">
+            <SmallButton Text="Close All" PictureName="CloseAllSmall!" Checked="false" DefaultCommand="true" Enabled="false" PowerTipText="Close All" PowerTipDescription="Close all tabs" Tag="Close All" Clicked="ue_smallbuttonclicked" Selected="ue_smallbuttonselected" />
+          </Group>
+          <Group NewLine="true">
+            <SmallButton Text="Close" PictureName="CloseSmall!" Checked="false" DefaultCommand="true" Enabled="false" PowerTipText="Close" PowerTipDescription="Close window" Tag="Close" Clicked="ue_smallbuttonclicked" Selected="ue_smallbuttonselected" />
+          </Group>
+        </Panel>
+        <Panel Text="Boards" PictureName="BoardSmall!" Enabled="true" Tag="Boards">
+          <LargeButton Text="Address" PictureName=".\image\Blue\address.png" Checked="false" DefaultCommand="true" Enabled="true" PowerTipText="Address" PowerTipDescription="Address information" Tag="Address" Clicked="ue_largebuttonclicked" Selected="ue_largebuttonselected" />
+          <LargeButton Text="Customer" PictureName="C:\Sistemas\Hymsoft\Art\customer.png" Checked="false" DefaultCommand="true" Enabled="true" PowerTipText="Customer" PowerTipDescription="Customer information" Tag="Customer" Clicked="ue_largebuttonclicked" Selected="ue_largebuttonselected" />
+          <LargeButton Text="Product" PictureName=".\image\Blue\product.png" Checked="false" DefaultCommand="true" Enabled="true" PowerTipText="Product" PowerTipDescription="Product information" Tag="Product" Clicked="ue_largebuttonclicked" Selected="ue_largebuttonselected" />
+          <LargeButton Text="Order" PictureName=".\image\Blue\order.png" Checked="false" DefaultCommand="true" Enabled="true" PowerTipText="Order" PowerTipDescription="Order information" Tag="Order" Clicked="ue_largebuttonclicked" Selected="ue_largebuttonselected" />
+          <LargeButton Text="Statistics" PictureName=".\image\Blue\statistics.png" Checked="false" DefaultCommand="true" Enabled="true" PowerTipText="Statistics" PowerTipDescription="Statistics information" Tag="Statistics" Clicked="ue_largebuttonclicked" Selected="ue_largebuttonselected" />
+        </Panel>
+        <Panel Text="Acciones" PictureName="ActionsSmall!" Enabled="true" Tag="Action">
+          <Group NewLine="true">
+            <SmallButton Text="Adicionar" PictureName="AddSmall!" Clicked="ue_smallbuttonclicked" Tag="Add" Enabled="false" PowerTipText="Adicionar" PowerTipDescription="Adicionar un registro" />
+            <SmallButton Text="Eliminar" PictureName="DeleteSmall!" Clicked="ue_smallbuttonclicked" Tag="Delete" Enabled="false" PowerTipText="Eliminar" PowerTipDescription="Eliminar el registro actual" />
+            <SmallButton Text="Editar" PictureName="ModifySmall!" Clicked="ue_smallbuttonclicked" Tag="Edit" Enabled="false" PowerTipText="Editar" PowerTipDescription="Editar los datos actuales" />
+            <SmallButton Text="Guardar" PictureName="SaveSmall!" Clicked="ue_smallbuttonclicked" Tag="Save" Enabled="false" PowerTipText="Guardar" PowerTipDescription="Guardar los datos" />
+	    <SmallButton Text="Survey" PictureName="C:\Sistemas\Hymsoft\Art\survey.png" Clicked="ue_smallbuttonclicked" Tag="Survey" Enabled="false" PowerTipText="Survey" PowerTipDescription="Survey" />
+          </Group>
+          <Group NewLine="true">
+            <SmallButton Text="Exportar" PictureName="ExportSmall!" Clicked="ue_smallbuttonclicked" Tag="Export" Enabled="false" PowerTipText="Exportar" PowerTipDescription="Exportar lod datos" />
+	    <SmallButton Text="Cancelar" PictureName="RedoSmall!" Clicked="ue_smallbuttonclicked" Tag="Cancel" Enabled="false" PowerTipText="Cancelar" PowerTipDescription="Cancelar edición" />
+	    <SmallButton Text="Crear PDF" PictureName="C:\Sistemas\Hymsoft\Art\CreatePDF.png" Clicked="ue_smallbuttonclicked" Tag="CreatePDF" Enabled="false" PowerTipText="Crear PDF" PowerTipDescription="Crear PDF" />
+	    <SmallButton Text="Enviar Correo" PictureName="C:\Sistemas\Hymsoft\Art\send-email.png" Clicked="ue_smallbuttonclicked" Tag="SendEmail" Enabled="false" PowerTipText="Enviar email" PowerTipDescription="Enviar email" />
+	    
+          </Group>
+        </Panel>
+        <Panel Text="Vistas" PictureName="ActionsSmall!" Enabled="true" Tag="View">
+          <Group NewLine="true">
+            <SmallButton PictureName="NavFirstSmall!" Clicked="ue_smallbuttonclicked" Tag="First" Enabled="false" PowerTipText="First" PowerTipDescription="Rollback to the first row" />
+            <SmallButton PictureName="NavPrevSmall!" Clicked="ue_smallbuttonclicked" Tag="Prior" Enabled="false" PowerTipText="Prior" PowerTipDescription="Rollback to the prior row" />
+            <SmallButton PictureName="NavNextSmall!" Clicked="ue_smallbuttonclicked" Tag="Next" Enabled="false" PowerTipText="Next" PowerTipDescription="Rollback to the next row" />
+            <SmallButton PictureName="NavLastSmall!" Clicked="ue_smallbuttonclicked" Tag="Last" Enabled="false" PowerTipText="Last" PowerTipDescription="Rollback to the last row" />
+          </Group>
+          <Group NewLine="true">
+            <SmallButton PictureName="SortSmall!" Clicked="ue_smallbuttonclicked" Tag="Sort" Enabled="false" PowerTipText="Ordenar" PowerTipDescription="Ordenar los datos" />
+            <SmallButton PictureName="FilterSmall!" Clicked="ue_smallbuttonclicked" Tag="Filter" Enabled="false" PowerTipText="Filtrar" PowerTipDescription="Filtrar los datos" />
+          </Group>
+        </Panel>
+      </Category>    
+    </Categories>
+    <TabButtons>
+      <TabButton Text="Minimize" PictureName="ArrowUpSmall!" Checked="false" DefaultCommand="true" Enabled="true" PowerTipText="Minimize" PowerTipDescription="Minimize or maximize RibbonBar" Tag="Tab Minimize" Clicked="ue_TabButtonClicked" Selected="ue_TabButtonSelected" />
+      <TabButton Text="Screen Saver" PictureName="C:\Sistemas\Hymsoft\Art\screensaver.png" Checked="false" DefaultCommand="true" Enabled="true" PowerTipText="Screen Saver" PowerTipDescription="Screen saver" Tag="Screen Saver" Clicked="ue_TabButtonClicked" Selected="ue_TabButtonSelected" />
+    </TabButtons>
+  </RibbonItems>
+</RibbonBar>

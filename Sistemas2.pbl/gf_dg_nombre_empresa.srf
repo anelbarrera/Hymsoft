@@ -1,0 +1,41 @@
+﻿//objectcomments Nombre de la Empresa
+global type gf_dg_nombre_empresa from function_object
+end type
+
+forward prototypes
+global function string gf_dg_nombre_empresa ()
+end prototypes
+
+global function string gf_dg_nombre_empresa ();string ls_so,ls_co,ls_in
+ //   PARA SER USADA EJEMPLO:
+ // gf_fa_nom_empr("agrumento del gupo financiero", "agrumento de empresa")
+    SELECT dgmempre.empr_razon_social,   
+         dgmempre.empr_razon_comercial,   
+         dgmempre.empr_utiliza_nombre  
+    INTO :ls_so,
+	      :ls_co,
+			:ls_in           
+    FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND 
+         ( dgmempre.empr_empresa = :str.empresa ) 
+			;
+ if str.aplicacion ='PL' then 
+	SELECT para_utiliza_nombre 
+    INTO :ls_in           
+    FROM plmparam  
+   WHERE ( plmparam.para_g_financiero = :str.g_financiero ) AND 
+         ( plmparam.para_empresa = :str.empresa )   ;	
+end if
+
+CHOOSE CASE ls_in
+	CASE "S"
+	    Return(ls_so)
+	CASE "C"
+		Return(ls_co)	
+	CASE "A"	
+      Return(ls_co + "~r~n" + ls_so)
+END CHOOSE
+	return("s")
+	
+end function
+

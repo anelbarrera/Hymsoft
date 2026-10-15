@@ -1,0 +1,34 @@
+Buenos días Renaul
+
+
+OK		1.	Existen transacciones de diciembre con fecha de enero, específicamente  entradas de mercancía
+OK		2.	Los compromisos de las compras a los proveedores, los registros no están correctos.
+OK		3.	Los prestamos de Banistmo para pagar compromisos a proveedores, los pagos no se reflejan en la cuenta de los proveedores.
+OK		4.	Los depósitos capturados por la pantalla “slip de depósitos”, no se reflejan en la cuenta de caja
+OK		5.	Necesito el reporte de Balance de prueba de clientes en cuentas por cobrar, es importante.
+OK		6.	Que en tráfico puedan capturar en inventario las entradas en la misma fecha que se tramitó la entrada.
+OK		7.	El Balance del mes de enero 2025 aún refleja gastos correspondiente al año 2024, específicamente asiento de planilla
+8.	El módulo de planilla no puedo procesar liquidaciones.
+OK		9.	Los saldos iniciales en cuentas por pagar no están correctos, si debo ingresarlos manualmente, necesito me corrijas las transacciones incorrectas de meses anteriores.
+OK		10.	Que las transacciones de bancos pasen el detalle hacia contabilidad y se vea en el historico
+11.	Poder ver los saldos negativos desde la antiguedad de saldos y desde el balance de pruebas
+OK		12.	Poder tirar los estados de cuenta por pais 
+13.	Talla en el catalogo y precio en letras, y ver error cuando esta la entrada y cambia el disponible
+OK		14.	Resumido de planilla en Legal
+OK		15.	Al copiar un pedido, poder hacerlo por referencias especificas, no todo el pedido
+OK		16.	Que el saldo en el historico, no se sume al final en el debito o credito como esta el reporte de bancarias
+OK		17.	En proveedores si ya existe el numero que incremente y ponga el siguiente disponible
+OK		18.	Agregar el enviar correo de la factura desde la opcion de Facturas Hymsoft
+19.	Permitir cambiar cuentas de bancos y cxp desde Mayor General y que valide que el mes no este cerrado contablemente, que pida usuario y clave y se guarde en el detalle quien y fecha del cambio
+20.	Reporte de Mercancia en Bodega con mas de 3 meses sin venderse, una vez al mes
+21.	Reporte de Mercancia Agotada una vez a la semana
+OK		22.	Que en la Etiqueta salga el precio 3 y mover la factura para el lado izquierdo
+OK		23.	Que en el catalogo aparezca el pv.3 si no tiene que ponga el 2 y si pide el 2 y no tiene que aparezca el 1
+24.	Que salga la cantida que viene en transito en el pedido de la pdt
+25.	Llave foranea en fadcargo con fatdiari
+26.	Reporte con mayor cantidad en inventarios, los X con mas cantidad
+27.	Grafica Anual de Ventas, Columna de Margen de Ganancia por mes y que se vea en la grafica, si es posible una barra con el Costo
+28.     Reporte de Pedidos Pendientes filtrar por vendedor, like tempo, dar clic al pedido y se abra y poder mandar el pedido por correo con las opciones que estan en pdt foto, excel, etc
+OK		29. 	No permitir grabar producto sin niveles
+OK		30.	Consulta desde Estado de Cuenta y Facturas
+31.	Error en identificacion de la factura

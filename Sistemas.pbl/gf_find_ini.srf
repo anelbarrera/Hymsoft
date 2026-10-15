@@ -1,0 +1,67 @@
+﻿//objectcomments Busca el Archivo INI y guarda la Ruta del Mismo
+global type gf_find_ini from function_object
+end type
+
+forward prototypes
+global subroutine gf_find_ini ()
+end prototypes
+
+global subroutine gf_find_ini ();String	win, nombre, path
+Int		value
+u_external_function_win32 gu_ext_func
+
+
+f_create_external_func_uo(gu_ext_func)
+
+win = Space (60)
+gu_ext_func.uf_GetWindowsDirectory(win, 60)
+	
+Destroy gu_ext_func
+
+
+/* Valida si win es nulo */
+if win = space(60) or isnull(win) then
+	IF FileExists("c:\winnt35\win.ini") THEN
+		win = "c:\winnt35"
+	ELSEIF FileExists("c:\winnt\win.ini") THEN
+		win = "c:\winnt"
+	ELSEIF FileExists("c:\winnt.sbs\win.ini") THEN
+		win = "c:\winnt"
+	ELSEIF FileExists("c:\winnt4\win.ini") THEN
+		win = "c:\winnt"
+	ELSEIF FileExists("d:\winnt35\win.ini") THEN
+		win = "d:\winnt35"
+	ELSEIF FileExists("d:\winnt\win.ini") THEN
+		win = "d:\winnt"
+	ELSEIF FileExists("d:\winnt.sbs\win.ini") THEN
+		win = "d:\winnt.sbs"
+	ELSEIF FileExists("d:\winnt4\win.ini") THEN
+		win = "d:\winnt4"
+	elseIF FileExists("c:\windows\win.ini") THEN
+		win = "c:\windows"
+	elseIF FileExists("d:\windows\win.ini") THEN
+		win = "d:\windows"		
+	END IF
+end if
+
+
+// Coloco el formato de fecha utilizada por nuestra aplicación
+//RegistrySet("HKEY_CURRENT_USER\Control Panel\International", "sShortDate", "dd/MM/yyyy")
+//RegistrySet("HKEY_USERS\.Default\Control Panel\International", "sShortDate", "dd/MM/yyyy")
+//SetProfileString(win + "\win.ini", "intl", "sShortDate", "dd/MM/yyyy")
+
+str.path = ProfileString(win + "\win.ini", "HYMSOFT", "ruta", "")
+
+If Not FileExists(str.path) Then 
+	value = GetFileOpenName("Seleccione el Archivo",  &
+	+ path, nombre, "INI",  &
+	+ "Archivo Inicialización (Hym.ini),Hym.Ini")
+	
+	If SetProfileString(win + "\win.ini", "HYMSOFT", "ruta", path) = -1 Then &
+		Messagebox("Error","SetProfileString")
+		
+	str.path = path
+End If
+
+end subroutine
+

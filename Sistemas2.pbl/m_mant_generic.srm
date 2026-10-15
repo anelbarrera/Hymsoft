@@ -1,0 +1,58 @@
+﻿forward
+global type m_mant_generic from m_a_sheet
+end type
+end forward
+
+global type m_mant_generic from m_a_sheet
+end type
+global m_mant_generic m_mant_generic
+
+on m_mant_generic.create
+m_mant_generic=this
+call super::create
+end on
+
+on m_mant_generic.destroy
+call super::destroy
+end on
+
+on m_archivo.create
+call super::create
+this.Tag="m_mant_generic.m_archivo"
+end on
+
+on m_guardar.create
+call super::create
+this.Tag="m_mant_generic.m_archivo.m_guardar"
+end on
+
+on m_cerrar.create
+call super::create
+this.Tag="m_mant_generic.m_archivo.m_cerrar"
+end on
+
+on m_edicion.create
+call super::create
+this.Tag="m_mant_generic.m_edicion"
+end on
+
+on m_editar.create
+call super::create
+this.Tag="m_mant_generic.m_edicion.m_editar"
+end on
+
+on m_insertar.create
+call super::create
+this.Tag="m_mant_generic.m_edicion.m_insertar"
+end on
+
+on m_borrar.create
+call super::create
+this.Tag="m_mant_generic.m_edicion.m_borrar"
+end on
+
+on m_entidad_b.create
+call super::create
+this.Enabled=false
+end on
+

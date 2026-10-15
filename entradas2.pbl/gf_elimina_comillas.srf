@@ -1,0 +1,30 @@
+﻿global type gf_elimina_comillas from function_object
+end type
+
+forward prototypes
+global function string gf_elimina_comillas (string campo_revision, string eliminar, string reemplaza)
+end prototypes
+
+global function string gf_elimina_comillas (string campo_revision, string eliminar, string reemplaza);// Jorge Barrios
+// Recible una cadena de cararacteres y elimina los caracteres que se solicitan
+
+string  l_eliminar, l_reemplaza
+Integer	li_len, li_i
+l_eliminar  = "'"
+l_reemplaza = "´"
+li_len = Len(campo_revision)
+FOR li_i=1 TO li_len
+	If Mid(campo_revision,li_i,1) = l_eliminar Then 
+		campo_revision = Replace(campo_revision, li_i, 1,l_reemplaza)
+	end if
+NEXT
+l_eliminar  = '"'
+l_reemplaza = "´´"
+FOR li_i=1 TO li_len
+	If Mid(campo_revision,li_i,1) = l_eliminar Then 
+		campo_revision = Replace(campo_revision, li_i, 1,l_reemplaza)
+	end if
+NEXT
+return(campo_revision)
+end function
+

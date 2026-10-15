@@ -1,0 +1,34 @@
+﻿global type str_dg_general from structure
+	string		variable1
+	string		variable2
+	string		variable3
+	string		variable4
+	string		variable5
+	string		variable6
+	string		variable7
+	string		variable8
+	long		numero1
+	long		numero2
+	long		numero3
+	long		numero4
+	long		numero5
+	long		numero6
+	long		numero7
+	long		numero8
+	datetime		fecha1
+	datetime		fecha2
+	datetime		fecha3
+	datetime		fecha4
+	datetime		fecha5
+	datetime		fecha6
+	datetime		fecha7
+	datetime		fecha8
+	string		nombre_dw1
+	string		nombre_dw2
+	string		nombre_dw3
+	string		nombre_dw4
+	string		nombre_dw5
+	string		empr_acceso_especial
+	window		ventana
+end type
+

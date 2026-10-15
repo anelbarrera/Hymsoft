@@ -1,0 +1,100 @@
+﻿global type gf_cp_saldo_anterior from function_object
+end type
+
+forward prototypes
+global function decimal gf_cp_saldo_anterior (long proveedor, datetime fecha)
+end prototypes
+
+global function decimal gf_cp_saldo_anterior (long proveedor, datetime fecha);decimal	ld_saldo_total, ld_saldo_d, ld_saldo_c,ldec_saldo_inicial 
+long ll_err
+string ls_err    
+
+  SELECT isnull(cptmovim.movi_monto_final,0)  
+    INTO :ldec_saldo_inicial  
+    FROM cptmovim  
+   WHERE ( cptmovim.movi_g_financiero = :str.g_financiero ) AND  
+         ( cptmovim.movi_empresa = :str.empresa ) AND  
+         ( cptmovim.movi_tercero = :proveedor ) AND  
+         ( cptmovim.movi_tipo_transaccion+cptmovim.movi_sub_transaccion = 'NC9' ) AND
+			( cptmovim.movi_aplicacion	= 'CP' );
+
+if sqlca.sqlcode = -1  then
+	ls_err = sqlca.sqlerrtext
+	ll_err = sqlca.sqlcode
+	rollback;
+	messagebox('Error No.'+string(ll_err),'Seleccionando saldo inicial '+ls_err)
+	return -1
+	
+end if
+
+//select sum(isnull(movi_monto_final,0))
+//into :ld_saldo_d
+//from cptmovim
+//where movi_g_financiero = :str.g_financiero 	and
+//		movi_empresa 		= :str.empresa			and
+//		movi_tercero		= :proveedor			and
+//		movi_fecha_tran	< :fecha				   and
+//		movi_aplicacion	= 'CP'					and
+//		movi_estado 		<> 'AN'					and
+//		movi_naturaleza	= 'D' AND
+//		(( cptmovim.movi_tipo_transaccion <> 'NC' ) AND
+//			( cptmovim.movi_sub_transaccion <> '9' ) ) ;
+//
+//if sqlca.sqlcode = -1 then
+//	return -1
+//end if
+
+
+ SELECT isnull(sum(case movi_naturaleza when 'D' then (-1* isnull(abs(movi_monto_final),0)) else isnull(abs(movi_monto_final),0) end),0)
+    INTO :ld_saldo_total
+    FROM cptmovim  
+   WHERE ( movi_g_financiero      = :str.g_financiero) AND  
+         ( movi_empresa           = :str.empresa) and
+			( movi_tercero           = :proveedor ) and
+			( movi_fecha_tran	       < :fecha) and
+			( movi_estado 		       <> 'AN'	) and
+			( movi_tipo_transaccion+movi_sub_transaccion <> 'NC9' );
+	
+if sqlca.sqlcode = -1 then
+	ls_err = sqlca.sqlerrtext
+	ll_err = sqlca.sqlcode
+	rollback;
+	messagebox('Error No.'+string(ll_err),'Seleccionando total de transacciones '+ls_err)
+	return -1
+end if
+
+
+
+//
+////mensaje('informacion', string(ld_saldo_d),'saldo debito')
+//
+//select sum(isnull(movi_monto_final,0))
+//into :ld_saldo_c
+//from cptmovim
+//where movi_g_financiero = :str.g_financiero 	and                 
+//		movi_empresa 		= :str.empresa			and
+//		movi_tercero		= :proveedor			and
+//		movi_fecha_tran	< :fecha				and
+//		movi_aplicacion	= 'CP'					and
+//		movi_estado 		<> 'AN'					and
+//		movi_naturaleza	= 'C' AND
+//		(( cptmovim.movi_tipo_transaccion <> 'NC' ) AND
+//		( cptmovim.movi_sub_transaccion <> '9' ) ) ;
+//
+//if sqlca.sqlcode = -1 then
+//	return -1
+//end if
+
+//if isnull(ld_saldo_d) then	ld_saldo_d = 0
+//if isnull(ld_saldo_c) then	ld_saldo_c = 0
+//if isnull(ldec_saldo_inicial) then ldec_saldo_inicial = 0
+
+//ld_saldo_total = ld_saldo_c - ld_saldo_d
+if isnull(ldec_saldo_inicial) then ldec_saldo_inicial = 0 
+if isnull(ld_saldo_total) then ld_saldo_total = 0
+ld_saldo_total =  (ldec_saldo_inicial) + ld_saldo_total 
+
+return ld_saldo_total
+
+end function
+

@@ -1,0 +1,23 @@
+﻿//objectcomments Extrae el total de bultos de un documento
+global type gf_cantidad_bultos from function_object
+end type
+
+forward prototypes
+global function integer gf_cantidad_bultos (string ent_sal, integer anio, string pedido)
+end prototypes
+
+global function integer gf_cantidad_bultos (string ent_sal, integer anio, string pedido);// Extrae el total de bultos de cada documento
+integer bultos
+
+  SELECT sum(tzdtraf1.traf_cant_bultos)  
+    INTO :bultos  
+    FROM tzdtraf1  
+   WHERE ( tzdtraf1.traf_g_financiero = :str.g_financiero ) AND  
+         ( tzdtraf1.traf_empresa = :str.empresa ) AND  
+         ( tzdtraf1.traf_ent_sal = :ent_sal ) AND  
+         ( tzdtraf1.traf_ann = :anio ) AND  
+         ( tzdtraf1.traf_pedido = :pedido )   ;
+
+return(bultos)
+end function
+

@@ -1,0 +1,24 @@
+﻿global type gf_centrar_dw from function_object
+end type
+
+forward prototypes
+global subroutine gf_centrar_dw (readonly window lw_this, readonly datawindow ld_dw, readonly groupbox lg_gb_1, readonly statictext ls_st_v)
+end prototypes
+
+global subroutine gf_centrar_dw (readonly window lw_this, readonly datawindow ld_dw, readonly groupbox lg_gb_1, readonly statictext ls_st_v);/* Funcion que centra el datawindows contra la ventana al cual pertenece.*/
+
+ld_dw.width  =lw_this.width  - 99
+ld_dw.height =lw_this.height - 278
+//messagebox(string(lw_this.x),string(lw_this.y))
+//messagebox(string(ld_dw.x),string(ld_dw.y))
+//ld_dw.x  =lw_this.x +20
+//ld_dw.y  =lw_this.y +45
+lg_gb_1.width  =lw_this.width  - 63
+lg_gb_1.height =lw_this.height - 220
+//lg_gb_v.y  =lg_gb_1.height+5     /*para cuando se tiene un recuadro */
+//ls_st_v.y  =lg_gb_v.y+40         /*en el campo de nombre de ventana */
+//messagebox(string(ls_st_v.y)+' '+string(lw_this.height)+' '+string(lw_this.y),string(lw_this.height))
+//ls_st_v.y  = lw_this.height // - 25 
+/* fin de la funcion wf_centrar */
+end subroutine
+

@@ -1,0 +1,21 @@
+﻿global type gf_acelerador from function_object
+end type
+
+forward prototypes
+global subroutine gf_acelerador ()
+end prototypes
+
+global subroutine gf_acelerador ();/* Este en comentarios por una semana a partir del 12 de  septiempre de 1999 
+   para evaluar si el problema de la velocidad es por esta funcion (Alexis)*/
+/* Realiza un ciclo de uno a diez para detener los procesos y desplegar las 
+	ventanas sin recuperar los dw */
+	
+//integer li_cont
+//
+//for li_cont = 1 to 10
+//  Yield()
+//next
+
+/* Fin gf_acelerador() */
+end subroutine
+

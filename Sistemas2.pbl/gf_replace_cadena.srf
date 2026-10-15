@@ -1,0 +1,24 @@
+﻿global type gf_replace_cadena from function_object
+end type
+
+forward prototypes
+global subroutine gf_replace_cadena (ref string as_texto, string as_a_remplazar, string as_remplazador)
+end prototypes
+
+global subroutine gf_replace_cadena (ref string as_texto, string as_a_remplazar, string as_remplazador);// gf_replace_cadena()
+Integer	li_len, li_pos, li_len_a_remplazar
+li_len = Len(as_texto)
+li_len_a_remplazar = Len(as_a_remplazar)
+
+li_pos = Pos(as_texto, as_a_remplazar)
+
+DO WHILE li_pos > 0
+	If Mid(as_texto, li_pos, li_len_a_remplazar) = as_a_remplazar Then &
+							as_texto = Replace(as_texto, li_pos, li_len_a_remplazar, as_remplazador)
+	li_pos = Pos(as_texto, as_a_remplazar)							
+LOOP
+
+
+
+end subroutine
+

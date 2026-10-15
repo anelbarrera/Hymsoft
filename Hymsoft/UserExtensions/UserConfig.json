@@ -1,0 +1,86 @@
+{
+  "AllowedHosts": "*",
+
+  // PowerServer server configuration
+  "PowerServer": {
+    "LicenseKey": "DSCA-IJHG-HCBD-A1FB-3JH2",
+    "LicenseCode": "eyJQYXlsb2FkIjoia0o0RUFhQXdpNThNOVN6Z2ljS0V4YjhYb2hSclhpOHhqNWxDeG5rQXhHNVBnZGVzcFJmT0N1VC96ZnZBMDNiNVdcdTAwMkJSaDljZ0xYRVlzb0pOVG1wWlkxaVdQQk1TU3JTMkxmd0Mvb2pqaGQ1RnFGdHVTMXZZbjExN3pTOURKdzROcFx1MDAyQlJrWkVqOTRSR3JlUnVNTkdSeWY1c01hajBqV2dhdHg3a1ZMc1dXUUhhVDFoMlZFXHUwMDJCVzQ3NTYvd0xtYUdHMkx3T3ZBQXNGWHBuUTN5QnhWZXJXVlY2YXJhSFNVZVx1MDAyQmRmemY2ZFJWVENmdDJ3MGg4RzZNbThZY0M1aGx1RVg2RmJER1NYQ25rWEZZbE1PRWhoUUljZTg1cWE3YmpqakZzcHlnZ3pJb2V0eEx4Um94NDBCMEFZVmg1Y3RoUi91VE9ldTlVQWRoM2pUcndaYkp0Z09WcEtrR1pZSkU0MC9sYjlaaXRML0dsREk0WkVVQnRkY2hBL2lrUHlLRUNtZmNLVklscXlGbEZYdm8vMzU1Zk5admJYcFdMOXVuWGVjREtKTkxNbkphMGZaeFBacEs5Q0ppL3oxZHgxbi81ekM4UFhvSU1Gd2xNXHUwMDJCMWlCek1OdE84RlIxSWN0aFUzZ2o4L01GOGtrZFx1MDAyQmVELzBxYVFwbFlvVUZ1U1B0UlplTFZPYWdyZlVDTFx1MDAyQnYyUmJKZGFFekxrUGlXM0pxbVE9PSIsIlRpbWVzdGFtcCI6MTczMDIyODQwMSwiU2lnbmF0dXJlIjoicENYOUxZMlEwQThtZlh5eUhjSWF3YlhFdUZMdHdhUTBwMDg1d1Q2c3ZIQVU2VkRyMHhJbjh5azl2cVZkXHUwMDJCaEJnOUtLanV3L0xYRGFiWm5wbkR5NUtNby9KRW1ZV3RDQmk0TVBXMDVXanhnb3Y1WXFmRlx1MDAyQm8yZnNhV01uQmJvU0ZRQ2E2dXdKWHo4Q3VFOXNZVUhFVTlaVTJsL1IvR24vMXdGQ3F2eFJ5R1NNdmRadUQ3a3FVYzZxSlx1MDAyQmpcdTAwMkJKaU5RS3pRTEl2VFdMUDZ0dUNtNHVxaUZnd0cvNG0vdGhcdTAwMkJaNTdNZ1B1cDhcdTAwMkIzakpTaVx1MDAyQmppcDVaYnV4NmNoRzFMNjJDb29LakM5YndhWG9ncE5qZS9NR2RTc1FobnFUNndxcUNQUEUyTEM3d293T3F1eFk5dHhrMko1M290c1g3Wm9KQzBGVVhNRGd2ZXA2cVlTbFVrT24yN2lTMXVXVnVsSlZZTlRzeUNqSDlkeHRGTnFFL2haOWoxRGRSYXhtTGw5Y2hGcTdhb2NjQjdBbFZEMHBsNDhNUEY2V0p0Q2lxMHJaWlE3cmJySTdEWjMyc2dvQUJlVERXSmNuUE5YdW9lU3locVdwRjYwZVx1MDAyQjNzOEdBQnVHS2kweDB2S0ROOFdpdERFMi9JMXRpU0JoNjdxOTNLbDVkTm5udlVUUVNyZkVjeExFcVNVelhlT09jcnNJNEJjRVlLTFBEVnVjSTRlUzA1U2I0cGs4Zmd6blBnOWNmbWFNeXRxbHk3Nm9cdTAwMkJhbng0d1NjdVBRWGRSZkNCRXpQb2pUNEwzUjZBM1NXTDBwNmxtdVg0Qjdhd1B0SEhIMWpWbXY2Ri9MT1h5Y2o3XHUwMDJCSmNJU1liUVlPMG43VHljSEUxMXEwZ2IyMGhkTTl0dnV6UFl2M3ZPc3J4VVJHTGlZTnczQT0ifQ==",
+
+    // Whether to have the sensitive data encrypted when transferring it from the configuration APIs to PowerServer
+    // If false, the sensitive data is not encrypted, then PowerServer will encrypt the data
+    // If true (recommended), the sensitive data is already encrypted, then PowerServer will not encrypt it
+    "EncryptedSensitiveData": false,
+
+    // Sets HTTP proxy for connection with the license server
+    "ProxyOptions": {
+
+      // Sets the proxy server
+      "Server": "",
+
+      // Sets the proxy server user name
+      "Username": "",
+
+      // Sets the proxy server password
+      "Password": ""
+    },
+
+    // Sets the email server 
+    "EmailOptions": {
+
+      // Sets the email server address
+      "SmtpServerAddress": "",
+
+      // Sets the email server port
+      "SmtpServerPort": 25,
+
+      // Sets whether to enable SSL
+      "SmtpServerSsl": false,
+
+      // Sets the email sender's account
+      "SenderAccount": "",
+
+      // Sets the email sender's account password
+      "SenderPassword": "",
+
+      // Sets the email sender's display name
+      "SenderDisplayName": "",
+
+      // Sets the recipient(s)
+      "Recipients": [ "" ]
+    },
+
+    // Sets the statistics options
+    "StatisticsOptions": {
+
+      // Sets whether to track the request details
+      "TrackRequestDetails": false,
+
+      // Sets whether to track the transaction details
+      "TrackTransactionDetails": false,
+
+      // Sets whether to track the failed request details
+      "TrackFailedRequestDetails": true,
+
+      // Sets whether to track the failed transaction details
+      "TrackFailedTransactionDetails": true,
+
+      // Sets the maximum number of requests to be recorded
+      "CountOfRequestDetailsToKeep": 1000,
+
+      // Sets the maximum number of transactions to be recorded
+      "CountOfTransactionDetailsToKeep": 500,
+
+      // Sets the maximum number of failed transactions to be recorded
+      "CountOfFailedTransactionDetailsToKeep": 100
+    }
+  }
+}
+
+
+
+
+
+
+
+
+

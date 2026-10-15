@@ -1,0 +1,31 @@
+﻿//objectcomments Estructura para Los Productos
+global type str_fa_producto from structure
+	string		item
+	string		descrip
+	string		descripd
+	double		costo
+	string		unidad
+	double		cubicaje
+	double		peso
+	string		unidadp
+	double		p_ma
+	double		p_me
+	double		p_af
+	double		p_ot
+	double		p_es
+	double		fob
+	double		cif
+	string		comision
+	double		desc_max
+	double		existencia
+	double		reserbado
+	double		empaque
+	string		emp_um
+	string		emp_abreviatura
+	string		desc_siono
+	double		desc_maximo
+	integer		pais
+	string		foto
+	string		em_desc
+end type
+

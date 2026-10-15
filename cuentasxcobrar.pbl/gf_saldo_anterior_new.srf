@@ -1,0 +1,41 @@
+﻿global type gf_saldo_anterior_new from function_object
+end type
+
+forward prototypes
+global function decimal gf_saldo_anterior_new (readonly long cliente, readonly datetime fecha, integer gfinan, integer emp, long ll_documento)
+end prototypes
+
+global function decimal gf_saldo_anterior_new (readonly long cliente, readonly datetime fecha, integer gfinan, integer emp, long ll_documento);decimal ld_saldo_total
+string  ls_error
+
+SELECT SUM(case cctmovim.movi_naturaleza  WHEN 'D' THEN cctmovim.movi_monto else - cctmovim.movi_monto END)
+into :ld_saldo_total
+FROM cctmovim
+where movi_g_financiero = :gfinan 	and
+		movi_empresa 		= :emp		and
+		movi_tercero		= :cliente	and
+		movi_fecha_tran	<= :fecha  and 
+		movi_estado 		= 'IM'and
+ //     convert(numeric(8),movi_documento) < :ll_documento and 
+		movi_tran_contado <> 'S'
+GROUP BY cctmovim.movi_g_financiero,   
+         cctmovim.movi_empresa,   
+         cctmovim.movi_tercero
+ORDER BY cctmovim.movi_g_financiero ASC,   
+         cctmovim.movi_empresa ASC,   
+         cctmovim.movi_tercero ASC;  
+//         cctmovim.movi_fecha_tran ASC,   
+//         cctmovim.movi_documento ASC  ;
+
+
+if sqlca.sqlcode = - 1 then
+	ls_error = sqlca.sqlerrtext
+	Rollback;
+	mensaje('Error','Error al calcular Saldo anterior del tercero: '+string(cliente),ls_error)
+end if
+
+
+return ld_saldo_total
+
+end function
+

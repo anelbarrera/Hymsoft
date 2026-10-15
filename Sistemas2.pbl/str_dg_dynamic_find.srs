@@ -1,0 +1,11 @@
+﻿//objectcomments Estructura con los Requerimientos para la Busqueda Dinámica
+global type str_dg_dynamic_find from structure
+	string		sql
+	string		texto_campo[12, 12]
+	string		tabla
+	string		tabla_where
+	string		filtrar
+	string		posicionarse
+	string		filtro
+end type
+

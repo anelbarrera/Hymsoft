@@ -1,0 +1,31 @@
+﻿global type gf_fa_convert_uni_cant from function_object
+end type
+
+forward prototypes
+global function long gf_fa_convert_uni_cant (readonly string as_med, readonly long al_fracciones)
+end prototypes
+
+global function long gf_fa_convert_uni_cant (readonly string as_med, readonly long al_fracciones);/*Esta Función Convierte de Unidad Minima a la Unidad que se Quiere*/
+Double ld_total,ld_ucom, ld_mconvera,ld_frac
+Long	 ll_cantidad
+
+ 
+/*Extrae la Unidad comun "Pedo/Unidades/etc "*/ /*Devuelve el tipo de medida*/
+ld_ucom = gf_medi_prod(as_med)
+
+
+/*Retorna el Factor de Conversión a unidades minimas*/
+ld_mconvera = gf_unidad_venta(as_med, ld_ucom)
+
+
+If ld_mconvera <= 0 Then ld_mconvera = 1
+
+ld_total = ( al_fracciones / ld_mconvera) 
+
+ld_frac = (Mod(al_fracciones, ld_mconvera))
+
+ll_cantidad = Long(ld_total)
+
+return ll_cantidad
+end function
+

@@ -1,0 +1,27 @@
+﻿global type gf_db_mensaje_error from function_object
+end type
+
+forward prototypes
+global subroutine gf_db_mensaje_error (readonly long al_sqldbcode, readonly string as_sqlerrtext, readonly string as_sqlsyntax)
+end prototypes
+
+global subroutine gf_db_mensaje_error (readonly long al_sqldbcode, readonly string as_sqlerrtext, readonly string as_sqlsyntax);
+string ls_msg
+
+ls_msg = string(al_sqldbcode) + " " + as_sqlerrtext + " " + as_sqlsyntax
+
+if pos(ls_msg,'does not allow null values') > 0 then 
+
+	Mensaje("Error de Datos Nulos ","No se puede guardar el registro cuando existen Datos nulos ( Campo: " +  &
+				mid(ls_msg,16,pos(ls_msg,'in table')-16) + ")",ls_msg)	
+else 
+	Mensaje("Error al Guardar","Ha ocurrido un error al tratar de guardar los registros",ls_msg)
+end if
+
+RETURN 
+
+
+
+
+end subroutine
+

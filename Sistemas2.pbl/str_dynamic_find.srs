@@ -1,0 +1,7 @@
+﻿global type str_dynamic_find from structure
+	string		sql
+	string		texto_campo[12, 12]
+	string		tabla
+	string		tabla_where
+end type
+

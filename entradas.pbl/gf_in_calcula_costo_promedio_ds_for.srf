@@ -1,0 +1,172 @@
+﻿global type gf_in_calcula_costo_promedio_ds_for from function_object
+end type
+
+forward prototypes
+global function double gf_in_calcula_costo_promedio_ds_for (ref datastore ads_kardex)
+end prototypes
+
+global function double gf_in_calcula_costo_promedio_ds_for (ref datastore ads_kardex);/* Funcion Global que utiliza un DataStore de Kardex para calcular el 
+	costo promedio del un producto */
+	
+integer ll_formato_decimal
+decimal ld_costo_rowcount,ld_costo_rowcount_1, ld_ultimo_costo, ld_costo_prom
+decimal ld_costo_rowcount_2,ld_acum_cantidad_rowcount_2,ld_acum_monto_rowcount_2
+decimal ld_cantidad,ld_medida, ld_dmov_medi_cantidad
+decimal ld_cantidad_rowcount,ld_acum_cantidad_rowcount_1,ld_cant1
+decimal ld_monto_rowcount,ld_acum_monto_rowcount_1,ld_calculo3,ld_calculo4,ld_calculo5
+string ls_tipo_costeo, ls_error,ls_tipo_trans,ls_aplicacion,ls_tipo,ls_tipo_1,ls_prom_sino
+Long	ll_row, ll_rowcount,ll_cont_1,li_con,ll_cont
+
+ld_monto_rowcount=0
+ld_acum_monto_rowcount_1=0
+ld_acum_monto_rowcount_2=0
+ld_calculo3=0
+ld_calculo4=0
+ld_calculo5=0
+ld_cantidad_rowcount=0
+ld_acum_cantidad_rowcount_1=0
+ld_acum_cantidad_rowcount_2=0
+ld_costo_rowcount=0
+ld_costo_rowcount_1=0
+ld_costo_rowcount_2=0
+
+select para_sistema_costeo,para_formato_decimal
+  into :ls_tipo_costeo,:ll_formato_decimal
+  from inaparam
+ where para_g_financiero=:str.g_financiero
+   and para_empresa=:str.empresa;
+	
+	if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje('Aviso','Error al Seleccionar el tipo de Costeo',ls_error)	
+	end if
+   
+	ll_cont=ads_kardex.rowcount()
+	
+if ls_tipo_costeo='LI'then
+   ld_costo_rowcount=ads_kardex.getitemdecimal(ll_cont,"costo_total")
+	for li_con = 1 to ll_cont
+       ads_kardex.setitem(li_con,"cc2",ld_costo_rowcount)
+   next
+elseif ls_tipo_costeo ='CP' then	/*Costo promedio*/
+
+	for ll_cont = 1 to ads_kardex.rowcount()
+
+		if ll_cont > 1 then
+			ll_cont_1 = ll_cont - 1
+		else
+			ll_cont_1 = ll_cont 
+		end if
+		
+		ld_costo_rowcount 	= ads_kardex.getitemnumber(ll_cont,"c_costo")	/*dmov_costo*/
+
+		ld_dmov_medi_cantidad = ads_kardex.GetItemNumber(ll_cont,"dmov_medi_cantidad")
+	 
+		If isNull(ld_dmov_medi_cantidad) or ld_dmov_medi_cantidad =0 then ld_dmov_medi_cantidad = 1
+
+		ld_cant1 = ads_kardex.GetItemNumber(ll_cont,"dmov_cant1")
+		
+		If isNull(ld_cant1)  then ld_cant1 = 0
+		
+		ld_cantidad_rowcount = ads_kardex.GetItemNumber(ll_cont,"dmov_cantidad")+ (ld_cant1/ ld_dmov_medi_cantidad)	 
+		
+		If IsNull(ld_cantidad_rowcount) then ld_cantidad_rowcount =0
+		
+		If ads_kardex.GetItemString(ll_cont,"intmovim_tmov_tipo")='C' Then
+			ld_cantidad_rowcount = - ld_cantidad_rowcount
+		End If 
+		
+		ld_costo_rowcount = ads_kardex.getitemnumber(ll_cont,"c_costo")	/*dmov_costo*/
+
+		ls_tipo  = ads_kardex.GetItemString(ll_cont,'dmov_tipo_transaccion')
+		
+		ls_tipo_1  = ads_kardex.GetItemString(ll_cont_1,'dmov_tipo_transaccion')
+		
+		If ls_tipo = 'AC'  OR ls_tipo = 'ZD' Then /*Costo prom = dmov_costo*/
+			ld_costo_prom = ld_costo_rowcount	 	/*NO PROMEDIA*/
+		else
+			
+			/*costo anterior*/
+			If ls_tipo_1 = 'EN'  Then	/*Promedia*/ 
+				ld_costo_rowcount_1 = ads_kardex.GetItemDecimal(ll_cont_1,"cc2")
+			elseif ls_tipo_1 = 'AC' or ls_tipo_1 = 'ZD' then
+				ld_costo_rowcount_1 = ads_kardex.GetItemDecimal(ll_cont_1,"c_costo")
+			else
+				ld_costo_rowcount_1 = 0
+			end if
+			
+			If ls_tipo <> 'AC'  and ls_tipo <> 'ZD' and ls_tipo <> 'EN' Then 
+				if ld_costo_rowcount_1 > 0 then
+					ld_costo_rowcount = ld_costo_rowcount_1
+				else
+					ls_tipo ='reversar'
+				end if
+			end if
+			
+			/*acum cantidad anterior*/
+			ld_acum_cantidad_rowcount_1 =ads_kardex.getitemdecimal(ll_cont_1,"saldo")
+			If IsNull(ld_acum_cantidad_rowcount_1) then ld_acum_cantidad_rowcount_1 =0
+			If IsNull(ld_costo_rowcount_1) then ld_costo_rowcount_1 =0
+
+			if (ld_acum_cantidad_rowcount_1 > 0 and ld_costo_rowcount_1 <= 0) or ls_tipo ='reversar' then
+				/*Recorre dw hacia atras hasta encontrar registro con costo >0*/
+				ll_row = ll_cont - 2
+				
+				DO WHILE  ll_row > 0
+					ld_costo_rowcount_1 = ads_kardex.getitemdecimal(ll_row,"cc2")
+				
+					ls_tipo_1  = ads_kardex.GetItemString(ll_row,'dmov_tipo_transaccion')
+					
+					If ls_tipo_1 = 'AC' or ls_tipo_1 = 'ZD' then
+						ld_costo_rowcount_1 = ads_kardex.getitemdecimal(ll_row,"c_costo")
+					end if
+			
+					IF ld_costo_rowcount_1 > 0 and ls_tipo_1 = 'EN' or ls_tipo_1 = 'AC' or ls_tipo_1 = 'ZD' then ll_row = 0
+					
+					ll_row = ll_row - 1
+				LOOP 
+
+				If IsNull(ld_costo_rowcount_1) then ld_costo_rowcount_1 =0
+				
+				If ld_costo_rowcount_1 = 0 then
+					ld_costo_rowcount_1 = ld_costo_rowcount	/*costo registro actual*/
+				end if
+				if ls_tipo ='reversar' then ld_costo_rowcount = ld_costo_rowcount_1
+			END IF
+
+			/*Monto del ultimo registro*/
+			ld_monto_rowcount = (ld_costo_rowcount * ld_cantidad_rowcount) 
+		
+			/*Monto del penultimo registro*/
+			ld_acum_monto_rowcount_1 = (ld_costo_rowcount_1 * ld_acum_cantidad_rowcount_1)
+			
+		//	COMENTADO PARA QUE CUANDO EL SALDO VIENE EN NEGATIVO O = 0, LE PONGA EL COSTO DE LA ENTRADA
+		//	EL 25/09/2002 POR RM	
+		//	If ld_cantidad_rowcount+ld_acum_cantidad_rowcount_1 >0 then
+			If ld_acum_cantidad_rowcount_1 >0 then
+				If ld_cantidad_rowcount+ld_acum_cantidad_rowcount_1 > 0 then //ld_cantidad+ld_acum_cant_anterior
+					ld_costo_prom = round((ld_monto_rowcount + ld_acum_monto_rowcount_1)/(ld_cantidad_rowcount+ld_acum_cantidad_rowcount_1),4)
+				ELSE
+					ld_costo_prom =ld_costo_rowcount
+				END IF
+			else
+				ld_costo_prom =ld_costo_rowcount
+			end if
+
+		end if
+	
+	 /*Si el costo es cero setea el ultimo costo_promedio calculado HGN/21/08/2002*/
+	 iF ls_prom_sino = 'NO' THEN ld_costo_prom = ld_costo_rowcount_1
+	 ads_kardex.SetItem(ll_cont,"cc2",ld_costo_prom) 
+	 ls_tipo =''
+	 ls_prom_sino = ' '
+	next
+end if
+
+return round(ld_costo_prom,ll_formato_decimal)
+/* Final de la Funcion */ 
+
+
+end function
+

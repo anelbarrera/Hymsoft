@@ -1,0 +1,101 @@
+﻿release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 1 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=744 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=248 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=char(30) updatewhereclause=no name=titulo dbname="titulo" )
+ column=(type=char(50) updatewhereclause=no name=subtitulo dbname="subtitulo" )
+ column=(type=char(50) updatewhereclause=no name=descripcion dbname="descripcion" )
+ column=(type=decimal(2) updatewhereclause=no name=monto1 dbname="monto1" )
+ column=(type=decimal(2) updatewhereclause=no name=monto2 dbname="monto2" )
+ column=(type=decimal(2) updatewhereclause=no name=monto3 dbname="monto3" )
+ column=(type=decimal(2) updatewhereclause=no name=utilidad dbname="utilidad" )
+ column=(type=char(15) updatewhereclause=no name=campo dbname="campo" )
+ column=(type=char(1) updatewhereclause=no name=tipo_registro dbname="tipo_registro" )
+ column=(type=decimal(2) updatewhereclause=no name=porc_mes_ant dbname="porc_mes_ant" )
+ column=(type=decimal(2) updatewhereclause=no name=porc_mes_corr dbname="porc_mes_corr" )
+ column=(type=decimal(2) updatewhereclause=no name=porc_saldo dbname="porc_saldo" )
+ column=(type=number updatewhereclause=no name=orden_en_reporte dbname="orden_en_reporte" )
+ column=(type=number updatewhereclause=no name=detalle dbname="detalle" )
+ column=(type=char(2) updatewhereclause=no name=ident_total dbname="ident_total" )
+ column=(type=decimal(2) updatewhereclause=no name=monto_anteior dbname="monto_anterior" )
+ column=(type=decimal(2) updatewhereclause=no name=monto_anterior_acum dbname="monto_anterior_acum" )
+ column=(type=char(1) updatewhereclause=no name=tipo_cuenta dbname="tipo_cuenta" )
+ column=(type=number updatewhereclause=no name=mg_nivel dbname="mg_nivel" )
+ column=(type=char(2) updatewhereclause=no name=grupo dbname="grupo" )
+ column=(type=char(20) updatewhereclause=no name=mg_cuenta dbname="mg_cuenta" )
+ column=(type=char(4) updatewhereclause=no name=subgrupo dbname="subgrupo" )
+ filter="abs( monto1 )+abs( monto2 )+abs( monto3 ) > 0 or  tipo_registro ='T'" )
+rectangle(band=header x="14" y="596" height="148" width="3401"  name=r_1 brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="0" )
+compute(band=header alignment="2" expression="''"border="0" color="0" x="855" y="120" height="108" width="1842" format="[general]"  name=empresa  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="2" expression="'Estado de Resultados'"border="1" color="0" x="805" y="244" height="72" width="1970" format="[general]"  name=status_reporte  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="''" border="0" color="0" x="206" y="400" height="56" width="197"  name=fecha1  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="''"border="0" color="0" x="434" y="400" height="56" width="293" format="[general]"  name=fecha  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="2" expression="~"~""border="0" color="0" x="1033" y="356" height="56" width="1486" format="[general]"  name=locura  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="1" text="dw_re_co_estado_resul_new" border="0" color="0" x="2661" y="380" height="56" width="745"  name=datawin  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="''" border="0" color="0" x="224" y="476" height="56" width="155"  name=hora1  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="''"border="0" color="0" x="434" y="476" height="56" width="293" format="[general]"  name=hora  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' de ' + pageCount()"border="0" color="0" x="2839" y="456" height="52" width="567" format="[general]"  name=pagina  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="''" border="0" color="0" x="823" y="444" height="56" width="1957"  name=t_7  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1090519039" )
+text(band=header alignment="2" text=" %" border="0" color="0" x="2747" y="612" height="56" width="69"  name=t_4  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="''" border="0" color="0" x="1367" y="616" height="56" width="457"  name=t_1  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="2" expression="''"border="0" color="0" x="1367" y="680" height="48" width="457" format="[general]"  name=mes_ant  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text=" %" border="0" color="0" x="1879" y="612" height="56" width="69"  name=t_2  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="''" border="0" color="0" x="2843" y="612" height="56" width="457"  name=t_5  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="2" expression="''"border="0" color="0" x="2848" y="680" height="48" width="457" format="[general]"  name=acumulado  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text=" %" border="0" color="0" x="3323" y="612" height="56" width="69"  name=t_6  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="''" border="0" color="0" x="2094" y="612" height="56" width="457"  name=t_3  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="2" expression="''"border="0" color="0" x="2107" y="684" height="48" width="457" format="[general]"  name=mes_act  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=detail x1="2798" y1="0" x2="3255" y2="0"  name=l_1 visible="1~tif (campo = 'SubTítulo',1,0)" pen.style="2" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="1349" y1="4" x2="1806" y2="4"  name=l_2 visible="1~tif (campo = 'SubTítulo',1,0)" pen.style="2" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2185" y1="4" x2="2642" y2="4"  name=l_3 visible="1~tif (campo = 'SubTítulo',1,0)" pen.style="2" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="0" x="1358" y="8" height="56" width="457" format="##,###,##0.00"  name=monto1 visible="1~tif ( ( campo <> ~"Título~" and  campo  <> ~"SubTítulo~") ,1,0) 
+" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="1" expression=" monto1 "border="0" color="0" x="1353" y="16" height="56" width="457" format="##,###,##0.00"  name=compute_1 visible="1~tif ( ( campo = ~"Título~" or  campo  = ~"SubTítulo~") ,1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression=" String( abs ( porc_mes_ant ))+' %' "border="0" color="0" x="1838" y="4" height="56" width="151" format="[general]"  name=pormes visible="1~tif(  Int(porc_mes_ant)>0 , 1, 0 )"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="1" expression=" monto2"border="0" color="0" x="2075" y="4" height="56" width="457" format="##,###,##0.00"  name=compute_2 visible="1~tif ( ( campo = ~"Título~" or  campo  = ~"SubTítulo~") ,1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="0" x="2089" y="8" height="56" width="457" format="##,###,##0.00"  name=monto2 visible="1~tif ( ( campo <> ~"Título~" and  campo  <> ~"SubTítulo~") ,1,0) 
+" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression=" String( abs (  porc_mes_corr ))+' %' "border="0" color="0" x="2574" y="8" height="56" width="165" format="[general]"  name=mes_actual visible="1~tif( int( porc_mes_corr )>0, 1, 0 )"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="1" expression=" monto3"border="0" color="0" x="2784" y="8" height="56" width="457" format="##,###,##0.00"  name=compute_3 visible="1~tif ( ( campo = ~"Título~" or  campo  = ~"SubTítulo~") ,1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="2798" y="4" height="56" width="457" format="##,###,##0.00"  name=monto3 visible="1~tif ( ( campo <> ~"Título~" and  campo  <> ~"SubTítulo~") ,1,0) 
+" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" String( abs (  porc_saldo ))+' %' "border="0" color="0" x="3278" y="8" height="56" width="151" format="[general]"  name=por_acum visible="1~tif( int( porc_saldo )>0, 1, 0 )"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="3031" y="176" height="56" width="37" format="[general]"  name=orden_en_reporte visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="3081" y="176" height="56" width="50" format="[general]"  name=detalle visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="3168" y="168" height="76" width="64" format="[general]"  name=ident_total visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="0~tif (campo = ~"Título~",300, 
+if (campo = ~"SubTítulo~", 500, 
+if (campo = ~"ingreso~", 400, 
+if (campo = ~"costo~",400,
+if (campo = ~"gasto~", 400, 
+if (campo = ~"inventario~", 400, 
+if (campo = ~"utilidad~",600, 700)))))))" y="8" height="56" width="1010" format="[general]"  name=subtitulo edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="0~tif (campo = ~"Título~",300, 
+if (campo = ~"SubTítulo~", 500, 
+if (campo = ~"ingreso~", 400, 
+if (campo = ~"costo~",400,
+if (campo = ~"gasto~", 400, 
+if (campo = ~"inventario~", 400, 
+if (campo = ~"utilidad~",700, 700)))))))" y="8" height="56" width="1042" format="[general]"  name=titulo edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="0" color="0" x="5~tif (campo = ~"Título~",300, 
+if (campo = ~"SubTítulo~", 500, 
+if (campo = ~"ingreso~", 250, 
+if (campo = ~"costo~",250,
+if (campo = ~"gasto~", 250, 
+if (campo = ~"inventario~", 400, 
+if (campo = ~"utilidad~",540,                                                                                  if(campo = descripcion,50,500))))))))" y="4" height="56" width="1312" format="[general]"  name=descripcion edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="''"border="0" color="0" x="398" y="164" height="56" width="946" format="[general]"  name=compute_4 visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="0" expression="'Costos no deducibles de Imp. de Renta'"border="0" color="0" x="393" y="160" height="56" width="946" format="[general]"  name=compute_5 visible="1~t0"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="''"border="0" color="0" x="1408" y="4" height="56" width="457" format=""  name=exc_imp_renta_ant visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="''"border="0" color="0" x="1934" y="4" height="56" width="457" format=""  name=exc_imp_renta_act visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="''"border="0" color="0" x="2706" y="4" height="56" width="457" format=""  name=exc_imp_renta_acum visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="''"border="0" color="0" x="1408" y="76" height="56" width="457" format=""  name=costos_no_dedu_ant visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="''"border="0" color="0" x="1934" y="76" height="56" width="457" format=""  name=costos_no_dedu_act visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="1" expression="''"border="0" color="0" x="2706" y="76" height="56" width="457" format=""  name=costos_no_dedu_acum visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="~"" border="0" color="0" x="375" y="8" height="56" width="955"  name=ingreso visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="~"" border="0" color="0" x="375" y="80" height="56" width="987"  name=costos visible="1~tif (page() = pageCount(),1,0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )
+  

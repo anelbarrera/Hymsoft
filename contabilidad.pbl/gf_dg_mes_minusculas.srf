@@ -1,0 +1,43 @@
+﻿//objectcomments Recibe el mes en numeros y Retorna el mes en minuscula
+global type gf_dg_mes_minusculas from function_object
+end type
+
+forward prototypes
+global function string gf_dg_mes_minusculas (readonly integer mes_numero)
+end prototypes
+
+global function string gf_dg_mes_minusculas (readonly integer mes_numero);// ESTA FUNCION RECIBE EL NUMERO DEL MES Y RETORNA EL NOMBRE DEL MISMO EN minuscula.
+// "MES_NUMERO"  VARIABLE QUE CONTIENE EL NUMERO DEL MES
+
+CHOOSE CASE MES_NUMERO
+	CASE 01
+		RETURN ("Enero")
+	CASE 02
+		RETURN ("Febrero")
+	CASE 03
+		RETURN ("Marzo")
+	CASE 04
+		RETURN ("Abril")
+	CASE 05
+		RETURN ("Mayo")
+   CASE 06
+		RETURN ("Junio")
+	CASE 07
+		RETURN ("Julio")
+	CASE 08
+		RETURN ("Agosto")
+	CASE 09
+		RETURN ("Septiembre")
+	CASE 10
+		RETURN ("Octubre")
+	CASE 11
+		RETURN ("Noviembre")
+	CASE 12
+		RETURN ("Diciembre")
+
+	CASE ELSE
+		RETURN (" ")
+END CHOOSE
+
+end function
+

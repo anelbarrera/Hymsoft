@@ -1,0 +1,17 @@
+﻿global type gf_ini_set from function_object
+end type
+
+forward prototypes
+global subroutine gf_ini_set ()
+end prototypes
+
+global subroutine gf_ini_set ();//Crea las claves del registro en el sistema		
+//messagebox("entro",ls_nom_apli)
+if RegistrySet( &
+	"HKEY_CURRENT_USER\Software\JavaH\", &
+	"ini", RegString!, str.path) = -1 then
+		mensaje("Aviso","Error al Registrar el Ini ",sqlca.sqlerrtext)
+end if
+
+end subroutine
+

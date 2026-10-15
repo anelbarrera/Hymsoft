@@ -1,0 +1,32 @@
+﻿global type gf_ss_accesos from function_object
+end type
+
+forward prototypes
+global function boolean gf_ss_accesos (string grupo, string aplicacion, string menu_padre, string tag)
+end prototypes
+
+global function boolean gf_ss_accesos (string grupo, string aplicacion, string menu_padre, string tag);integer li_existe,li_pos
+boolean lb_resp
+
+li_pos = Pos(tag, ".")
+
+tag = Mid (tag,li_pos + 1,len(tag))
+
+tag = menu_padre+'.'+tag
+
+SELECT count(*) 
+INTO :li_existe  
+FROM ssmacceso  
+WHERE ( acce_id_grupo = :grupo ) AND ( acce_cod_menu =  :menu_padre) AND  
+( acce_menu_item = :tag ) AND ( acce_aplicacion =  :aplicacion) AND ( acce_acceso = 'S' )   ;
+
+if li_existe > 0 then
+	lb_resp = true
+else
+	lb_resp = false
+	//messagebox('Mensaje','Usted no tiene derechos para utilizar esta opción.')
+end if
+
+return lb_resp
+end function
+

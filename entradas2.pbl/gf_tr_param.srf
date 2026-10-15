@@ -1,0 +1,49 @@
+﻿//objectcomments Función que recupera los parámetros de la Aplicación
+global type gf_tr_param from function_object
+end type
+
+forward prototypes
+global subroutine gf_tr_param ()
+end prototypes
+
+global subroutine gf_tr_param ();  SELECT tzaparam.para_ann,   
+         tzaparam.para_clave_cia,   
+         tzaparam.para_recupera_de_salida,   
+         tzaparam.para_num_pais,
+			tzaparam.para_mod_integrado,
+			tzaparam.para_subfactura_sn,
+			tzaparam.para_imp_x_renglones,
+			tzaparam.para_imp_gastos_sa_tr,
+			tzaparam.para_imp_no_ped_traspaso,
+			tzaparam.para_detalle_bultos,
+			tzaparam.para_imp_total_despues_lin10,
+			tzaparam.para_trabaja_decimales,
+			tzaparam.para_inserta_lin_totales,
+			tzaparam.para_totales_en_linea_10
+    INTO :w_fa_fondo.str_param.anio,   
+         :w_fa_fondo.str_param.clave_cia,   
+         :w_fa_fondo.str_param.recupera_de_salida,   
+         :w_fa_fondo.str_param.num_pais,
+         :w_fa_fondo.str_param.integrado_independiente,
+			:w_fa_fondo.str_param.subfactura_sn,
+			:w_fa_fondo.str_param.imp_x_renglones,
+			:w_fa_fondo.str_param.imp_gastos_en_sal_trasp,
+			:w_fa_fondo.str_param.imp_no_ped_traspaso,
+			:w_fa_fondo.str_param.detalle_bultos,
+			:w_fa_fondo.str_param.imp_totales_desp_lin10,
+			:w_fa_fondo.str_param.decimales_sino,
+			:w_fa_fondo.str_param.inserta_lin_totales,
+			:w_fa_fondo.str_param.totales_en_linea_10
+    FROM tzaparam  
+   WHERE ( tzaparam.para_g_financiero =:str.g_financiero ) AND  
+         ( tzaparam.para_empresa =:str.empresa )   ;
+
+if sqlca.sqlcode = -1 then
+	messagebox("Error",sqlca.sqlerrtext)
+elseif sqlca.sqlcode = 100 then
+	messagebox("Atencion Sr. Usuario",'Debe Cargar los Parametros Iniciales')
+end if
+
+ 
+end subroutine
+

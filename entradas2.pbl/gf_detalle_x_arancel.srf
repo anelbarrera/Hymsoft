@@ -1,0 +1,25 @@
+﻿global type gf_detalle_x_arancel from function_object
+end type
+
+forward prototypes
+global function boolean gf_detalle_x_arancel (readonly integer secuencia)
+end prototypes
+
+global function boolean gf_detalle_x_arancel (readonly integer secuencia);// Data Store para resumir detalle de la entrada en inventario y su pase
+// resumida al detalle de trafico
+long ll_rows
+integer recorrido, li_cantidad, li_fraccion
+string  ls_arancel
+datastore lds_detalle
+lds_detalle = create datastore
+lds_detalle.DataObject="dw_ca_tz_det_ent_invent"
+lds_detalle.SetTransObject(SQLCA)
+ll_rows = lds_detalle.Retrieve(str.g_financiero,str.empresa,"EN","IN",secuencia)
+
+if ll_rows > 0 then
+	FOR recorrido = 1 TO lds_detalle.rowcount()
+	NEXT			
+end if
+return(true)
+end function
+

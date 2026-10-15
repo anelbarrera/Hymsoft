@@ -1,0 +1,11 @@
+
+04-GLDR-N2611M
+
+
+1.	Incluir la existencia en la tabla de inpdtinventario y que el reporte saque la diferencia en base a ese campo
+2.	Poner opcion Resumen para que puedan cambiar cantidades desde la pdt
+3.	Incluir un comentario en la captura
+4.	Que se posicione en el conteo y luego descripcion
+5.	Usar el standar, con el excel detallado
+6.	Poder ver la foto desde la captura de inventario
+

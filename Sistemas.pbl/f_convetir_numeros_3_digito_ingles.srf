@@ -1,0 +1,58 @@
+﻿global type f_convetir_numeros_3_digito_ingles from function_object
+end type
+
+forward prototypes
+global function string f_convetir_numeros_3_digito_ingles (readonly decimal numero_convertidor)
+end prototypes
+
+global function string f_convetir_numeros_3_digito_ingles (readonly decimal numero_convertidor);string ls_cantidad,ls_cantidad2, ls_num_convertir, ls_punto
+string ls_extrae2, Ls_2_digitos, ls_extrae,ls_extrae1
+long ll_largo, ll_largo_2_digitos, numero,  ll_digito, ll_num_convertir
+integer li_pos
+STRING ls_cientos[9] ={'ONE HUNDRED','TWO HUNDRED','THREE HUNDRED','FOUR HUNDRED','FIVE HUNDRED','SIX HUNDRED','SEVEN HUNDRED','EIGHT HUNDRED','NINE HUNDRED' }
+string ls_ciento [1] ={'ONE HUNDRED'}
+//
+ls_num_convertir =string(numero_convertidor)
+trim(ls_num_convertir)
+li_pos = pos(ls_num_convertir, ".",1)
+ls_punto  = mid(ls_num_convertir, li_pos +1,len(ls_num_convertir))
+ls_punto  = mid(ls_punto, 0 + 1,2)
+if li_pos > 0 then ls_num_convertir = left(ls_num_convertir, li_pos -1)
+
+//
+ll_largo = Len (ls_num_convertir)
+Ls_2_digitos = Right(ls_num_convertir, 2)
+
+IF ll_largo > 3 then
+ ls_num_convertir  = Right(ls_num_convertir, 3)
+ numero = long( ls_num_convertir )
+ ll_largo = Len (string(numero))
+ ls_num_convertir = string(numero)
+end if
+FOR li_pos = 1 TO ll_largo
+ls_extrae = mid(ls_num_convertir, li_pos,1) 
+  IF ll_largo = 3 then // verifica si es 100 
+		if li_pos = 3 then
+			if ls_extrae2 = '0' and ls_extrae = '0' then
+			 ls_cantidad = ls_cientos[integer(ls_extrae1)]
+			else
+			 if ls_extrae1 = '1' then
+			  ls_cantidad = ls_ciento[integer(ls_extrae1)]
+			 else
+			  ls_cantidad = ls_cientos[integer(ls_extrae1)]
+			 end if
+			 // despues del 100 ejemplo: de 120 respuesta es 20
+			 ls_cantidad2 = f_convetir_numeros_2_digito_ingles(long(Ls_2_digitos))
+			 ls_cantidad = ls_cantidad + " "+ ls_cantidad2
+			end if
+		else
+			if li_pos = 1 then ls_extrae1 = ls_extrae 
+			if li_pos = 2 then ls_extrae2 = ls_extrae
+		end if
+	else 
+		if ll_largo <= 2 then	ls_cantidad = f_convetir_numeros_2_digito_ingles(long(Ls_2_digitos))
+	end if
+NEXT
+return (ls_cantidad)
+end function
+

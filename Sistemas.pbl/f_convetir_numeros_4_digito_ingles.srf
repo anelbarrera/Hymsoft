@@ -1,0 +1,66 @@
+﻿global type f_convetir_numeros_4_digito_ingles from function_object
+end type
+
+forward prototypes
+global function string f_convetir_numeros_4_digito_ingles (readonly decimal numero_convertidor)
+end prototypes
+
+global function string f_convetir_numeros_4_digito_ingles (readonly decimal numero_convertidor);string ls_cantidad, ls_num_convertir, ls_extrae,ls_punto
+long ll_largo
+integer li_pos
+STRING ls_miles[9]  ={"ONE THOUSAND","TWO THOUSAND", "THREE THOUSAND","FOUR THOUSAND","FIVE THOUSAND","SIX THOUSAND","SEVEN THOUSAND","EIGHT THOUSAND","NINE THOUSAND"}
+
+//
+ls_num_convertir =string(numero_convertidor)
+//messagebox("4  numero_convertidor   4   ",string(numero_convertidor))
+trim(ls_num_convertir)
+li_pos = pos(ls_num_convertir, ".",1)
+ls_punto  = mid(ls_num_convertir, li_pos +1,len(ls_num_convertir))
+ls_punto  = mid(ls_punto, 0 + 1,2)
+if li_pos > 0 then ls_num_convertir=left(ls_num_convertir, li_pos -1)
+
+//messagebox("4 dig ll_digito   4   ",ls_num_convertir)
+//
+ll_largo = Len (ls_num_convertir)
+
+
+
+IF ll_largo > 6 then ls_num_convertir = mid(ls_num_convertir, 2,6)
+ll_largo = Len (ls_num_convertir)
+ IF ll_largo >= 4 and ll_largo <= 6 then  // de 4 a 6
+  // FOR li_pos = 1 TO ll_largo
+   IF ll_largo = 4 then           // igual a 4
+	 	ls_extrae = mid(ls_num_convertir, 1,1)
+//		 messagebox("Cantidad ",  "Digitos de 4")
+	   ls_cantidad = ls_miles[integer(ls_extrae)]
+  end if              // igual a 5
+  IF ll_largo = 5 then           // igual a 5
+	 ls_extrae = mid(ls_num_convertir, 1,2)
+	 if ls_extrae ='0' then     // extraido = cero
+	 else                       // extraido = cero      
+	  ls_cantidad = f_convetir_numeros_2_digito_mil_ingles(double(ls_extrae))
+	  ls_cantidad = ls_cantidad + " THOUSAND"
+    end if                     // extraido = cero
+  end if              // igual a 5
+  IF ll_largo = 6 then         // largo = 6
+	ls_extrae = mid(ls_num_convertir, 1,3)
+	if ls_extrae ='0' then      // extraido = cero
+	else // extraido = cero
+	ls_cantidad = f_convetir_numeros_3_digito_mil_ingles( double(ls_extrae))
+	ls_cantidad = ls_cantidad +" THOUSAND" 
+	end if  // extraido = cero
+  end if   // largo = 6
+// next
+else // es 1 digito de milenio
+	ls_extrae = mid(ls_num_convertir, 1,1)
+	if ls_extrae ='0' then
+	ls_cantidad = ls_miles[integer(ls_extrae)]
+	end if
+end if
+IF ll_largo = 4 then ls_extrae = mid(ls_num_convertir, 2,3)
+IF ll_largo = 5 then ls_extrae = mid(ls_num_convertir, 3,3)
+IF ll_largo = 6 then ls_extrae = mid(ls_num_convertir, 4,3)
+ if integer(ls_extrae) > 0 then ls_cantidad = ls_cantidad +" "+ f_convetir_numeros_3_digito_mil_ingles(numero_convertidor)
+return (ls_cantidad)
+end function
+

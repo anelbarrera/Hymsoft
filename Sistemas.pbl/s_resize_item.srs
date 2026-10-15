@@ -1,0 +1,12 @@
+﻿//objectcomments  
+global type s_resize_item from structure
+	dragobject		wo_control
+	long		il_orig_x
+	long		il_orig_y
+	long		il_orig_width
+	long		il_orig_height
+	integer		ii_move_x
+	integer		ii_move_y
+	integer		ii_scale_x
+	integer		ii_scale_y
+end type

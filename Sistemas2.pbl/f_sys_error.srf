@@ -1,0 +1,52 @@
+﻿//objectcomments Display a system error message.
+global type f_sys_error from function_object
+end type
+
+forward prototypes
+global subroutine f_sys_error ()
+end prototypes
+
+global subroutine f_sys_error ();// Decodificando system error y desplegando error dialog.
+
+String s_msg, ls_error
+
+
+// Construyendo system error message.
+
+s_msg = "   Error Number :~t " + String(error.number) &
+	+ "~r~n   Error Text :~t " + error.text &
+	+ "~r~n   Event :       ~t " + error.objectevent & 
+	+ "~r~n   Line Number :~t " + String(error.line) &
+	+ "~r~n   Window/Menu :~t " + error.windowmenu &
+	+ "~r~n   Object :      ~t " + error.object
+
+
+   
+if Pos ( error.text,"_frame") > 0 and (error.Line) = 248 then
+	messagebox("Acceso Denegado "," Usted no tiene derecho a Accesar Esta Aplicacion ")
+	str.aplicacion = 'Acceso no Permitido'
+else 
+	// Desplegando error dialog.
+	f_error_dialog("Error de Sistema", s_msg, true)
+end if
+
+///***** Almacena el error en la BD
+
+  INSERT INTO dgterror  
+         ( erro_aplica,   
+           erro_usuario,   
+           erro_programa,
+	      erro_tipo)  
+  VALUES ( :str.aplicacion,   
+           :str.usuario,   
+           :s_msg,			  
+			  "AP")  ;
+  if sqlca.sqlcode = -1 then
+    ls_error = sqlca.sqlerrtext
+	 rollback;
+	 mensaje("Aviso","Error al Guardar el Registro de Error.",ls_error)
+  else
+	 Commit;
+  end if
+end subroutine
+

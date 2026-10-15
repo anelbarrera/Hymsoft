@@ -1,0 +1,88 @@
+﻿//objectcomments Append the log entry to the error log file
+global type f_log_it from function_object
+end type
+
+forward prototypes
+global subroutine f_log_it (string a_s_log_entry)
+end prototypes
+
+global subroutine f_log_it (string a_s_log_entry);//// Logs the error message to a file.
+//
+//int		i_file_number
+//string	s_name1, s_name2
+//string	s_error_dir, s_error_log, s_error_old_log
+//long		l_max_err_size
+//
+//// Get all the Initialization strings from the INI file.
+//IF i_b_valid THEN
+//	s_error_dir = ProfileString("\Harr2000_Funciones\Harr2000\Harr2000.ini", "Harr2000", "ErrorLogDir", "")
+//	s_name1 = ProfileString("\Harr2000_Funciones\Harr2000\Harr2000.ini", "Harr2000", "ErrorLogName", "Harr2000.err")
+//	s_error_log = s_error_dir + "\" + s_name1
+//	s_name2 = ProfileString("\Harr2000_Funciones\Harr2000\rolodex.ini", "Harr2000", "ErrorOldLogName", "Harr2000.old")
+//	s_error_old_log = s_error_dir + "\" + s_name2
+//	l_max_err_size = ProfileInt("\Harr2000_Funciones\Harr2000\rolodex.ini", "Harr2000", "ErrorMaxSize", 30000)
+//ELSE
+//	// No INI file exists or is open - use just the default values.
+//	s_error_dir = ""
+//	s_name1 = "Harr2000.err"
+//	s_error_log = s_error_dir + "\" + s_name1
+//	s_name2 = "Harr2000.old"
+//	s_error_old_log = s_error_dir + "\" + s_name2
+//	l_max_err_size = 30000
+//END IF
+//	
+//// Check to see if these files can be created - path exists.
+//i_file_number = FileOpen (s_error_log, LineMode!, Write!, LockReadWrite!, Append!)
+//IF i_file_number = -1 THEN
+//	s_error_log = "\" + s_name1		// Assume the path is bad - try just the name.
+//	s_error_old_log = "\" + s_name2
+//ELSE
+//	FileClose (i_file_number)
+//END IF
+//
+//// Don't get the date and time from the database, as we may be reporting
+//// a database error.
+//a_s_log_entry = String (Today ()) + " " + String (Now ()) + " " + a_s_log_entry
+//
+//// Check the size of the existing file.  If it's greater than i_size_limit, move
+//// it to a backup file and start a new log file.
+//
+//IF FileLength (s_error_log) > l_max_err_size THEN
+//	// Delete the old backup file.
+//	FileDelete (s_error_old_log)
+//
+//	IF f_copy_file (s_error_log, s_error_old_log) < 0 THEN
+//		messagebox("Copy Error", "f_log_it incapaz de crear el archivo de backup", Information!, OK!, 1)
+//		RETURN
+//	ELSE	
+//		// Delete the error log file.
+//		FileDelete (s_error_log)
+//	END IF
+//END IF
+//
+//
+//// Open the file, write the log entry, and then close the file for each entry.  This
+//// should ensure that each entry is flushed to the file.
+//
+//// Note that we do NOT want to call f_app_warning or f_app_error when errors are
+//// detected, since we would generate recursive error calls.  Call messageboxinstead.
+//
+//i_file_number = FileOpen (s_error_log, LineMode!, Write!, LockReadWrite!, Append!)
+//IF (i_file_number = -1) THEN
+//	messagebox("Log File Error", "Unable to open the file " + s_error_log + ".", &
+//		Information!, OK!, 1)
+//	RETURN
+//END IF
+//
+//IF (FileWrite (i_file_number, a_s_log_entry) = -1) THEN
+//	messagebox("Log File Error", "Unable to write to the file " + s_error_log + ".", &
+//		Information!, OK!, 1)
+//END IF
+//
+//IF (FileClose (i_file_number) = -1) THEN
+//	messagebox("Log File Error", "Unable to close the file " + s_error_log + ".", &
+//		Information!, OK!, 1)
+//END IF
+//
+end subroutine
+

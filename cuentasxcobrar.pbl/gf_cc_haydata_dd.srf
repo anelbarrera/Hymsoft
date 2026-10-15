@@ -1,0 +1,26 @@
+﻿global type gf_cc_haydata_dd from function_object
+end type
+
+forward prototypes
+global function integer gf_cc_haydata_dd (ref datawindowchild adwc_dd)
+end prototypes
+
+global function integer gf_cc_haydata_dd (ref datawindowchild adwc_dd);//Función utilizada para añadir una fila a los DropDownDW en caso de que no tengan
+//para que no aparezca el mensaje de Retrieval Argument
+
+long		ll_contfilas
+integer	li_rtn
+
+ll_contfilas = adwc_dd.Rowcount()
+IF ll_contfilas = 0 Then
+	li_rtn = adwc_dd.InsertRow(0) //Se inserto una fila al DropDown
+ELSEIF ll_contfilas > 0 Then
+	li_rtn = 0   //Tiene datos el DropDown
+ELSE
+	li_rtn = -1 //Ocurrio un error
+END IF
+
+Return li_rtn
+
+end function
+

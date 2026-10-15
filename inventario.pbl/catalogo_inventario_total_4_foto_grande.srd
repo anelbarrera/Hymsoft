@@ -1,0 +1,138 @@
+﻿release 25;
+datawindow(units=3 data.export.format=1 timer_interval=0 color=1073741824 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="catalogo" print.orientation = 1 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 31 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=10689 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=datetime updatewhereclause=yes name=inmprodu_prod_entrada_fecha dbname="inmprodu.prod_entrada_fecha" dbalias=".prod_entrada_fecha" )
+ column=(type=char(20) updatewhereclause=yes name=inmprodu_prod_producto dbname="inmprodu.prod_producto" dbalias=".prod_producto" )
+ column=(type=char(20) updatewhereclause=yes name=inmprodu_prod_producto_dos dbname="inmprodu.prod_producto_dos" dbalias=".prod_producto_dos" )
+ column=(type=char(65) updatewhereclause=yes name=inmprodu_prod_descripcion dbname="inmprodu.prod_descripcion" dbalias=".prod_descripcion" )
+ column=(type=decimal(0) updatewhereclause=yes name=inmprodu_prod_g_financiero dbname="inmprodu.prod_g_financiero" dbalias=".prod_g_financiero" )
+ column=(type=decimal(0) updatewhereclause=yes name=inmprodu_prod_empresa dbname="inmprodu.prod_empresa" dbalias=".prod_empresa" )
+ column=(type=char(120) updatewhereclause=yes name=inmprodu_prod_foto_dir dbname="inmprodu.prod_foto_dir" dbalias=".prod_foto_dir" )
+ column=(type=char(25) updatewhereclause=yes name=cramarca_amar_nombre_marca dbname="cramarca.amar_nombre_marca" dbalias=".amar_nombre_marca" )
+ column=(type=decimal(4) updatewhereclause=yes name=inmprodu_prod_empaque dbname="inmprodu.prod_empaque" dbalias=".prod_empaque" )
+ column=(type=decimal(4) updatewhereclause=yes name=inmprodu_prod_cubicaje dbname="inmprodu.prod_cubicaje" dbalias=".prod_cubicaje" )
+ column=(type=decimal(8) updatewhereclause=yes name=inmprodu_prod_costo_fob dbname="inmprodu.prod_costo_fob" dbalias=".prod_costo_fob" )
+ column=(type=decimal(8) updatewhereclause=yes name=inmprodu_prod_costo_cif dbname="inmprodu.prod_costo_cif" dbalias=".prod_costo_cif" )
+ column=(type=char(50) updatewhereclause=yes name=inmprodu_prod_descripcion_dos dbname="inmprodu.prod_descripcion_dos" dbalias=".prod_descripcion_dos" )
+ column=(type=char(255) updatewhereclause=yes name=inmprodu_prod_observacion dbname="inmprodu.prod_observacion" dbalias=".prod_observacion" )
+ column=(type=decimal(4) updatewhereclause=yes name=inmprodu_prod_precio_venta_unidad dbname="inmprodu.prod_precio_venta_unidad" dbalias=".prod_precio_venta_unidad" )
+ column=(type=decimal(6) updatewhereclause=yes name=inmprodu_prod_existencia_total dbname="inmprodu.prod_existencia_total" dbalias=".prod_existencia_total" )
+ column=(type=decimal(6) updatewhereclause=yes name=inmprodu_prod_reserva_total dbname="inmprodu.prod_reserva_total" dbalias=".prod_reserva_total" )
+ column=(type=char(1) updatewhereclause=yes name=letras dbname="letras" )
+ column=(type=char(1) updatewhereclause=yes name=desde dbname="desde" )
+ column=(type=char(1) updatewhereclause=yes name=hasta dbname="hasta" )
+ column=(type=char(5) updatewhereclause=yes name=inmprodu_prod_marca dbname="inmprodu.prod_marca" dbalias=".prod_marca" )
+ column=(type=char(17) updatewhereclause=yes name=barra dbname="barra" )
+ column=(type=char(3) updatewhereclause=yes name=inmprodu_prod_division dbname="inmprodu.prod_division" dbalias=".prod_division" )
+ column=(type=decimal(8) updatewhereclause=yes name=inamedid_medi_cantidad dbname="inamedid.medi_cantidad" dbalias="inamedid_a.medi_cantidad" )
+ column=(type=decimal(0) updatewhereclause=yes name=disponibles dbname="disponibles" )
+ column=(type=decimal(0) updatewhereclause=yes name=inmprodu_prod_ultima_entrada_sec dbname="inmprodu.prod_ultima_entrada_sec" dbalias=".prod_ultima_entrada_sec" )
+ column=(type=char(10) updatewhereclause=yes name=precio dbname="precio" )
+ column=(type=char(10) updatewhereclause=yes name=costo dbname="costo" )
+ column=(type=decimal(4) updatewhereclause=yes name=inmprodu_precio_numero dbname="inmprodu.precio_numero" dbalias=".precio_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=dentero dbname="dentero" )
+ column=(type=decimal(0) updatewhereclause=yes name=total_entrada dbname="total_entrada" )
+ column=(type=decimal(0) updatewhereclause=yes name=inmprodu_prod_tercero dbname="inmprodu.prod_tercero" dbalias=".prod_tercero" )
+ column=(type=long updatewhereclause=yes name=incluir dbname="incluir" )
+ column=(type=decimal(0) updatewhereclause=yes name=rentero dbname="rentero" )
+ column=(type=decimal(6) updatewhereclause=yes name=prod_ultima_entrada_can dbname="prod_ultima_entrada_can" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_ultima_entrada_can_2 dbname="prod_ultima_entrada_can_2" )
+ column=(type=char(2) updatewhereclause=yes name=inmprodu_prod_empaque_um dbname="inmprodu.prod_empaque_um" dbalias=".prod_empaque_um" )
+ column=(type=decimal(4) updatewhereclause=yes name=inmprodu_precio_numero2 dbname="inmprodu.precio_numero2" dbalias=".precio_numero2" )
+ column=(type=long updatewhereclause=yes name=ver_precio dbname="ver_precio" )
+ column=(type=long updatewhereclause=yes name=ver_cantidad dbname="ver_cantidad" )
+ column=(type=char(50) updatewhereclause=yes name=inmprodu_prod_nivel1 dbname="inmprodu.prod_nivel1" dbalias=".prod_nivel1" )
+ column=(type=char(50) updatewhereclause=yes name=inmprodu_prod_nivel2 dbname="inmprodu.prod_nivel2" dbalias=".prod_nivel2" )
+ column=(type=char(50) updatewhereclause=yes name=inmprodu_prod_nivel3 dbname="inmprodu.prod_nivel3" dbalias=".prod_nivel3" )
+ column=(type=char(50) updatewhereclause=yes name=inmprodu_prod_nivel4 dbname="inmprodu.prod_nivel4" dbalias=".prod_nivel4" )
+ column=(type=char(50) updatewhereclause=yes name=inmprodu_prod_nivel5 dbname="inmprodu.prod_nivel5" dbalias=".prod_nivel5" )
+ column=(type=char(120) updatewhereclause=yes name=inmprodu_prod_foto_catalogo dbname="inmprodu.prod_foto_catalogo" dbalias=".prod_foto_catalogo" )
+ column=(type=char(30) updatewhereclause=yes name=talla dbname="talla" )
+ column=(type=char(20) updatewhereclause=yes name=precio1 dbname="precio1" )
+ column=(type=char(20) updatewhereclause=yes name=precio2 dbname="precio2" )
+ column=(type=decimal(4) updatewhereclause=yes name=precio_numero3 dbname="inmprodu.precio_numero3" dbalias=".precio_numero3" )
+ column=(type=char(20) updatewhereclause=yes name=precio3 dbname="precio3" )
+ retrieve="    SELECT inmprodu.prod_entrada_fecha,
+		inmprodu.prod_producto, 
+         inmprodu.prod_producto_dos,
+         inmprodu.prod_descripcion,       
+		inmprodu.prod_g_financiero,   
+         inmprodu.prod_empresa,    
+         inmprodu.prod_foto_dir,
+		cramarca.amar_nombre_marca,      
+         inmprodu.prod_empaque,   
+         inmprodu.prod_cubicaje,   
+         inmprodu.prod_costo_fob,
+         inmprodu.prod_costo_cif,   
+         inmprodu.prod_descripcion_dos,   
+         inmprodu.prod_observacion,
+         inmprodu.prod_precio_venta_unidad,           
+         inmprodu.prod_existencia_total, 
+		inmprodu.prod_reserva_total,  
+         letras = '',   
+         desde = '',   
+         hasta = '',   
+         inmprodu.prod_marca,   
+         '*' + inmprodu.prod_barra +'*' barra,   
+         inmprodu.prod_division, 
+         inamedid_a.medi_cantidad, 
+         convert(numeric(10, 0), ((inmprodu.prod_existencia_total - inmprodu.prod_reserva_total) /inamedid_a.medi_cantidad)) disponibles,    
+         inmprodu.prod_ultima_entrada_sec,   
+         '          ' precio,   
+         '          ' costo,   
+         inmprodu.prod_precio1 precio_numero ,
+         convert(numeric(10, 0), ((inmprodu.prod_existencia_total - inmprodu.prod_reserva_total) /inamedid_a.medi_cantidad)) dentero,   
+         total_entrada = convert(numeric(10, 0), ( inmprodu.prod_ultima_entrada_can /inamedid_a.medi_cantidad) * prod_costo_fob),   
+         inmprodu.prod_tercero,   
+         incluir=0,   
+         convert(numeric(10, 0), (inmprodu.prod_reserva_total / inamedid_a.medi_cantidad)) rentero,   
+         prod_ultima_entrada_can = ( SELECT sum(dmov_cantidad) FROM indmovim,  intmovim   WHERE ( indmovim.dmov_g_financiero = intmovim.tmov_g_financiero ) and   ( indmovim.dmov_empresa = intmovim.tmov_empresa ) and  ( indmovim.dmov_aplicacion = intmovim.tmov_aplicacion ) and  ( indmovim.dmov_tipo_transaccion = intmovim.tmov_tipo_transaccion ) and  ( indmovim.dmov_concepto = intmovim.tmov_concepto ) and  ( indmovim.dmov_secuencia = intmovim.tmov_secuencia ) and  ( indmovim.dmov_anual = intmovim.tmov_anual ) and  ( ( indmovim.dmov_g_financiero = inmprodu.prod_g_financiero ) AND ( indmovim.dmov_empresa = inmprodu.prod_empresa ) AND ( indmovim.dmov_aplicacion = 'IN' ) AND  ( indmovim.dmov_tipo_transaccion = 'EN' ) AND  ( indmovim.dmov_producto = inmprodu.prod_producto) )),   
+         convert(numeric(10, 0), ( inmprodu.prod_ultima_entrada_can /inamedid_a.medi_cantidad)) prod_ultima_entrada_can_2,   
+		inmprodu.prod_empaque_um ,
+         inmprodu.prod_precio2 precio_numero2 ,
+		ver_precio = 1,
+		ver_cantidad = 1,
+		prod_nivel1,
+		prod_nivel2,
+		prod_nivel3,
+		prod_nivel4,
+		prod_nivel5,
+		inmprodu.prod_foto_catalogo,
+		talla = (select max(t.acta_descripcion) from cracltam t where inmprodu.prod_cod_clase_tam = t.acta_cod_clase_tam and inmprodu.prod_empresa = t.acta_empresa and inmprodu.prod_g_financiero = t.acta_g_financiero),		
+		precio1 = '                    ',
+		precio2 = '                    ',
+		inmprodu.prod_precio3 precio_numero3 ,
+		precio3 = '                    '
+    FROM inmprodu,
+         cramarca,
+         inamedid inamedid_a,   
+         inamedid inamedid_b
+   WHERE ( cramarca.amar_g_financiero = inmprodu.prod_g_financiero ) and  
+         ( cramarca.amar_empresa = inmprodu.prod_empresa ) and  
+         ( cramarca.amar_num_marca = inmprodu.prod_marca ) and  
+         ( inmprodu.prod_medida = inamedid_a.medi_medida ) and 
+		( inmprodu.prod_empaque_um = inamedid_b.medi_medida ) and         
+         ( ( inmprodu.prod_g_financiero = :grupo ) AND  
+         ( inmprodu.prod_empresa = :empresa ) AND  
+         ( inmprodu.prod_entrada_fecha >= :fecha_inicio ) AND  
+         ( inmprodu.prod_entrada_fecha <= :fecha_final ) and
+         (len (rtrim(inmprodu.prod_foto_catalogo))>0 ) and
+		( round( (( inmprodu.prod_existencia_total - inmprodu.prod_reserva_total ) / inamedid_b.medi_cantidad ), 0) >= 1 ))
+ 
+
+" arguments=(("grupo", number),("empresa", number),("fecha_inicio", date),("fecha_final", date)) )
+column(band=detail id=46 alignment="0" tabsequence=32766 border="0" color="33554432" x="105" y="80" height="10530" width="15980" format="[general]" html.valueishtml="0"  name=inmprodu_prod_foto_catalogo visible="1" bitmapname=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=2 distill.custompostscript="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.xhtml()
+ 

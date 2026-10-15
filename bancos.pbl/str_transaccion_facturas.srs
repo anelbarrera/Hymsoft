@@ -1,0 +1,12 @@
+﻿global type str_transaccion_facturas from structure
+	string		transaccion
+	string		subtransaccion
+	integer		banco
+	string		cuenta
+	string		documento
+	integer		ann
+	string		aplicacion
+	decimal { 2 }		monto
+	datetime		fecha
+end type
+

@@ -1,0 +1,13 @@
+﻿global type str_colores from structure
+	long		fondo_principal
+	long		fondo_lateral
+	long		fondo_cursor
+	long		borde_cursor
+	long		titulo_opciones
+	long		letras_opciones
+	long		letra_seleccion_principal
+	long		titulo_opciones_lateral
+	long		letras_opciones_lateral
+	long		letra_seleccion_lateral
+end type
+

@@ -1,0 +1,358 @@
+﻿global type gf_cp_antiguedad_x_proveedor_prueba from function_object
+end type
+
+forward prototypes
+global subroutine gf_cp_antiguedad_x_proveedor_prueba (datetime fecha, long proveedor)
+end prototypes
+
+global subroutine gf_cp_antiguedad_x_proveedor_prueba (datetime fecha, long proveedor);integer li_registros,li_registros2, li_dia_inicio, li_valor,li_dia_fin, li_filas,li_filas2,li_valor2, li_row,li_fila_ 
+integer li_dia_ftem,li_dia_item
+datetime ld_fecha_inicio, ld_fecha_final,ldt_fecha
+decimal ld_saldo, ld_saldo_d, ld_saldo_c, ld_temporal, ld_recibos, ld_facturas, ld_saldo_total, lii_cliente
+decimal ldec_saldo_inicial,ld_saldo_d1,ldec_total_credito,ld_saldob,ld_saldoa,ldec_temp_sald
+long ll_err
+datastore dw_4, dw_5, dw_6
+string ls_ruc,ls_err, ls_desc,ls_natura 
+
+
+dw_4 = create datastore
+dw_5 = create datastore
+dw_6 = create datastore
+dw_4.dataobject = 'dw_cp_ext_antiguedad' //externo que contiene facturas y recibos
+dw_5.dataobject = 'dw_cp_inf_ayuda_antiguedad' // cantidad de dias
+dw_6.dataobject = 'dw_cp_inf_cpatempa' // montos 
+dw_4.settransobject(sqlca)
+dw_5.settransobject(sqlca)
+dw_6.settransobject(sqlca)
+
+dw_4.reset()
+ld_saldo_total = 0
+
+lii_cliente 	= round(proveedor, 0)
+ls_ruc 			= string(lii_cliente)
+
+dw_5.retrieve(str.g_financiero, str.empresa)
+li_registros 			= dw_5.rowcount()
+
+// AGREGRE ESTO PARA SOLO TOMAR UN SOLO TOTAL DEBITO Y REBAJARLO
+	SELECT SUM(abs(isnull(cptmovim.movi_monto_final,0)))
+		INTO :ld_saldo_d
+	    FROM cptmovim  
+   		WHERE ( cptmovim.movi_g_financiero 	= :str.g_financiero 	) AND  
+         		( cptmovim.movi_empresa 		= :str.empresa 		) AND  
+					( cptmovim.movi_naturaleza 	= 'D' 					) AND 
+					//( cptmovim.movi_estado 			<> 'AN' 					) AND
+		      	( cptmovim.movi_fecha_tran 	< dateadd(dd,1,:fecha)	) AND 
+      		//  ( rtrim(ltrim(cptmovim.movi_tipo_transaccion+cptmovim.movi_sub_transaccion)) <> 'NC9' ) and 
+				   ( cptmovim.movi_tercero 		= :lii_cliente 		);   
+			
+							
+		If sqlca.sqlcode = -1 then
+			ll_err = sqlca.sqldbcode
+			ls_err  = sqlca.SQLErrText
+			rollback;
+			mensaje("Error"+string(ll_err),"No se pudo obtener el saldo inicial ",&
+					'Descripción del error: '+ls_err)
+			return
+	
+		end if
+	
+	//
+	if isnull(ld_saldo_d) then ld_saldo_d = 0
+	ld_saldo_d1 = ld_saldo_d
+
+
+FOR li_filas 			= 1 TO li_registros //dw_5  dias
+	li_row 				= dw_4.insertrow(0)
+	li_dia_inicio		= dw_5.getitemnumber(li_filas, 'cpan_diaini')
+	li_dia_fin	 		= dw_5.getitemnumber(li_filas, 'cpan_diafin')//diaini')
+	ls_desc		 		= dw_5.getitemstring(li_filas, 'cpan_detalle') 
+	
+	li_dia_inicio 		= li_dia_inicio * -1
+	li_dia_fin 			= li_dia_fin * -1
+	if li_dia_inicio 	= -1 then
+		li_dia_inicio 	= 0 
+	end if
+	
+	ld_fecha_inicio	= datetime(relativedate( date( fecha), li_dia_inicio ), 23:59:59)
+	ld_fecha_final 	= datetime(relativedate( date( fecha), li_dia_fin ))
+		
+	if li_filas 		= li_registros then
+		ld_saldo_c = 0
+
+		SELECT sum(abs(isnull(cptmovim.movi_monto_final,0)))
+			INTO :ld_saldo_c
+			 FROM cptmovim  
+				WHERE ( cptmovim.movi_g_financiero 	= :str.g_financiero 	) AND  
+						( cptmovim.movi_empresa 		= :str.empresa 		) AND  
+						( cptmovim.movi_fecha_tran 	< :ld_fecha_inicio	) AND  
+						( cptmovim.movi_naturaleza 	= 'C' 					) AND  
+						//( cptmovim.movi_estado 			<> 'AN' 					) AND
+					//(rtrim(ltrim(cptmovim.movi_tipo_transaccion+cptmovim.movi_sub_transaccion)) <> 'NC9' ) and 
+						( cptmovim.movi_tercero 		= :lii_cliente 		);   
+	
+					if isnull(ld_saldo_c) then
+						ld_saldo_c = 0 
+					end if
+												
+				If sqlca.sqlcode = -1 then
+					ll_err = sqlca.sqldbcode
+					ls_err  = sqlca.SQLErrText
+					rollback;
+					mensaje("Error"+string(ll_err),"No se pudo obtener el saldo crédito ",&
+							'Descripción del error: '+ls_err)
+					return
+					
+				end if	
+//					 
+//				SELECT isnull(cptmovim.movi_monto_final,0),cptmovim.movi_naturaleza
+//				INTO :ldec_saldo_inicial,:ls_natura
+//				 FROM cptmovim  
+//					WHERE ( cptmovim.movi_g_financiero 	= :str.g_financiero 	) AND  
+//							( cptmovim.movi_empresa 		= :str.empresa 		) AND  
+//							( cptmovim.movi_fecha_tran 	< :ld_fecha_inicio	) AND  
+//							( rtrim(ltrim(cptmovim.movi_tipo_transaccion+cptmovim.movi_sub_transaccion)) = 'NC9' ) and 
+//							( cptmovim.movi_tercero 		= :lii_cliente 		);   
+//					
+//									
+//				If sqlca.sqlcode = -1 then
+//					ll_err = sqlca.sqldbcode
+//					ls_err  = sqlca.SQLErrText
+//					rollback;
+//					if ll_err = 100 then
+//					else
+//					mensaje("Error"+string(ll_err),"No se pudo obtener el saldo inicial ",&
+//							'Descripción del error: '+ls_err)
+//					return
+//					end if
+//				end if	
+//				if isnull(ldec_saldo_inicial) then
+//					ldec_saldo_inicial = 0 
+//				end if
+	 				
+				  
+//			 
+//		if ls_natura = 'D' then
+//			ld_saldo_d = ld_saldo_d + (-1 * ldec_saldo_inicial)
+//		elseif ls_natura = 'C' then
+//			ld_saldo_c = ld_saldo_c + ldec_saldo_inicial
+//		end if
+//		ldec_saldo_inicial = 0
+//		ld_saldo_total = ld_saldo_total + ld_saldo_c
+		 
+	else
+		ld_saldo_c = 0
+	//	ld_saldo_d = 0
+		SELECT sum(abs(isnull(cptmovim.movi_monto_final,0)))
+		INTO :ld_saldo_c
+	   FROM cptmovim  
+   	WHERE ( cptmovim.movi_g_financiero 	= :str.g_financiero 	) AND  
+        		( cptmovim.movi_empresa 		= :str.empresa 		) AND  
+		      ( cptmovim.movi_fecha_tran 	>= :ld_fecha_final 	) AND
+				( cptmovim.movi_fecha_tran 	<= :ld_fecha_inicio	) AND
+			   ( cptmovim.movi_naturaleza 	= 'C' 					) AND  
+		   //   ( cptmovim.movi_estado 			<> 'AN' 					) AND
+			//	( rtrim(ltrim(cptmovim.movi_tipo_transaccion+cptmovim.movi_sub_transaccion)) <> 'NC9' ) and 
+		      ( cptmovim.movi_tercero 		= :lii_cliente 		) ;
+				
+			If sqlca.sqlcode <> 0 then
+				ll_err = sqlca.sqldbcode
+				ls_err  = sqlca.SQLErrText
+				rollback;
+				mensaje("Error"+string(ll_err),"No se pudo obtener el saldo débito ",&
+					'Descripción del error: '+ls_err)
+			end if	
+
+				if isnull(ld_saldo_c) then
+					ld_saldo_c = 0 
+				end if
+
+
+//
+				if isnull(ld_saldo_d) then
+					ld_saldo_d = 0 
+				end if
+				
+//		SELECT isnull(cptmovim.movi_monto_final,0), cptmovim.movi_naturaleza
+//		INTO :ldec_saldo_inicial,:ls_natura
+//	    FROM cptmovim  
+//   		WHERE ( cptmovim.movi_g_financiero 	= :str.g_financiero 	) AND  
+//         		( cptmovim.movi_empresa 		= :str.empresa 		) AND  
+//		      ( cptmovim.movi_fecha_tran 	>= :ld_fecha_final 	) AND
+//				( cptmovim.movi_fecha_tran 	<= :ld_fecha_inicio	) AND 
+//      		( rtrim(ltrim(cptmovim.movi_tipo_transaccion+cptmovim.movi_sub_transaccion)) = 'NC9' ) and 
+//				( cptmovim.movi_tercero 		= :lii_cliente 		);   
+//			
+//							
+//		If sqlca.sqlcode = -1 then
+//			ll_err = sqlca.sqldbcode
+//			ls_err  = sqlca.SQLErrText
+//			rollback;
+//			if ll_err = 100 then
+//			else
+//			mensaje("Error"+string(ll_err),"No se pudo obtener el saldo inicial ",&
+//					'Descripción del error: '+ls_err)
+//			return
+//			end if
+//		end if
+//		if isnull(ldec_saldo_inicial) then
+//			ldec_saldo_inicial = 0 
+//		end if
+		
+//		if ls_natura = 'D' then
+//			ld_saldo_d = ld_saldo_d + (-1 * ldec_saldo_inicial)
+//			
+//		elseif ls_natura = 'C' then
+//			ld_saldo_c = ld_saldo_c + ldec_saldo_inicial
+//		end if    			
+//						
+//		ldec_saldo_inicial = 0
+	end if
+	if isnull(ld_saldo_d) then
+		ld_saldo_d = 0
+	end if
+	if isnull(ld_saldo_c) then
+		ld_saldo_c = 0
+	end if
+	
+	
+		
+ // if ld_saldo_d < 0 then ld_saldo_d = (ld_saldo_d * -1) 
+  
+  
+  
+	dw_4.setitem(li_row, 'inicio',  li_dia_inicio)
+	dw_4.setitem(li_row, 'fin',     li_dia_fin	)
+	dw_4.setitem(li_row, 'desc',     ls_desc	)
+	//dw_4.setitem(li_row, 'facturas', ld_saldo_d	)///16/01/2001
+	dw_4.setitem(li_row, 'recibos',  ld_saldo_c	)
+
+	//	ld_saldo =  ld_saldo_c - ld_saldo_d //16/01/2001
+	//ld_saldo =  (ld_saldo_c - ld_saldo_d) 
+	
+	//ld_saldo_total = ld_saldo_total + ld_saldo_c //16/01/2001
+	if isnull(ldec_total_credito) then ldec_total_credito = 0
+	ldec_total_credito = ldec_total_credito + ld_saldo_c
+NEXT
+
+	
+if isnull(ld_saldo_total) then ld_saldo_total = 0
+ld_saldo_total = ldec_total_credito  - ld_saldo_d 
+if ld_saldo_total <> 0 then
+//li_registros = dw_5.rowcount()
+//li_registros2 = li_registros
+//FOR li_filas 		= li_registros to 1 STEP -1
+//	FOR li_filas2 	= li_registros2 to 1 STEP -1
+//		ld_recibos 	= dw_4.getitemnumber(li_filas2, 'recibos')
+//		ld_facturas = dw_4.getitemnumber(li_filas, 'facturas')
+//
+//		ld_temporal = 0
+//		ld_temporal =    ld_facturas - ld_recibos
+//		
+//		if ld_temporal < 0 then //
+//			ld_recibos =  ld_recibos - ld_facturas  //recibos creditos 
+//			dw_4.setitem(li_filas, 'facturas',0.00 		)
+//			dw_4.setitem(li_filas2, 'recibos',ld_recibos )
+//			exit
+//		end if
+//		if ld_temporal >= 0 then //
+//			ld_facturas = ld_facturas - ld_recibos   
+//			dw_4.setitem(li_filas, 'facturas',ld_facturas)
+//			dw_4.setitem(li_filas2,'recibos' ,0.00			)
+//		end if
+//	next
+//next
+
+
+li_registros = dw_5.rowcount()
+dw_6.reset()
+for li_filas =1 to dw_4.rowcount()
+dw_6.insertrow(0)
+next
+li_valor2 = dw_4.rowcount() + 1
+FOR li_filas 		=   1 to li_registros 
+	li_valor = dw_5.rowcount() + 1
+	li_valor2 = li_valor2 - 1
+//	dw_6.insertrow(0)
+	ld_saldo =	0
+	ld_saldob = dw_4.getitemnumber((li_valor - li_filas),'recibos')
+	
+	if isnull(ld_saldob) then ld_saldob = 0
+	ld_saldo = ld_saldob	- ld_saldo_d1//16/01/2001 desde aqui
+	if isnull(ld_saldo) then ld_saldo = 0
+	
+	if ld_saldo < 0 then 
+		ld_saldo = 0 
+		li_fila_ = li_filas
+	
+	//dw_4.getitemnumber(li_filas,'facturas')  //16/01/2001
+	 
+	//if isnull(ld_saldo) then
+	//	ld_saldo = 0
+	//else
+	//	dw_4.setitem(li_filas, 'saldo',ld_saldo)
+	
+	end if
+//	ld_saldo_total = ld_saldo_total + ld_saldo //16/01/2001
+	ld_saldoa = dw_4.getitemnumber(li_valor - li_filas,'recibos')
+	
+	if isnull(ld_saldoa) then ld_saldoa = 0
+	if isnull(ld_saldo_d1) then ld_saldo_d1 = 0
+	ld_saldo_d1 = ld_saldo_d1 - ld_saldoa
+	//ld_saldo_total = ldec_total_credito  - ld_saldo_d 
+	
+	if ld_saldo_d1 < 0 then ld_saldo_d1 = 0
+
+  
+	dw_6.setitem(li_filas, 'tmpa_g_financiero', str.g_financiero									)
+	dw_6.setitem(li_filas, 'tmpa_empresa'		, str.empresa											)
+	dw_6.setitem(li_filas, 'tmpa_tercero'		, lii_cliente											)
+	dw_6.setitem(li_filas, 'tmpa_ruc_tercero'	, string(lii_cliente)								)
+	dw_6.setitem(li_filas, 'tmpa_maxdias'		, (dw_4.getitemnumber(li_filas, 'fin') * -1) )
+/* Modificado por Alexis - 05/07/2000 */
+/*	if li_filas = 1 then
+		dw_6.setitem(li_filas, 'tmpa_descantig', 'Corriente') 
+	else */
+		if li_filas = li_registros then
+		dw_6.setitem(li_filas, 'tmpa_descantig',RightTrim(dw_4.getitemstring(li_filas, 'desc')))
+		dw_6.setitem(li_filas, 'tmpa_maxdias',1000000)
+	else 
+	/*	dw_6.setitem(li_filas, 'tmpa_descantig', string(dw_4.getitemnumber(li_filas, 'inicio') * -1) + ' Dias') */
+      dw_6.setitem(li_filas, 'tmpa_descantig',RightTrim(dw_4.getitemstring(li_filas, 'desc')))		
+	end if		
+	dw_6.setitem( li_valor2, 'tmpa_monto', ld_saldo)
+	dw_6.setitem(li_filas, 'tmpa_maquina'	   , str.maquina		)
+	dw_6.setitem(li_filas, 'tmpa_orden', 		li_filas)	//nuevo
+	
+next
+if isnull(ld_saldo_total) then
+	ld_saldo_total = 0
+end if
+//ld_saldo_total= ld_saldo_total //+ ld_saldo 16/01/2001
+
+ld_saldo_total = ldec_total_credito  - ld_saldo_d 
+
+
+li_filas = dw_6.insertrow(0)
+dw_6.setitem(li_filas, 'tmpa_g_financiero'	, str.g_financiero	)
+	dw_6.setitem(li_filas, 'tmpa_empresa'		, str.empresa			)
+	dw_6.setitem(li_filas, 'tmpa_tercero'		, lii_cliente			)
+	dw_6.setitem(li_filas, 'tmpa_ruc_tercero'	, string(lii_cliente))
+	dw_6.setitem(li_filas, 'tmpa_maxdias'		, 1000001				)
+	dw_6.setitem(li_filas, 'tmpa_descantig'	, 'Saldo Total'		)
+	dw_6.setitem(li_filas, 'tmpa_maquina'	   , str.maquina		)
+	dw_6.setitem(li_filas, 'tmpa_orden', 		21)	//nuevo
+	dw_6.setitem(li_filas, 'tmpa_monto'			, ld_saldo_total		)
+	if ld_saldo_total < 0 then	dw_6.setitem(li_fila_,'tmpa_monto', ld_saldo_total)
+
+	if dw_6.update() = 1 then
+		commit using sqlca;
+	else
+		rollback using sqlca;
+	end if
+end if
+destroy dw_4
+destroy dw_5
+destroy dw_6
+end subroutine
+

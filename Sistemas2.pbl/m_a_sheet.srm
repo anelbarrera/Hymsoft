@@ -1,0 +1,1132 @@
+﻿forward
+global type m_a_sheet from menu
+end type
+type m_archivo from menu within m_a_sheet
+end type
+type m_guardar from menu within m_archivo
+end type
+type m_-1 from menu within m_archivo
+end type
+type m_cerrar from menu within m_archivo
+end type
+type m_archivo from menu within m_a_sheet
+m_guardar m_guardar
+m_-1 m_-1
+m_cerrar m_cerrar
+end type
+type m_edicion from menu within m_a_sheet
+end type
+type m_editar from menu within m_edicion
+end type
+type m_insertar from menu within m_edicion
+end type
+type m_borrar from menu within m_edicion
+end type
+type m_-2 from menu within m_edicion
+end type
+type m_deshacer from menu within m_edicion
+end type
+type m_-3 from menu within m_edicion
+end type
+type m_cortar from menu within m_edicion
+end type
+type m_copiar from menu within m_edicion
+end type
+type m_pegar from menu within m_edicion
+end type
+type m_limpiar from menu within m_edicion
+end type
+type m_edicion from menu within m_a_sheet
+m_editar m_editar
+m_insertar m_insertar
+m_borrar m_borrar
+m_-2 m_-2
+m_deshacer m_deshacer
+m_-3 m_-3
+m_cortar m_cortar
+m_copiar m_copiar
+m_pegar m_pegar
+m_limpiar m_limpiar
+end type
+type m_panel from menu within m_a_sheet
+end type
+type m_nuevo from menu within m_panel
+end type
+type m_usuario from menu within m_nuevo
+end type
+type m_grupo from menu within m_nuevo
+end type
+type m_nuevo from menu within m_panel
+m_usuario m_usuario
+m_grupo m_grupo
+end type
+type m_copiar1 from menu within m_panel
+end type
+type m_usuario1 from menu within m_copiar1
+end type
+type m_grupo1 from menu within m_copiar1
+end type
+type m_copiar1 from menu within m_panel
+m_usuario1 m_usuario1
+m_grupo1 m_grupo1
+end type
+type m_eliminar from menu within m_panel
+end type
+type m_usuario2 from menu within m_eliminar
+end type
+type m_grupo2 from menu within m_eliminar
+end type
+type m_eliminar from menu within m_panel
+m_usuario2 m_usuario2
+m_grupo2 m_grupo2
+end type
+type m_-4 from menu within m_panel
+end type
+type m_vericonos from menu within m_panel
+end type
+type m_grandes from menu within m_vericonos
+end type
+type m_pequeos from menu within m_vericonos
+end type
+type m_lista from menu within m_vericonos
+end type
+type m_detalles from menu within m_vericonos
+end type
+type m_vericonos from menu within m_panel
+m_grandes m_grandes
+m_pequeos m_pequeos
+m_lista m_lista
+m_detalles m_detalles
+end type
+type m_-5 from menu within m_panel
+end type
+type m_cerrar1 from menu within m_panel
+end type
+type m_panel from menu within m_a_sheet
+m_nuevo m_nuevo
+m_copiar1 m_copiar1
+m_eliminar m_eliminar
+m_-4 m_-4
+m_vericonos m_vericonos
+m_-5 m_-5
+m_cerrar1 m_cerrar1
+end type
+type m_m_panel from menu within m_a_sheet
+end type
+type m_nuevo1 from menu within m_m_panel
+end type
+type m_usuario3 from menu within m_nuevo1
+end type
+type m_grupo3 from menu within m_nuevo1
+end type
+type m_nuevo1 from menu within m_m_panel
+m_usuario3 m_usuario3
+m_grupo3 m_grupo3
+end type
+type m_copiar2 from menu within m_m_panel
+end type
+type m_usuario4 from menu within m_copiar2
+end type
+type m_grupo4 from menu within m_copiar2
+end type
+type m_copiar2 from menu within m_m_panel
+m_usuario4 m_usuario4
+m_grupo4 m_grupo4
+end type
+type m_eliminar1 from menu within m_m_panel
+end type
+type m_usuario5 from menu within m_eliminar1
+end type
+type m_grupo5 from menu within m_eliminar1
+end type
+type m_eliminar1 from menu within m_m_panel
+m_usuario5 m_usuario5
+m_grupo5 m_grupo5
+end type
+type m_m_panel from menu within m_a_sheet
+m_nuevo1 m_nuevo1
+m_copiar2 m_copiar2
+m_eliminar1 m_eliminar1
+end type
+type m_entidad_b from menu within m_a_sheet
+end type
+type m_nuevo2 from menu within m_entidad_b
+end type
+type m_borrar1 from menu within m_entidad_b
+end type
+type m_-6 from menu within m_entidad_b
+end type
+type m_modificar from menu within m_entidad_b
+end type
+type m_cerrar2 from menu within m_entidad_b
+end type
+type m_entidad_b from menu within m_a_sheet
+m_nuevo2 m_nuevo2
+m_borrar1 m_borrar1
+m_-6 m_-6
+m_modificar m_modificar
+m_cerrar2 m_cerrar2
+end type
+type m_contabilidad from menu within m_a_sheet
+end type
+type m_calendario from menu within m_contabilidad
+end type
+type m_contabilidad from menu within m_a_sheet
+m_calendario m_calendario
+end type
+end forward
+
+global type m_a_sheet from menu
+m_archivo m_archivo
+m_edicion m_edicion
+m_panel m_panel
+m_m_panel m_m_panel
+m_entidad_b m_entidad_b
+m_contabilidad m_contabilidad
+end type
+global m_a_sheet m_a_sheet
+
+forward prototypes
+public subroutine mf_check_view (menu am_item)
+end prototypes
+
+public subroutine mf_check_view (menu am_item);If am_item <> m_a_sheet.m_panel.m_vericonos.m_grandes Then &
+									m_a_sheet.m_panel.m_vericonos.m_grandes.checked = false
+If am_item <> m_a_sheet.m_panel.m_vericonos.m_pequeos Then &
+									m_a_sheet.m_panel.m_vericonos.m_pequeos.checked = false
+If am_item <> m_a_sheet.m_panel.m_vericonos.m_lista Then &
+									m_a_sheet.m_panel.m_vericonos.m_lista.checked = false
+If am_item <> m_a_sheet.m_panel.m_vericonos.m_detalles Then &
+									m_a_sheet.m_panel.m_vericonos.m_detalles.checked = false
+									
+am_item.checked = true
+
+end subroutine
+
+on m_a_sheet.create
+m_a_sheet=this
+this.m_archivo=create m_archivo
+this.m_edicion=create m_edicion
+this.m_panel=create m_panel
+this.m_m_panel=create m_m_panel
+this.m_entidad_b=create m_entidad_b
+this.m_contabilidad=create m_contabilidad
+this.Item[]={this.m_archivo, &
+this.m_edicion, &
+this.m_panel, &
+this.m_m_panel, &
+this.m_entidad_b, &
+this.m_contabilidad}
+end on
+
+on m_a_sheet.destroy
+destroy(this.m_archivo)
+destroy(this.m_edicion)
+destroy(this.m_panel)
+destroy(this.m_m_panel)
+destroy(this.m_entidad_b)
+destroy(this.m_contabilidad)
+end on
+
+type m_archivo from menu within m_a_sheet
+m_guardar m_guardar
+m_-1 m_-1
+m_cerrar m_cerrar
+end type
+
+on m_archivo.create
+this.Text="&Archivo"
+this.m_guardar=create m_guardar
+this.m_-1=create m_-1
+this.m_cerrar=create m_cerrar
+this.Item[]={this.m_guardar, &
+this.m_-1, &
+this.m_cerrar}
+end on
+
+on m_archivo.destroy
+destroy(this.m_guardar)
+destroy(this.m_-1)
+destroy(this.m_cerrar)
+end on
+
+type m_guardar from menu within m_archivo
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_salvar")
+end event
+
+on m_guardar.create
+this.Text="&Guardar~tAlt+G"
+this.Microhelp="Guardar los Cambios"
+this.ToolBarItemName="Custom008!"
+this.ToolBarItemText="Guardar"
+this.Shortcut=583
+end on
+
+type m_-1 from menu within m_archivo
+end type
+
+on m_-1.create
+this.Text="-"
+end on
+
+type m_cerrar from menu within m_archivo
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_close")
+end event
+
+on m_cerrar.create
+this.Text="&Cerrar~tAlt+F4"
+this.Microhelp="Cierra la Ventana"
+this.ToolBarItemName="Custom036!"
+this.ToolBarItemText="Cerrar"
+this.ToolBarItemOrder=25
+this.ToolBarItemSpace=1
+this.Shortcut=627
+end on
+
+type m_edicion from menu within m_a_sheet
+m_editar m_editar
+m_insertar m_insertar
+m_borrar m_borrar
+m_-2 m_-2
+m_deshacer m_deshacer
+m_-3 m_-3
+m_cortar m_cortar
+m_copiar m_copiar
+m_pegar m_pegar
+m_limpiar m_limpiar
+end type
+
+on m_edicion.create
+this.Text="&Edicion"
+this.m_editar=create m_editar
+this.m_insertar=create m_insertar
+this.m_borrar=create m_borrar
+this.m_-2=create m_-2
+this.m_deshacer=create m_deshacer
+this.m_-3=create m_-3
+this.m_cortar=create m_cortar
+this.m_copiar=create m_copiar
+this.m_pegar=create m_pegar
+this.m_limpiar=create m_limpiar
+this.Item[]={this.m_editar, &
+this.m_insertar, &
+this.m_borrar, &
+this.m_-2, &
+this.m_deshacer, &
+this.m_-3, &
+this.m_cortar, &
+this.m_copiar, &
+this.m_pegar, &
+this.m_limpiar}
+end on
+
+on m_edicion.destroy
+destroy(this.m_editar)
+destroy(this.m_insertar)
+destroy(this.m_borrar)
+destroy(this.m_-2)
+destroy(this.m_deshacer)
+destroy(this.m_-3)
+destroy(this.m_cortar)
+destroy(this.m_copiar)
+destroy(this.m_pegar)
+destroy(this.m_limpiar)
+end on
+
+type m_editar from menu within m_edicion
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_editar")
+end event
+
+on m_editar.create
+this.Text="E&ditar~tAlt+E"
+this.Microhelp="Edita el Registro Actual"
+this.ToolBarItemName="EditStops5!"
+this.ToolBarItemText="Editar"
+this.ToolBarItemOrder=20
+this.ToolBarItemSpace=1
+this.Shortcut=581
+end on
+
+type m_insertar from menu within m_edicion
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_insertar")
+end event
+
+on m_insertar.create
+this.Text="&Insertar~tAlt+I"
+this.Microhelp="Inserta un Nuevo Registro"
+this.ToolBarItemName="Insert5!"
+this.ToolBarItemText="Insertar"
+this.ToolBarItemOrder=21
+this.Shortcut=585
+end on
+
+type m_borrar from menu within m_edicion
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_borrar")
+end event
+
+on m_borrar.create
+this.Text="&Borrar~tAlt+B"
+this.Microhelp="Elimina el Registro Actual"
+this.ToolBarItemName="Clear!"
+this.ToolBarItemText="Borrar"
+this.ToolBarItemOrder=22
+this.Shortcut=578
+end on
+
+type m_-2 from menu within m_edicion
+end type
+
+on m_-2.create
+this.Text="-"
+end on
+
+type m_deshacer from menu within m_edicion
+end type
+
+event clicked;GraphicObject goObject
+DataWindow dwUndo
+EditMask emUndo
+MultiLineEdit mleUndo
+SingleLineEdit sleUndo
+
+goObject = GetFocus()		
+
+If Not IsNull( goObject) Then
+	Choose Case TypeOf( goObject)
+		Case DataWindow!
+			dwUndo = goObject
+			If dwUndo.CanUndo() Then
+				dwUndo.Undo()
+			End If
+		Case EditMask!
+			emUndo = goObject
+			If emUndo.CanUndo() Then
+				emUndo.Undo()
+			End If
+		Case MultiLineEdit!
+			mleUndo = goObject
+			If mleUndo.CanUndo() Then
+				mleUndo.Undo()
+			End If
+		Case SingleLineEdit!
+			sleUndo = goObject
+			If sleUndo.CanUndo() Then
+				sleUndo.Undo()
+			End If
+	End Choose
+End If
+
+end event
+
+on m_deshacer.create
+this.Text="&Deshacer~tCtrl+Z"
+this.Microhelp="Deshace el Ultimo Cambio"
+this.Shortcut=346
+end on
+
+type m_-3 from menu within m_edicion
+end type
+
+on m_-3.create
+this.Text="-"
+end on
+
+type m_cortar from menu within m_edicion
+end type
+
+event clicked;GraphicObject goObject
+DataWindow dwCut
+DropDownListBox ddlbCut
+EditMask emCut
+MultiLineEdit mleCut
+OLEControl oleCut
+SingleLineEdit sleCut
+
+goObject = GetFocus()		
+
+If Not IsNull( goObject) Then
+	Choose Case TypeOf( goObject)
+		Case DataWindow!
+			dwCut = goObject
+			dwCut.Cut()
+		Case DropDownListBox!
+			ddlbCut = goObject
+			If ddlbCut.AllowEdit = TRUE Then
+				ddlbCut.Cut()
+			End If
+		Case EditMask!
+			emCut = goObject
+			emCut.Cut()
+		Case MultiLineEdit!
+			mleCut = goObject
+			mleCut.Cut()
+		Case SingleLineEdit!
+			sleCut = goObject
+			sleCut.Cut()
+		Case OLEControl!
+			oleCut = goObject
+			oleCut.Cut()
+	End Choose
+End If
+
+end event
+
+on m_cortar.create
+this.Text="Cor&tar~tCtrl+T"
+this.Microhelp="Corta el Texto Seleccionado"
+this.Shortcut=340
+end on
+
+type m_copiar from menu within m_edicion
+end type
+
+event clicked;GraphicObject goObject
+DataWindow dwCopy
+DropDownListBox ddlbCopy
+EditMask emCopy
+MultiLineEdit mleCopy
+OLEControl oleCopy
+SingleLineEdit sleCopy
+
+goObject = GetFocus()		
+
+If Not IsNull( goObject) Then
+	Choose Case TypeOf( goObject)
+		Case DataWindow!
+			dwCopy = goObject
+			dwCopy.Copy()
+		Case DropDownListBox!
+			ddlbCopy = goObject
+			If ddlbCopy.AllowEdit = TRUE Then
+				ddlbCopy.Copy()
+			End If
+		Case EditMask!
+			emCopy = goObject
+			emCopy.Copy()
+		Case MultiLineEdit!
+			mleCopy = goObject
+			mleCopy.Copy()
+		Case SingleLineEdit!
+			sleCopy = goObject
+			sleCopy.Copy()
+		Case OLEControl!
+			oleCopy = goObject
+			oleCopy.Copy()
+	End Choose
+End If
+
+end event
+
+on m_copiar.create
+this.Text="&Copiar~tCtrl+C"
+this.Microhelp="Copia el Texto Seleccionado"
+this.Shortcut=323
+end on
+
+type m_pegar from menu within m_edicion
+end type
+
+event clicked;GraphicObject goObject
+DataWindow dwPaste
+DropDownListBox ddlbPaste
+EditMask emPaste
+MultiLineEdit mlePaste
+OLEControl olePaste
+SingleLineEdit slePaste
+
+goObject = GetFocus()		
+
+If Not IsNull( goObject) Then
+	Choose Case TypeOf( goObject)
+		Case DataWindow!
+			dwPaste = goObject
+			dwPaste.Paste()
+		Case DropDownListBox!
+			ddlbPaste = goObject
+			If ddlbPaste.AllowEdit = TRUE Then
+				ddlbPaste.Paste()
+			End If
+		Case EditMask!
+			emPaste = goObject
+			emPaste.Paste()
+		Case MultiLineEdit!
+			mlePaste = goObject
+			mlePaste.Paste()
+		Case SingleLineEdit!
+			slePaste = goObject
+			slePaste.Paste()
+		Case OLEControl!
+			olePaste = goObject
+			olePaste.Paste()
+	End Choose
+End If
+
+end event
+
+on m_pegar.create
+this.Text="&Pegar~tCtrl+V"
+this.Microhelp="Pega el Texto Seleccionado"
+this.Shortcut=342
+end on
+
+type m_limpiar from menu within m_edicion
+end type
+
+event clicked;GraphicObject goObject
+DataWindow dwClear
+DropDownListBox ddlbClear
+EditMask emClear
+MultiLineEdit mleClear
+OLEControl oleClear
+SingleLineEdit sleClear
+
+goObject = GetFocus()		
+
+If Not IsNull( goObject) Then
+	Choose Case TypeOf( goObject)
+		Case DataWindow!
+			dwClear = goObject
+			dwClear.Clear()
+		Case DropDownListBox!
+			ddlbClear = goObject
+			If ddlbClear.AllowEdit = TRUE Then
+				ddlbClear.Clear()
+			End If
+		Case EditMask!
+			emClear = goObject
+			emClear.Clear()
+		Case MultiLineEdit!
+			mleClear = goObject
+			mleClear.Clear()
+		Case SingleLineEdit!
+			sleClear = goObject
+			sleClear.Clear()
+		Case OLEControl!
+			oleClear = goObject
+			oleClear.Clear()
+	End Choose
+End If
+
+end event
+
+on m_limpiar.create
+this.Text="&Limpiar~tDel"
+this.Microhelp="Borra el Texto Seleccionado"
+this.Shortcut=46
+end on
+
+type m_panel from menu within m_a_sheet
+m_nuevo m_nuevo
+m_copiar1 m_copiar1
+m_eliminar m_eliminar
+m_-4 m_-4
+m_vericonos m_vericonos
+m_-5 m_-5
+m_cerrar1 m_cerrar1
+end type
+
+on m_panel.create
+this.Text="&RB_Panel"
+this.m_nuevo=create m_nuevo
+this.m_copiar1=create m_copiar1
+this.m_eliminar=create m_eliminar
+this.m_-4=create m_-4
+this.m_vericonos=create m_vericonos
+this.m_-5=create m_-5
+this.m_cerrar1=create m_cerrar1
+this.Item[]={this.m_nuevo, &
+this.m_copiar1, &
+this.m_eliminar, &
+this.m_-4, &
+this.m_vericonos, &
+this.m_-5, &
+this.m_cerrar1}
+end on
+
+on m_panel.destroy
+destroy(this.m_nuevo)
+destroy(this.m_copiar1)
+destroy(this.m_eliminar)
+destroy(this.m_-4)
+destroy(this.m_vericonos)
+destroy(this.m_-5)
+destroy(this.m_cerrar1)
+end on
+
+type m_nuevo from menu within m_panel
+m_usuario m_usuario
+m_grupo m_grupo
+end type
+
+on m_nuevo.create
+this.Text="&Nuevo"
+this.m_usuario=create m_usuario
+this.m_grupo=create m_grupo
+this.Item[]={this.m_usuario, &
+this.m_grupo}
+end on
+
+on m_nuevo.destroy
+destroy(this.m_usuario)
+destroy(this.m_grupo)
+end on
+
+type m_usuario from menu within m_nuevo
+end type
+
+on m_usuario.create
+this.Text="&Usuario"
+this.Microhelp="Crea un Nuevo Usuario"
+end on
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_new_ug("U")
+end event
+
+type m_grupo from menu within m_nuevo
+end type
+
+on m_grupo.create
+this.Text="&Grupo"
+this.Microhelp="Crea un Nuevo Grupo"
+end on
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_new_ug("G")
+end event
+
+type m_copiar1 from menu within m_panel
+m_usuario1 m_usuario1
+m_grupo1 m_grupo1
+end type
+
+on m_copiar1.create
+this.Text="C&opiar"
+this.m_usuario1=create m_usuario1
+this.m_grupo1=create m_grupo1
+this.Item[]={this.m_usuario1, &
+this.m_grupo1}
+end on
+
+on m_copiar1.destroy
+destroy(this.m_usuario1)
+destroy(this.m_grupo1)
+end on
+
+type m_usuario1 from menu within m_copiar1
+end type
+
+on m_usuario1.create
+this.Text="&Usuario"
+this.Microhelp="Copia los Accesos del Usuario Seleccionado"
+end on
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_copy_ug("U")
+end event
+
+type m_grupo1 from menu within m_copiar1
+end type
+
+on m_grupo1.create
+this.Text="&Grupo"
+this.Microhelp="Copia los Accesos del Grupo Seleccionado"
+end on
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_copy_ug("G")
+end event
+
+type m_eliminar from menu within m_panel
+m_usuario2 m_usuario2
+m_grupo2 m_grupo2
+end type
+
+on m_eliminar.create
+this.Text="&Inactivar"
+this.m_usuario2=create m_usuario2
+this.m_grupo2=create m_grupo2
+this.Item[]={this.m_usuario2, &
+this.m_grupo2}
+end on
+
+on m_eliminar.destroy
+destroy(this.m_usuario2)
+destroy(this.m_grupo2)
+end on
+
+type m_usuario2 from menu within m_eliminar
+end type
+
+on m_usuario2.create
+this.Text="&Usuario"
+this.Microhelp="Elimina al Usuario Seleccionado"
+end on
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_del_ug("U")
+end event
+
+type m_grupo2 from menu within m_eliminar
+end type
+
+on m_grupo2.create
+this.Text="&Grupo"
+this.Microhelp="Elimina el Grupo Seleccionado"
+end on
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_del_ug("G")
+end event
+
+type m_-4 from menu within m_panel
+end type
+
+on m_-4.create
+this.Text="-"
+end on
+
+type m_vericonos from menu within m_panel
+m_grandes m_grandes
+m_pequeos m_pequeos
+m_lista m_lista
+m_detalles m_detalles
+end type
+
+on m_vericonos.create
+this.Text="Ver &Iconos"
+this.m_grandes=create m_grandes
+this.m_pequeos=create m_pequeos
+this.m_lista=create m_lista
+this.m_detalles=create m_detalles
+this.Item[]={this.m_grandes, &
+this.m_pequeos, &
+this.m_lista, &
+this.m_detalles}
+end on
+
+on m_vericonos.destroy
+destroy(this.m_grandes)
+destroy(this.m_pequeos)
+destroy(this.m_lista)
+destroy(this.m_detalles)
+end on
+
+type m_grandes from menu within m_vericonos
+end type
+
+on m_grandes.create
+this.Text="&Grandes"
+this.Microhelp="Vista de Iconos Grandes"
+end on
+
+event clicked;//mf_check_view(this)
+
+ParentWindow.Dynamic Trigger Event ue_ver("G")
+end event
+
+type m_pequeos from menu within m_vericonos
+end type
+
+on m_pequeos.create
+this.Text="&Pequeños"
+this.Microhelp="Vista de Iconos Pequeños"
+end on
+
+event clicked;//mf_check_view(this)
+
+ParentWindow.Dynamic Trigger Event ue_ver("P")
+end event
+
+type m_lista from menu within m_vericonos
+end type
+
+on m_lista.create
+this.Text="&Lista"
+this.Microhelp="Vista de Iconos en Lista"
+end on
+
+event clicked;//mf_check_view(this)
+
+ParentWindow.Dynamic Trigger Event ue_ver("L")
+end event
+
+type m_detalles from menu within m_vericonos
+end type
+
+on m_detalles.create
+this.Text="&Detalles"
+this.Microhelp="Vista de Iconos con Detalles"
+end on
+
+event clicked;//mf_check_view(this)
+
+ParentWindow.Dynamic Trigger Event ue_ver("D")
+end event
+
+type m_-5 from menu within m_panel
+end type
+
+on m_-5.create
+this.Text="-"
+end on
+
+type m_cerrar1 from menu within m_panel
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_close")
+end event
+
+on m_cerrar1.create
+this.Text="&Cerrar~tAlt+F4"
+this.Microhelp="Cierra la Ventana"
+this.Shortcut=627
+end on
+
+type m_m_panel from menu within m_a_sheet
+m_nuevo1 m_nuevo1
+m_copiar2 m_copiar2
+m_eliminar1 m_eliminar1
+end type
+
+on m_m_panel.create
+this.Text="&M_Panel"
+this.m_nuevo1=create m_nuevo1
+this.m_copiar2=create m_copiar2
+this.m_eliminar1=create m_eliminar1
+this.Item[]={this.m_nuevo1, &
+this.m_copiar2, &
+this.m_eliminar1}
+end on
+
+on m_m_panel.destroy
+destroy(this.m_nuevo1)
+destroy(this.m_copiar2)
+destroy(this.m_eliminar1)
+end on
+
+type m_nuevo1 from menu within m_m_panel
+m_usuario3 m_usuario3
+m_grupo3 m_grupo3
+end type
+
+on m_nuevo1.create
+this.Text="&Nuevo"
+this.m_usuario3=create m_usuario3
+this.m_grupo3=create m_grupo3
+this.Item[]={this.m_usuario3, &
+this.m_grupo3}
+end on
+
+on m_nuevo1.destroy
+destroy(this.m_usuario3)
+destroy(this.m_grupo3)
+end on
+
+type m_usuario3 from menu within m_nuevo1
+end type
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_new_ug("U")
+end event
+
+on m_usuario3.create
+this.Text="&Usuario"
+this.Microhelp="Crea un Nuevo Usuario"
+end on
+
+type m_grupo3 from menu within m_nuevo1
+end type
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_new_ug("G")
+end event
+
+on m_grupo3.create
+this.Text="&Grupo"
+this.Microhelp="Crea un Nuevo Grupo"
+end on
+
+type m_copiar2 from menu within m_m_panel
+m_usuario4 m_usuario4
+m_grupo4 m_grupo4
+end type
+
+on m_copiar2.create
+this.Text="C&opiar"
+this.m_usuario4=create m_usuario4
+this.m_grupo4=create m_grupo4
+this.Item[]={this.m_usuario4, &
+this.m_grupo4}
+end on
+
+on m_copiar2.destroy
+destroy(this.m_usuario4)
+destroy(this.m_grupo4)
+end on
+
+type m_usuario4 from menu within m_copiar2
+end type
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_copy_ug("U")
+end event
+
+on m_usuario4.create
+this.Text="&Usuario"
+this.Microhelp="Copia los Accesos del Usuario Seleccionado"
+end on
+
+type m_grupo4 from menu within m_copiar2
+end type
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_copy_ug("G")
+end event
+
+on m_grupo4.create
+this.Text="&Grupo"
+this.Microhelp="Copia los Accesos del Grupo Seleccionado"
+end on
+
+type m_eliminar1 from menu within m_m_panel
+m_usuario5 m_usuario5
+m_grupo5 m_grupo5
+end type
+
+on m_eliminar1.create
+this.Text="&Inactivar"
+this.m_usuario5=create m_usuario5
+this.m_grupo5=create m_grupo5
+this.Item[]={this.m_usuario5, &
+this.m_grupo5}
+end on
+
+on m_eliminar1.destroy
+destroy(this.m_usuario5)
+destroy(this.m_grupo5)
+end on
+
+type m_usuario5 from menu within m_eliminar1
+end type
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_del_ug("U")
+end event
+
+on m_usuario5.create
+this.Text="&Usuario"
+this.Microhelp="Elimina al Usuario Seleccionado"
+end on
+
+type m_grupo5 from menu within m_eliminar1
+end type
+
+event clicked;ParentWindow.Dynamic Trigger Event ue_del_ug("G")
+end event
+
+on m_grupo5.create
+this.Text="&Grupo"
+this.Microhelp="Elimina al Grupo Seleccionado"
+end on
+
+type m_entidad_b from menu within m_a_sheet
+m_nuevo2 m_nuevo2
+m_borrar1 m_borrar1
+m_-6 m_-6
+m_modificar m_modificar
+m_cerrar2 m_cerrar2
+end type
+
+on m_entidad_b.create
+this.Text="Entidad_B"
+this.m_nuevo2=create m_nuevo2
+this.m_borrar1=create m_borrar1
+this.m_-6=create m_-6
+this.m_modificar=create m_modificar
+this.m_cerrar2=create m_cerrar2
+this.Item[]={this.m_nuevo2, &
+this.m_borrar1, &
+this.m_-6, &
+this.m_modificar, &
+this.m_cerrar2}
+end on
+
+on m_entidad_b.destroy
+destroy(this.m_nuevo2)
+destroy(this.m_borrar1)
+destroy(this.m_-6)
+destroy(this.m_modificar)
+destroy(this.m_cerrar2)
+end on
+
+type m_nuevo2 from menu within m_entidad_b
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_insertar")
+end event
+
+on m_nuevo2.create
+this.Text="&Nuevo"
+end on
+
+type m_borrar1 from menu within m_entidad_b
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_borrar")
+end event
+
+on m_borrar1.create
+this.Text="&Borrar"
+end on
+
+type m_-6 from menu within m_entidad_b
+end type
+
+on m_-6.create
+this.Text="-"
+end on
+
+type m_modificar from menu within m_entidad_b
+end type
+
+on m_modificar.create
+this.Text="&Modificar"
+end on
+
+event clicked;ParentWindow.TriggerEvent("ue_modificar")
+end event
+
+type m_cerrar2 from menu within m_entidad_b
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_close")
+end event
+
+on m_cerrar2.create
+this.Text="&Cerrar"
+end on
+
+type m_contabilidad from menu within m_a_sheet
+m_calendario m_calendario
+end type
+
+on m_contabilidad.create
+this.Text="Contabilidad"
+this.m_calendario=create m_calendario
+this.Item[]={this.m_calendario}
+end on
+
+on m_contabilidad.destroy
+destroy(this.m_calendario)
+end on
+
+type m_calendario from menu within m_contabilidad
+end type
+
+event clicked;ParentWindow.TriggerEvent("ue_calendario")
+end event
+
+on m_calendario.create
+this.Text="Calendario"
+end on
+

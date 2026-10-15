@@ -1,0 +1,7 @@
+﻿//objectcomments Para Enviar y/o Recibir el producto, bodega y la ubicacion de un producto
+global type str_fa_prod_bodega_ubica from structure
+	string		producto
+	string		bodega
+	string		ubicacion
+end type
+

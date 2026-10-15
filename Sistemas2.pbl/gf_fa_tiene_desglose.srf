@@ -1,0 +1,38 @@
+﻿//objectcomments Verifica si existe existencia (desglosada) de un PRODUCTO en una BODEGA - UBICACIÓN
+global type gf_fa_tiene_desglose from function_object
+end type
+
+forward prototypes
+global function boolean gf_fa_tiene_desglose (string as_bodega, string as_ubic, string as_producto)
+end prototypes
+
+global function boolean gf_fa_tiene_desglose (string as_bodega, string as_ubic, string as_producto);// Verifica si existe existencia de un PRODUCTO en una BODEGA - UBICACIÓN
+//
+
+Boolean		lb_rtn	
+Integer		li_cantidad
+ 
+ 
+ SELECT COUNT (*)  
+    INTO :li_cantidad  
+    FROM inmbodet  
+   WHERE ( inmbodet.mbde_g_financiero = :str.g_financiero ) AND  
+         ( inmbodet.mbde_empresa = :str.empresa ) AND  
+         ( inmbodet.mbde_bodega = :as_bodega ) AND  
+         ( inmbodet.mbde_ubicacion = :as_ubic ) AND  
+         ( inmbodet.mbde_producto = :as_producto )   ;
+		if sqlca.sqlcode = -1 then
+			mensaje("Aviso","Error al Validar Existencia del Producto",sqlca.sqlerrtext)
+		end if
+
+If li_cantidad > 0 Then 
+	lb_rtn = True
+//	MessageBox ('gotcha','I win!!!')
+Else 
+	lb_rtn = False
+//	MessageBox ('ops...','try again.~n' + as_bodega + '~n' + as_ubic +  '~n' + as_producto)
+End If
+
+Return lb_rtn
+end function
+

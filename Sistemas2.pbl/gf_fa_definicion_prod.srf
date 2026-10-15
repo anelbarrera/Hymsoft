@@ -1,0 +1,27 @@
+﻿//objectcomments Obtiene la definición (desglose, Standar, serie) del Producto
+global type gf_fa_definicion_prod from function_object
+end type
+
+forward prototypes
+global function integer gf_fa_definicion_prod (string as_codigo_prod)
+end prototypes
+
+global function integer gf_fa_definicion_prod (string as_codigo_prod);Integer	li_definicion
+ 
+ SELECT prod_definicion
+    INTO :li_definicion
+    FROM inmprodu
+   WHERE ( prod_g_financiero = :str.g_financiero ) AND
+         ( prod_empresa = :str.empresa ) AND
+         ( prod_producto = :as_codigo_prod );
+			
+	if sqlca.sqlcode = -1 then
+		li_definicion = sqlca.sqlcode
+		gf_mensaje("Atención","Error al Seleccionar la Definicion del Producto "+sqlca.sqlerrtext,1,1,"E")
+		return -1
+	end if
+
+ Return(li_definicion)
+ 
+end function
+

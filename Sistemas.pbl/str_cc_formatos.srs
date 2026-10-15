@@ -1,0 +1,38 @@
+﻿global type str_cc_formatos from structure
+	string		vienede
+	string		tipo_formato
+	string		reporte_o_para
+	string		cod_formato
+	string		datawindow
+	long		secuencia
+	integer		anio
+	integer		largo_doc
+	integer		ancho_doc
+	boolean		aceptar
+	string		formato_pb_usuario
+	string		transaccion
+	datawindow		dw_object
+	string		secuencia_s
+	string		tipo_numeracion
+	decimal { 2 }		monto
+	string		sub_transaccion
+	integer		tipo_bd
+	integer		grupo
+	integer		empresa
+	datetime		fecha_reg
+	date		fecha_tran
+	long		tercero
+	boolean		imprimir_directo
+	string		cuenta_banco
+	integer		banco
+	string		documento
+	string		referencia
+	string		cuenta
+	datetime		fecha1
+	datetime		fecha2
+	string		nombre
+	string		ruc
+	string		dv
+	string		aplicacion
+end type
+

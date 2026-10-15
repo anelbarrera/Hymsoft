@@ -1,0 +1,16 @@
+﻿global type str_br_general from structure
+	string		variable1
+	string		variable2
+	string		variable3
+	long		numero1
+	long		numero2
+	long		numero3
+	datetime		fecha1
+	datetime		fecha2
+	datetime		fecha3
+	decimal { 2 }		decimal1
+	decimal { 2 }		decimal2
+	decimal { 2 }		decimal3
+	decimal { 2 }		decimal4
+end type
+

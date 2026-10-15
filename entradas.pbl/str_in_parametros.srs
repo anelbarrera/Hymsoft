@@ -1,0 +1,8 @@
+﻿global type str_in_parametros from structure
+	string		transaccion
+	string		movim
+	integer		year
+	string		concepto
+	string		codigo_menu_acc
+end type
+

@@ -1,0 +1,57 @@
+﻿//objectcomments Suma cantidad de dias a una fecha inicial el argumento "VALOR" que contiene la catidad de dias que se le quiere sumar a una fecha y para ello debe tener la fecha en el argumento "FECHA" y retorna un valor de tipo "DATE" contenido en el argumento "FECH䅄⩔츀
+global type gf_suma_fecha_valor from function_object
+end type
+
+forward prototypes
+global function date gf_suma_fecha_valor (integer valor, date fecha)
+end prototypes
+
+global function date gf_suma_fecha_valor (integer valor, date fecha);// "gf_suma_fecha_valor"   Suma cantidad de días a una fecha inicial 
+// el argumento "VALOR" contiene la cantidad de días que se le quieren sumar
+// a una fecha y para ello debe tener la fecha en el argumento "FECHA" y
+// retorna un valor de tipo "DATE" contenido en el argumento "FECHA"
+
+int valor_t
+integer ii_diferencia, ii_entero, ii_month, ii_year,ii_day,ii_day2
+
+valor_t = 0
+
+FOR valor_t=1 TO valor
+	ii_month = month(fecha)
+	ii_year = year(fecha)
+	ii_day = day(fecha)
+
+// Función para retornar el último día del mes contenido en "ii_Day2".
+// Ejm.: Febrero 28 ó 29 si es bisiesto, 30 noviembre, 31 diciembre, etc.
+
+	ii_Day2 = gf_suma_fecha (ii_month, ii_year)
+	
+	IF ii_day > ii_day2 then
+		ii_diferencia = ii_day - ii_day2
+		ii_day = ii_diferencia
+	 if ii_month = 12 then
+		ii_month = 1
+		ii_year  = ii_year  + 1
+	 else
+		ii_month = ii_month + 1
+	 end if
+	ELSE
+	 if ii_day = ii_day2 then
+		ii_day =  1
+	 	if ii_month = 12 then
+			ii_month = 1
+			ii_year  = ii_year  + 1
+	  	else
+			ii_month = ii_month + 1
+	 end if
+	 else
+	 	ii_day = ii_day + 1
+	 end if 
+	END IF
+	FECHA = date(ii_year,ii_month,ii_day)
+next
+
+return (FECHA)
+
+end function
+

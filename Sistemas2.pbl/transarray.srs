@@ -1,0 +1,5 @@
+﻿global type transarray from structure
+	unsignedinteger		wlanguageid
+	unsignedinteger		wcharacterset
+end type
+

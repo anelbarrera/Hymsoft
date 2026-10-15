@@ -1,0 +1,4 @@
+﻿{
+  // Sets whether to enable authentication for PowerServer APIs
+  "PowerServer:EnableAuthentication": false
+}

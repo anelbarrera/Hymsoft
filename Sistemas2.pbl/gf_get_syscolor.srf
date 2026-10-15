@@ -1,0 +1,16 @@
+﻿global type gf_get_syscolor from function_object
+end type
+
+forward prototypes
+global function long gf_get_syscolor (readonly integer ai_idx)
+end prototypes
+
+global function long gf_get_syscolor (readonly integer ai_idx);u_external_function	lu_ef
+
+
+
+f_create_external_func_uo (lu_ef)
+
+Return lu_ef.uf_getsyscolor(ai_idx)
+end function
+

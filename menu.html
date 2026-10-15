@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Outlook PB 2025</title>
+<style>
+  :root {
+    --bg-main: #0f172a;
+    --bg-category: #1e293b;
+    --bg-hover: #334155;
+    --bg-active: rgba(56, 189, 248, 0.15);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #38bdf8;
+    --border-color: #334155;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Scrollbar personalizado */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-main); }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+  /* Barra de Búsqueda Rápida */
+  .search-container {
+    padding: 12px;
+    background: var(--bg-main);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .search-box {
+    width: 100%;
+    padding: 8px 12px 8px 32px;
+    background: #1e293b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 8px center / 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box:focus {
+    border-color: var(--accent);
+  }
+
+  /* Botón de Categoría */
+  .category-btn {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg-category);
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 12.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease;
+  }
+
+  .category-btn:hover {
+    background: #283548;
+  }
+
+  .cat-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chevron {
+    font-size: 10px;
+    color: var(--text-secondary);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .category-btn.open .chevron {
+    transform: rotate(90deg);
+    color: var(--accent);
+  }
+
+  /* Animación CSS con Grid para transiciones dinámicas */
+  .submenu-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #090d16;
+  }
+
+  .submenu-wrapper.open {
+    grid-template-rows: 1fr;
+  }
+
+  .submenu-content {
+    overflow: hidden;
+  }
+
+  /* Elementos de Menú / Opciones */
+  .menu-item {
+    padding: 9px 16px 9px 30px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.18s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .menu-item:hover {
+    background: var(--bg-hover);
+    color: #fff;
+    padding-left: 36px;
+  }
+
+  .menu-item.active {
+    background: var(--bg-active);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .item-icon {
+    font-size: 14px;
+    width: 18px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <div class="search-container">
+    <input type="text" id="txtSearch" class="search-box" placeholder="Buscar módulo u opción..." oninput="filterMenu(this.value)">
+  </div>
+
+  <!-- 1. FACTURAS Y ENTRADAS -->
+  <button class="category-btn open" onclick="toggleCategory(this)">
+    <span class="cat-title">🧾 Generación de Facturas y Entradas</span>
+    <span class="chevron">▶</span>
+  </button>
+  <div class="submenu-wrapper open">
+    <div class="submenu-content">
+      <div class="menu-item" onclick="openWindow('w_captura', this)"><span class="item-icon">📄</span>Captura</div>
+      <div class="menu-item" onclick="openWindow('w_fac_directa', this)"><span class="item-icon">📝</span>Orden de Factura Directa</div>
+      <div class="menu-item" onclick="openWindow('w_reg_transacciones', this)"><span class="item-icon">💳</span>Registro de Transacciones</div>
+      <div class="menu-item" onclick="openWindow('w_entrada_mercancia', this)"><span class="item-icon">📦</span>Entrada de Mercancía</div>
+      <div class="menu-item" onclick="openWindow('w_cargos_morosidad', this)"><span class="item-icon">⚠️</span>Cargos por Morosidad</div>
+      <div class="menu-item" onclick="openWindow('w_pedidos', this)"><span class="item-icon">🛒</span>Captura de Pedidos</div>
+      <div class="menu-item" onclick="openWindow('w_cotizaciones', this)"><span class="item-icon">📋</span>Cotizaciones</div>
+      <div class="menu-item" onclick="openWindow('w_orden_compra', this)"><span class="item-icon">📑</span>Orden de Compra</div>
+      <div class="menu-item" onclick="openWindow('w_fac_prov_transito', this)"><span class="item-icon">🚚</span>Factura Proveedor-Transito</div>
+      <div class="menu-item" onclick="openWindow('w_proformas_inex', this)"><span class="item-icon">🚫</span>Proformas - Productos Inexistentes</div>
+    </div>
+  </div>
+
+  <!-- 2. REPORTES -->
+  <button class="category-btn" onclick="toggleCategory(this)">
+    <span class="cat-title">📊 Reportes</span>
+    <span class="chevron">▶</span>
+  </button>
+  <div class="submenu-wrapper">
+    <div class="submenu-content">
+      <div class="menu-item" onclick="openWindow('w_rep_antiguedad_saldos', this)"><span class="item-icon">⏳</span>Antigüedad de Saldos</div>
+      <div class="menu-item" onclick="openWindow('w_rep_ventas', this)"><span class="item-icon">📈</span>Ventas</div>
+      <div class="menu-item" onclick="openWindow('w_rep_inventarios', this)"><span class="item-icon">📋</span>Informe de Inventarios</div>
+      <div class="menu-item" onclick="openWindow('w_rep_entradas', this)"><span class="item-icon">📥</span>Informe de Entradas</div>
+      <div class="menu-item" onclick="openWindow('w_rep_saldos_cli', this)"><span class="item-icon">👥</span>Saldos de Clientes</div>
+      <div class="menu-item" onclick="openWindow('w_rep_trans_cli', this)"><span class="item-icon">🔄</span>Transacciones de Clientes</div>
+      <div class="menu-item" onclick="openWindow('w_rep_transferencias', this)"><span class="item-icon">🔀</span>Informe de Transferencias</div>
+      <div class="menu-item" onclick="openWindow('w_rep_ajustes', this)"><span class="item-icon">⚖️</span>Informe de Ajustes</div>
+      <div class="menu-item" onclick="openWindow('w_rep_ordenes', this)"><span class="item-icon">📑</span>Informe de Ordenes</div>
+      <div class="menu-item" onclick="openWindow('w_rep_rotacion_inv', this)"><span class="item-icon">🔄</span>Rotación del Inventario</div>
+      <div class="menu-item" onclick="openWindow('w_rep_antiguedad_inv', this)"><span class="item-icon">📦</span>Antigüedad de Inventario</div>
+      <div class="menu-item" onclick="openWindow('w_rep_movimientos', this)"><span class="item-icon">📊</span>Informe de Movimiento</div>
+      <div class="menu-item" onclick="openWindow('w_rep_sugerido_compras', this)"><span class="item-icon">💡</span>Sugerido de Compras</div>
+      <div class="menu-item" onclick="openWindow('w_rep_prod_mas_vendidos', this)"><span class="item-icon">⭐</span>Productos Más Vendidos</div>
+      <div class="menu-item" onclick="openWindow('w_rep_catalogos', this)"><span class="item-icon">📚</span>Catálogos</div>
+    </div>
+  </div>
+
+  <!-- 3. CAPTURA DE TRANSACCIONES -->
+  <button class="category-btn" onclick="toggleCategory(this)">
+    <span class="cat-title">💳 Captura de Transacciones</span>
+    <span class="chevron">▶</span>
+  </button>
+  <div class="submenu-wrapper">
+    <div class="submenu-content">
+      <div class="menu-item" onclick="openWindow('w_tra_ajustes_inv', this)"><span class="item-icon">🛠️</span>Ajustes de Inventarios</div>
+      <div class="menu-item" onclick="openWindow('w_tra_proveedores', this)"><span class="item-icon">🏭</span>Proveedores</div>
+      <div class="menu-item" onclick="openWindow('w_tra_diarios', this)"><span class="item-icon">📖</span>Comprobantes de Diarios</div>
+      <div class="menu-item" onclick="openWindow('w_tra_caja', this)"><span class="item-icon">💵</span>Caja</div>
+      <div class="menu-item" onclick="openWindow('w_tra_bancarias', this)"><span class="item-icon">🏦</span>Bancarias</div>
+      <div class="menu-item" onclick="openWindow('w_tra_ajustes_caja', this)"><span class="item-icon">🪙</span>Ajustes de Caja</div>
+      <div class="menu-item" onclick="openWindow('w_tra_transf_bodega', this)"><span class="item-icon">🚚</span>Transferencia-Bodega</div>
+      <div class="menu-item" onclick="openWindow('w_tra_depositos_bancarios', this)"><span class="item-icon">🏧</span>Depósitos Bancarios</div>
+    </div>
+  </div>
+
+  <!-- 4. CONSULTA DE MOVIMIENTOS -->
+  <button class="category-btn" onclick="toggleCategory(this)">
+    <span class="cat-title">🔍 Consulta de Movimientos</span>
+    <span class="chevron">▶</span>
+  </button>
+  <div class="submenu-wrapper">
+    <div class="submenu-content">
+      <div class="menu-item" onclick="openWindow('w_con_productos', this)"><span class="item-icon">🏷️</span>Productos</div>
+      <div class="menu-item" onclick="openWindow('w_con_kardex', this)"><span class="item-icon">🗂️</span>Kardex</div>
+      <div class="menu-item" onclick="openWindow('w_con_hist_ventas_cli', this)"><span class="item-icon">📜</span>Historial de Ventas Cliente</div>
+      <div class="menu-item" onclick="openWindow('w_con_est_cta_cli', this)"><span class="item-icon">👤</span>Estado de Cuentas - Clientes</div>
+      <div class="menu-item" onclick="openWindow('w_con_facturas', this)"><span class="item-icon">🧾</span>Facturas</div>
+      <div class="menu-item" onclick="openWindow('w_con_trans_cli', this)"><span class="item-icon">↔️</span>Transacciones de Clientes</div>
+      <div class="menu-item" onclick="openWindow('w_con_reservados_ref', this)"><span class="item-icon">🔖</span>Reservados por Referencia</div>
+      <div class="menu-item" onclick="openWindow('w_con_est_cta_prov', this)"><span class="item-icon">📑</span>Estado Cuenta - Proveedores</div>
+      <div class="menu-item" onclick="openWindow('w_con_trans_prov', this)"><span class="item-icon">🔃</span>Transacciones Proveedores</div>
+      <div class="menu-item" onclick="openWindow('w_con_conciliacion', this)"><span class="item-icon">⚖️</span>Conciliación Bancaria</div>
+      <div class="menu-item" onclick="openWindow('w_con_diarios', this)"><span class="item-icon">📒</span>Comprobantes de Diarios</div>
+      <div class="menu-item" onclick="openWindow('w_con_saldos_bancarios', this)"><span class="item-icon">💰</span>Saldos Bancarios</div>
+    </div>
+  </div>
+
+  <!-- 5. SISTEMA Y MANTENIMIENTO -->
+  <button class="category-btn" onclick="toggleCategory(this)">
+    <span class="cat-title">⚙️ Sistema y Mantenimiento</span>
+    <span class="chevron">▶</span>
+  </button>
+  <div class="submenu-wrapper">
+    <div class="submenu-content">
+      <div class="menu-item" onclick="openWindow('w_sis_parametros', this)"><span class="item-icon">⚙️</span>Parámetros</div>
+      <div class="menu-item" onclick="openWindow('w_sis_clientes', this)"><span class="item-icon">👥</span>Clientes</div>
+      <div class="menu-item" onclick="openWindow('w_productos', this)"><span class="item-icon">🏷️</span>Productos</div>
+      <div class="menu-item" onclick="openWindow('w_sis_proveedores', this)"><span class="item-icon">🏭</span>Proveedores</div>
+      <div class="menu-item" onclick="openWindow('w_sis_param_gral', this)"><span class="item-icon">🔧</span>Parámetros Generales</div>
+      <div class="menu-item" onclick="openWindow('w_sis_plan_cuentas', this)"><span class="item-icon">🗂️</span>Plan de Cuentas</div>
+      <div class="menu-item" onclick="openWindow('w_sis_param_inv', this)"><span class="item-icon">📦</span>Parámetros de Inventario</div>
+      <div class="menu-item" onclick="openWindow('w_sis_param_ventas', this)"><span class="item-icon">🛒</span>Parámetros de Ventas</div>
+      <div class="menu-item" onclick="openWindow('w_sis_usuarios', this)"><span class="item-icon">👤➕</span>Adicionar Usuarios</div>
+      <div class="menu-item" onclick="openWindow('w_sis_directorio', this)"><span class="item-icon">📁</span>Directorio</div>
+      <div class="menu-item" onclick="openWindow('w_sis_asignar_fotos', this)"><span class="item-icon">🖼️</span>Asignar Fotos</div>
+    </div>
+  </div>
+
+  <!-- 6. CONTABILIDAD -->
+  <button class="category-btn" onclick="toggleCategory(this)">
+    <span class="cat-title">🏛️ Contabilidad</span>
+    <span class="chevron">▶</span>
+  </button>
+  <div class="submenu-wrapper">
+    <div class="submenu-content">
+      <div class="menu-item" onclick="openWindow('w_cnt_trans_bancarias', this)"><span class="item-icon">🏦</span>Transacciones Bancarias</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_morosidad_prov', this)"><span class="item-icon">⏳</span>Morosidad a Proveedores</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_saldos_prov', this)"><span class="item-icon">💼</span>Saldos de Proveedores</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_trans_prov', this)"><span class="item-icon">🔄</span>Transacciones Proveedores</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_hist_cuentas', this)"><span class="item-icon">📜</span>Histórico de Cuentas</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_balance_prueba', this)"><span class="item-icon">⚖️</span>Balances de Prueba</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_tarjeta_visa', this)"><span class="item-icon">💳</span>Tarjeta Visa</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_aux_cuentas', this)"><span class="item-icon">📑</span>Auxiliares de Cuentas</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_estados_financieros', this)"><span class="item-icon">📊</span>Estados F.</div>
+      <div class="menu-item" onclick="openWindow('w_cnt_mayor_general', this)"><span class="item-icon">📖</span>Mayor General</div>
+    </div>
+  </div>
+
+<script>
+  // Transición suave de Acordeón
+  function toggleCategory(button) {
+    const wrapper = button.nextElementSibling;
+    const isOpen = wrapper.classList.contains('open');
+
+    // Cerrar todas las categorías
+    document.querySelectorAll('.submenu-wrapper').forEach(w => w.classList.remove('open'));
+    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('open'));
+
+    // Abrir la seleccionada si estaba cerrada
+    if (!isOpen) {
+      wrapper.classList.add('open');
+      button.classList.add('open');
+    }
+  }
+
+  // Notificar a PowerBuilder y marcar selección activa
+  function openWindow(windowName, element) {
+    document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+    element.classList.add('active');
+
+    // Cambiar hash para disparar el evento AddressChange en PowerBuilder
+    window.location.hash = windowName + '&t=' + Date.now();
+  }
+
+  // Filtrado reactivo en tiempo real
+  function filterMenu(query) {
+    const q = query.toLowerCase().trim();
+    const items = document.querySelectorAll('.menu-item');
+    const categories = document.querySelectorAll('.category-btn');
+
+    if (q === '') {
+      items.forEach(item => item.style.display = 'flex');
+      categories.forEach(cat => cat.style.display = 'flex');
+      return;
+    }
+
+    categories.forEach(cat => {
+      const wrapper = cat.nextElementSibling;
+      const subItems = wrapper.querySelectorAll('.menu-item');
+      let catHasMatch = false;
+
+      subItems.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        if (text.includes(q)) {
+          item.style.display = 'flex';
+          catHasMatch = true;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (catHasMatch) {
+        cat.style.display = 'flex';
+        wrapper.classList.add('open');
+        cat.classList.add('open');
+      } else {
+        cat.style.display = 'none';
+        wrapper.classList.remove('open');
+        cat.classList.remove('open');
+      }
+    });
+  }
+</script>
+</body>
+</html>

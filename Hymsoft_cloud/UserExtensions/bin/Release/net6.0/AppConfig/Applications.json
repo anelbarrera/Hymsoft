@@ -1,0 +1,44 @@
+{
+  "Applications": {
+    "hymsoft_cloud": {
+      "CloudTransactions": {
+        "SQLCA": {
+          "CacheName": "hymsoft"
+        }
+      },
+      "Transaction": {
+        "Timeout": 120,
+        "TransactionException": true
+      },
+      "Session": {
+        "Timeout": 3600
+      },
+      "Request": {
+        "Timeout": 3600
+      },
+      "RunMode": 0,
+      "MaxSPCache": 50
+    }
+  },
+  "Connections": {
+    "Default": {
+      "hymsoft": {
+        "ConnectionType": "SqlServer",
+        "Database": "UNIONZL",
+        "Host": "44.218.195.47",
+        "Port": 1433,
+        "UserID": "sa",
+        "Password": "eyJQYXlsb2FkIjoiZjRJVldiVWxMdTUzVjU5c2pCT0ZHZz09IiwiVGltZXN0YW1wIjoxNzI1OTEwNzEyLCJTaWduYXR1cmUiOiJNYlRDTEdTSFx1MDAyQlo3b3dwWG05N1x1MDAyQkdUM0kzL0xiQ01PYVhkRlhjcDVWWHBESk5GcGY2L0owZ2R3a05NWm1JZUJabFZUak1KSFdRTVpCTjNuR1dEc0M2bVE9PSJ9",
+        "EnablePooling": true,
+        "MinPoolSize": 0,
+        "MaxPoolSize": 100,
+        "ConnectionLifetime": 0,
+        "ConnectionTimeout": 15,
+        "CommandTimeout": 30,
+        "SecurityOptions": "encrypt=False",
+        "OtherOptions": null,
+        "DynamicConnection": false
+      }
+    }
+  }
+}

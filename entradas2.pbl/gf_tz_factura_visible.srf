@@ -1,0 +1,80 @@
+﻿global type gf_tz_factura_visible from function_object
+end type
+
+forward prototypes
+global subroutine gf_factura_visible (integer ai_limite, decimal ld_total_valor, string ls_costo, decimal ld_flete, decimal ld_seguro, decimal ld_otros, decimal ld_tot_final, string is_no_facturas, ref datawindow ldw_3)
+global subroutine gf_tz_factura_visible (integer ai_limite, decimal ld_total_valor, string ls_costo, decimal ld_flete, decimal ld_seguro, decimal ld_otros, decimal ld_tot_final, string is_no_facturas, ref datawindow ldw_3, integer il_rowcount)
+end prototypes
+
+global subroutine gf_factura_visible (integer ai_limite, decimal ld_total_valor, string ls_costo, decimal ld_flete, decimal ld_seguro, decimal ld_otros, decimal ld_tot_final, string is_no_facturas, ref datawindow ldw_3);Integer li_ipo_fact_ped, il_rowcount
+String  ls_pedido_fac, ls_facturas, ls_visible
+
+
+if ldw_3.Rowcount() < ai_limite then
+   ls_visible = 'S'		
+	ldw_3.object.visible_fact.expression = "'"+ls_visible+"'"
+
+	ldw_3.InsertRow(0)		
+	ldw_3.SetItem(ldw_3.Rowcount(),'doc_visible','0')
+	ldw_3.SetItem(ldw_3.rowcount(),'traf_pedido','.')
+	ldw_3.SetItem(ldw_3.Rowcount(),'factura_visible','S')
+
+	/*Added 27/08/2001*/
+	li_ipo_fact_ped = ldw_3.GetItemNumber(il_rowcount,'ttra_tipo_fact_pedido')
+	ls_facturas 	= ldw_3.GetItemString(il_rowcount,'ttra_facturas')
+	ls_pedido_fac  = ldw_3.GetItemString(il_rowcount,'ttra_pedidos_fac')
+
+	ldw_3.SetItem(ldw_3.Rowcount(),'ttra_tipo_fact_pedido',li_ipo_fact_ped)
+	ldw_3.SetItem(ldw_3.Rowcount(),'ttra_facturas',ls_facturas)
+	ldw_3.SetItem(ldw_3.Rowcount(),'ttra_pedidos_fac',ls_pedido_fac)
+	
+	ldw_3.SetItem(ldw_3.Rowcount(),'no_facturas',is_no_facturas)
+	
+	// Setea los valores del último registro antes del Insert al
+	// registro agregado para los totales del documento
+	ldw_3.setItem(ldw_3.Rowcount(),'tzttraf0_ttra_tipo_fob_cif',ls_costo)
+	ldw_3.object.valor.expression = "'"+string(round(ld_total_valor,2))+"'"
+	ldw_3.setitem(ldw_3.Rowcount(),"tzttraf0_ttra_flete",ld_flete)
+	ldw_3.setitem(ldw_3.Rowcount(),"tzttraf0_ttra_seguro",ld_seguro)
+	ldw_3.setitem(ldw_3.Rowcount(),"tzttraf0_ttra_otros",ld_otros)
+	ldw_3.object.final.expression = "'"+string(round(ld_tot_final,2))+"'"
+end if
+
+end subroutine
+
+global subroutine gf_tz_factura_visible (integer ai_limite, decimal ld_total_valor, string ls_costo, decimal ld_flete, decimal ld_seguro, decimal ld_otros, decimal ld_tot_final, string is_no_facturas, ref datawindow ldw_3, integer il_rowcount);Integer li_ipo_fact_ped // il_rowcount
+String  ls_pedido_fac, ls_facturas, ls_visible
+
+
+if ldw_3.Rowcount() < ai_limite then
+   ls_visible = 'S'		
+	ldw_3.object.visible_fact.expression = "'"+ls_visible+"'"
+
+	ldw_3.InsertRow(0)		
+	ldw_3.SetItem(ldw_3.Rowcount(),'doc_visible','0')  //No muestra documentos/
+	ldw_3.SetItem(ldw_3.rowcount(),'traf_pedido','.')	//No muestra totales
+	ldw_3.SetItem(ldw_3.Rowcount(),'factura_visible','S') //Muestra facturas despues del detalle
+
+	/*Added 27/08/2001*/
+	li_ipo_fact_ped = ldw_3.GetItemNumber(il_rowcount,'ttra_tipo_fact_pedido')
+	ls_facturas 	= ldw_3.GetItemString(il_rowcount,'ttra_facturas')
+	ls_pedido_fac  = ldw_3.GetItemString(il_rowcount,'ttra_pedidos_fac')
+
+	ldw_3.SetItem(ldw_3.Rowcount(),'ttra_tipo_fact_pedido',li_ipo_fact_ped)
+	ldw_3.SetItem(ldw_3.Rowcount(),'ttra_facturas',ls_facturas)
+	ldw_3.SetItem(ldw_3.Rowcount(),'ttra_pedidos_fac',ls_pedido_fac)
+	
+	ldw_3.SetItem(ldw_3.Rowcount(),'no_facturas',is_no_facturas)
+	
+	// Setea los valores del último registro antes del Insert al
+	// registro agregado para los totales del documento
+	ldw_3.setItem(ldw_3.Rowcount(),'tzttraf0_ttra_tipo_fob_cif',ls_costo)
+	ldw_3.object.valor.expression = "'"+string(round(ld_total_valor,2))+"'"
+	ldw_3.setitem(ldw_3.Rowcount(),"tzttraf0_ttra_flete",ld_flete)
+	ldw_3.setitem(ldw_3.Rowcount(),"tzttraf0_ttra_seguro",ld_seguro)
+	ldw_3.setitem(ldw_3.Rowcount(),"tzttraf0_ttra_otros",ld_otros)
+	ldw_3.object.final.expression = "'"+string(round(ld_tot_final,2))+"'"
+end if
+
+end subroutine
+

@@ -1,0 +1,28 @@
+﻿global type gf_find_path from function_object
+end type
+
+forward prototypes
+global subroutine gf_find_path (ref string as_path)
+end prototypes
+
+global subroutine gf_find_path (ref string as_path);// Funcion gf_find_path
+// Esta función fue creada para que encuentre el ultimo directorio en la cadena de un path
+// Herick Guillén 23/Sep/1998
+
+
+Integer	li_pos, li_pos_final
+
+
+li_pos = Pos(as_path, "\")
+
+If li_pos > 0 Then
+	Do While	li_pos > 0
+		li_pos_final = li_pos
+		li_pos = Pos(as_path, "\", li_pos + 1)
+	Loop
+	
+	as_path = Left(as_path, li_pos_final)	
+	
+End If
+end subroutine
+

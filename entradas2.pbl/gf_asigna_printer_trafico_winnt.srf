@@ -1,0 +1,38 @@
+﻿global type gf_asigna_printer_trafico_winnt from function_object
+end type
+
+forward prototypes
+global function string gf_asigna_printer_trafico_winnt ()
+end prototypes
+
+global function string gf_asigna_printer_trafico_winnt ();string ls_defauld,ls_key,ls_driver,ls_port ,ls_printer,ls_dri
+string ls_impr_nueva,ls_puerto_nuevo,ls_impr_puerto_nuevo
+// Paso 1: Toma la impresora por defecto y la guarda para luego reasignarla al salir de la ventana
+
+RegistryGet("HKEY_LOCAL_MACHINE\Config\0001\System\CurrentControlSet\Control\Print\Printers","default",ls_defauld)
+
+// Paso 2: Toma la Impresora por defecto y el puerto
+// ls_port toma el puerto y ls_driver toma el driver de impresion
+ 
+  SELECT tzaparam.para_printer_doc_comercial,   
+         tzaparam.para_puerto_doc_comercial,   
+         tzaparam.para_printer_puerto_ruta  
+	INTO	:ls_impr_nueva,
+			:ls_puerto_nuevo,
+			:ls_impr_puerto_nuevo
+    FROM tzaparam  
+   WHERE ( tzaparam.para_g_financiero = :str.g_financiero ) AND  
+         ( tzaparam.para_empresa 	  = :str.empresa )   ;
+
+	if SQLCA.SQLCODE = 0 THEN
+		// Setea la Nueva Impresora por defecto en el WIN.INI
+		gf_asigna_printer_default(ls_impr_nueva)
+		
+		return(ls_defauld)	
+	else
+		MESSAGEBOX("ATENCIÓN SR. USUARIO","Error al setear Nueva Impresora, Reinténtelo",StopSign!)
+		return("")	
+	end if
+
+end function
+

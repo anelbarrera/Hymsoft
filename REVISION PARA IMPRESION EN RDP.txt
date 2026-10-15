@@ -1,0 +1,42 @@
+En la computadora local (desde donde te conectas):
+
+Habilita el redireccionamiento de impresoras antes de conectarte:
+
+Abre Conexión a Escritorio Remoto (mstsc.exe)
+Haz clic en "Mostrar opciones"
+Ve a la pestaña "Recursos locales"
+Haz clic en "Más..." bajo Dispositivos y recursos locales
+Marca la casilla "Impresoras"
+Conecta a la sesión remota
+
+
+Verifica los servicios de Escritorio Remoto:
+
+Presiona Win+R, escribe services.msc
+Busca "Cola de impresión" (Print Spooler) y asegúrate de que esté en ejecución
+Busca "Redirector de puerto en modo de usuario de Servicios de Escritorio remoto" y verifica que esté iniciado
+
+
+
+En el servidor/computadora remota:
+
+Habilita el redireccionamiento de impresoras en las políticas:
+
+Presiona Win+R, escribe gpedit.msc (si está disponible)
+Ve a: Configuración del equipo > Plantillas administrativas > Componentes de Windows > Servicios de Escritorio remoto > Host de sesión de Escritorio remoto > Redirección de dispositivos y recursos de impresora
+Asegúrate de que "No permitir redirección de impresoras cliente" esté en "No configurada" o "Deshabilitada"
+
+
+Verifica que el servicio de Cola de impresión esté activo (igual que en el paso anterior)
+
+Soluciones alternativas:
+
+Instala los controladores de impresora en el servidor remoto si la impresora no se redirige automáticamente
+Usa Easy Print de Escritorio Remoto - esto permite imprimir sin instalar controladores específicos en el servidor
+Comparte la impresora en red y conéctate directamente desde el servidor remoto a la impresora compartida
+
+Problemas comunes:
+
+Si usas Windows Home, no tiene todas las funciones de directiva de grupo
+Verifica que tu firewall no esté bloqueando las conexiones
+Asegúrate de tener permisos de administrador en ambas máquinas

@@ -1,0 +1,26 @@
+﻿//objectcomments New! function call made that will return a user object for making external calls for the correct platform
+global type f_create_external_func_uo from function_object
+end type
+
+forward prototypes
+global function boolean f_create_external_func_uo (ref u_external_function auo_ext)
+end prototypes
+
+global function boolean f_create_external_func_uo (ref u_external_function auo_ext);String	ls_WinType = "u_external_function"
+
+If ge_Environment.Win16 Then
+	ls_WinType = ls_WinType + "_win16"
+Else
+	ls_WinType = ls_WinType + "_win32"
+End If
+
+auo_Ext = Create Using ls_WinType
+
+If IsNull(auo_Ext) Then
+	Return False
+Else
+	Return True
+End If
+
+end function
+

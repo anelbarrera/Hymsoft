@@ -1,0 +1,25 @@
+﻿global type gf_mes_de_proceso from function_object
+end type
+
+forward prototypes
+global subroutine gf_mes_de_proceso (ref string as_mes_proceso)
+end prototypes
+
+global subroutine gf_mes_de_proceso (ref string as_mes_proceso);string 	ls_mes
+string		ls_meses[] = {'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'}
+integer 	li_mes, li_ann
+
+  SELECT IsNull(comparam.para_ann_actual,0),
+         IsNull(comparam.para_mes_actual,0) 
+    INTO :li_ann,   
+         :li_mes  
+    FROM comparam  
+   WHERE ( comparam.para_g_financiero = :str.g_financiero ) AND  
+         ( comparam.para_empresa = :str.empresa )   ;
+	if sqlca.sqlcode = -1 then
+		gf_mensaje('','Error al BUscar Mes de Proceso  '+sqlca.sqlerrtext,1,1,'E')
+	end if
+
+as_mes_proceso = ' - MES DE PROCESO '+ ls_meses[li_mes] + ' ' + string(li_ann)
+end subroutine
+

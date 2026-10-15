@@ -1,0 +1,4405 @@
+﻿//objectcomments Menu Ancestro del sistema de Facturación (Menu del frame)
+forward
+global type m_fa_padre from menu
+end type
+type m_archivo from menu within m_fa_padre
+end type
+type m_empresa from menu within m_archivo
+end type
+type m_cerrar from menu within m_archivo
+end type
+type m_guardar from menu within m_archivo
+end type
+type m_guardarcomo from menu within m_archivo
+end type
+type m_- from menu within m_archivo
+end type
+type m_vistapreliminar from menu within m_archivo
+end type
+type m_imprimir from menu within m_archivo
+end type
+type m_reimprimir from menu within m_archivo
+end type
+type m_-1 from menu within m_archivo
+end type
+type m_salir from menu within m_archivo
+end type
+type m_archivo from menu within m_fa_padre
+m_empresa m_empresa
+m_cerrar m_cerrar
+m_guardar m_guardar
+m_guardarcomo m_guardarcomo
+m_- m_-
+m_vistapreliminar m_vistapreliminar
+m_imprimir m_imprimir
+m_reimprimir m_reimprimir
+m_-1 m_-1
+m_salir m_salir
+end type
+type m_edicin from menu within m_fa_padre
+end type
+type m_adicionar from menu within m_edicin
+end type
+type m_insertar from menu within m_edicin
+end type
+type m_eliminar from menu within m_edicin
+end type
+type m_-2 from menu within m_edicin
+end type
+type m_siguienteregistro from menu within m_edicin
+end type
+type m_registroanterior from menu within m_edicin
+end type
+type m_-3 from menu within m_edicin
+end type
+type m_primerregistro from menu within m_edicin
+end type
+type m_ultimoregistro from menu within m_edicin
+end type
+type m_-10 from menu within m_edicin
+end type
+type m_filtrar from menu within m_edicin
+end type
+type m_sortear from menu within m_edicin
+end type
+type m_restaurar from menu within m_edicin
+end type
+type m_-14 from menu within m_edicin
+end type
+type m_herramientas from menu within m_edicin
+end type
+type m_copiar from menu within m_herramientas
+end type
+type m_deproforma from menu within m_copiar
+end type
+type m_depedido from menu within m_copiar
+end type
+type m_defactura from menu within m_copiar
+end type
+type m_copiar from menu within m_herramientas
+m_deproforma m_deproforma
+m_depedido m_depedido
+m_defactura m_defactura
+end type
+type m_liberarmercancia from menu within m_herramientas
+end type
+type m_reserva from menu within m_herramientas
+end type
+type m_-15 from menu within m_herramientas
+end type
+type m_pasarapedido from menu within m_herramientas
+end type
+type m_pasarafactura from menu within m_herramientas
+end type
+type m_herramientas from menu within m_edicin
+m_copiar m_copiar
+m_liberarmercancia m_liberarmercancia
+m_reserva m_reserva
+m_-15 m_-15
+m_pasarapedido m_pasarapedido
+m_pasarafactura m_pasarafactura
+end type
+type m_-22 from menu within m_edicin
+end type
+type m_verfoto from menu within m_edicin
+end type
+type m_busqueda from menu within m_edicin
+end type
+type m_aprobarpedido from menu within m_edicin
+end type
+type m_consolidar from menu within m_edicin
+end type
+type m_cambiarformato from menu within m_edicin
+end type
+type m_edicin from menu within m_fa_padre
+m_adicionar m_adicionar
+m_insertar m_insertar
+m_eliminar m_eliminar
+m_-2 m_-2
+m_siguienteregistro m_siguienteregistro
+m_registroanterior m_registroanterior
+m_-3 m_-3
+m_primerregistro m_primerregistro
+m_ultimoregistro m_ultimoregistro
+m_-10 m_-10
+m_filtrar m_filtrar
+m_sortear m_sortear
+m_restaurar m_restaurar
+m_-14 m_-14
+m_herramientas m_herramientas
+m_-22 m_-22
+m_verfoto m_verfoto
+m_busqueda m_busqueda
+m_aprobarpedido m_aprobarpedido
+m_consolidar m_consolidar
+m_cambiarformato m_cambiarformato
+end type
+type m_ventanas from menu within m_fa_padre
+end type
+type m_horizontal from menu within m_ventanas
+end type
+type m_vertical from menu within m_ventanas
+end type
+type m_pantallacompleta from menu within m_ventanas
+end type
+type m_cascada from menu within m_ventanas
+end type
+type m_-6 from menu within m_ventanas
+end type
+type m_zoom from menu within m_ventanas
+end type
+type m_20% from menu within m_zoom
+end type
+type m_40% from menu within m_zoom
+end type
+type m_60% from menu within m_zoom
+end type
+type m_80% from menu within m_zoom
+end type
+type m_100% from menu within m_zoom
+end type
+type m_200% from menu within m_zoom
+end type
+type m_zoom from menu within m_ventanas
+m_20% m_20%
+m_40% m_40%
+m_60% m_60%
+m_80% m_80%
+m_100% m_100%
+m_200% m_200%
+end type
+type m_zoom2 from menu within m_ventanas
+end type
+type m_zoom3 from menu within m_ventanas
+end type
+type m_regla from menu within m_ventanas
+end type
+type m_ventanas from menu within m_fa_padre
+m_horizontal m_horizontal
+m_vertical m_vertical
+m_pantallacompleta m_pantallacompleta
+m_cascada m_cascada
+m_-6 m_-6
+m_zoom m_zoom
+m_zoom2 m_zoom2
+m_zoom3 m_zoom3
+m_regla m_regla
+end type
+type m_ayuda from menu within m_fa_padre
+end type
+type m_acercade from menu within m_ayuda
+end type
+type m_manualhymsoft from menu within m_ayuda
+end type
+type m_prueba from menu within m_ayuda
+end type
+type m_reserva0 from menu within m_ayuda
+end type
+type m_actualizaocs from menu within m_ayuda
+end type
+type m_actualizatransitos from menu within m_ayuda
+end type
+type m_fechadeentrada from menu within m_ayuda
+end type
+type m_fechadesalida from menu within m_ayuda
+end type
+type m_asignaproveedor from menu within m_ayuda
+end type
+type m_revfactura from menu within m_ayuda
+end type
+type m_pedidosvencidos from menu within m_ayuda
+end type
+type m_ayuda from menu within m_fa_padre
+m_acercade m_acercade
+m_manualhymsoft m_manualhymsoft
+m_prueba m_prueba
+m_reserva0 m_reserva0
+m_actualizaocs m_actualizaocs
+m_actualizatransitos m_actualizatransitos
+m_fechadeentrada m_fechadeentrada
+m_fechadesalida m_fechadesalida
+m_asignaproveedor m_asignaproveedor
+m_revfactura m_revfactura
+m_pedidosvencidos m_pedidosvencidos
+end type
+global type m_fa_padre from menu
+m_archivo m_archivo
+m_edicin m_edicin
+m_ventanas m_ventanas
+m_ayuda m_ayuda
+end type
+end forward
+
+global type m_fa_padre from menu
+m_archivo m_archivo
+m_edicin m_edicin
+m_ventanas m_ventanas
+m_ayuda m_ayuda
+end type
+global m_fa_padre m_fa_padre
+
+type variables
+str_fa_carg_ped str_formato
+str_fa_formato str_formato_pr
+str_cc_formatos str_formato1
+
+end variables
+
+forward prototypes
+public subroutine mf_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato)
+public subroutine mf_selecciona_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato)
+end prototypes
+
+public subroutine mf_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato);/*Scrip agregado por HGN el 20 de marzo del 2000*/
+
+/* Esta función verifica cuantos formatos existen del documento
+solicitado, si hay más de uno abre la ventana de selección, si sólo
+hay uno toma el datawindow del mismo y abre la ventana principal*/
+
+String	ls_dberror
+
+SELECT count(*) 
+ INTO :ai_existe
+    FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato =:as_forma_formato);   
+
+if ai_existe <= 0 then
+	mensaje("Atención ","No se ha configurado el formato del documento, por favor contacte al personal de soporte, o al programador..gracias", "")
+	ab_aceptar = false
+	return
+End If
+
+If ai_existe = 1 then
+	// Sólo hay un formato no abre ventana selección de formatos
+	  SELECT faaforma.forma_datawindow  
+	 INTO :str_formato.datawindow 
+	 FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato = :as_forma_formato);   
+	
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al leer el formato del documento", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Scrip que asigna el datawindow de listas de empaques de facturas
+	if as_forma_formato = 'LEMPQ' then
+	  integer li_pos
+	  li_pos = pos(str_formato.datawindow,"_pedi_")
+     str_formato.datawindow2	= left(str_formato.datawindow,li_pos)+"fact_"+mid(str_formato.datawindow,li_pos + 6)	  
+   end if
+end  if
+
+ab_aceptar = true
+
+end subroutine
+
+public subroutine mf_selecciona_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato);/* Esta función verifica cuantos formatos existen del documento
+solicitado, si hay más de uno abre la ventana de selección, si sólo
+hay uno toma el datawindow del mismo y abre la ventana principal*/
+
+String	ls_dberror
+
+SELECT count(*) 
+ INTO :ai_existe
+    FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato =:as_forma_formato);   
+	if sqlca.sqlcode = -1 then
+		mensaje("Aviso","Error al Validar Existencia del Formato",sqlca.sqlerrtext)
+		return
+	end if
+
+if ai_existe <= 0 then
+	mensaje("Atención ","No se ha configurado el formato del documento, por favor contacte al personal de soporte, o al programador..gracias", "")
+	ab_aceptar = false
+	return
+End If
+
+	// Sólo hay un formato no abre ventana selección de formatos
+	Declare cur_formato cursor for
+	  SELECT faaforma.forma_datawindow  
+	 FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato = :as_forma_formato)
+			Order by forma_cod_fomato ;   
+	
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al declarar el cursor", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Abre el cursor
+	open cur_formato;
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al abrir el cursor", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Selecciona el primer registro del cursor
+	fetch cur_formato into :str_formato.datawindow ;
+	
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error en el fetch del cursor", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Cierra el cursor
+	close cur_formato;
+	
+	
+//Scrip que asigna el datawindow de listas de empaques de facturas
+if as_forma_formato = 'LEMPQ' then
+  integer li_pos
+  li_pos = pos(str_formato.datawindow,"_pedi_")
+  str_formato.datawindow2	= left(str_formato.datawindow,li_pos)+"fact_"+mid(str_formato.datawindow,li_pos + 6)
+end if
+
+
+ab_aceptar = true
+
+end subroutine
+
+on m_fa_padre.create
+m_fa_padre=this
+call super::create
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_archivo=create m_archivo
+this.m_edicin=create m_edicin
+this.m_ventanas=create m_ventanas
+this.m_ayuda=create m_ayuda
+this.Item[UpperBound(this.Item)+1]=this.m_archivo
+this.Item[UpperBound(this.Item)+1]=this.m_edicin
+this.Item[UpperBound(this.Item)+1]=this.m_ventanas
+this.Item[UpperBound(this.Item)+1]=this.m_ayuda
+end on
+
+on m_fa_padre.destroy
+call super::destroy
+destroy(this.m_archivo)
+destroy(this.m_edicin)
+destroy(this.m_ventanas)
+destroy(this.m_ayuda)
+end on
+
+type m_archivo from menu within m_fa_padre
+m_empresa m_empresa
+m_cerrar m_cerrar
+m_guardar m_guardar
+m_guardarcomo m_guardarcomo
+m_- m_-
+m_vistapreliminar m_vistapreliminar
+m_imprimir m_imprimir
+m_reimprimir m_reimprimir
+m_-1 m_-1
+m_salir m_salir
+end type
+
+on m_archivo.create
+call super::create
+this.tag = "m_fa_padre.m_archivo //"
+this.text = "&Archivo"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_empresa=create m_empresa
+this.m_cerrar=create m_cerrar
+this.m_guardar=create m_guardar
+this.m_guardarcomo=create m_guardarcomo
+this.m_-=create m_-
+this.m_vistapreliminar=create m_vistapreliminar
+this.m_imprimir=create m_imprimir
+this.m_reimprimir=create m_reimprimir
+this.m_-1=create m_-1
+this.m_salir=create m_salir
+this.Item[UpperBound(this.Item)+1]=this.m_empresa
+this.Item[UpperBound(this.Item)+1]=this.m_cerrar
+this.Item[UpperBound(this.Item)+1]=this.m_guardar
+this.Item[UpperBound(this.Item)+1]=this.m_guardarcomo
+this.Item[UpperBound(this.Item)+1]=this.m_-
+this.Item[UpperBound(this.Item)+1]=this.m_vistapreliminar
+this.Item[UpperBound(this.Item)+1]=this.m_imprimir
+this.Item[UpperBound(this.Item)+1]=this.m_reimprimir
+this.Item[UpperBound(this.Item)+1]=this.m_-1
+this.Item[UpperBound(this.Item)+1]=this.m_salir
+end on
+
+on m_archivo.destroy
+call super::destroy
+destroy(this.m_empresa)
+destroy(this.m_cerrar)
+destroy(this.m_guardar)
+destroy(this.m_guardarcomo)
+destroy(this.m_-)
+destroy(this.m_vistapreliminar)
+destroy(this.m_imprimir)
+destroy(this.m_reimprimir)
+destroy(this.m_-1)
+destroy(this.m_salir)
+end on
+
+type m_empresa from menu within m_archivo
+end type
+
+event clicked;// Herick
+// Fue creapa para que el usuario pueda escoger las ventanas que desea cerrar
+// cuando va a cambiar de empresa
+
+
+String	ls_aplicacion
+Integer	li_pos, li_rtn_msg, li_i=1, li_j, li_existe
+str_active_sheet str_wsheet
+
+SELECT count(*)
+    INTO :li_existe
+    FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND  
+         ( dgmempre.empr_empresa = :str.empresa ) ;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al seleccionar el nombre de la empresa '+sqlca.sqlerrtext,1,1,'E')
+			end if	
+
+if li_existe = 1 then return
+
+str_wsheet.wSheet[li_i] = str.frame.GetFirstSheet()
+
+IF IsValid(str_wsheet.wSheet[li_i]) THEN
+
+	str_wsheet.titulo[li_i] = str_wsheet.wsheet[li_i].Title
+	str_wsheet.nombre[li_i] = str_wsheet.wsheet[li_i].ClassName()
+
+	If IsValid(str_wsheet.wSheet[li_i]) And (lower(Right(str_wsheet.nombre[li_i],5)) <> &
+													"fondo" And Len(str_wsheet.nombre[li_i]) <> 10 ) Then
+
+		DO WHILE IsValid(str_wsheet.wSheet[li_i])				
+			
+			If (lower(Right(str_wsheet.nombre[li_i],5)) = "fondo" And &
+															Len(str_wsheet.nombre[li_i]) = 10 ) Then Exit
+		
+			li_j = li_i
+			li_i++
+			str_wsheet.wSheet[li_i] = str.frame.GetNextSheet(str_wsheet.wSheet[li_j])
+			
+			If Not IsValid(str_wsheet.wSheet[li_i]) Then Continue
+			
+				str_wsheet.titulo[li_i] = str_wsheet.wsheet[li_i].Title
+				str_wsheet.nombre[li_i] = str_wsheet.wsheet[li_i].ClassName()
+		LOOP
+
+		OpenWithParm(w_active_sheets, str_wsheet)
+	End if
+END IF
+
+yield()
+
+li_pos = Pos(str.frame.title, " -- ")
+
+ls_aplicacion = Right(str.frame.title, Len(str.frame.title) - (li_pos + 3))
+
+OpenWithParm(w_select_empr, str.usuario)
+
+//str.frame.title = gf_dg_nom_empresa(str.g_financiero,str.empresa) + ' -- ' + ls_aplicacion
+//selecciona el nombre de la empresa
+  SELECT dgmempre.empr_razon_social  , empr_acceso_especial, empr_valor_fixing
+    INTO :str.nombre_empresa , :str.empr_acceso_especial, :str.valor_fixing
+    FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND  
+         ( dgmempre.empr_empresa = :str.empresa ) ;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al seleccionar el nombre de la empresa '+sqlca.sqlerrtext,1,1,'E')
+			end if
+
+w_fa_fondo.sle_1.text = str.nombre_empresa + ' - HYMSOFT V 1.0'
+str.frame.title = 'SISTEMA INTEGRADO HymSoft V 1.0 - '+str.nombre_empresa			
+end event
+
+on m_empresa.create
+call super::create
+this.tag = "m_fa_padre.m_archivo.m_empresa"
+this.visible = false
+this.text = "&Cambiar de Empresa"
+this.microhelp = "Permite cambiar la Empresa de Trabajo"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_empresa.destroy
+call super::destroy
+end on
+
+type m_cerrar from menu within m_archivo
+end type
+
+on m_cerrar.create
+call super::create
+this.tag = "m_fa_padre.m_archivo.m_cerrar"
+this.visible = false
+this.text = "&Cerrar~tAlt+C"
+this.shortcut = 579
+this.microhelp = "Cierrar la Ventana"
+this.toolbaritemtext = "Cerrar"
+this.toolbaritemorder = 1
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cerrar.destroy
+call super::destroy
+end on
+
+type m_guardar from menu within m_archivo
+end type
+
+on m_guardar.create
+call super::create
+this.tag = "m_fa_padre.m_archivo.m_guardar"
+this.visible = false
+this.text = "&Guardar~tAlt+G"
+this.enabled = false
+this.shortcut = 583
+this.microhelp = "Guardar"
+this.toolbaritemtext = "Guardar"
+this.toolbaritemorder = 2
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.triggerevent("ue_pre_aceptar")
+end event
+
+on m_guardar.destroy
+call super::destroy
+end on
+
+type m_guardarcomo from menu within m_archivo
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_save_as')
+end event
+
+on m_guardarcomo.create
+call super::create
+this.visible = false
+this.text = "Guardar Como"
+this.enabled = false
+this.microhelp = "Guardar en un archivo"
+this.toolbaritemvisible = false
+this.toolbaritemname = "saveas!"
+this.toolbaritemtext = "Guardar Como .."
+this.toolbaritemorder = 3
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_guardarcomo.destroy
+call super::destroy
+end on
+
+type m_- from menu within m_archivo
+end type
+
+on m_-.create
+call super::create
+this.tag = "m_fa_padre.m_archivo.m_-"
+this.visible = false
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_vistapreliminar from menu within m_archivo
+end type
+
+on m_vistapreliminar.create
+call super::create
+this.tag = "m_fa_padre.m_archivo.m_vistapreliminar"
+this.visible = false
+this.text = "&Vista Preliminar~tAlt+V"
+this.enabled = false
+this.shortcut = 598
+this.microhelp = "Vista Preliminar"
+this.toolbaritemvisible = false
+this.toolbaritemname = "editdatatabular!"
+this.toolbaritemtext = "Vista Preliminar"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_vista')
+end event
+
+on m_vistapreliminar.destroy
+call super::destroy
+end on
+
+type m_imprimir from menu within m_archivo
+end type
+
+on m_imprimir.create
+call super::create
+this.tag = "m_fa_padre.m_archivo.m_imprimir"
+this.visible = false
+this.text = "I&mprimir~tAlt+I"
+this.enabled = false
+this.shortcut = 585
+this.microhelp = "Imprimir "
+this.toolbaritemtext = "Imprimir"
+this.toolbaritemorder = 7
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.Triggerevent("ue_print")
+end event
+
+on m_imprimir.destroy
+call super::destroy
+end on
+
+type m_reimprimir from menu within m_archivo
+end type
+
+on m_reimprimir.create
+call super::create
+this.visible = false
+this.text = "Reimprimir"
+this.enabled = false
+this.toolbaritemvisible = false
+this.toolbaritemname = "custom074!"
+this.toolbaritemorder = 11
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_reimprimir.destroy
+call super::destroy
+end on
+
+type m_-1 from menu within m_archivo
+end type
+
+on m_-1.create
+call super::create
+this.tag = "m_fa_padre.m_archivo.m_-1"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_salir from menu within m_archivo
+end type
+
+on m_salir.create
+call super::create
+this.tag = "m_fa_padre.m_archivo.m_salir //"
+this.text = "&Salir~tAlt+S"
+this.shortcut = 595
+this.microhelp = "Salir de la Aplicación"
+this.toolbaritemname = "prior!"
+this.toolbaritemdownname = "Run!"
+this.toolbaritemtext = "Salir de la aplicacion"
+this.toolbaritemspace = 1
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;//w_fa_fondo.uo_regional.of_setvalores_anteriores()
+close(parentwindow)
+end event
+
+on m_salir.destroy
+call super::destroy
+end on
+
+type m_edicin from menu within m_fa_padre
+m_adicionar m_adicionar
+m_insertar m_insertar
+m_eliminar m_eliminar
+m_-2 m_-2
+m_siguienteregistro m_siguienteregistro
+m_registroanterior m_registroanterior
+m_-3 m_-3
+m_primerregistro m_primerregistro
+m_ultimoregistro m_ultimoregistro
+m_-10 m_-10
+m_filtrar m_filtrar
+m_sortear m_sortear
+m_restaurar m_restaurar
+m_-14 m_-14
+m_herramientas m_herramientas
+m_-22 m_-22
+m_verfoto m_verfoto
+m_busqueda m_busqueda
+m_aprobarpedido m_aprobarpedido
+m_consolidar m_consolidar
+m_cambiarformato m_cambiarformato
+end type
+
+on m_edicin.create
+call super::create
+this.tag = "m_fa_padre.m_edicin"
+this.visible = false
+this.text = "&Edición"
+this.enabled = false
+this.microhelp = "Opciones de Edicion de Registros"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_adicionar=create m_adicionar
+this.m_insertar=create m_insertar
+this.m_eliminar=create m_eliminar
+this.m_-2=create m_-2
+this.m_siguienteregistro=create m_siguienteregistro
+this.m_registroanterior=create m_registroanterior
+this.m_-3=create m_-3
+this.m_primerregistro=create m_primerregistro
+this.m_ultimoregistro=create m_ultimoregistro
+this.m_-10=create m_-10
+this.m_filtrar=create m_filtrar
+this.m_sortear=create m_sortear
+this.m_restaurar=create m_restaurar
+this.m_-14=create m_-14
+this.m_herramientas=create m_herramientas
+this.m_-22=create m_-22
+this.m_verfoto=create m_verfoto
+this.m_busqueda=create m_busqueda
+this.m_aprobarpedido=create m_aprobarpedido
+this.m_consolidar=create m_consolidar
+this.m_cambiarformato=create m_cambiarformato
+this.Item[UpperBound(this.Item)+1]=this.m_adicionar
+this.Item[UpperBound(this.Item)+1]=this.m_insertar
+this.Item[UpperBound(this.Item)+1]=this.m_eliminar
+this.Item[UpperBound(this.Item)+1]=this.m_-2
+this.Item[UpperBound(this.Item)+1]=this.m_siguienteregistro
+this.Item[UpperBound(this.Item)+1]=this.m_registroanterior
+this.Item[UpperBound(this.Item)+1]=this.m_-3
+this.Item[UpperBound(this.Item)+1]=this.m_primerregistro
+this.Item[UpperBound(this.Item)+1]=this.m_ultimoregistro
+this.Item[UpperBound(this.Item)+1]=this.m_-10
+this.Item[UpperBound(this.Item)+1]=this.m_filtrar
+this.Item[UpperBound(this.Item)+1]=this.m_sortear
+this.Item[UpperBound(this.Item)+1]=this.m_restaurar
+this.Item[UpperBound(this.Item)+1]=this.m_-14
+this.Item[UpperBound(this.Item)+1]=this.m_herramientas
+this.Item[UpperBound(this.Item)+1]=this.m_-22
+this.Item[UpperBound(this.Item)+1]=this.m_verfoto
+this.Item[UpperBound(this.Item)+1]=this.m_busqueda
+this.Item[UpperBound(this.Item)+1]=this.m_aprobarpedido
+this.Item[UpperBound(this.Item)+1]=this.m_consolidar
+this.Item[UpperBound(this.Item)+1]=this.m_cambiarformato
+end on
+
+on m_edicin.destroy
+call super::destroy
+destroy(this.m_adicionar)
+destroy(this.m_insertar)
+destroy(this.m_eliminar)
+destroy(this.m_-2)
+destroy(this.m_siguienteregistro)
+destroy(this.m_registroanterior)
+destroy(this.m_-3)
+destroy(this.m_primerregistro)
+destroy(this.m_ultimoregistro)
+destroy(this.m_-10)
+destroy(this.m_filtrar)
+destroy(this.m_sortear)
+destroy(this.m_restaurar)
+destroy(this.m_-14)
+destroy(this.m_herramientas)
+destroy(this.m_-22)
+destroy(this.m_verfoto)
+destroy(this.m_busqueda)
+destroy(this.m_aprobarpedido)
+destroy(this.m_consolidar)
+destroy(this.m_cambiarformato)
+end on
+
+type m_adicionar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_adicionar')
+end event
+
+on m_adicionar.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_adicionar"
+this.text = "&Adicionar~tCtrl+A"
+this.shortcut = 321
+this.microhelp = "Adicionar un Registro"
+this.toolbaritemtext = "Adicionar"
+this.toolbaritemorder = 5
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_adicionar.destroy
+call super::destroy
+end on
+
+type m_insertar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_insertar')
+end event
+
+on m_insertar.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_insertar"
+this.visible = false
+this.text = "&Insertar~tCtrl+I"
+this.enabled = false
+this.shortcut = 329
+this.microhelp = "Inserta un Nuevo Registro"
+this.toolbaritemvisible = false
+this.toolbaritemtext = "Insertar"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_insertar.destroy
+call super::destroy
+end on
+
+type m_eliminar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_pre_eliminar')
+end event
+
+on m_eliminar.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_eliminar"
+this.text = "&Eliminar~tCtrl+E"
+this.shortcut = 325
+this.microhelp = "Eliminar Registro"
+this.toolbaritemtext = "Eliminar"
+this.toolbaritemorder = 6
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_eliminar.destroy
+call super::destroy
+end on
+
+type m_-2 from menu within m_edicin
+end type
+
+on m_-2.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_-2"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from menu within m_edicin
+end type
+
+on m_siguienteregistro.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_siguienteregistro"
+this.text = "&Siguiente Registro"
+this.microhelp = "Siguiente Registro"
+this.toolbaritemtext = "Siguiente Registro"
+this.toolbaritemorder = 10
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_siguiente_reg')
+end event
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from menu within m_edicin
+end type
+
+on m_registroanterior.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_registroanterior"
+this.text = "&Registro Anterior"
+this.microhelp = "Registro Anterior"
+this.toolbaritemtext = "Registro Anterior"
+this.toolbaritemorder = 9
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_reg_anterior')
+end event
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_-3 from menu within m_edicin
+end type
+
+on m_-3.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_-3"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_primerregistro from menu within m_edicin
+end type
+
+on m_primerregistro.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_primerregistro"
+this.text = "&Primer Registro"
+this.microhelp = "Primer Registro"
+this.toolbaritemtext = "Primer Registro"
+this.toolbaritemorder = 8
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_primer_reg')
+end event
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from menu within m_edicin
+end type
+
+on m_ultimoregistro.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_ultimoregistro"
+this.text = "&Ultimo Registro"
+this.microhelp = "Ultimo Registro"
+this.toolbaritemtext = "Ultimo Registro"
+this.toolbaritemorder = 11
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_ultimo_reg')
+end event
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-10 from menu within m_edicin
+end type
+
+on m_-10.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_-10"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-10.destroy
+call super::destroy
+end on
+
+type m_filtrar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_filter')
+end event
+
+on m_filtrar.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_filtrar"
+this.text = "&Filtrar"
+this.microhelp = "Filtra Los Registros"
+this.toolbaritemtext = "Filtra"
+this.toolbaritemorder = 12
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_filtrar.destroy
+call super::destroy
+end on
+
+type m_sortear from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_sort')
+end event
+
+on m_sortear.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_sortear"
+this.text = "&Ordenar"
+this.microhelp = "Reordena los Registros"
+this.toolbaritemdownname = "Sortear"
+this.toolbaritemtext = "Ordenar"
+this.toolbaritemorder = 13
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_sortear.destroy
+call super::destroy
+end on
+
+type m_restaurar from menu within m_edicin
+end type
+
+on m_restaurar.create
+call super::create
+this.visible = false
+this.text = "Res&taurar~tCtrl+R"
+this.shortcut = 338
+this.toolbaritemvisible = false
+this.toolbaritemname = "undo!"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_restaurar')
+end event
+
+on m_restaurar.destroy
+call super::destroy
+end on
+
+type m_-14 from menu within m_edicin
+end type
+
+on m_-14.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_-14"
+this.visible = false
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-14.destroy
+call super::destroy
+end on
+
+type m_herramientas from menu within m_edicin
+m_copiar m_copiar
+m_liberarmercancia m_liberarmercancia
+m_reserva m_reserva
+m_-15 m_-15
+m_pasarapedido m_pasarapedido
+m_pasarafactura m_pasarafactura
+end type
+
+on m_herramientas.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas"
+this.visible = false
+this.text = "&Herramientas"
+this.microhelp = "Herramientas de ayuda interactiva "
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_copiar=create m_copiar
+this.m_liberarmercancia=create m_liberarmercancia
+this.m_reserva=create m_reserva
+this.m_-15=create m_-15
+this.m_pasarapedido=create m_pasarapedido
+this.m_pasarafactura=create m_pasarafactura
+this.Item[UpperBound(this.Item)+1]=this.m_copiar
+this.Item[UpperBound(this.Item)+1]=this.m_liberarmercancia
+this.Item[UpperBound(this.Item)+1]=this.m_reserva
+this.Item[UpperBound(this.Item)+1]=this.m_-15
+this.Item[UpperBound(this.Item)+1]=this.m_pasarapedido
+this.Item[UpperBound(this.Item)+1]=this.m_pasarafactura
+end on
+
+on m_herramientas.destroy
+call super::destroy
+destroy(this.m_copiar)
+destroy(this.m_liberarmercancia)
+destroy(this.m_reserva)
+destroy(this.m_-15)
+destroy(this.m_pasarapedido)
+destroy(this.m_pasarafactura)
+end on
+
+type m_copiar from menu within m_herramientas
+m_deproforma m_deproforma
+m_depedido m_depedido
+m_defactura m_defactura
+end type
+
+on m_copiar.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_copiar"
+this.text = "&Copiar"
+this.microhelp = "Copiar"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_deproforma=create m_deproforma
+this.m_depedido=create m_depedido
+this.m_defactura=create m_defactura
+this.Item[UpperBound(this.Item)+1]=this.m_deproforma
+this.Item[UpperBound(this.Item)+1]=this.m_depedido
+this.Item[UpperBound(this.Item)+1]=this.m_defactura
+end on
+
+on m_copiar.destroy
+call super::destroy
+destroy(this.m_deproforma)
+destroy(this.m_depedido)
+destroy(this.m_defactura)
+end on
+
+type m_deproforma from menu within m_copiar
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_copiarpro')
+end event
+
+on m_deproforma.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_copiar.m_deproforma"
+this.text = "de Proforma"
+this.enabled = false
+this.microhelp = "Copia la Información de una Proforma existente."
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_deproforma.destroy
+call super::destroy
+end on
+
+type m_depedido from menu within m_copiar
+end type
+
+on m_depedido.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_copiar.m_depedido"
+this.text = "de Pedido"
+this.enabled = false
+this.microhelp = "Copia la Información de un Pedido existente."
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_copiarped')
+end event
+
+on m_depedido.destroy
+call super::destroy
+end on
+
+type m_defactura from menu within m_copiar
+end type
+
+on m_defactura.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_copiar.m_defactura"
+this.text = "de Factura"
+this.enabled = false
+this.microhelp = "Copia la Información de un Factura existente."
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_copiarfac')
+end event
+
+on m_defactura.destroy
+call super::destroy
+end on
+
+type m_liberarmercancia from menu within m_herramientas
+end type
+
+on m_liberarmercancia.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_liberarmercancia"
+this.text = "&Liberar Mercancia"
+this.microhelp = "Libera de Mercancía Reservada en el Inventario"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_libera')
+end event
+
+on m_liberarmercancia.destroy
+call super::destroy
+end on
+
+type m_reserva from menu within m_herramientas
+end type
+
+on m_reserva.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_reserva"
+this.text = "&Reserva Mercancia"
+this.microhelp = "Reserva la Mercancía de un pedido inactivo"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_deslibera')
+end event
+
+on m_reserva.destroy
+call super::destroy
+end on
+
+type m_-15 from menu within m_herramientas
+end type
+
+on m_-15.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_-15"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-15.destroy
+call super::destroy
+end on
+
+type m_pasarapedido from menu within m_herramientas
+end type
+
+on m_pasarapedido.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_pasarapedido"
+this.text = "Pasar a Pedido"
+this.microhelp = "Pasa una Proforma en su Totalidad a Pedido"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_pasaaped')
+end event
+
+on m_pasarapedido.destroy
+call super::destroy
+end on
+
+type m_pasarafactura from menu within m_herramientas
+end type
+
+on m_pasarafactura.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_herramientas.m_pasarafactura"
+this.text = "Pasar a Factura"
+this.enabled = false
+this.microhelp = "Pasa un Pedido o Proforma en su Totalidad a Factura"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_pasafac')
+end event
+
+on m_pasarafactura.destroy
+call super::destroy
+end on
+
+type m_-22 from menu within m_edicin
+end type
+
+on m_-22.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_-22"
+this.visible = false
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-22.destroy
+call super::destroy
+end on
+
+type m_verfoto from menu within m_edicin
+end type
+
+on m_verfoto.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_verfoto"
+this.visible = false
+this.text = "Ver Foto~tCtrl+Shift+F"
+this.enabled = false
+this.shortcut = 1350
+this.microhelp = "Abre o cierra la ventana que muestra la foto del producto para un renglón"
+this.toolbaritemvisible = false
+this.toolbaritemtext = "Foto del producto"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;//Check y Uncheck de la opcion
+If This.Checked Then
+	This.UnCheck()
+	This.ToolbarItemDown	= False
+	str.frame.GetActiveSheet().Event Dynamic Trigger ue_foto(False)
+Else
+	This.Check()
+	This.ToolbarItemDown	= True
+	str.frame.GetActiveSheet().Event Dynamic Trigger ue_foto(True)	
+End If
+end event
+
+on m_verfoto.destroy
+call super::destroy
+end on
+
+type m_busqueda from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_busqueda')
+
+end event
+
+on m_busqueda.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_busqueda"
+this.visible = false
+this.text = "Bu&squeda~tAlt+B"
+this.enabled = false
+this.shortcut = 578
+this.microhelp = "Busqueda"
+this.toolbaritemvisible = false
+this.toolbaritemname = "find!"
+this.toolbaritemtext = "Busqueda"
+this.toolbaritemorder = 20
+this.toolbaritemspace = 1
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_busqueda.destroy
+call super::destroy
+end on
+
+type m_aprobarpedido from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_aprobar_pedido')
+end event
+
+on m_aprobarpedido.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_aprobarpedido"
+this.visible = false
+this.text = "Aprobar Pedido"
+this.microhelp = "Para Abropar el Pedido y Poder así Generar la Lista de Empaque"
+this.toolbaritemvisible = false
+this.toolbaritemname = "custom038!"
+this.toolbaritemtext = "Aprobar Pedido"
+this.toolbaritemorder = 15
+this.toolbaritemspace = 1
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_aprobarpedido.destroy
+call super::destroy
+end on
+
+type m_consolidar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_consolidar')
+end event
+
+on m_consolidar.create
+call super::create
+this.tag = "m_fa_padre.m_edicin.m_consolidar"
+this.visible = false
+this.text = "&Consolidar"
+this.microhelp = "Consolidación de los articulos de la factura"
+this.toolbaritemvisible = false
+this.toolbaritemname = "compile!"
+this.toolbaritemtext = "Consolidar Factura"
+this.toolbaritemorder = 16
+this.toolbaritemspace = 1
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_consolidar.destroy
+call super::destroy
+end on
+
+type m_cambiarformato from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_cambiar_formato')
+end event
+
+on m_cambiarformato.create
+call super::create
+this.visible = false
+this.text = "Cambiar Formato"
+this.toolbaritemvisible = false
+this.toolbaritemname = "copy!"
+this.toolbaritemorder = 17
+this.toolbaritemspace = 1
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cambiarformato.destroy
+call super::destroy
+end on
+
+type m_ventanas from menu within m_fa_padre
+m_horizontal m_horizontal
+m_vertical m_vertical
+m_pantallacompleta m_pantallacompleta
+m_cascada m_cascada
+m_-6 m_-6
+m_zoom m_zoom
+m_zoom2 m_zoom2
+m_zoom3 m_zoom3
+m_regla m_regla
+end type
+
+on m_ventanas.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas"
+this.visible = false
+this.text = "&Ventanas"
+this.enabled = false
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_horizontal=create m_horizontal
+this.m_vertical=create m_vertical
+this.m_pantallacompleta=create m_pantallacompleta
+this.m_cascada=create m_cascada
+this.m_-6=create m_-6
+this.m_zoom=create m_zoom
+this.m_zoom2=create m_zoom2
+this.m_zoom3=create m_zoom3
+this.m_regla=create m_regla
+this.Item[UpperBound(this.Item)+1]=this.m_horizontal
+this.Item[UpperBound(this.Item)+1]=this.m_vertical
+this.Item[UpperBound(this.Item)+1]=this.m_pantallacompleta
+this.Item[UpperBound(this.Item)+1]=this.m_cascada
+this.Item[UpperBound(this.Item)+1]=this.m_-6
+this.Item[UpperBound(this.Item)+1]=this.m_zoom
+this.Item[UpperBound(this.Item)+1]=this.m_zoom2
+this.Item[UpperBound(this.Item)+1]=this.m_zoom3
+this.Item[UpperBound(this.Item)+1]=this.m_regla
+end on
+
+on m_ventanas.destroy
+call super::destroy
+destroy(this.m_horizontal)
+destroy(this.m_vertical)
+destroy(this.m_pantallacompleta)
+destroy(this.m_cascada)
+destroy(this.m_-6)
+destroy(this.m_zoom)
+destroy(this.m_zoom2)
+destroy(this.m_zoom3)
+destroy(this.m_regla)
+end on
+
+type m_horizontal from menu within m_ventanas
+end type
+
+on m_horizontal.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_horizontal"
+this.text = "&Horizontal"
+this.microhelp = "Organización Horizontal"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().ArrangeSheets(tilehorizontal!)
+end event
+
+on m_horizontal.destroy
+call super::destroy
+end on
+
+type m_vertical from menu within m_ventanas
+end type
+
+on m_vertical.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_vertical"
+this.text = "&Vertical"
+this.microhelp = "Organización Vertical"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().ArrangeSheets(tile!)
+end event
+
+on m_vertical.destroy
+call super::destroy
+end on
+
+type m_pantallacompleta from menu within m_ventanas
+end type
+
+on m_pantallacompleta.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_pantallacompleta"
+this.text = "&Pantalla Completa"
+this.microhelp = "Pantalla Completa"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().ArrangeSheets(layer!)
+end event
+
+on m_pantallacompleta.destroy
+call super::destroy
+end on
+
+type m_cascada from menu within m_ventanas
+end type
+
+on m_cascada.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_cascada"
+this.text = "&Cascada"
+this.microhelp = "Organización en Cascada"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().ArrangeSheets(cascade!)
+end event
+
+on m_cascada.destroy
+call super::destroy
+end on
+
+type m_-6 from menu within m_ventanas
+end type
+
+on m_-6.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_-6"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-6.destroy
+call super::destroy
+end on
+
+type m_zoom from menu within m_ventanas
+m_20% m_20%
+m_40% m_40%
+m_60% m_60%
+m_80% m_80%
+m_100% m_100%
+m_200% m_200%
+end type
+
+on m_zoom.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_zoom"
+this.text = "&Zoom"
+this.microhelp = "Aumento Visual"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_20%=create m_20%
+this.m_40%=create m_40%
+this.m_60%=create m_60%
+this.m_80%=create m_80%
+this.m_100%=create m_100%
+this.m_200%=create m_200%
+this.Item[UpperBound(this.Item)+1]=this.m_20%
+this.Item[UpperBound(this.Item)+1]=this.m_40%
+this.Item[UpperBound(this.Item)+1]=this.m_60%
+this.Item[UpperBound(this.Item)+1]=this.m_80%
+this.Item[UpperBound(this.Item)+1]=this.m_100%
+this.Item[UpperBound(this.Item)+1]=this.m_200%
+end on
+
+on m_zoom.destroy
+call super::destroy
+destroy(this.m_20%)
+destroy(this.m_40%)
+destroy(this.m_60%)
+destroy(this.m_80%)
+destroy(this.m_100%)
+destroy(this.m_200%)
+end on
+
+type m_20% from menu within m_zoom
+end type
+
+event clicked;str.zoom = 20
+//parentwindow.getactivesheet().triggerevent('ue_zoom2')
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 20%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_20%.create
+call super::create
+this.text = "20%"
+this.microhelp = "20 %"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_20%.destroy
+call super::destroy
+end on
+
+type m_40% from menu within m_zoom
+end type
+
+on m_40%.create
+call super::create
+this.text = "40%"
+this.microhelp = "40 %"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;str.zoom = 40
+
+//parentwindow.getactivesheet().triggerevent('ue_zoom2')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 40%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, &
+		lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_40%.destroy
+call super::destroy
+end on
+
+type m_60% from menu within m_zoom
+end type
+
+on m_60%.create
+call super::create
+this.text = "60%"
+this.microhelp = "60 %"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;str.zoom = 60
+//parentwindow.getactivesheet().triggerevent('ue_zoom2')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 60%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, &
+		lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_60%.destroy
+call super::destroy
+end on
+
+type m_80% from menu within m_zoom
+end type
+
+on m_80%.create
+call super::create
+this.text = "80%"
+this.microhelp = "80 %"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;str.zoom = 80
+//parentwindow.getactivesheet().triggerevent('ue_zoom2')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 80%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, &
+		lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_80%.destroy
+call super::destroy
+end on
+
+type m_100% from menu within m_zoom
+end type
+
+on m_100%.create
+call super::create
+this.text = "100%"
+this.microhelp = "100 %"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;str.zoom = 100
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 100%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_100%.destroy
+call super::destroy
+end on
+
+type m_200% from menu within m_zoom
+end type
+
+on m_200%.create
+call super::create
+this.text = "200%"
+this.microhelp = "200 %"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;str.zoom = 200
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 200%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_200%.destroy
+call super::destroy
+end on
+
+type m_zoom2 from menu within m_ventanas
+end type
+
+on m_zoom2.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_zoom2"
+this.text = "Zoom (-)"
+this.microhelp = "Reduce Zoom"
+this.toolbaritemtext = "Disminuir Zoom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;window	lw_frame, lw_sheet
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom_down")
+	end if
+end if
+end event
+
+on m_zoom2.destroy
+call super::destroy
+end on
+
+type m_zoom3 from menu within m_ventanas
+end type
+
+on m_zoom3.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_zoom3"
+this.text = "Zoom (+)"
+this.microhelp = "Aumenta Zoom"
+this.toolbaritemtext = "Aumentar Zoom"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;window	lw_frame, lw_sheet
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom_up")
+	end if
+end if
+end event
+
+on m_zoom3.destroy
+call super::destroy
+end on
+
+type m_regla from menu within m_ventanas
+end type
+
+event clicked;window	lw_frame, lw_sheet
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_regla")
+	end if
+end if
+end event
+
+on m_regla.create
+call super::create
+this.tag = "m_fa_padre.m_ventanas.m_regla"
+this.text = "&Regla"
+this.microhelp = "Regla"
+this.toolbaritemtext = "Regla"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_regla.destroy
+call super::destroy
+end on
+
+type m_ayuda from menu within m_fa_padre
+m_acercade m_acercade
+m_manualhymsoft m_manualhymsoft
+m_prueba m_prueba
+m_reserva0 m_reserva0
+m_actualizaocs m_actualizaocs
+m_actualizatransitos m_actualizatransitos
+m_fechadeentrada m_fechadeentrada
+m_fechadesalida m_fechadesalida
+m_asignaproveedor m_asignaproveedor
+m_revfactura m_revfactura
+m_pedidosvencidos m_pedidosvencidos
+end type
+
+on m_ayuda.create
+call super::create
+this.tag = "m_fa_padre.m_ayuda"
+this.text = "&Ayuda"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_acercade=create m_acercade
+this.m_manualhymsoft=create m_manualhymsoft
+this.m_prueba=create m_prueba
+this.m_reserva0=create m_reserva0
+this.m_actualizaocs=create m_actualizaocs
+this.m_actualizatransitos=create m_actualizatransitos
+this.m_fechadeentrada=create m_fechadeentrada
+this.m_fechadesalida=create m_fechadesalida
+this.m_asignaproveedor=create m_asignaproveedor
+this.m_revfactura=create m_revfactura
+this.m_pedidosvencidos=create m_pedidosvencidos
+this.Item[UpperBound(this.Item)+1]=this.m_acercade
+this.Item[UpperBound(this.Item)+1]=this.m_manualhymsoft
+this.Item[UpperBound(this.Item)+1]=this.m_prueba
+this.Item[UpperBound(this.Item)+1]=this.m_reserva0
+this.Item[UpperBound(this.Item)+1]=this.m_actualizaocs
+this.Item[UpperBound(this.Item)+1]=this.m_actualizatransitos
+this.Item[UpperBound(this.Item)+1]=this.m_fechadeentrada
+this.Item[UpperBound(this.Item)+1]=this.m_fechadesalida
+this.Item[UpperBound(this.Item)+1]=this.m_asignaproveedor
+this.Item[UpperBound(this.Item)+1]=this.m_revfactura
+this.Item[UpperBound(this.Item)+1]=this.m_pedidosvencidos
+end on
+
+on m_ayuda.destroy
+call super::destroy
+destroy(this.m_acercade)
+destroy(this.m_manualhymsoft)
+destroy(this.m_prueba)
+destroy(this.m_reserva0)
+destroy(this.m_actualizaocs)
+destroy(this.m_actualizatransitos)
+destroy(this.m_fechadeentrada)
+destroy(this.m_fechadesalida)
+destroy(this.m_asignaproveedor)
+destroy(this.m_revfactura)
+destroy(this.m_pedidosvencidos)
+end on
+
+type m_acercade from menu within m_ayuda
+end type
+
+on m_acercade.create
+call super::create
+this.tag = "m_fa_padre.m_ayuda.m_acercadeharr"
+this.text = "Acerca de..~tF10"
+this.shortcut = 121
+this.microhelp = "Acerca de Bodega~'s Wireless Backoffice"
+this.toolbaritemtext = "Acerca de HARR2000"
+this.toolbaritemspace = 1
+this.menuitemtype = menuitemtypeabout!
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.SetRedraw ( False )
+//OpenSheet(w_acerca_de,parentwindow ,2, Original!)
+//OpenSheet(w_dg_db,parentwindow ,2, Original!)
+
+OpenSheet(w_acerca_de,parentwindow ,2, Original!)
+//OpenSheet(w_cacan,parentwindow ,2, Original!)
+//OpenSheet(w_fa_lista_productos,parentwindow ,2, Original!)
+parentwindow.SetRedraw ( True )
+//OpenSheetWithParm(w_genapp_toolbars,parentwindow,parentwindow ,2, Original!)
+
+
+
+
+
+end event
+
+on m_acercade.destroy
+call super::destroy
+end on
+
+type m_manualhymsoft from menu within m_ayuda
+end type
+
+on m_manualhymsoft.create
+call super::create
+this.text = "Manual Hymsoft"
+this.microhelp = "Manual de Usuario"
+this.toolbaritemtext = "Manual del Sistema Hymsoft"
+this.mergeoption = helpmenu!
+this.menuitemtype = menuitemtypehelp!
+this.menuimage = "Help!"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.menuanimation = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_manualhymsoft.destroy
+call super::destroy
+end on
+
+event clicked;OLEObject ole_object 
+Integer li_rc 
+String ls_ruta 
+
+  SELECT isnull(dgmempre.empr_ruta_de_manual,'')  
+    INTO :ls_ruta  
+    FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND  
+         ( dgmempre.empr_empresa = :str.empresa )   ;
+	if sqlca.sqlcode = -1 then
+		gf_mensaje('','Error al buscar ruta '+sqlca.sqlerrtext,1,1,'E')
+	end if
+
+if fileexists(ls_ruta) then
+	
+else
+	//ls_ruta = " C:\Sistemas\Documentos\hymsoft.pdf" 
+	gf_mensaje('','Ubique la ruta del manual, Verifique !!!',1,1,'E')
+	return
+end if
+
+ls_ruta = " "+ls_ruta
+
+ole_object = CREATE OleObject 
+li_rc = ole_object.ConnectToNewObject( "WScript.Shell" ) 
+
+IF li_rc<>0 THEN 
+DESTROY ole_object 
+MessageBox("Error", "No puede conectarse a Acrobat ") 
+RETURN 
+END IF 
+
+ole_object.run("AcroRd32"+ls_ruta) //, Maximized!) 
+
+end event
+
+type m_prueba from menu within m_ayuda
+end type
+
+event clicked;//parentwindow.SetRedraw ( false )
+//OpenSheet(aa_borrar_importacion,parentwindow, 9,Original! )
+//OpenSheet(w_subir_saldos_clientes,parentwindow, 9,Original! )
+//parentwindow.SetRedraw ( True )
+
+
+string ls_error, ls_prod
+long i
+ sqlca.autocommit = true 
+ 
+	 //Sql que actualiza las cantidades existentes del maestro de producto
+yield()
+	 str.frame.setmicrohelp("Eliminando Tabla Temporal de las Existencias de los Productos .............por favor Espere")		
+yield()		
+
+delete from incantidades
+where cant_g_financiero = :str.g_financiero and
+		 cant_empresa = :str.empresa;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al Eliminar en tabla temporal  '+ sqlca.sqlerrtext,1,1,'E')
+				return
+			end if
+
+	 str.frame.setmicrohelp("Recuperando las Existencias de los Productos .............por favor Espere")		
+	 
+  INSERT INTO incantidades  
+         ( cant_g_financiero,   
+           cant_empresa,   
+           cant_producto,   
+		  cant_bodega,
+           cant_cantidad )  
+	select  max(inmprodu.prod_g_financiero),
+			 max(inmprodu.prod_empresa),
+			 inmprodu.prod_producto,
+			 dmov_bodega,
+			 sum((case intmovim.tmov_tipo when 'D' then 1 else - 1 end ) * round((((indmovim.dmov_cantidad * inamedid.medi_cantidad ) + isnull(indmovim.dmov_cant1,0))),2))
+			 FROM indmovim,
+					intmovim,
+					inamedid,
+					inmprodu
+			WHERE ( intmovim.tmov_g_financiero = indmovim.dmov_g_financiero ) and
+					( intmovim.tmov_empresa = indmovim.dmov_empresa ) and
+					( intmovim.tmov_aplicacion = indmovim.dmov_aplicacion ) and
+					( intmovim.tmov_tipo_transaccion = indmovim.dmov_tipo_transaccion ) and
+					( intmovim.tmov_secuencia = indmovim.dmov_secuencia ) and
+					( intmovim.tmov_anual = indmovim.dmov_anual ) and
+					( intmovim.tmov_concepto = indmovim.dmov_concepto ) and		
+					( inamedid.medi_medida = indmovim.dmov_unidad_medida ) and
+					( indmovim.dmov_g_financiero = inmprodu.prod_g_financiero ) and
+					( indmovim.dmov_empresa = inmprodu.prod_empresa ) and	
+					( inmprodu.prod_g_financiero = :str.g_financiero ) and (inmprodu.prod_empresa = :str.empresa) and 
+					( indmovim.dmov_producto = inmprodu.prod_producto )	 group by prod_producto, dmov_bodega;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al insertar en tabla temporal  '+ sqlca.sqlerrtext,1,1,'E')
+				return
+			end if
+
+//Update existencia_total
+	str.frame.setmicrohelp("Actualizando las Existencia Total de los Productos .............por favor Espere")	
+update inmprodu
+set     inmprodu.prod_existencia_total = 
+	isnull(( select sum( incantidades.cant_cantidad)   
+    FROM incantidades
+   WHERE ( inmprodu.prod_g_financiero = incantidades.cant_g_financiero ) and  
+         ( inmprodu.prod_empresa = incantidades.cant_empresa ) and  
+         ( inmprodu.prod_producto = incantidades.cant_producto ) and  
+         ( ( incantidades.cant_g_financiero = :str.g_financiero ) AND  
+         ( incantidades.cant_empresa = :str.empresa ) ) ),0)
+Where inmprodu.prod_g_financiero = :str.g_financiero and
+		 inmprodu.prod_empresa = :str.empresa ;     
+
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al Actualizar Existencia Total  '+ sqlca.sqlerrtext,1,1,'E')
+				return
+			end if
+
+//Bodega 1 
+str.frame.setmicrohelp("Actualizando las Existencias de los Productos Bodega 1.............por favor Espere")
+
+update inmprodu
+set     inmprodu.prod_existencia1 = 
+	isnull(( select sum( incantidades.cant_cantidad)   
+    FROM incantidades
+   WHERE ( inmprodu.prod_g_financiero = incantidades.cant_g_financiero ) and  
+         ( inmprodu.prod_empresa = incantidades.cant_empresa ) and  
+         ( inmprodu.prod_producto = incantidades.cant_producto ) and  
+		( incantidades.cant_bodega = '1' ) AND
+         ( ( incantidades.cant_g_financiero = :str.g_financiero ) AND  
+         ( incantidades.cant_empresa = :str.empresa ) ) ),0) 
+Where inmprodu.prod_g_financiero = :str.g_financiero and
+		 inmprodu.prod_empresa = :str.empresa ;     
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al Actualizar Existencia Total Bodega 1 '+ sqlca.sqlerrtext,1,1,'E')
+				return
+			end if
+			
+//Bodega 2
+str.frame.setmicrohelp("Actualizando las Existencias de los Productos Bodega 2.............por favor Espere")
+
+update inmprodu
+set     inmprodu.prod_existencia2 = 
+	isnull(( select sum( incantidades.cant_cantidad)   
+    FROM incantidades
+   WHERE ( inmprodu.prod_g_financiero = incantidades.cant_g_financiero ) and  
+         ( inmprodu.prod_empresa = incantidades.cant_empresa ) and  
+         ( inmprodu.prod_producto = incantidades.cant_producto ) and  
+		( incantidades.cant_bodega = '2' ) AND
+         ( ( incantidades.cant_g_financiero = :str.g_financiero ) AND  
+         ( incantidades.cant_empresa = :str.empresa ) ) ),0) 
+Where inmprodu.prod_g_financiero = :str.g_financiero and
+		 inmprodu.prod_empresa = :str.empresa ;     
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al Actualizar Existencia Total Bodega 1 '+ sqlca.sqlerrtext,1,1,'E')
+				return
+			end if
+
+//ACTUALIZAR EXISTENCIAS EN TRANSITO
+delete from incantidadesoc
+where cant_g_financiero = :str.g_financiero and
+		 cant_empresa = :str.empresa;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al Eliminar en tabla temporal  '+ sqlca.sqlerrtext,1,1,'E')
+				return
+			end if
+
+	 str.frame.setmicrohelp("Recuperando las Existencias de los Productos OC .............por favor Espere")		
+
+	   INSERT INTO incantidadesoc  
+         ( cant_g_financiero,   
+           cant_empresa,   
+           cant_producto,   
+           cant_cantidad )  
+  SELECT max(orden_detalle.deta_g_financiero),
+  			max(orden_detalle.deta_empresa),
+			orden_detalle.deta_referencia,	
+			sum(orden_detalle.deta_cantidad * inamedid.medi_cantidad - isnull(orden_detalle.deta_pasada,0) )  
+    FROM inamedid,   
+         orden,   
+         orden_detalle  
+   WHERE ( orden_detalle.deta_g_financiero = orden.enca_g_financiero ) and  
+         ( orden_detalle.deta_empresa = orden.enca_empresa ) and  
+         ( orden_detalle.deta_secuencia = orden.enca_secuencia ) and  
+         ( orden_detalle.deta_ann = orden.enca_ann ) and  
+         ( orden_detalle.deta_unidad = inamedid.medi_medida ) and  
+         ( ( orden.enca_g_financiero = :str.g_financiero ) AND  
+         ( orden.enca_empresa = :str.empresa ) AND  
+         ( orden.enca_estado = 'E' ) AND  
+         ( isnull(orden_detalle.deta_pasada,0) < orden_detalle.deta_cantidad * inamedid.medi_cantidad ) AND  
+         ( orden.enca_tipo <> 2 ) )   
+	GROUP BY orden_detalle.deta_referencia   ;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al Actualizar Existencia en Tabla de OCs '+ sqlca.sqlerrtext,1,1,'E')
+				return
+			end if
+
+//Update existencia_total
+	str.frame.setmicrohelp("Actualizando las Existencia Total de los Transitos .............por favor Espere")	
+update inmprodu
+set     inmprodu.prod_cant_confirma = 
+	isnull(( select sum( incantidadesoc.cant_cantidad)   
+    FROM incantidadesoc
+   WHERE ( inmprodu.prod_g_financiero = incantidadesoc.cant_g_financiero ) and  
+         ( inmprodu.prod_empresa = incantidadesoc.cant_empresa ) and  
+         ( inmprodu.prod_producto = incantidadesoc.cant_producto ) and  
+         ( ( incantidadesoc.cant_g_financiero = :str.g_financiero ) AND  
+         ( incantidadesoc.cant_empresa = :str.empresa ) ) ),0)
+Where inmprodu.prod_g_financiero = :str.g_financiero and
+		 inmprodu.prod_empresa = :str.empresa ;     
+
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al Actualizar Existencia Total de OC '+ sqlca.sqlerrtext,1,1,'E')
+				return
+			end if
+//
+// DECLARE cur_prod CURSOR FOR  
+//  SELECT inmprodu.prod_producto  
+//    FROM inmprodu  
+//   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero ) AND  
+//         ( inmprodu.prod_empresa = :str.empresa )  order by prod_producto  ;
+//		if sqlca.sqlcode = -1 then
+//			gf_mensaje('','Error al declarar '+ sqlca.sqlerrtext,1,1,'E')
+//		end if
+//	
+//open cur_prod;
+//
+//fetch cur_prod into :ls_prod;
+//
+//do while sqlca.sqlcode = 0
+//yield()
+//i ++
+//str.frame.setmicrohelp("Registro "+string(i)+"     Producto "+ls_prod)
+//
+//		UPDATE inmprodu  
+//				  SET prod_existencia_total = 
+//		isnull(		  (
+//		select   sum((case intmovim.tmov_tipo when 'D' then 1 else - 1 end ) * round((((indmovim.dmov_cantidad * inamedid.medi_cantidad ) + indmovim.dmov_cant1)),2))
+//			 FROM indmovim,
+//					intmovim,
+//					inamedid
+//			WHERE ( intmovim.tmov_g_financiero = indmovim.dmov_g_financiero ) and
+//					( intmovim.tmov_empresa = indmovim.dmov_empresa ) and
+//					( intmovim.tmov_aplicacion = indmovim.dmov_aplicacion ) and
+//					( intmovim.tmov_tipo_transaccion = indmovim.dmov_tipo_transaccion ) and
+//					( intmovim.tmov_secuencia = indmovim.dmov_secuencia ) and
+//					( intmovim.tmov_anual = indmovim.dmov_anual ) and
+//					( intmovim.tmov_concepto = indmovim.dmov_concepto ) and
+//		
+//					( inamedid.medi_medida = indmovim.dmov_unidad_medida ) and
+//		
+//					( indmovim.dmov_g_financiero = inmprodu.prod_g_financiero ) and
+//					( indmovim.dmov_empresa = inmprodu.prod_empresa ) and
+//					( indmovim.dmov_producto = inmprodu.prod_producto )	 and
+//					( indmovim.dmov_producto = :ls_prod )
+//				  ),0),
+//				  
+//prod_existencia1 = 
+//		isnull(		  (
+//		select sum( case when dmov_bodega = '1' then (case intmovim.tmov_tipo when 'D' then 1 else - 1 end ) * round((((indmovim.dmov_cantidad * inamedid.medi_cantidad ) + indmovim.dmov_cant1)),2)  end )
+//			 FROM indmovim,
+//					intmovim,
+//					inamedid
+//			WHERE ( intmovim.tmov_g_financiero = indmovim.dmov_g_financiero ) and
+//					( intmovim.tmov_empresa = indmovim.dmov_empresa ) and
+//					( intmovim.tmov_aplicacion = indmovim.dmov_aplicacion ) and
+//					( intmovim.tmov_tipo_transaccion = indmovim.dmov_tipo_transaccion ) and
+//					( intmovim.tmov_secuencia = indmovim.dmov_secuencia ) and
+//					( intmovim.tmov_anual = indmovim.dmov_anual ) and
+//					( intmovim.tmov_concepto = indmovim.dmov_concepto ) and
+//		
+//					( inamedid.medi_medida = indmovim.dmov_unidad_medida ) and
+//		
+//					( indmovim.dmov_g_financiero = inmprodu.prod_g_financiero ) and
+//					( indmovim.dmov_empresa = inmprodu.prod_empresa ) and
+//					( indmovim.dmov_producto = inmprodu.prod_producto )	 and
+//					( indmovim.dmov_producto = :ls_prod )
+//				  ),0)	,
+//				  
+//prod_existencia2 = 
+//		isnull(		  (
+//		select sum( case when dmov_bodega = '2' then (case intmovim.tmov_tipo when 'D' then 1 else - 1 end ) * round((((indmovim.dmov_cantidad * inamedid.medi_cantidad ) + indmovim.dmov_cant1)),2)  end )
+//			 FROM indmovim,
+//					intmovim,
+//					inamedid
+//			WHERE ( intmovim.tmov_g_financiero = indmovim.dmov_g_financiero ) and
+//					( intmovim.tmov_empresa = indmovim.dmov_empresa ) and
+//					( intmovim.tmov_aplicacion = indmovim.dmov_aplicacion ) and
+//					( intmovim.tmov_tipo_transaccion = indmovim.dmov_tipo_transaccion ) and
+//					( intmovim.tmov_secuencia = indmovim.dmov_secuencia ) and
+//					( intmovim.tmov_anual = indmovim.dmov_anual ) and
+//					( intmovim.tmov_concepto = indmovim.dmov_concepto ) and
+//		
+//					( inamedid.medi_medida = indmovim.dmov_unidad_medida ) and
+//		
+//					( indmovim.dmov_g_financiero = inmprodu.prod_g_financiero ) and
+//					( indmovim.dmov_empresa = inmprodu.prod_empresa ) and
+//					( indmovim.dmov_producto = inmprodu.prod_producto )	 and
+//					( indmovim.dmov_producto = :ls_prod )
+//				  ),0)	,
+//				  
+//	  prod_existencia3 = 
+//		isnull(		  ( select sum( case when dmov_bodega = '3' then (case intmovim.tmov_tipo when 'D' then 1 else - 1 end ) * round((((indmovim.dmov_cantidad * inamedid.medi_cantidad ) + indmovim.dmov_cant1)),2)  end )
+//			 FROM indmovim,
+//					intmovim,
+//					inamedid
+//			WHERE ( intmovim.tmov_g_financiero = indmovim.dmov_g_financiero ) and
+//					( intmovim.tmov_empresa = indmovim.dmov_empresa ) and
+//					( intmovim.tmov_aplicacion = indmovim.dmov_aplicacion ) and
+//					( intmovim.tmov_tipo_transaccion = indmovim.dmov_tipo_transaccion ) and
+//					( intmovim.tmov_secuencia = indmovim.dmov_secuencia ) and
+//					( intmovim.tmov_anual = indmovim.dmov_anual ) and
+//					( intmovim.tmov_concepto = indmovim.dmov_concepto ) and
+//		
+//					( inamedid.medi_medida = indmovim.dmov_unidad_medida ) and
+//		
+//					( indmovim.dmov_g_financiero = inmprodu.prod_g_financiero ) and
+//					( indmovim.dmov_empresa = inmprodu.prod_empresa ) and
+//					( indmovim.dmov_producto = inmprodu.prod_producto )	 and
+//					( indmovim.dmov_producto = :ls_prod )
+//				  ),0)				  
+//				  
+//				WHERE ( inmprodu.prod_g_financiero = :str.g_financiero ) AND  
+//						( inmprodu.prod_empresa = :str.empresa )   AND 
+//						( inmprodu.prod_producto = :ls_prod );
+//						
+//				  if sqlca.sqlcode = -1 then
+//					ls_error = sqlca.sqlerrtext
+//					rollback;
+//					mensaje("Aviso","Error al Actualizar las Existencias de los Productos ",ls_error)
+//					sqlca.autocommit = true
+//					return
+//				  end if
+//			yield()
+//
+//				UPDATE inmprodu  
+//				  SET prod_existencia4 = 
+//			isnull( ( select sum( case when dmov_bodega = '4' then (case intmovim.tmov_tipo when 'D' then 1 else - 1 end ) * round((((indmovim.dmov_cantidad * inamedid.medi_cantidad ) + indmovim.dmov_cant1)),2)  end )
+//			 FROM indmovim,
+//					intmovim,
+//					inamedid
+//			WHERE ( intmovim.tmov_g_financiero = indmovim.dmov_g_financiero ) and
+//					( intmovim.tmov_empresa = indmovim.dmov_empresa ) and
+//					( intmovim.tmov_aplicacion = indmovim.dmov_aplicacion ) and
+//					( intmovim.tmov_tipo_transaccion = indmovim.dmov_tipo_transaccion ) and
+//					( intmovim.tmov_secuencia = indmovim.dmov_secuencia ) and
+//					( intmovim.tmov_anual = indmovim.dmov_anual ) and
+//					( intmovim.tmov_concepto = indmovim.dmov_concepto ) and
+//		
+//					( inamedid.medi_medida = indmovim.dmov_unidad_medida ) and
+//		
+//					( indmovim.dmov_g_financiero = inmprodu.prod_g_financiero ) and
+//					( indmovim.dmov_empresa = inmprodu.prod_empresa ) and
+//					( indmovim.dmov_producto = inmprodu.prod_producto )	 and
+//					( indmovim.dmov_producto = :ls_prod )
+//				  ),0)				  
+//				  
+//				WHERE ( inmprodu.prod_g_financiero = :str.g_financiero ) AND  
+//						( inmprodu.prod_empresa = :str.empresa )   AND 
+//						( inmprodu.prod_producto = :ls_prod );
+//						
+//				  if sqlca.sqlcode = -1 then
+//					ls_error = sqlca.sqlerrtext
+//					rollback;
+//					mensaje("Aviso","Error al Actualizar las Existencias de los Productos ",ls_error)
+//					sqlca.autocommit = true
+//					return
+//				  end if
+//			yield()
+//				
+//			
+////			str.frame.setmicrohelp("Actualizando las Reservas de los Productos .............por favor Espere")
+//				
+//		fetch cur_prod into :ls_prod;
+//		
+//		//	gf_mensaje("","Actualización Exitosa de las Existencias de Productos",1,1,"E")
+//	
+//loop
+//close cur_prod;
+str.frame.setmicrohelp("Listo")
+end event
+
+on m_prueba.create
+call super::create
+this.text = "Actualiza"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_prueba.destroy
+call super::destroy
+end on
+
+type m_reserva0 from menu within m_ayuda
+end type
+
+event clicked;string ls_error
+sqlca.autocommit = true
+
+ str.frame.setmicrohelp("Actualizando las Reservas de los Productos .............por favor Espere")		
+yield()
+
+ UPDATE inmprodu  
+     SET prod_reserva_total = 
+			ISNULL( ( 
+ 			  SELECT sum(fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum(faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+			        ( fatdiari.fact_estado = 'A' ))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) ;
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return
+			  end if
+
+commit;
+yield()
+ str.frame.setmicrohelp("Actualizando las Reservas 1 de los Productos .............por favor Espere")		
+ 
+ UPDATE inmprodu  
+     SET prod_reserva1 = 
+			ISNULL( ( 
+ 			  SELECT sum( case when dped_bodega = '1' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada end) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum( case when facd_bodega = '1' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion end ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+			        ( fatdiari.fact_estado = 'A' ))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) ;
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return
+			  end if
+
+commit;
+yield()
+ str.frame.setmicrohelp("Actualizando las Reservas 2 de los Productos .............por favor Espere")		
+
+ UPDATE inmprodu  
+     SET prod_reserva2 = 
+			ISNULL( ( 
+ 			  SELECT sum( case when dped_bodega = '2' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada end) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum( case when facd_bodega = '2' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion end ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+			        ( fatdiari.fact_estado = 'A' ))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) ;
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return
+			  end if
+
+commit;
+
+yield()
+ str.frame.setmicrohelp("Actualizando las Reservas 3 de los Productos .............por favor Espere")		
+
+ UPDATE inmprodu  
+     SET prod_reserva3 = 
+			ISNULL( ( 
+ 			  SELECT sum( case when dped_bodega = '3' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada end) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum( case when facd_bodega = '3' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion end ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+			        ( fatdiari.fact_estado = 'A' ))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) ;
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return
+			  end if
+yield()
+ str.frame.setmicrohelp("Actualizando las Reservas 4 de los Productos .............por favor Espere")		
+ 
+ UPDATE inmprodu  
+     SET prod_reserva4 = 
+			ISNULL( ( 
+ 			  SELECT sum( case when dped_bodega = '4' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada end) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum( case when facd_bodega = '4' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion end ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+			        ( fatdiari.fact_estado = 'A' ))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) ;
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return
+			  end if
+
+commit;
+
+ str.frame.setmicrohelp("Reserva Actualizada")		
+
+////parentwindow.SetRedraw ( false )
+////OpenSheet(aa_borrar_importacion,parentwindow, 9,Original! )
+////OpenSheet(w_subir_saldos_clientes,parentwindow, 9,Original! )
+////parentwindow.SetRedraw ( True )
+//
+//
+//string ls_error, ls_prod
+//long i
+// sqlca.autocommit = true 
+// 
+//	 //Sql que actualiza las cantidades existentes del maestro de producto
+//yield()
+//	 str.frame.setmicrohelp("Actualizando las Existencias de los Productos .............por favor Espere")		
+//yield()		
+//
+//
+// DECLARE cur_prod CURSOR FOR  
+//  SELECT inmprodu.prod_producto  
+//    FROM inmprodu  
+//   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero ) AND  
+//         ( inmprodu.prod_empresa = :str.empresa )  order by prod_producto ;
+//		if sqlca.sqlcode = -1 then
+//			gf_mensaje('','Error al declarar '+ sqlca.sqlerrtext,1,1,'E')
+//		end if
+//	
+//open cur_prod;
+//
+//fetch cur_prod into :ls_prod;
+//
+//do while sqlca.sqlcode = 0
+//yield()
+//i ++
+//str.frame.setmicrohelp("Producto "+ls_prod+"           "+string(i))
+//
+//yield()
+//			
+////			str.frame.setmicrohelp("Actualizando las Reservas de los Productos .............por favor Espere")
+//str.frame.setmicrohelp("Producto Reserva "+ls_prod+"           "+string(i))
+//
+//		/*Actualiza los reservados del producto, procedentes de pedidos*/
+//		 UPDATE inmprodu  
+//			  SET prod_reserva_total = 
+//					isnull( (
+//					  SELECT  sum(faddiari.facd_cantidad * inamedid.medi_cantidad + 
+//								 faddiari.facd_cantidad_fraccion ) 
+//					  FROM faddiari,
+//							 inamedid,
+//							 fatdiari
+//					  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+//							  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+//							  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+//							  ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+//							  ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+//							  ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+//							  ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+//							  ( fatdiari.fact_ann = faddiari.facd_ann ) and
+//							  ( faddiari.facd_codigo_item = :ls_prod ) and
+//							  ( fatdiari.fact_estado = 'A' or 
+//								 ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+//					 ,0)	,
+//
+//		 prod_reserva1 = 	isnull( (
+//					  SELECT  sum(  case when facd_bodega = '1' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+//								 faddiari.facd_cantidad_fraccion end ) 
+//					  FROM faddiari,
+//							 inamedid,
+//							 fatdiari
+//					  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+//							  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+//							  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+//							  ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+//							  ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+//							  ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+//							  ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+//							  ( fatdiari.fact_ann = faddiari.facd_ann ) and
+//							  ( faddiari.facd_codigo_item = :ls_prod ) and
+//							  ( fatdiari.fact_estado = 'A' or 
+//							 ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+//					 ,0)			 
+//			 FROM inmprodu
+//			WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+//					( inmprodu.prod_empresa = :str.empresa) and
+//					( inmprodu.prod_producto = :ls_prod );
+//					
+//			  if sqlca.sqlcode = -1 then
+//				ls_error = sqlca.sqlerrtext
+//				rollback;
+//				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+//				sqlca.autocommit = true
+//		
+//				return
+//			  end if
+//			  
+//		yield()
+//		
+//				/*Actualiza los reservados del producto, procedentes de pedidos*/
+//		 UPDATE inmprodu  
+//			  SET 	 prod_reserva2 = 	isnull( (  SELECT  sum(  case when facd_bodega = '2' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+//								 faddiari.facd_cantidad_fraccion end ) 
+//					  FROM faddiari,
+//							 inamedid,
+//							 fatdiari
+//					  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+//							  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+//							  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+//							  ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+//							  ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+//							  ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+//							  ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+//							  ( fatdiari.fact_ann = faddiari.facd_ann ) and
+//							  ( faddiari.facd_codigo_item = :ls_prod ) and
+//							  ( fatdiari.fact_estado = 'A' or 
+//								 ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+//					 ,0)							 					 
+//			 FROM inmprodu
+//			WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+//					( inmprodu.prod_empresa = :str.empresa) and
+//					( inmprodu.prod_producto = :ls_prod );
+//					
+//			  if sqlca.sqlcode = -1 then
+//				ls_error = sqlca.sqlerrtext
+//				rollback;
+//				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+//				sqlca.autocommit = true
+//		
+//				return
+//			  end if
+//			
+//			
+//		fetch cur_prod into :ls_prod;
+//		
+//		//	gf_mensaje("","Actualización Exitosa de las Existencias de Productos",1,1,"E")
+//	
+//loop
+//close cur_prod;
+//str.frame.setmicrohelp("Listo")
+//
+///*
+//
+//,
+//					  prod_reserva3 = ISNULL( ( SELECT sum(case when dped_bodega = '3' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+//								fadpedid.dped_fraccion - dped_pasada end) 
+//					  FROM fadpedid,inamedid, fatpedid
+//					  WHERE ( fadpedid.dped_g_financiero = fatpedid.pedi_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = fatpedid.pedi_empresa ) and  
+//							  ( fadpedid.dped_no_pedido = fatpedid.pedi_no_pedido ) and  
+//							  ( fadpedid.dped_ann = fatpedid.pedi_ann ) and		        
+//							  ( fatpedid.pedi_estado <> 'P') and					
+//							  ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+//							  ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+//							  ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+//							  ( fadpedid.dped_codigo_item = :ls_prod ) AND
+//							  ( fadpedid.dped_pasada <= fadpedid.dped_cantidad * inamedid.medi_cantidad + fadpedid.dped_fraccion ) and					  
+//							  ( fadpedid.dped_reserva_origen = 'E')),0) + 
+//					isnull( (
+//					  SELECT  sum(  case when facd_bodega = '3' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+//								 faddiari.facd_cantidad_fraccion end ) 
+//					  FROM faddiari,
+//							 inamedid,
+//							 fatdiari
+//					  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+//							  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+//							  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+//							  ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+//							  ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+//							  ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+//							  ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+//							  ( fatdiari.fact_ann = faddiari.facd_ann ) and
+//							  ( faddiari.facd_codigo_item = :ls_prod ) and
+//							  ( fatdiari.fact_no_pedido not like '%NC%') AND
+//							  ( fatdiari.fact_estado = 'A' or 
+//								 ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+//					 ,0)
+//
+//*/
+//
+//
+///*update con el pedido
+//
+////parentwindow.SetRedraw ( false )
+////OpenSheet(aa_borrar_importacion,parentwindow, 9,Original! )
+////OpenSheet(w_subir_saldos_clientes,parentwindow, 9,Original! )
+////parentwindow.SetRedraw ( True )
+//
+//
+//string ls_error, ls_prod
+//long i
+// sqlca.autocommit = true 
+// 
+//	 //Sql que actualiza las cantidades existentes del maestro de producto
+//yield()
+//	 str.frame.setmicrohelp("Actualizando las Existencias de los Productos .............por favor Espere")		
+//yield()		
+//
+//
+// DECLARE cur_prod CURSOR FOR  
+//  SELECT inmprodu.prod_producto  
+//    FROM inmprodu  
+//   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero ) AND  
+//         ( inmprodu.prod_empresa = :str.empresa )  order by prod_producto ;
+//		if sqlca.sqlcode = -1 then
+//			gf_mensaje('','Error al declarar '+ sqlca.sqlerrtext,1,1,'E')
+//		end if
+//	
+//open cur_prod;
+//
+//fetch cur_prod into :ls_prod;
+//
+//do while sqlca.sqlcode = 0
+//yield()
+//i ++
+//str.frame.setmicrohelp("Producto "+ls_prod+"           "+string(i))
+//
+//yield()
+//			
+////			str.frame.setmicrohelp("Actualizando las Reservas de los Productos .............por favor Espere")
+//str.frame.setmicrohelp("Producto Reserva "+ls_prod+"           "+string(i))
+//
+//		/*Actualiza los reservados del producto, procedentes de pedidos*/
+//		 UPDATE inmprodu  
+//			  SET prod_reserva_total = 
+//					ISNULL( ( 
+//					  SELECT sum(fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+//								fadpedid.dped_fraccion - dped_pasada) 
+//					  FROM fadpedid,inamedid, fatpedid
+//					  WHERE ( fadpedid.dped_g_financiero = fatpedid.pedi_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = fatpedid.pedi_empresa ) and  
+//							  ( fadpedid.dped_no_pedido = fatpedid.pedi_no_pedido ) and  
+//							  ( fadpedid.dped_ann = fatpedid.pedi_ann ) and		        
+//							  ( fatpedid.pedi_estado <> 'P') and					
+//							  ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+//							  ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+//							  ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+//							  ( fadpedid.dped_codigo_item = :ls_prod ) AND
+//							  ( fadpedid.dped_pasada <= fadpedid.dped_cantidad * inamedid.medi_cantidad + fadpedid.dped_fraccion ) and					  
+//							  ( fadpedid.dped_reserva_origen = 'E')),0) + 
+//					isnull( (
+//					  SELECT  sum(faddiari.facd_cantidad * inamedid.medi_cantidad + 
+//								 faddiari.facd_cantidad_fraccion ) 
+//					  FROM faddiari,
+//							 inamedid,
+//							 fatdiari
+//					  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+//							  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+//							  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+//							  ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+//							  ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+//							  ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+//							  ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+//							  ( fatdiari.fact_ann = faddiari.facd_ann ) and
+//							  ( faddiari.facd_codigo_item = :ls_prod ) and
+//							  ( fatdiari.fact_estado = 'A' or 
+//								 ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+//					 ,0)	,
+//
+//		 prod_reserva1 = ISNULL( ( SELECT sum(case when dped_bodega = '1' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+//								fadpedid.dped_fraccion - dped_pasada end) 
+//					  FROM fadpedid,inamedid, fatpedid
+//					  WHERE ( fadpedid.dped_g_financiero = fatpedid.pedi_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = fatpedid.pedi_empresa ) and  
+//							  ( fadpedid.dped_no_pedido = fatpedid.pedi_no_pedido ) and  
+//							  ( fadpedid.dped_ann = fatpedid.pedi_ann ) and		        
+//							  ( fatpedid.pedi_estado <> 'P') and					
+//							  ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+//							  ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+//							  ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+//							  ( fadpedid.dped_codigo_item = :ls_prod ) AND
+//							  ( fadpedid.dped_pasada <= fadpedid.dped_cantidad * inamedid.medi_cantidad + fadpedid.dped_fraccion ) and					  
+//							  ( fadpedid.dped_reserva_origen = 'E')),0) + 
+//					isnull( (
+//					  SELECT  sum(  case when facd_bodega = '1' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+//								 faddiari.facd_cantidad_fraccion end ) 
+//					  FROM faddiari,
+//							 inamedid,
+//							 fatdiari
+//					  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+//							  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+//							  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+//							  ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+//							  ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+//							  ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+//							  ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+//							  ( fatdiari.fact_ann = faddiari.facd_ann ) and
+//							  ( faddiari.facd_codigo_item = :ls_prod ) and
+//							  ( fatdiari.fact_estado = 'A' or 
+//							 ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+//					 ,0)			 
+//			 FROM inmprodu
+//			WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+//					( inmprodu.prod_empresa = :str.empresa) and
+//					( inmprodu.prod_producto = :ls_prod );
+//					
+//			  if sqlca.sqlcode = -1 then
+//				ls_error = sqlca.sqlerrtext
+//				rollback;
+//				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+//				sqlca.autocommit = true
+//		
+//				return
+//			  end if
+//			  
+//		yield()
+//		
+//				/*Actualiza los reservados del producto, procedentes de pedidos*/
+//		 UPDATE inmprodu  
+//			  SET 	 prod_reserva2 = ISNULL( ( SELECT sum(case when dped_bodega = '2' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+//								fadpedid.dped_fraccion - dped_pasada end) 
+//					  FROM fadpedid,inamedid, fatpedid
+//					  WHERE ( fadpedid.dped_g_financiero = fatpedid.pedi_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = fatpedid.pedi_empresa ) and  
+//							  ( fadpedid.dped_no_pedido = fatpedid.pedi_no_pedido ) and  
+//							  ( fadpedid.dped_ann = fatpedid.pedi_ann ) and		        
+//							  ( fatpedid.pedi_estado <> 'P') and					
+//							  ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+//							  ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+//							  ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+//							  ( fadpedid.dped_codigo_item = :ls_prod ) AND
+//							  ( fadpedid.dped_pasada <= fadpedid.dped_cantidad * inamedid.medi_cantidad + fadpedid.dped_fraccion ) and					  
+//							  ( fadpedid.dped_reserva_origen = 'E')),0) + 
+//					isnull( (
+//					  SELECT  sum(  case when facd_bodega = '2' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+//								 faddiari.facd_cantidad_fraccion end ) 
+//					  FROM faddiari,
+//							 inamedid,
+//							 fatdiari
+//					  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+//							  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+//							  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+//							  ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+//							  ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+//							  ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+//							  ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+//							  ( fatdiari.fact_ann = faddiari.facd_ann ) and
+//							  ( faddiari.facd_codigo_item = :ls_prod ) and
+//							  ( fatdiari.fact_estado = 'A' or 
+//								 ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+//					 ,0)							 					 
+//			 FROM inmprodu
+//			WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+//					( inmprodu.prod_empresa = :str.empresa) and
+//					( inmprodu.prod_producto = :ls_prod );
+//					
+//			  if sqlca.sqlcode = -1 then
+//				ls_error = sqlca.sqlerrtext
+//				rollback;
+//				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+//				sqlca.autocommit = true
+//		
+//				return
+//			  end if
+//			
+//			
+//		fetch cur_prod into :ls_prod;
+//		
+//		//	gf_mensaje("","Actualización Exitosa de las Existencias de Productos",1,1,"E")
+//	
+//loop
+//close cur_prod;
+//str.frame.setmicrohelp("Listo")
+//
+///*
+//
+//,
+//					  prod_reserva3 = ISNULL( ( SELECT sum(case when dped_bodega = '3' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+//								fadpedid.dped_fraccion - dped_pasada end) 
+//					  FROM fadpedid,inamedid, fatpedid
+//					  WHERE ( fadpedid.dped_g_financiero = fatpedid.pedi_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = fatpedid.pedi_empresa ) and  
+//							  ( fadpedid.dped_no_pedido = fatpedid.pedi_no_pedido ) and  
+//							  ( fadpedid.dped_ann = fatpedid.pedi_ann ) and		        
+//							  ( fatpedid.pedi_estado <> 'P') and					
+//							  ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+//							  ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+//							  ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+//							  ( fadpedid.dped_codigo_item = :ls_prod ) AND
+//							  ( fadpedid.dped_pasada <= fadpedid.dped_cantidad * inamedid.medi_cantidad + fadpedid.dped_fraccion ) and					  
+//							  ( fadpedid.dped_reserva_origen = 'E')),0) + 
+//					isnull( (
+//					  SELECT  sum(  case when facd_bodega = '3' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+//								 faddiari.facd_cantidad_fraccion end ) 
+//					  FROM faddiari,
+//							 inamedid,
+//							 fatdiari
+//					  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+//							  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+//							  ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+//							  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+//							  ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+//							  ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+//							  ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+//							  ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+//							  ( fatdiari.fact_ann = faddiari.facd_ann ) and
+//							  ( faddiari.facd_codigo_item = :ls_prod ) and
+//							  ( fatdiari.fact_no_pedido not like '%NC%') AND
+//							  ( fatdiari.fact_estado = 'A' or 
+//								 ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+//					 ,0)
+//
+//*/
+//*/
+end event
+
+on m_reserva0.create
+call super::create
+this.text = "Reserva"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_reserva0.destroy
+call super::destroy
+end on
+
+type m_actualizaocs from menu within m_ayuda
+end type
+
+on m_actualizaocs.create
+call super::create
+this.text = "Actualiza OCs"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_actualizaocs.destroy
+call super::destroy
+end on
+
+event clicked; str.frame.setmicrohelp("Actualizando las Cantidades de las Ordenes .............por favor Espere")		
+ 
+update inmprodu set prod_cant_confirma = 
+ ( SELECT isnull(sum(convert(numeric(17,0), orden_detalle.deta_cantidad * inamedid.medi_cantidad) ),0) 
+    FROM orden,   
+         orden_detalle,   
+         inamedid  
+   WHERE ( orden_detalle.deta_g_financiero = orden.enca_g_financiero ) and  
+         ( orden_detalle.deta_empresa = orden.enca_empresa ) and  
+         ( orden_detalle.deta_secuencia = orden.enca_secuencia ) and  
+         ( orden_detalle.deta_ann = orden.enca_ann ) and  
+         ( orden_detalle.deta_unidad = inamedid.medi_medida ) and  
+         ( ( orden.enca_g_financiero = :str.g_financiero ) AND  
+         ( orden.enca_empresa = :str.empresa ) AND  
+         ( (orden_detalle.deta_cantidad * medi_cantidad ) - isnull(orden_detalle.deta_pasada,0) > 0 ) AND  
+         ( orden.enca_tipo = 0 ) ) and 
+		( orden_detalle.deta_g_financiero = inmprodu.prod_g_financiero  and orden_detalle.deta_empresa = inmprodu.prod_empresa  and orden_detalle.deta_referencia = inmprodu.prod_producto) 
+		 )
+  from inmprodu
+where prod_g_financiero = :str.g_financiero and prod_empresa = :str.empresa and prod_status = 1;
+if sqlca.sqlcode = -1 then
+	gf_mensaje('','Error al Actualizar Cantidades de las Ordenes '+sqlca.sqlerrtext,1,1,'E')
+	 str.frame.setmicrohelp("")
+	 return
+end if
+
+ str.frame.setmicrohelp("Ordenes Actualizadas")		
+end event
+
+type m_actualizatransitos from menu within m_ayuda
+end type
+
+event clicked; str.frame.setmicrohelp("Actualizando las Cantidades de las Facturas del Proveedor .............por favor Espere")		
+ 
+update inmprodu set prod_cant_transito = 
+ ( SELECT isnull(sum(convert(numeric(17,0), transito_detalle.deta_cantidad * inamedid.medi_cantidad) ),0) 
+    FROM transito,   
+         transito_detalle,   
+         inamedid  
+   WHERE ( transito_detalle.deta_g_financiero = transito.enca_g_financiero ) and  
+         ( transito_detalle.deta_empresa = transito.enca_empresa ) and  
+         ( transito_detalle.deta_secuencia = transito.enca_secuencia ) and  
+         ( transito_detalle.deta_ann = transito.enca_ann ) and  
+         ( transito_detalle.deta_unidad = inamedid.medi_medida ) and  
+         ( ( transito.enca_g_financiero = :str.g_financiero ) AND  
+         ( transito.enca_empresa = :str.empresa ) AND  
+         ( (transito_detalle.deta_cantidad * medi_cantidad ) - isnull(transito_detalle.deta_pasada,0) > 0 ) AND  
+         ( transito.enca_tipo = 0 ) ) and 
+		( transito_detalle.deta_g_financiero = inmprodu.prod_g_financiero  and transito_detalle.deta_empresa = inmprodu.prod_empresa  and transito_detalle.deta_referencia = inmprodu.prod_producto) 
+		 )
+  from inmprodu
+where prod_g_financiero = :str.g_financiero and prod_empresa = :str.empresa and prod_status = 1;
+if sqlca.sqlcode = -1 then
+	gf_mensaje('','Error al Actualizar Cantidades de los Transitos '+sqlca.sqlerrtext,1,1,'E')
+	 str.frame.setmicrohelp("")
+	 return
+end if
+
+ str.frame.setmicrohelp("Transitos Actualizados")		
+end event
+
+on m_actualizatransitos.create
+call super::create
+this.text = "Actualiza Transitos"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_actualizatransitos.destroy
+call super::destroy
+end on
+
+type m_fechadeentrada from menu within m_ayuda
+end type
+
+event clicked;OpenSheet(w_asigna_cantidad_entrada,parentwindow,2, Layered!)
+end event
+
+on m_fechadeentrada.create
+call super::create
+this.visible = false
+this.text = "Cantidad de  Entrada"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_fechadeentrada.destroy
+call super::destroy
+end on
+
+type m_fechadesalida from menu within m_ayuda
+end type
+
+event clicked;OpenSheet(w_asigna_fecha_salida,parentwindow,2, Layered!)
+end event
+
+on m_fechadesalida.create
+call super::create
+this.visible = false
+this.text = "Fecha de Salida"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_fechadesalida.destroy
+call super::destroy
+end on
+
+type m_asignaproveedor from menu within m_ayuda
+end type
+
+event clicked;OpenSheet(w_dashboard,parentwindow,2, Layered!)
+end event
+
+on m_asignaproveedor.create
+call super::create
+this.text = "Dashboard"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_asignaproveedor.destroy
+call super::destroy
+end on
+
+type m_revfactura from menu within m_ayuda
+event create ( )
+event destroy ( )
+end type
+
+on m_revfactura.create
+call super::create
+this.text = "Rev. Factura"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_revfactura.destroy
+call super::destroy
+end on
+
+event clicked;OpenSheet(w_activar_factura,parentwindow,2, Original!)
+end event
+
+type m_pedidosvencidos from menu within m_ayuda
+end type
+
+event clicked;OpenSheet(w_pedidos_vencidos,parentwindow,2, Original!)
+end event
+
+on m_pedidosvencidos.create
+call super::create
+this.text = "Pedidos Vencidos~tF2"
+this.shortcut = 113
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pedidosvencidos.destroy
+call super::destroy
+end on
+

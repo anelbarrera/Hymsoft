@@ -1,0 +1,13 @@
+﻿//objectcomments Estructura para pasar el Datawindow de impresión a la ventana
+global type str_fa_dw_rep from structure
+	datawindow		dw
+	string		producto
+	integer		pais
+	long		cliente
+	datetime		fecha_ini
+	datetime		fecha_fin
+	string		is_where
+	string		datawindow
+	string		titulo_repo
+end type
+

@@ -1,0 +1,21 @@
+﻿global type gf_arancel from function_object
+end type
+
+forward prototypes
+global function boolean gf_arancel (readonly string codigo_arancel)
+end prototypes
+
+global function boolean gf_arancel (readonly string codigo_arancel);// Data Store para resumir detalle de la entrada en inventario y su pase
+boolean lb_retorna
+integer recorrido, li_cantidad, li_fraccion
+string  ls_arancel
+datastore lds_detalle
+lds_detalle = create datastore
+lds_detalle.DataObject="dw_dd_arancel_argumeto"
+lds_detalle.SetTransObject(SQLCA)
+lb_retorna = false
+if  lds_detalle.Retrieve(codigo_arancel)> 0 then lb_retorna = true
+destroy lds_detalle
+return(lb_retorna)
+end function
+

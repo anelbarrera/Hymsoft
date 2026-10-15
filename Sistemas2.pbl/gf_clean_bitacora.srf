@@ -1,0 +1,23 @@
+﻿global type gf_clean_bitacora from function_object
+end type
+
+forward prototypes
+global subroutine gf_clean_bitacora ()
+end prototypes
+
+global subroutine gf_clean_bitacora ();// Limpio la Bitacora de los registros del usuario que se pudieron quedar sin eliminar.
+DELETE FROM ssaudito  
+  WHERE ( ssaudito.audi_usuario_apl = :str.usuario ) AND  
+        ( ssaudito.audi_usuario_win = :str.win_user ) AND  
+        ( ssaudito.audi_maquina = :str.maquina ) AND  
+        ( ssaudito.audi_cod_aplicacion = :str.aplicacion ) AND  
+        ( ssaudito.audi_g_seguridad = :str.grupo )   ;
+
+// No despliego mensaje de Error
+If Sqlca.Sqlcode = 0 Then
+	Commit using sqlca;
+Else
+	Mensaje("Aviso", "gf_clean() No Logró Limpiar la Vitácora.", sqlca.sqlerrtext)
+End If
+end subroutine
+

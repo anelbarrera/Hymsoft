@@ -1,0 +1,32 @@
+﻿global type gf_tz_rango_page from function_object
+end type
+
+forward prototypes
+global subroutine gf_tz_rango_page (datawindow dw_imp, integer ai_lin_x_page)
+end prototypes
+
+global subroutine gf_tz_rango_page (datawindow dw_imp, integer ai_lin_x_page);// Esta función imprime dos veces cada pagina de un documento en forma
+// consecutiva (Documentos comerciales de Zona Libre)
+Integer li_paginas, li_cont
+Double	ld_pagina, ld_residuo
+String  ls_rango, command
+
+li_paginas = Int( dw_imp.rowcount()/ai_lin_x_page)
+ 
+ld_residuo = Mod ( dw_imp.rowcount(), ai_lin_x_page )
+
+If ld_residuo > 0 Then li_paginas++
+//dw.Modify("DataWindow.Print.Copies='<an integer>'")
+//dw.Modify("DataWindow.Print.Page.Range='<comma or dash separated list of pages to print (i.e. 1,5,7,8-13,15)>' ")
+For li_cont = 1 to li_paginas 
+	
+	ls_rango = string(li_cont)
+	ls_rango = '"'+ls_rango+'-'+ls_rango+'"'
+	command = "datawindow.print.copies = '2'"
+	command =command + " datawindow.print.page.range = "+ls_rango
+	dw_imp.Modify(command)
+	dw_imp.print()
+Next
+
+end subroutine
+

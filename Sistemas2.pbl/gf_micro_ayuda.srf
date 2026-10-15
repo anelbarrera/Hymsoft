@@ -1,0 +1,20 @@
+﻿//objectcomments Recibe el datawindow en el Argumento "data_ventana" para deslegar el MicroHelp o micro ayuda para esto toda la columnas del DW tinene que tener el TAG con informacion sino aparecera "?" en el microhelp.
+global type gf_micro_ayuda from function_object
+end type
+
+forward prototypes
+global subroutine gf_micro_ayuda (readonly datawindow data_ventana)
+end prototypes
+
+global subroutine gf_micro_ayuda (readonly datawindow data_ventana);//   Recibe el datawindow en el Argumento "data_ventana" para desplegar 
+//   el MicroHelp o micro ayuda para esto toda la columnas del DW tinene
+//   que tener el TAG con informacion sino aparecera "?" en el microhelp
+string	ls_tag
+int li_col
+li_col = data_ventana.GetColumn()
+if li_col > 0 then
+	ls_tag = data_ventana.Describe ("#" + String (li_col) + ".tag")
+end if
+str.frame.SetMicroHelp (ls_tag)
+end subroutine
+

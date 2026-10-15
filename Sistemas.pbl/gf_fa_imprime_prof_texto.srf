@@ -1,0 +1,289 @@
+﻿//objectcomments imprime la proforma de cosmotex en formato texto
+global type gf_fa_imprime_prof_texto from function_object
+end type
+
+forward prototypes
+global subroutine gf_imprime_proforma_texto ()
+global subroutine gf_fa_imprime_prof_texto (datawindow dw3, datawindow dw6)
+end prototypes
+
+global subroutine gf_imprime_proforma_texto (); //cv
+end subroutine
+
+global subroutine gf_fa_imprime_prof_texto (datawindow dw3, datawindow dw6);long ll_archivo,ll_registros,i,ll_ancho, ll_i, ll_li, ll_rest, ll_centro, ll_k
+string ls_articulo,ls_texto,ls_valor,ls_espacios,ls_es_automatica,ls_precio,ls_descuento
+string ls_descripcion,ls_esp,ls_cantidad,ls_monto_final,ls_esp_cant, ls_espacios2, ls_blanc
+string ls_usuario
+decimal ld_suma_mon, ld_total, ld_cargos
+datawindow ldw_dw
+ll_ancho = 95
+ldw_dw = dw3 
+
+ls_esp   = fill(" ",50)
+ls_blanc = fill(" ",6) 
+
+ll_archivo = FileOpen ("c:proforma.txt" , LineMode!  , Write!  , LockWrite!  , Append!  )
+filewrite(ll_archivo,char(27) + "C" +  CHAR(66))
+ls_espacios = fill("",1)
+
+//Nombre de la Empresa
+ls_texto = 	string(ldw_dw.getitemstring(1,"nom_empresa"))
+ll_rest = 95 - len(ldw_dw.getitemstring(1,"nom_empresa"))
+ls_espacios = fill(" ",((ll_rest / 2) - 1) - 6) + ls_texto
+filewrite(ll_archivo,char(27) + char(18) + CHAR(14) + CHAR(15) + ls_espacios)
+
+//Dirección de la Empresa
+ls_texto = ldw_dw.getitemstring(1,"empr_direccion")
+ls_espacios = fill(" ",(ll_ancho - len(ls_texto)/2) - 15)
+filewrite(ll_archivo,char(27) + 'M' + CHAR(15) + ls_espacios + ls_texto)
+
+//Generales de la Empresa
+ls_texto = ldw_dw.getitemstring(1,"generales")
+ls_espacios = fill(" ",(ll_ancho - len(ls_texto)/2) - 15)
+filewrite(ll_archivo,char(27) + 'M' + char(15)+ ls_espacios + ls_texto)
+
+filewrite(ll_archivo,char(27)+char(13))	
+filewrite(ll_archivo,char(27)+char(13))	
+
+//Nombre del Cliente y Vendedor
+ls_texto     =  mid(ldw_dw.describe("t_3.text") + ls_esp,1,13)
+ls_valor     = ldw_dw.getitemstring(1,"prof_a_nombre")
+if  isnull(ls_valor) then ls_valor = ""
+ls_espacios  = ls_texto + ls_valor + fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+ls_texto     = mid(ldw_dw.describe("t_14.text") + ls_esp, 1, 13)
+ls_valor     = char(15)+ldw_dw.describe("nom_vendedor.text")
+if  isnull(ls_valor) then ls_valor = ""
+ls_espacios2 = ls_espacios+ls_blanc+ls_texto+ls_valor+fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+filewrite(ll_archivo,char(27) + 'M' + char(18) +ls_espacios2)
+
+//Dirección de la empresa y Fecha de Despacho
+ls_texto =  char(18) + mid(ldw_dw.describe("t_4.text") + ls_esp,1,13)
+ls_valor = ldw_dw.getitemstring(1,"prof_a_nombre_direccion")
+if  isnull(ls_valor) then ls_valor = ""
+ls_espacios = ls_texto+ls_valor+fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+ls_texto = mid(ldw_dw.describe("t_13.text")+ls_esp,1,13)
+ls_valor = string(ldw_dw.getitemdatetime(1,"prof_fecha"),'dd/mm/yyyy')
+if  isnull(ls_valor) then ls_valor = ""
+ls_espacios2 = ls_espacios+ls_blanc+ls_texto+ls_valor+fill(" ",47 - (len(ls_blanc)+len(ls_texto)+len(ls_valor)))
+filewrite(ll_archivo,char(27)+'M' + char(18) + ls_espacios2)
+
+//Consignado y Condición
+ls_texto =  mid("CONSIGNADO A:"+ls_esp,1,13)
+ls_valor = ldw_dw.getitemstring(1,"prof_consignado")
+if  isnull(ls_valor) then ls_valor = ""
+ls_espacios = ls_texto+ls_valor+fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+ls_texto = mid("CONDICION:"+ls_esp,1,14)
+ls_valor = ldw_dw.getitemstring(1,"terminos")
+if  isnull(ls_valor) then ls_valor = ""
+ls_espacios2 = ls_espacios+ls_blanc+ls_texto+ls_valor+fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+filewrite(ll_archivo,char(27)+'M'  + char(18) +ls_espacios2)
+
+//Marcas
+ls_texto =  mid("MARCAS:"+ls_esp,1,11)
+ls_valor = ldw_dw.getitemstring(1,"prof_marca")
+if  isnull(ls_valor) then ls_valor = ""
+ls_espacios = ls_texto + ls_valor+fill(" ",95 - (len(ls_texto)+len(ls_valor)))
+filewrite(ll_archivo,char(27)+'M'+char(18)+ls_espacios)
+
+filewrite(ll_archivo,char(27)+char(13))	
+
+//Impresión de Titulos
+ls_texto   =   mid(("")+ls_esp,1,3)
+ls_texto   +=  mid(("REFERENCIA")+ls_esp,1,12)
+ls_texto   +=  mid(("DESCRIPCION")+ls_esp,1,24)
+//ls_texto   +=  mid(("CANT.")+ls_esp,1,8)
+ls_texto   +=  right((ls_esp + "CANT." + "  "),8)
+ls_texto   +=  mid(("UND.")+ls_esp,1,10)
+ls_texto   +=  mid(("EMPACADO")+ls_esp,1,15)
+ls_texto   +=  mid(("PRECIO")+ls_esp,1,11)
+ls_texto   +=  mid(("MONTO")+ls_esp,1,12)
+filewrite(ll_archivo,char(27)+'M'+char(18)+ls_texto)
+
+filewrite(ll_archivo,char(27)+char(13))	
+
+ld_suma_mon = 0
+
+//Impresión Del Detalle
+For ll_i =  1 to ldw_dw.rowcount()  
+
+	If isnull(ldw_dw.getitemdecimal(ll_i,"dpro_monto_final2")) then  
+	 ld_suma_mon += 0
+	Else 
+	 ld_suma_mon += ldw_dw.getitemdecimal(ll_i,"dpro_monto_final2")
+   End If 
+	
+	ls_valor  = mid(string(ll_i)+ls_esp,1,3)
+	ls_valor += mid(ldw_dw.getitemstring(ll_i,"dpro_codigo_item")+ls_esp,1,12)
+	ls_valor += char(15)+mid(mid(ldw_dw.getitemstring(ll_i,"dpro_descripcion_alterna"),1,30)+ls_esp,1,40)
+/*	ls_valor += char(18)+mid(string(ldw_dw.getitemdecimal(ll_i,"cant_entero"))+ "/" +&
+	            string(ldw_dw.getitemdecimal(ll_i,"cant_fraccion"))+ls_esp,1,8)	*/
+	ls_valor += char(18)+right(ls_esp+string(ldw_dw.getitemdecimal(ll_i,"cant_entero"))+ "/" +&
+	            string(ldw_dw.getitemdecimal(ll_i,"cant_fraccion")) + "  ",8)						
+	ls_valor += mid(ldw_dw.getitemstring(ll_i,"inamedid_medi_descripcion")+ls_esp,1,10)
+	ls_valor += mid(fill("_",8)+ls_esp,1,8)
+	ls_valor += right(ls_esp+string(ldw_dw.getitemdecimal(ll_i,"dpro_precio_unidad_producto"),"#,##0.00"),12)
+	ls_valor += right(ls_esp+string(ldw_dw.getitemdecimal(ll_i,"dpro_monto_final2"),"#,##0.00"),12)
+	filewrite(ll_archivo,char(27)+'M'+char(18) + ls_valor)	
+
+	filewrite(ll_archivo,char(27)+char(13))	
+   
+	ll_li = (ll_i * 2) + 15
+	if ll_li >= 62  then //64
+		filewrite(ll_archivo,char(12))			
+		
+	//Nombre de la Empresa
+	ls_texto = 	string(ldw_dw.getitemstring(1,"nom_empresa"))
+	ll_rest = 95 - len(ldw_dw.getitemstring(1,"nom_empresa"))
+	ls_espacios = fill(" ",((ll_rest / 2) - 1) - 6) + ls_texto
+	filewrite(ll_archivo,char(27) + char(18) + CHAR(14) + CHAR(15) + ls_espacios)
+	
+	//Dirección de la Empresa
+	ls_texto = ldw_dw.getitemstring(1,"empr_direccion")
+	ls_espacios = fill(" ",(ll_ancho - len(ls_texto)/2) - 15)
+	filewrite(ll_archivo,char(27) + 'M' + CHAR(15) + ls_espacios + ls_texto)
+	
+	//Generales de la Empresa
+	ls_texto = ldw_dw.getitemstring(1,"generales")
+	ls_espacios = fill(" ",(ll_ancho - len(ls_texto)/2) - 15)
+	filewrite(ll_archivo,char(27) + 'M' + char(15)+ ls_espacios + ls_texto)
+	
+	filewrite(ll_archivo,char(27)+char(13))	
+	filewrite(ll_archivo,char(27)+char(13))	
+	
+	//Nombre del Cliente y Vendedor
+	ls_texto     =  mid(ldw_dw.describe("t_3.text") + ls_esp,1,13)
+	ls_valor     = ldw_dw.getitemstring(1,"prof_a_nombre")
+	if  isnull(ls_valor) then ls_valor = ""
+	ls_espacios  = ls_texto + ls_valor + fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+	ls_texto     = mid(ldw_dw.describe("t_14.text") + ls_esp, 1, 13)
+	ls_valor     = char(15)+ldw_dw.describe("nom_vendedor.text")
+	if  isnull(ls_valor) then ls_valor = ""
+	ls_espacios2 = ls_espacios+ls_blanc+ls_texto+ls_valor+fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+	filewrite(ll_archivo,char(27) + 'M' + char(18) +ls_espacios2)
+	
+	//Dirección de la empresa y Fecha de Despacho
+	ls_texto =  char(18) + mid(ldw_dw.describe("t_4.text") + ls_esp,1,13)
+	ls_valor = ldw_dw.getitemstring(1,"prof_a_nombre_direccion")
+	if  isnull(ls_valor) then ls_valor = ""
+	ls_espacios = ls_texto+ls_valor+fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+	ls_texto = mid(ldw_dw.describe("t_13.text")+ls_esp,1,13)
+	ls_valor = string(ldw_dw.getitemdatetime(1,"prof_fecha"),'dd/mm/yyyy')
+	if  isnull(ls_valor) then ls_valor = ""
+	ls_espacios2 = ls_espacios+ls_blanc+ls_texto+ls_valor+fill(" ",47 - (len(ls_blanc)+len(ls_texto)+len(ls_valor)))
+	filewrite(ll_archivo,char(27)+'M' + char(18) + ls_espacios2)
+	
+	//Consignado y Condición
+	ls_texto =  mid("CONSIGNADO A:"+ls_esp,1,13)
+	ls_valor = ldw_dw.getitemstring(1,"prof_consignado")
+	if  isnull(ls_valor) then ls_valor = ""
+	ls_espacios = ls_texto+ls_valor+fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+	ls_texto = mid("CONDICION:"+ls_esp,1,14)
+	ls_valor = ldw_dw.getitemstring(1,"terminos")
+	if  isnull(ls_valor) then ls_valor = ""
+	ls_espacios2 = ls_espacios+ls_blanc+ls_texto+ls_valor+fill(" ",47 - (len(ls_texto)+len(ls_valor)))
+	filewrite(ll_archivo,char(27)+'M'  + char(18) +ls_espacios2)
+	
+	//Marcas
+	ls_texto =  mid("MARCAS:"+ls_esp,1,11)
+	ls_valor = ldw_dw.getitemstring(1,"prof_marca")
+	if  isnull(ls_valor) then ls_valor = ""
+	ls_espacios = ls_texto + ls_valor+fill(" ",95 - (len(ls_texto)+len(ls_valor)))
+	filewrite(ll_archivo,char(27)+'M'+char(18)+ls_espacios)
+	
+	filewrite(ll_archivo,char(27)+char(13))	
+	
+	//Impresión de Titulos
+	ls_texto   =   mid(("")+ls_esp,1,3)
+	ls_texto   +=  mid(("REFERENCIA")+ls_esp,1,12)
+	ls_texto   +=  mid(("DESCRIPCION")+ls_esp,1,24)
+	//ls_texto   +=  mid(("CANT.")+ls_esp,1,8)
+	ls_texto   +=  right((ls_esp + "CANT." + "  "),8)
+	ls_texto   +=  mid(("UND.")+ls_esp,1,10)
+	ls_texto   +=  mid(("EMPACADO")+ls_esp,1,15)
+	ls_texto   +=  mid(("PRECIO")+ls_esp,1,11)
+	ls_texto   +=  mid(("MONTO")+ls_esp,1,12)
+	filewrite(ll_archivo,char(27)+'M'+char(18)+ls_texto)
+	
+	filewrite(ll_archivo,char(27)+char(13))	
+
+		
+	End If	
+
+Next
+
+ll_li = (ll_i*2) + 21
+	
+If ll_li > 62 then //64
+	filewrite(ll_archivo,char(12))
+End If
+
+ls_texto =  mid("SUBTOTAL NETO:"+ls_esp,1,14)
+ls_valor = string(ld_suma_mon,"#,##0.00")
+//ls_espacios = fill(" ",(89 - (len(ls_texto) + len(ls_valor)))) + ls_texto + ls_valor 
+ls_espacios = (fill(" ",(75 - len(ls_texto))) + ls_texto)+(fill(" ",(14 - len(ls_valor)))+ls_valor)  
+filewrite(ll_archivo,char(27)+'M'+char(18)+ls_espacios)
+
+ld_cargos = 0
+
+for ll_k = 1 to dw6.rowcount() 
+	
+	ld_cargos += dw6.getitemdecimal(ll_k,"prca_monto")
+	
+	ls_texto =  mid(dw6.GetitemString(ll_k,"faacargo_carg_descripcion") + ls_esp,1,16)+":"
+	ls_valor = string(dw6.getitemdecimal(ll_k,"prca_monto"),"#,##0.00")
+//	ls_espacios = fill(" ",(89 - (len(ls_texto) + len(ls_valor)))) + ls_texto + ls_valor 
+	ls_espacios = (fill(" ",(75 - len(ls_texto))) + ls_texto)+(fill(" ",(14 - len(ls_valor)))+ls_valor)  
+	filewrite(ll_archivo,char(27) + 'M'+char(18) + ls_espacios)
+	
+	ll_li = (ll_i * 2) + 24 + ll_k
+		
+	If ll_li > 62 Then //64
+		filewrite(ll_archivo,char(12))
+	End If
+	
+Next
+
+ld_total = ld_suma_mon + ld_cargos 
+
+ls_texto = mid("TOTAL:"+ls_esp,1,7)
+ls_valor = string(ld_total,"#,##0.00")
+//ls_espacios = fill(" ",(89 - (len(ls_texto) + len(ls_valor)))) + ls_texto + ls_valor 
+ls_espacios = (fill(" ",(75 - len(ls_texto))) + ls_texto)+(fill(" ",(14 - len(ls_valor))) + ls_valor) 
+filewrite(ll_archivo,char(27)+'M'+char(18)+ls_espacios)
+
+filewrite(ll_archivo,char(27)+char(13))	
+
+ls_texto = 	string(ldw_dw.getitemstring(1,"num_palabra"))
+ls_espacios = fill(" ",(ll_ancho - len(ls_texto))/2)
+filewrite(ll_archivo,char(27) + char(18) + ls_espacios + ls_texto)
+
+filewrite(ll_archivo,char(27)+char(13))	
+
+ls_texto   =   mid("CUBICAJE"+ls_esp,1,12)
+ls_texto   +=  mid("PESO"+ls_esp,1,12)
+ls_texto   +=  mid("BULTOS"+ls_esp,1,12)
+ls_texto   +=  mid("CONFECCIONADO POR: "+ls_esp,1,30)
+filewrite(ll_archivo,char(27) + char(18) + ls_espacios + ls_texto)
+
+ls_valor  = mid(string(ldw_dw.getitemdecimal(1,"prof_cubicaje_total"),"#,###,##0.00")+ls_esp,1,12)
+ls_valor += mid(string(ldw_dw.getitemdecimal(1,"prof_peso_total"),"#,###,##0.00")+ls_esp,1,12)
+ls_valor += mid(string(ldw_dw.getitemdecimal(1,"prof_bultos_total"),"#,###,##0.00")+ls_esp,1,12)
+ls_usuario = ldw_dw.getitemstring(1,"prof_usuario")
+if  isnull(ls_usuario) then ls_usuario = ""
+ls_valor += " " + ls_usuario
+filewrite(ll_archivo,char(27) + char(18) + ls_espacios + ls_valor)
+
+filewrite(ll_archivo,char(12))
+
+fileclose(ll_archivo)
+
+//ll_archivo = FileOpen ("c:\proforma.bat" , LineMode!  , Write!  , LockWrite!  , Append!  )
+//filewrite(ll_archivo,'TYPE C:\proforma.txt > \\Arturo\panasonic')
+//
+//filewrite(ll_archivo,'DEL C:\proforma.*')
+//fileclose(ll_archivo)
+Run('C:\proforma.bat',minimized!)
+
+
+end subroutine
+

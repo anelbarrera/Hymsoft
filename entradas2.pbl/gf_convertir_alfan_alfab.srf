@@ -1,0 +1,27 @@
+﻿global type gf_convertir_alfan_alfab from function_object
+end type
+
+forward prototypes
+global function string gf_convertir_alfan_alfab (readonly string campo_revision)
+end prototypes
+
+global function string gf_convertir_alfan_alfab (readonly string campo_revision);integer li_largo, li_valor, li_convertido
+string ls_campo_revision, ls_letra, ls_convertido
+ls_campo_revision = trim(campo_revision)
+li_largo = len(ls_campo_revision)
+FOR li_valor = 1 TO li_largo
+  ls_letra = mid (ls_campo_revision,li_valor,1)
+  li_convertido = integer (ls_letra)
+  if integer(ls_letra) >= 1 and integer(ls_letra) <= 9 then 
+//	messagebox("LETRA ", "ES: "+ ls_letra)
+	else
+		if ls_letra = "0" then
+		else
+			ls_convertido = ls_convertido+ls_letra 
+		end if
+	end if
+NEXT
+//messagebox("Nombre", "Es: " + ls_convertido)
+return(ls_convertido)
+end function
+

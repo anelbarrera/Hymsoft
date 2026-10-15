@@ -1,0 +1,40 @@
+﻿//objectcomments Verifica mas que nada los dias de mes para retornar un  valor a la suma que usted haya generado.  Controla los Anos Viciestos para que el ultimo día de febrero sea 28 o 29 .En otros casos como: enero, marzo mayo, julio, agosto, octubre, diciembre de 3䅄⩔
+global type gf_suma_fecha from function_object
+end type
+
+forward prototypes
+global function integer gf_suma_fecha (integer mes, integer ano)
+end prototypes
+
+global function integer gf_suma_fecha (integer mes, integer ano);// La mayoría de casos son iguales, directamente hay un número fijo de
+// días en 11 de los 12 meses.  Febrero es, por supuesto, el problema.
+// En un febrero del año bisiesto tiene 29 días, de lo contrario 28 días.
+
+integer		li_DiasEnMes, li_Dias[12] = {31,28,31,30,31,30,31,31,30,31,30,31}
+
+// Hace el número de días por mes por año.
+li_DiasEnMes = li_Dias[mes]
+
+// Verifica Febrero por un año bisiesto.
+If mes = 2 Then
+	// Si el año es bisiesto, cambia el número de días.
+	// Calcula del año del Salto:
+	// año divisible por 4, pero no por 100, a menos que ésta también sea divisible por 400
+	If (Mod(ano,4) = 0 And Mod(ano,100) <> 0) Or (Mod(ano,400) = 0) Then
+		li_DiasEnMes = 29
+	End If
+else
+	// Gianni (23/10/1999): este parte no es necesaria
+//	if mes = 1 or (mes = 3) or (mes = 5) or (mes = 7) or (mes = 8) &
+//				  or (mes = 10) or (mes = 12) then
+//	else
+//		li_DiasEnMes = 30
+//	end if
+End If
+
+// Retorna el número de días en el mes pertinente (Cuantos días tiene el mes)
+
+Return li_DiasEnMes
+
+end function
+

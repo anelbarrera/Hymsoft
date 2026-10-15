@@ -1,0 +1,74 @@
+﻿//objectcomments Convierte la fecha en (" dia / Mes(Palabras) / Año ")
+global type gf_cp_fecha_palabras_2 from function_object
+end type
+
+forward prototypes
+global function string gf_cp_fecha_palabras_2 (character as_tipo, unsignedinteger ai_completa, datetime ad_fecha)
+end prototypes
+
+global function string gf_cp_fecha_palabras_2 (character as_tipo, unsignedinteger ai_completa, datetime ad_fecha);string ls_date_time, ls_return,ls_mes,ls_valor
+integer li_pos, li_mes, li_annio,li_dia
+boolean lb_completa
+
+If ai_completa = 1 Then
+	lb_completa = TRUE
+Else	
+	lb_completa = FALSE
+End If	
+
+li_mes   = MONTH(DATE(ad_fecha))
+li_annio = YEAR(DATE(ad_fecha))
+li_dia = day(date(ad_fecha))
+//ls_date_time = string(gf_fecha_serv(), "dd/mmm/yyyy hh:mm AM/PM")
+//ls_date_time = string(ad_fecha, "dd/mm/yyyy hh:mm AM/PM")
+
+li_pos = Pos(ls_date_time," ")
+
+//CHOOSE CASE as_tipo
+//	CASE "D"
+//		ls_return = Left(ls_date_time, li_pos - 1)
+//	CASE "T"
+//		ls_return = Right(ls_date_time, Len(ls_date_time) - li_pos)		
+//	CASE "C"
+//		ls_return = ls_date_time
+//	CASE "W"
+//		ls_return = gf_dia_mes(ls_date_time,lb_completa)
+//		//ls_return = string(day(date(ad_fecha)))
+//	CASE "M"
+		CHOOSE CASE li_mes
+			CASE 1
+				ls_mes = "Enero"  // = "Enero"
+			CASE 2
+					ls_mes  = "Febrero"
+			CASE 3
+				ls_mes = "Marzo"
+			CASE 4
+					ls_mes  = "Abril"
+			CASE 5
+				ls_mes  = "Mayo"
+			CASE 6
+			    ls_mes  = "Junio"
+			CASE 7
+					ls_mes  = "Julio"
+			CASE 8
+					ls_mes = "Agosto"
+			CASE 9
+					ls_mes = "Septiembre"
+			CASE 10
+					ls_mes  = "Octubre"
+			CASE 11
+					ls_mes  = "Noviembre"
+			CASE 12
+			ls_mes  = "Diciembre"
+
+		END CHOOSE
+		
+//		If lb_completa Then ls_return =+ " de " + String(li_annio)
+//					
+//END CHOOSE
+ls_return = string(li_dia)+' de '+ls_mes+' de '+string(li_annio)
+
+Return ls_return
+
+end function
+

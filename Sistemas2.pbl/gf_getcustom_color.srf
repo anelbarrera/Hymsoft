@@ -1,0 +1,28 @@
+﻿global type gf_getcustom_color from function_object
+end type
+
+forward prototypes
+global function long gf_getcustom_color (string ventana, string texto_fondo)
+end prototypes
+
+global function long gf_getcustom_color (string ventana, string texto_fondo);long ll_color1, ll_color2
+  
+  
+  SELECT dgacolor.color1,   
+         dgacolor.color2  
+    INTO :ll_color1,   
+         :ll_color2  
+    FROM dgacolor  
+   WHERE ( dgacolor.colo_g_finanaciero = :str.g_financiero ) AND  
+         ( dgacolor.colo_empresa = :str.empresa ) AND  
+         ( dgacolor.colo_aplicacion = :str.aplicacion ) AND  
+         ( dgacolor.ventana = :ventana )   ;
+
+
+If Upper(texto_fondo) = "T" Then 
+	Return(ll_color1)
+Else	
+	Return(ll_color2)	
+End If	
+end function
+

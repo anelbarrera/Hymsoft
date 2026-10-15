@@ -1,0 +1,47 @@
+﻿global type gf_dw_error from function_object
+end type
+
+forward prototypes
+global subroutine gf_dw_error (long al_error_num, string as_error_text)
+end prototypes
+
+global subroutine gf_dw_error (long al_error_num, string as_error_text);//Llamada desde el dberror del dw_1 en el grampa
+String	ls_mensaje, ls_explicacion
+
+CHOOSE CASE al_error_num
+	CASE -3	//Row Change Between Retrieve and Update
+		ls_mensaje = "El Registro que Ud. Recupero Originalmente fue Actualizado " + &
+			  "por Otro Usuario."
+		ls_explicacion = "Cierre la Ventana y Ábrala otra vez para ver la Información Actualizada.~r~n~n"
+		ls_explicacion += as_error_text
+	CASE 233 //Datos Nulos
+		ls_mensaje = "Existen Campos con Valores Requeridos que Ud. Debe Llenar."
+		ls_explicacion = "Verifique los Registros que Tiene sin Llenar.~r~n~n"
+		ls_explicacion += as_error_text		
+	CASE 547 //Foreign Key
+		ls_mensaje = "El Sistema ha Detectado que Ud. Introdujo Información que No Cumple " + &
+						 "con la Integridad de La Información."
+		ls_explicacion = "Verifique que Ud. No se Encuentre Cambiando o Eliminando Datos " + &
+							  "con Referencias en el Sistema.~r~n~n"
+		ls_explicacion += as_error_text	
+	CASE 2601 //Datos Nulos
+		ls_mensaje = "Ud. Está Generando Duplicidad de Información, Ya Existen Registros " + &
+						 "con la Información Introducida."
+		ls_explicacion = "Verifique los Listados o Reportes que tengan Referencia.~r~n~n"
+		ls_explicacion += as_error_text
+	CASE ELSE
+		ls_mensaje = "Ha Ocurrido un Error al Manipular " + &
+			  "la Información.    Si el Problema Persiste Comuníquese con su Administrador"
+		ls_explicacion = as_error_text
+END CHOOSE
+
+IF as_error_text <> "" THEN 
+	rollback;
+//	mensaje("Error del DataWindow: Nº" + string(al_error_num) + " " + This.ClassName(), &
+	gf_mensaje("Error: Nº " + string(al_error_num) + " ", &
+			  ls_mensaje + ' ' + ls_explicacion,1,1,'E')
+	gf_dberror(al_error_num,as_error_text)	
+END IF
+
+end subroutine
+

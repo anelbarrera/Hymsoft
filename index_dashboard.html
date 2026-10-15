@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<style>
+
+body{
+    font-family:Segoe UI;
+    background:#f5f7fb;
+    margin:20px;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.kpis{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+
+/***********************************/
+.kpi{
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+
+/* HEADER */
+
+.kpi-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+
+/* TITULO */
+
+.kpi h4{
+
+    margin:0;
+
+    color:#6B7280;
+
+    font-size:14px;
+
+    font-family:Arial;
+
+    font-weight:normal;
+}
+
+
+/* VALOR */
+
+.kpi h2{
+
+    margin-top:8px;
+
+    margin-bottom:0;
+
+    font-size:30px;
+
+    color:#111827;
+
+    font-family:Arial;
+}
+
+
+/* ICONO */
+
+.kpi-icon{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:12px;
+
+    background:#DBEAFE;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:24px;
+}
+
+
+/* FOOTER */
+
+.kpi-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-family:Arial;
+
+    font-size:13px;
+}
+
+
+.kpi-fecha{
+
+    margin-top:16px;
+
+    padding-top:10px;
+
+    border-top:2px solid rgba(255,255,255,.35);
+
+    color:white;
+
+    font-family:Arial;
+
+    font-size:12px;
+}
+
+
+/* AYER */
+
+#ventas_ayer{
+
+    color:#6B7280;
+}
+
+
+/* POSITIVO */
+
+.positivo{
+
+    color:#10B981;
+
+    font-weight:bold;
+}
+
+
+/* NEGATIVO */
+
+.negativo{
+
+    color:#EF4444;
+
+    font-weight:bold;
+}
+
+/***********************************/
+
+.kpi-hoy{
+
+background:linear-gradient(
+    135deg,
+    #2563EB,
+    #06B6D4
+);
+
+    color:white;
+}
+
+.kpi-hoy h4,
+.kpi-hoy h2,
+.kpi-hoy .kpi-fecha,
+.kpi-hoy #ventas_ayer{
+
+    color:white;
+}
+
+#ventas_variacion{
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-family:Arial;
+
+    font-weight:bold;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:70px;
+    
+    box-shadow:
+    0 2px 8px rgba(0,0,0,.12);
+
+}
+
+.positivo{
+
+    background:rgba(255,255,255,.20);
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    backdrop-filter:blur(4px);
+}
+
+.negativo{
+
+    background:rgba(0,0,0,.18);
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.20);
+
+    backdrop-filter:blur(4px);
+}
+
+.kpi-mes{
+
+    background:linear-gradient(
+        135deg,
+        #10B981,
+        #059669
+    );
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.kpi-mes h4,
+.kpi-mes h2,
+.kpi-mes .kpi-fecha,
+.kpi-mes #ventas_mes_anterior{
+
+    color:white;
+}
+
+.kpi-mes .kpi-icon{
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+}
+
+.kpi-ann{
+
+    background:linear-gradient(
+        135deg,
+        #6D28D9,
+        #8B5CF6
+    );
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.kpi-ann h4,
+.kpi-ann h2,
+.kpi-ann .kpi-fecha,
+.kpi-ann #ventas_ann_anterior{
+
+    color:white;
+}
+
+.kpi-ann .kpi-icon{
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+}
+
+
+.kpi-mes #ventas_mes_variacion{
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    border:1px solid rgba(255,255,255,.20);
+}
+
+.kpi-mes .kpi-fecha{
+
+    margin-top:12px;
+
+    padding-top:10px;
+    
+    border-top:2px solid rgba(255,255,255,.35);
+
+}
+
+
+.kpi-ann #ventas_ann_variacion{
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    border:1px solid rgba(255,255,255,.20);
+}
+
+.kpi-ann .kpi-fecha{
+
+    margin-top:12px;
+
+    padding-top:10px;
+    
+    border-top:2px solid rgba(255,255,255,.35);
+
+}
+
+
+.kpi-subinfo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-top:6px;
+
+    font-family:Arial;
+
+    font-size:12px;
+
+    color:rgba(255,255,255,.88);
+
+    letter-spacing:.3px;
+}
+
+.kpi-semana{
+
+    background:linear-gradient(
+        135deg,
+        #F59E0B,
+        #F97316
+    );
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.kpi-semana h4,
+.kpi-semana h2,
+.kpi-semana .kpi-fecha,
+.kpi-semana #ventas_semana_anterior{
+
+    color:white;
+}
+
+.kpi-semana .kpi-icon{
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+}
+
+.kpi-semana #ventas_semana_variacion{
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    border:1px solid rgba(255,255,255,.20);
+}
+
+.kpi-semana .kpi-fecha{
+
+    margin-top:12px;
+
+    padding-top:10px;
+
+    border-top:2px solid rgba(255,255,255,.35);
+}
+
+.total{
+    margin-top:20px;
+    text-align:right;
+    padding-right:20px;
+    color:#9CA3AF;
+    font-family:Arial;
+    font-size:20px;
+    font-weight:normal;
+}
+
+.leyenda{
+    margin-top:20px;
+    font-family:Arial;
+    font-size:13px;
+    color:#6B7280; //#9CA3AF;
+    width:fit-content;
+    margin-left:auto;
+    margin-right:10px;	
+}
+
+.legend-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+    gap:30px;
+}
+
+.legend-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    width:180px;
+}
+
+.legend-color{
+    width:12px;
+    height:12px;
+    border-radius:3px;
+}
+
+.legend-value{
+    text-align:right;
+    min-width:180px;
+    color:#6B7280; //#9CA3AF;
+}
+
+.contenedor-chart{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:40px;
+    width:100%;
+}
+
+/* AREA DEL CHART */
+.chart-area{
+    width:280px;
+    height:280px;
+    position:relative;
+    flex-shrink:0;
+}
+
+.chart-area-deptos{
+    width:100%;
+    height:500px;
+    position:relative;
+    flex-shrink:0;
+}
+
+.chart-area-line{
+    width:100%;
+    height:400px;
+    position:relative;
+    flex-shrink:0;
+}
+
+.chart-area canvas{
+   width:100% !important;
+   height:100% !important;
+   max-width:100% !important;
+   max-height:100% !important;
+}
+
+
+/* AREA LEYENDA */
+.leyenda-area{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+</style>
+</head>
+<body>
+
+<div class="kpis">
+
+
+<div class="kpi kpi-hoy">
+    <div class="kpi-header">
+        <div>
+            <h4>VENTA DEL DIA</h4>
+            <h2 id="ventas_hoy">
+                $0
+            </h2>
+	    <div id="facturas_hoy"
+	      class="kpi-subinfo">
+	      🧾 0 Facturas
+	     </div>
+        </div>	
+        <div class="kpi-icon">
+            💰
+        </div>
+    </div>
+    <div class="kpi-footer">
+        <span id="ventas_ayer">
+            Ayer: $0
+        </span>
+        <span id="ventas_variacion"
+              class="positivo">
+            ▲ 0%
+        </span>
+    </div>
+    <div id="fecha_hoy"
+	class="kpi-fecha">
+    </div>
+</div>
+
+<div class="kpi kpi-semana">
+    <div class="kpi-header">
+        <div>
+            <h4>VENTA SEMANA</h4>
+            <h2 id="ventas_semana">
+                $0
+            </h2>
+	  <div id="facturas_semana"
+	    class="kpi-subinfo">
+	    0 Facturas
+	  </div>
+        </div>
+        <div class="kpi-icon">
+           📊
+        </div>
+    </div>
+    <div class="kpi-footer">
+        <span id="ventas_semana_anterior">
+            Mes anterior: $0
+        </span>
+        <span id="ventas_semana_variacion"
+              class="positivo">
+            ▲ 0%
+        </span>
+    </div>
+    <div id="fecha_semana"
+         class="kpi-fecha">
+    </div>
+</div>
+
+<div class="kpi kpi-mes">
+    <div class="kpi-header">
+        <div>
+            <h4>VENTA DEL MES</h4>
+            <h2 id="ventas_mes">
+                $0
+            </h2>
+	  <div id="facturas_mes"
+	    class="kpi-subinfo">
+	    0 Facturas
+	  </div>
+        </div>
+        <div class="kpi-icon">
+            📈
+        </div>
+    </div>
+    <div class="kpi-footer">
+        <span id="ventas_mes_anterior">
+            Mes anterior: $0
+        </span>
+        <span id="ventas_mes_variacion"
+              class="positivo">
+            ▲ 0%
+        </span>
+    </div>
+    <div id="fecha_mes"
+         class="kpi-fecha">
+    </div>
+</div>
+
+
+<div class="kpi kpi-ann">
+    <div class="kpi-header">
+        <div>
+            <h4>VENTA ANUAL</h4>
+            <h2 id="ventas_ann">
+                $0
+            </h2>
+	  <div id="facturas_ann"
+	    class="kpi-subinfo">
+	    0 Facturas
+	  </div>
+        </div>
+        <div class="kpi-icon">
+          🏆
+        </div>
+    </div>
+    <div class="kpi-footer">
+        <span id="ventas_ann_anterior">
+            Año anterior: $0
+        </span>
+        <span id="ventas_ann_variacion"
+              class="positivo">
+            ▲ 0%
+        </span>
+    </div>
+    <div id="fecha_ann"
+         class="kpi-fecha">
+    </div>
+</div>
+
+
+
+</div>
+
+<button onclick="exportarExcel()">
+    Exportar Excel
+</button>
+
+<div class="container">
+
+<div class="card">
+   <div class="chart-area-line">
+	<canvas id="ventasMes"></canvas>
+   </div>
+</div>
+
+<div class="card">
+<canvas id="topProductos"></canvas>
+</div>
+
+
+<div class="card">
+    <div class="contenedor-chart">
+        <!-- GRAFICA -->
+        <div class="chart-area">
+            <canvas id="vendedores"></canvas>
+        </div>
+        <!-- LEYENDA -->
+        <div class="leyenda-area">
+            <div id="leyenda_vendedores"
+                 class="leyenda">
+            </div>
+            <div id="total_vendedores"
+                 class="total">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="chart-area-deptos">
+        <canvas id="departamentos"></canvas>
+    </div>
+</div>
+
+</div>
+
+<script>
+
+let ventasChart;
+
+function cargarVentasMes(labels, datos){
+  
+
+    ventasChart  = new Chart(document.getElementById('ventasMes'), {
+
+        type:'line',
+
+        data:{
+            labels:labels,
+
+            datasets:[{
+                label:'Ventas por Mes',
+                data:datos,
+                borderWidth:1,
+                tension:0.3,
+		//Morado SaaS
+		borderColor:'#8B5CF6',
+		backgroundColor:'rgba(139,92,246,0.15)',
+		fill:true,
+		pointBackgroundColor:'#10B981',
+		pointHoverRadius:6
+		//Cian Premium
+		//borderColor:'#06B6D4',
+		//backgroundColor:'rgba(6,182,212,0.15)'
+            }]
+        },
+
+        options:{
+
+            responsive:true,
+
+            onClick:function(evt, elements){
+
+                if(elements.length > 0){
+
+                    // índice seleccionado
+                    let index = elements[0].index;
+
+                    // día/mes label
+                    let periodo = labels[index];
+
+                    // valor ventas
+                    let venta = datos[index];
+
+                    console.log(periodo);
+                    console.log(venta);
+
+                    // enviar a PowerBuilder
+                    window.chrome.webview.postMessage({
+
+                        tipo:"detalle_ventas",
+                        periodo:periodo,
+                        venta:venta
+                    });
+                }
+            }
+        }
+    });
+}
+
+let topProductosChart ;
+
+function cargarTopProductos(labels, datos){
+
+
+    // destruir chart anterior
+    if(topProductosChart){
+        topProductosChart.destroy();
+    }
+
+    topProductosChart = new Chart(document.getElementById('topProductos'), {
+        type:'bar',
+        data:{
+            labels:labels,
+            datasets:[{
+                label:'Productos Mas Vendidos (Top 10)',
+                data:datos,
+		borderWidth:2,
+		//Azul ejecutivo                
+		//backgroundColor:'#3B82F6',
+		//borderColor:'#2563EB'
+		  backgroundColor:'rgba(16,185,129,0.75)',
+		  borderColor:'#10B981',
+		  hoverBackgroundColor:'#60A5FA',
+		  borderRadius:10,
+		  borderWidth:1
+            }]
+        }
+    })
+}
+
+
+
+let vendedoresChart;
+
+function cargarVendedores(labels, datos){
+
+    // destruir chart anterior
+    if(vendedoresChart){
+        vendedoresChart.destroy();
+    }
+
+    // COLORES
+    const colores = [
+
+        '#3B82F6',
+        '#10B981',
+        '#06B6D4',
+        '#8B5CF6',
+        '#F59E0B',
+	'#EC4899', // rosa
+	'#6366F1', // índigo
+	'#84CC16'  // lima
+    ];
+
+    // TOTAL
+    const total =
+        datos.reduce(
+            (a,b)=> Number(a) + Number(b),
+            0
+        );
+
+
+
+    vendedoresChart = new Chart(
+        document.getElementById('vendedores'),
+        {
+
+        type:'doughnut',
+
+        data:{
+
+	    label:'Ventas por Vendedor',
+            labels:labels,
+
+            datasets:[{
+
+                label:'Vendedores',
+
+                data:datos,
+
+                backgroundColor:colores,
+
+                borderColor:'#1F2937',
+
+                borderWidth:1,
+
+                hoverOffset:12
+            }]
+        },	
+
+        options:{
+
+            responsive:true,
+	    maintainAspectRatio:false,
+            cutout:'35%',
+
+            plugins:{
+
+
+// TITULO
+    title:{
+        display:true,
+        text:'Ventas por Vendedor',
+        color:'#1F2937',
+	       font:{
+	           family:'Arial',
+	           size:18,
+        	   weight:'normal'
+	        },
+	        padding:{
+        	top:10,
+	        bottom:20
+        	}
+	    },
+///
+                // OCULTAR LEYENDA NATIVA
+                legend:{
+                    display:false
+                },
+
+	datalabels:{
+
+        color:'#D1D5DB',	//'#111827', negro
+
+        font:{
+
+            family:'Arial',
+
+            size:14,
+
+            weight:'bold'
+        },
+
+        formatter:(value,ctx)=>{
+
+            const total =
+                ctx.chart.data.datasets[0]
+                .data
+                .reduce((a,b)=>a+b,0);
+
+            const percent =
+                ((value/total)*100)
+                .toFixed(1);
+
+            return percent + '%';
+        }
+    }
+
+            }
+        },
+
+     plugins:[ChartDataLabels]
+	
+    });
+
+    // TOTAL FINAL
+    document.getElementById(
+        "total_vendedores"
+    ).innerHTML =
+
+        "TOTAL: $" +
+        total.toLocaleString();
+
+
+
+    // LEYENDA HTML PERSONALIZADA
+    let html = '';
+
+    labels.forEach((label,i)=>{
+
+        const value =
+            Number(datos[i]);
+
+        const percent =
+            ((value/total)*100)
+            .toFixed(1);
+
+        html += `
+
+        <div class="legend-row">
+
+            <div class="legend-left">
+
+                <div class="legend-color"
+                     style="
+                        background:${colores[i]}
+                     ">
+                </div>
+
+                <div>
+                    ${label}
+                </div>
+
+            </div>
+
+            <div class="legend-value">
+
+                $${value.toLocaleString()}
+                (${percent}%)
+
+            </div>
+
+        </div>
+        `;
+
+    });
+
+
+    document.getElementById(
+        'leyenda_vendedores'
+    ).innerHTML = html;
+
+
+}
+
+
+
+//Funcion para la grafica por departamento del producto
+
+let departamentosChart;
+
+function cargarDepartamentos(labels, datos){
+
+    // destruir chart anterior
+    if(departamentosChart){
+        departamentosChart.destroy();
+    }
+
+    const colores = [
+
+        '#3B82F6',
+        '#10B981',
+        '#06B6D4',
+        '#8B5CF6',
+        '#F59E0B',
+        '#EF4444',
+        '#14B8A6'
+    ];
+
+    departamentosChart = new Chart(
+        document.getElementById('departamentos'),
+        {
+
+        type:'bar',
+
+        data:{
+	    label:'Departamentos Mas Vendidos',
+            labels:labels,
+
+            datasets:[{
+
+                label:'Departamentos',
+
+                data:datos,
+
+                backgroundColor:colores,
+
+                borderRadius:8,
+
+                borderWidth:1
+            }]
+        },
+
+        options:{
+
+            indexAxis:'y', // HORIZONTAL
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+	    layout:{
+	    	padding:{
+        		right:80
+		 }	
+	    },
+
+
+            plugins:{
+
+// TITULO
+    	title:{
+        display:true,
+        text:'Ventas por Departamentos (Top 15)',
+        color:'#1F2937',
+	       font:{
+	           family:'Arial',
+	           size:18,
+        	   weight:'normal'
+	        },
+	        padding:{
+        	top:10,
+	        bottom:20
+        	}
+	    },
+///
+                legend:{
+                    display:false
+                },
+
+                tooltip:{
+
+                    callbacks:{
+
+                        label:function(context){
+
+                            return '$' +
+                                Number(context.raw)
+                                .toLocaleString();
+                        }
+                    }
+                }
+            },
+
+
+            scales:{
+
+                x:{
+
+                    ticks:{
+
+                        color:'#6B7280',
+
+                        font:{
+
+                            family:'Arial',
+
+                            size:11
+                        },
+
+                        callback:function(value){
+
+                            return '$' +
+                                Number(value)
+                                .toLocaleString();
+                        }
+                    },
+
+                    grid:{
+                        color:'rgba(0,0,0,.05)'
+                    }
+                },
+
+                y:{
+
+                    ticks:{
+
+                        color:'#6B7280',
+
+                        font:{
+
+                            family:'Arial',
+
+                            size:12
+                        }
+                    },
+
+                    grid:{
+                        display:false
+                    }
+                }
+            }
+        },
+
+        plugins:[{
+
+            // VALORES AL FINAL DE LA BARRA
+            id:'valores',
+
+            afterDatasetsDraw(chart){
+
+                const {ctx} = chart;
+
+                ctx.save();
+
+                ctx.font = '12px Arial';
+
+                ctx.fillStyle = '#6B7280';
+
+                chart.getDatasetMeta(0)
+                .data
+                .forEach((bar,index)=>{
+
+                    const value =
+                        datos[index];
+
+                    ctx.fillText(
+
+                        '$' +
+                        Number(value)
+                        .toLocaleString(),
+
+                        bar.x + 10,
+
+                        bar.y + 4
+                    );
+                });
+            }
+        }]
+    });
+}
+
+///////////
+
+function exportarExcel(){
+
+    // LIBRO
+    const wb = XLSX.utils.book_new();
+
+
+    // =========================
+    // KPIs
+    // =========================
+
+    const kpis = [
+
+        ["Indicador","Valor"],
+
+        ["Ventas Hoy",
+         document.getElementById("ventas_hoy").innerText],
+
+        ["Ventas Mes",
+         document.getElementById("ventas_mes").innerText],
+
+        ["Facturas",
+         document.getElementById("facturas").innerText],
+
+        ["Ticket Promedio",
+         document.getElementById("ticket").innerText]
+    ];
+
+    const ws_kpis =
+        XLSX.utils.aoa_to_sheet(kpis);
+
+    XLSX.utils.book_append_sheet(
+        wb,
+        ws_kpis,
+        "KPIs"
+    );
+
+
+    // =========================
+    // VENTAS MES
+    // =========================
+
+    let ventasData = [
+
+        ["Periodo","Ventas"]
+    ];
+
+    ventasChart.data.labels.forEach(
+        (label,i)=>{
+
+        ventasData.push([
+
+            label,
+
+            ventasChart
+            .data
+            .datasets[0]
+            .data[i]
+        ]);
+    });
+
+    const ws_ventas =
+        XLSX.utils.aoa_to_sheet(
+            ventasData
+        );
+
+    XLSX.utils.book_append_sheet(
+        wb,
+        ws_ventas,
+        "Ventas Mes"
+    );
+
+
+    // =========================
+    // TOP PRODUCTOS
+    // =========================
+
+    let productosData = [
+
+        ["Producto","Ventas"]
+    ];
+
+    topProductosChart.data.labels.forEach(
+        (label,i)=>{
+
+        productosData.push([
+
+            label,
+
+            topProductosChart
+            .data
+            .datasets[0]
+            .data[i]
+        ]);
+    });
+
+    const ws_productos =
+        XLSX.utils.aoa_to_sheet(
+            productosData
+        );
+
+    XLSX.utils.book_append_sheet(
+        wb,
+        ws_productos,
+        "Top Productos"
+    );
+
+
+    // =========================
+    // VENDEDORES
+    // =========================
+
+    let vendedoresData = [
+
+        ["Vendedor","Ventas"]
+    ];
+
+    vendedoresChart.data.labels.forEach(
+        (label,i)=>{
+
+        vendedoresData.push([
+
+            label,
+
+            vendedoresChart
+            .data
+            .datasets[0]
+            .data[i]
+        ]);
+    });
+
+    const ws_vendedores =
+        XLSX.utils.aoa_to_sheet(
+            vendedoresData
+        );
+
+    XLSX.utils.book_append_sheet(
+        wb,
+        ws_vendedores,
+        "Vendedores"
+    );
+
+
+    // =========================
+    // EXPORTAR
+    // =========================
+
+    XLSX.writeFile(
+        wb,
+        "Dashboard_Ventas.xlsx"
+    );
+}
+
+///////////
+
+function actualizarKPI(
+
+    ventaHoy,
+    ventaAyer,
+    facturasHoy
+){
+
+    // KPI HOY
+
+	document.getElementById(
+	    'ventas_hoy'
+		).innerHTML =
+
+	    '$' +
+	    Number(ventaHoy)
+	    .toLocaleString(
+	        'en-US',
+	   {
+            minimumFractionDigits:2
+          }
+    );
+	document.getElementById(
+	'facturas_hoy'
+	).innerHTML =
+    '🧾 ' +Number(facturasHoy)
+    .toLocaleString() +
+    ' Facturas';
+
+    // KPI AYER
+    document.getElementById(
+        'ventas_ayer'
+    ).innerHTML =
+
+        'Ayer: $' +
+        Number(ventaAyer)
+        .toLocaleString('en-US',
+	   {
+            minimumFractionDigits:2
+          }
+	);
+
+
+    // VARIACION
+    let variacion = 0;
+
+    if(ventaAyer > 0){
+
+        variacion =
+            (
+                (
+                    ventaHoy -
+                    ventaAyer
+                ) / ventaAyer
+            ) * 100;
+    }
+
+    const lbl =
+        document.getElementById(
+            'ventas_variacion'
+        );
+
+
+    // POSITIVO / NEGATIVO
+    if(variacion >= 0){
+
+        lbl.className = 'positivo';
+
+        lbl.innerHTML =
+
+            '▲ ' +
+            variacion.toFixed(1) +
+            '%';
+
+    }else{
+
+        lbl.className = 'negativo';
+
+        lbl.innerHTML =
+
+            '▼ ' +
+            Math.abs(variacion)
+            .toFixed(1) +
+            '%';
+    }
+}
+
+function actualizarKPImes(
+
+    ventaMes,
+    ventaMesAyer,
+    facturasMes
+){
+
+    // KPI MES
+
+	document.getElementById(
+	    'ventas_mes'
+		).innerHTML =
+
+	    '$' +
+	    Number(ventaMes)
+	    .toLocaleString(
+	        'en-US',
+	   {
+            minimumFractionDigits:2
+          }
+    );
+
+	document.getElementById(
+	    'facturas_mes'
+		).innerHTML =
+	    '🧾 '+Number(facturasMes)
+	    .toLocaleString() +' Facturas';
+	
+    // KPI MES PASADO
+    document.getElementById(
+        'ventas_mes_anterior'
+    ).innerHTML =
+
+        'Mes Pasado: $' +
+        Number(ventaMesAyer)
+        .toLocaleString('en-US',
+	   {
+            minimumFractionDigits:2
+          }
+	);
+
+
+    // VARIACION
+    let variacion = 0;
+
+    if(ventaMesAyer > 0){
+
+        variacion =
+            (
+                (
+                    ventaMes -
+                    ventaMesAyer
+                ) / ventaMesAyer
+            ) * 100;
+    }
+
+    const lbl =
+        document.getElementById(
+            'ventas_mes_variacion'
+        );
+
+
+    // POSITIVO / NEGATIVO
+    if(variacion >= 0){
+
+        lbl.className = 'positivo';
+
+        lbl.innerHTML =
+
+            '▲ ' +
+            variacion.toFixed(1) +
+            '%';
+
+    }else{
+
+        lbl.className = 'negativo';
+
+        lbl.innerHTML =
+
+            '▼ ' +
+            Math.abs(variacion)
+            .toFixed(1) +
+            '%';
+    }
+}
+
+
+function actualizarKPIsemana(
+
+    ventaSemana,
+    ventaSemanaAnterior,
+    facturasSemana,
+    semana_actual
+){
+
+    // KPI MES
+
+	document.getElementById(
+	    'ventas_semana'
+		).innerHTML =
+
+	    '$' +
+	    Number(ventaSemana)
+	    .toLocaleString(
+	        'en-US',
+	   {
+            minimumFractionDigits:2
+          }
+    );
+
+	document.getElementById(
+	    'facturas_semana'
+		).innerHTML =
+	    '🧾 '+Number(facturasSemana)
+	    .toLocaleString() +' Facturas';
+	
+    // KPI MES PASADO
+    document.getElementById(
+        'ventas_semana_anterior'
+    ).innerHTML =
+        'Semana Pasada: $' +
+        Number(ventaSemanaAnterior)
+        .toLocaleString('en-US',
+	   {
+            minimumFractionDigits:2
+          }
+	);
+
+    //SEMANA ACTUAL
+    document.getElementById(
+        'fecha_semana'
+    ).innerHTML = 'Semana Actual #:' + semana_actual + ' de 52';
+
+
+    // VARIACION
+    let variacion = 0;
+
+    if(ventaSemanaAnterior > 0){
+
+        variacion =
+            (
+                (
+                    ventaSemana -
+                    ventaSemanaAnterior
+                ) / ventaSemanaAnterior
+            ) * 100;
+    }
+
+    const lbl =
+        document.getElementById(
+            'ventas_semana_variacion'
+        );
+
+
+    // POSITIVO / NEGATIVO
+    if(variacion >= 0){
+
+        lbl.className = 'positivo';
+
+        lbl.innerHTML =
+
+            '▲ ' +
+            variacion.toFixed(1) +
+            '%';
+
+    }else{
+
+        lbl.className = 'negativo';
+
+        lbl.innerHTML =
+
+            '▼ ' +
+            Math.abs(variacion)
+            .toFixed(1) +
+            '%';
+    }
+}
+
+
+function cargarFechaHoy(){
+
+    const hoy = new Date();
+
+    const opciones = {
+
+        day:'2-digit',
+
+        month:'long',
+
+        year:'numeric'
+    };
+
+    let fecha =
+        hoy.toLocaleDateString(
+            'es-ES',
+            opciones
+        );
+
+     // separar partes
+    let partes = fecha.split(' ');
+
+    // MAYUSCULA al mes
+    partes[2] =
+        partes[2].charAt(0).toUpperCase() +
+        partes[2].slice(1);
+
+    // reconstruir fecha
+    //fecha = partes.join(' ');
+
+ // reconstruir fecha
+    fecha = 'Hoy: ' +
+        partes[0] + ' ' +
+        partes[2] + ' ' +
+        partes[4];
+
+    document.getElementById(
+        'fecha_hoy'
+    ).innerHTML = fecha; 
+
+}
+
+function cargarFechaAnn(){
+
+    const hoy = new Date();
+
+    const opciones = {
+
+        day:'2-digit',
+
+        month:'long',
+
+        year:'numeric'
+    };
+
+    let fecha =
+        hoy.toLocaleDateString(
+            'es-ES',
+            opciones
+        );
+
+     // separar partes
+    let partes = fecha.split(' ');
+
+ // reconstruir fecha
+    fecha = 'Año: ' +
+        partes[4];
+
+    document.getElementById(
+        'fecha_ann'
+    ).innerHTML = fecha; 
+
+}
+
+function cargarFechaMes(){
+
+    const hoy = new Date();
+
+    const opciones = {
+
+        day:'2-digit',
+
+        month:'long',
+
+        year:'numeric'
+    };
+
+    let fecha =
+        hoy.toLocaleDateString(
+            'es-ES',
+            opciones
+        );
+
+     // separar partes
+    let partes = fecha.split(' ');
+
+    // MAYUSCULA al mes
+    partes[2] =
+        partes[2].charAt(0).toUpperCase() +
+        partes[2].slice(1);
+
+ // reconstruir fecha
+    fecha = 'Mes: ' +
+        partes[2] + ' ' +
+        partes[4];
+
+    document.getElementById(
+        'fecha_mes'
+    ).innerHTML = fecha; 
+
+}
+
+function actualizarKPIann(
+
+    ventaAnn,
+    ventaAnnAyer,
+    facturasAnn
+){
+
+    // KPI ANN
+
+	document.getElementById(
+	    'ventas_ann'
+		).innerHTML =
+
+	    '$' +
+	    Number(ventaAnn)
+	    .toLocaleString(
+	        'en-US',
+	   {
+            minimumFractionDigits:2
+          }
+    );
+
+	document.getElementById(
+	    'facturas_ann'
+		).innerHTML =
+	    '🧾 '+Number(facturasAnn)
+	    .toLocaleString() +' Facturas';
+	
+    // KPI MES PASADO
+    document.getElementById(
+        'ventas_ann_anterior'
+    ).innerHTML =
+
+        'Año Pasado: $' +
+        Number(ventaAnnAyer)
+        .toLocaleString('en-US',
+	   {
+            minimumFractionDigits:2
+          }
+	);
+
+
+    // VARIACION
+    let variacion = 0;
+
+    if(ventaAnnAyer > 0){
+
+        variacion =
+            (
+                (
+                    ventaAnn -
+                    ventaAnnAyer
+                ) / ventaAnnAyer
+            ) * 100;
+    }
+
+    const lbl =
+        document.getElementById(
+            'ventas_ann_variacion'
+        );
+
+
+    // POSITIVO / NEGATIVO
+    if(variacion >= 0){
+
+        lbl.className = 'positivo';
+
+        lbl.innerHTML =
+
+            '▲ ' +
+            variacion.toFixed(1) +
+            '%';
+
+    }else{
+
+        lbl.className = 'negativo';
+
+        lbl.innerHTML =
+
+            '▼ ' +
+            Math.abs(variacion)
+            .toFixed(1) +
+            '%';
+    }
+}
+
+</script>
+
+</body>
+</html>

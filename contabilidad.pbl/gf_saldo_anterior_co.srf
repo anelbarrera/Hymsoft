@@ -1,0 +1,93 @@
+﻿global type gf_saldo_anterior_co from function_object
+end type
+
+forward prototypes
+global function decimal gf_saldo_anterior_co (string cuenta, datetime fecha)
+end prototypes
+
+global function decimal gf_saldo_anterior_co (string cuenta, datetime fecha);decimal ld_monto, ld_monto_conci ,ld_saldo_anterior
+decimal{2} ld_saldo_inicial, ld_debito, ld_credito, ld_valor_periodo
+datetime ldt_fecha_conci, ldt_fecha_saldo_inicial, ldt_fecha_inicio
+integer li_ann, li_mes, banco
+string  ls_naturaleza_cuenta
+
+li_ann = year(date(fecha))
+li_mes = month(date(fecha))
+
+ldt_fecha_inicio = datetime(date('01/'+string(li_mes)+'/'+string(li_ann)), time('00:00:00'))
+
+if li_mes = 1 then
+	li_mes = 12
+	li_ann --
+else
+	li_mes = li_mes - 1
+end if
+
+  SELECT case :li_mes when 1 then mayo_ene_inicial when 2 then mayo_feb_inicial when 3 then mayo_mar_inicial when 4 then mayo_abr_inicial when 5 then mayo_may_inicial when 6 then mayo_jun_inicial when 7 then mayo_jul_inicial when 8 then mayo_ago_inicial when 9 then mayo_sep_inicial when 10 then mayo_oct_inicial when 11 then mayo_nov_inicial when 12 then mayo_cierre_inicial end saldo_inicial,   
+         case :li_mes when 1 then mayo_ene_db when 2 then mayo_feb_db when 3 then mayo_mar_db when 4 then mayo_abr_db when 5 then mayo_may_db when 6 then mayo_jun_db when 7 then mayo_jul_db when 8 then mayo_ago_db when 9 then mayo_sep_db when 10 then mayo_oct_db when 11 then mayo_nov_db when 12 then mayo_cierre_db end debito,   
+         case :li_mes when 1 then mayo_ene_cr when 2 then mayo_feb_cr when 3 then mayo_mar_cr when 4 then mayo_abr_cr when 5 then mayo_may_cr when 6 then mayo_jun_cr when 7 then mayo_jul_cr when 8 then mayo_ago_cr when 9 then mayo_sep_cr when 10 then mayo_oct_cr when 11 then mayo_nov_cr when 12 then mayo_cierre_cr end credito,
+			dgmplanc.mg_naturaleza	
+	INTO :ld_saldo_inicial, :ld_debito, :ld_credito, :ls_naturaleza_cuenta				
+    FROM comayor,   
+         dganivec,   
+         dgmplanc  
+   WHERE ( comayor.mayo_g_financiero = dgmplanc.mg_g_financiero ) and  
+         ( comayor.mayo_empresa = dgmplanc.mg_empresa ) and  
+         ( comayor.mayo_cuenta = dgmplanc.mg_cuenta ) and  
+         ( dgmplanc.mg_g_financiero = dganivec.nive_g_financiero ) and  
+         ( dgmplanc.mg_empresa = dganivec.nive_empresa ) and  
+         ( dgmplanc.mg_nivel = dganivec.nive_no_nivel ) and  
+         ( ( comayor.mayo_g_financiero = :str.g_financiero ) AND  
+         ( comayor.mayo_empresa = :str.empresa ) AND  
+			( comayor.mayo_cuenta = :cuenta ) AND
+         ( comayor.mayo_ann = :li_ann ) )   ;   
+    		if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al declarar cursor de saldos '+sqlca.sqlerrtext,1,1,'E')
+			end if
+			
+if ls_naturaleza_cuenta = 'D' then
+	ld_saldo_anterior = ld_saldo_inicial + ld_debito - ld_credito
+else
+	ld_saldo_anterior = ld_saldo_inicial - ld_credito + ld_debito
+end if
+ 
+//Si Se solicita el reporte a una fecha diferente al primero del mes, suma el valor de los dias hasta la fecha desde
+if ldt_fecha_inicio <> fecha then
+	
+	SELECT isnull(sum ( case when dgmplanc.mg_naturaleza = 'D' then  case  when ddia_naturaleza = 'D' then ddia_monto else - ddia_monto  end  else  case  when ddia_naturaleza = 'D' then - ddia_monto else ddia_monto  end   end )  ,0)
+    INTO :ld_valor_periodo  
+    FROM coddiari,   
+         cotdiari,   
+         dgmplanc  
+   WHERE ( cotdiari.diar_g_financiero = coddiari.ddia_g_financiero ) and  
+         ( cotdiari.diar_empresa = coddiari.ddia_empresa ) and  
+         ( cotdiari.diar_aplicacion_mg = coddiari.ddia_aplicacion_mg ) and  
+         ( cotdiari.diar_tipo_transaccion = coddiari.ddia_tipo_transaccion ) and  
+         ( cotdiari.diar_sub_trans = coddiari.ddia_sub_trans ) and  
+         ( cotdiari.diar_no_documento = coddiari.ddia_no_documento ) and  
+         ( cotdiari.diar_no_referencia = coddiari.ddia_no_referencia ) and  
+         ( cotdiari.diar_banco_cuenta = coddiari.ddia_banco_cuenta ) and  
+         ( cotdiari.diar_ann = coddiari.ddia_ann ) and  
+         ( dgmplanc.mg_g_financiero = coddiari.ddia_g_financiero ) and  
+         ( dgmplanc.mg_empresa = coddiari.ddia_empresa ) and  
+         ( dgmplanc.mg_cuenta = coddiari.ddia_mg_cuenta ) and  
+         ( ( cotdiari.diar_g_financiero = :str.g_financiero ) AND  
+         ( cotdiari.diar_empresa = :str.empresa ) AND  
+         ( coddiari.ddia_mg_cuenta = :cuenta ) AND  
+         ( cotdiari.diar_fecha_transaccion >= :ldt_fecha_inicio ) AND  
+         ( cotdiari.diar_fecha_transaccion < :fecha )  )   ;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al buscar saldo del periodo '+sqlca.sqlerrtext,1,1,'E')
+			end if					
+
+	if ls_naturaleza_cuenta = 'D' then
+		ld_saldo_anterior = ld_saldo_anterior + ld_valor_periodo
+	else
+		ld_saldo_anterior = ld_saldo_anterior - ld_valor_periodo
+	end if
+end if
+ 
+
+return (ld_saldo_anterior)
+end function
+

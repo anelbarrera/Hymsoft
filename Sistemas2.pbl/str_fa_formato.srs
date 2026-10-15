@@ -1,0 +1,9 @@
+﻿//objectcomments datawindow También es utilizado en el llamado de la consulta de existencias
+global type str_fa_formato from structure
+	string		cod_formato
+	string		datawindow
+	string		tipo_formato
+	string		captura_o_para
+	string		producto
+end type
+
