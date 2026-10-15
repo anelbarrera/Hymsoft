@@ -1,0 +1,547 @@
+﻿global type gf_cc_calcula_antiguedad_sql from function_object
+end type
+
+forward prototypes
+global subroutine gf_cc_calcula_antiguedad_sql (readonly date ad_fecha, readonly string balance, integer li_sw)
+end prototypes
+
+global subroutine gf_cc_calcula_antiguedad_sql (readonly date ad_fecha, readonly string balance, integer li_sw);sqlca.autocommit = true
+integer   li_registros, li_registros2, li_filas, li_filas2, li_row, primer = 1, swt, li_fil
+long		 ll_cliente, li_dia_inicio, li_dia_fin, ll_tercero
+datetime  ld_fecha_inicio, ld_fecha_final
+decimal   ld_saldo,ld_saldo_d, ld_saldo_c,ld_temporal,ld_recibos, ld_facturas, ld_saldo_total
+datastore dw_4, dw_5, dw_6, dw_7
+string    ls_ruc,	ls_ref_anterior , ls_error, ls_descripcion
+datawindowchild ldwc_sub_tran,ldwc_pais, ldwc_region
+datetime      fecha
+string ls_fecha_1 , ls_fecha_2
+
+fecha = datetime(ad_fecha,Time(23,59,59))
+
+dw_4 				 = create ds_dg_import_file
+dw_5 				 = create ds_dg_import_file
+dw_6 				 = create ds_dg_import_file
+dw_7 				 = create ds_dg_import_file
+dw_4.dataobject = 'dw_cc_inf_recupera_antig'//'dw_cc_ext_antiguedad'
+dw_5.dataobject = 'dw_cc_inf_ayuda_antiguedad'
+dw_6.dataobject = 'dw_cc_inf_ccatempa'
+dw_7.dataobject = 'dw_cc_inf_recupera_terceros'
+dw_4.settransobject(sqlca)
+dw_5.settransobject(sqlca)
+dw_6.settransobject(sqlca)
+dw_7.settransobject(sqlca)
+
+dw_4.reset()
+dw_5.retrieve(str.g_financiero, str.empresa)
+li_registros = dw_5.rowcount()
+ld_saldo_total = 0
+
+
+SELECT isnull(ccmparam.para_tipo_descrip_antig_estcta,'N')
+INTO :ls_descripcion  
+FROM ccmparam  
+WHERE ( ccmparam.para_g_financiero = :str.g_financiero ) AND  
+	( ccmparam.para_empresa = :str.empresa )   ;
+
+if sqlca.sqldbcode = -1 then
+	ls_error  = sqlca.sqlerrtext
+	rollback;
+	mensaje('Error','Ha ocurrido un error al seleccionar datos en ccmparam',ls_error)
+end if
+	
+
+//str.frame.SetMicroHelp("  Eliminado Registros de Tablas Temporales para el Cálculo de Antigüedad ")
+DELETE FROM cctantig  
+WHERE ( cctantig.ant_g_financiero = :str.g_financiero ) AND  
+		( cctantig.ant_empresa = :str.empresa ) AND  
+		( cctantig.ant_usuario_maquina = :str.maquina );
+if sqlca.sqlcode = -1 then
+	ls_error = sqlca.sqlerrtext
+	mensaje('Error','Ha ocurrido un error al eliminarr datos en cctantig',ls_error)
+end if
+	
+DELETE FROM ccatempa  
+WHERE ( ccatempa.tmpa_g_financiero = :str.g_financiero ) AND  
+		( ccatempa.tmpa_empresa = :str.empresa ) AND  
+		( ccatempa.tmpa_usuario_maquina = :str.maquina );
+if sqlca.sqlcode = -1 then
+	ls_error = sqlca.sqlerrtext
+	mensaje('Error','Ha ocurrido un error al eliminar datos en ccatempa',ls_error)
+end if
+
+
+commit using sqlca;
+
+/**/
+
+//Inserta los registros de cero
+str.frame.SetMicroHelp("  Insertando Morosidad Base ")
+INSERT INTO cctantig
+      (ant_g_financiero,
+       ant_empresa,
+       ant_tercero,
+       ant_inicio,
+       ant_fin,
+       ant_usuario_maquina,
+       ant_facturas,
+       ant_recibos,
+       ant_saldo,
+		 ant_orden)
+  SELECT ccmclien.clie_g_financiero,
+  			ccmclien.clie_empresa,
+			ccmclien.clie_tercero,   
+         - ccaantig.ccan_diaini,  
+			- ccaantig.ccan_diafin,  
+         :str.maquina,   
+         0,   
+         0,   
+         0,
+			0
+    FROM ccaantig,   
+         ccmclien,
+		   cctcancl  
+   WHERE (ccmclien.clie_g_financiero = ccaantig.ccan_g_financiero     ) and  
+         (ccmclien.clie_empresa = ccaantig.ccan_empresa         ) and 
+         (cctcancl.ancl_g_financiero = ccmclien.clie_g_financiero ) and  
+         (cctcancl.ancl_empresa = ccmclien.clie_empresa ) and  
+         (cctcancl.ancl_tercero = ccmclien.clie_tercero )   and
+         (cctcancl.ancl_maquina = :str.maquina )   and			
+         (ccmclien.clie_g_financiero = :str.g_financiero ) AND  
+         (ccmclien.clie_empresa      = :str.empresa ) 
+			  order by  ccmclien.clie_g_financiero asc,
+				  			ccmclien.clie_empresa asc ,
+							ccmclien.clie_tercero asc,   
+	 			 	      ccaantig.ccan_diaini  desc  
+							;
+
+	if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		mensaje('Error - 1 ','Ha ocurrido un error al insertar datos en cctantig',ls_error)
+	end if
+/***/
+commit ; 
+
+FOR li_filas 			= 1 TO li_registros//(antigüedad)
+	li_row 			   = dw_4.insertrow(0)
+	li_dia_inicio		= dw_5.getitemnumber(li_filas, 'ccan_diaini')
+	li_dia_fin	 		= dw_5.getitemnumber(li_filas, 'ccan_diafin')
+	li_dia_inicio 		= li_dia_inicio * -1
+	li_dia_fin 			= li_dia_fin * -1
+	
+	if li_dia_inicio 	= -1 then
+		li_dia_inicio 	= 0 
+	end if
+	
+	ld_fecha_inicio	= datetime(relativedate(date(fecha), li_dia_inicio),Time(23,59,59))
+	ld_fecha_final 	= datetime(relativedate( date(fecha), li_dia_fin)   )
+	
+
+//str.frame.SetMicroHelp(" Actualizando Morosidad Base por Rango de Fechas : " + 'FECHA_INICIO: '+string(ld_fecha_inicio)+' FECHA FINAL: '+string(ld_fecha_final ))
+if li_filas 		= li_registros then
+  UPDATE cctantig SET ant_facturas = isnull(( 
+  		SELECT SUM(case cctmovim.movi_naturaleza  WHEN 'D' THEN cctmovim.movi_monto else 0 END)
+		FROM cctmovim
+		WHERE ( cctmovim.movi_g_financiero = cctantig.ant_g_financiero   ) AND  
+      		( cctmovim.movi_empresa      = cctantig.ant_empresa   ) AND  
+				( cctmovim.movi_tercero      = cctantig.ant_tercero   ) and 
+      		( cctmovim.movi_fecha_tran   <= :ld_fecha_inicio ) AND  
+      		( cctmovim.movi_estado       = 'IM'              ) AND  
+      		( cctmovim.movi_tran_contado  <>'S') 
+    	group by 
+			cctmovim.movi_g_financiero,
+      	cctmovim.movi_empresa, 
+      	cctmovim.movi_tercero
+),0),
+         
+			ant_recibos = isnull((
+			  		SELECT SUM(case cctmovim.movi_naturaleza  WHEN 'C' THEN cctmovim.movi_monto else 0 END)
+		FROM cctmovim
+		WHERE ( cctmovim.movi_g_financiero = cctantig.ant_g_financiero   ) AND  
+      		( cctmovim.movi_empresa      = cctantig.ant_empresa   ) AND  
+				( cctmovim.movi_tercero      = cctantig.ant_tercero   ) and 
+      		( cctmovim.movi_fecha_tran   <= :ld_fecha_inicio ) AND  
+      		( cctmovim.movi_estado       = 'IM'              ) AND  
+      		( cctmovim.movi_tran_contado  <>'S') 
+		group by 
+			cctmovim.movi_g_financiero,
+      	cctmovim.movi_empresa, 
+      	cctmovim.movi_tercero
+),0), ant_orden = :li_filas
+			
+    FROM cctantig  
+   WHERE ( cctantig.ant_g_financiero = :str.g_financiero ) AND  
+         ( cctantig.ant_empresa = :str.empresa ) AND  
+         ( cctantig.ant_inicio = :li_dia_inicio ) AND  
+         ( cctantig.ant_fin =    :li_dia_fin ) AND  
+         ( cctantig.ant_usuario_maquina = :str.maquina )   ;
+   	
+		if sqlca.sqlcode = -1 then
+			ls_error = sqlca.sqlerrtext
+			mensaje('Error','Ha ocurrido un error al actualizar datos en cctantig',ls_error)
+		end if
+	
+   else
+
+/*  */
+  IF li_dia_inicio = 0 THEN li_dia_inicio = -1 
+/*  */  
+  ls_fecha_1 = string(ld_fecha_inicio,'mm/dd/yyyy hh:mm:ss')
+  ls_fecha_2 = string(ld_fecha_final,'mm/dd/yyyy hh:mm:ss')
+  
+  UPDATE cctantig SET ant_facturas = ISNULL (( 
+  		SELECT distinct SUM(case cctmovim.movi_naturaleza  WHEN 'D' THEN cctmovim.movi_monto else 0 END)
+		FROM cctmovim
+		WHERE ( cctmovim.movi_g_financiero = cctantig.ant_g_financiero   ) AND  
+      		( cctmovim.movi_empresa      = cctantig.ant_empresa   ) AND  
+				( cctmovim.movi_tercero      = cctantig.ant_tercero   ) and 
+				( cctmovim.movi_fecha_tran   >= :ld_fecha_final   )  and 
+				( cctmovim.movi_fecha_tran   <= :ld_fecha_inicio  )  AND  
+      		( cctmovim.movi_estado       = 'IM'              )   AND  
+      		( cctmovim.movi_tran_contado  <>'S')   
+							
+    	group by 
+			cctmovim.movi_g_financiero,
+      	cctmovim.movi_empresa, 
+      	cctmovim.movi_tercero
+),0),
+         
+			ant_recibos = ISNULL((
+			  		SELECT SUM(case cctmovim.movi_naturaleza  WHEN 'C' THEN cctmovim.movi_monto else 0 END)
+		FROM cctmovim
+		WHERE ( cctmovim.movi_g_financiero = cctantig.ant_g_financiero   ) AND  
+      		( cctmovim.movi_empresa      = cctantig.ant_empresa   ) AND  
+				( cctmovim.movi_tercero      = cctantig.ant_tercero   ) and 
+				( cctmovim.movi_fecha_tran   >= :ld_fecha_final   )  and 
+				( cctmovim.movi_fecha_tran   <= :ld_fecha_inicio  )  AND  
+      		( cctmovim.movi_estado       = 'IM'              ) AND  
+      		( cctmovim.movi_tran_contado  <>'S')
+
+    	group by 
+			cctmovim.movi_g_financiero,
+      	cctmovim.movi_empresa, 
+      	cctmovim.movi_tercero
+),0)  , ant_orden = :li_filas
+			
+    FROM cctantig  
+   WHERE ( cctantig.ant_g_financiero = :str.g_financiero ) AND  
+         ( cctantig.ant_empresa = :str.empresa ) AND  
+         ( cctantig.ant_inicio = :li_dia_inicio ) AND  
+         ( cctantig.ant_fin    =    :li_dia_fin ) AND  
+         ( cctantig.ant_usuario_maquina = :str.maquina )   ;
+	if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		mensaje('Error - 2 ','Ha ocurrido un error al actualizar datos en cctantig',ls_error)
+		end if
+	end if
+NEXT
+
+
+li_registros2 = li_registros
+ll_cliente    = 0
+
+//str.frame.SetMicroHelp(" Iniciando Cálculo de Morosidad Por Cliente ")
+dw_4.retrieve(str.g_financiero, str.empresa,str.maquina)	
+
+//Retrieve de los terceros
+dw_7.retrieve(str.g_financiero,str.empresa,str.maquina)
+
+
+For li_fil = 1 to  dw_7.rowcount()
+ld_saldo_total = 0	
+	ll_tercero  = dw_7.getitemnumber(li_fil,'ant_tercero')
+	str.frame.SetMicroHelp("Procesando Cliente "+string(ll_tercero) + ' Registro '+ string(li_fil) + ' de '+ string(dw_7.rowcount()))
+	
+	dw_4.Setfilter("ant_tercero = "+string(ll_tercero))
+	dw_4.Filter()
+	
+	FOR li_filas 		= li_registros to 1 STEP -1
+		ld_facturas = dw_4.getitemnumber(li_filas, 'ant_facturas') //debitos		
+		if ld_facturas = 0 then 
+			continue 
+		end if
+		FOR li_filas2 	= li_registros2 to 1 STEP -1
+//			str.frame.SetMicroHelp("  Cálculo de Morosidad para el Cliente #"+string(ll_tercero) + '/( '+ string(li_fil) + ' / ' + string(dw_7.rowcount()) + ') - '+ string(li_filas*10000+ li_filas2))			
+			if dw_4.rowcount() < li_filas2 then 
+				exit
+			end if
+
+
+			if dw_4.rowcount() < 1 then 
+					str.frame.SetMicroHelp("  Número de Cliente " + string(ll_tercero) + string(li_filas2,"###,###"))
+			else 			
+			ld_recibos 	= dw_4.getitemnumber(li_filas2, 'ant_recibos') //creditos
+			ld_facturas = dw_4.getitemnumber(li_filas, 'ant_facturas') //debitos					
+			if ld_facturas = 0 then 
+				continue 
+			end if			
+
+			ld_temporal = ld_facturas - ld_recibos
+		
+			if ld_temporal < 0 then
+				ld_recibos = ld_recibos - ld_facturas
+				dw_4.setitem(li_filas, 'ant_facturas',0.00 )
+				dw_4.setitem(li_filas2, 'ant_recibos',ld_recibos)
+				exit
+			end if
+			
+			if ld_temporal >= 0 then
+				ld_facturas = ld_facturas - ld_recibos
+				dw_4.setitem(li_filas, 'ant_facturas',ld_facturas)//debitos
+				dw_4.setitem(li_filas2, 'ant_recibos',0.00)//creditos
+			end if
+			end if
+		next
+		
+	next
+
+if dw_4.update() = 1 then
+	commit using sqlca;
+else
+	rollback using sqlca;
+end if
+
+
+li_registros = dw_5.rowcount()//lineas de antiguedad
+dw_6.reset()
+
+next //
+
+/* Prueba de velocidad */
+//continue 
+
+if dw_6.update() = 1 then
+	commit using sqlca;
+else
+	rollback using sqlca;
+end if
+
+
+commit using sqlca ; 
+
+//Elimina los registros de los clientes que no tienen movimiento
+
+if li_sw = 0 then//
+	DELETE FROM cctantig  
+		WHERE 
+			0 = (SELECT sum (cct.ant_facturas - cct.ant_recibos)  
+						FROM cctantig cct  
+						WHERE ( cct.ant_g_financiero = cctantig.ant_g_financiero ) AND  
+								( cct.ant_empresa = cctantig.ant_empresa ) AND  
+								( cct.ant_tercero = cctantig.ant_tercero ) AND
+							   ( cct.ant_usuario_maquina = cctantig.ant_usuario_maquina )
+						GROUP BY cct.ant_g_financiero,   
+								cct.ant_empresa,   
+								cct.ant_tercero  )
+			and cctantig.ant_g_financiero = :str.g_financiero  and 
+				cctantig.ant_empresa = :str.empresa and    
+				cctantig.ant_usuario_maquina = :str.maquina ;
+	if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback using sqlca ; 
+		mensaje('Error','Ha ocurrido un error al eliminar registros conceros en cctantig',ls_error)
+	else
+		
+		commit using sqlca ; 	
+	end if
+end if
+
+//Elimina los clientes con saldo debito o credito 
+
+choose case balance
+	case 'D'
+		DELETE FROM cctantig  
+	   WHERE 
+		0 > (SELECT sum (cct.ant_facturas - cct.ant_recibos)  
+				FROM cctantig cct  
+				WHERE ( cct.ant_g_financiero = cctantig.ant_g_financiero ) AND  
+						( cct.ant_empresa = cctantig.ant_empresa ) AND  
+						( cct.ant_tercero= cctantig.ant_tercero )   
+				GROUP BY cct.ant_g_financiero,   
+						cct.ant_empresa,   
+						cct.ant_tercero  )
+		and cctantig.ant_g_financiero = :str.g_financiero  and 
+         cctantig.ant_empresa = :str.empresa and    
+         cctantig.ant_usuario_maquina = :str.maquina ;
+		if sqlca.sqlcode = -1 then
+			ls_error = sqlca.sqlerrtext
+			rollback using sqlca ; 
+			mensaje('Error','Ha ocurrido un error al eliminar registros conceros en cctantig',ls_error)
+		else
+			commit using sqlca ; 	
+		end if
+		
+	case 'C'
+		DELETE FROM cctantig  
+			WHERE 
+			0 < (SELECT sum (cct.ant_facturas - cct.ant_recibos)  
+					FROM cctantig cct  
+					WHERE ( cct.ant_g_financiero = cctantig.ant_g_financiero ) AND  
+							( cct.ant_empresa = cctantig.ant_empresa ) AND  
+							( cct.ant_tercero = cctantig.ant_tercero )   
+					GROUP BY cct.ant_g_financiero,   
+							cct.ant_empresa,   
+							cct.ant_tercero  )
+			and cctantig.ant_g_financiero = :str.g_financiero  and 
+			    cctantig.ant_empresa = :str.empresa and    
+				cctantig.ant_usuario_maquina = :str.maquina ;
+		if sqlca.sqlcode = -1 then
+			ls_error = sqlca.sqlerrtext
+			rollback using sqlca ; 
+			mensaje('Error','Ha ocurrido un error al eliminar registros conceros en cctantig',ls_error)
+		else
+			commit using sqlca ; 	
+		end if
+end choose
+
+//------**************************-
+
+
+
+//***************************************
+delete from ccatempa ;
+choose case ls_descripcion
+	case'N' //descripcion larga
+
+INSERT INTO ccatempa  
+         ( tmpa_g_financiero,   
+           tmpa_empresa,   
+           tmpa_tercero,   
+           tmpa_ruc_tercero,   
+           tmpa_maxdias,   
+           tmpa_descantig,   
+           tmpa_monto,
+			  tmpa_orden,
+			  tmpa_usuario_maquina
+ )  
+  
+  SELECT cctantig.ant_g_financiero,   
+         cctantig.ant_empresa,   
+         cctantig.ant_tercero,   
+         ltrim(str(cctantig.ant_tercero)),   
+         cctantig.ant_fin * (-1),   
+         ccaantig.ccan_detalle,   //convert(char(3),ccaantig.ccan_diaini) +' a '+ convert(char(3),ccaantig.ccan_diafin)+' días'
+         cctantig.ant_facturas - cctantig.ant_recibos,
+			cctantig.ant_orden,
+			cctantig.ant_usuario_maquina
+    FROM cctantig,   
+         ccaantig  
+   WHERE cctantig.ant_g_financiero = :str.g_financiero and 
+         cctantig.ant_empresa = :str.empresa and 
+         cctantig.ant_usuario_maquina = :str.maquina and 
+			( cctantig.ant_g_financiero = ccaantig.ccan_g_financiero ) and  
+         ( cctantig.ant_empresa = ccaantig.ccan_empresa ) and  
+         ( ( cctantig.ant_fin * (-1) = ccaantig.ccan_diafin ) )   
+ORDER BY cctantig.ant_g_financiero ASC,   
+         cctantig.ant_empresa ASC,   
+         cctantig.ant_tercero ASC,   
+         cctantig.ant_fin * (-1) ASC   ;
+
+
+if sqlca.sqlcode = -1 then
+	ls_error = sqlca.sqlerrtext
+	rollback using sqlca ; 
+	mensaje('Error','Ha ocurrido un error al insertar datos en ccatempa',ls_error)
+else
+	commit using sqlca ; 	
+end if
+
+case 'S'//corta
+	INSERT INTO ccatempa  
+         ( tmpa_g_financiero,   
+           tmpa_empresa,   
+           tmpa_tercero,   
+           tmpa_ruc_tercero,   
+           tmpa_maxdias,   
+           tmpa_descantig,   
+           tmpa_monto,
+			  tmpa_orden,
+			  tmpa_usuario_maquina
+ )  
+  
+  SELECT cctantig.ant_g_financiero,   
+         cctantig.ant_empresa,   
+         cctantig.ant_tercero,   
+         ltrim(str(cctantig.ant_tercero)),   
+         cctantig.ant_fin * (-1),   
+         ccaantig.ccan_detalle,   
+         cctantig.ant_facturas - cctantig.ant_recibos,
+			cctantig.ant_orden,
+			cctantig.ant_usuario_maquina
+    FROM cctantig,   
+         ccaantig  
+   WHERE cctantig.ant_g_financiero = :str.g_financiero and 
+         cctantig.ant_empresa = :str.empresa and 
+         cctantig.ant_usuario_maquina = :str.maquina and 
+			( cctantig.ant_g_financiero = ccaantig.ccan_g_financiero ) and  
+         ( cctantig.ant_empresa = ccaantig.ccan_empresa ) and  
+         ( ( cctantig.ant_fin * (-1) = ccaantig.ccan_diafin ) )   
+ORDER BY cctantig.ant_g_financiero ASC,   
+         cctantig.ant_empresa ASC,   
+         cctantig.ant_tercero ASC,   
+         cctantig.ant_fin * (-1) ASC   ;
+
+
+if sqlca.sqlcode = -1 then
+	ls_error = sqlca.sqlerrtext
+	rollback using sqlca ; 
+	mensaje('Error','Ha ocurrido un error al insertar datos en ccatempa',ls_error)
+else
+	commit using sqlca ; 	
+end if
+
+end choose
+
+  INSERT INTO ccatempa  
+         ( tmpa_g_financiero,   
+           tmpa_empresa,   
+           tmpa_tercero,   
+           tmpa_ruc_tercero,   
+           tmpa_maxdias,   
+           tmpa_descantig,   
+           tmpa_monto,
+			  tmpa_orden,
+			  tmpa_usuario_maquina
+ )  
+
+			
+SELECT cctantig.ant_g_financiero,   
+         cctantig.ant_empresa,   
+         cctantig.ant_tercero,   
+         max(ltrim(  str(cctantig.ant_tercero))),   
+         100001,   
+         'Saldo Total ',   
+         sum(cctantig.ant_facturas - cctantig.ant_recibos),
+			21,
+			cctantig.ant_usuario_maquina
+    FROM cctantig,   
+         ccaantig  
+    WHERE cctantig.ant_g_financiero = :str.g_financiero and 
+         cctantig.ant_empresa = :str.empresa and 
+         cctantig.ant_usuario_maquina = :str.maquina and 
+			( cctantig.ant_g_financiero = ccaantig.ccan_g_financiero ) and  
+         ( cctantig.ant_empresa = ccaantig.ccan_empresa ) and  
+         ( ( cctantig.ant_fin * (-1) = ccaantig.ccan_diafin ) )   
+	 group BY cctantig.ant_g_financiero ,   
+         cctantig.ant_empresa ,   
+         cctantig.ant_tercero ,
+   		cctantig.ant_usuario_maquina;
+
+			
+	if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback using sqlca ; 
+		mensaje('Error - 200 ','Ha ocurrido un error al insertar datos en ccatempa para el total de Antiguiedad',ls_error)
+	else
+		commit using sqlca ; 	
+	end if
+
+
+destroy dw_4
+destroy dw_5
+destroy dw_6
+
+str.frame.setmicrohelp('Listo')
+
+
+end subroutine
+

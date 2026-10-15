@@ -1,0 +1,9 @@
+﻿global type str_pase_entradas from structure
+	long		entrada
+	integer		ann
+	string		referencia[]
+	decimal { 3 }		cantidad[]
+	integer		fraccion[]
+	integer		linea[]
+end type
+

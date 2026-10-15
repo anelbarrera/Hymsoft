@@ -1,0 +1,28 @@
+﻿global type gf_tz_hide_item from function_object
+end type
+
+forward prototypes
+global subroutine gf_tz_hide_item ()
+end prototypes
+
+global subroutine gf_tz_hide_item ();If str.aplicacion <> "TZ" Then Return
+
+m_fa_principal.m_edicin.m_insertar.visible = False
+m_fa_principal.m_edicin.m_insertar.ToolBarItemVisible = False
+m_fa_principal.m_edicin.m_adicionar.visible = False
+m_fa_principal.m_edicin.m_adicionar.ToolBarItemVisible = False
+m_fa_principal.m_edicin.m_eliminar.visible = False
+m_fa_principal.m_edicin.m_eliminar.ToolBarItemVisible = False
+
+m_fa_principal.m_edicin.m_primerregistro.toolbaritemvisible=false
+m_fa_principal.m_edicin.m_registroanterior.toolbaritemvisible=false
+m_fa_principal.m_edicin.m_siguienteregistro.toolbaritemvisible=false
+m_fa_principal.m_edicin.m_ultimoregistro.toolbaritemvisible=false
+
+m_fa_principal.m_edicin.m_busqueda.toolbaritemvisible=false
+m_fa_principal.m_edicin.m_busqueda.visible=false
+
+m_fa_principal.m_archivo.m_guardar.visible = False
+m_fa_principal.m_archivo.m_guardar.ToolBarItemVisible = False
+end subroutine
+

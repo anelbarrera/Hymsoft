@@ -1,0 +1,172 @@
+﻿//objectcomments Función que carga los parámetros iniciales del sistema en una estructura
+global type gf_fa_param from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_param ()
+end prototypes
+
+global subroutine gf_fa_param ();// Funcion global que carga los parámetros iniciales necesarios para la Aplicación de Factura
+ 
+ SELECT faaparam.fara_fact_ano,   
+         faaparam.fara_venta,   
+         faaparam.fara_produ_servi,   
+         faaparam.fara_comision,  
+         faaparam.fara_comi_por_cobro,  
+			faaparam.fara_mostrar_desde,
+			faaparam.fara_desde,
+			faaparam.fapa_igual_factura_pedido,
+			faaparam.fara_modi_fac,
+			faaparam.fara_afecta_consultas,
+			faaparam.fara_uni_peso,
+			faaparam.fara_titulo_reimpresion,
+			faaparam.fara_bodega,
+			faaparam.fara_ubicacion,
+			faaparam.fara_logo_apli,
+			faaparam.fara_ingles,
+			faaparam.fara_nota_credito,
+			faaparam.fara_genera_recibo,
+			faaparam.fara_act_cliente,
+			faaparam.fara_act_inventario,
+			faaparam.fara_precio_ayuda_clave,
+			faaparam.fara_dw_impresion1,
+			faaparam.fara_dw_impresion2,
+			faaparam.fara_unidad_cubicaje,
+			faaparam.fara_titulo_desglose_abreviado,
+			faaparam.fara_adicionar_al_guardar,
+			faaparam.fara_ayuda_en_codigo,
+			faaparam.fara_cliente_contado,
+			faaparam.fara_unidad_default,
+			faaparam.fara_ayuda_en_unidad,
+			faaparam.fara_detalle_de_cargos,
+			faaparam.fara_facturar_en_negativo,
+			faaparam.fara_cambiar_al_detalle,
+			faaparam.fara_recalcular_peso,
+			faaparam.fara_recalcular_cubicaje,
+			faaparam.fara_recalcular_bultos,
+			faaparam.fara_recibo_en_fac_contado,
+			faaparam.fara_tipo_de_empaques,
+			faaparam.fara_formato_pb_usuario,
+			isnull(faaparam.fara_orden_default,2),
+			faaparam.fara_sec_vta_detal,
+			faaparam.fara_pedido_vta_detal,
+			faaparam.fara_bod_vta_detal,
+			faaparam.fara_ubica_vta_detal,
+			faaparam.fara_tiene_vta_detal,
+			faaparam.fara_tipo_vta_detal,
+			faaparam.fara_precio_vta_detal,
+			isnull(faaparam.fara_mostrar_empaque,0),
+			isnull(faaparam.fara_pais_en_direccion,0),
+			isnull(faaparam.fara_mostrar_bultos,0),
+			isnull(faaparam.fara_fecha_serv_al_imprimir,0),
+			isnull(faaparam.fara_lista_emp_especial,0),			
+			faaparam.fara_precio_a_utilizar,
+			faaparam.fara_dec_en_cantidad,
+			faaparam.fara_reserva_en_transito,
+			isnull(faaparam.fara_seis_digitos_pedido,0),
+			isnull(faaparam.fara_pasar_mismo_numero,0),
+			isnull(fara_abrir_ventana_vendedor,0),
+			isnull(faaparam.fara_clave_reserva_negativo,0),
+			isnull(faaparam.fara_empaque_decimales,0),
+			isnull(faaparam.fara_mostrar_precio_uno,1),
+			isnull(faaparam.fara_clave_bajo_costos,1),
+			isnull(faaparam.fara_pregunta_por_negativos,1),
+			isnull(faaparam.fara_default_codigo_barra,0),
+			isnull(faaparam.fara_inf_agotado_pedfact,0),
+			isnull(faaparam.fara_proteger_actualizacion,1),
+			faaparam.fara_cantidad_linea_doc,
+			isnull(fara_ctl_fecha_fac,0),
+			isnull(fara_formula_utilidad,1),
+			isnull(faaparam.fara_mostrar_producto_dos,0)
+    INTO :w_fa_fondo.str_para.ano,   
+         :w_fa_fondo.str_para.venta,   
+         :w_fa_fondo.str_para.tipo,   
+         :w_fa_fondo.str_para.comision,  
+			:w_fa_fondo.str_para.comision_cobros,
+			:w_fa_fondo.str_para.mostrar,
+			:w_fa_fondo.str_para.desde,
+			:w_fa_fondo.str_para.fac_igual_ped,
+			:w_fa_fondo.str_para.modi_fac,
+			:w_fa_fondo.str_para.afecta_consulta,
+			:w_fa_fondo.str_para.unidad,
+			:w_fa_fondo.str_para.reimpresion,
+			:w_fa_fondo.str_para.bodega,
+			:w_fa_fondo.str_para.ubicacion,
+			:w_fa_fondo.str_para.fondo_apli,
+			:w_fa_fondo.str_para.ingles,
+			:w_fa_fondo.str_para.nc_o_fac,
+			:w_fa_fondo.str_para.genera_recibo,
+			:w_fa_fondo.str_para.act_cliente,
+			:w_fa_fondo.str_para.act_inventario,
+			:w_fa_fondo.str_para.precio_clave,
+			:w_fa_fondo.str_para.dw_imp1,
+			:w_fa_fondo.str_para.dw_imp2,
+			:w_fa_fondo.str_para.unidad_cubicaje,
+			:w_fa_fondo.str_para.titulo_abreviado,
+			:w_fa_fondo.str_para.adicionar_al_guardar,
+			:w_fa_fondo.str_para.ayuda_en_codigo,
+			:w_fa_fondo.str_para.cliente_contado,
+			:w_fa_fondo.str_para.unidad_default,
+			:w_fa_fondo.str_para.ayuda_en_unidad,
+			:w_fa_fondo.str_para.detalle_de_cargos,
+			:w_fa_fondo.str_para.factura_negativo,
+			:w_fa_fondo.str_para.cambiar_al_detalle,
+			:w_fa_fondo.str_para.recalcula_peso,
+			:w_fa_fondo.str_para.recalcula_cubicaje,
+			:w_fa_fondo.str_para.recalcula_bultos,
+			:w_fa_fondo.str_para.recibo_fac_contado,
+			:w_fa_fondo.str_para.tipos_de_empaques,
+			:w_fa_fondo.str_para.formato_pb_usuario,
+			:w_fa_fondo.str_para.orden,
+			:w_fa_fondo.str_para.secuencia_vta_detal,
+			:w_fa_fondo.str_para.pedido_vta_detal,
+			:w_fa_fondo.str_para.bod_vta_detal,
+			:w_fa_fondo.str_para.ubic_vta_detal,
+			:w_fa_fondo.str_para.tiene_vta_detal,
+			:w_fa_fondo.str_para.tipo_vta_detal,
+			:w_fa_fondo.str_para.precio_vta_detal,
+			:w_fa_fondo.str_para.mostrar_empaque,
+			:w_fa_fondo.str_para.pais_en_direccion,
+			:w_fa_fondo.str_para.mostrar_bultos,
+			:w_fa_fondo.str_para.fecha_pedido_al_imp,
+			:w_fa_fondo.str_para.lista_emp_especial,			
+			:w_fa_fondo.str_para.precio_a_utilizar,
+			:w_fa_fondo.str_para.utiliza_decimales,
+			:w_fa_fondo.str_para.reserva_en_transito,
+			:w_fa_fondo.str_para.seis_digitos,
+			:w_fa_fondo.str_para.pasar_mismo_numero,
+			:w_fa_fondo.str_para.abrir_ventana_vendedor,
+			:w_fa_fondo.str_para.clave_reserva_negativo,
+			:w_fa_fondo.str_para.empaque_decimales,
+			:w_fa_fondo.str_para.mostrar_precio,
+			:w_fa_fondo.str_para.clave_bajo_costo,
+			:w_fa_fondo.str_para.pregunta_al_excederse,
+			:w_fa_fondo.str_para.default_codigo_barra,
+			:w_fa_fondo.str_para.agotados_al_imprimir,
+			:w_fa_fondo.str_para.protege_actualizacion,
+			:w_fa_fondo.str_para.cantidad_linea_doc,
+			:w_fa_fondo.str_para.controla_fecha_fac,
+			:w_fa_fondo.str_para.fara_formula_utilidad,
+			:w_fa_fondo.str_para.mostrar_producto_dos
+	 FROM faaparam  
+   WHERE ( faaparam.fara_g_financiero = :str.g_financiero ) AND  
+         ( faaparam.fara_empresa = :str.empresa);
+
+	if sqlca.sqlcode = -1 then
+		mensaje("Aviso","Error al Cargar la Estructura de Facturación",sqlca.sqlerrtext)
+	end if
+	
+	/*Selecciona parámetro para determinar de dónde debe tomarse el costo
+	  del maestro de productos o de la bodega*/
+	  SELECT Isnull(inaparam.para_costo_aplicado,'')
+    INTO :w_fa_fondo.str_para.costo_de_prod_bodega  
+    FROM inaparam  
+   WHERE ( inaparam.para_g_financiero = :str.g_financiero ) AND  
+         ( inaparam.para_empresa = :str.empresa )   ;
+
+	if sqlca.sqlcode = -1 then
+		mensaje("Aviso","Error al Recuperar el parámetro del costo a aplicar",sqlca.sqlerrtext)
+	end if
+
+end subroutine
+

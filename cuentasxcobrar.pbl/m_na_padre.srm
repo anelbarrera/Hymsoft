@@ -1,0 +1,5528 @@
+﻿//objectcomments Menu Ancestro del sistema de Facturación (Menu del frame)
+forward
+global type m_na_padre from menu
+end type
+type m_archivo from menu within m_na_padre
+end type
+type m_empresa from menu within m_archivo
+end type
+type m_cerrar from menu within m_archivo
+end type
+type m_guardar from menu within m_archivo
+end type
+type m_guardarcomo from menu within m_archivo
+end type
+type m_- from menu within m_archivo
+end type
+type m_vistapreliminar from menu within m_archivo
+end type
+type m_imprimir from menu within m_archivo
+end type
+type m_-1 from menu within m_archivo
+end type
+type m_reimpresion from menu within m_archivo
+end type
+type m_salir from menu within m_archivo
+end type
+type m_archivo from menu within m_na_padre
+m_empresa m_empresa
+m_cerrar m_cerrar
+m_guardar m_guardar
+m_guardarcomo m_guardarcomo
+m_- m_-
+m_vistapreliminar m_vistapreliminar
+m_imprimir m_imprimir
+m_-1 m_-1
+m_reimpresion m_reimpresion
+m_salir m_salir
+end type
+type m_edicin from menu within m_na_padre
+end type
+type m_adicionar from menu within m_edicin
+end type
+type m_insertar from menu within m_edicin
+end type
+type m_eliminar from menu within m_edicin
+end type
+type m_-2 from menu within m_edicin
+end type
+type m_siguienteregistro from menu within m_edicin
+end type
+type m_registroanterior from menu within m_edicin
+end type
+type m_-3 from menu within m_edicin
+end type
+type m_primerregistro from menu within m_edicin
+end type
+type m_ultimoregistro from menu within m_edicin
+end type
+type m_-10 from menu within m_edicin
+end type
+type m_filtrar from menu within m_edicin
+end type
+type m_sortear from menu within m_edicin
+end type
+type m_restaurar from menu within m_edicin
+end type
+type m_-14 from menu within m_edicin
+end type
+type m_verfoto from menu within m_edicin
+end type
+type m_busqueda from menu within m_edicin
+end type
+type m_cambiarformato from menu within m_edicin
+end type
+type m_enviarmensaje from menu within m_edicin
+end type
+type m_actualizarfactura from menu within m_edicin
+end type
+type m_edicin from menu within m_na_padre
+m_adicionar m_adicionar
+m_insertar m_insertar
+m_eliminar m_eliminar
+m_-2 m_-2
+m_siguienteregistro m_siguienteregistro
+m_registroanterior m_registroanterior
+m_-3 m_-3
+m_primerregistro m_primerregistro
+m_ultimoregistro m_ultimoregistro
+m_-10 m_-10
+m_filtrar m_filtrar
+m_sortear m_sortear
+m_restaurar m_restaurar
+m_-14 m_-14
+m_verfoto m_verfoto
+m_busqueda m_busqueda
+m_cambiarformato m_cambiarformato
+m_enviarmensaje m_enviarmensaje
+m_actualizarfactura m_actualizarfactura
+end type
+type m_parmetros from menu within m_na_padre
+end type
+type m_inicialesdelsistemaalquiler from menu within m_parmetros
+end type
+type m_-4 from menu within m_parmetros
+end type
+type m_clasedecargos from menu within m_parmetros
+end type
+type m_cargos from menu within m_parmetros
+end type
+type m_-5 from menu within m_parmetros
+end type
+type m_clientes from menu within m_parmetros
+end type
+type m_-8 from menu within m_parmetros
+end type
+type m_banderas from menu within m_parmetros
+end type
+type m_barconave from menu within m_parmetros
+end type
+type m_puertoscargadescarga from menu within m_parmetros
+end type
+type m_puertos from menu within m_parmetros
+end type
+type m_-13 from menu within m_parmetros
+end type
+type m_telefonos from menu within m_parmetros
+end type
+type m_tarifas from menu within m_parmetros
+end type
+type m_-15 from menu within m_parmetros
+end type
+type m_servicios from menu within m_parmetros
+end type
+type m_tiposdefacturas from menu within m_parmetros
+end type
+type m_-20 from menu within m_parmetros
+end type
+type m_plantillas from menu within m_parmetros
+end type
+type m_cajas from menu within m_parmetros
+end type
+type m_parmetros from menu within m_na_padre
+m_inicialesdelsistemaalquiler m_inicialesdelsistemaalquiler
+m_-4 m_-4
+m_clasedecargos m_clasedecargos
+m_cargos m_cargos
+
+m_-5 m_-5
+m_clientes m_clientes
+m_-8 m_-8
+m_banderas m_banderas
+m_barconave m_barconave
+m_puertoscargadescarga m_puertoscargadescarga
+m_puertos m_puertos
+m_-13 m_-13
+m_telefonos m_telefonos
+m_tarifas m_tarifas
+m_-15 m_-15
+m_servicios m_servicios
+m_tiposdefacturas m_tiposdefacturas
+m_-20 m_-20
+m_plantillas m_plantillas
+m_cajas m_cajas
+end type
+type m_listados from menu within m_na_padre
+end type
+type m_clientes0 from menu within m_listados
+end type
+type m_cargos0 from menu within m_listados
+end type
+type m_barcos from menu within m_listados
+end type
+type m_transitos from menu within m_listados
+end type
+type m_banderas0 from menu within m_listados
+end type
+type m_puertos0 from menu within m_listados
+end type
+type m_-18 from menu within m_listados
+end type
+type m_telefonos0 from menu within m_listados
+end type
+type m_tarifas0 from menu within m_listados
+end type
+type m_-19 from menu within m_listados
+end type
+type m_servicios0 from menu within m_listados
+end type
+type m_-21 from menu within m_listados
+end type
+type m_plantillas0 from menu within m_listados
+end type
+type m_serviciosporcliente from menu within m_listados
+end type
+type m_saldosinicialesdetransitos from menu within m_listados
+end type
+type m_-0 from menu within m_listados
+end type
+type m_casosdepiclub from menu within m_listados
+end type
+type m_listados from menu within m_na_padre
+m_clientes0 m_clientes0
+m_cargos0 m_cargos0
+m_barcos m_barcos
+m_transitos m_transitos
+m_banderas0 m_banderas0
+m_puertos0 m_puertos0
+m_-18 m_-18
+m_telefonos0 m_telefonos0
+m_tarifas0 m_tarifas0
+m_-19 m_-19
+m_servicios0 m_servicios0
+m_-21 m_-21
+m_plantillas0 m_plantillas0
+m_serviciosporcliente m_serviciosporcliente
+m_saldosinicialesdetransitos m_saldosinicialesdetransitos
+m_-0 m_-0
+m_casosdepiclub m_casosdepiclub
+end type
+type m_capturas from menu within m_na_padre
+end type
+type m_transito from menu within m_capturas
+end type
+type m_-12 from menu within m_capturas
+end type
+type m_dopesheet from menu within m_capturas
+end type
+type m_-16 from menu within m_capturas
+end type
+type m_agencyfees from menu within m_capturas
+end type
+type m_-23 from menu within m_capturas
+end type
+type m_communication from menu within m_capturas
+end type
+type m_0 from menu within m_capturas
+end type
+type m_-22 from menu within m_capturas
+end type
+type m_cajamenuda from menu within m_capturas
+end type
+type m_aprobaciones from menu within m_capturas
+end type
+type m_saldosiniciales from menu within m_capturas
+end type
+type m_-25 from menu within m_capturas
+end type
+type m_pandiclub from menu within m_capturas
+end type
+type m_capturas from menu within m_na_padre
+m_transito m_transito
+m_-12 m_-12
+m_dopesheet m_dopesheet
+m_-16 m_-16
+m_agencyfees m_agencyfees
+m_-23 m_-23
+m_communication m_communication
+m_0 m_0
+m_-22 m_-22
+m_cajamenuda m_cajamenuda
+m_aprobaciones m_aprobaciones
+m_saldosiniciales m_saldosiniciales
+m_-25 m_-25
+m_pandiclub m_pandiclub
+end type
+type m_consultas from menu within m_na_padre
+end type
+type m_reportes from menu within m_na_padre
+end type
+type m_estadodecuentadissbursment from menu within m_reportes
+end type
+type m_-9 from menu within m_reportes
+end type
+type m_librodecontrol from menu within m_reportes
+end type
+type m_-11 from menu within m_reportes
+end type
+type m_informedetransitos from menu within m_reportes
+end type
+type m_reportedetransitos from menu within m_reportes
+end type
+type m_informedeestadodetránsitos from menu within m_reportes
+end type
+type m_informedeestadodetránsitosporfecha from menu within m_reportes
+end type
+type m_informedeestadodefletesporfecha from menu within m_reportes
+end type
+type m_informedeestadoderetencionesporfecha from menu within m_reportes
+end type
+type m_detalledeoperaciones from menu within m_reportes
+end type
+type m_detallepormovimientoclass from menu within m_reportes
+end type
+type m_librodecierredebarcos from menu within m_reportes
+end type
+type m_reportedeaprobaciondepagos from menu within m_reportes
+end type
+type m_informedebarcosporcliente from menu within m_reportes
+end type
+type m_reportedecomunicaciones from menu within m_reportes
+end type
+type m_-17 from menu within m_reportes
+end type
+type m_taxessales from menu within m_reportes
+end type
+type m_-24 from menu within m_reportes
+end type
+type m_cajamenuda0 from menu within m_reportes
+end type
+type m_reportedefletes from menu within m_reportes
+end type
+type m_reportedefletescerrados from menu within m_reportes
+end type
+type m_reportederetencionescerradas from menu within m_reportes
+end type
+type m_reportedecapturafletesyretenciones from menu within m_reportes
+end type
+type m_-28 from menu within m_reportes
+end type
+type m_estadodecuentadepandiclub from menu within m_reportes
+end type
+type m_informedeestadodecasosdepandiclub from menu within m_reportes
+end type
+type m_detalledeoperaciónesdepandiclub from menu within m_reportes
+end type
+type m_reportes from menu within m_na_padre
+m_estadodecuentadissbursment m_estadodecuentadissbursment
+m_-9 m_-9
+m_librodecontrol m_librodecontrol
+m_-11 m_-11
+m_informedetransitos m_informedetransitos
+m_reportedetransitos m_reportedetransitos
+m_informedeestadodetránsitos m_informedeestadodetránsitos
+m_informedeestadodetránsitosporfecha m_informedeestadodetránsitosporfecha
+m_informedeestadodefletesporfecha m_informedeestadodefletesporfecha
+m_informedeestadoderetencionesporfecha m_informedeestadoderetencionesporfecha
+m_detalledeoperaciones m_detalledeoperaciones
+m_detallepormovimientoclass m_detallepormovimientoclass
+m_librodecierredebarcos m_librodecierredebarcos
+m_reportedeaprobaciondepagos m_reportedeaprobaciondepagos
+m_informedebarcosporcliente m_informedebarcosporcliente
+m_reportedecomunicaciones m_reportedecomunicaciones
+m_-17 m_-17
+m_taxessales m_taxessales
+m_-24 m_-24
+m_cajamenuda0 m_cajamenuda0
+m_reportedefletes m_reportedefletes
+m_reportedefletescerrados m_reportedefletescerrados
+m_reportederetencionescerradas m_reportederetencionescerradas
+m_reportedecapturafletesyretenciones m_reportedecapturafletesyretenciones
+m_-28 m_-28
+m_estadodecuentadepandiclub m_estadodecuentadepandiclub
+m_informedeestadodecasosdepandiclub m_informedeestadodecasosdepandiclub
+m_detalledeoperaciónesdepandiclub m_detalledeoperaciónesdepandiclub
+end type
+type m_controldefacturacion from menu within m_na_padre
+end type
+type m_facturasagencyfees from menu within m_controldefacturacion
+end type
+type m_cambiodecargos from menu within m_controldefacturacion
+end type
+type m_-7 from menu within m_controldefacturacion
+end type
+type m_revisiondetransito from menu within m_controldefacturacion
+end type
+type m_cerrartransito from menu within m_controldefacturacion
+end type
+type m_procesodeaprobaciondepagos from menu within m_controldefacturacion
+end type
+type m_cerrarfletesdetransito from menu within m_controldefacturacion
+end type
+type m_cerrarretencionesdetransito from menu within m_controldefacturacion
+end type
+type m_aprobaciondefacturas from menu within m_controldefacturacion
+end type
+type m_cierredefletesparcial from menu within m_controldefacturacion
+end type
+type m_cierrederetencionesporfecha from menu within m_controldefacturacion
+end type
+type m_-26 from menu within m_controldefacturacion
+end type
+type m_cambiodeclassdepandiclub from menu within m_controldefacturacion
+end type
+type m_cierredepiclub from menu within m_controldefacturacion
+end type
+type m_controldefacturacion from menu within m_na_padre
+m_facturasagencyfees m_facturasagencyfees
+m_cambiodecargos m_cambiodecargos
+m_-7 m_-7
+m_revisiondetransito m_revisiondetransito
+m_cerrartransito m_cerrartransito
+m_procesodeaprobaciondepagos m_procesodeaprobaciondepagos
+m_cerrarfletesdetransito m_cerrarfletesdetransito
+m_cerrarretencionesdetransito m_cerrarretencionesdetransito
+m_aprobaciondefacturas m_aprobaciondefacturas
+m_cierredefletesparcial m_cierredefletesparcial
+m_cierrederetencionesporfecha m_cierrederetencionesporfecha
+m_-26 m_-26
+m_cambiodeclassdepandiclub m_cambiodeclassdepandiclub
+m_cierredepiclub m_cierredepiclub
+end type
+type m_ventanas from menu within m_na_padre
+end type
+type m_horizontal from menu within m_ventanas
+end type
+type m_vertical from menu within m_ventanas
+end type
+type m_pantallacompleta from menu within m_ventanas
+end type
+type m_cascada from menu within m_ventanas
+end type
+type m_-6 from menu within m_ventanas
+end type
+type m_zoom from menu within m_ventanas
+end type
+type m_20% from menu within m_zoom
+end type
+type m_40% from menu within m_zoom
+end type
+type m_60% from menu within m_zoom
+end type
+type m_80% from menu within m_zoom
+end type
+type m_100% from menu within m_zoom
+end type
+type m_200% from menu within m_zoom
+end type
+type m_zoom from menu within m_ventanas
+m_20% m_20%
+m_40% m_40%
+m_60% m_60%
+m_80% m_80%
+m_100% m_100%
+m_200% m_200%
+end type
+type m_zoom2 from menu within m_ventanas
+end type
+type m_zoom3 from menu within m_ventanas
+end type
+type m_regla from menu within m_ventanas
+end type
+type m_ventanas from menu within m_na_padre
+m_horizontal m_horizontal
+m_vertical m_vertical
+m_pantallacompleta m_pantallacompleta
+m_cascada m_cascada
+m_-6 m_-6
+m_zoom m_zoom
+m_zoom2 m_zoom2
+m_zoom3 m_zoom3
+m_regla m_regla
+end type
+type m_ayuda from menu within m_na_padre
+end type
+type m_acercade from menu within m_ayuda
+end type
+type m_calculadora from menu within m_ayuda
+end type
+type m_paint from menu within m_ayuda
+end type
+type m_wordpad from menu within m_ayuda
+end type
+type m_ayuda from menu within m_na_padre
+m_acercade m_acercade
+m_calculadora m_calculadora
+m_paint m_paint
+m_wordpad m_wordpad
+end type
+type m_supervisor from menu within m_na_padre
+end type
+type m_activaciontransitocerrado from menu within m_supervisor
+end type
+type m_activaciondefletescerrados from menu within m_supervisor
+end type
+type m_activacionderetencionescerradas from menu within m_supervisor
+end type
+type m_modificacióndecajamenuda from menu within m_supervisor
+end type
+type m_creacióndesuplementarias from menu within m_supervisor
+end type
+type m_activarestadodecuenta from menu within m_supervisor
+end type
+type m_-27 from menu within m_supervisor
+end type
+type m_activaciondecasospandiclub from menu within m_supervisor
+end type
+type m_supervisor from menu within m_na_padre
+m_activaciontransitocerrado m_activaciontransitocerrado
+m_activaciondefletescerrados m_activaciondefletescerrados
+m_activacionderetencionescerradas m_activacionderetencionescerradas
+m_modificacióndecajamenuda m_modificacióndecajamenuda
+m_creacióndesuplementarias m_creacióndesuplementarias
+m_activarestadodecuenta m_activarestadodecuenta
+m_-27 m_-27
+m_activaciondecasospandiclub m_activaciondecasospandiclub
+end type
+global type m_na_padre from menu
+m_archivo m_archivo
+m_edicin m_edicin
+m_parmetros m_parmetros
+m_listados m_listados
+m_capturas m_capturas
+m_consultas m_consultas
+m_reportes m_reportes
+m_controldefacturacion m_controldefacturacion
+m_ventanas m_ventanas
+m_ayuda m_ayuda
+m_supervisor m_supervisor
+end type
+end forward
+
+global type m_na_padre from menu
+m_archivo m_archivo
+m_edicin m_edicin
+m_parmetros m_parmetros
+m_listados m_listados
+m_capturas m_capturas
+m_consultas m_consultas
+m_reportes m_reportes
+m_controldefacturacion m_controldefacturacion
+m_ventanas m_ventanas
+m_ayuda m_ayuda
+m_supervisor m_supervisor
+end type
+global m_na_padre m_na_padre
+
+type prototypes
+Function long ShellExecuteA (ulong hwind, string lpOperation, string lpFile, string lpParameters, string lpDirectory, long nShowCmd) library "shell32.dll" alias for "ShellExecuteA;Ansi"
+end prototypes
+
+type variables
+str_fa_carg_ped str_formato
+str_fa_formato str_formato_pr
+
+end variables
+
+forward prototypes
+public subroutine mf_selecciona_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato)
+public subroutine mf_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato)
+public subroutine mf_actualiza_reservados ()
+public subroutine mf_subcontrol ()
+end prototypes
+
+public subroutine mf_selecciona_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato);/* Esta función verifica cuantos formatos existen del documento
+solicitado, si hay más de uno abre la ventana de selección, si sólo
+hay uno toma el datawindow del mismo y abre la ventana principal*/
+
+String	ls_dberror
+
+SELECT count(*) 
+ INTO :ai_existe
+    FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato =:as_forma_formato);   
+	if sqlca.sqlcode = -1 then
+		mensaje("Aviso","Error al Validar Existencia del Formato",sqlca.sqlerrtext)
+		return
+	end if
+
+if ai_existe <= 0 then
+	mensaje("Atención ","No se ha configurado el formato del documento, por favor contacte al personal de soporte, o al programador..gracias", "")
+	ab_aceptar = false
+	return
+End If
+
+	// Sólo hay un formato no abre ventana selección de formatos
+	Declare cur_formato cursor for
+	  SELECT faaforma.forma_datawindow  
+	 FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato = :as_forma_formato)
+			Order by forma_cod_fomato ;   
+	
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al declarar el cursor", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Abre el cursor
+	open cur_formato;
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al abrir el cursor", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Selecciona el primer registro del cursor
+	fetch cur_formato into :str_formato.datawindow ;
+	
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error en el fetch del cursor", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Cierra el cursor
+	close cur_formato;
+	
+	
+//Scrip que asigna el datawindow de listas de empaques de facturas
+if as_forma_formato = 'LEMPQ' then
+  integer li_pos
+  li_pos = pos(str_formato.datawindow,"_pedi_")
+  str_formato.datawindow2	= left(str_formato.datawindow,li_pos)+"fact_"+mid(str_formato.datawindow,li_pos + 6)
+end if
+
+
+ab_aceptar = true
+
+end subroutine
+
+public subroutine mf_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato);/*Scrip agregado por HGN el 20 de marzo del 2000*/
+
+/* Esta función verifica cuantos formatos existen del documento
+solicitado, si hay más de uno abre la ventana de selección, si sólo
+hay uno toma el datawindow del mismo y abre la ventana principal*/
+
+String	ls_dberror
+
+SELECT count(*) 
+ INTO :ai_existe
+    FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato =:as_forma_formato);   
+
+if ai_existe <= 0 then
+	mensaje("Atención ","No se ha configurado el formato del documento, por favor contacte al personal de soporte, o al programador..gracias", "")
+	ab_aceptar = false
+	return
+End If
+
+If ai_existe = 1 then
+	// Sólo hay un formato no abre ventana selección de formatos
+	  SELECT faaforma.forma_datawindow  
+	 INTO :str_formato.datawindow 
+	 FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato = :as_forma_formato);   
+	
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al leer el formato del documento", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Scrip que asigna el datawindow de listas de empaques de facturas
+	if as_forma_formato = 'LEMPQ' then
+	  integer li_pos
+	  li_pos = pos(str_formato.datawindow,"_pedi_")
+     str_formato.datawindow2	= left(str_formato.datawindow,li_pos)+"fact_"+mid(str_formato.datawindow,li_pos + 6)	  
+   end if
+end  if
+
+ab_aceptar = true
+
+end subroutine
+
+public subroutine mf_actualiza_reservados ();string ls_error
+
+ str.frame.setmicrohelp("Inicializando los Productos Reservados.............por favor Espere")
+
+ sqlca.autocommit = false
+ 
+  UPDATE inmprodu  
+     SET prod_reserva_total = 0  
+	  where prod_g_financiero = :str.g_financiero and
+	  		  prod_empresa		  = :str.empresa ;
+	  
+	  if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("Aviso","Error al Actualizar las Reservas a 0 (inmprodu) ",ls_error)
+		sqlca.autocommit = true
+		return
+	  end if
+
+  UPDATE inmbodeg  
+     SET mbod_reserva = 0  
+	  Where mbod_g_financiero = :str.g_financiero and
+	  		  mbod_empresa	= :str.empresa ;
+
+	  if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("Aviso","Error al Actualizar las Reservas a 0 (inmbodeg) ",ls_error)
+		sqlca.autocommit = true
+		return
+	  end if
+
+str.frame.setmicrohelp("Actualizando los Productos Reservados.............por favor Espere")
+
+/*Actualiza los reservados del producto, procedentes de pedidos*/
+  UPDATE inmprodu  
+     SET prod_reserva_total = prod_reserva_total + vi_reserva.reservado  
+    FROM inmprodu,   
+         vi_reserva  
+   WHERE ( inmprodu.prod_g_financiero = vi_reserva.dped_g_financiero ) AND  
+         ( inmprodu.prod_empresa      = vi_reserva.dped_empresa ) AND  
+         ( inmprodu.prod_producto     = vi_reserva.dped_codigo_item )  AND
+			( inmprodu.prod_g_financiero = :str.g_financiero ) AND
+	  		( inmprodu.prod_empresa		  = :str.empresa ) ;
+	  if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+		sqlca.autocommit = true
+		return
+	  end if
+
+/*Actualiza los reservados del producto, procedentes de factura*/
+  UPDATE inmprodu  
+     SET prod_reserva_total = prod_reserva_total + vi_reserva_fac.reservado
+    FROM inmprodu,   
+         vi_reserva_fac  
+   WHERE ( inmprodu.prod_g_financiero = vi_reserva_fac.facd_g_financiero ) AND  
+         ( inmprodu.prod_empresa = vi_reserva_fac.facd_empresa ) AND  
+         ( inmprodu.prod_producto = vi_reserva_fac.facd_codigo_item ) AND
+			( inmprodu.prod_g_financiero = :str.g_financiero ) AND
+	  		( inmprodu.prod_empresa		  = :str.empresa ) ;
+			
+	  if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("Aviso","Error al Actualizar las Reservas de Productos ",ls_error)
+		sqlca.autocommit = true
+		return
+	  end if
+
+/*Para actualizar las cantidades pasadas con la cantidad total del Registro, si la cantidad
+ pasada es mayor a la total*/
+  UPDATE fadpedid  
+     SET dped_pasada = fadpedid.dped_cantidad * inamedid.medi_cantidad + fadpedid.dped_fraccion  
+    FROM fadpedid,   
+         inamedid  
+   WHERE ( fadpedid.dped_pasada > fadpedid.dped_cantidad * inamedid.medi_cantidad + fadpedid.dped_fraccion ) AND  
+         ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) AND
+			( fadpedid.dped_g_financiero = :str.g_financiero ) AND
+			( fadpedid.dped_empresa = :str.empresa );
+			
+	  if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("Aviso","Error al Actualizar las Cantidades Pasadas",ls_error)
+		sqlca.autocommit = true
+		return
+	  end if
+
+/*Actualiza los reservados por bodega, procedentes de factura*/
+ str.frame.setmicrohelp("Actualizando los Productos Reservados por Bodega.............por favor Espere")
+
+  UPDATE inmbodeg  
+     SET mbod_reserva = mbod_reserva + vi_reserva_fac_bodega.reservado
+    FROM inmbodeg,   
+         vi_reserva_fac_bodega  
+   WHERE ( inmbodeg.mbod_g_financiero = vi_reserva_fac_bodega.facd_g_financiero ) AND  
+         ( inmbodeg.mbod_empresa = vi_reserva_fac_bodega.facd_empresa ) AND  
+         ( inmbodeg.mbod_bodega = vi_reserva_fac_bodega.facd_bodega ) AND  
+         ( inmbodeg.mbod_ubicacion = vi_reserva_fac_bodega.facd_ubicacion ) AND  
+         ( inmbodeg.mbod_producto = vi_reserva_fac_bodega.facd_codigo_item ) AND
+			( inmbodeg.mbod_g_financiero = :str.g_financiero ) AND  
+         ( inmbodeg.mbod_empresa = :str.empresa );
+			
+	  if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("Aviso","Error al Actualizar las Reservas de productos por bodega ",ls_error)
+		sqlca.autocommit = true
+		return
+	  end if
+			
+
+/*Actualiza los reservados por bodega, procedentes de pedidos*/
+  UPDATE inmbodeg  
+     SET mbod_reserva = mbod_reserva  +  vi_reserva_ped_bodega.reservado
+    FROM inmbodeg,   
+         vi_reserva_ped_bodega  
+   WHERE ( inmbodeg.mbod_g_financiero = vi_reserva_ped_bodega.dped_g_financiero ) AND  
+         ( inmbodeg.mbod_empresa = vi_reserva_ped_bodega.dped_empresa ) AND  
+         ( inmbodeg.mbod_bodega = vi_reserva_ped_bodega.dped_bodega ) AND  
+         ( inmbodeg.mbod_ubicacion = vi_reserva_ped_bodega.dped_ubicacion ) AND  
+         ( inmbodeg.mbod_producto = vi_reserva_ped_bodega.dped_codigo_item ) AND
+			( inmbodeg.mbod_g_financiero = :str.g_financiero ) AND  
+         ( inmbodeg.mbod_empresa = :str.empresa ) ;
+	  if sqlca.sqlcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("Aviso","Error al Actualizar las Reservas de productos por bodega ",ls_error)
+		sqlca.autocommit = true
+		return
+	  end if
+	
+	
+	//Si no manda error , guarda en la base de datos
+	
+	commit;
+
+	sqlca.autocommit = true	
+	
+end subroutine
+
+public subroutine mf_subcontrol ();
+end subroutine
+
+on m_na_padre.create
+m_na_padre=this
+call super::create
+this.m_archivo=create m_archivo
+this.m_edicin=create m_edicin
+this.m_parmetros=create m_parmetros
+this.m_listados=create m_listados
+this.m_capturas=create m_capturas
+this.m_consultas=create m_consultas
+this.m_reportes=create m_reportes
+this.m_controldefacturacion=create m_controldefacturacion
+this.m_ventanas=create m_ventanas
+this.m_ayuda=create m_ayuda
+this.m_supervisor=create m_supervisor
+this.Item[UpperBound(this.Item)+1]=this.m_archivo
+this.Item[UpperBound(this.Item)+1]=this.m_edicin
+this.Item[UpperBound(this.Item)+1]=this.m_parmetros
+this.Item[UpperBound(this.Item)+1]=this.m_listados
+this.Item[UpperBound(this.Item)+1]=this.m_capturas
+this.Item[UpperBound(this.Item)+1]=this.m_consultas
+this.Item[UpperBound(this.Item)+1]=this.m_reportes
+this.Item[UpperBound(this.Item)+1]=this.m_controldefacturacion
+this.Item[UpperBound(this.Item)+1]=this.m_ventanas
+this.Item[UpperBound(this.Item)+1]=this.m_ayuda
+this.Item[UpperBound(this.Item)+1]=this.m_supervisor
+end on
+
+on m_na_padre.destroy
+call super::destroy
+destroy(this.m_archivo)
+destroy(this.m_edicin)
+destroy(this.m_parmetros)
+destroy(this.m_listados)
+destroy(this.m_capturas)
+destroy(this.m_consultas)
+destroy(this.m_reportes)
+destroy(this.m_controldefacturacion)
+destroy(this.m_ventanas)
+destroy(this.m_ayuda)
+destroy(this.m_supervisor)
+end on
+
+event clicked;parentwindow.triggerevent("ue_reimprimir_pagina")
+end event
+
+type m_archivo from menu within m_na_padre
+m_empresa m_empresa
+m_cerrar m_cerrar
+m_guardar m_guardar
+m_guardarcomo m_guardarcomo
+m_- m_-
+m_vistapreliminar m_vistapreliminar
+m_imprimir m_imprimir
+m_-1 m_-1
+m_reimpresion m_reimpresion
+m_salir m_salir
+end type
+
+on m_archivo.create
+call super::create
+this.tag = "m_na_padre.m_archivo //"
+this.text = "&Archivo"
+this.m_empresa=create m_empresa
+this.m_cerrar=create m_cerrar
+this.m_guardar=create m_guardar
+this.m_guardarcomo=create m_guardarcomo
+this.m_-=create m_-
+this.m_vistapreliminar=create m_vistapreliminar
+this.m_imprimir=create m_imprimir
+this.m_-1=create m_-1
+this.m_reimpresion=create m_reimpresion
+this.m_salir=create m_salir
+this.Item[UpperBound(this.Item)+1]=this.m_empresa
+this.Item[UpperBound(this.Item)+1]=this.m_cerrar
+this.Item[UpperBound(this.Item)+1]=this.m_guardar
+this.Item[UpperBound(this.Item)+1]=this.m_guardarcomo
+this.Item[UpperBound(this.Item)+1]=this.m_-
+this.Item[UpperBound(this.Item)+1]=this.m_vistapreliminar
+this.Item[UpperBound(this.Item)+1]=this.m_imprimir
+this.Item[UpperBound(this.Item)+1]=this.m_-1
+this.Item[UpperBound(this.Item)+1]=this.m_reimpresion
+this.Item[UpperBound(this.Item)+1]=this.m_salir
+end on
+
+on m_archivo.destroy
+call super::destroy
+destroy(this.m_empresa)
+destroy(this.m_cerrar)
+destroy(this.m_guardar)
+destroy(this.m_guardarcomo)
+destroy(this.m_-)
+destroy(this.m_vistapreliminar)
+destroy(this.m_imprimir)
+destroy(this.m_-1)
+destroy(this.m_reimpresion)
+destroy(this.m_salir)
+end on
+
+event clicked;//w_al_rep_calendario_devoluciones
+end event
+
+event selected;//***
+
+
+
+//***
+end event
+
+type m_empresa from menu within m_archivo
+end type
+
+event clicked;// Fue creapa para que el usuario pueda escoger las ventanas que desea cerrar
+// cuando va a cambiar de empresa
+
+
+String	ls_aplicacion
+Integer	li_pos, li_rtn_msg, li_i=1, li_j
+str_active_sheet str_wsheet
+
+
+str_wsheet.wSheet[li_i] = str.frame.GetFirstSheet()
+
+IF IsValid(str_wsheet.wSheet[li_i]) THEN
+
+	str_wsheet.titulo[li_i] = str_wsheet.wsheet[li_i].Title
+	str_wsheet.nombre[li_i] = str_wsheet.wsheet[li_i].ClassName()
+
+	If IsValid(str_wsheet.wSheet[li_i]) And (lower(Right(str_wsheet.nombre[li_i],5)) <> &
+													"fondo" And Len(str_wsheet.nombre[li_i]) <> 10 ) Then
+
+		DO WHILE IsValid(str_wsheet.wSheet[li_i])				
+			
+			If (lower(Right(str_wsheet.nombre[li_i],5)) = "fondo" And &
+															Len(str_wsheet.nombre[li_i]) = 10 ) Then Exit
+		
+			li_j = li_i
+			li_i++
+			str_wsheet.wSheet[li_i] = str.frame.GetNextSheet(str_wsheet.wSheet[li_j])
+			
+			If Not IsValid(str_wsheet.wSheet[li_i]) Then Continue
+			
+				str_wsheet.titulo[li_i] = str_wsheet.wsheet[li_i].Title
+				str_wsheet.nombre[li_i] = str_wsheet.wsheet[li_i].ClassName()
+		LOOP
+
+		OpenWithParm(w_active_sheets, str_wsheet)
+	End if
+END IF
+
+yield()
+
+li_pos = Pos(str.frame.title, " -- ")
+
+ls_aplicacion = Right(str.frame.title, Len(str.frame.title) - (li_pos + 3))
+
+//OPENWithParm(w_select_empr, str.usuario)
+
+//Función en la que se cargan los parametros de facturación para la empresa activa
+
+str.frame.title = gf_dg_nom_empresa(str.g_financiero,str.empresa) + ' -- ' + ls_aplicacion
+str.nombre_empresa = gf_dg_nom_empresa(str.g_financiero,str.empresa)
+w_na_fondo.st_empresa.text = str.nombre_empresa
+end event
+
+on m_empresa.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_empresa"
+this.text = "&Empresa"
+this.microhelp = "Permite cambiar la Empresa de Trabajo"
+end on
+
+on m_empresa.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cerrar from menu within m_archivo
+end type
+
+on m_cerrar.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_cerrar"
+this.visible = false
+this.text = "&Cerrar~tAlt+C"
+this.shortcut = 579
+this.microhelp = "Cierrar la Ventana"
+this.toolbaritemtext = "Cerrar"
+end on
+
+on m_cerrar.destroy
+call super::destroy
+end on
+
+type m_guardar from menu within m_archivo
+end type
+
+on m_guardar.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_guardar"
+this.visible = false
+this.text = "&Guardar~tAlt+G"
+this.enabled = false
+this.shortcut = 583
+this.microhelp = "Guardar"
+this.toolbaritemtext = "Guardar"
+end on
+
+event clicked;parentwindow.triggerevent("ue_pre_aceptar")
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+on m_guardar.destroy
+call super::destroy
+end on
+
+type m_guardarcomo from menu within m_archivo
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_save_as')
+end event
+
+on m_guardarcomo.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_guardarcomo"
+this.visible = false
+this.text = "Guardar Como"
+this.enabled = false
+this.microhelp = "Guardar en un archivo"
+this.toolbaritemvisible = false
+this.toolbaritemname = "SaveAs!"
+this.toolbaritemtext = "Guardar Como .."
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+on m_guardarcomo.destroy
+call super::destroy
+end on
+
+type m_- from menu within m_archivo
+end type
+
+on m_-.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_-"
+this.visible = false
+this.text = "-"
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_vistapreliminar from menu within m_archivo
+end type
+
+on m_vistapreliminar.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_vistapreliminar"
+this.visible = false
+this.text = "&Vista Preliminar~tAlt+V"
+this.enabled = false
+this.shortcut = 598
+this.microhelp = "Vista Preliminar "
+this.toolbaritemvisible = false
+this.toolbaritemname = "EditDataTabular!"
+this.toolbaritemtext = "Vista Preliminar"
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_vista')
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+on m_vistapreliminar.destroy
+call super::destroy
+end on
+
+type m_imprimir from menu within m_archivo
+end type
+
+on m_imprimir.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_imprimir"
+this.visible = false
+this.text = "I&mprimir~tAlt+I"
+this.enabled = false
+this.shortcut = 585
+this.microhelp = "Imprimir "
+this.toolbaritemtext = "Imprimir"
+end on
+
+event clicked;parentwindow.Triggerevent("ue_print")
+end event
+
+on m_imprimir.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-1 from menu within m_archivo
+end type
+
+on m_-1.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_-1"
+this.text = "-"
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_reimpresion from menu within m_archivo
+end type
+
+on m_reimpresion.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_reimpresion"
+this.visible = false
+this.text = "Reimpresion"
+this.microhelp = "Reimpresion"
+this.toolbaritemvisible = false
+this.toolbaritemname = "Custom074!"
+end on
+
+on m_reimpresion.destroy
+call super::destroy
+end on
+
+event selected;//string ls_tag
+//
+////Llamado de funcion de acceso a opciones (SEGURIDAD)
+//ls_tag = this.Tag
+//
+//if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+//	this.enabled = true
+//else
+//	this.enabled = false
+//	return
+//end if
+//
+end event
+
+event clicked;parentwindow.Triggerevent("ue_reimprimir")
+end event
+
+type m_salir from menu within m_archivo
+end type
+
+on m_salir.create
+call super::create
+this.tag = "m_na_padre.m_archivo.m_salir //"
+this.text = "&Salir~tAlt+S"
+this.shortcut = 595
+this.microhelp = "Salir de la Aplicación"
+this.toolbaritemname = "Exit!"
+this.toolbaritemdownname = "Run!"
+this.toolbaritemtext = "Salir"
+this.toolbaritemspace = 1
+end on
+
+event clicked;close(parentwindow)
+end event
+
+on m_salir.destroy
+call super::destroy
+end on
+
+type m_edicin from menu within m_na_padre
+m_adicionar m_adicionar
+m_insertar m_insertar
+m_eliminar m_eliminar
+m_-2 m_-2
+m_siguienteregistro m_siguienteregistro
+m_registroanterior m_registroanterior
+m_-3 m_-3
+m_primerregistro m_primerregistro
+m_ultimoregistro m_ultimoregistro
+m_-10 m_-10
+m_filtrar m_filtrar
+m_sortear m_sortear
+m_restaurar m_restaurar
+m_-14 m_-14
+m_verfoto m_verfoto
+m_busqueda m_busqueda
+m_cambiarformato m_cambiarformato
+m_enviarmensaje m_enviarmensaje
+m_actualizarfactura m_actualizarfactura
+end type
+
+on m_edicin.create
+call super::create
+this.tag = "m_na_padre.m_edicin"
+this.visible = false
+this.text = "&Edición"
+this.enabled = false
+this.microhelp = "Opciones de Edicion de Registros"
+this.m_adicionar=create m_adicionar
+this.m_insertar=create m_insertar
+this.m_eliminar=create m_eliminar
+this.m_-2=create m_-2
+this.m_siguienteregistro=create m_siguienteregistro
+this.m_registroanterior=create m_registroanterior
+this.m_-3=create m_-3
+this.m_primerregistro=create m_primerregistro
+this.m_ultimoregistro=create m_ultimoregistro
+this.m_-10=create m_-10
+this.m_filtrar=create m_filtrar
+this.m_sortear=create m_sortear
+this.m_restaurar=create m_restaurar
+this.m_-14=create m_-14
+this.m_verfoto=create m_verfoto
+this.m_busqueda=create m_busqueda
+this.m_cambiarformato=create m_cambiarformato
+this.m_enviarmensaje=create m_enviarmensaje
+this.m_actualizarfactura=create m_actualizarfactura
+this.Item[UpperBound(this.Item)+1]=this.m_adicionar
+this.Item[UpperBound(this.Item)+1]=this.m_insertar
+this.Item[UpperBound(this.Item)+1]=this.m_eliminar
+this.Item[UpperBound(this.Item)+1]=this.m_-2
+this.Item[UpperBound(this.Item)+1]=this.m_siguienteregistro
+this.Item[UpperBound(this.Item)+1]=this.m_registroanterior
+this.Item[UpperBound(this.Item)+1]=this.m_-3
+this.Item[UpperBound(this.Item)+1]=this.m_primerregistro
+this.Item[UpperBound(this.Item)+1]=this.m_ultimoregistro
+this.Item[UpperBound(this.Item)+1]=this.m_-10
+this.Item[UpperBound(this.Item)+1]=this.m_filtrar
+this.Item[UpperBound(this.Item)+1]=this.m_sortear
+this.Item[UpperBound(this.Item)+1]=this.m_restaurar
+this.Item[UpperBound(this.Item)+1]=this.m_-14
+this.Item[UpperBound(this.Item)+1]=this.m_verfoto
+this.Item[UpperBound(this.Item)+1]=this.m_busqueda
+this.Item[UpperBound(this.Item)+1]=this.m_cambiarformato
+this.Item[UpperBound(this.Item)+1]=this.m_enviarmensaje
+this.Item[UpperBound(this.Item)+1]=this.m_actualizarfactura
+end on
+
+on m_edicin.destroy
+call super::destroy
+destroy(this.m_adicionar)
+destroy(this.m_insertar)
+destroy(this.m_eliminar)
+destroy(this.m_-2)
+destroy(this.m_siguienteregistro)
+destroy(this.m_registroanterior)
+destroy(this.m_-3)
+destroy(this.m_primerregistro)
+destroy(this.m_ultimoregistro)
+destroy(this.m_-10)
+destroy(this.m_filtrar)
+destroy(this.m_sortear)
+destroy(this.m_restaurar)
+destroy(this.m_-14)
+destroy(this.m_verfoto)
+destroy(this.m_busqueda)
+destroy(this.m_cambiarformato)
+destroy(this.m_enviarmensaje)
+destroy(this.m_actualizarfactura)
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_adicionar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_adicionar')
+end event
+
+on m_adicionar.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_adicionar"
+this.text = "&Adicionar~tCtrl+A"
+this.shortcut = 321
+this.microhelp = "Adicionar un Registro"
+this.toolbaritemtext = "Adicionar"
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+on m_adicionar.destroy
+call super::destroy
+end on
+
+type m_insertar from menu within m_edicin
+
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_insertar')
+end event
+
+on m_insertar.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_insertar"
+this.text = "&Insertar"
+this.microhelp = "Inserta un Nuevo Registro"
+this.toolbaritemtext = "Insertar"
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+on m_insertar.destroy
+call super::destroy
+end on
+
+type m_eliminar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_pre_eliminar')
+end event
+
+on m_eliminar.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_eliminar"
+this.text = "&Eliminar~tCtrl+E"
+this.shortcut = 325
+this.microhelp = "Eliminar Registro"
+this.toolbaritemtext = "Eliminar"
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+on m_eliminar.destroy
+call super::destroy
+end on
+
+type m_-2 from menu within m_edicin
+end type
+
+on m_-2.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_-2"
+this.text = "-"
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from menu within m_edicin
+end type
+
+on m_siguienteregistro.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_siguienteregistro"
+this.text = "&Siguiente Registro"
+this.microhelp = "Siguiente Registro"
+this.toolbaritemtext = "Siguiente Registro"
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_siguiente_reg')
+end event
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from menu within m_edicin
+end type
+
+on m_registroanterior.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_registroanterior"
+this.text = "&Registro Anterior"
+this.microhelp = "Registro Anterior"
+this.toolbaritemtext = "Registro Anterior"
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_reg_anterior')
+end event
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_-3 from menu within m_edicin
+end type
+
+on m_-3.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_-3"
+this.text = "-"
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_primerregistro from menu within m_edicin
+end type
+
+on m_primerregistro.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_primerregistro"
+this.text = "&Primer Registro"
+this.microhelp = "Primer Registro"
+this.toolbaritemtext = "Primer Registro"
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_primer_reg')
+end event
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from menu within m_edicin
+end type
+
+on m_ultimoregistro.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_ultimoregistro"
+this.text = "&Ultimo Registro"
+this.microhelp = "Ultimo Registro"
+this.toolbaritemtext = "Ultimo Registro"
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_ultimo_reg')
+end event
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-10 from menu within m_edicin
+end type
+
+on m_-10.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_-10"
+this.text = "-"
+end on
+
+on m_-10.destroy
+call super::destroy
+end on
+
+type m_filtrar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_filter')
+end event
+
+on m_filtrar.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_filtrar"
+this.text = "&Filtrar"
+this.microhelp = "Filtra Los Registros"
+this.toolbaritemtext = "Filtra"
+end on
+
+on m_filtrar.destroy
+call super::destroy
+end on
+
+type m_sortear from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_sort')
+end event
+
+on m_sortear.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_sortear"
+this.text = "&Ordenar"
+this.microhelp = "Ordena los Registros"
+this.toolbaritemdownname = "Sortear"
+this.toolbaritemtext = "Ordenar"
+end on
+
+on m_sortear.destroy
+call super::destroy
+end on
+
+type m_restaurar from menu within m_edicin
+end type
+
+on m_restaurar.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_restaurar"
+this.visible = false
+this.text = "Res&taurar~tCtrl+R"
+this.shortcut = 338
+this.microhelp = "Recupera nuevamente de la Base de Datos"
+this.toolbaritemvisible = false
+this.toolbaritemname = "Undo!"
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_restaurar')
+end event
+
+on m_restaurar.destroy
+call super::destroy
+end on
+
+type m_-14 from menu within m_edicin
+end type
+
+on m_-14.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_-14"
+this.visible = false
+this.text = "-"
+end on
+
+on m_-14.destroy
+call super::destroy
+end on
+
+type m_verfoto from menu within m_edicin
+end type
+
+on m_verfoto.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_verfoto"
+this.visible = false
+this.text = "Ver Foto~tCtrl+Shift+F"
+this.enabled = false
+this.shortcut = 1350
+this.microhelp = "Abre o cierra la ventana que muestra la foto del producto para un renglón"
+this.toolbaritemvisible = false
+this.toolbaritemtext = "Foto del producto"
+end on
+
+event clicked;//Check y Uncheck de la opcion
+If This.Checked Then
+	This.UnCheck()
+	This.ToolbarItemDown	= False
+	str.frame.GetActiveSheet().Event Dynamic Trigger ue_foto(False)
+Else
+	This.Check()
+	This.ToolbarItemDown	= True
+	str.frame.GetActiveSheet().Event Dynamic Trigger ue_foto(True)	
+End If
+end event
+
+on m_verfoto.destroy
+call super::destroy
+end on
+
+type m_busqueda from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_busqueda')
+
+end event
+
+on m_busqueda.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_busqueda"
+this.visible = false
+this.text = "Bu&squeda~tAlt+B"
+this.enabled = false
+this.shortcut = 578
+this.microhelp = "Busqueda"
+this.toolbaritemvisible = false
+this.toolbaritemname = "Find!"
+this.toolbaritemtext = "Busqueda"
+this.toolbaritemorder = 20
+this.toolbaritemspace = 1
+end on
+
+on m_busqueda.destroy
+call super::destroy
+end on
+
+type m_cambiarformato from menu within m_edicin
+end type
+
+on m_cambiarformato.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_cambiarformato"
+this.visible = false
+this.text = "Cambiar Formato"
+this.toolbaritemvisible = false
+this.toolbaritemname = "Copy!"
+this.toolbaritemtext = "Cambiar Formato de Impresion"
+this.toolbaritemorder = 17
+this.toolbaritemspace = 1
+end on
+
+on m_cambiarformato.destroy
+call super::destroy
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_cambiar_formato')
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_enviarmensaje from menu within m_edicin
+end type
+
+event clicked;//parentwindow.SetRedraw ( false )
+//Open(w_universo)
+//parentwindow.SetRedraw ( True )
+
+end event
+
+on m_enviarmensaje.create
+call super::create
+this.visible = false
+this.text = "Enviar Mensaje~tF4"
+this.shortcut = 115
+this.microhelp = "Enviar Correo a .."
+this.toolbaritemvisible = false
+this.toolbaritemname = "Custom002!"
+this.toolbaritemtext = "Enviar Correo"
+this.toolbaritemorder = 20
+end on
+
+on m_enviarmensaje.destroy
+call super::destroy
+end on
+
+type m_actualizarfactura from menu within m_edicin
+end type
+
+on m_actualizarfactura.create
+call super::create
+this.tag = "m_na_padre.m_edicin.m_actualizarfactura"
+this.visible = false
+this.text = "Actualizar Factura"
+this.microhelp = "Actualizar Factura"
+this.toolbaritemvisible = false
+this.toolbaritemname = "DataPipeline!"
+this.toolbaritemtext = "Actualizar Factura"
+this.toolbaritemorder = 20
+this.toolbaritemspace = 2
+end on
+
+on m_actualizarfactura.destroy
+call super::destroy
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_actualizar_factura')
+end event
+
+type m_parmetros from menu within m_na_padre
+m_inicialesdelsistemaalquiler m_inicialesdelsistemaalquiler
+m_-4 m_-4
+m_clasedecargos m_clasedecargos
+m_cargos m_cargos
+m_-5 m_-5
+m_clientes m_clientes
+m_-8 m_-8
+m_banderas m_banderas
+m_barconave m_barconave
+m_puertoscargadescarga m_puertoscargadescarga
+m_puertos m_puertos
+m_-13 m_-13
+m_telefonos m_telefonos
+m_tarifas m_tarifas
+m_-15 m_-15
+m_servicios m_servicios
+m_tiposdefacturas m_tiposdefacturas
+m_-20 m_-20
+m_plantillas m_plantillas
+m_cajas m_cajas
+end type
+
+on m_parmetros.create
+call super::create
+this.tag = "m_na_padre.m_parmetros"
+this.text = "&Parámetros"
+this.microhelp = "Parametros Iniciales del Sistema de Facturación"
+this.m_inicialesdelsistemaalquiler=create m_inicialesdelsistemaalquiler
+this.m_-4=create m_-4
+this.m_clasedecargos=create m_clasedecargos
+this.m_cargos=create m_cargos
+this.m_-5=create m_-5
+this.m_clientes=create m_clientes
+this.m_-8=create m_-8
+this.m_banderas=create m_banderas
+this.m_barconave=create m_barconave
+this.m_puertoscargadescarga=create m_puertoscargadescarga
+this.m_puertos=create m_puertos
+this.m_-13=create m_-13
+this.m_telefonos=create m_telefonos
+this.m_tarifas=create m_tarifas
+this.m_-15=create m_-15
+this.m_servicios=create m_servicios
+this.m_tiposdefacturas=create m_tiposdefacturas
+this.m_-20=create m_-20
+this.m_plantillas=create m_plantillas
+this.m_cajas=create m_cajas
+this.Item[UpperBound(this.Item)+1]=this.m_inicialesdelsistemaalquiler
+this.Item[UpperBound(this.Item)+1]=this.m_-4
+this.Item[UpperBound(this.Item)+1]=this.m_clasedecargos
+this.Item[UpperBound(this.Item)+1]=this.m_cargos
+this.Item[UpperBound(this.Item)+1]=this.m_-5
+this.Item[UpperBound(this.Item)+1]=this.m_clientes
+this.Item[UpperBound(this.Item)+1]=this.m_-8
+this.Item[UpperBound(this.Item)+1]=this.m_banderas
+this.Item[UpperBound(this.Item)+1]=this.m_barconave
+this.Item[UpperBound(this.Item)+1]=this.m_puertoscargadescarga
+this.Item[UpperBound(this.Item)+1]=this.m_puertos
+this.Item[UpperBound(this.Item)+1]=this.m_-13
+this.Item[UpperBound(this.Item)+1]=this.m_telefonos
+this.Item[UpperBound(this.Item)+1]=this.m_tarifas
+this.Item[UpperBound(this.Item)+1]=this.m_-15
+this.Item[UpperBound(this.Item)+1]=this.m_servicios
+this.Item[UpperBound(this.Item)+1]=this.m_tiposdefacturas
+this.Item[UpperBound(this.Item)+1]=this.m_-20
+this.Item[UpperBound(this.Item)+1]=this.m_plantillas
+this.Item[UpperBound(this.Item)+1]=this.m_cajas
+end on
+
+on m_parmetros.destroy
+call super::destroy
+destroy(this.m_inicialesdelsistemaalquiler)
+destroy(this.m_-4)
+destroy(this.m_clasedecargos)
+destroy(this.m_cargos)
+destroy(this.m_-5)
+destroy(this.m_clientes)
+destroy(this.m_-8)
+destroy(this.m_banderas)
+destroy(this.m_barconave)
+destroy(this.m_puertoscargadescarga)
+destroy(this.m_puertos)
+destroy(this.m_-13)
+destroy(this.m_telefonos)
+destroy(this.m_tarifas)
+destroy(this.m_-15)
+destroy(this.m_servicios)
+destroy(this.m_tiposdefacturas)
+destroy(this.m_-20)
+destroy(this.m_plantillas)
+destroy(this.m_cajas)
+end on
+
+event selected;string ls_tag
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_inicialesdelsistemaalquiler from menu within m_parmetros
+event clicked ( )
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_param,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_inicialesdelsistemaalquiler.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_inicialesdelsistemaalquiler"
+this.text = "Iniciales del Sistema"
+end on
+
+on m_inicialesdelsistemaalquiler.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-4 from menu within m_parmetros
+end type
+
+on m_-4.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_-4"
+this.text = "-"
+end on
+
+on m_-4.destroy
+call super::destroy
+end on
+
+type m_clasedecargos from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_clase_cargos,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_clasedecargos.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_clasedecargos"
+this.visible = false
+this.text = "&Tipos de Class"
+this.enabled = false
+end on
+
+on m_clasedecargos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cargos from menu within m_parmetros
+end type
+
+on m_cargos.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_cargos"
+this.text = "&Class"
+this.microhelp = "Cargos Que Pueden Se Aplicados Sobre las Facturas"
+this.toolbaritemtext = "Cargos"
+end on
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_cargos,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+on m_cargos.destroy
+call super::destroy
+end on
+
+type m_-5 from menu within m_parmetros
+end type
+
+on m_-5.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_-5"
+this.text = "-"
+end on
+
+on m_-5.destroy
+call super::destroy
+end on
+
+type m_clientes from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_cc_man_crea_clientes,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_clientes.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_clientes"
+this.text = "Clientes"
+end on
+
+on m_clientes.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-8 from menu within m_parmetros
+end type
+
+on m_-8.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_-8"
+this.text = "-"
+end on
+
+on m_-8.destroy
+call super::destroy
+end on
+
+type m_banderas from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_bandera,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_banderas.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_banderas"
+this.text = "Países"
+end on
+
+on m_banderas.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_barconave from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_nave,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_barconave.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_barconave"
+this.text = "Barco / Nave"
+end on
+
+on m_barconave.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_puertoscargadescarga from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_puertos_int,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_puertoscargadescarga.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_puertoscargadescarga"
+this.text = "Puertos Carga/Descarga"
+end on
+
+on m_puertoscargadescarga.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_puertos from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_puertos,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_puertos.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_puertos"
+this.text = "Puertos"
+end on
+
+on m_puertos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-13 from menu within m_parmetros
+end type
+
+on m_-13.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_-13"
+this.text = "-"
+end on
+
+on m_-13.destroy
+call super::destroy
+end on
+
+type m_telefonos from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_telefono,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_telefonos.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_telefonos"
+this.text = "Teléfonos"
+end on
+
+on m_telefonos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_tarifas from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_tarifas,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_tarifas.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_tarifas"
+this.text = "Tarifas"
+end on
+
+on m_tarifas.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-15 from menu within m_parmetros
+end type
+
+on m_-15.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_-15"
+this.text = "-"
+end on
+
+on m_-15.destroy
+call super::destroy
+end on
+
+type m_servicios from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_servicios,parentwindow, 9, Layered!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_servicios.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_servicios"
+this.text = "Servicios"
+
+end on
+
+on m_servicios.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_tiposdefacturas from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_tipo_facturas,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_tiposdefacturas.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_tiposdefacturas"
+this.text = "Tipos de Facturas"
+end on
+
+on m_tiposdefacturas.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-20 from menu within m_parmetros
+end type
+
+on m_-20.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_-20"
+this.text = "-"
+end on
+
+on m_-20.destroy
+call super::destroy
+end on
+
+type m_plantillas from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_plantilla,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_plantillas.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_plantillas"
+this.text = "Plantillas"
+end on
+
+on m_plantillas.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cajas from menu within m_parmetros
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_man_cajas,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_cajas.create
+call super::create
+this.tag = "m_na_padre.m_parmetros.m_cajas"
+this.text = "Cajas"
+end on
+
+on m_cajas.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_listados from menu within m_na_padre
+m_clientes0 m_clientes0
+m_cargos0 m_cargos0
+m_barcos m_barcos
+m_transitos m_transitos
+m_banderas0 m_banderas0
+m_puertos0 m_puertos0
+m_-18 m_-18
+m_telefonos0 m_telefonos0
+m_tarifas0 m_tarifas0
+m_-19 m_-19
+m_servicios0 m_servicios0
+m_-21 m_-21
+m_plantillas0 m_plantillas0
+m_serviciosporcliente m_serviciosporcliente
+m_saldosinicialesdetransitos m_saldosinicialesdetransitos
+m_-0 m_-0
+m_casosdepiclub m_casosdepiclub
+end type
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+on m_listados.create
+call super::create
+this.tag = "m_na_padre.m_listados"
+this.text = "&Listados"
+this.microhelp = "Listado del Sistema de Facturación"
+this.m_clientes0=create m_clientes0
+this.m_cargos0=create m_cargos0
+this.m_barcos=create m_barcos
+this.m_transitos=create m_transitos
+this.m_banderas0=create m_banderas0
+this.m_puertos0=create m_puertos0
+this.m_-18=create m_-18
+this.m_telefonos0=create m_telefonos0
+this.m_tarifas0=create m_tarifas0
+this.m_-19=create m_-19
+this.m_servicios0=create m_servicios0
+this.m_-21=create m_-21
+this.m_plantillas0=create m_plantillas0
+this.m_serviciosporcliente=create m_serviciosporcliente
+this.m_saldosinicialesdetransitos=create m_saldosinicialesdetransitos
+this.m_-0=create m_-0
+this.m_casosdepiclub=create m_casosdepiclub
+this.Item[UpperBound(this.Item)+1]=this.m_clientes0
+this.Item[UpperBound(this.Item)+1]=this.m_cargos0
+this.Item[UpperBound(this.Item)+1]=this.m_barcos
+this.Item[UpperBound(this.Item)+1]=this.m_transitos
+this.Item[UpperBound(this.Item)+1]=this.m_banderas0
+this.Item[UpperBound(this.Item)+1]=this.m_puertos0
+this.Item[UpperBound(this.Item)+1]=this.m_-18
+this.Item[UpperBound(this.Item)+1]=this.m_telefonos0
+this.Item[UpperBound(this.Item)+1]=this.m_tarifas0
+this.Item[UpperBound(this.Item)+1]=this.m_-19
+this.Item[UpperBound(this.Item)+1]=this.m_servicios0
+this.Item[UpperBound(this.Item)+1]=this.m_-21
+this.Item[UpperBound(this.Item)+1]=this.m_plantillas0
+this.Item[UpperBound(this.Item)+1]=this.m_serviciosporcliente
+this.Item[UpperBound(this.Item)+1]=this.m_saldosinicialesdetransitos
+this.Item[UpperBound(this.Item)+1]=this.m_-0
+this.Item[UpperBound(this.Item)+1]=this.m_casosdepiclub
+end on
+
+on m_listados.destroy
+call super::destroy
+destroy(this.m_clientes0)
+destroy(this.m_cargos0)
+destroy(this.m_barcos)
+destroy(this.m_transitos)
+destroy(this.m_banderas0)
+destroy(this.m_puertos0)
+destroy(this.m_-18)
+destroy(this.m_telefonos0)
+destroy(this.m_tarifas0)
+destroy(this.m_-19)
+destroy(this.m_servicios0)
+destroy(this.m_-21)
+destroy(this.m_plantillas0)
+destroy(this.m_serviciosporcliente)
+destroy(this.m_saldosinicialesdetransitos)
+destroy(this.m_-0)
+destroy(this.m_casosdepiclub)
+end on
+
+type m_clientes0 from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_clase_cargos,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_clientes0.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_clientes0"
+this.visible = false
+this.text = "Tipos de Class"
+this.enabled = false
+end on
+
+on m_clientes0.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cargos0 from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_cargos,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_cargos0.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_cargos0"
+this.text = "Class"
+end on
+
+on m_cargos0.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_barcos from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_barcos,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_barcos.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_barcos"
+this.text = "Barcos"
+this.microhelp = "Listado de Barcos"
+end on
+
+on m_barcos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_transitos from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_transitos,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_transitos.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_transitos"
+this.text = "Tránsitos"
+this.microhelp = "Listado de Tránsitos"
+end on
+
+on m_transitos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_banderas0 from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_banderas,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_banderas0.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_banderas0"
+this.text = "Banderas"
+end on
+
+on m_banderas0.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_puertos0 from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_puertos,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_puertos0.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_puertos0"
+this.text = "Puertos"
+end on
+
+on m_puertos0.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-18 from menu within m_listados
+end type
+
+on m_-18.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_-18"
+this.text = "-"
+end on
+
+on m_-18.destroy
+call super::destroy
+end on
+
+type m_telefonos0 from menu within m_listados
+end type
+
+on m_telefonos0.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_telefonos0"
+this.text = "Teléfonos"
+end on
+
+on m_telefonos0.destroy
+call super::destroy
+end on
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_telefonos,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_tarifas0 from menu within m_listados
+end type
+
+on m_tarifas0.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_tarifas0"
+this.visible = false
+this.text = "Tarifas"
+end on
+
+on m_tarifas0.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-19 from menu within m_listados
+end type
+
+on m_-19.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_-19"
+this.text = "-"
+end on
+
+on m_-19.destroy
+call super::destroy
+end on
+
+type m_servicios0 from menu within m_listados
+end type
+
+on m_servicios0.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_servicios0"
+this.text = "Servicios"
+end on
+
+on m_servicios0.destroy
+call super::destroy
+end on
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_servicios,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-21 from menu within m_listados
+end type
+
+on m_-21.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_-21"
+this.text = "-"
+end on
+
+on m_-21.destroy
+call super::destroy
+end on
+
+type m_plantillas0 from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_plantillas,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_plantillas0.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_plantillas0"
+this.text = "Plantillas"
+end on
+
+on m_plantillas0.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_serviciosporcliente from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_servicios_por_clientes ,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_serviciosporcliente.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_serviciosporcliente"
+this.text = "Servicios por Cliente"
+end on
+
+on m_serviciosporcliente.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_saldosinicialesdetransitos from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_saldos_iniciales_barcos,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_saldosinicialesdetransitos.create
+call super::create
+this.tag = "m_na_padre.m_listados.m_saldosinicialesdetransitos"
+this.text = "Saldos Iniciales de Tránsitos"
+end on
+
+on m_saldosinicialesdetransitos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-0 from menu within m_listados
+end type
+
+on m_-0.create
+call super::create
+this.text = "-"
+end on
+
+on m_-0.destroy
+call super::destroy
+end on
+
+type m_casosdepiclub from menu within m_listados
+end type
+
+event clicked;parentwindow.SetRedraw ( false )
+//OPENSheet(w_na_co_pandi,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_casosdepiclub.create
+call super::create
+this.text = "Casos de P. & I. Club"
+end on
+
+on m_casosdepiclub.destroy
+call super::destroy
+end on
+
+type m_capturas from menu within m_na_padre
+m_transito m_transito
+m_-12 m_-12
+m_dopesheet m_dopesheet
+m_-16 m_-16
+m_agencyfees m_agencyfees
+m_-23 m_-23
+m_communication m_communication
+m_0 m_0
+m_-22 m_-22
+m_cajamenuda m_cajamenuda
+m_aprobaciones m_aprobaciones
+m_saldosiniciales m_saldosiniciales
+m_-25 m_-25
+m_pandiclub m_pandiclub
+end type
+
+on m_capturas.create
+call super::create
+this.tag = "m_na_padre.m_capturas"
+this.text = "Capturas"
+this.m_transito=create m_transito
+this.m_-12=create m_-12
+this.m_dopesheet=create m_dopesheet
+this.m_-16=create m_-16
+this.m_agencyfees=create m_agencyfees
+this.m_-23=create m_-23
+this.m_communication=create m_communication
+this.m_0=create m_0
+this.m_-22=create m_-22
+this.m_cajamenuda=create m_cajamenuda
+this.m_aprobaciones=create m_aprobaciones
+this.m_saldosiniciales=create m_saldosiniciales
+this.m_-25=create m_-25
+this.m_pandiclub=create m_pandiclub
+this.Item[UpperBound(this.Item)+1]=this.m_transito
+this.Item[UpperBound(this.Item)+1]=this.m_-12
+this.Item[UpperBound(this.Item)+1]=this.m_dopesheet
+this.Item[UpperBound(this.Item)+1]=this.m_-16
+this.Item[UpperBound(this.Item)+1]=this.m_agencyfees
+this.Item[UpperBound(this.Item)+1]=this.m_-23
+this.Item[UpperBound(this.Item)+1]=this.m_communication
+this.Item[UpperBound(this.Item)+1]=this.m_0
+this.Item[UpperBound(this.Item)+1]=this.m_-22
+this.Item[UpperBound(this.Item)+1]=this.m_cajamenuda
+this.Item[UpperBound(this.Item)+1]=this.m_aprobaciones
+this.Item[UpperBound(this.Item)+1]=this.m_saldosiniciales
+this.Item[UpperBound(this.Item)+1]=this.m_-25
+this.Item[UpperBound(this.Item)+1]=this.m_pandiclub
+end on
+
+on m_capturas.destroy
+call super::destroy
+destroy(this.m_transito)
+destroy(this.m_-12)
+destroy(this.m_dopesheet)
+destroy(this.m_-16)
+destroy(this.m_agencyfees)
+destroy(this.m_-23)
+destroy(this.m_communication)
+destroy(this.m_0)
+destroy(this.m_-22)
+destroy(this.m_cajamenuda)
+destroy(this.m_aprobaciones)
+destroy(this.m_saldosiniciales)
+destroy(this.m_-25)
+destroy(this.m_pandiclub)
+end on
+
+type m_transito from menu within m_capturas
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_transito,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_transito.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_transito"
+this.text = "Tránsito"
+end on
+
+on m_transito.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-12 from menu within m_capturas
+end type
+
+on m_-12.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_-12"
+this.text = "-"
+end on
+
+on m_-12.destroy
+call super::destroy
+end on
+
+type m_dopesheet from menu within m_capturas
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_dsheet,parentwindow, 9, Layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_dopesheet.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_dopesheet"
+this.text = "Dope Sheet"
+end on
+
+on m_dopesheet.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-16 from menu within m_capturas
+end type
+
+on m_-16.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_-16"
+this.text = "-"
+end on
+
+on m_-16.destroy
+call super::destroy
+end on
+
+type m_agencyfees from menu within m_capturas
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_a_fees,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_agencyfees.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_agencyfees"
+this.text = "Facturación de Servicios"
+end on
+
+on m_agencyfees.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-23 from menu within m_capturas
+end type
+
+on m_-23.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_-23"
+this.text = "-"
+end on
+
+on m_-23.destroy
+call super::destroy
+end on
+
+type m_communication from menu within m_capturas
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_communication,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_communication.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_comunication"
+this.text = "Communication"
+end on
+
+on m_communication.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_0 from menu within m_capturas
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_importa_communication,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_0.create
+call super::create
+this.text = "Importa llamadas de Comunicaciones"
+end on
+
+on m_0.destroy
+call super::destroy
+end on
+
+type m_-22 from menu within m_capturas
+end type
+
+on m_-22.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_-22"
+this.text = "-"
+end on
+
+on m_-22.destroy
+call super::destroy
+end on
+
+type m_cajamenuda from menu within m_capturas
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_desmbolso,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_cajamenuda.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_cajamenuda"
+this.text = "Caja Menuda"
+end on
+
+on m_cajamenuda.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_aprobaciones from menu within m_capturas
+end type
+
+on m_aprobaciones.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_aprobaciones"
+this.text = "Aprobaciones"
+end on
+
+on m_aprobaciones.destroy
+call super::destroy
+end on
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_aprobaciones_desem,parentwindow, 9, Layered!)
+parentwindow.SetRedraw ( True )
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_saldosiniciales from menu within m_capturas
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_saldos_iniciales,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_saldosiniciales.create
+call super::create
+this.tag = "m_na_padre.m_capturas.m_saldosiniciales"
+this.text = "Saldos Iniciales"
+this.microhelp = "Captura de Saldos Iniciales de Barcos"
+end on
+
+on m_saldosiniciales.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-25 from menu within m_capturas
+end type
+
+on m_-25.create
+call super::create
+this.text = "-"
+end on
+
+on m_-25.destroy
+call super::destroy
+end on
+
+type m_pandiclub from menu within m_capturas
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_pandi,parentwindow, 9, Original!)
+parentwindow.SetRedraw ( True )
+end event
+
+on m_pandiclub.create
+call super::create
+this.text = "P. and I. club"
+end on
+
+on m_pandiclub.destroy
+call super::destroy
+end on
+
+type m_consultas from menu within m_na_padre
+end type
+
+on m_consultas.create
+call super::create
+this.tag = "m_na_padre.m_consultas"
+this.visible = false
+this.text = "&Consultas"
+this.microhelp = "Consulta de Clientes"
+end on
+
+on m_consultas.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_reportes from menu within m_na_padre
+m_estadodecuentadissbursment m_estadodecuentadissbursment
+m_-9 m_-9
+m_librodecontrol m_librodecontrol
+m_-11 m_-11
+m_informedetransitos m_informedetransitos
+m_reportedetransitos m_reportedetransitos
+m_informedeestadodetránsitos m_informedeestadodetránsitos
+m_informedeestadodetránsitosporfecha m_informedeestadodetránsitosporfecha
+m_informedeestadodefletesporfecha m_informedeestadodefletesporfecha
+m_informedeestadoderetencionesporfecha m_informedeestadoderetencionesporfecha
+m_detalledeoperaciones m_detalledeoperaciones
+m_detallepormovimientoclass m_detallepormovimientoclass
+m_librodecierredebarcos m_librodecierredebarcos
+m_reportedeaprobaciondepagos m_reportedeaprobaciondepagos
+m_informedebarcosporcliente m_informedebarcosporcliente
+m_reportedecomunicaciones m_reportedecomunicaciones
+m_-17 m_-17
+m_taxessales m_taxessales
+m_-24 m_-24
+m_cajamenuda0 m_cajamenuda0
+m_reportedefletes m_reportedefletes
+m_reportedefletescerrados m_reportedefletescerrados
+m_reportederetencionescerradas m_reportederetencionescerradas
+m_reportedecapturafletesyretenciones m_reportedecapturafletesyretenciones
+m_-28 m_-28
+m_estadodecuentadepandiclub m_estadodecuentadepandiclub
+m_informedeestadodecasosdepandiclub m_informedeestadodecasosdepandiclub
+m_detalledeoperaciónesdepandiclub m_detalledeoperaciónesdepandiclub
+end type
+
+on m_reportes.create
+call super::create
+this.tag = "m_na_padre.m_reportes"
+this.text = "&Informes"
+this.microhelp = "Para aprobación de la gerencia"
+this.m_estadodecuentadissbursment=create m_estadodecuentadissbursment
+this.m_-9=create m_-9
+this.m_librodecontrol=create m_librodecontrol
+this.m_-11=create m_-11
+this.m_informedetransitos=create m_informedetransitos
+this.m_reportedetransitos=create m_reportedetransitos
+this.m_informedeestadodetránsitos=create m_informedeestadodetránsitos
+this.m_informedeestadodetránsitosporfecha=create m_informedeestadodetránsitosporfecha
+this.m_informedeestadodefletesporfecha=create m_informedeestadodefletesporfecha
+this.m_informedeestadoderetencionesporfecha=create m_informedeestadoderetencionesporfecha
+this.m_detalledeoperaciones=create m_detalledeoperaciones
+this.m_detallepormovimientoclass=create m_detallepormovimientoclass
+this.m_librodecierredebarcos=create m_librodecierredebarcos
+this.m_reportedeaprobaciondepagos=create m_reportedeaprobaciondepagos
+this.m_informedebarcosporcliente=create m_informedebarcosporcliente
+this.m_reportedecomunicaciones=create m_reportedecomunicaciones
+this.m_-17=create m_-17
+this.m_taxessales=create m_taxessales
+this.m_-24=create m_-24
+this.m_cajamenuda0=create m_cajamenuda0
+this.m_reportedefletes=create m_reportedefletes
+this.m_reportedefletescerrados=create m_reportedefletescerrados
+this.m_reportederetencionescerradas=create m_reportederetencionescerradas
+this.m_reportedecapturafletesyretenciones=create m_reportedecapturafletesyretenciones
+this.m_-28=create m_-28
+this.m_estadodecuentadepandiclub=create m_estadodecuentadepandiclub
+this.m_informedeestadodecasosdepandiclub=create m_informedeestadodecasosdepandiclub
+this.m_detalledeoperaciónesdepandiclub=create m_detalledeoperaciónesdepandiclub
+this.Item[UpperBound(this.Item)+1]=this.m_estadodecuentadissbursment
+this.Item[UpperBound(this.Item)+1]=this.m_-9
+this.Item[UpperBound(this.Item)+1]=this.m_librodecontrol
+this.Item[UpperBound(this.Item)+1]=this.m_-11
+this.Item[UpperBound(this.Item)+1]=this.m_informedetransitos
+this.Item[UpperBound(this.Item)+1]=this.m_reportedetransitos
+this.Item[UpperBound(this.Item)+1]=this.m_informedeestadodetránsitos
+this.Item[UpperBound(this.Item)+1]=this.m_informedeestadodetránsitosporfecha
+this.Item[UpperBound(this.Item)+1]=this.m_informedeestadodefletesporfecha
+this.Item[UpperBound(this.Item)+1]=this.m_informedeestadoderetencionesporfecha
+this.Item[UpperBound(this.Item)+1]=this.m_detalledeoperaciones
+this.Item[UpperBound(this.Item)+1]=this.m_detallepormovimientoclass
+this.Item[UpperBound(this.Item)+1]=this.m_librodecierredebarcos
+this.Item[UpperBound(this.Item)+1]=this.m_reportedeaprobaciondepagos
+this.Item[UpperBound(this.Item)+1]=this.m_informedebarcosporcliente
+this.Item[UpperBound(this.Item)+1]=this.m_reportedecomunicaciones
+this.Item[UpperBound(this.Item)+1]=this.m_-17
+this.Item[UpperBound(this.Item)+1]=this.m_taxessales
+this.Item[UpperBound(this.Item)+1]=this.m_-24
+this.Item[UpperBound(this.Item)+1]=this.m_cajamenuda0
+this.Item[UpperBound(this.Item)+1]=this.m_reportedefletes
+this.Item[UpperBound(this.Item)+1]=this.m_reportedefletescerrados
+this.Item[UpperBound(this.Item)+1]=this.m_reportederetencionescerradas
+this.Item[UpperBound(this.Item)+1]=this.m_reportedecapturafletesyretenciones
+this.Item[UpperBound(this.Item)+1]=this.m_-28
+this.Item[UpperBound(this.Item)+1]=this.m_estadodecuentadepandiclub
+this.Item[UpperBound(this.Item)+1]=this.m_informedeestadodecasosdepandiclub
+this.Item[UpperBound(this.Item)+1]=this.m_detalledeoperaciónesdepandiclub
+end on
+
+on m_reportes.destroy
+call super::destroy
+destroy(this.m_estadodecuentadissbursment)
+destroy(this.m_-9)
+destroy(this.m_librodecontrol)
+destroy(this.m_-11)
+destroy(this.m_informedetransitos)
+destroy(this.m_reportedetransitos)
+destroy(this.m_informedeestadodetránsitos)
+destroy(this.m_informedeestadodetránsitosporfecha)
+destroy(this.m_informedeestadodefletesporfecha)
+destroy(this.m_informedeestadoderetencionesporfecha)
+destroy(this.m_detalledeoperaciones)
+destroy(this.m_detallepormovimientoclass)
+destroy(this.m_librodecierredebarcos)
+destroy(this.m_reportedeaprobaciondepagos)
+destroy(this.m_informedebarcosporcliente)
+destroy(this.m_reportedecomunicaciones)
+destroy(this.m_-17)
+destroy(this.m_taxessales)
+destroy(this.m_-24)
+destroy(this.m_cajamenuda0)
+destroy(this.m_reportedefletes)
+destroy(this.m_reportedefletescerrados)
+destroy(this.m_reportederetencionescerradas)
+destroy(this.m_reportedecapturafletesyretenciones)
+destroy(this.m_-28)
+destroy(this.m_estadodecuentadepandiclub)
+destroy(this.m_informedeestadodecasosdepandiclub)
+destroy(this.m_detalledeoperaciónesdepandiclub)
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_estadodecuentadissbursment from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_re_estado_cuenta,parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_estadodecuentadissbursment.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_estadodecuentadissbursment"
+this.text = "Estado de Cuenta (Disbursment)"
+end on
+
+on m_estadodecuentadissbursment.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-9 from menu within m_reportes
+end type
+
+on m_-9.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_-9"
+this.text = "-"
+end on
+
+on m_-9.destroy
+call super::destroy
+end on
+
+type m_librodecontrol from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_garantias,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_librodecontrol.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_librodecontrol"
+this.text = "Libro de Control"
+end on
+
+on m_librodecontrol.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-11 from menu within m_reportes
+end type
+
+on m_-11.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_-11"
+this.text = "-"
+end on
+
+on m_-11.destroy
+call super::destroy
+end on
+
+type m_informedetransitos from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_transitos_det,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_informedetransitos.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_informedetransitos"
+this.text = "Informe de Tránsitos"
+end on
+
+on m_informedetransitos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_reportedetransitos from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_re_tran_param,parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_reportedetransitos.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_reportedetransitos"
+this.text = "Informe Mensual de Barcos"
+end on
+
+on m_reportedetransitos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_informedeestadodetránsitos from menu within m_reportes
+end type
+
+event clicked;str_dg_general lstr_param
+
+//lstr_param.ventana = w_na_rep_estado_transitos
+parentwindow.SetRedraw(false)
+//OPENSheetWithParm(w_na_re_tran_param_2, lstr_param, parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_informedeestadodetránsitos.create
+call super::create
+this.text = "Informe de Estado de Tránsitos"
+end on
+
+on m_informedeestadodetránsitos.destroy
+call super::destroy
+end on
+
+type m_informedeestadodetránsitosporfecha from menu within m_reportes
+end type
+
+event clicked;str_dg_general lstr_param
+//
+//lstr_param.ventana = w_na_rep_estado_tran_por_fecha
+parentwindow.SetRedraw(false)
+//OPENSheetWithParm(w_na_re_tran_param_3, lstr_param, parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_informedeestadodetránsitosporfecha.create
+call super::create
+this.text = "Informe de Estado de Tránsitos por Fecha"
+end on
+
+on m_informedeestadodetránsitosporfecha.destroy
+call super::destroy
+end on
+
+type m_informedeestadodefletesporfecha from menu within m_reportes
+end type
+
+event clicked;str_dg_general lstr_param
+
+//lstr_param.ventana = w_na_rep_estado_fletes_por_fecha
+parentwindow.SetRedraw(false)
+//OPENSheetWithParm(w_na_re_tran_param_4, lstr_param, parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_informedeestadodefletesporfecha.create
+call super::create
+this.text = "Informe de Estado de Fletes por Fecha"
+end on
+
+on m_informedeestadodefletesporfecha.destroy
+call super::destroy
+end on
+
+type m_informedeestadoderetencionesporfecha from menu within m_reportes
+end type
+
+event clicked;str_dg_general lstr_param
+
+//lstr_param.ventana = w_na_rep_estado_fletes_por_fecha
+parentwindow.SetRedraw(false)
+//OPENSheetWithParm(w_na_re_tran_param_5, lstr_param, parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_informedeestadoderetencionesporfecha.create
+call super::create
+this.text = "Informe de Estado de Retenciones por Fecha"
+end on
+
+on m_informedeestadoderetencionesporfecha.destroy
+call super::destroy
+end on
+
+type m_detalledeoperaciones from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_detalle_operaciones,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_detalledeoperaciones.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_detalledeoperaciones"
+this.text = "Detalle de Operaciones de Tránsitos"
+end on
+
+on m_detalledeoperaciones.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_detallepormovimientoclass from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_detalle_x_class,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_detallepormovimientoclass.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_detallepormovimientoclass"
+this.text = "Detalle por Movimiento (Class)"
+end on
+
+on m_detallepormovimientoclass.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_librodecierredebarcos from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_libro_cierre,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_librodecierredebarcos.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_librodecierredebarcos"
+this.text = "Libro de Cierre de Barcos"
+end on
+
+on m_librodecierredebarcos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_reportedeaprobaciondepagos from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_aprob_pagos,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_reportedeaprobaciondepagos.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_reportedeaprobaciondepagos"
+this.text = "Reporte de Aprobación de Pagos"
+end on
+
+on m_reportedeaprobaciondepagos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_informedebarcosporcliente from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_cliente_barcos,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_informedebarcosporcliente.create
+call super::create
+this.text = "Informe de Barcos por Cliente"
+end on
+
+on m_informedebarcosporcliente.destroy
+call super::destroy
+end on
+
+type m_reportedecomunicaciones from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_re_param_comunicaciones,parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_reportedecomunicaciones.create
+call super::create
+this.text = "Reporte de Comunicaciones"
+end on
+
+on m_reportedecomunicaciones.destroy
+call super::destroy
+end on
+
+type m_-17 from menu within m_reportes
+end type
+
+on m_-17.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_-17"
+this.text = "-"
+end on
+
+on m_-17.destroy
+call super::destroy
+end on
+
+type m_taxessales from menu within m_reportes
+end type
+
+on m_taxessales.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_taxessales"
+this.text = "Summary of Taxes and Sales"
+end on
+
+on m_taxessales.destroy
+call super::destroy
+end on
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_taxes_sales,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-24 from menu within m_reportes
+end type
+
+on m_-24.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_-24"
+this.text = "-"
+end on
+
+on m_-24.destroy
+call super::destroy
+end on
+
+type m_cajamenuda0 from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_caja_menuda,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_cajamenuda0.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_cajamenuda0"
+this.text = "Caja Menuda"
+end on
+
+on m_cajamenuda0.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_reportedefletes from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_fletes,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_reportedefletes.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_reportedefletes"
+this.text = "Reporte de Fletes y Retenciones"
+end on
+
+on m_reportedefletes.destroy
+call super::destroy
+end on
+
+type m_reportedefletescerrados from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_fletes_cerrados,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_reportedefletescerrados.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_reportedefletescerrados"
+this.text = "Reporte de Fletes Cerrados"
+end on
+
+on m_reportedefletescerrados.destroy
+call super::destroy
+end on
+
+type m_reportederetencionescerradas from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_retenciones_cerradas,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_reportederetencionescerradas.create
+call super::create
+this.tag = "m_na_padre.m_reportes.m_reportederetencionescerradas"
+this.text = "Reporte de Retenciones Cerradas"
+end on
+
+on m_reportederetencionescerradas.destroy
+call super::destroy
+end on
+
+type m_reportedecapturafletesyretenciones from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_rep_fletes_retencion,parentwindow, 9, layered!)
+parentwindow.SetRedraw ( True )
+
+end event
+
+on m_reportedecapturafletesyretenciones.create
+call super::create
+this.tag = "m_na_padre.m_reportes."
+this.text = "Reporte de Captura Fletes y Retenciones"
+end on
+
+on m_reportedecapturafletesyretenciones.destroy
+call super::destroy
+end on
+
+type m_-28 from menu within m_reportes
+end type
+
+on m_-28.create
+call super::create
+this.text = "-"
+end on
+
+on m_-28.destroy
+call super::destroy
+end on
+
+type m_estadodecuentadepandiclub from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_re_estado_cuenta_pandi,parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_estadodecuentadepandiclub.create
+call super::create
+this.text = "Estado de Cuenta de P. and I. Club"
+end on
+
+on m_estadodecuentadepandiclub.destroy
+call super::destroy
+end on
+
+type m_informedeestadodecasosdepandiclub from menu within m_reportes
+end type
+
+event clicked;str_dg_general lstr_param
+
+parentwindow.SetRedraw(false)
+//OPENSheetWithParm(w_na_re_tran_param_pandi, lstr_param, parentwindow, 9, Original!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_informedeestadodecasosdepandiclub.create
+call super::create
+this.text = "Informe de Estado de Casos de P. and I. Club"
+end on
+
+on m_informedeestadodecasosdepandiclub.destroy
+call super::destroy
+end on
+
+type m_detalledeoperaciónesdepandiclub from menu within m_reportes
+end type
+
+event clicked;parentwindow.SetRedraw(false)
+//OPENSheet(w_na_rep_detalle_operaciones_pandi,parentwindow, 9, Layered!)
+parentwindow.SetRedraw(True)
+end event
+
+on m_detalledeoperaciónesdepandiclub.create
+call super::create
+this.text = "Detalle de Operaciones de P. and I. Club"
+end on
+
+on m_detalledeoperaciónesdepandiclub.destroy
+call super::destroy
+end on
+
+type m_controldefacturacion from menu within m_na_padre
+m_facturasagencyfees m_facturasagencyfees
+m_cambiodecargos m_cambiodecargos
+m_-7 m_-7
+m_revisiondetransito m_revisiondetransito
+m_cerrartransito m_cerrartransito
+m_procesodeaprobaciondepagos m_procesodeaprobaciondepagos
+m_cerrarfletesdetransito m_cerrarfletesdetransito
+m_cerrarretencionesdetransito m_cerrarretencionesdetransito
+m_aprobaciondefacturas m_aprobaciondefacturas
+m_cierredefletesparcial m_cierredefletesparcial
+m_cierrederetencionesporfecha m_cierrederetencionesporfecha
+m_-26 m_-26
+m_cambiodeclassdepandiclub m_cambiodeclassdepandiclub
+m_cierredepiclub m_cierredepiclub
+end type
+
+on m_controldefacturacion.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion"
+this.text = "P&rocesos"
+this.microhelp = "Procesos principales"
+this.m_facturasagencyfees=create m_facturasagencyfees
+this.m_cambiodecargos=create m_cambiodecargos
+this.m_-7=create m_-7
+this.m_revisiondetransito=create m_revisiondetransito
+this.m_cerrartransito=create m_cerrartransito
+this.m_procesodeaprobaciondepagos=create m_procesodeaprobaciondepagos
+this.m_cerrarfletesdetransito=create m_cerrarfletesdetransito
+this.m_cerrarretencionesdetransito=create m_cerrarretencionesdetransito
+this.m_aprobaciondefacturas=create m_aprobaciondefacturas
+this.m_cierredefletesparcial=create m_cierredefletesparcial
+this.m_cierrederetencionesporfecha=create m_cierrederetencionesporfecha
+this.m_-26=create m_-26
+this.m_cambiodeclassdepandiclub=create m_cambiodeclassdepandiclub
+this.m_cierredepiclub=create m_cierredepiclub
+this.Item[UpperBound(this.Item)+1]=this.m_facturasagencyfees
+this.Item[UpperBound(this.Item)+1]=this.m_cambiodecargos
+this.Item[UpperBound(this.Item)+1]=this.m_-7
+this.Item[UpperBound(this.Item)+1]=this.m_revisiondetransito
+this.Item[UpperBound(this.Item)+1]=this.m_cerrartransito
+this.Item[UpperBound(this.Item)+1]=this.m_procesodeaprobaciondepagos
+this.Item[UpperBound(this.Item)+1]=this.m_cerrarfletesdetransito
+this.Item[UpperBound(this.Item)+1]=this.m_cerrarretencionesdetransito
+this.Item[UpperBound(this.Item)+1]=this.m_aprobaciondefacturas
+this.Item[UpperBound(this.Item)+1]=this.m_cierredefletesparcial
+this.Item[UpperBound(this.Item)+1]=this.m_cierrederetencionesporfecha
+this.Item[UpperBound(this.Item)+1]=this.m_-26
+this.Item[UpperBound(this.Item)+1]=this.m_cambiodeclassdepandiclub
+this.Item[UpperBound(this.Item)+1]=this.m_cierredepiclub
+end on
+
+on m_controldefacturacion.destroy
+call super::destroy
+destroy(this.m_facturasagencyfees)
+destroy(this.m_cambiodecargos)
+destroy(this.m_-7)
+destroy(this.m_revisiondetransito)
+destroy(this.m_cerrartransito)
+destroy(this.m_procesodeaprobaciondepagos)
+destroy(this.m_cerrarfletesdetransito)
+destroy(this.m_cerrarretencionesdetransito)
+destroy(this.m_aprobaciondefacturas)
+destroy(this.m_cierredefletesparcial)
+destroy(this.m_cierrederetencionesporfecha)
+destroy(this.m_-26)
+destroy(this.m_cambiodeclassdepandiclub)
+destroy(this.m_cierredepiclub)
+end on
+
+event selected;string ls_tag
+
+mf_subcontrol()
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_facturasagencyfees from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_rep_fact_agency_fees,parentwindow, 9, Layered!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_facturasagencyfees.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_facturasagencyfees"
+this.visible = false
+this.text = "Facturas (Agency Fees)"
+end on
+
+on m_facturasagencyfees.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cambiodecargos from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_cambios_cargos,parentwindow, 9, original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_cambiodecargos.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_cambiodecargos"
+this.text = "Cambio de Class de Tránsitos"
+end on
+
+on m_cambiodecargos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_-7 from menu within m_controldefacturacion
+end type
+
+on m_-7.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_-7"
+this.text = "-"
+end on
+
+on m_-7.destroy
+call super::destroy
+end on
+
+type m_revisiondetransito from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_revision_de_transitos,parentwindow, 9, original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_revisiondetransito.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_revisiondetransito"
+this.text = "Revisión de Tránsito"
+end on
+
+on m_revisiondetransito.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cerrartransito from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_cierre_de_transitos,parentwindow, 9, original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_cerrartransito.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_cerrartransito"
+this.text = "Cerrar Tránsito"
+end on
+
+on m_cerrartransito.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_procesodeaprobaciondepagos from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_rep_copia_aprob_pagos,parentwindow, 9, layered!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_procesodeaprobaciondepagos.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_procesodeaprobaciondepagos"
+this.text = "Proceso de Aprobación de Pagos o Cheques"
+end on
+
+on m_procesodeaprobaciondepagos.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cerrarfletesdetransito from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_cierre_flete,parentwindow, 9, original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_cerrarfletesdetransito.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_cerrarfletesdetransito"
+this.text = "Cierre de Fletes"
+end on
+
+on m_cerrarfletesdetransito.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cerrarretencionesdetransito from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_cierre_retenciones,parentwindow, 9, original!)
+parentwindow.SetRedraw (True) 
+end event
+
+on m_cerrarretencionesdetransito.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_cerrarretencionesdetransito"
+this.text = "Cierre de Retenciones"
+end on
+
+on m_cerrarretencionesdetransito.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_aprobaciondefacturas from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_aprobacion_de_facturas,parentwindow, 9, Layered!)
+parentwindow.SetRedraw (True)
+
+end event
+
+on m_aprobaciondefacturas.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_aprobaciondefacturas"
+this.text = "Aprobación de Facturas"
+this.microhelp = "Aprobar Facturas por Lote"
+end on
+
+on m_aprobaciondefacturas.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cierredefletesparcial from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_cierre_flete_por_fecha,parentwindow, 9, Layered!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_cierredefletesparcial.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_cierredefletesparcial"
+this.text = "Cierre de Fletes por Fecha"
+end on
+
+on m_cierredefletesparcial.destroy
+call super::destroy
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+
+end event
+
+type m_cierrederetencionesporfecha from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_cierre_retenc_por_fecha,parentwindow, 9, Layered!)
+parentwindow.SetRedraw (True)
+end event
+
+event selected;//string ls_tag
+//
+////Llamado de funcion de acceso a opciones (SEGURIDAD)
+//ls_tag = this.Tag
+//
+//if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+//	this.enabled = true
+//else
+//	this.enabled = false
+//	return
+//end if
+
+end event
+
+on m_cierrederetencionesporfecha.create
+call super::create
+this.tag = "m_na_padre.m_controldefacturacion.m_cierrederetencionesporfecha"
+this.text = "Cierre de Retenciones por Fecha"
+end on
+
+on m_cierrederetencionesporfecha.destroy
+call super::destroy
+end on
+
+type m_-26 from menu within m_controldefacturacion
+end type
+
+on m_-26.create
+call super::create
+this.text = "-"
+end on
+
+on m_-26.destroy
+call super::destroy
+end on
+
+type m_cambiodeclassdepandiclub from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_cambios_cargos_pandi,parentwindow, 9, original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_cambiodeclassdepandiclub.create
+call super::create
+this.text = "Cambio de Class de P. and I. Club"
+end on
+
+on m_cambiodeclassdepandiclub.destroy
+call super::destroy
+end on
+
+type m_cierredepiclub from menu within m_controldefacturacion
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_cierre_de_casos,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_cierredepiclub.create
+call super::create
+this.text = "Cierre de P. and I. Club"
+end on
+
+on m_cierredepiclub.destroy
+call super::destroy
+end on
+
+type m_ventanas from menu within m_na_padre
+m_horizontal m_horizontal
+m_vertical m_vertical
+m_pantallacompleta m_pantallacompleta
+m_cascada m_cascada
+m_-6 m_-6
+m_zoom m_zoom
+m_zoom2 m_zoom2
+m_zoom3 m_zoom3
+m_regla m_regla
+end type
+
+on m_ventanas.create
+call super::create
+this.tag = "m_na_padre.m_ventanas"
+this.text = "&Ventanas"
+this.m_horizontal=create m_horizontal
+this.m_vertical=create m_vertical
+this.m_pantallacompleta=create m_pantallacompleta
+this.m_cascada=create m_cascada
+this.m_-6=create m_-6
+this.m_zoom=create m_zoom
+this.m_zoom2=create m_zoom2
+this.m_zoom3=create m_zoom3
+this.m_regla=create m_regla
+this.Item[UpperBound(this.Item)+1]=this.m_horizontal
+this.Item[UpperBound(this.Item)+1]=this.m_vertical
+this.Item[UpperBound(this.Item)+1]=this.m_pantallacompleta
+this.Item[UpperBound(this.Item)+1]=this.m_cascada
+this.Item[UpperBound(this.Item)+1]=this.m_-6
+this.Item[UpperBound(this.Item)+1]=this.m_zoom
+this.Item[UpperBound(this.Item)+1]=this.m_zoom2
+this.Item[UpperBound(this.Item)+1]=this.m_zoom3
+this.Item[UpperBound(this.Item)+1]=this.m_regla
+end on
+
+on m_ventanas.destroy
+call super::destroy
+destroy(this.m_horizontal)
+destroy(this.m_vertical)
+destroy(this.m_pantallacompleta)
+destroy(this.m_cascada)
+destroy(this.m_-6)
+destroy(this.m_zoom)
+destroy(this.m_zoom2)
+destroy(this.m_zoom3)
+destroy(this.m_regla)
+end on
+
+type m_horizontal from menu within m_ventanas
+end type
+
+on m_horizontal.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_horizontal"
+this.text = "&Horizontal"
+this.microhelp = "Organización Horizontal"
+end on
+
+event clicked;window lw_active
+lw_active = parentwindow.getactivesheet()
+if not isvalid(lw_active) then return
+parentwindow.getactivesheet().ArrangeSheets(tilehorizontal!)
+end event
+
+on m_horizontal.destroy
+call super::destroy
+end on
+
+type m_vertical from menu within m_ventanas
+end type
+
+on m_vertical.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_vertical"
+this.text = "&Vertical"
+this.microhelp = "Organización Vertical"
+end on
+
+event clicked;window lw_active
+lw_active = parentwindow.getactivesheet()
+if not isvalid(lw_active) then return
+parentwindow.getactivesheet().ArrangeSheets(tile!)
+end event
+
+on m_vertical.destroy
+call super::destroy
+end on
+
+type m_pantallacompleta from menu within m_ventanas
+end type
+
+on m_pantallacompleta.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_pantallacompleta"
+this.text = "&Pantalla Completa"
+this.microhelp = "Pantalla Completa"
+end on
+
+event clicked;window lw_active
+lw_active = parentwindow.getactivesheet()
+if not isvalid(lw_active) then return
+parentwindow.getactivesheet().ArrangeSheets(layer!)
+end event
+
+on m_pantallacompleta.destroy
+call super::destroy
+end on
+
+type m_cascada from menu within m_ventanas
+end type
+
+on m_cascada.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_cascada"
+this.text = "&Cascada"
+this.microhelp = "Organización en Cascada"
+end on
+
+event clicked;window lw_active
+lw_active = parentwindow.getactivesheet()
+if not isvalid(lw_active) then return
+parentwindow.getactivesheet().ArrangeSheets(cascade!)
+end event
+
+on m_cascada.destroy
+call super::destroy
+end on
+
+type m_-6 from menu within m_ventanas
+end type
+
+on m_-6.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_-6"
+this.text = "-"
+end on
+
+on m_-6.destroy
+call super::destroy
+end on
+
+type m_zoom from menu within m_ventanas
+m_20% m_20%
+m_40% m_40%
+m_60% m_60%
+m_80% m_80%
+m_100% m_100%
+m_200% m_200%
+end type
+
+on m_zoom.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom"
+this.text = "&Zoom"
+this.microhelp = "Aumento Visual"
+this.m_20%=create m_20%
+this.m_40%=create m_40%
+this.m_60%=create m_60%
+this.m_80%=create m_80%
+this.m_100%=create m_100%
+this.m_200%=create m_200%
+this.Item[UpperBound(this.Item)+1]=this.m_20%
+this.Item[UpperBound(this.Item)+1]=this.m_40%
+this.Item[UpperBound(this.Item)+1]=this.m_60%
+this.Item[UpperBound(this.Item)+1]=this.m_80%
+this.Item[UpperBound(this.Item)+1]=this.m_100%
+this.Item[UpperBound(this.Item)+1]=this.m_200%
+end on
+
+on m_zoom.destroy
+call super::destroy
+destroy(this.m_20%)
+destroy(this.m_40%)
+destroy(this.m_60%)
+destroy(this.m_80%)
+destroy(this.m_100%)
+destroy(this.m_200%)
+end on
+
+type m_20% from menu within m_zoom
+end type
+
+event clicked;str.zoom = 20
+//parentwindow.getactivesheet().triggerevent('ue_zoom2')
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 20%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_20%.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom.m_20%"
+this.text = "20%"
+this.microhelp = "20 %"
+end on
+
+on m_20%.destroy
+call super::destroy
+end on
+
+type m_40% from menu within m_zoom
+end type
+
+on m_40%.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom.m_40%"
+this.text = "40%"
+this.microhelp = "40 %"
+end on
+
+event clicked;str.zoom = 40
+
+//parentwindow.getactivesheet().triggerevent('ue_zoom2')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 40%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, &
+		lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_40%.destroy
+call super::destroy
+end on
+
+type m_60% from menu within m_zoom
+end type
+
+on m_60%.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom.m_60%"
+this.text = "60%"
+this.microhelp = "60 %"
+end on
+
+event clicked;str.zoom = 60
+//parentwindow.getactivesheet().triggerevent('ue_zoom2')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 60%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, &
+		lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_60%.destroy
+call super::destroy
+end on
+
+type m_80% from menu within m_zoom
+end type
+
+on m_80%.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom.m_80%"
+this.text = "80%"
+this.microhelp = "80 %"
+end on
+
+event clicked;str.zoom = 80
+//parentwindow.getactivesheet().triggerevent('ue_zoom2')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 80%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, &
+		lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_80%.destroy
+call super::destroy
+end on
+
+type m_100% from menu within m_zoom
+end type
+
+on m_100%.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom.m_100%"
+this.text = "100%"
+this.microhelp = "100 %"
+end on
+
+event clicked;str.zoom = 100
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 100%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_100%.destroy
+call super::destroy
+end on
+
+type m_200% from menu within m_zoom
+end type
+
+on m_200%.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom.m_200%"
+this.text = "200%"
+this.microhelp = "200 %"
+end on
+
+event clicked;str.zoom = 200
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Scale the display area to 200%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+window	lw_frame, lw_sheet
+
+// uncheck all zoom menu items
+parent.m_20%.checked = false
+parent.m_40%.checked = false
+parent.m_60%.checked = false
+parent.m_80%.checked = false
+parent.m_100%.checked = false
+parent.m_200%.checked = false
+
+this.checked = not this.checked
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom")
+	end if
+end if
+end event
+
+on m_200%.destroy
+call super::destroy
+end on
+
+type m_zoom2 from menu within m_ventanas
+end type
+
+on m_zoom2.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom2"
+this.text = "Zoom (-)"
+this.microhelp = "Reduce Zoom"
+this.toolbaritemtext = "Disminuir Zoom"
+end on
+
+event clicked;window	lw_frame, lw_sheet
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom_down")
+	end if
+end if
+end event
+
+on m_zoom2.destroy
+call super::destroy
+end on
+
+type m_zoom3 from menu within m_ventanas
+end type
+
+on m_zoom3.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_zoom3"
+this.text = "Zoom (+)"
+this.microhelp = "Aumenta Zoom"
+this.toolbaritemtext = "Aumentar Zoom"
+end on
+
+event clicked;window	lw_frame, lw_sheet
+
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_zoom_up")
+	end if
+end if
+end event
+
+on m_zoom3.destroy
+call super::destroy
+end on
+
+type m_regla from menu within m_ventanas
+end type
+
+event clicked;window	lw_frame, lw_sheet
+lw_frame = ParentWindow.ParentWindow()
+if IsValid (lw_frame) then
+	lw_sheet = lw_frame.GetActiveSheet()	
+	if IsValid (lw_sheet) then
+		lw_sheet.TriggerEvent ("ue_regla")
+	end if
+end if
+end event
+
+on m_regla.create
+call super::create
+this.tag = "m_na_padre.m_ventanas.m_regla"
+this.text = "&Regla"
+this.microhelp = "Regla"
+this.toolbaritemtext = "Regla"
+end on
+
+on m_regla.destroy
+call super::destroy
+end on
+
+type m_ayuda from menu within m_na_padre
+m_acercade m_acercade
+m_calculadora m_calculadora
+m_paint m_paint
+m_wordpad m_wordpad
+end type
+
+on m_ayuda.create
+call super::create
+this.tag = "m_na_padre.m_ayuda"
+this.text = "&Ayuda"
+this.m_acercade=create m_acercade
+this.m_calculadora=create m_calculadora
+this.m_paint=create m_paint
+this.m_wordpad=create m_wordpad
+this.Item[UpperBound(this.Item)+1]=this.m_acercade
+this.Item[UpperBound(this.Item)+1]=this.m_calculadora
+this.Item[UpperBound(this.Item)+1]=this.m_paint
+this.Item[UpperBound(this.Item)+1]=this.m_wordpad
+end on
+
+on m_ayuda.destroy
+call super::destroy
+destroy(this.m_acercade)
+destroy(this.m_calculadora)
+destroy(this.m_paint)
+destroy(this.m_wordpad)
+end on
+
+type m_acercade from menu within m_ayuda
+end type
+
+on m_acercade.create
+call super::create
+this.tag = "m_na_padre.m_ayuda.m_acercadeharr"
+this.text = "Acerca de..~tF10"
+this.shortcut = 121
+this.microhelp = "Acerca de HARR2000"
+this.toolbaritemtext = "Acerca de HARR2000"
+this.toolbaritemspace = 1
+this.menuitemtype = menuitemtypeabout!
+end on
+
+event clicked;parentwindow.SetRedraw ( False )
+//OpenSheet(w_acerca_de,parentwindow ,2, Original!)
+//OpenSheet(w_dg_db,parentwindow ,2, Original!)
+
+//OPENSheet(w_acerca_de,parentwindow ,2, Original!)
+//OpenSheet(w_cacan,parentwindow ,2, Original!)
+//OpenSheet(w_fa_lista_productos,parentwindow ,2, Original!)
+parentwindow.SetRedraw ( True )
+//OpenSheetWithParm(w_genapp_toolbars,parentwindow,parentwindow ,2, Original!)
+
+
+
+
+
+end event
+
+on m_acercade.destroy
+call super::destroy
+end on
+
+type m_calculadora from menu within m_ayuda
+end type
+
+event clicked;//LLAMADO A EJECUTABLE POR APLICACION.
+string ls_null
+	SetNull (ls_null)
+	ShellExecuteA(Handle(this), ls_null, "calc", ls_null, ls_null, 1)
+
+
+end event
+
+on m_calculadora.create
+call super::create
+this.text = "Calculadora"
+end on
+
+on m_calculadora.destroy
+call super::destroy
+end on
+
+type m_paint from menu within m_ayuda
+end type
+
+event clicked;//LLAMADO A EJECUTABLE POR APLICACION.
+string ls_null
+	SetNull (ls_null)
+	ShellExecuteA(Handle(this), ls_null, "mspaint", ls_null, ls_null, 1)
+
+
+end event
+
+on m_paint.create
+call super::create
+this.text = "Paint"
+end on
+
+on m_paint.destroy
+call super::destroy
+end on
+
+type m_wordpad from menu within m_ayuda
+end type
+
+event clicked;//LLAMADO A EJECUTABLE POR APLICACION.
+string ls_null
+	SetNull (ls_null)
+	ShellExecuteA(Handle(this), ls_null, "wordpad", ls_null, ls_null, 1)
+
+
+end event
+
+on m_wordpad.create
+call super::create
+this.text = "Word Pad"
+end on
+
+on m_wordpad.destroy
+call super::destroy
+end on
+
+type m_supervisor from menu within m_na_padre
+m_activaciontransitocerrado m_activaciontransitocerrado
+m_activaciondefletescerrados m_activaciondefletescerrados
+m_activacionderetencionescerradas m_activacionderetencionescerradas
+m_modificacióndecajamenuda m_modificacióndecajamenuda
+m_creacióndesuplementarias m_creacióndesuplementarias
+m_activarestadodecuenta m_activarestadodecuenta
+m_-27 m_-27
+m_activaciondecasospandiclub m_activaciondecasospandiclub
+end type
+
+on m_supervisor.create
+call super::create
+this.tag = "m_na_padre.m_supervisor"
+this.text = "&Supervisor"
+this.m_activaciontransitocerrado=create m_activaciontransitocerrado
+this.m_activaciondefletescerrados=create m_activaciondefletescerrados
+this.m_activacionderetencionescerradas=create m_activacionderetencionescerradas
+this.m_modificacióndecajamenuda=create m_modificacióndecajamenuda
+this.m_creacióndesuplementarias=create m_creacióndesuplementarias
+this.m_activarestadodecuenta=create m_activarestadodecuenta
+this.m_-27=create m_-27
+this.m_activaciondecasospandiclub=create m_activaciondecasospandiclub
+this.Item[UpperBound(this.Item)+1]=this.m_activaciontransitocerrado
+this.Item[UpperBound(this.Item)+1]=this.m_activaciondefletescerrados
+this.Item[UpperBound(this.Item)+1]=this.m_activacionderetencionescerradas
+this.Item[UpperBound(this.Item)+1]=this.m_modificacióndecajamenuda
+this.Item[UpperBound(this.Item)+1]=this.m_creacióndesuplementarias
+this.Item[UpperBound(this.Item)+1]=this.m_activarestadodecuenta
+this.Item[UpperBound(this.Item)+1]=this.m_-27
+this.Item[UpperBound(this.Item)+1]=this.m_activaciondecasospandiclub
+end on
+
+on m_supervisor.destroy
+call super::destroy
+destroy(this.m_activaciontransitocerrado)
+destroy(this.m_activaciondefletescerrados)
+destroy(this.m_activacionderetencionescerradas)
+destroy(this.m_modificacióndecajamenuda)
+destroy(this.m_creacióndesuplementarias)
+destroy(this.m_activarestadodecuenta)
+destroy(this.m_-27)
+destroy(this.m_activaciondecasospandiclub)
+end on
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+end event
+
+type m_activaciontransitocerrado from menu within m_supervisor
+end type
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+end event
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_activar_transito,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_activaciontransitocerrado.create
+call super::create
+this.tag = "m_na_padre.m_supervisor.m_activaciontransitocerrado"
+this.text = "Activación Tránsito Cerrado"
+end on
+
+on m_activaciontransitocerrado.destroy
+call super::destroy
+end on
+
+type m_activaciondefletescerrados from menu within m_supervisor
+end type
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+end event
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_activar_transito_flete,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_activaciondefletescerrados.create
+call super::create
+this.tag = "m_na_padre.m_supervisor.m_activaciondefletescerrados"
+this.text = "Activación de Fletes Cerrados"
+end on
+
+on m_activaciondefletescerrados.destroy
+call super::destroy
+end on
+
+type m_activacionderetencionescerradas from menu within m_supervisor
+end type
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+end event
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_activar_transito_retencion,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_activacionderetencionescerradas.create
+call super::create
+this.tag = "m_na_padre.m_supervisor.m_activacionderetencionescerradas"
+this.text = "Activación de Retenciones Cerradas"
+end on
+
+on m_activacionderetencionescerradas.destroy
+call super::destroy
+end on
+
+type m_modificacióndecajamenuda from menu within m_supervisor
+end type
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+	this.enabled = true
+else
+	this.enabled = false
+	return
+end if
+end event
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_modif_desmbolso,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_modificacióndecajamenuda.create
+call super::create
+this.tag = "m_na_padre.m_supervisor.m_modificacióndecajamenuda"
+this.text = "Modificación de Caja Menuda"
+end on
+
+on m_modificacióndecajamenuda.destroy
+call super::destroy
+end on
+
+type m_creacióndesuplementarias from menu within m_supervisor
+end type
+
+event clicked;
+parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_transito_suplem,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+//if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+//	this.enabled = true
+//else
+//	this.enabled = false
+//	return
+//end if
+end event
+
+on m_creacióndesuplementarias.create
+call super::create
+this.text = "Creación de Suplementarias"
+end on
+
+on m_creacióndesuplementarias.destroy
+call super::destroy
+end on
+
+type m_activarestadodecuenta from menu within m_supervisor
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_activar_estado_cuenta,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+end event
+
+on m_activarestadodecuenta.create
+call super::create
+this.text = "Activar Estado de Cuenta"
+end on
+
+on m_activarestadodecuenta.destroy
+call super::destroy
+end on
+
+type m_-27 from menu within m_supervisor
+end type
+
+on m_-27.create
+call super::create
+this.text = "-"
+end on
+
+on m_-27.destroy
+call super::destroy
+end on
+
+type m_activaciondecasospandiclub from menu within m_supervisor
+end type
+
+event clicked;parentwindow.SetRedraw (False)
+//OPENSheet(w_na_man_activar_casos,parentwindow, 9, Original!)
+parentwindow.SetRedraw (True)
+
+end event
+
+event selected;string ls_tag
+
+//Llamado de funcion de acceso a opciones (SEGURIDAD)
+ls_tag = this.Tag
+
+//if gf_ss_accesos(str.grupo,'NA','m_na_padre',ls_tag) = true then
+//	this.enabled = true
+//else
+//	this.enabled = false
+//	return
+//end if
+end event
+
+on m_activaciondecasospandiclub.create
+call super::create
+this.tag = "m_na_padre.m_supervisor.m_activaciondecasospandiclub"
+this.text = "Activación de Casos P. and I. Club"
+end on
+
+on m_activaciondecasospandiclub.destroy
+call super::destroy
+end on
+

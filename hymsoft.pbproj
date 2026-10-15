@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Project>
+  <Type Name="pb"/>
+  <Application Name="hymsoft"/>
+  <Libraries AppEntry="Sistemas.pbl">
+    <Library Path="Sistemas.pbl"/>
+    <Library Path="bancos.pbl"/>
+    <Library Path="contabilidad.pbl"/>
+    <Library Path="cuentasxcobrar.pbl"/>
+    <Library Path="cuentasxpagar.pbl"/>
+    <Library Path="dw2xls.pbl"/>
+    <Library Path="entradas.pbl"/>
+    <Library Path="entradas2.pbl"/>
+    <Library Path="facturacion.pbl"/>
+    <Library Path="inventario.pbl"/>
+    <Library Path="salidas.pbl"/>
+    <Library Path="Sistemas2.pbl"/>
+  </Libraries>
+  <Deployings>
+    <Deploying Deploy="1" Library="Sistemas.pbl" Name="hymsoft_cloud"/>
+    <Deploying Deploy="1" Library="Sistemas.pbl" Name="hymsoft_cloud_pr"/>
+    <Deploying Deploy="1" Library="Sistemas.pbl" Name="hymsoft_local"/>
+    <Deploying Deploy="1" Library="Sistemas.pbl" Name="p_hymsoft_exe"/>
+  </Deployings>
+</Project>

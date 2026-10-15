@@ -1,0 +1,42 @@
+﻿global type gf_dberror from function_object
+end type
+
+forward prototypes
+global function integer gf_dberror (readonly integer li_codigo, readonly string ls_texto)
+end prototypes
+
+global function integer gf_dberror (readonly integer li_codigo, readonly string ls_texto);// Esta función tiene la Finalidad de tomar el error de la Base de
+// Datos y desplegarlo
+//Llamado desde gf_dw_error en grampa
+
+	string ls_left, ls_right,ls_otro,ls_errtest
+   integer li_tab,li_con
+    
+	 li_con = 1
+	 ls_errtest = ls_texto
+	 
+	 DO WHILE Match(ls_errtest,"~n")
+		
+      li_tab = Pos(ls_errtest, "~n", 1)		
+	 
+      ls_left = Left(ls_errtest, li_tab - li_con)
+		
+		ls_otro = Left(Mid(ls_errtest, li_tab),1 ) 
+		
+		If ls_otro = "~n" Then
+		  ls_right = Mid(ls_errtest, li_tab + 1)
+	   else  
+		  ls_right = Mid(ls_errtest, li_tab)
+		End If	
+      
+		ls_errtest = ls_left + ls_right
+		li_con = li_con + 1
+		
+    LOOP
+	 
+   gf_mandb(string(li_codigo) + ls_errtest) 
+	
+return(1)
+
+end function
+

@@ -1,0 +1,193 @@
+﻿global type gf_imprime_barras_union_bodega from function_object
+end type
+
+forward prototypes
+global subroutine gf_imprime_barras_union_bodega (string as_item, string as_descripcion, integer ai_cantidad, decimal ad_precio, string as_barra, integer ai_usuario_bodega)
+end prototypes
+
+global subroutine gf_imprime_barras_union_bodega (string as_item, string as_descripcion, integer ai_cantidad, decimal ad_precio, string as_barra, integer ai_usuario_bodega);//FUNCION QUE IMPRIME CODIGO DE BARRA
+sqlca.autocommit = true
+long ll_archivo,li_anio,ld_valor, ll_alto, ll_ancho, ll_largo
+integer li_mes,li_anio1
+integer li_pos, li_pos2, li_rest
+datetime ld_fecha
+ll_archivo = FileOpen ("c:\Sistemas\codigo_barra.txt" , LineMode!  , Write!  , LockWrite!  , Append!  )
+string ls_precio_utiliza3, ls_precio_utiliza2,ls_precio_utiliza, ls_cantidad,ls_fd,ls_fs,ls_xz,ls_xa,ls_by,ls_pq,ls_fo,ls_bcn,ls_bc3,ls_pos,ls_pos1,ls_clave_costo,ls_descripcion, ls_medio, ls_gramaje
+string ls_barra,ls_producto,ls_razon, ls_ubicacion,ls_syntax,ls_codigo,mes_letra,ls_anio,ls_costo_cif, ls_ult_entrada, ls_medida_bultos, ls_factura, ls_contrato
+decimal ld_precio_mayor,ld_precio_menor,ld_precio_afiliadas,ld_precio_otro,ld_precio_especial ,ld_costo
+decimal ld_precio,ld_precio_v,ld_cubicaje,ld_empaque,ld_peso
+decimal{2} ld_costo_cif, ld_porcentaje
+string ls_med, ls_medida,ls_emp_descrip,ls_emp_um,ls_peso_unidad_m,ls_descrip_tam, ls_tam, ls_precio
+
+if ai_cantidad = 0 or isnull(ai_cantidad) then
+	ls_cantidad = '1'
+else
+	ls_cantidad = string(ai_cantidad)
+end if
+//^XA Inicio de la etiqueta				
+//^FD Identifica el texto a imprmir
+//^FS Indicador de fin de linea
+//^XZ Finalización de la etiqueta
+//^FO X,Separacion entre lineas
+//Indica el tipo de codigo de barra 
+ls_bcn = char(94)+char(66)+char(67)+char(78) //^BCN
+ls_bc3 = char(94)+char(66)+char(67)+char(51) //^BC3N	  	
+				  				  
+		filewrite(ll_archivo,'^XA')
+		filewrite(ll_archivo,'^BY'+char(49))
+		filewrite(ll_archivo,'^PQ'+ls_cantidad)
+		filewrite(ll_archivo,'^LH0,0')
+		
+		SELECT inmprodu.prod_barra,
+   			inmprodu.prod_producto,
+			inmprodu.prod_descripcion,
+			inmprodu.prod_precio1,   
+			inmprodu.prod_precio2,   
+			inmprodu.prod_precio3,   
+			inmprodu.prod_precio4,   
+			inmprodu.prod_precio5,
+			inmprodu.prod_medida,
+			inmprodu.prod_cubicaje,
+			inmprodu.prod_empaque,
+			inmprodu.prod_peso,
+			inmprodu.prod_empaque_descripcion,
+			inmprodu.prod_empaque_um,
+			inmprodu.prod_peso_unidad_medida,
+			inmprodu.prod_cod_clase_tam,
+			inmprodu.prod_gramaje,
+			inmprodu.prod_costo_cif,
+			inmprodu.prod_ultima_entrada_doc,
+			isnull(inmprodu.prod_alto,0),
+			isnull(inmprodu.prod_ancho,0),
+			isnull(inmprodu.prod_largo,0),
+			inmprodu.prod_documento_entrada,
+			isnull(inmprodu.prod_contrato,'')
+	 INTO :ls_barra,   
+	   	:ls_codigo,
+			:ls_descripcion,
+			:ld_precio_mayor,   
+			:ld_precio_menor,   
+			:ld_precio_afiliadas,   
+			:ld_precio_otro,   
+			:ld_precio_especial,
+			:ls_med,
+			:ld_cubicaje,
+			:ld_empaque,
+			:ld_peso,
+			:ls_emp_descrip,
+			:ls_emp_um,
+			:ls_peso_unidad_m,
+			:ls_tam,
+			:ls_gramaje,
+			:ld_costo_cif,
+			:ls_factura,
+			:ll_alto,
+			:ll_ancho,
+			:ll_largo,
+			:ls_ult_entrada,
+			:ls_contrato
+	 FROM inmprodu  
+	WHERE ( inmprodu.prod_g_financiero = :str.g_financiero ) AND  
+			( inmprodu.prod_empresa = :str.empresa ) AND  
+			( inmprodu.prod_producto = :as_item )   ;
+	if sqlca.sqlcode = -1 then
+		gf_mensaje('','Error al Buscar Datos del Producto '+sqlca.sqlerrtext,1,1,'E')
+		return
+	end if
+	
+	  SELECT inamedid.medi_descripcion  
+    INTO :ls_medida  
+    FROM inamedid  
+   WHERE inamedid.medi_medida = :ls_med   ;
+	if sqlca.sqlcode = -1 then
+		gf_mensaje('','Error al Buscar Unidad del Producto '+sqlca.sqlerrtext,1,1,'E')
+		return
+	end if
+
+	  SELECT cracltam.acta_descripcion  
+    INTO :ls_descrip_tam  
+    FROM cracltam  
+   WHERE ( cracltam.acta_g_financiero = :str.g_financiero ) AND  
+         ( cracltam.acta_empresa = :str.empresa ) AND  
+         ( cracltam.acta_cod_clase_tam = :ls_tam )   ;
+	if sqlca.sqlcode = -1 then
+		gf_mensaje('','Error al Buscar Tamaño del Producto '+sqlca.sqlerrtext,1,1,'E')
+		return
+	end if
+
+	SELECT dgmempre.empr_razon_social  
+	INTO :ls_razon  
+	FROM dgmempre  
+	WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND  
+			(dgmempre.empr_empresa = :str.empresa );
+	if sqlca.sqlcode = -1 then
+		gf_mensaje('','Error al Buscar Empresa '+sqlca.sqlerrtext,1,1,'E')
+		return
+	end if
+
+		//Codigo Producto
+		filewrite(ll_archivo,'^FO50,65^A0N50,25^FDCodigo:'+ls_codigo+'^FS') 
+		//Descripcion
+		filewrite(ll_archivo,'^FO150,65^A0N50,25^FD'+upper(ls_descripcion)+'^FS')	
+		//Empaque del item
+		filewrite(ll_archivo,'^FO150,95^A0N50,25^FD'+string(ld_empaque,'###,###,##0')+' '+ls_medida+' X '+ls_emp_descrip+'^FS')		
+		//Codigo de Barra
+		filewrite(ll_archivo,'^BY2,3,121^FT150,249^BCN,,Y,N^FD>:'+ls_codigo+'^FS')					
+		//Medidas del bulto
+		if ll_alto * ll_ancho * ll_largo > 0 then ls_medida_bultos = string(ll_alto)+'X'+string(ll_ancho)+'X'+string(ll_largo)+'CM'
+		filewrite(ll_archivo,'^FO425,60^A0N50,25^FDMed.:'+ls_medida_bultos+'^FS') 
+		//Cubicaje
+		filewrite(ll_archivo,'^FO425,95^A0N50,25^FDCubicaje:  '+string(dec(ld_cubicaje),'###,###,##0.00')+'^FS') 
+		
+		//Peso
+		filewrite(ll_archivo,'^FO150,290^A0N50,25^FDPeso:  '+string(dec(ld_peso),'###,###,##0.00')+' ' + ls_peso_unidad_m +'^FS') 
+		//Talla del Producto
+		filewrite(ll_archivo,'^FO150,320^A0N50,25^FDTamano: '+ls_descrip_tam+'^FS')						
+		//Numero de la Factura
+		filewrite(ll_archivo,'^FO150,350^A0N50,25^FDFact.: ' +ls_factura+'^FS')
+		//Contrato de Compra
+		filewrite(ll_archivo,'^FO150,380^A0N50,25^FDCnt.: ' +ls_contrato+'^FS')
+		
+		if ai_usuario_bodega = 0 then
+		//Precio 1, Precio 2 y Precio 3
+			ls_precio_utiliza = gf_clave_precios(dec(ld_precio_mayor) )
+			ls_precio_utiliza2 = gf_clave_precios(dec(ld_precio_menor) )				
+			ls_precio_utiliza3 = gf_clave_precios(dec(ld_precio_afiliadas) )	
+			
+				  SELECT dgmempre.empr_porcentaje_etiqueta  
+					 INTO :ld_porcentaje  
+					 FROM dgmempre  
+					WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND  
+							( dgmempre.empr_empresa = :str.empresa ) ;
+							if sqlca.sqlcode = -1 then
+								gf_mensaje('','Error al buscar Porc. '+sqlca.sqlerrtext,1,1,'E')
+								return	
+							end if
+
+				ld_costo_cif = round(ld_costo_cif + (ld_costo_cif * ld_porcentaje),2)
+				ls_costo_cif = gf_clave_costos(ld_costo_cif )
+				//Costo cif + 5% de la empresa
+				filewrite(ll_archivo,'^FO90,40^A0N50,18^FD'+ ls_costo_cif +'^FS')// string(dec(as_costo_cif),'###,###,##0.00')+'^FS')				
+				//Precio Venta 1
+				filewrite(ll_archivo,'^FO325,290^A0N50,25^FDP.V1.:   '+ls_precio_utiliza+'^FS')
+				//Precio Venta 2
+				filewrite(ll_archivo,'^FO325,320^A0N50,25^FDP.V2.:   '+ls_precio_utiliza2 +'^FS')
+				//Precio Venta 3
+				filewrite(ll_archivo,'^FO325,350^A0N50,25^FDP.V3.:   '+ls_precio_utiliza3 +'^FS')
+		end if
+			
+			//Numero de la Entrada
+			filewrite(ll_archivo,'^FO425,380^A0N50,25^FDEnt.: ' +ls_ult_entrada+'^FS')
+			
+//			//Numero de la Entrada
+//			filewrite(ll_archivo,'^FO325,350^A0N50,25^FDEnt.: ' +ls_ult_entrada+'^FS')
+//			//Numero de la Factura
+//			filewrite(ll_archivo,'^FO325,380^A0N50,25^FDFact.: ' +ls_factura+'^FS')
+			
+	//Precio
+		//ls_precio = string(ad_precio,"##,##0.00")
+		//filewrite(ll_archivo,'^FT600,65^A0N,38,38^FH\^FD$'+ls_precio+'^FS')
+	
+fileclose(ll_archivo)
+end subroutine
+

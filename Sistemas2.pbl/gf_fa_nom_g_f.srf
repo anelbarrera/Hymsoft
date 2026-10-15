@@ -1,0 +1,19 @@
+﻿//objectcomments Recibe el numero del Grupo y Retorna el Nombre
+global type gf_fa_nom_g_f from function_object
+end type
+
+forward prototypes
+global function string gf_fa_nom_g_f (readonly integer g_financiero)
+end prototypes
+
+global function string gf_fa_nom_g_f (readonly integer g_financiero);  string ls_nombre
+  
+  SELECT dgagrupf.grup_descripcion  
+    INTO :ls_nombre  
+    FROM dgagrupf  
+   WHERE dgagrupf.grup_g_financiero = :g_financiero   ;
+	
+	
+return(ls_nombre)
+end function
+

@@ -1,0 +1,26 @@
+﻿global type gf_dg_tranferencia_empresa from function_object
+end type
+
+forward prototypes
+global function string gf_dg_tranferencia_empresa (integer g_financiero, integer empresa)
+end prototypes
+
+global function string gf_dg_tranferencia_empresa (integer g_financiero, integer empresa);/* retorna la direccion de la empresa que esta activa, 
+   se envia el numero del grupo financiero y de la empresa  para el estado de cuenta*/
+ string ls_transfer, ls_error
+ 
+ SELECT dgmempre.empr_transferencia
+  INTO :ls_transfer        
+   FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :g_financiero ) AND 
+         ( dgmempre.empr_empresa = :empresa )   ;
+	if sqlca.sqldbcode = -1 then
+		ls_error = sqlca.sqlerrtext
+		mensaje('Error','Ha ocurrido un error al recuperar la transferencia',ls_error)
+	end if
+	
+if isnull(ls_transfer) then ls_transfer = ''
+	
+return (ls_transfer)
+end function
+

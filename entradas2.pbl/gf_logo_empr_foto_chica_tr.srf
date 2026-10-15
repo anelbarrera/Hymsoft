@@ -1,0 +1,20 @@
+﻿global type gf_logo_empr_foto_chica_tr from function_object
+end type
+
+forward prototypes
+global function string gf_logo_empr_foto_chica_tr ()
+end prototypes
+
+global function string gf_logo_empr_foto_chica_tr ();String ls_logote
+
+  SELECT tzaparam.para_foto_chica
+	 INTO :ls_logote
+    FROM tzaparam  
+   WHERE ( tzaparam.para_g_financiero = :str.g_financiero ) AND  
+         ( tzaparam.para_empresa = :str.empresa )   ;
+If isNull(ls_logote) then ls_logote = ''
+Return ls_logote
+
+
+end function
+

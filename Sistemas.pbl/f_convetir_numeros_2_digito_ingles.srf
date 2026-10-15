@@ -1,0 +1,65 @@
+﻿global type f_convetir_numeros_2_digito_ingles from function_object
+end type
+
+forward prototypes
+global function string f_convetir_numeros_2_digito_ingles (readonly decimal numero_convertidor)
+end prototypes
+
+global function string f_convetir_numeros_2_digito_ingles (readonly decimal numero_convertidor);string ls_cantidad, ls_num_convertir
+string Ls_2_digitos, ls_extrae,ls_extrae1, ls_extrae2, ls_punto
+long ll_largo, numero, ll_digito, ll_num_convertir
+integer li_pos
+STRING ls_digitos[9]  ={"0NE","TWO", "THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"}
+STRING ls_desci  [9] ={'ELEVEN','TWELVE','THIRTEEN','FOURTEEN','FIFTEEN','SIXTEEN','SEVENTEEN','EIGHTEEN','NINETEEN'}
+STRING ls_Veite_treinta[9] ={'TEN','TWENTY','THIRTY','FORTY','FIFTY','SIXTY','SEVENTY','EIGHTY','NINETY'}
+STRING ls_veintes [9] ={'TWENTY'}
+//ls_num_convertir =string(INTEGER(numero_convertidor))
+
+ls_num_convertir =string(numero_convertidor)
+ll_digito = numero_convertidor
+trim(ls_num_convertir)
+li_pos = pos(ls_num_convertir, ".",1)
+ls_punto  = mid(ls_num_convertir, li_pos +1,len(ls_num_convertir))
+ls_punto  = mid(ls_punto, 0 + 1,2)
+if li_pos > 0 then ls_num_convertir=left(ls_num_convertir, li_pos -1)
+ll_largo = Len (ls_num_convertir)
+ll_num_convertir = long(ls_num_convertir)
+ 
+ll_largo = Len (ls_num_convertir)
+IF ll_largo > 2 then
+ ls_num_convertir  = Right(ls_num_convertir, 2)
+
+ numero = long( ls_num_convertir)
+ ll_largo = Len (string(numero))
+ ls_num_convertir = string(numero)
+end if
+FOR li_pos = 1 TO ll_largo
+	ls_extrae = mid(ls_num_convertir, li_pos,1)
+	IF ll_largo <= 2 then  // es 2 digitos
+		if ll_largo = 1 then ls_cantidad = ls_digitos[integer(ls_extrae)]  // es 1 digito
+		 if li_pos = 2 then
+			if ls_extrae = '0' then // es 2 digitos redondos
+				ls_cantidad = ls_Veite_treinta[integer(ls_extrae2)]
+			else
+				if ls_extrae2 = '1' then // del ////once al diescinueve
+             ls_cantidad = ls_desci [integer(ls_extrae)]
+ 			    else
+					if ls_extrae2 = '2' then // mayor a 20 0 < 29
+					ls_cantidad = ls_veintes[1]
+					ls_cantidad = ls_cantidad + ls_digitos[integer(ls_extrae)]
+				   else
+						ls_cantidad = ls_Veite_treinta[integer(ls_extrae2)]//+' WITH '
+						ls_cantidad = ls_cantidad + ls_digitos[integer(ls_extrae)]
+					end if
+			   end if
+			end if
+		else
+			ls_extrae2 = ls_extrae
+		end if
+ END IF
+NEXT
+
+return (ls_cantidad)
+
+end function
+

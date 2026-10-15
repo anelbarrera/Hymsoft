@@ -1,0 +1,18 @@
+﻿//objectcomments (D)para mover los datawindows utilizados en las pantallas de kardexs
+global type str_kardex from structure
+	string		dwpantalla
+	string		dwreporte
+	string		opcion_menu
+	string		titulo_ventana
+	string		opcion_ventana
+	string		dwinforme_1
+	string		dwinforme_2
+	string		fecha
+	string		tipo_transaccion
+	datetime		fecha_inicial
+	datetime		fecha_final
+	string		bodega
+	integer		precio
+	string		kproducto
+end type
+

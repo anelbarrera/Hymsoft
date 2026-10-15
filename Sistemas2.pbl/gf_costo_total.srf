@@ -1,0 +1,50 @@
+﻿//objectcomments Funcion que calcula el costo total de un articulo
+global type gf_costo_total from function_object
+end type
+
+forward prototypes
+global function double gf_costo_total (string ls_unidad_venta, string ls_unidad_prod, double ld_costo_cif, integer cantidad, integer fraccion)
+end prototypes
+
+global function double gf_costo_total (string ls_unidad_venta, string ls_unidad_prod, double ld_costo_cif, integer cantidad, integer fraccion);long ll_ucom
+double ld_mconverb, ld_mconvera, ld_costo, ld_total, ld_costo_minimo
+			
+		    //Tipo de medida de la unidad del producto	(UNIDADES, UNIDAD DE PESO, CONVERSIONES, ETC)
+          // Devuleve 10 en caso de que sea una medida
+			 
+			 ll_ucom = gf_medi_prod(ls_unidad_prod)
+			  
+			  
+			//* Carga Los Datos de Converción de la Unidad del Producto a la Nueva unidad o 
+			// Cantidad de unidades minimas de la unidad del producto
+			
+			//Devuelve 1 si la unidad del producto es PZ : Piezas
+			//  "      12        "                    DO : Docenas
+			//  "      300        "                   GR : Gruesas
+
+			 ld_mconverb = gf_unidad_prod(ls_unidad_prod, ll_ucom)	
+
+			 if ld_mconverb	= 0 then ld_mconverb = 1
+				
+				
+	
+			//* cantidad de unidades minimas que tiene la unidad del producto
+			//Devuelve 1 si la unidad de Venta es PZ : Piezas
+			//  "      12        "                DO : Docenas
+			//  "      300        "               GR : Gruesas
+			
+			ld_mconvera = gf_unidad_venta(ls_unidad_venta, ll_ucom)
+			
+				if ld_mconvera	= 0 then ld_mconvera = 1
+
+		  ld_costo_minimo = ld_costo_cif / ld_mconverb			// Costo Segun la unidad del producto
+		  		  
+		  ld_total = (cantidad * ld_mconvera) + fraccion      // Cantidad 
+	  																		   // que se esta vendiendo
+		  ld_costo = ld_total  *  ld_costo_minimo
+	  
+//		  ld_costo = ld_costo + (fraccion  *  ld_costo_minimo)
+
+return (ld_costo)
+end function
+

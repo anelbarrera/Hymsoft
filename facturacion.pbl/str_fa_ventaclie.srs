@@ -1,0 +1,11 @@
+﻿//objectcomments Estrucutura que carga algunos datos de la ventana de reporte de las Ventas por Cliente
+global type str_fa_ventaclie from structure
+	string		nombre
+	string		tipo
+	string		todos_clie
+	string		signo
+	string		fecha_ini
+	string		fecha_fin
+	string		orden
+end type
+

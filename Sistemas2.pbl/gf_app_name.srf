@@ -1,0 +1,19 @@
+﻿global type gf_app_name from function_object
+end type
+
+forward prototypes
+global function string gf_app_name (readonly string ls_cod)
+end prototypes
+
+global function string gf_app_name (readonly string ls_cod);  //Función que retorna el nombre de la aplicación
+  //Daniel Vergara 22/09/1998
+  
+  String ls_descr
+  SELECT dgmaplica.apli_descripcion  
+    INTO :ls_descr  
+    FROM dgmaplica  
+   WHERE dgmaplica.apli_aplicacion =: ls_cod   ;
+	
+Return(ls_descr)
+end function
+

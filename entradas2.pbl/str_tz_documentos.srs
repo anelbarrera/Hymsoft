@@ -1,0 +1,14 @@
+﻿global type str_tz_documentos from structure
+	long		sec_inventario
+	string		documento
+	string		pedido
+	long		largo_doc
+	long		ancho_doc
+	boolean		aceptar
+	string		tipo
+	datawindow		dw_object
+	string		viene_de
+	integer		anio
+	integer		viene_de_buscar
+end type
+

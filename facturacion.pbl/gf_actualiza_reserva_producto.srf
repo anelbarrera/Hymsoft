@@ -1,0 +1,250 @@
+﻿global type gf_actualiza_reserva_producto from function_object
+end type
+
+forward prototypes
+global function boolean gf_actualiza_reserva_producto (string as_producto)
+end prototypes
+
+global function boolean gf_actualiza_reserva_producto (string as_producto);string ls_error
+sqlca.autocommit = true
+
+ str.frame.setmicrohelp("Actualizando las Reservas de los Productos .............por favor Espere")		
+yield()
+
+ UPDATE inmprodu  
+     SET prod_reserva_total = 
+			ISNULL( ( 
+ 			  SELECT sum(fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+				   ( fadpedid.dped_codigo_item = :as_producto ) and  
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum(faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+			      	   ( faddiari.facd_codigo_item = :as_producto) and
+					   ( fatdiari.fact_estado = 'A' or 
+					   ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) and
+			( inmprodu.prod_producto = :as_producto );
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return false
+			  end if
+
+commit;
+yield()
+ str.frame.setmicrohelp("Actualizando las Reservas 1 de los Productos .............por favor Espere")		
+ 
+ UPDATE inmprodu  
+     SET prod_reserva1 = 
+			ISNULL( ( 
+ 			  SELECT sum( case when dped_bodega = '1' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada end) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+				   ( fadpedid.dped_codigo_item = :as_producto ) and  					  
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum( case when facd_bodega = '1' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion end ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+				   ( faddiari.facd_codigo_item = :as_producto) and	  
+			        ( fatdiari.fact_estado = 'A' or 
+					    ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) and
+			( inmprodu.prod_producto = :as_producto );
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return false
+			  end if
+
+yield()
+ str.frame.setmicrohelp("Actualizando las Reservas 2 de los Productos .............por favor Espere")		
+
+ UPDATE inmprodu  
+     SET prod_reserva2 = 
+			ISNULL( ( 
+ 			  SELECT sum( case when dped_bodega = '2' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada end) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+				   ( fadpedid.dped_codigo_item = :as_producto ) and  					  
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum( case when facd_bodega = '2' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion end ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+				   ( faddiari.facd_codigo_item = :as_producto) and					  
+			        ( fatdiari.fact_estado = 'A' or 
+					    ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) and
+			( inmprodu.prod_producto = :as_producto );
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return false
+			  end if
+
+yield()
+ str.frame.setmicrohelp("Actualizando las Reservas 3 de los Productos .............por favor Espere")		
+
+ UPDATE inmprodu  
+     SET prod_reserva3 = 
+			ISNULL( ( 
+ 			  SELECT sum( case when dped_bodega = '3' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada end) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+				   ( fadpedid.dped_codigo_item = :as_producto ) and  					  
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum( case when facd_bodega = '3' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion end ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+				   ( faddiari.facd_codigo_item = :as_producto) and
+			        ( fatdiari.fact_estado = 'A' or 
+					    ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) and
+			( inmprodu.prod_producto = :as_producto );
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return false
+			  end if
+
+yield()
+ str.frame.setmicrohelp("Actualizando las Reservas 3 de los Productos .............por favor Espere")		
+
+ UPDATE inmprodu  
+     SET prod_reserva4 = 
+			ISNULL( ( 
+ 			  SELECT sum( case when dped_bodega = '4' then fadpedid.dped_cantidad * inamedid.medi_cantidad + 
+                  fadpedid.dped_fraccion - dped_pasada end) 
+			  FROM fadpedid,inamedid
+			  WHERE ( fadpedid.dped_unidad_venta = inamedid.medi_medida ) and
+			        ( fadpedid.dped_g_financiero = inmprodu.prod_g_financiero  ) and  
+         		  ( fadpedid.dped_empresa = inmprodu.prod_empresa ) and  
+			        ( fadpedid.dped_codigo_item = inmprodu.prod_producto) and
+				   ( fadpedid.dped_codigo_item = :as_producto ) and  					  
+			        ( fadpedid.dped_reserva_origen = 'E')),0) + 
+			isnull( (
+			  SELECT  sum( case when facd_bodega = '4' then faddiari.facd_cantidad * inamedid.medi_cantidad + 
+			  			 faddiari.facd_cantidad_fraccion end ) 
+		     FROM faddiari,
+       			 inamedid,
+			       fatdiari
+			  WHERE ( faddiari.facd_unidad_venta = inamedid.medi_medida ) and
+					  ( faddiari.facd_g_financiero = inmprodu.prod_g_financiero  ) and  
+			        ( faddiari.facd_empresa = inmprodu.prod_empresa ) and  
+					  ( faddiari.facd_codigo_item = inmprodu.prod_producto) and
+		           ( fatdiari.fact_g_financiero = faddiari.facd_g_financiero ) and
+	              ( fatdiari.fact_empresa = faddiari.facd_empresa ) and
+			        ( fatdiari.fact_tipo = faddiari.facd_tipo ) and
+	              ( fatdiari.fact_no_pedido = faddiari.facd_no_pedido ) and
+			        ( fatdiari.fact_ann = faddiari.facd_ann ) and
+				   ( faddiari.facd_codigo_item = :as_producto) and
+			        ( fatdiari.fact_estado = 'A' or 
+					    ( fatdiari.fact_estado = 'I' and fatdiari.fact_act_inventario = 0 )))
+          ,0)					  
+    FROM inmprodu
+   WHERE ( inmprodu.prod_g_financiero = :str.g_financiero) and
+			( inmprodu.prod_empresa = :str.empresa) and
+			( inmprodu.prod_producto = :as_producto );
+
+			  if sqlca.sqlcode = -1 then
+				ls_error = sqlca.sqlerrtext
+				rollback;
+				mensaje("Aviso","Error al Actualizar las Reservas de los Productos ",ls_error)
+				sqlca.autocommit = true
+				return false
+			  end if
+
+
+return true
+end function
+

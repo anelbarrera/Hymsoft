@@ -1,0 +1,70 @@
+﻿global type gf_tz_reimprime_x_pagina from function_object
+end type
+
+forward prototypes
+global subroutine gf_tz_reimprime_x_pagina (datawindow dw_imp, string as_range, string as_copias)
+end prototypes
+
+global subroutine gf_tz_reimprime_x_pagina (datawindow dw_imp, string as_range, string as_copias);// Esta función permite la reimpresión de una página x de un documento
+// comercial
+Integer li_cont, li_from_page, li_to_page, li_pos
+String  ls_rango, command, ls_ai_from_page, ls_ai_to_page, ls_copias
+
+// Rango inicial de página a imprimir
+	if Pos(as_range, "_") <> 0 then 
+		li_pos = Pos(as_range, "_")
+		ls_ai_from_page = left(as_range,Pos(as_range, "_")-1)
+		ls_ai_to_page = right(as_range,(len(as_range) - li_pos))
+	elseif Pos(as_range, ",") <> 0 then 
+		li_pos = Pos(as_range, ",")
+		ls_ai_from_page = left(as_range,Pos(as_range, ",")-1)
+		ls_ai_to_page = right(as_range,(len(as_range) - li_pos))
+	elseif Pos(as_range, "/") <> 0 then 
+		li_pos = Pos(as_range, "/")
+		ls_ai_from_page = left(as_range,Pos(as_range, "/")-1)
+		ls_ai_to_page = right(as_range,(len(as_range) - li_pos))
+	elseif Pos(as_range, " ") <> 0 then 
+		li_pos = Pos(as_range, " ")
+		ls_ai_from_page = left(as_range,Pos(as_range, " ")-1)
+		ls_ai_to_page = right(as_range,(len(as_range) - li_pos))
+	end if	
+
+If IsNull(ls_ai_from_page) or ls_ai_from_page='' then
+	messagebox('Atencion ','El rango inicial de páginas a imprimir es incorrecto , verifique...')
+	Return
+end if
+
+If Isnull(ls_ai_to_page) or ls_ai_to_page ='' then
+	messagebox('Atencion ','El rango final de páginas a imprimir es incorrecto , verifique...')
+	Return
+end if
+
+li_from_page = integer(ls_ai_from_page)
+li_to_page   = integer(ls_ai_to_page)
+
+If li_from_page > li_to_page then
+	messagebox('Atención ','El rango inicial no puede ser mayor al final')
+	Return
+end if
+
+If IsNull(as_copias) or as_copias='' then
+	messagebox('Atención ','Debe especificar el número de copias,,')
+	return
+end if
+
+If integer(as_copias) > 2 then as_copias ='2'
+
+For li_cont = li_from_page to li_to_page 
+
+	ls_rango = string(li_cont)
+	ls_rango = '"'+ls_rango+'-'+ls_rango+'"'
+
+//	command = "datawindow.print.copies = '2'"
+	command = "datawindow.print.copies = "+as_copias
+	command =command + " datawindow.print.page.range = "+ls_rango
+	dw_imp.Modify(command)
+	dw_imp.print()
+Next
+
+end subroutine
+

@@ -1,0 +1,31 @@
+﻿global type gf_dg_tamano_pagina from function_object
+end type
+
+forward prototypes
+global subroutine gf_dg_tamano_pagina (integer largo, integer ancho, datawindow dw_impresion)
+end prototypes
+
+global subroutine gf_dg_tamano_pagina (integer largo, integer ancho, datawindow dw_impresion);
+//* Script para la asignacion del tamaño de página ....
+Int  i,li_largo,li_ancho,li_papel_ant,li_width_ant,li_length_ant
+u_external_function   lu_externa
+LONG ll_p2, ll_hnd,ll_p1
+
+	f_create_external_func_uo(lu_externa)  
+
+	ll_hnd = Handle(this)	
+	ll_p1 = largo	// largo
+	ll_p2 = ancho	// ancho
+	
+	
+	lu_externa.uf_config_printer(ll_hnd , 4 , ll_p1 , 1)
+	lu_externa.uf_config_printer(ll_hnd , 8 , ll_p2 , 1)
+
+	dw_impresion.Modify("DataWindow.Print.Preview=Yes")
+	dw_impresion.Modify("DataWindow.Print.Margin.Top=01")
+	dw_impresion.SetFocus()	
+return
+
+
+end subroutine
+

@@ -1,0 +1,54 @@
+﻿global type gf_imprime_barras_bultos from function_object
+end type
+
+forward prototypes
+global subroutine gf_imprime_barras_bultos (string as_item, string as_descripcion, decimal ad_precio, string as_cod1, string as_cod2, string as_cod3, string as_cod4, string as_peso1, string as_peso2, string as_peso3, string as_peso4, string as_kilates, decimal ad_peso)
+end prototypes
+
+global subroutine gf_imprime_barras_bultos (string as_item, string as_descripcion, decimal ad_precio, string as_cod1, string as_cod2, string as_cod3, string as_cod4, string as_peso1, string as_peso2, string as_peso3, string as_peso4, string as_kilates, decimal ad_peso);//FUNCION QUE IMPRIME CODIGO DE BARRA
+sqlca.autocommit = true
+long ll_archivo,li_anio,ld_valor
+integer li_mes,li_anio1
+datetime ld_fecha
+ll_archivo = FileOpen ("c:\codigo_barra.txt" , LineMode!  , Write!  , LockWrite!  , Append!  )
+string ls_cantidad,ls_fd,ls_fs,ls_xz,ls_xa,ls_by,ls_pq,ls_fo,ls_bcn,ls_bc3,ls_pos,ls_pos1,ls_clave_costo,ls_descripcion
+string ls_barra,ls_producto,ls_razon,ls_anio, ls_item
+
+ls_cantidad = '1'
+
+//^XA Inicio de la etiqueta				
+//^FD Identifica el texto a imprmir
+//^FS Indicador de fin de linea
+//^XZ Finalización de la etiqueta
+//^FO X,Separacion entre lineas
+//Indica el tipo de codigo de barra 
+ls_bcn = char(94)+char(66)+char(67)+char(78) //^BCN
+ls_bc3 = char(94)+char(66)+char(67)+char(51) //^BC3N
+			  	
+		filewrite(ll_archivo,'^XA')	
+		filewrite(ll_archivo,'^MMT')			
+		filewrite(ll_archivo,'^PW400')
+		filewrite(ll_archivo,'^LL0120')
+		filewrite(ll_archivo,'^LS0')	
+		
+		ls_barra = as_item
+		
+		//Codigo de Barra
+		filewrite(ll_archivo,'^BY1,3,39^FT11,70^BCN,,Y,N')
+		filewrite(ll_archivo,'^FD>:'+as_item+'^FS')		
+		//Item, Kilates, Peso y Descripcion
+		filewrite(ll_archivo,'^FT12,26^A0N,15,19^FH\^FD'+as_item+'^FS')
+		filewrite(ll_archivo,'^FT131,32^A0N,20,19^FH\^FD'+as_kilates+'^FS')
+		filewrite(ll_archivo,'^FT118,66^A0N,20,19^FH\^FD'+string(ad_peso)+' Gr^FS')
+		filewrite(ll_archivo,'^FT8,101^A0N,17,19^FH\^FD'+mid(as_descripcion,1,19)+'^FS')
+		//Especificaciones del producto
+		filewrite(ll_archivo,'^FT194,29^A0N,17,16^FH\^FD'+as_cod1+' '+as_peso1+'   '+as_cod2+' '+as_peso2+'^FS')
+		filewrite(ll_archivo,'^FT194,60^A0N,17,19^FH\^FD'+as_cod3+' '+as_peso3+'   '+as_cod4+' '+as_peso4+'^FS')
+		//Precio
+		filewrite(ll_archivo,'^FT203,91^A0N,17,16^FH\^FD$ '+string(ad_precio, '##,##0.00')+'^FS')
+		//Copias
+		filewrite(ll_archivo,'^PQ'+ls_cantidad+',0,1,Y^XZ')
+
+fileclose(ll_archivo)
+end subroutine
+

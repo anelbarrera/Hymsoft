@@ -1,0 +1,15 @@
+﻿global type fileversioninfo from structure
+	string		ProductName
+	string		ProductVersion
+	string		OriginalFilename
+	string		FileDescription
+	string		FileVersion
+	string		CompanyName
+	string		LegalCopyright
+	string		LegalTrademarks
+	string		InternalName
+	string		PrivateBuild
+	string		SpecialBuild
+	string		Comments
+end type
+

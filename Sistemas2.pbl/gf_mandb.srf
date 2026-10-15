@@ -1,0 +1,46 @@
+﻿//objectcomments Almacena los Errores de la Base de Datos
+global type gf_mandb from function_object
+end type
+
+forward prototypes
+global subroutine gf_mandb (readonly string ls_errprog)
+end prototypes
+
+global subroutine gf_mandb (readonly string ls_errprog);// Función de Mantenimiento que Captura y Almacena todos los Errores.
+// llamada desde gf_dberror()
+
+datetime		ldt_fecha
+string		ls_errtext, ls_dberror
+
+ldt_fecha  = gf_fecha_serv()
+
+ls_errtext = ls_errprog
+
+if len(ls_errtext) > 250 then
+	ls_errtext = mid(ls_errtext,1,250)
+end if
+
+//Guarda en la tabla de Errores
+  INSERT INTO dgterror  
+         ( erro_aplica,   
+           erro_usuario,   
+           erro_fecha,   
+           erro_programa,   
+           erro_tipo )  
+  VALUES ( :str.aplicacion,   
+           :str.usuario,   
+           :ldt_fecha,   
+           :ls_errtext,   
+           "DB" )  ;
+
+	if sqlca.sqlcode <> 0 then
+		ls_errtext = sqlca.sqlerrtext
+		ls_dberror = string(sqlca.sqldbcode)
+		rollback;
+		gf_mensaje('Error en DW '+ls_dberror,'Descripción: '+ls_errtext,1,1,'')
+	end if
+
+//Commit; //NO PONER, Va en la Ventana que generó dicho error
+
+end subroutine
+

@@ -1,0 +1,32 @@
+﻿//objectcomments Recibe el numero del Grupo y la Empresa y Retorna el nombre de la empresa y el telefono de la misma
+global type gf_tz_nom_empr from function_object
+end type
+
+forward prototypes
+global function string gf_tz_nom_empr (readonly integer g_f, readonly integer empresa)
+end prototypes
+
+global function string gf_tz_nom_empr (readonly integer g_f, readonly integer empresa);string ls_social,ls_comer,ls_util_nom
+    
+	  SELECT dgmempre.empr_razon_social,   
+         dgmempre.empr_razon_comercial,   
+         dgmempre.empr_utiliza_nombre  
+    INTO :ls_social,
+	      :ls_comer,
+			:ls_util_nom
+    FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :str.g_financiero ) AND  
+         ( dgmempre.empr_empresa = :str.empresa )   ;
+	 
+CHOOSE CASE ls_util_nom
+	CASE "S"
+	    Return(ls_social)
+	CASE "C"
+		Return(ls_comer)	
+	CASE "A"	
+      Return(ls_comer + "~n" + ls_social)
+END CHOOSE
+	return("s")
+	
+end function
+

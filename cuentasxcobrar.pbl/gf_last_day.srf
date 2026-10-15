@@ -1,0 +1,21 @@
+﻿global type gf_last_day from function_object
+end type
+
+forward prototypes
+global function integer gf_last_day (integer ai_mes, integer ai_anio)
+end prototypes
+
+global function integer gf_last_day (integer ai_mes, integer ai_anio);Integer 	li_ult_dia [12] = {31,28,31,30,31,30,31,31,30,31,30,31}
+Date 		ld_retorno
+
+
+If ai_mes < 1 Or ai_mes > 12 Or IsNull(ai_mes) Or IsNull(ai_anio) Then Return 0
+
+if ai_mes = 2 then
+	ld_retorno = RelativeDate(Date("1-3-"+ string(ai_anio)), -1 )
+	li_ult_dia [2] = day(ld_retorno)
+End If
+ 
+return li_ult_dia [ai_mes]
+end function
+

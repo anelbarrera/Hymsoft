@@ -1,0 +1,9 @@
+﻿global type str_aplica_links from structure
+	string		factura_activa_fa
+	string		cxc_activa_cc
+	string		inventario_activa_in
+	string		cxp_activa_cp
+	integer		habilita_links
+	integer		controla_modificaciones
+end type
+

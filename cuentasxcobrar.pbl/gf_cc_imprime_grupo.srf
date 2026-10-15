@@ -1,0 +1,21 @@
+﻿global type gf_cc_imprime_grupo from function_object
+end type
+
+forward prototypes
+global function integer gf_cc_imprime_grupo (integer grupo, integer empresa)
+end prototypes
+
+global function integer gf_cc_imprime_grupo (integer grupo, integer empresa);integer li_grupo
+
+select para_imprime_grupo
+into  :li_grupo
+from ccmparam
+where para_g_financiero = :grupo and para_empresa = :empresa
+commit using sqlca;
+
+if sqlca.sqlcode = 0 then
+	return li_grupo
+end if
+
+end function
+

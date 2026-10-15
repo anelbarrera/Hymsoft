@@ -1,0 +1,846 @@
+﻿//objectcomments Consulta de transacciones de clientes Vista Previa
+forward
+global type w_pasar_transitos from w_fa_padre_reportes
+end type
+type st_sel_marca from statictext within w_pasar_transitos
+end type
+type ddlb_1 from dropdownlistbox within w_pasar_transitos
+end type
+type cb_consultar from commandbutton within w_pasar_transitos
+end type
+type cb_2 from commandbutton within w_pasar_transitos
+end type
+type dw_2 from datawindow within w_pasar_transitos
+end type
+type uo_1 from u_ddcalen within w_pasar_transitos
+end type
+type uo_2 from u_ddcalen within w_pasar_transitos
+end type
+type dw_3 from datawindow within w_pasar_transitos
+end type
+type dw_4 from datawindow within w_pasar_transitos
+end type
+type cb_buscar from commandbutton within w_pasar_transitos
+end type
+type dw_5 from datawindow within w_pasar_transitos
+end type
+type cb_1 from commandbutton within w_pasar_transitos
+end type
+end forward
+
+global type w_pasar_transitos from w_fa_padre_reportes
+integer width = 4306
+integer height = 2748
+string title = "Pase de Transitos a Entradas"
+string menuname = ""
+boolean minbox = false
+boolean maxbox = false
+boolean resizable = false
+windowtype windowtype = response!
+long backcolor = 12639424
+boolean center = true
+windowanimationstyle openanimation = centeranimation!
+windowanimationstyle closeanimation = centeranimation!
+st_sel_marca st_sel_marca
+ddlb_1 ddlb_1
+cb_consultar cb_consultar
+cb_2 cb_2
+dw_2 dw_2
+uo_1 uo_1
+uo_2 uo_2
+dw_3 dw_3
+dw_4 dw_4
+cb_buscar cb_buscar
+dw_5 dw_5
+cb_1 cb_1
+end type
+global w_pasar_transitos w_pasar_transitos
+
+type variables
+datawindowchild idwc_cliente, idwc_producto
+boolean ib_pasar
+str_pase_pedido istr_pedidos
+datawindowchild ldwc_prov
+end variables
+
+on w_pasar_transitos.create
+int iCurrent
+call super::create
+this.st_sel_marca=create st_sel_marca
+this.ddlb_1=create ddlb_1
+this.cb_consultar=create cb_consultar
+this.cb_2=create cb_2
+this.dw_2=create dw_2
+this.uo_1=create uo_1
+this.uo_2=create uo_2
+this.dw_3=create dw_3
+this.dw_4=create dw_4
+this.cb_buscar=create cb_buscar
+this.dw_5=create dw_5
+this.cb_1=create cb_1
+iCurrent=UpperBound(this.Control)
+this.Control[iCurrent+1]=this.st_sel_marca
+this.Control[iCurrent+2]=this.ddlb_1
+this.Control[iCurrent+3]=this.cb_consultar
+this.Control[iCurrent+4]=this.cb_2
+this.Control[iCurrent+5]=this.dw_2
+this.Control[iCurrent+6]=this.uo_1
+this.Control[iCurrent+7]=this.uo_2
+this.Control[iCurrent+8]=this.dw_3
+this.Control[iCurrent+9]=this.dw_4
+this.Control[iCurrent+10]=this.cb_buscar
+this.Control[iCurrent+11]=this.dw_5
+this.Control[iCurrent+12]=this.cb_1
+end on
+
+on w_pasar_transitos.destroy
+call super::destroy
+destroy(this.st_sel_marca)
+destroy(this.ddlb_1)
+destroy(this.cb_consultar)
+destroy(this.cb_2)
+destroy(this.dw_2)
+destroy(this.uo_1)
+destroy(this.uo_2)
+destroy(this.dw_3)
+destroy(this.dw_4)
+destroy(this.cb_buscar)
+destroy(this.dw_5)
+destroy(this.cb_1)
+end on
+
+event ue_post_open;//Override
+dw_1.settransobject(sqlca)
+dw_2.settransobject(sqlca)
+dw_3.settransobject(sqlca)
+dw_3.insertrow(1)
+dw_1.insertrow(1)
+dw_4.settransobject(sqlca)
+dw_4.getchild('proveedor',ldwc_prov)
+ldwc_prov.settransobject(sqlca)
+ldwc_prov.retrieve(str.g_financiero, str.empresa)
+
+dw_4.insertrow(1)
+
+istr_pedidos = message.powerobjectparm
+end event
+
+event resize;//Override
+this.SetRedraw(false)
+//dw_1.width  = this.width  - 99
+//dw_1.height = this.height - 278
+
+st_nom_ventana.x = 28
+st_nom_ventana.y = this.height - 180
+
+ddlb_1.y = this.height - 200
+ddlb_1.X = (this.width - 70) - ddlb_1.width 
+
+st_sel_marca.y = this.height - 200
+st_sel_marca.X = (this.width - 70) - ddlb_1.width - st_sel_marca.width -100
+
+this.SetRedraw(true)
+
+end event
+
+event open;//Override
+
+dw = dw_1
+dw_impresion = dw_1
+dw.settransobject(sqlca)
+st_nom_ventana.text = this.classname()
+dw_5.settransobject(sqlca)
+
+//This.SetToolbar(1,true,AlignatTop!)
+//This.SetToolbarPos(1,1,50,false)
+
+str.frame.SetRedraw ( True )
+
+This.Icon = str.icono
+this.postevent("ue_post_open")
+
+end event
+
+type st_ayuda from w_fa_padre_reportes`st_ayuda within w_pasar_transitos
+end type
+
+type st_nom_ventana from w_fa_padre_reportes`st_nom_ventana within w_pasar_transitos
+boolean visible = false
+integer x = 32
+integer y = 1384
+end type
+
+type dw_1 from w_fa_padre_reportes`dw_1 within w_pasar_transitos
+integer x = 27
+integer y = 232
+integer width = 2725
+integer height = 324
+string dataobject = "dw_pasar_transitos"
+boolean vscrollbar = true
+boolean border = false
+boolean livescroll = false
+end type
+
+event dw_1::ue_microayuda;//override
+end event
+
+event dw_1::clicked;//Scrip que Permite Ordenar Ascendentemente, o Descendente en caso que se de click nuevamente
+//en la misma columna.
+accepttext()
+date 	ld_date,ld_ini_date, ld_hoy
+string ls_objeto, ls_column
+integer li_pos 
+
+ls_objeto = This.GetObjectAtPointer()
+ld_hoy = date(gf_fecha_Serv())
+li_pos 	 =  Pos(ls_objeto, "~t")
+ls_objeto = Left(ls_objeto, li_pos - 1)
+
+ls_column = dwo.name
+
+if ls_column = 'cctmovim_movi_a_nombre' then
+	str_cc_formatos str_formato1		
+	str_formato1.tipo_bd = Pos(SQLCA.DBMS, "SQL Server")//0 sql
+	str_formato1.tercero = dw_1.getitemNumber(1,"cctmovim_movi_tercero")
+	OpenSheetwithparm(w_mant_clientes,str_formato1,parent,2, Original!)
+elseif dwo.name='calendario' then
+	ld_ini_date=date(dw_1.GetItemDateTime(dw_1.getrow(),"fecha1"))
+	if year(ld_ini_date) = 1900 then
+		ld_ini_date = ld_hoy
+	end if
+	if uo_1.visible=false then
+		uo_1.wf_set_value(ld_ini_date)
+		uo_1.visible=true
+		uo_1.allow_close=false
+		uo_1.inicializar()
+		uo_1.TriggerEvent('ue_abrir')
+	end if
+elseif dwo.name='calendario2' then
+	ld_ini_date=date(dw_1.GetItemDateTime(dw_1.getrow(),"fecha2"))
+	if year(ld_ini_date) = 1900 then
+		ld_ini_date = ld_hoy
+	end if
+	if uo_2.visible=false then
+		uo_2.wf_set_value(ld_ini_date)
+		uo_2.visible=true
+		uo_2.allow_close=false
+		uo_2.inicializar()
+		uo_2.TriggerEvent('ue_abrir')
+	end if
+	
+end if
+end event
+
+event dw_1::buttonclicked;call super::buttonclicked;//busqueda
+long ll_codigo
+integer li_encontro	
+String  ls_find,ls_codigo1,ls_lter,ls_des, ls_error
+integer li_c, li_b
+long    ll_lter
+
+Datawindow        dww
+str_dg_dynamic_find	lstr_df
+
+if dwo.name = 'b_cliente' then
+	
+		lstr_df.texto_campo [1,1] = "ccmclien.clie_ref_anterior" //"dgmterce.terc_identificacion"
+		lstr_df.texto_campo [1,2] = "Cuenta"
+		lstr_df.texto_campo [1,3] = ""
+		lstr_df.texto_campo [1,4] = 'V'
+		lstr_df.texto_campo [1,5] = '450'
+		lstr_df.texto_campo [2,1] = "dgmterce.terc_descripcion"
+		lstr_df.texto_campo [2,2] = "Descripción"
+		lstr_df.texto_campo [2,3] = ""
+		lstr_df.texto_campo [2,4] = 'V'
+		lstr_df.texto_campo [2,5] = '700'		
+		lstr_df.texto_campo [3,1] = "dgmterce.terc_tercero"
+		lstr_df.texto_campo [3,2] = "Código Tercero"
+		lstr_df.texto_campo [3,3] = "terc_tercero"
+		lstr_df.texto_campo [3,4] = 'V'
+		lstr_df.texto_campo [4,1] = "dgapais.pais_descripcion"
+		lstr_df.texto_campo [4,2] = "País"
+		lstr_df.texto_campo [4,3] = ""
+		lstr_df.texto_campo [4,4] = 'V'
+		lstr_df.texto_campo [4,5] = '550'
+		
+		lstr_df.tabla = " dgmterce, dgapais, ccmclien "
+		
+		
+		lstr_df.tabla_where = &
+					"WHERE ( dgmterce.terc_pais *= dgapais.pais_pais ) and  " +&				
+							 "(ccmclien.clie_g_financiero = " + string(str.g_financiero) + " and " +&
+							 "ccmclien.clie_empresa = " + string(str.empresa) + ") 	and " +&
+							"(dgmterce.terc_tercero = ccmclien.clie_tercero) "  							
+		
+		OpenWithParm(w_dg_a_custom_find, lstr_df)
+		ls_find = Message.StringParm
+	
+	
+	If len (ls_find) = 0 Then Return
+		
+		
+	ls_codigo1 =  String(Right ( ls_find, Len (ls_find) - Pos (ls_find, "=") ))
+	gf_replace_cadena(ls_codigo1,"'"," ")
+	ls_codigo1 = Trim(ls_codigo1)
+
+	dw_1.setitem(1,'cliente',long(ls_codigo1))
+	dw_1.accepttext()
+	dw_1.setitem(1,'cuenta', idwc_cliente.getitemstring(idwc_cliente.getrow(),'clie_ref_anterior'))
+	dw_1.setcolumn('cliente')
+
+elseif dwo.name = 'b_producto' then
+
+	lstr_df.texto_campo [1,1] = "inmprodu.prod_producto"
+	lstr_df.texto_campo [1,2] = "Referencia"
+	lstr_df.texto_campo [1,3] = "prod_producto"
+	lstr_df.texto_campo [1,4] = 'V'
+//	lstr_df.texto_campo [1,5] = '280'	
+	lstr_df.texto_campo [2,1] = "inmprodu.prod_descripcion"
+	lstr_df.texto_campo [2,2] = "Descripcion"
+	lstr_df.texto_campo [2,3] = ""
+	lstr_df.texto_campo [2,4] = 'V'
+	lstr_df.texto_campo [2,5] = '770'
+	lstr_df.tabla = " inmprodu "
+		
+	lstr_df.tabla_where = &
+				"WHERE (inmprodu.prod_g_financiero = " + string(str.g_financiero) + ") and " +&
+						 "(inmprodu.prod_empresa = " + string(str.empresa) + ") "	
+	OpenWithParm(w_dg_a_custom_find, lstr_df)
+	ls_find = Message.StringParm
+	
+	If len (ls_find) = 0 Then Return
+		
+	ls_codigo1 =  String(Right ( ls_find, Len (ls_find) - Pos (ls_find, "=") ))
+	gf_replace_cadena(ls_codigo1,"'"," ")
+	ls_codigo1 = Trim(ls_codigo1)
+	this.setitem(this.getrow(),'item',ls_codigo1)
+	this.setitem(this.getrow(),'producto',ls_codigo1)	
+	this.accepttext()
+
+end if
+end event
+
+event dw_1::itemchanged;call super::itemchanged;accepttext()
+integer i, k, li_pasar, l
+string ls_sec, ls_orden, ls_find
+integer li_ann
+
+choose case dwo.name
+	case 'pasar'
+		li_pasar = integer(data)
+		li_ann = this.getitemnumber(row, 'enca_ann')
+		ls_sec = this.getitemstring(row,'enca_secuencia')
+		for i = 1 to this.rowcount()
+			if i <> row then
+				this.setitem(i,'pasar',0)
+			else
+			   if li_pasar = 0 then
+					//Devolver lo que se paso ?
+					if this.getitemnumber(row,'pasada') = 1 then
+						if gf_mensaje('','Ya Paso la Orden, Desea Restaurarla ???',2,2,'E') = 2 then return
+						dw_5.setfilter('dmov_orden_compra = "'+ls_sec+'" and dmov_ann_orden =  '+string(li_ann))
+						dw_5.filter()
+						for l = 1 to dw_5.rowcount()
+							dw_5.deleterow(l)
+							l --
+						next
+						this.setitem(row,'pasada',0)
+						dw_5.setfilter('')
+						dw_5.filter()
+					end if
+					dw_2.setfilter('')
+					dw_2.filter()
+					dw_2.reset()
+					dw_5.sort()
+			   else
+					dw_2.retrieve(str.g_financiero, str.empresa, ls_sec, li_ann)
+					for k = 1 to dw_2.rowcount()
+						dw_2.setitem(k,'pasar',li_pasar)
+					next
+				end if
+			end if
+		next
+end choose
+end event
+
+type gb_1 from w_fa_padre_reportes`gb_1 within w_pasar_transitos
+boolean visible = false
+integer x = 27
+integer y = 192
+integer width = 73
+integer height = 48
+long backcolor = 12639424
+end type
+
+type st_sel_marca from statictext within w_pasar_transitos
+boolean visible = false
+integer x = 1541
+integer y = 1408
+integer width = 640
+integer height = 56
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+long backcolor = 67108864
+string text = "Seleccione la Marca"
+boolean focusrectangle = false
+end type
+
+type ddlb_1 from dropdownlistbox within w_pasar_transitos
+boolean visible = false
+integer x = 2240
+integer y = 1388
+integer width = 754
+integer height = 244
+integer taborder = 51
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+string text = "none"
+boolean vscrollbar = true
+string item[] = {"NATURAL EXCHANGE","PUNTOCOM","TODAS"}
+borderstyle borderstyle = stylelowered!
+end type
+
+event selectionchanged;String	ls_filtro
+ls_filtro = 'PC'
+
+if index = 1 then	//NATURAL
+	dw_1.setFilter("fact_ruc_cliente not like '" +ls_filtro+ "%'")
+	dw_1.filter()
+	dw_1.groupcalc()
+elseIf index = 2 then //PUNTO COM
+	dw_1.setFilter( "fact_ruc_cliente like '" +ls_filtro+ "%'")
+	dw_1.filter()
+	dw_1.groupcalc()
+elseIf index = 3 then //TOTAL
+	ls_filtro = 'XX'
+	dw_1.setFilter( "fact_ruc_cliente not like '" +ls_filtro+ "%'")
+	dw_1.filter()
+	dw_1.groupcalc()
+end if
+
+end event
+
+type cb_consultar from commandbutton within w_pasar_transitos
+integer x = 3799
+integer y = 1736
+integer width = 453
+integer height = 124
+integer taborder = 30
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string text = "EJECUTAR PASE"
+end type
+
+event clicked;str_pase_pedido lstr_pedidos
+integer i
+ib_pasar = true
+istr_pedidos = lstr_pedidos
+
+dw_1.accepttext()
+dw_2.accepttext()
+
+if dw_5.rowcount() = 0 then 
+	gf_mensaje('','Debe seleccionar las referencias a pasar, Verifique !!!',1,1,'E')
+	return
+end if
+
+for i = 1 to dw_5.rowcount()
+	
+	istr_pedidos.ordenes[i] 	  = dw_5.getitemstring(i,'dmov_transito')
+	istr_pedidos.ann_orden[i] = dw_5.getitemNumber(i,'dmov_ann_transito')
+	istr_pedidos.referencia[i] = dw_5.getitemstring(i, 'dmov_producto')
+	istr_pedidos.cantidad[i]	 = dw_5.getitemNumber(i, 'dmov_cantidad')
+//	istr_pedidos.fraccion[i] 	 = dw_5.getitemNumber(i, 'por_pasar_fraccion')	
+	istr_pedidos.linea[i] 		 = dw_5.getitemNumber(i, 'dmov_linea')
+	istr_pedidos.costo[i] 		 = dw_5.getitemNumber(i, 'dmov_costo_fob')	
+next
+
+w_entrada_arriba.dynamic wf_pasar_estructura( istr_pedidos )
+
+close(parent)
+
+//dw_1.setfilter('')
+//dw_2.setfilter('')
+//dw_1.filter()
+//dw_2.filter()
+//dw_1.retrieve(str.g_financiero, str.empresa)
+end event
+
+type cb_2 from commandbutton within w_pasar_transitos
+integer x = 2967
+integer y = 164
+integer width = 343
+integer height = 100
+integer taborder = 40
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string text = "Cerrar"
+end type
+
+event clicked;parent.triggerevent('close')
+end event
+
+type dw_2 from datawindow within w_pasar_transitos
+integer x = 23
+integer y = 560
+integer width = 3730
+integer height = 1000
+integer taborder = 11
+boolean bringtotop = true
+boolean titlebar = true
+string title = "Productos a Pasar a Entrada"
+string dataobject = "dw_pasar_transitos_detalle"
+boolean controlmenu = true
+boolean maxbox = true
+boolean vscrollbar = true
+boolean resizable = true
+string icon = "AppIcon!"
+boolean livescroll = true
+end type
+
+event clicked;string ls_objeto
+integer i, li_pasar, li_fraccion
+long ll_cantidad
+
+if this.rowcount() = 0 then return
+
+ls_objeto = dwo.name
+
+choose case ls_objeto
+	case 't_ok'
+		li_pasar = this.getitemnumber(1,'pasar')		
+		if li_pasar = 1 then
+			li_pasar = 0
+			ll_cantidad = 0
+			li_fraccion = 0
+		else
+			li_pasar = 1
+		end if
+		for i = 1 to this.rowcount()
+			this.setitem(i,'pasar',li_pasar)
+			if li_pasar = 1 then
+				ll_cantidad = dw_2.getitemnumber(i,'pendiente')
+			end if
+			dw_2.setitem(i,'por_pasar', ll_cantidad)
+		next
+end choose
+end event
+
+event itemchanged;this.accepttext()
+
+choose case dwo.name
+	case 'pasar'
+		if data = '1' then
+			this.setitem(row,'por_pasar',this.getitemnumber(row,'pendiente'))
+//			this.setitem(row,'por_pasar_fraccion',this.getitemnumber(row,'pendiente_fraccion'))						
+		else
+			this.setitem(row,'por_pasar',0)
+//			this.setitem(row,'por_pasar_fraccion',0)			
+		end if
+end choose
+end event
+
+event retrieveend;string ls_sec, ls_cadena
+integer l, li_linea, i, li_ann
+if dw_1.getitemnumber(dw_1.getrow(),'pasada') = 1 then
+	li_ann = dw_1.getitemnumber(dw_1.getrow(), 'enca_ann')
+	ls_sec = dw_1.getitemstring(dw_1.getrow(),'enca_secuencia')
+	dw_5.setfilter('dmov_orden_compra = "'+ls_sec+'" and dmov_ann_orden =  '+string(li_ann))
+	dw_5.filter()
+	for l = 1 to dw_5.rowcount()
+		li_linea = dw_5.getitemnumber(l,'dmov_linea')
+		if l = 1 then
+			ls_cadena = 'deta_linea <> '+string(li_linea)
+		else
+			ls_cadena = ls_cadena + ' and deta_linea <> '+string(li_linea)
+		end if
+	next
+	dw_5.setfilter('')
+	dw_5.filter()
+	dw_2.setfilter(ls_cadena)
+	dw_2.filter()
+else
+	dw_2.setfilter('')
+	dw_2.filter()
+end if
+dw_5.sort()
+end event
+
+type uo_1 from u_ddcalen within w_pasar_transitos
+boolean visible = false
+integer x = 1966
+integer y = 128
+integer taborder = 21
+boolean bringtotop = true
+end type
+
+event destructor;call super::destructor;call u_ddcalen::destroy
+end event
+
+event ue_clicked;call super::ue_clicked;dw_1.SetItem ( dw_1.getrow(), 'fecha1', uo_1.return_sel_date() )
+
+if uo_1.allow_close then
+	this.visible=false
+	dw_1.SetFocus()
+end if
+
+
+end event
+
+on uo_1.destroy
+call u_ddcalen::destroy
+end on
+
+type uo_2 from u_ddcalen within w_pasar_transitos
+boolean visible = false
+integer x = 2693
+integer y = 128
+integer taborder = 31
+boolean bringtotop = true
+end type
+
+event destructor;call super::destructor;call u_ddcalen::destroy
+end event
+
+event ue_clicked;call super::ue_clicked;dw_1.SetItem ( dw_1.getrow(), 'fecha2', uo_2.return_sel_date() )
+
+if uo_2.allow_close then
+	this.visible=false
+	dw_1.SetFocus()
+end if
+
+
+end event
+
+on uo_2.destroy
+call u_ddcalen::destroy
+end on
+
+type dw_3 from datawindow within w_pasar_transitos
+integer x = 137
+integer y = 164
+integer width = 1390
+integer height = 80
+integer taborder = 20
+string title = "none"
+string dataobject = "dw_external_pase_proforma"
+boolean border = false
+boolean livescroll = true
+end type
+
+event editchanged;string ls_texto, ls_cadena
+accepttext()
+ls_texto = data
+if isnull(ls_texto) then ls_texto = ''
+
+choose case dwo.name
+	case 'proforma'
+		if len(ls_texto) > 0 then
+			ls_cadena = 'left(upper(enca_documento) ,'+ string(len(ls_texto))+ ') = "'+upper(ls_texto)+'"'
+		else
+			ls_cadena = ''
+		end if
+	case 'nombre'
+		if len(ls_texto) > 0 then
+			ls_cadena = 'upper(dgmterce_terc_descripcion) like "%'+upper(ls_texto)+'%"'
+		else
+			ls_cadena = ''
+		end if
+end choose
+
+dw_1.setfilter(ls_cadena)
+dw_1.filter()
+end event
+
+type dw_4 from datawindow within w_pasar_transitos
+integer x = 114
+integer y = 36
+integer width = 1737
+integer height = 80
+integer taborder = 20
+boolean bringtotop = true
+string title = "none"
+string dataobject = "dw_external_proveedores"
+boolean border = false
+boolean livescroll = true
+end type
+
+event itemchanged;this.accepttext()
+string ls_codigo, ls_columna
+long ll_tercero
+ls_columna = this.getcolumnname()
+choose case ls_columna
+	case 'proveedor'
+		ls_codigo = ldwc_prov.getitemstring(ldwc_prov.getrow(),'cpmprove_prov_cod_proveedor')
+		ll_tercero = long(data)	//ldwc_prov.getitemnumber(ldwc_prov.getrow(),'terc_tercero')
+		this.setitem(1,'cuenta', ls_codigo)
+
+end choose
+dw_2.reset()
+dw_5.reset()
+dw_1.retrieve(str.g_financiero, str.empresa, ll_tercero)
+
+end event
+
+type cb_buscar from commandbutton within w_pasar_transitos
+integer x = 1920
+integer y = 24
+integer width = 256
+integer height = 104
+integer taborder = 20
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string text = "Buscar"
+end type
+
+event clicked;	str_dg_dynamic_find	lstr_df
+	string ls_find, ls_codigo1
+	
+		lstr_df.texto_campo [2,1] = "cpmprove.prov_cod_proveedor" //"dgmterce.terc_identificacion"
+		lstr_df.texto_campo [2,2] = "Cuenta"
+		lstr_df.texto_campo [2,3] = ""
+		lstr_df.texto_campo [2,4] = 'V'
+		lstr_df.texto_campo [2,5] = '350'
+		lstr_df.texto_campo [1,1] = "dgmterce.terc_descripcion"
+		lstr_df.texto_campo [1,2] = "Descripción"
+		lstr_df.texto_campo [1,3] = ""
+		lstr_df.texto_campo [1,4] = 'V'
+		lstr_df.texto_campo [1,5] = '850'		
+		lstr_df.texto_campo [3,1] = "dgmterce.terc_tercero"
+		lstr_df.texto_campo [3,2] = "Tercero"
+		lstr_df.texto_campo [3,3] = "terc_tercero"
+		lstr_df.texto_campo [3,4] = 'V'
+		
+		lstr_df.tabla = " dgmterce, cpmprove "	
+		
+		lstr_df.tabla_where = &
+					"WHERE (cpmprove.prov_g_financiero = " + string(str.g_financiero) + " and " +&
+							 "cpmprove.prov_empresa = " + string(str.empresa) + ") 	and " +&
+							"(dgmterce.terc_tercero = cpmprove.prov_tercero) and " +&
+					      "(cpmprove.prov_estado = 'A' ) "
+		
+		OpenWithParm(w_dg_a_custom_find, lstr_df)
+		ls_find = Message.StringParm
+	
+	If len (ls_find) = 0 Then Return		
+		
+	ls_codigo1 =  String(Right ( ls_find, Len (ls_find) - Pos (ls_find, "=") ))
+	//gf_replace_cadena(ls_codigo1,"'"," ")
+	ls_codigo1 = Trim(ls_codigo1)
+
+	dw_4.setitem(1,'proveedor',long(ls_codigo1))
+	dw_4.accepttext()
+	dw_4.setcolumn('proveedor')
+	dw_4.trigger event itemchanged(1,dw_1.object,ls_codigo1)	
+end event
+
+type dw_5 from datawindow within w_pasar_transitos
+string tag = "dw_pasar_ordenes_detalle"
+integer x = 23
+integer y = 1580
+integer width = 3730
+integer height = 1072
+integer taborder = 21
+boolean bringtotop = true
+boolean titlebar = true
+string title = "Entrada al Inventario"
+string dataobject = "dw_transitos_detalle_pasadas"
+boolean controlmenu = true
+boolean maxbox = true
+boolean vscrollbar = true
+boolean resizable = true
+string icon = "AppIcon!"
+boolean livescroll = true
+end type
+
+event itemchanged;this.accepttext()
+integer i, li_final
+choose case dwo.name
+	case 'pasar'
+		if long(data) = 1 then return
+		li_final = dw_2.rowcount()
+		li_final ++
+		i = dw_5.RowsMove(row, row, Primary!, dw_2, li_final, Primary!)  //dw_5.rowcount()
+		dw_2.sort()
+end choose
+
+end event
+
+type cb_1 from commandbutton within w_pasar_transitos
+integer x = 3835
+integer y = 932
+integer width = 343
+integer height = 100
+integer taborder = 40
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string text = "Pasar"
+end type
+
+event clicked;integer i, li_final, li_linea, li_ann, l
+string ls_cadena, ls_sec
+
+li_final = dw_5.rowcount()
+li_final ++
+dw_2.setfilter('pasar = 1 and por_pasar > 0')
+dw_2.filter()
+if dw_2.rowcount() = 0 then
+	dw_2.setfilter('')
+	dw_2.filter()
+	gf_mensaje('','Debe Marcar los Productos a Pasar, Verifique !!!',1,1,'E')
+	return
+end if
+i = dw_2.RowsMove(1, dw_2.RowCount(), Primary!, dw_5, li_final, Primary!)  //dw_5.rowcount()
+dw_1.setitem(dw_1.getrow(),'pasada',1)
+
+//Filtra los productos incluyendo los nuevos pasados
+	li_ann = dw_1.getitemnumber(dw_1.getrow(), 'enca_ann')
+	ls_sec = dw_1.getitemstring(dw_1.getrow(),'enca_secuencia')
+	dw_5.setfilter('dmov_transito = "'+ls_sec+'" and dmov_ann_transito =  '+string(li_ann))
+	dw_5.filter()
+	for l = 1 to dw_5.rowcount()
+		li_linea = dw_5.getitemnumber(l,'dmov_linea')
+		if l = 1 then
+			ls_cadena = 'deta_linea <> '+string(li_linea)
+		else
+			ls_cadena = ls_cadena + ' and deta_linea <> '+string(li_linea)
+		end if
+	next
+	dw_5.setfilter('')
+	dw_5.filter()
+	dw_2.setfilter(ls_cadena)
+	dw_2.filter()
+end event
+

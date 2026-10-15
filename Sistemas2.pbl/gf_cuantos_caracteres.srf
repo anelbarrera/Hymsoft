@@ -1,0 +1,31 @@
+﻿global type gf_cuantos_caracteres from function_object
+end type
+
+forward prototypes
+global function integer gf_cuantos_caracteres (string as_cadena, character ac_caracter)
+end prototypes
+
+global function integer gf_cuantos_caracteres (string as_cadena, character ac_caracter);// Funcion gf_cuantos_caracteres
+// Esta función fue creada para que encuentre cuantas veces se encuentra un 
+// caracter en una cadena
+// Herick Guillén 25/Sep/1998
+
+
+Integer	li_pos, li_pos_final, li_cont
+
+
+li_pos = Pos(as_cadena, ac_caracter)
+
+If li_pos > 0 Then
+	Do While	li_pos > 0
+//		li_pos_final = li_pos
+		li_cont ++
+		li_pos = Pos(as_cadena, ac_caracter, li_pos + 1)
+	Loop
+	
+	Return li_cont
+Else
+	Return 0
+End If
+end function
+

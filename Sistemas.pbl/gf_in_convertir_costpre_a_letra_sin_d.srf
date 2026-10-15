@@ -1,0 +1,110 @@
+﻿global type gf_in_convertir_costpre_a_letra_sin_d from function_object
+end type
+
+forward prototypes
+global function any gf_in_convertir_costpre_a_letra_sin_d (integer grupo, integer empresa, string codigo, string valor, integer decimales_sn)
+end prototypes
+
+global function any gf_in_convertir_costpre_a_letra_sin_d (integer grupo, integer empresa, string codigo, string valor, integer decimales_sn);/*   Función que transforma el Precio o el costo del Producto en letras
+     de acuerdo a la clave respectiva                                  */
+
+integer li_financiero 
+integer negocio    //Toma el valor de la empresa
+string  codigo_p   //Toma el valor del codigo de la clave 
+string  valor_cop //Toma el valor del costo o precio 
+
+string vector[10] //Clave
+string letras[20] //Costos
+string tabla[20]  //Resultado
+
+string cla_costo, ls_cadena_real, ls_transf
+integer k,j,l, cont ,dd
+string ls_signo 
+integer li_sw, sw, deci,li_cant_clave,li_sec
+
+/*      INICIO DE PROCESO         */
+li_sw = 0
+
+//li_financiero = grupo 
+//negocio = empresa
+li_financiero = str.g_financiero 
+negocio = str.empresa
+codigo_p = codigo
+
+valor_cop = string(round(dec(valor), decimales_sn))
+
+/* Verifico que sea Negativo y le elimino el signo */
+if mid(valor_cop,1,1) = '-' then 
+	li_sw = 1
+	valor_cop = mid(valor_cop,2,len(valor_cop))	
+End If	
+
+
+ select claco_clave
+ into :cla_costo
+ from inaclaco
+ where claco_g_financiero = :li_financiero and
+		 claco_empresa = :negocio and
+		 claco_codigo = :codigo_p ;
+
+
+ If sqlca.sqlcode = -1 Then
+	messagebox('Aviso','¡ Error al Recuperar Clave de Costos...!'+sqlca.sqlerrtext)
+	return 'Error'
+ End if	
+			 
+	 ls_cadena_real = mid(cla_costo,2,len(cla_costo))		  
+    li_cant_clave=len(cla_costo)/10
+    li_sec=1
+	For k = 1 to 10  
+		 vector[k] = mid(ls_cadena_real,li_sec,li_cant_clave) //Cargo la letras claves
+ 		 li_sec=li_sec+li_cant_clave
+	Next	
+	
+	j = len(valor_cop)
+	 
+	For k = 1 to j
+		letras[k] = mid(valor_cop,k,1) //Cargo digitos de costos
+	Next	
+	
+	cont  = 0
+	sw = 0
+	deci = 0
+	
+	For l = 1 to j
+	  If letras[l] <> '.' then
+		  dd = integer(letras[l]) 	
+		  cont = cont + 1
+		  If letras[l] <> '0' then
+				tabla[cont] = vector[dd]
+		  Else
+				tabla[cont] = vector[10]
+		  End if	
+		  
+		  if sw = 1 then
+			 deci += 1
+		  end if	 
+		  
+		Else	  
+			sw = 1
+		End If	
+	  
+	Next 
+	
+	For k = 1 to cont
+		ls_transf += tabla[k] 
+	Next	
+	
+	if deci = 0 then
+//		ls_transf = ls_transf + vector[10] + vector[10]
+	elseif deci = 1 then
+		ls_transf = ls_transf + vector[10]
+	end if 
+
+	if li_sw = 1 then
+		ls_transf = '-' + ls_transf
+	end if	
+
+	Return ls_transf
+end function
+

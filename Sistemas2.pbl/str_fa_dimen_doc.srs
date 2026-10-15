@@ -1,0 +1,8 @@
+﻿global type str_fa_dimen_doc from structure
+	long		largo_doc
+	long		ancho_doc
+	boolean		aceptar
+	string		viene_de
+	datawindow		dw
+end type
+

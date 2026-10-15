@@ -1,0 +1,27 @@
+﻿//objectcomments Estructura para los cargos de los Pedidos, tambien utilizada para enviar Parametros al Picking List, (NO BORRAR)
+global type str_fa_carg_ped from structure
+	string		pedido
+	double		monto
+	double		bultos
+	integer		ano
+	string		tipo
+	string		vienede
+	string		tipo_formato
+	string		reporte_o_para
+	string		cod_formato
+	string		datawindow
+	long		cliente
+	datawindow		dwobject
+	long		largo_doc
+	long		ancho_doc
+	boolean		aceptar
+	string		datawindow2
+	integer		reg_detalle
+	string		proforma
+	window		window
+	boolean		pedido_futuro
+	boolean		directo_al_printer
+	string		estado
+	string		factura
+end type
+

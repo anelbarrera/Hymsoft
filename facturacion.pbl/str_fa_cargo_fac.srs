@@ -1,0 +1,11 @@
+﻿//objectcomments Estructura para los Cargos de las Facturas
+global type str_fa_cargo_fac from structure
+	string		pedido
+	double		monto
+	double		bultos
+	string		tipo
+	string		estado
+	integer		an
+	window		window
+end type
+

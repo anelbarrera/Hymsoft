@@ -1,0 +1,46 @@
+﻿release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=160 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=108 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=cpatempa_tmpa_g_financiero dbname="cpatempa.tmpa_g_financiero" )
+ column=(type=decimal(0) updatewhereclause=yes name=cpatempa_tmpa_empresa dbname="cpatempa.tmpa_empresa" )
+ column=(type=decimal(0) updatewhereclause=yes name=cpatempa_tmpa_tercero dbname="cpatempa.tmpa_tercero" )
+ column=(type=char(20) updatewhereclause=yes name=cpatempa_tmpa_ruc_tercero dbname="cpatempa.tmpa_ruc_tercero" )
+ column=(type=decimal(0) updatewhereclause=yes name=cpatempa_tmpa_maxdias dbname="cpatempa.tmpa_maxdias" )
+ column=(type=decimal(4) updatewhereclause=yes name=cpatempa_tmpa_monto dbname="cpatempa.tmpa_monto" )
+ column=(type=char(30) updatewhereclause=yes name=cpatempa_tmpa_descantig dbname="cpatempa.tmpa_descantig" )
+ column=(type=decimal(0) updatewhereclause=yes name=cpaantig_cpan_diaini dbname="cpaantig.cpan_diaini" )
+ column=(type=decimal(0) updatewhereclause=yes name=cpaantig_cpan_diafin dbname="cpaantig.cpan_diafin" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"cpatempa~" )  TABLE(NAME=~"cpaantig~" ) COLUMN(NAME=~"cpatempa.tmpa_g_financiero~") COLUMN(NAME=~"cpatempa.tmpa_empresa~") COLUMN(NAME=~"cpatempa.tmpa_tercero~") COLUMN(NAME=~"cpatempa.tmpa_ruc_tercero~") COLUMN(NAME=~"cpatempa.tmpa_maxdias~") COLUMN(NAME=~"cpatempa.tmpa_monto~") COLUMN(NAME=~"cpatempa.tmpa_descantig~") COLUMN(NAME=~"cpaantig.cpan_diaini~") COLUMN(NAME=~"cpaantig.cpan_diafin~")    JOIN (LEFT=~"cpaantig.cpan_g_financiero~"    OP =~"=~"RIGHT=~"cpatempa.tmpa_g_financiero~" )    JOIN (LEFT=~"cpaantig.cpan_empresa~"    OP =~"=~"RIGHT=~"cpatempa.tmpa_empresa~" )WHERE(    EXP1 =~"( ( cpatempa.tmpa_g_financiero~"   OP =~"=~"    EXP2 =~":grupo )~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"( cpatempa.tmpa_empresa~"   OP =~"=~"    EXP2 =~":empresa )~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"( cpatempa.tmpa_tercero~"   OP =~"=~"    EXP2 =~":ll_tercero ) )~" ) ) ARG(NAME = ~"grupo~" TYPE = number)  ARG(NAME = ~"empresa~" TYPE = number)  ARG(NAME = ~"ll_tercero~" TYPE = number) " arguments=(("grupo", number),("empresa", number),("ll_tercero", number)) )
+text(band=header alignment="2" text="Cpatempa
+Tmpa G Financiero" border="6" color="0" x="18" y="16" height="128" width="503"  name=cpatempa_tmpa_g_financiero_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cpatempa
+Tmpa Empresa" border="6" color="0" x="539" y="16" height="128" width="402"  name=cpatempa_tmpa_empresa_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cpatempa
+Tmpa Tercero" border="6" color="0" x="960" y="16" height="128" width="361"  name=cpatempa_tmpa_tercero_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cpatempa
+Tmpa Ruc Tercero" border="6" color="0" x="1339" y="16" height="128" width="576"  name=cpatempa_tmpa_ruc_tercero_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cpatempa
+Tmpa Maxdias" border="6" color="0" x="1934" y="16" height="128" width="389"  name=cpatempa_tmpa_maxdias_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cpatempa
+Tmpa Monto" border="6" color="0" x="2341" y="16" height="128" width="329"  name=cpatempa_tmpa_monto_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cpatempa
+Tmpa Descantig" border="6" color="0" x="2688" y="16" height="128" width="850"  name=cpatempa_tmpa_descantig_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cpaantig
+Cpan Diaini" border="6" color="0" x="3552" y="16" height="128" width="329"  name=cpaantig_cpan_diaini_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cpaantig
+Cpan Diafin" border="6" color="0" x="3899" y="16" height="128" width="329"  name=cpaantig_cpan_diafin_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="5" color="8388608" x="18" y="16" height="76" width="329" format="[general]"  name=cpatempa_tmpa_g_financiero edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="5" color="8388608" x="539" y="16" height="76" width="329" format="[general]"  name=cpatempa_tmpa_empresa edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="5" color="8388608" x="960" y="16" height="76" width="329" format="[general]"  name=cpatempa_tmpa_tercero edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="5" color="8388608" x="1339" y="16" height="76" width="576" format="[general]"  name=cpatempa_tmpa_ruc_tercero edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="5" color="8388608" x="1934" y="16" height="76" width="329" format="[general]"  name=cpatempa_tmpa_maxdias edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="5" color="8388608" x="2341" y="16" height="76" width="329" format="[general]"  name=cpatempa_tmpa_monto edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="5" color="8388608" x="2688" y="16" height="76" width="850" format="[general]"  name=cpatempa_tmpa_descantig edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="5" color="8388608" x="3552" y="16" height="76" width="329" format="[general]"  name=cpaantig_cpan_diaini edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="5" color="8388608" x="3899" y="16" height="76" width="329" format="[general]"  name=cpaantig_cpan_diafin edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )
+  

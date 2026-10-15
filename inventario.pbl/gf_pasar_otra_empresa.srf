@@ -1,0 +1,486 @@
+﻿global type gf_pasar_otra_empresa from function_object
+end type
+
+forward prototypes
+global function integer gf_pasar_otra_empresa (readonly integer g_finan_prov, readonly integer empresa_prov, readonly integer g_finan_dest, readonly integer empresa_dest)
+end prototypes
+
+global function integer gf_pasar_otra_empresa (readonly integer g_finan_prov, readonly integer empresa_prov, readonly integer g_finan_dest, readonly integer empresa_dest);//messageBox("Inicio de Proceso de Actualizacion de Estructura de Productos", & 
+//				'Este proceso llena las tablas Relacionas a la configuracion de los productos')															
+integer li_cant_prod
+string ls_error
+ls_error=''
+
+INSERT INTO cracltam  
+         ( acta_g_financiero,   
+           acta_empresa,   
+           acta_cod_clase_tam,   
+           acta_descripcion,   
+           acta_nom_tam_a,   
+           acta_nom_tam_b )  
+    SELECT :g_finan_dest, /**/   
+           :empresa_dest, /**/ 
+         crin.acta_cod_clase_tam,   
+         crin.acta_descripcion,   
+         crin.acta_nom_tam_a,   
+         crin.acta_nom_tam_b  
+    FROM cracltam  crin 
+   WHERE ( crin.acta_g_financiero = :g_finan_prov) AND  
+         ( crin.acta_empresa = :empresa_prov ) and 
+			null = (  SELECT SUM(1)
+      	          FROM cracltam  
+                  WHERE ( cracltam.acta_g_financiero = :g_finan_dest ) AND  
+						      ( cracltam.acta_empresa = :empresa_dest )  and 
+								  cracltam.acta_cod_clase_tam = crin.acta_cod_clase_tam);
+			
+str.frame.SetMicroHelp("Clase de Tamaños Incluidos " + string(sqlca.sqlnrows))
+if sqlca.sqlcode = -1 then
+	ls_error = sqlca.sqlerrtext
+	commit using sqlca;																
+	mensaje("(cracltam) Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")																					
+else 
+	commit using sqlca;																
+end if				
+
+   INSERT INTO cracolor  
+         ( acol_g_financiero,   
+           acol_empresa,   
+           acol_num_color,   
+           acol_nombre_color,   
+           acol_pertenece_a,   
+           acol_abrev )  
+   SELECT :g_finan_dest, /**/
+         :empresa_dest, /**/
+         crin.acol_num_color,   
+         crin.acol_nombre_color,   
+         crin.acol_pertenece_a,   
+         crin.acol_abrev  
+    FROM cracolor  crin
+   WHERE ( crin.acol_g_financiero = :g_finan_prov ) AND  
+         ( crin.acol_empresa = :empresa_prov ) AND  
+         ( null = (  SELECT sum(1)
+                       FROM cracolor  
+                      WHERE ( cracolor.acol_g_financiero = :g_finan_dest ) AND  
+                            ( cracolor.acol_empresa = :empresa_dest ) and 
+							         crin.acol_num_color =   cracolor.acol_num_color));
+										
+str.frame.SetMicroHelp("Colores Incluidos " + string(sqlca.sqlnrows))															  
+				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																
+					mensaje("(cracolor),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")																														
+				else 
+					commit using sqlca;																
+				end if				
+
+INSERT INTO cradivis  
+         ( adiv_g_financiero,   
+           adiv_empresa,   
+           adiv_codigo_div,   
+           adiv_nombre_div )  
+     SELECT :g_finan_dest, /**/  
+            :empresa_dest, /**/  
+            crin.adiv_codigo_div,   
+            crin.adiv_nombre_div  
+       FROM cradivis  crin 
+      WHERE ( crin.adiv_g_financiero = :g_finan_prov) AND  
+            ( crin.adiv_empresa = :empresa_prov ) AND  
+            (  null = (  SELECT sum(1)
+				             FROM cradivis  
+            			   WHERE ( cradivis.adiv_g_financiero = :g_finan_dest ) AND  
+			                     ( cradivis.adiv_empresa = :empresa_dest ) and 
+										cradivis.adiv_codigo_div = crin.adiv_codigo_div))   ;
+
+str.frame.SetMicroHelp("Colores Incluidos " + string(sqlca.sqlnrows))															  															  
+
+ 				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																
+					mensaje("(cradivis),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")																						
+				else 
+					commit using sqlca ; 
+				end if				
+
+  INSERT INTO craespec  
+         ( aesp_g_financiero,   
+           aesp_empresa,   
+           aesp_num_especificacion,   
+           aesp_descripcion_espec )  
+     SELECT :g_finan_dest, /**/  
+            :empresa_dest, /**/  
+            crin.aesp_num_especificacion,   
+            crin.aesp_descripcion_espec  
+       FROM craespec crin   
+      WHERE ( crin.aesp_g_financiero = :g_finan_prov) AND  
+            ( crin.aesp_empresa = :empresa_prov ) AND  
+            ( null =  
+            (  SELECT  sum(1)
+               FROM craespec  
+               WHERE ( craespec.aesp_g_financiero = :g_finan_dest ) AND  
+                     ( craespec.aesp_empresa = :empresa_dest ) and 
+							craespec.aesp_num_especificacion = crin.aesp_num_especificacion))   ;
+
+ 				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																
+					mensaje("(craespec),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")																				
+				else 
+					commit using sqlca ; 
+				end if				
+
+  INSERT INTO cragrupo  
+         ( agru_g_financiero,   
+           agru_empresa,   
+           agru_codigo_div,   
+           agru_codigo_grupo,   
+           agru_descripcion_grupo,   
+           agru_arancel_default )  
+     SELECT :g_finan_dest, /**/   
+            :empresa_dest, /**/   
+            crin.agru_codigo_div,   
+            crin.agru_codigo_grupo,   
+            crin.agru_descripcion_grupo,   
+            crin.agru_arancel_default  
+       FROM cragrupo  crin
+      WHERE ( crin.agru_g_financiero = :g_finan_prov ) AND  
+            ( crin.agru_empresa = :empresa_prov ) AND  
+            ( null =  (SELECT sum(1)
+            FROM cragrupo WHERE ( cragrupo.agru_g_financiero = :g_finan_dest ) 
+                           AND ( cragrupo.agru_empresa = :empresa_dest)  and 
+									cragrupo.agru_codigo_div = crin.agru_codigo_div and 
+									cragrupo.agru_codigo_grupo = crin.agru_codigo_grupo))   ;
+									
+
+ 				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																					
+					mensaje("(cragrupo),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")
+				else 
+					commit using sqlca; 
+				end if				
+
+  INSERT INTO crasubgr  
+         ( asub_g_financiero,   
+           asub_empresa,   
+           asub_cod_div,   
+           asub_codigo_grupo,   
+           asub_codigo_subgrupo,   
+           asub_descrip_subgrupo )  
+     SELECT distinct :g_finan_dest, /**/   
+            :empresa_dest, /**/  
+            inmprodu.prod_division,   
+            inmprodu.prod_grupo,   
+            inmprodu.prod_sub_grupo,   
+            inmprodu.prod_grupo + inmprodu.prod_sub_grupo
+       FROM inmprodu  
+      WHERE ( inmprodu.prod_g_financiero = :g_finan_prov ) AND  
+            ( inmprodu.prod_empresa = :empresa_prov ) and
+				( inmprodu.prod_grupo <> null) and
+				( inmprodu.prod_sub_grupo <> null) and
+				( inmprodu.prod_division +
+            inmprodu.prod_grupo   + 
+            inmprodu.prod_sub_grupo 
+ not in (  SELECT crasubgr.asub_cod_div + 
+			  crasubgr.asub_codigo_grupo +
+			  crasubgr.asub_codigo_subgrupo
+           FROM crasubgr WHERE ( crasubgr.asub_g_financiero = :g_finan_dest ) AND  
+                         ( crasubgr.asub_empresa = :empresa_dest )  ) ) ;
+
+ 				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																
+					mensaje("(crasubgr),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")																									
+				end if				
+
+
+  INSERT INTO cramarca  
+         ( amar_g_financiero,   
+           amar_empresa,   
+           amar_num_marca,   
+           amar_nombre_marca )  
+     SELECT :g_finan_dest, /**/  
+            :empresa_dest, /**/  
+            cramarca.amar_num_marca,   
+            cramarca.amar_nombre_marca  
+       FROM cramarca  
+      WHERE ( cramarca.amar_g_financiero = :g_finan_prov ) AND  
+            ( cramarca.amar_empresa = :empresa_prov ) AND  
+            ( cramarca.amar_num_marca not in 
+            (  SELECT cramarca.amar_num_marca  
+               FROM cramarca  
+               WHERE ( cramarca.amar_g_financiero = :g_finan_dest ) AND  
+                     ( cramarca.amar_empresa =:empresa_dest)))   ;
+
+
+
+ 				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																
+					mensaje("(cramarca),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")																														
+				end if				
+
+
+  INSERT INTO inabodeg  
+         ( abod_g_financiero,   
+           abod_empresa,   
+           abod_bodega,   
+           abod_descripcion,   
+           abod_ubicacion_fisica,   
+           abod_dimensiones )  
+    SELECT :g_finan_dest, /**/
+         :empresa_dest, /**/
+         crin.abod_bodega,   
+         crin.abod_descripcion,   
+         crin.abod_ubicacion_fisica,   
+         crin.abod_dimensiones  
+    FROM inabodeg  crin 
+   WHERE ( crin.abod_g_financiero = :g_finan_prov ) AND  
+         ( crin.abod_empresa = :empresa_prov ) AND  
+         ( null =  (  SELECT inabodeg.abod_bodega  
+                                            FROM inabodeg  
+                                           WHERE ( inabodeg.abod_g_financiero = :g_finan_dest ) AND  
+                                                 ( inabodeg.abod_empresa = :empresa_dest ) and 
+																 inabodeg.abod_bodega = crin.abod_bodega))   ;
+
+
+ 				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																
+					mensaje("(inabodeg),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")																																																																						
+				else 
+					commit using sqlca;
+				end if				
+
+
+  INSERT INTO inaubica  
+         ( ubic_g_financiero,   
+           ubic_empresa,   
+           ubic_bodega,   
+           ubic_ubicacion,   
+           ubic_descripcion,   
+           ubic_ubicacion_fisica )  
+  SELECT :g_finan_dest, /**/
+         :empresa_dest, /**/
+         crin.ubic_bodega,   
+         crin.ubic_ubicacion,   
+         crin.ubic_descripcion,   
+         crin.ubic_ubicacion_fisica  
+    FROM inaubica  crin
+   WHERE ( crin.ubic_g_financiero = :g_finan_prov ) AND  
+         ( crin.ubic_empresa = :empresa_prov ) AND  
+         ( null = (SELECT sum(1) FROM inaubica  
+            WHERE ( inaubica.ubic_g_financiero = :g_finan_dest ) AND  
+                  ( inaubica.ubic_empresa = :empresa_dest )  and 
+				        inaubica.ubic_bodega  = crin.ubic_bodega and 
+				        inaubica.ubic_ubicacion = crin.ubic_ubicacion  )) ;
+
+ 				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																
+					mensaje("(inaubica),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")																																																																						
+				else 
+					commit using sqlca ;
+				end if				
+
+
+  INSERT INTO inmprodu  
+         ( prod_g_financiero,   
+           prod_empresa,   
+           prod_producto,   
+           prod_owner,   
+           prod_producto_dos,   
+           prod_cod_alternativo,   
+           prod_barra,   
+           prod_descripcion,   
+           prod_descripcion_dos,   
+           prod_division,   
+           prod_grupo,   
+           prod_sub_grupo,   
+           prod_clase,   
+           prod_num_producto,   
+           prod_num_tipo,   
+           prod_compuesto,   
+           prod_marca,   
+           prod_codigo_modelo,   
+           prod_medida,   
+           prod_color,   
+           prod_cod_clase_tam,   
+           prod_fecha_creacion,   
+           prod_ultima_actualizacion,   
+           prod_costo_fob,   
+           prod_flete,   
+           prod_seguros,   
+           prod_otros_gastos,   
+           prod_costo_cif,   
+           prod_precio_venta_unidad,   
+           prod_impuesto,   
+           prod_arancel,   
+           prod_status,   
+           prod_estatus_ref,   
+           prod_foto_dir,   
+           prod_desc_local,   
+           prod_desc_exterior,   
+           prod_costou_local,   
+           prod_itbm_local,   
+           prod_definicion,   
+           prod_peso,   
+           prod_peso_descripcion,   
+           prod_empaque,   
+           prod_empaque_descripcion,   
+           prod_cubicaje,   
+           prod_unidad_cub,   
+           prod_id_usuario,   
+           prod_pais,   
+           prod_base1,   
+           prod_base2,   
+           prod_tipo_base,   
+           prod_porc_apli,   
+           prod_costo_unitario,   
+           prod_ultima_entrada_doc,   
+           prod_ultima_entrada_can,   
+           prod_precio1,   
+           prod_precio2,   
+           prod_precio3,   
+           prod_precio4,   
+           prod_precio5,   
+           prod_punto_maximo,   
+           prod_punto_minimo,   
+           prod_cant_a_pedir,   
+           prod_comision,   
+           prod_descuento_maximo,   
+           prod_descuento_siono,   
+           prod_existencia_total,   
+           prod_reserva_total,   
+           prod_entrada_fecha,   
+           prod_salida_fecha,   
+           prod_ultima_salida_doc,   
+           prod_observacion,   
+           prod_cant_transito,   
+           prod_reserva_trans,   
+           prod_empaque_um,   
+           prod_peso_unidad_medida,   
+           prod_fecha_agotado,   
+           prod_board,   
+           prod_precio_venta_minimo,   
+           prod_porcentaje_regalias,   
+           prod_contrato_regalias,   
+           prod_unidad_venta,   
+           prod_clave_costo,
+		  prod_costo_promedio,
+		  prod_peso_neto,
+		  prod_alto,
+		  prod_ancho,
+		  prod_largo,
+		  prod_metros_cubicos,
+		  prod_excluir_de_sugerido)  
+SELECT :g_finan_dest, /**/   
+            :empresa_dest, /**/  
+            crin.prod_producto,   
+            crin.prod_owner,   
+            crin.prod_producto_dos,   
+            crin.prod_cod_alternativo,   
+            crin.prod_barra,   
+            crin.prod_descripcion,   
+            crin.prod_descripcion_dos,   
+            crin.prod_division,   
+            crin.prod_grupo,
+            crin.prod_sub_grupo,   
+            crin.prod_clase,   
+            crin.prod_num_producto,   
+            crin.prod_num_tipo,   
+            crin.prod_compuesto,   
+            crin.prod_marca,   
+            crin.prod_codigo_modelo,   
+            crin.prod_medida,   
+            crin.prod_color,   
+            crin.prod_cod_clase_tam,   
+            crin.prod_fecha_creacion,   
+            crin.prod_ultima_actualizacion,   
+            crin.prod_costo_fob,   
+            crin.prod_flete,   
+            crin.prod_seguros,   
+            crin.prod_otros_gastos,   
+            crin.prod_costo_cif,   
+            crin.prod_precio_venta_unidad,   
+            crin.prod_impuesto,   
+            crin.prod_arancel,   
+            crin.prod_status,   
+            crin.prod_estatus_ref,   
+            crin.prod_foto_dir,   
+            crin.prod_desc_local,   
+            crin.prod_desc_exterior,   
+            crin.prod_costou_local,   
+            crin.prod_itbm_local,   
+            crin.prod_definicion,   
+            crin.prod_peso,   
+            crin.prod_peso_descripcion,   
+            crin.prod_empaque,   
+            crin.prod_empaque_descripcion,   
+            crin.prod_cubicaje,   
+            crin.prod_unidad_cub,   
+            :str.usuario,   
+            crin.prod_pais,   
+            crin.prod_base1,   
+            crin.prod_base2,   
+            crin.prod_tipo_base,   
+            crin.prod_porc_apli,   
+            crin.prod_costo_unitario,   
+            crin.prod_ultima_entrada_doc,   
+            crin.prod_ultima_entrada_can,   
+            crin.prod_precio1,   
+            crin.prod_precio2,   
+            crin.prod_precio3,   
+            crin.prod_precio4,   
+            crin.prod_precio5,   
+            crin.prod_punto_maximo,   
+            crin.prod_punto_minimo,   
+            crin.prod_cant_a_pedir,   
+            crin.prod_comision,   
+            crin.prod_descuento_maximo,   
+            crin.prod_descuento_siono,   
+            0,   //Existencia
+            0,   //Reserva
+            crin.prod_entrada_fecha,   
+            crin.prod_salida_fecha,   
+            crin.prod_ultima_salida_doc,   
+            crin.prod_observacion,   
+            crin.prod_cant_transito,   
+            crin.prod_reserva_trans,   
+            crin.prod_empaque_um,   
+            crin.prod_peso_unidad_medida,   
+            crin.prod_fecha_agotado,   
+            crin.prod_board,   
+            crin.prod_precio_venta_minimo,   
+            crin.prod_porcentaje_regalias,   
+            crin.prod_contrato_regalias,   
+            crin.prod_unidad_venta,   
+            crin.prod_clave_costo,
+				  crin.prod_costo_promedio,
+				  crin.prod_peso_neto,
+				  crin.prod_alto,
+				  crin.prod_ancho,
+				  crin.prod_largo,
+				  crin.prod_metros_cubicos,
+				  crin.prod_excluir_de_sugerido		
+       FROM inmprodu  crin 
+      WHERE ( crin.prod_g_financiero = :g_finan_prov ) AND  
+            ( crin.prod_empresa = :empresa_prov) AND 
+			   ( null =  (  SELECT sum(1)  FROM inmprodu  
+                         WHERE ( inmprodu.prod_g_financiero = :g_finan_dest ) AND  
+                               ( inmprodu.prod_empresa = :empresa_dest ) and 
+								      	inmprodu.prod_producto  = crin.prod_producto  ));
+											
+				str.frame.SetMicroHelp("Productos Incluidos " + string(sqlca.sqlnrows))
+				
+				if sqlca.sqlcode = -1 then
+					ls_error = sqlca.sqlerrtext
+					commit using sqlca;																
+					mensaje("(inmprodu3),Error al Incluir los Datos / Sin embargo el Proceso Continua",ls_error,"")
+				else
+					li_cant_prod = sqlca.sqlnrows
+					commit using sqlca;																
+					return li_cant_prod
+				end if				
+
+end function
+

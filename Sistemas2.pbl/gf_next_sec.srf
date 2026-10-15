@@ -1,0 +1,135 @@
+﻿global type gf_next_sec from function_object
+end type
+
+forward prototypes
+global subroutine gf_next_sec (ref string ass_secuencia, string ass_tipotransac)
+end prototypes
+
+global subroutine gf_next_sec (ref string ass_secuencia, string ass_tipotransac);string ls_sec_temp, ls_tipo
+long ll_ano, ll_linea, i
+integer li_existe
+
+string ls_tiempo
+
+  SELECT dgmserie.mser_secuencia,   
+         dgmserie.mser_anno  
+    INTO :ass_secuencia,   
+         :ll_ano
+    FROM dgmserie  
+   WHERE ( dgmserie.mser_g_financiero = :str.g_financiero ) AND  
+         ( dgmserie.mser_empresa = :str.empresa ) AND  
+         ( dgmserie.mser_tipo_transaccion = :ass_tipotransac );
+			
+ass_secuencia = string(integer(ass_secuencia) + 1)
+
+	SELECT max(tsec_linea )
+	  INTO :ll_linea
+    FROM dgtemsec  
+   WHERE ( dgtemsec.tsec_g_financiero = :str.g_financiero ) AND  
+         ( dgtemsec.tsec_empresa = :str.empresa ) AND  
+			( dgtemsec.tsec_aplicacion = :str.aplicacion) AND
+         ( dgtemsec.tsec_tipotransac = :ass_tipotransac );
+	
+If isNull(ll_linea) then ll_linea = 0
+	ll_linea ++
+
+ls_tiempo = string(gf_fecha_serv(), "ffff")
+
+For i = 1 to long(ls_tiempo)
+	
+	yield()
+	
+Next 
+
+
+	  INSERT INTO dgtemsec  
+         ( tsec_g_financiero,   
+           tsec_empresa,   
+           tsec_aplicacion,   
+           tsec_tipotransac,   
+           tsec_sec_alfnum,
+			  tsec_linea  )
+	  VALUES ( :str.g_financiero,   
+				  :str.empresa,   
+				  :str.aplicacion,   
+				  :ass_tipotransac,   
+				  :ass_secuencia,
+				  :ll_linea)  ;
+
+	
+If sqlca.sqlcode = -1 then
+		
+	DO
+		For i = 1 to long(ls_tiempo)
+			yield()
+		Next 
+	ass_secuencia = string(integer(ass_secuencia) + 1)
+	
+	
+	SELECT Count(*) 
+	  INTO :li_existe
+    FROM dgtemsec  
+   WHERE ( dgtemsec.tsec_g_financiero = :str.g_financiero ) AND  
+         ( dgtemsec.tsec_empresa = :str.empresa ) AND  
+			( dgtemsec.tsec_aplicacion = :str.aplicacion) AND
+         ( dgtemsec.tsec_tipotransac = :ass_tipotransac )   AND
+			( dgtemsec.tsec_sec_alfnum = :ass_secuencia);
+	
+	
+		
+	LOOP UNTIL li_existe = 0	
+	
+	
+	SELECT max(tsec_linea )
+	  INTO :ll_linea
+    FROM dgtemsec  
+   WHERE ( dgtemsec.tsec_g_financiero = :str.g_financiero ) AND  
+         ( dgtemsec.tsec_empresa = :str.empresa ) AND  
+			( dgtemsec.tsec_aplicacion = :str.aplicacion) AND
+         ( dgtemsec.tsec_tipotransac = :ass_tipotransac );
+		
+	ll_linea ++
+	
+	INSERT INTO dgtemsec  
+         ( tsec_g_financiero,   
+           tsec_empresa,   
+           tsec_aplicacion,   
+           tsec_tipotransac,   
+           tsec_sec_alfnum,   
+           tsec_linea)  
+  VALUES ( :str.g_financiero,   
+           :str.empresa,   
+           :str.aplicacion,   
+           :ass_tipotransac,   
+           :ass_secuencia,   
+           :ll_linea)  ;
+			  
+	If sqlca.sqlcode = -1 then
+		messagebox("ERROR",sqlca.sqlerrtext)
+		Rollback using sqlca;
+		ass_secuencia = ""
+		return
+	End If	
+	
+	
+//	return ass_secuencia
+	
+Else
+
+		
+If sqlca.sqlcode = -1 then
+	messagebox("ERROR",sqlca.sqlerrtext)
+	Rollback using sqlca;
+	ass_secuencia = ""
+	return
+End If
+
+//return ass_secuencia
+	
+End If
+
+
+//Commit using(sqlca);
+
+end subroutine
+

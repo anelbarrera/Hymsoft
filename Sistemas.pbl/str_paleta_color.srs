@@ -1,0 +1,12 @@
+﻿//objectcomments Contiene los colores del texto y fondo
+global type str_paleta_color from structure
+	long		color1
+	long		color2
+	long		color3
+	long		color4
+	long		color5
+	long		color6
+	long		color7
+	long		color8
+end type
+

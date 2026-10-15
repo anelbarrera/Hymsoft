@@ -1,0 +1,6 @@
+﻿global type str_in_entradas from structure
+	long		secuencia
+	integer		ann
+	string		concepto
+end type
+

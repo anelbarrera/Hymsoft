@@ -1,0 +1,28 @@
+﻿global type gf_dg_nom_empresa from function_object
+end type
+
+forward prototypes
+global function string gf_dg_nom_empresa (readonly integer g_financiero, readonly integer empresa)
+end prototypes
+
+global function string gf_dg_nom_empresa (readonly integer g_financiero, readonly integer empresa);/* retorna el nombre de la empresa que esta activa, 
+   se envia el numero del grupo financiero y de la empresa */
+ string ls_so,ls_co,ls_in
+  
+ SELECT dgmempre.empr_razon_social,   
+        dgmempre.empr_razon_comercial,   
+        dgmempre.empr_utiliza_nombre  
+    INTO :ls_so,
+	      :ls_co,
+			:ls_in           
+    FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :g_financiero ) AND 
+         ( dgmempre.empr_empresa = :empresa )   ;
+if ls_in = "S" then
+	Return(ls_so)
+else		 
+	Return(ls_co)	
+END if
+return ' '
+end function
+

@@ -1,0 +1,937 @@
+﻿//objectcomments Menu Principal de Facturacion (Menu de las Ventanas)
+forward
+global type m_fa_principal from m_fa_padre
+end type
+end forward
+
+global type m_fa_principal from m_fa_padre
+end type
+global m_fa_principal m_fa_principal
+
+forward prototypes
+public subroutine mf_set_menu (string tipo_serv_pro)
+end prototypes
+
+public subroutine mf_set_menu (string tipo_serv_pro);If not IsValid(m_fa_principal) Then 
+	w_fa_frame.changemenu(m_fa_principal)
+End If
+end subroutine
+
+on m_fa_principal.create
+m_fa_principal=this
+call super::create
+end on
+
+on m_fa_principal.destroy
+call super::destroy
+end on
+
+type m_archivo from m_fa_padre`m_archivo within m_fa_principal
+end type
+
+on m_archivo.create
+call super::create
+this.tag = "m_fa_principal.m_archivo"
+end on
+
+on m_archivo.destroy
+call super::destroy
+end on
+
+event m_archivo::clicked;call super::clicked;//
+
+end event
+
+type m_empresa from m_fa_padre`m_empresa within m_archivo
+end type
+
+on m_empresa.create
+call super::create
+this.tag = "m_fa_principal.m_archivo.m_empresa"
+end on
+
+on m_empresa.destroy
+call super::destroy
+end on
+
+type m_cerrar from m_fa_padre`m_cerrar within m_archivo
+end type
+
+event m_cerrar::clicked;call super::clicked;close(parentwindow)
+end event
+
+on m_cerrar.create
+call super::create
+this.tag = "m_fa_principal.m_archivo.m_cerrar"
+this.visible = true
+this.microhelp = "Cierra la Ventana"
+this.toolbaritemname = "custom009!"
+this.toolbaritemdownname = "RunSCC!"
+this.menuimage = "custom009!"
+this.menuanimation = true
+end on
+
+on m_cerrar.destroy
+call super::destroy
+end on
+
+type m_guardar from m_fa_padre`m_guardar within m_archivo
+end type
+
+on m_guardar.create
+call super::create
+this.tag = "m_fa_principal.m_archivo.m_guardar"
+this.visible = true
+this.enabled = true
+this.toolbaritemname = "save!"
+this.toolbaritemdownname = "Save!"
+this.toolbaritemspace = 2
+this.menuimage = "save!"
+this.menuanimation = true
+end on
+
+on m_guardar.destroy
+call super::destroy
+end on
+
+type m_guardarcomo from m_fa_padre`m_guardarcomo within m_archivo
+end type
+
+on m_guardarcomo.create
+call super::create
+this.visible = true
+this.enabled = true
+this.toolbaritemvisible = true
+this.menuimage = "saveas!"
+this.menuanimation = true
+end on
+
+on m_guardarcomo.destroy
+call super::destroy
+end on
+
+type m_- from m_fa_padre`m_- within m_archivo
+end type
+
+on m_-.create
+call super::create
+this.tag = "m_fa_principal.m_archivo.m_-"
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_vistapreliminar from m_fa_padre`m_vistapreliminar within m_archivo
+end type
+
+on m_vistapreliminar.create
+call super::create
+this.tag = "m_fa_principal.m_archivo.m_vistapreliminar"
+this.toolbaritemname = "preview!"
+this.menuimage = "preview!"
+end on
+
+on m_vistapreliminar.destroy
+call super::destroy
+end on
+
+type m_imprimir from m_fa_padre`m_imprimir within m_archivo
+end type
+
+on m_imprimir.create
+call super::create
+this.tag = "m_fa_principal.m_archivo.m_imprimir"
+this.visible = true
+this.enabled = true
+this.toolbaritemname = "print!"
+this.toolbaritemdownname = "Report!"
+this.toolbaritemorder = 6
+this.toolbaritemspace = 2
+this.menuimage = "print!"
+this.menuanimation = true
+end on
+
+on m_imprimir.destroy
+call super::destroy
+end on
+
+type m_reimprimir from m_fa_padre`m_reimprimir within m_archivo
+end type
+
+on m_reimprimir.create
+call super::create
+end on
+
+on m_reimprimir.destroy
+call super::destroy
+end on
+
+type m_-1 from m_fa_padre`m_-1 within m_archivo
+end type
+
+on m_-1.create
+call super::create
+this.tag = "m_fa_principal.m_archivo.m_-1"
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_salir from m_fa_padre`m_salir within m_archivo
+end type
+
+on m_salir.create
+call super::create
+this.tag = "m_fa_principal.m_archivo.m_salir //"
+this.toolbaritemname = ""
+this.toolbaritemorder = 1
+this.toolbaritemspace = 2
+this.menuimage = "Run!"
+this.menuanimation = true
+end on
+
+on m_salir.destroy
+call super::destroy
+end on
+
+type m_edicin from m_fa_padre`m_edicin within m_fa_principal
+end type
+
+on m_edicin.create
+call super::create
+this.tag = "m_fa_principal.m_edicin"
+this.visible = true
+this.enabled = true
+end on
+
+on m_edicin.destroy
+call super::destroy
+end on
+
+type m_adicionar from m_fa_padre`m_adicionar within m_edicin
+end type
+
+on m_adicionar.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_adicionar"
+this.microhelp = "Adiciona un Nuevo Registro"
+this.toolbaritemname = "retrieve5!"
+this.toolbaritemorder = 4
+this.toolbaritemspace = 1
+this.menuimage = "retrieve5!"
+this.menuanimation = true
+end on
+
+on m_adicionar.destroy
+call super::destroy
+end on
+
+type m_insertar from m_fa_padre`m_insertar within m_edicin
+end type
+
+on m_insertar.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_insertar"
+this.toolbaritemname = "insert5!"
+this.toolbaritemorder = 4
+end on
+
+on m_insertar.destroy
+call super::destroy
+end on
+
+type m_eliminar from m_fa_padre`m_eliminar within m_edicin
+end type
+
+on m_eliminar.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_eliminar"
+this.toolbaritemname = "custom094!"
+this.toolbaritemorder = 5
+this.menuimage = "custom094!"
+this.menuanimation = true
+end on
+
+on m_eliminar.destroy
+call super::destroy
+end on
+
+type m_-2 from m_fa_padre`m_-2 within m_edicin
+end type
+
+on m_-2.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_-2"
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from m_fa_padre`m_siguienteregistro within m_edicin
+end type
+
+on m_siguienteregistro.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_siguienteregistro"
+this.toolbaritemname = "vcrnext!"
+this.toolbaritemorder = 9
+this.menuimage = "vcrnext!"
+this.menuanimation = true
+end on
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from m_fa_padre`m_registroanterior within m_edicin
+end type
+
+on m_registroanterior.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_registroanterior"
+this.toolbaritemname = "vcrprior!"
+this.toolbaritemorder = 8
+this.menuimage = "vcrprior!"
+this.menuanimation = true
+end on
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_-3 from m_fa_padre`m_-3 within m_edicin
+end type
+
+on m_-3.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_-3"
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_primerregistro from m_fa_padre`m_primerregistro within m_edicin
+end type
+
+on m_primerregistro.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_primerregistro"
+this.toolbaritemname = "vcrfirst!"
+this.toolbaritemorder = 7
+this.toolbaritemspace = 1
+this.menuimage = "vcrfirst!"
+this.menuanimation = true
+end on
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from m_fa_padre`m_ultimoregistro within m_edicin
+end type
+
+on m_ultimoregistro.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_ultimoregistro"
+this.toolbaritemname = "vcrlast!"
+this.toolbaritemorder = 10
+this.menuimage = "vcrlast!"
+this.menuanimation = true
+end on
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-10 from m_fa_padre`m_-10 within m_edicin
+end type
+
+on m_-10.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_-10"
+end on
+
+on m_-10.destroy
+call super::destroy
+end on
+
+type m_filtrar from m_fa_padre`m_filtrar within m_edicin
+end type
+
+on m_filtrar.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_filtrar"
+this.visible = false
+this.toolbaritemname = "where!"
+this.toolbaritemorder = 11
+this.menuimage = "Where!"
+this.menuanimation = true
+end on
+
+on m_filtrar.destroy
+call super::destroy
+end on
+
+type m_sortear from m_fa_padre`m_sortear within m_edicin
+end type
+
+on m_sortear.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_sortear"
+this.toolbaritemname = "sort!"
+this.toolbaritemorder = 12
+this.menuimage = "Sort!"
+this.menuanimation = true
+end on
+
+on m_sortear.destroy
+call super::destroy
+end on
+
+type m_restaurar from m_fa_padre`m_restaurar within m_edicin
+end type
+
+on m_restaurar.create
+call super::create
+this.microhelp = "Restaurar Información desde la Última vez que se Guardó"
+this.toolbaritemtext = "Recuperar Información Guardada"
+end on
+
+on m_restaurar.destroy
+call super::destroy
+end on
+
+type m_-14 from m_fa_padre`m_-14 within m_edicin
+end type
+
+on m_-14.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_-14"
+end on
+
+on m_-14.destroy
+call super::destroy
+end on
+
+type m_herramientas from m_fa_padre`m_herramientas within m_edicin
+end type
+
+on m_herramientas.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas"
+end on
+
+on m_herramientas.destroy
+call super::destroy
+end on
+
+type m_copiar from m_fa_padre`m_copiar within m_herramientas
+end type
+
+on m_copiar.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_copiar"
+end on
+
+on m_copiar.destroy
+call super::destroy
+end on
+
+type m_deproforma from m_fa_padre`m_deproforma within m_copiar
+end type
+
+on m_deproforma.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_copiar.m_deproforma"
+end on
+
+on m_deproforma.destroy
+call super::destroy
+end on
+
+type m_depedido from m_fa_padre`m_depedido within m_copiar
+end type
+
+on m_depedido.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_copiar.m_depedido"
+end on
+
+on m_depedido.destroy
+call super::destroy
+end on
+
+type m_defactura from m_fa_padre`m_defactura within m_copiar
+end type
+
+on m_defactura.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_copiar.m_defactura"
+end on
+
+on m_defactura.destroy
+call super::destroy
+end on
+
+type m_liberarmercancia from m_fa_padre`m_liberarmercancia within m_herramientas
+end type
+
+on m_liberarmercancia.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_liberarmercancia"
+end on
+
+on m_liberarmercancia.destroy
+call super::destroy
+end on
+
+type m_reserva from m_fa_padre`m_reserva within m_herramientas
+end type
+
+on m_reserva.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_reserva"
+end on
+
+on m_reserva.destroy
+call super::destroy
+end on
+
+type m_-15 from m_fa_padre`m_-15 within m_herramientas
+end type
+
+on m_-15.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_-15"
+end on
+
+on m_-15.destroy
+call super::destroy
+end on
+
+type m_pasarapedido from m_fa_padre`m_pasarapedido within m_herramientas
+end type
+
+on m_pasarapedido.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_pasarapedido"
+end on
+
+on m_pasarapedido.destroy
+call super::destroy
+end on
+
+type m_pasarafactura from m_fa_padre`m_pasarafactura within m_herramientas
+end type
+
+on m_pasarafactura.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_herramientas.m_pasarafactura"
+end on
+
+on m_pasarafactura.destroy
+call super::destroy
+end on
+
+type m_-22 from m_fa_padre`m_-22 within m_edicin
+end type
+
+on m_-22.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_-22"
+end on
+
+on m_-22.destroy
+call super::destroy
+end on
+
+type m_verfoto from m_fa_padre`m_verfoto within m_edicin
+end type
+
+on m_verfoto.create
+call super::create
+this.tag = "m_fa_principal.m_edicin.m_verfoto"
+this.toolbaritemname = "picture5!"
+this.toolbaritemorder = 10
+this.toolbaritemspace = 1
+end on
+
+on m_verfoto.destroy
+call super::destroy
+end on
+
+type m_busqueda from m_fa_padre`m_busqueda within m_edicin
+end type
+
+on m_busqueda.create
+call super::create
+end on
+
+on m_busqueda.destroy
+call super::destroy
+end on
+
+type m_aprobarpedido from m_fa_padre`m_aprobarpedido within m_edicin
+end type
+
+on m_aprobarpedido.create
+call super::create
+end on
+
+on m_aprobarpedido.destroy
+call super::destroy
+end on
+
+type m_consolidar from m_fa_padre`m_consolidar within m_edicin
+end type
+
+on m_consolidar.create
+call super::create
+this.toolbaritemname = "copy!"
+this.toolbaritemdownname = "Copy!"
+this.menuanimation = true
+end on
+
+on m_consolidar.destroy
+call super::destroy
+end on
+
+type m_cambiarformato from m_fa_padre`m_cambiarformato within m_edicin
+end type
+
+on m_cambiarformato.create
+call super::create
+end on
+
+on m_cambiarformato.destroy
+call super::destroy
+end on
+
+type m_ventanas from m_fa_padre`m_ventanas within m_fa_principal
+end type
+
+on m_ventanas.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas"
+end on
+
+on m_ventanas.destroy
+call super::destroy
+end on
+
+type m_horizontal from m_fa_padre`m_horizontal within m_ventanas
+end type
+
+on m_horizontal.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_horizontal"
+end on
+
+on m_horizontal.destroy
+call super::destroy
+end on
+
+type m_vertical from m_fa_padre`m_vertical within m_ventanas
+end type
+
+on m_vertical.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_vertical"
+end on
+
+on m_vertical.destroy
+call super::destroy
+end on
+
+type m_pantallacompleta from m_fa_padre`m_pantallacompleta within m_ventanas
+end type
+
+on m_pantallacompleta.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_pantallacompleta"
+end on
+
+on m_pantallacompleta.destroy
+call super::destroy
+end on
+
+type m_cascada from m_fa_padre`m_cascada within m_ventanas
+end type
+
+on m_cascada.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_cascada"
+end on
+
+on m_cascada.destroy
+call super::destroy
+end on
+
+type m_-6 from m_fa_padre`m_-6 within m_ventanas
+end type
+
+on m_-6.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_-6"
+end on
+
+on m_-6.destroy
+call super::destroy
+end on
+
+type m_zoom from m_fa_padre`m_zoom within m_ventanas
+end type
+
+on m_zoom.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_zoom"
+end on
+
+on m_zoom.destroy
+call super::destroy
+end on
+
+type m_20% from m_fa_padre`m_20% within m_zoom
+end type
+
+on m_20%.create
+call super::create
+end on
+
+on m_20%.destroy
+call super::destroy
+end on
+
+type m_40% from m_fa_padre`m_40% within m_zoom
+end type
+
+on m_40%.create
+call super::create
+end on
+
+on m_40%.destroy
+call super::destroy
+end on
+
+type m_60% from m_fa_padre`m_60% within m_zoom
+end type
+
+on m_60%.create
+call super::create
+end on
+
+on m_60%.destroy
+call super::destroy
+end on
+
+type m_80% from m_fa_padre`m_80% within m_zoom
+end type
+
+on m_80%.create
+call super::create
+end on
+
+on m_80%.destroy
+call super::destroy
+end on
+
+type m_100% from m_fa_padre`m_100% within m_zoom
+end type
+
+on m_100%.create
+call super::create
+end on
+
+on m_100%.destroy
+call super::destroy
+end on
+
+type m_200% from m_fa_padre`m_200% within m_zoom
+end type
+
+on m_200%.create
+call super::create
+end on
+
+on m_200%.destroy
+call super::destroy
+end on
+
+type m_zoom2 from m_fa_padre`m_zoom2 within m_ventanas
+end type
+
+on m_zoom2.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_zoom2"
+end on
+
+on m_zoom2.destroy
+call super::destroy
+end on
+
+type m_zoom3 from m_fa_padre`m_zoom3 within m_ventanas
+end type
+
+on m_zoom3.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_zoom3"
+end on
+
+on m_zoom3.destroy
+call super::destroy
+end on
+
+type m_regla from m_fa_padre`m_regla within m_ventanas
+end type
+
+on m_regla.create
+call super::create
+this.tag = "m_fa_principal.m_ventanas.m_regla"
+this.visible = false
+this.toolbaritemvisible = false
+this.toolbaritemname = "horizontal!"
+end on
+
+on m_regla.destroy
+call super::destroy
+end on
+
+type m_ayuda from m_fa_padre`m_ayuda within m_fa_principal
+end type
+
+on m_ayuda.create
+call super::create
+this.tag = "m_fa_principal.m_ayuda//"
+this.toolbaritemorder = 12
+end on
+
+on m_ayuda.destroy
+call super::destroy
+end on
+
+type m_acercade from m_fa_padre`m_acercade within m_ayuda
+end type
+
+on m_acercade.create
+call super::create
+this.tag = "m_fa_padre.m_ayuda.m_acercadeharr //"
+end on
+
+on m_acercade.destroy
+call super::destroy
+end on
+
+type m_manualhymsoft from m_fa_padre`m_manualhymsoft within m_ayuda
+end type
+
+on m_manualhymsoft.create
+call super::create
+end on
+
+on m_manualhymsoft.destroy
+call super::destroy
+end on
+
+type m_prueba from m_fa_padre`m_prueba within m_ayuda
+end type
+
+on m_prueba.create
+call super::create
+end on
+
+on m_prueba.destroy
+call super::destroy
+end on
+
+type m_reserva0 from m_fa_padre`m_reserva0 within m_ayuda
+end type
+
+on m_reserva0.create
+call super::create
+end on
+
+on m_reserva0.destroy
+call super::destroy
+end on
+
+type m_actualizaocs from m_fa_padre`m_actualizaocs within m_ayuda
+end type
+
+on m_actualizaocs.create
+call super::create
+end on
+
+on m_actualizaocs.destroy
+call super::destroy
+end on
+
+type m_actualizatransitos from m_fa_padre`m_actualizatransitos within m_ayuda
+end type
+
+on m_actualizatransitos.create
+call super::create
+end on
+
+on m_actualizatransitos.destroy
+call super::destroy
+end on
+
+type m_fechadeentrada from m_fa_padre`m_fechadeentrada within m_ayuda
+end type
+
+on m_fechadeentrada.create
+call super::create
+end on
+
+on m_fechadeentrada.destroy
+call super::destroy
+end on
+
+type m_fechadesalida from m_fa_padre`m_fechadesalida within m_ayuda
+end type
+
+on m_fechadesalida.create
+call super::create
+end on
+
+on m_fechadesalida.destroy
+call super::destroy
+end on
+
+type m_asignaproveedor from m_fa_padre`m_asignaproveedor within m_ayuda
+end type
+
+on m_asignaproveedor.create
+call super::create
+end on
+
+on m_asignaproveedor.destroy
+call super::destroy
+end on
+
+type m_revfactura from m_fa_padre`m_revfactura within m_ayuda
+end type
+
+on m_revfactura.create
+call super::create
+end on
+
+on m_revfactura.destroy
+call super::destroy
+end on
+
+type m_pedidosvencidos from m_fa_padre`m_pedidosvencidos within m_ayuda
+end type
+
+on m_pedidosvencidos.create
+call super::create
+end on
+
+on m_pedidosvencidos.destroy
+call super::destroy
+end on
+

@@ -1,0 +1,24 @@
+﻿global type gf_fecha_ini_fecha_fin from function_object
+end type
+
+forward prototypes
+global subroutine gf_fecha_ini_fecha_fin (ref integer ai_mes, ref integer ai_anio, ref date ldt_fec_inicial, ref date ldt_fec_final)
+end prototypes
+
+global subroutine gf_fecha_ini_fecha_fin (ref integer ai_mes, ref integer ai_anio, ref date ldt_fec_inicial, ref date ldt_fec_final);// Retorna la fecha del primer dia del mes y el ultimo
+// H.Gómez 13/8/1999
+Date ldf_fecha,ldf_fecha1
+ldf_fecha = date("01/" +String (ai_mes)+ "/" + String (ai_anio))
+ldf_fecha1 = ldf_fecha
+
+do while month(ldf_fecha) = month(ldf_fecha1)
+	ldf_fecha = relativeDate(ldf_fecha,1)
+loop
+
+ldf_fecha = relativeDate(ldf_fecha,-1)
+ldt_fec_inicial = date("01/" +String (month (ldf_fecha1))+ "/" + String (Year(ldf_fecha1)))
+
+ldt_fec_final 	 = ldf_fecha
+
+end subroutine
+

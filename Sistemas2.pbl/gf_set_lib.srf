@@ -1,0 +1,21 @@
+﻿global type gf_set_lib from function_object
+end type
+
+forward prototypes
+global subroutine gf_set_lib (string as_aplica)
+end prototypes
+
+global subroutine gf_set_lib (string as_aplica);
+//  String ls_aplica
+//  
+//  SELECT dgmaplica.apli_librerias  
+//    INTO :ls_aplica
+//    FROM dgmaplica  
+//   WHERE dgmaplica.apli_aplicacion = :as_aplica   ;
+//	
+//	Harr2000.SetLibraryList(ls_aplica)
+//	
+//
+//
+end subroutine
+

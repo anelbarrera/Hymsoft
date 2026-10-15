@@ -1,0 +1,2890 @@
+﻿//objectcomments Menú especial para la ventana de parámetros de clientes
+forward
+global type m_cc_principal_listados from m_cc_principal
+end type
+end forward
+
+global type m_cc_principal_listados from m_cc_principal
+end type
+global m_cc_principal_listados m_cc_principal_listados
+
+on m_cc_principal_listados.create
+m_cc_principal_listados=this
+call super::create
+this.text = "m_cc_principal_listados"
+end on
+
+on m_cc_principal_listados.destroy
+call super::destroy
+end on
+
+type m_archivo from m_cc_principal`m_archivo within m_cc_principal_listados
+end type
+
+on m_archivo.create
+call super::create
+end on
+
+on m_archivo.destroy
+call super::destroy
+end on
+
+event m_archivo::clicked;call super::clicked;//
+end event
+
+type m_cerrar from m_cc_principal`m_cerrar within m_archivo
+end type
+
+on m_cerrar.create
+call super::create
+end on
+
+on m_cerrar.destroy
+call super::destroy
+end on
+
+type m_guardar from m_cc_principal`m_guardar within m_archivo
+end type
+
+on m_guardar.create
+call super::create
+end on
+
+on m_guardar.destroy
+call super::destroy
+end on
+
+type m_-5 from m_cc_principal`m_-5 within m_archivo
+end type
+
+on m_-5.create
+call super::create
+end on
+
+on m_-5.destroy
+call super::destroy
+end on
+
+type m_empresa from m_cc_principal`m_empresa within m_archivo
+end type
+
+on m_empresa.create
+call super::create
+end on
+
+on m_empresa.destroy
+call super::destroy
+end on
+
+type m_1 from m_cc_principal`m_1 within m_archivo
+end type
+
+on m_1.create
+call super::create
+this.toolbaritemname = "preview!"
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_imprimir from m_cc_principal`m_imprimir within m_archivo
+end type
+
+on m_imprimir.create
+call super::create
+end on
+
+on m_imprimir.destroy
+call super::destroy
+end on
+
+type m_-7 from m_cc_principal`m_-7 within m_archivo
+end type
+
+on m_-7.create
+call super::create
+end on
+
+on m_-7.destroy
+call super::destroy
+end on
+
+type m_salir from m_cc_principal`m_salir within m_archivo
+end type
+
+on m_salir.create
+call super::create
+end on
+
+on m_salir.destroy
+call super::destroy
+end on
+
+type m_saveas from m_cc_principal`m_saveas within m_archivo
+end type
+
+on m_saveas.create
+call super::create
+this.toolbaritemname = "saveas!"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_saveas.destroy
+call super::destroy
+end on
+
+type m_edicin from m_cc_principal`m_edicin within m_cc_principal_listados
+end type
+
+on m_edicin.create
+call super::create
+end on
+
+on m_edicin.destroy
+call super::destroy
+end on
+
+type m_adicionar from m_cc_principal`m_adicionar within m_edicin
+end type
+
+on m_adicionar.create
+call super::create
+this.visible = false
+this.enabled = false
+this.toolbaritemvisible = false
+end on
+
+on m_adicionar.destroy
+call super::destroy
+end on
+
+type m_insertar from m_cc_principal`m_insertar within m_edicin
+end type
+
+on m_insertar.create
+call super::create
+this.visible = false
+this.enabled = false
+this.toolbaritemvisible = false
+end on
+
+on m_insertar.destroy
+call super::destroy
+end on
+
+type m_eliminar from m_cc_principal`m_eliminar within m_edicin
+end type
+
+on m_eliminar.create
+call super::create
+this.visible = false
+this.enabled = false
+this.toolbaritemvisible = false
+end on
+
+on m_eliminar.destroy
+call super::destroy
+end on
+
+type m_cancelar from m_cc_principal`m_cancelar within m_edicin
+end type
+
+on m_cancelar.create
+call super::create
+end on
+
+on m_cancelar.destroy
+call super::destroy
+end on
+
+type m_recuperar from m_cc_principal`m_recuperar within m_edicin
+end type
+
+on m_recuperar.create
+call super::create
+end on
+
+on m_recuperar.destroy
+call super::destroy
+end on
+
+type m_-6 from m_cc_principal`m_-6 within m_edicin
+end type
+
+on m_-6.create
+call super::create
+end on
+
+on m_-6.destroy
+call super::destroy
+end on
+
+type m_primerregistro from m_cc_principal`m_primerregistro within m_edicin
+end type
+
+on m_primerregistro.create
+call super::create
+end on
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from m_cc_principal`m_registroanterior within m_edicin
+end type
+
+on m_registroanterior.create
+call super::create
+end on
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from m_cc_principal`m_siguienteregistro within m_edicin
+end type
+
+on m_siguienteregistro.create
+call super::create
+end on
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from m_cc_principal`m_ultimoregistro within m_edicin
+end type
+
+on m_ultimoregistro.create
+call super::create
+end on
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-8 from m_cc_principal`m_-8 within m_edicin
+end type
+
+on m_-8.create
+call super::create
+end on
+
+on m_-8.destroy
+call super::destroy
+end on
+
+type m_filtrar from m_cc_principal`m_filtrar within m_edicin
+end type
+
+on m_filtrar.create
+call super::create
+end on
+
+on m_filtrar.destroy
+call super::destroy
+end on
+
+type m_sortear from m_cc_principal`m_sortear within m_edicin
+end type
+
+on m_sortear.create
+call super::create
+end on
+
+on m_sortear.destroy
+call super::destroy
+end on
+
+type m_busqueda from m_cc_principal`m_busqueda within m_edicin
+end type
+
+on m_busqueda.create
+call super::create
+end on
+
+on m_busqueda.destroy
+call super::destroy
+end on
+
+type m_parmetros from m_cc_principal`m_parmetros within m_cc_principal_listados
+end type
+
+on m_parmetros.create
+call super::create
+this.visible = false
+this.enabled = false
+end on
+
+on m_parmetros.destroy
+call super::destroy
+end on
+
+type m_cliente from m_cc_principal`m_cliente within m_parmetros
+end type
+
+on m_cliente.create
+call super::create
+end on
+
+on m_cliente.destroy
+call super::destroy
+end on
+
+type m_mantenimientos1 from m_cc_principal`m_mantenimientos1 within m_cliente
+end type
+
+on m_mantenimientos1.create
+call super::create
+end on
+
+on m_mantenimientos1.destroy
+call super::destroy
+end on
+
+type m_cambiar_cuenta from m_cc_principal`m_cambiar_cuenta within m_cliente
+end type
+
+on m_cambiar_cuenta.create
+call super::create
+end on
+
+on m_cambiar_cuenta.destroy
+call super::destroy
+end on
+
+type m_tiposdeclientes1 from m_cc_principal`m_tiposdeclientes1 within m_cliente
+end type
+
+on m_tiposdeclientes1.create
+call super::create
+end on
+
+on m_tiposdeclientes1.destroy
+call super::destroy
+end on
+
+type m_vendedores from m_cc_principal`m_vendedores within m_cliente
+end type
+
+on m_vendedores.create
+call super::create
+end on
+
+on m_vendedores.destroy
+call super::destroy
+end on
+
+type m_plazas from m_cc_principal`m_plazas within m_cliente
+end type
+
+on m_plazas.create
+call super::create
+end on
+
+on m_plazas.destroy
+call super::destroy
+end on
+
+type m_clientesconsolidados from m_cc_principal`m_clientesconsolidados within m_cliente
+end type
+
+on m_clientesconsolidados.create
+call super::create
+end on
+
+on m_clientesconsolidados.destroy
+call super::destroy
+end on
+
+type m_proyectos from m_cc_principal`m_proyectos within m_cliente
+end type
+
+on m_proyectos.create
+call super::create
+end on
+
+on m_proyectos.destroy
+call super::destroy
+end on
+
+type m_facturaciondeservicios from m_cc_principal`m_facturaciondeservicios within m_parmetros
+end type
+
+on m_facturaciondeservicios.create
+call super::create
+end on
+
+on m_facturaciondeservicios.destroy
+call super::destroy
+end on
+
+type m_informdecaja from m_cc_principal`m_informdecaja within m_parmetros
+end type
+
+on m_informdecaja.create
+call super::create
+end on
+
+on m_informdecaja.destroy
+call super::destroy
+end on
+
+type m_autorizaciones from m_cc_principal`m_autorizaciones within m_informdecaja
+end type
+
+on m_autorizaciones.create
+call super::create
+end on
+
+on m_autorizaciones.destroy
+call super::destroy
+end on
+
+type m_transacciones4 from m_cc_principal`m_transacciones4 within m_informdecaja
+end type
+
+on m_transacciones4.create
+call super::create
+end on
+
+on m_transacciones4.destroy
+call super::destroy
+end on
+
+type m_sistema from m_cc_principal`m_sistema within m_parmetros
+end type
+
+on m_sistema.create
+call super::create
+end on
+
+on m_sistema.destroy
+call super::destroy
+end on
+
+type m_transaccionesysecuencias from m_cc_principal`m_transaccionesysecuencias within m_sistema
+end type
+
+on m_transaccionesysecuencias.create
+call super::create
+end on
+
+on m_transaccionesysecuencias.destroy
+call super::destroy
+end on
+
+type m_configurartarjetasdecredito from m_cc_principal`m_configurartarjetasdecredito within m_sistema
+end type
+
+on m_configurartarjetasdecredito.create
+call super::create
+end on
+
+on m_configurartarjetasdecredito.destroy
+call super::destroy
+end on
+
+type m_tiposyformasdecobro from m_cc_principal`m_tiposyformasdecobro within m_sistema
+end type
+
+on m_tiposyformasdecobro.create
+call super::create
+end on
+
+on m_tiposyformasdecobro.destroy
+call super::destroy
+end on
+
+type m_conciliacindetarjetas1 from m_cc_principal`m_conciliacindetarjetas1 within m_sistema
+end type
+
+on m_conciliacindetarjetas1.create
+call super::create
+end on
+
+on m_conciliacindetarjetas1.destroy
+call super::destroy
+end on
+
+type m_antiguedaddesaldos1 from m_cc_principal`m_antiguedaddesaldos1 within m_sistema
+end type
+
+on m_antiguedaddesaldos1.create
+call super::create
+end on
+
+on m_antiguedaddesaldos1.destroy
+call super::destroy
+end on
+
+type m_antiguedaddesaldosdinamica from m_cc_principal`m_antiguedaddesaldosdinamica within m_sistema
+end type
+
+on m_antiguedaddesaldosdinamica.create
+call super::create
+end on
+
+on m_antiguedaddesaldosdinamica.destroy
+call super::destroy
+end on
+
+type m_tiposdeantiguedad from m_cc_principal`m_tiposdeantiguedad within m_antiguedaddesaldosdinamica
+end type
+
+on m_tiposdeantiguedad.create
+call super::create
+end on
+
+on m_tiposdeantiguedad.destroy
+call super::destroy
+end on
+
+type m_antiguedaddinamica from m_cc_principal`m_antiguedaddinamica within m_antiguedaddesaldosdinamica
+end type
+
+on m_antiguedaddinamica.create
+call super::create
+end on
+
+on m_antiguedaddinamica.destroy
+call super::destroy
+end on
+
+type m_informes from m_cc_principal`m_informes within m_sistema
+end type
+
+on m_informes.create
+call super::create
+end on
+
+on m_informes.destroy
+call super::destroy
+end on
+
+type m_logos from m_cc_principal`m_logos within m_sistema
+end type
+
+on m_logos.create
+call super::create
+end on
+
+on m_logos.destroy
+call super::destroy
+end on
+
+type m_formatos from m_cc_principal`m_formatos within m_parmetros
+end type
+
+on m_formatos.create
+call super::create
+end on
+
+on m_formatos.destroy
+call super::destroy
+end on
+
+type m_recibos from m_cc_principal`m_recibos within m_formatos
+end type
+
+on m_recibos.create
+call super::create
+end on
+
+on m_recibos.destroy
+call super::destroy
+end on
+
+type m_notasdecrdito from m_cc_principal`m_notasdecrdito within m_formatos
+end type
+
+on m_notasdecrdito.create
+call super::create
+end on
+
+on m_notasdecrdito.destroy
+call super::destroy
+end on
+
+type m_facturas2 from m_cc_principal`m_facturas2 within m_formatos
+end type
+
+on m_facturas2.create
+call super::create
+end on
+
+on m_facturas2.destroy
+call super::destroy
+end on
+
+type m_formato from m_cc_principal`m_formato within m_formatos
+end type
+
+on m_formato.create
+call super::create
+end on
+
+on m_formato.destroy
+call super::destroy
+end on
+
+type m_modelosdeimpresoras from m_cc_principal`m_modelosdeimpresoras within m_parmetros
+end type
+
+on m_modelosdeimpresoras.create
+call super::create
+end on
+
+on m_modelosdeimpresoras.destroy
+call super::destroy
+end on
+
+type m_recibos1 from m_cc_principal`m_recibos1 within m_modelosdeimpresoras
+end type
+
+on m_recibos1.create
+call super::create
+end on
+
+on m_recibos1.destroy
+call super::destroy
+end on
+
+type m_notascrnotasdr from m_cc_principal`m_notascrnotasdr within m_modelosdeimpresoras
+end type
+
+on m_notascrnotasdr.create
+call super::create
+end on
+
+on m_notascrnotasdr.destroy
+call super::destroy
+end on
+
+type m_facturas3 from m_cc_principal`m_facturas3 within m_modelosdeimpresoras
+end type
+
+on m_facturas3.create
+call super::create
+end on
+
+on m_facturas3.destroy
+call super::destroy
+end on
+
+type m_configuraciónasientoscontables from m_cc_principal`m_configuraciónasientoscontables within m_parmetros
+end type
+
+on m_configuraciónasientoscontables.create
+call super::create
+end on
+
+on m_configuraciónasientoscontables.destroy
+call super::destroy
+end on
+
+type m_listados from m_cc_principal`m_listados within m_cc_principal_listados
+end type
+
+on m_listados.create
+call super::create
+this.visible = false
+this.enabled = false
+end on
+
+on m_listados.destroy
+call super::destroy
+end on
+
+type m_clientes2 from m_cc_principal`m_clientes2 within m_listados
+end type
+
+on m_clientes2.create
+call super::create
+end on
+
+on m_clientes2.destroy
+call super::destroy
+end on
+
+type m_clientes1 from m_cc_principal`m_clientes1 within m_clientes2
+end type
+
+on m_clientes1.create
+call super::create
+end on
+
+on m_clientes1.destroy
+call super::destroy
+end on
+
+type m_clientesportipo from m_cc_principal`m_clientesportipo within m_clientes2
+end type
+
+on m_clientesportipo.create
+call super::create
+end on
+
+on m_clientesportipo.destroy
+call super::destroy
+end on
+
+type m_clientesporvendedor1 from m_cc_principal`m_clientesporvendedor1 within m_clientes2
+end type
+
+on m_clientesporvendedor1.create
+call super::create
+end on
+
+on m_clientesporvendedor1.destroy
+call super::destroy
+end on
+
+type m_clientesporpaisyregion from m_cc_principal`m_clientesporpaisyregion within m_clientes2
+end type
+
+on m_clientesporpaisyregion.create
+call super::create
+end on
+
+on m_clientesporpaisyregion.destroy
+call super::destroy
+end on
+
+type m_clientesporsocio from m_cc_principal`m_clientesporsocio within m_clientes2
+end type
+
+on m_clientesporsocio.create
+call super::create
+end on
+
+on m_clientesporsocio.destroy
+call super::destroy
+end on
+
+type m_clientesporauditor from m_cc_principal`m_clientesporauditor within m_clientes2
+end type
+
+on m_clientesporauditor.create
+call super::create
+end on
+
+on m_clientesporauditor.destroy
+call super::destroy
+end on
+
+type m_tiposdeclientes from m_cc_principal`m_tiposdeclientes within m_clientes2
+end type
+
+on m_tiposdeclientes.create
+call super::create
+end on
+
+on m_tiposdeclientes.destroy
+call super::destroy
+end on
+
+type m_saldosiniciales1 from m_cc_principal`m_saldosiniciales1 within m_clientes2
+end type
+
+on m_saldosiniciales1.create
+call super::create
+end on
+
+on m_saldosiniciales1.destroy
+call super::destroy
+end on
+
+type m_datosgenerales1 from m_cc_principal`m_datosgenerales1 within m_clientes2
+end type
+
+on m_datosgenerales1.create
+call super::create
+end on
+
+on m_datosgenerales1.destroy
+call super::destroy
+end on
+
+type m_resumendatosgenerales from m_cc_principal`m_resumendatosgenerales within m_clientes2
+end type
+
+on m_resumendatosgenerales.create
+call super::create
+end on
+
+on m_resumendatosgenerales.destroy
+call super::destroy
+end on
+
+type m_codificadordepas from m_cc_principal`m_codificadordepas within m_clientes2
+end type
+
+on m_codificadordepas.create
+call super::create
+end on
+
+on m_codificadordepas.destroy
+call super::destroy
+end on
+
+type m_codificadordeclientesporpas from m_cc_principal`m_codificadordeclientesporpas within m_clientes2
+end type
+
+on m_codificadordeclientesporpas.create
+call super::create
+end on
+
+on m_codificadordeclientesporpas.destroy
+call super::destroy
+end on
+
+type m_capturasdetarjetas from m_cc_principal`m_capturasdetarjetas within m_clientes2
+end type
+
+on m_capturasdetarjetas.create
+call super::create
+end on
+
+on m_capturasdetarjetas.destroy
+call super::destroy
+end on
+
+type m_transacciones2 from m_cc_principal`m_transacciones2 within m_listados
+end type
+
+on m_transacciones2.create
+call super::create
+end on
+
+on m_transacciones2.destroy
+call super::destroy
+end on
+
+type m_mantenimientos from m_cc_principal`m_mantenimientos within m_transacciones2
+end type
+
+on m_mantenimientos.create
+call super::create
+end on
+
+on m_mantenimientos.destroy
+call super::destroy
+end on
+
+type m_mantenimientodeservicioscosto from m_cc_principal`m_mantenimientodeservicioscosto within m_transacciones2
+end type
+
+on m_mantenimientodeservicioscosto.create
+call super::create
+end on
+
+on m_mantenimientodeservicioscosto.destroy
+call super::destroy
+end on
+
+type m_facturasporgenerar from m_cc_principal`m_facturasporgenerar within m_transacciones2
+end type
+
+on m_facturasporgenerar.create
+call super::create
+end on
+
+on m_facturasporgenerar.destroy
+call super::destroy
+end on
+
+type m_cargosgenerados from m_cc_principal`m_cargosgenerados within m_transacciones2
+end type
+
+on m_cargosgenerados.create
+call super::create
+end on
+
+on m_cargosgenerados.destroy
+call super::destroy
+end on
+
+type m_tipodeproveedores from m_cc_principal`m_tipodeproveedores within m_transacciones2
+end type
+
+on m_tipodeproveedores.create
+call super::create
+end on
+
+on m_tipodeproveedores.destroy
+call super::destroy
+end on
+
+type m_mantenimientodeservicios from m_cc_principal`m_mantenimientodeservicios within m_transacciones2
+end type
+
+on m_mantenimientodeservicios.create
+call super::create
+end on
+
+on m_mantenimientodeservicios.destroy
+call super::destroy
+end on
+
+type m_otros1 from m_cc_principal`m_otros1 within m_listados
+end type
+
+on m_otros1.create
+call super::create
+end on
+
+on m_otros1.destroy
+call super::destroy
+end on
+
+type m_costosporclasedevendedor from m_cc_principal`m_costosporclasedevendedor within m_otros1
+end type
+
+on m_costosporclasedevendedor.create
+call super::create
+end on
+
+on m_costosporclasedevendedor.destroy
+call super::destroy
+end on
+
+type m_tiposyformasdecobro1 from m_cc_principal`m_tiposyformasdecobro1 within m_otros1
+end type
+
+on m_tiposyformasdecobro1.create
+call super::create
+end on
+
+on m_tiposyformasdecobro1.destroy
+call super::destroy
+end on
+
+type m_antigedaddesaldos from m_cc_principal`m_antigedaddesaldos within m_otros1
+end type
+
+on m_antigedaddesaldos.create
+call super::create
+end on
+
+on m_antigedaddesaldos.destroy
+call super::destroy
+end on
+
+type m_tarjetas1 from m_cc_principal`m_tarjetas1 within m_otros1
+end type
+
+on m_tarjetas1.create
+call super::create
+end on
+
+on m_tarjetas1.destroy
+call super::destroy
+end on
+
+type m_capturas1 from m_cc_principal`m_capturas1 within m_cc_principal_listados
+end type
+
+on m_capturas1.create
+call super::create
+this.visible = false
+this.enabled = false
+end on
+
+on m_capturas1.destroy
+call super::destroy
+end on
+
+type m_documentospost-fechados2 from m_cc_principal`m_documentospost-fechados2 within m_capturas1
+end type
+
+on m_documentospost-fechados2.create
+call super::create
+end on
+
+on m_documentospost-fechados2.destroy
+call super::destroy
+end on
+
+type m_transaccioneshistóricas from m_cc_principal`m_transaccioneshistóricas within m_capturas1
+end type
+
+on m_transaccioneshistóricas.create
+call super::create
+end on
+
+on m_transaccioneshistóricas.destroy
+call super::destroy
+end on
+
+type m_facturas from m_cc_principal`m_facturas within m_capturas1
+end type
+
+on m_facturas.create
+call super::create
+end on
+
+on m_facturas.destroy
+call super::destroy
+end on
+
+type m_facturadeserviciosautómatica from m_cc_principal`m_facturadeserviciosautómatica within m_capturas1
+end type
+
+on m_facturadeserviciosautómatica.create
+call super::create
+end on
+
+on m_facturadeserviciosautómatica.destroy
+call super::destroy
+end on
+
+type m_recibosdecobro from m_cc_principal`m_recibosdecobro within m_capturas1
+end type
+
+on m_recibosdecobro.create
+call super::create
+end on
+
+on m_recibosdecobro.destroy
+call super::destroy
+end on
+
+type m_recibodecobromúltiple from m_cc_principal`m_recibodecobromúltiple within m_capturas1
+end type
+
+on m_recibodecobromúltiple.create
+call super::create
+end on
+
+on m_recibodecobromúltiple.destroy
+call super::destroy
+end on
+
+type m_depsitos from m_cc_principal`m_depsitos within m_capturas1
+end type
+
+on m_depsitos.create
+call super::create
+end on
+
+on m_depsitos.destroy
+call super::destroy
+end on
+
+type m_capturadetarjetas from m_cc_principal`m_capturadetarjetas within m_capturas1
+end type
+
+on m_capturadetarjetas.create
+call super::create
+end on
+
+on m_capturadetarjetas.destroy
+call super::destroy
+end on
+
+type m_s from m_cc_principal`m_s within m_capturadetarjetas
+end type
+
+on m_s.create
+call super::create
+end on
+
+on m_s.destroy
+call super::destroy
+end on
+
+type m_global from m_cc_principal`m_global within m_capturadetarjetas
+end type
+
+on m_global.create
+call super::create
+end on
+
+on m_global.destroy
+call super::destroy
+end on
+
+type m_saldosiniciales from m_cc_principal`m_saldosiniciales within m_capturas1
+end type
+
+on m_saldosiniciales.create
+call super::create
+end on
+
+on m_saldosiniciales.destroy
+call super::destroy
+end on
+
+type m_saldoinicialdecaja from m_cc_principal`m_saldoinicialdecaja within m_capturas1
+end type
+
+on m_saldoinicialdecaja.create
+call super::create
+end on
+
+on m_saldoinicialdecaja.destroy
+call super::destroy
+end on
+
+type m_justificasaldoinicial from m_cc_principal`m_justificasaldoinicial within m_saldoinicialdecaja
+end type
+
+on m_justificasaldoinicial.create
+call super::create
+end on
+
+on m_justificasaldoinicial.destroy
+call super::destroy
+end on
+
+type m_capturadetrans-saldoinicial from m_cc_principal`m_capturadetrans-saldoinicial within m_saldoinicialdecaja
+end type
+
+on m_capturadetrans-saldoinicial.create
+call super::create
+end on
+
+on m_capturadetrans-saldoinicial.destroy
+call super::destroy
+end on
+
+type m_proyeccióndeventas from m_cc_principal`m_proyeccióndeventas within m_capturas1
+end type
+
+on m_proyeccióndeventas.create
+call super::create
+end on
+
+on m_proyeccióndeventas.destroy
+call super::destroy
+end on
+
+type m_consultas from m_cc_principal`m_consultas within m_cc_principal_listados
+end type
+
+on m_consultas.create
+call super::create
+this.visible = false
+this.enabled = false
+end on
+
+on m_consultas.destroy
+call super::destroy
+end on
+
+type m_clientes from m_cc_principal`m_clientes within m_consultas
+end type
+
+on m_clientes.create
+call super::create
+end on
+
+on m_clientes.destroy
+call super::destroy
+end on
+
+type m_datosgenerales from m_cc_principal`m_datosgenerales within m_clientes
+end type
+
+on m_datosgenerales.create
+call super::create
+end on
+
+on m_datosgenerales.destroy
+call super::destroy
+end on
+
+type m_transacciones from m_cc_principal`m_transacciones within m_clientes
+end type
+
+on m_transacciones.create
+call super::create
+end on
+
+on m_transacciones.destroy
+call super::destroy
+end on
+
+type m_movimientos1 from m_cc_principal`m_movimientos1 within m_clientes
+end type
+
+on m_movimientos1.create
+call super::create
+end on
+
+on m_movimientos1.destroy
+call super::destroy
+end on
+
+type m_saldoalafecha from m_cc_principal`m_saldoalafecha within m_clientes
+end type
+
+on m_saldoalafecha.create
+call super::create
+end on
+
+on m_saldoalafecha.destroy
+call super::destroy
+end on
+
+type m_especfica from m_cc_principal`m_especfica within m_clientes
+end type
+
+on m_especfica.create
+call super::create
+end on
+
+on m_especfica.destroy
+call super::destroy
+end on
+
+type m_estadistica from m_cc_principal`m_estadistica within m_clientes
+end type
+
+on m_estadistica.create
+call super::create
+end on
+
+on m_estadistica.destroy
+call super::destroy
+end on
+
+type m_-1 from m_cc_principal`m_-1 within m_consultas
+end type
+
+on m_-1.create
+call super::create
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_transacciones1 from m_cc_principal`m_transacciones1 within m_consultas
+end type
+
+on m_transacciones1.create
+call super::create
+end on
+
+on m_transacciones1.destroy
+call super::destroy
+end on
+
+type m_facturas1 from m_cc_principal`m_facturas1 within m_transacciones1
+end type
+
+on m_facturas1.create
+call super::create
+end on
+
+on m_facturas1.destroy
+call super::destroy
+end on
+
+type m_depositos from m_cc_principal`m_depositos within m_transacciones1
+end type
+
+on m_depositos.create
+call super::create
+end on
+
+on m_depositos.destroy
+call super::destroy
+end on
+
+type m_recibosdecobro2 from m_cc_principal`m_recibosdecobro2 within m_transacciones1
+end type
+
+on m_recibosdecobro2.create
+call super::create
+end on
+
+on m_recibosdecobro2.destroy
+call super::destroy
+end on
+
+type m_recibosdecobrosporregional from m_cc_principal`m_recibosdecobrosporregional within m_transacciones1
+end type
+
+on m_recibosdecobrosporregional.create
+call super::create
+end on
+
+on m_recibosdecobrosporregional.destroy
+call super::destroy
+end on
+
+type m_recibosdecobroformasdecobro from m_cc_principal`m_recibosdecobroformasdecobro within m_transacciones1
+end type
+
+on m_recibosdecobroformasdecobro.create
+call super::create
+end on
+
+on m_recibosdecobroformasdecobro.destroy
+call super::destroy
+end on
+
+type m_documentospost-fechados from m_cc_principal`m_documentospost-fechados within m_transacciones1
+end type
+
+on m_documentospost-fechados.create
+call super::create
+end on
+
+on m_documentospost-fechados.destroy
+call super::destroy
+end on
+
+type m_todas1 from m_cc_principal`m_todas1 within m_transacciones1
+end type
+
+on m_todas1.create
+call super::create
+end on
+
+on m_todas1.destroy
+call super::destroy
+end on
+
+type m_desglose-recibodecobroelbros from m_cc_principal`m_desglose-recibodecobroelbros within m_transacciones1
+end type
+
+on m_desglose-recibodecobroelbros.create
+call super::create
+end on
+
+on m_desglose-recibodecobroelbros.destroy
+call super::destroy
+end on
+
+type m_-10 from m_cc_principal`m_-10 within m_consultas
+end type
+
+on m_-10.create
+call super::create
+end on
+
+on m_-10.destroy
+call super::destroy
+end on
+
+type m_informedecajadiaria from m_cc_principal`m_informedecajadiaria within m_consultas
+end type
+
+on m_informedecajadiaria.create
+call super::create
+end on
+
+on m_informedecajadiaria.destroy
+call super::destroy
+end on
+
+type m_porempresa1 from m_cc_principal`m_porempresa1 within m_informedecajadiaria
+end type
+
+on m_porempresa1.create
+call super::create
+end on
+
+on m_porempresa1.destroy
+call super::destroy
+end on
+
+type m_consolidado1 from m_cc_principal`m_consolidado1 within m_informedecajadiaria
+end type
+
+on m_consolidado1.create
+call super::create
+end on
+
+on m_consolidado1.destroy
+call super::destroy
+end on
+
+type m_otrasconsultas from m_cc_principal`m_otrasconsultas within m_consultas
+end type
+
+on m_otrasconsultas.create
+call super::create
+end on
+
+on m_otrasconsultas.destroy
+call super::destroy
+end on
+
+type m_transaccionespendientes from m_cc_principal`m_transaccionespendientes within m_otrasconsultas
+end type
+
+on m_transaccionespendientes.create
+call super::create
+end on
+
+on m_transaccionespendientes.destroy
+call super::destroy
+end on
+
+type m_enlaceconcontabilidad from m_cc_principal`m_enlaceconcontabilidad within m_otrasconsultas
+end type
+
+on m_enlaceconcontabilidad.create
+call super::create
+end on
+
+on m_enlaceconcontabilidad.destroy
+call super::destroy
+end on
+
+type m_historialdetarjetas from m_cc_principal`m_historialdetarjetas within m_otrasconsultas
+end type
+
+on m_historialdetarjetas.create
+call super::create
+end on
+
+on m_historialdetarjetas.destroy
+call super::destroy
+end on
+
+type m_calendariodepago from m_cc_principal`m_calendariodepago within m_otrasconsultas
+end type
+
+on m_calendariodepago.create
+call super::create
+end on
+
+on m_calendariodepago.destroy
+call super::destroy
+end on
+
+type m_reportes from m_cc_principal`m_reportes within m_cc_principal_listados
+end type
+
+on m_reportes.create
+call super::create
+this.visible = false
+this.enabled = false
+end on
+
+on m_reportes.destroy
+call super::destroy
+end on
+
+type m_declientes from m_cc_principal`m_declientes within m_reportes
+end type
+
+on m_declientes.create
+call super::create
+end on
+
+on m_declientes.destroy
+call super::destroy
+end on
+
+type m_estadodecuenta1 from m_cc_principal`m_estadodecuenta1 within m_declientes
+end type
+
+on m_estadodecuenta1.create
+call super::create
+end on
+
+on m_estadodecuenta1.destroy
+call super::destroy
+end on
+
+type m_estadodecuentasdedocumentospendi from m_cc_principal`m_estadodecuentasdedocumentospendi within m_declientes
+end type
+
+on m_estadodecuentasdedocumentospendi.create
+call super::create
+end on
+
+on m_estadodecuentasdedocumentospendi.destroy
+call super::destroy
+end on
+
+type m_estadoconsolidado from m_cc_principal`m_estadoconsolidado within m_declientes
+end type
+
+on m_estadoconsolidado.create
+call super::create
+end on
+
+on m_estadoconsolidado.destroy
+call super::destroy
+end on
+
+type m_bslsncedeprueba from m_cc_principal`m_bslsncedeprueba within m_declientes
+end type
+
+on m_bslsncedeprueba.create
+call super::create
+end on
+
+on m_bslsncedeprueba.destroy
+call super::destroy
+end on
+
+type m_historialdelcliente from m_cc_principal`m_historialdelcliente within m_declientes
+end type
+
+on m_historialdelcliente.create
+call super::create
+end on
+
+on m_historialdelcliente.destroy
+call super::destroy
+end on
+
+type m_transacciones3 from m_cc_principal`m_transacciones3 within m_declientes
+end type
+
+on m_transacciones3.create
+call super::create
+end on
+
+on m_transacciones3.destroy
+call super::destroy
+end on
+
+type m_transaccionesporrangodecliente from m_cc_principal`m_transaccionesporrangodecliente within m_declientes
+end type
+
+on m_transaccionesporrangodecliente.create
+call super::create
+end on
+
+on m_transaccionesporrangodecliente.destroy
+call super::destroy
+end on
+
+type m_saldosconsolidados from m_cc_principal`m_saldosconsolidados within m_declientes
+end type
+
+on m_saldosconsolidados.create
+call super::create
+end on
+
+on m_saldosconsolidados.destroy
+call super::destroy
+end on
+
+type m_saldosalafecha from m_cc_principal`m_saldosalafecha within m_declientes
+end type
+
+on m_saldosalafecha.create
+call super::create
+end on
+
+on m_saldosalafecha.destroy
+call super::destroy
+end on
+
+type m_saldospormes from m_cc_principal`m_saldospormes within m_declientes
+end type
+
+on m_saldospormes.create
+call super::create
+end on
+
+on m_saldospormes.destroy
+call super::destroy
+end on
+
+type m_anlisisdesaldosporfacturacin from m_cc_principal`m_anlisisdesaldosporfacturacin within m_declientes
+end type
+
+on m_anlisisdesaldosporfacturacin.create
+call super::create
+end on
+
+on m_anlisisdesaldosporfacturacin.destroy
+call super::destroy
+end on
+
+type m_lmitesdecrditosexcedidos from m_cc_principal`m_lmitesdecrditosexcedidos within m_declientes
+end type
+
+on m_lmitesdecrditosexcedidos.create
+call super::create
+end on
+
+on m_lmitesdecrditosexcedidos.destroy
+call super::destroy
+end on
+
+type m_saldosporzonasdeventas from m_cc_principal`m_saldosporzonasdeventas within m_declientes
+end type
+
+on m_saldosporzonasdeventas.create
+call super::create
+end on
+
+on m_saldosporzonasdeventas.destroy
+call super::destroy
+end on
+
+type m_- from m_cc_principal`m_- within m_reportes
+end type
+
+on m_-.create
+call super::create
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_cobros from m_cc_principal`m_cobros within m_reportes
+end type
+
+on m_cobros.create
+call super::create
+end on
+
+on m_cobros.destroy
+call super::destroy
+end on
+
+type m_porcliente from m_cc_principal`m_porcliente within m_cobros
+end type
+
+on m_porcliente.create
+call super::create
+end on
+
+on m_porcliente.destroy
+call super::destroy
+end on
+
+type m_porpasoregin from m_cc_principal`m_porpasoregin within m_cobros
+end type
+
+on m_porpasoregin.create
+call super::create
+end on
+
+on m_porpasoregin.destroy
+call super::destroy
+end on
+
+type m_resumido from m_cc_principal`m_resumido within m_cobros
+end type
+
+on m_resumido.create
+call super::create
+end on
+
+on m_resumido.destroy
+call super::destroy
+end on
+
+type m_resumendeopraciones from m_cc_principal`m_resumendeopraciones within m_cobros
+end type
+
+on m_resumendeopraciones.create
+call super::create
+end on
+
+on m_resumendeopraciones.destroy
+call super::destroy
+end on
+
+type m_proyeccioncobros from m_cc_principal`m_proyeccioncobros within m_cobros
+end type
+
+on m_proyeccioncobros.create
+call super::create
+end on
+
+on m_proyeccioncobros.destroy
+call super::destroy
+end on
+
+type m_8 from m_cc_principal`m_8 within m_reportes
+end type
+
+on m_8.create
+call super::create
+end on
+
+on m_8.destroy
+call super::destroy
+end on
+
+type m_7 from m_cc_principal`m_7 within m_reportes
+end type
+
+on m_7.create
+call super::create
+end on
+
+on m_7.destroy
+call super::destroy
+end on
+
+type m_informeporregiónyporactividadaunmesespe from m_cc_principal`m_informeporregiónyporactividadaunmesespe within m_7
+end type
+
+on m_informeporregiónyporactividadaunmesespe.create
+call super::create
+end on
+
+on m_informeporregiónyporactividadaunmesespe.destroy
+call super::destroy
+end on
+
+type m_comparativorespectoapresupuestoyañoante from m_cc_principal`m_comparativorespectoapresupuestoyañoante within m_7
+end type
+
+on m_comparativorespectoapresupuestoyañoante.create
+call super::create
+end on
+
+on m_comparativorespectoapresupuestoyañoante.destroy
+call super::destroy
+end on
+
+type m_informeporrangodemesesyañoespecífico from m_cc_principal`m_informeporrangodemesesyañoespecífico within m_7
+end type
+
+on m_informeporrangodemesesyañoespecífico.create
+call super::create
+end on
+
+on m_informeporrangodemesesyañoespecífico.destroy
+call super::destroy
+end on
+
+type m_informemensualacumuladoyporrubro from m_cc_principal`m_informemensualacumuladoyporrubro within m_7
+end type
+
+on m_informemensualacumuladoyporrubro.create
+call super::create
+end on
+
+on m_informemensualacumuladoyporrubro.destroy
+call super::destroy
+end on
+
+type m_informemensualacumuladoporregional from m_cc_principal`m_informemensualacumuladoporregional within m_7
+end type
+
+on m_informemensualacumuladoporregional.create
+call super::create
+end on
+
+on m_informemensualacumuladoporregional.destroy
+call super::destroy
+end on
+
+type m_presupuestadovsrecaudadoporregionalyniv from m_cc_principal`m_presupuestadovsrecaudadoporregionalyniv within m_7
+end type
+
+on m_presupuestadovsrecaudadoporregionalyniv.create
+call super::create
+end on
+
+on m_presupuestadovsrecaudadoporregionalyniv.destroy
+call super::destroy
+end on
+
+type m_informedeingresodiario from m_cc_principal`m_informedeingresodiario within m_7
+end type
+
+on m_informedeingresodiario.create
+call super::create
+end on
+
+on m_informedeingresodiario.destroy
+call super::destroy
+end on
+
+type m_9 from m_cc_principal`m_9 within m_reportes
+end type
+
+on m_9.create
+call super::create
+end on
+
+on m_9.destroy
+call super::destroy
+end on
+
+type m_movimientos from m_cc_principal`m_movimientos within m_reportes
+end type
+
+on m_movimientos.create
+call super::create
+end on
+
+on m_movimientos.destroy
+call super::destroy
+end on
+
+type m_pormes from m_cc_principal`m_pormes within m_movimientos
+end type
+
+on m_pormes.create
+call super::create
+end on
+
+on m_pormes.destroy
+call super::destroy
+end on
+
+type m_porcliente1 from m_cc_principal`m_porcliente1 within m_movimientos
+end type
+
+on m_porcliente1.create
+call super::create
+end on
+
+on m_porcliente1.destroy
+call super::destroy
+end on
+
+type m_porrangodeclientesyfecha from m_cc_principal`m_porrangodeclientesyfecha within m_movimientos
+end type
+
+on m_porrangodeclientesyfecha.create
+call super::create
+end on
+
+on m_porrangodeclientesyfecha.destroy
+call super::destroy
+end on
+
+type m_portipodetransaccin from m_cc_principal`m_portipodetransaccin within m_movimientos
+end type
+
+on m_portipodetransaccin.create
+call super::create
+end on
+
+on m_portipodetransaccin.destroy
+call super::destroy
+end on
+
+type m_depositosregistrados from m_cc_principal`m_depositosregistrados within m_movimientos
+end type
+
+on m_depositosregistrados.create
+call super::create
+end on
+
+on m_depositosregistrados.destroy
+call super::destroy
+end on
+
+type m_-14 from m_cc_principal`m_-14 within m_reportes
+end type
+
+on m_-14.create
+call super::create
+end on
+
+on m_-14.destroy
+call super::destroy
+end on
+
+type m_antigüedad from m_cc_principal`m_antigüedad within m_reportes
+end type
+
+on m_antigüedad.create
+call super::create
+end on
+
+on m_antigüedad.destroy
+call super::destroy
+end on
+
+type m_antiguedaddesaldos from m_cc_principal`m_antiguedaddesaldos within m_antigüedad
+end type
+
+on m_antiguedaddesaldos.create
+call super::create
+end on
+
+on m_antiguedaddesaldos.destroy
+call super::destroy
+end on
+
+type m_0 from m_cc_principal`m_0 within m_antigüedad
+end type
+
+on m_0.create
+call super::create
+end on
+
+on m_0.destroy
+call super::destroy
+end on
+
+type m_pruebaantiguedad from m_cc_principal`m_pruebaantiguedad within m_antigüedad
+end type
+
+on m_pruebaantiguedad.create
+call super::create
+end on
+
+on m_pruebaantiguedad.destroy
+call super::destroy
+end on
+
+type m_antiguedadpordocumentosendas from m_cc_principal`m_antiguedadpordocumentosendas within m_antigüedad
+end type
+
+on m_antiguedadpordocumentosendas.create
+call super::create
+end on
+
+on m_antiguedadpordocumentosendas.destroy
+call super::destroy
+end on
+
+type m_antigüedadconsolidada from m_cc_principal`m_antigüedadconsolidada within m_antigüedad
+end type
+
+on m_antigüedadconsolidada.create
+call super::create
+end on
+
+on m_antigüedadconsolidada.destroy
+call super::destroy
+end on
+
+type m_3 from m_cc_principal`m_3 within m_reportes
+end type
+
+on m_3.create
+call super::create
+end on
+
+on m_3.destroy
+call super::destroy
+end on
+
+type m_informediariodecaja from m_cc_principal`m_informediariodecaja within m_reportes
+end type
+
+on m_informediariodecaja.create
+call super::create
+end on
+
+on m_informediariodecaja.destroy
+call super::destroy
+end on
+
+type m_porempresa from m_cc_principal`m_porempresa within m_informediariodecaja
+end type
+
+on m_porempresa.create
+call super::create
+end on
+
+on m_porempresa.destroy
+call super::destroy
+end on
+
+type m_consolidado from m_cc_principal`m_consolidado within m_informediariodecaja
+end type
+
+on m_consolidado.create
+call super::create
+end on
+
+on m_consolidado.destroy
+call super::destroy
+end on
+
+type m_otros2 from m_cc_principal`m_otros2 within m_reportes
+end type
+
+on m_otros2.create
+call super::create
+end on
+
+on m_otros2.destroy
+call super::destroy
+end on
+
+type m_documentospost-fechados1 from m_cc_principal`m_documentospost-fechados1 within m_otros2
+end type
+
+on m_documentospost-fechados1.create
+call super::create
+end on
+
+on m_documentospost-fechados1.destroy
+call super::destroy
+end on
+
+type m_recibospordepositar from m_cc_principal`m_recibospordepositar within m_otros2
+end type
+
+on m_recibospordepositar.create
+call super::create
+end on
+
+on m_recibospordepositar.destroy
+call super::destroy
+end on
+
+type m_vencimientodedocumentos from m_cc_principal`m_vencimientodedocumentos within m_otros2
+end type
+
+on m_vencimientodedocumentos.create
+call super::create
+end on
+
+on m_vencimientodedocumentos.destroy
+call super::destroy
+end on
+
+type m_depsitosajustados from m_cc_principal`m_depsitosajustados within m_otros2
+end type
+
+on m_depsitosajustados.create
+call super::create
+end on
+
+on m_depsitosajustados.destroy
+call super::destroy
+end on
+
+type m_tarjetasmanuales from m_cc_principal`m_tarjetasmanuales within m_otros2
+end type
+
+on m_tarjetasmanuales.create
+call super::create
+end on
+
+on m_tarjetasmanuales.destroy
+call super::destroy
+end on
+
+type m_historialdetarjeta from m_cc_principal`m_historialdetarjeta within m_otros2
+end type
+
+on m_historialdetarjeta.create
+call super::create
+end on
+
+on m_historialdetarjeta.destroy
+call super::destroy
+end on
+
+type m_movimientodetarjetascredito from m_cc_principal`m_movimientodetarjetascredito within m_otros2
+end type
+
+on m_movimientodetarjetascredito.create
+call super::create
+end on
+
+on m_movimientodetarjetascredito.destroy
+call super::destroy
+end on
+
+type m_costosporfacturas from m_cc_principal`m_costosporfacturas within m_otros2
+end type
+
+on m_costosporfacturas.create
+call super::create
+end on
+
+on m_costosporfacturas.destroy
+call super::destroy
+end on
+
+type m_historialdecuentas from m_cc_principal`m_historialdecuentas within m_otros2
+end type
+
+on m_historialdecuentas.create
+call super::create
+end on
+
+on m_historialdecuentas.destroy
+call super::destroy
+end on
+
+type m_justificar from m_cc_principal`m_justificar within m_otros2
+end type
+
+on m_justificar.create
+call super::create
+end on
+
+on m_justificar.destroy
+call super::destroy
+end on
+
+type m_documentosabonados from m_cc_principal`m_documentosabonados within m_otros2
+end type
+
+on m_documentosabonados.create
+call super::create
+end on
+
+on m_documentosabonados.destroy
+call super::destroy
+end on
+
+type m_recibosnoaplicados from m_cc_principal`m_recibosnoaplicados within m_otros2
+end type
+
+on m_recibosnoaplicados.create
+call super::create
+end on
+
+on m_recibosnoaplicados.destroy
+call super::destroy
+end on
+
+type m_documentosnoaplicados from m_cc_principal`m_documentosnoaplicados within m_otros2
+end type
+
+on m_documentosnoaplicados.create
+call super::create
+end on
+
+on m_documentosnoaplicados.destroy
+call super::destroy
+end on
+
+type m_2 from m_cc_principal`m_2 within m_otros2
+end type
+
+on m_2.create
+call super::create
+end on
+
+on m_2.destroy
+call super::destroy
+end on
+
+type m_procesos from m_cc_principal`m_procesos within m_cc_principal_listados
+end type
+
+on m_procesos.create
+call super::create
+this.visible = false
+this.enabled = false
+end on
+
+on m_procesos.destroy
+call super::destroy
+end on
+
+type m_actualizacindetransacciones from m_cc_principal`m_actualizacindetransacciones within m_procesos
+end type
+
+on m_actualizacindetransacciones.create
+call super::create
+end on
+
+on m_actualizacindetransacciones.destroy
+call super::destroy
+end on
+
+type m_asignaciondelotes from m_cc_principal`m_asignaciondelotes within m_actualizacindetransacciones
+end type
+
+on m_asignaciondelotes.create
+call super::create
+end on
+
+on m_asignaciondelotes.destroy
+call super::destroy
+end on
+
+type m_conciliacindetarjetas from m_cc_principal`m_conciliacindetarjetas within m_actualizacindetransacciones
+end type
+
+on m_conciliacindetarjetas.create
+call super::create
+end on
+
+on m_conciliacindetarjetas.destroy
+call super::destroy
+end on
+
+type m_conciliacindetarjetasmanual from m_cc_principal`m_conciliacindetarjetasmanual within m_actualizacindetransacciones
+end type
+
+on m_conciliacindetarjetasmanual.create
+call super::create
+end on
+
+on m_conciliacindetarjetasmanual.destroy
+call super::destroy
+end on
+
+type m_eliminarconciliacin from m_cc_principal`m_eliminarconciliacin within m_actualizacindetransacciones
+end type
+
+on m_eliminarconciliacin.create
+call super::create
+end on
+
+on m_eliminarconciliacin.destroy
+call super::destroy
+end on
+
+type m_liberacindelotes from m_cc_principal`m_liberacindelotes within m_actualizacindetransacciones
+end type
+
+on m_liberacindelotes.create
+call super::create
+end on
+
+on m_liberacindelotes.destroy
+call super::destroy
+end on
+
+type m_actualizacindetransacciones11 from m_cc_principal`m_actualizacindetransacciones11 within m_procesos
+end type
+
+on m_actualizacindetransacciones11.create
+call super::create
+end on
+
+on m_actualizacindetransacciones11.destroy
+call super::destroy
+end on
+
+type m_anulacindetransacciones from m_cc_principal`m_anulacindetransacciones within m_procesos
+end type
+
+on m_anulacindetransacciones.create
+call super::create
+end on
+
+on m_anulacindetransacciones.destroy
+call super::destroy
+end on
+
+type m_modificacindedepositos from m_cc_principal`m_modificacindedepositos within m_procesos
+end type
+
+on m_modificacindedepositos.create
+call super::create
+end on
+
+on m_modificacindedepositos.destroy
+call super::destroy
+end on
+
+type m_modificacindetransacciones from m_cc_principal`m_modificacindetransacciones within m_procesos
+end type
+
+on m_modificacindetransacciones.create
+call super::create
+end on
+
+on m_modificacindetransacciones.destroy
+call super::destroy
+end on
+
+type m_cierresdecaja from m_cc_principal`m_cierresdecaja within m_procesos
+end type
+
+on m_cierresdecaja.create
+call super::create
+end on
+
+on m_cierresdecaja.destroy
+call super::destroy
+end on
+
+type m_-3 from m_cc_principal`m_-3 within m_procesos
+end type
+
+on m_-3.create
+call super::create
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_cambiodecuentadecliente from m_cc_principal`m_cambiodecuentadecliente within m_procesos
+end type
+
+on m_cambiodecuentadecliente.create
+call super::create
+end on
+
+on m_cambiodecuentadecliente.destroy
+call super::destroy
+end on
+
+type m_recibosdepositados from m_cc_principal`m_recibosdepositados within m_procesos
+end type
+
+on m_recibosdepositados.create
+call super::create
+end on
+
+on m_recibosdepositados.destroy
+call super::destroy
+end on
+
+type m_imprimirfacturasporservicios from m_cc_principal`m_imprimirfacturasporservicios within m_procesos
+end type
+
+on m_imprimirfacturasporservicios.create
+call super::create
+end on
+
+on m_imprimirfacturasporservicios.destroy
+call super::destroy
+end on
+
+type m_5 from m_cc_principal`m_5 within m_procesos
+end type
+
+on m_5.create
+call super::create
+end on
+
+on m_5.destroy
+call super::destroy
+end on
+
+type m_aplicardocumentosdeclientecontrasaldo from m_cc_principal`m_aplicardocumentosdeclientecontrasaldo within m_procesos
+end type
+
+on m_aplicardocumentosdeclientecontrasaldo.create
+call super::create
+end on
+
+on m_aplicardocumentosdeclientecontrasaldo.destroy
+call super::destroy
+end on
+
+type m_aolicardocumento from m_cc_principal`m_aolicardocumento within m_procesos
+end type
+
+on m_aolicardocumento.create
+call super::create
+end on
+
+on m_aolicardocumento.destroy
+call super::destroy
+end on
+
+type m_comisiones from m_cc_principal`m_comisiones within m_procesos
+end type
+
+on m_comisiones.create
+call super::create
+end on
+
+on m_comisiones.destroy
+call super::destroy
+end on
+
+type m_cargardata from m_cc_principal`m_cargardata within m_comisiones
+end type
+
+on m_cargardata.create
+call super::create
+end on
+
+on m_cargardata.destroy
+call super::destroy
+end on
+
+type m_aplicarcomision from m_cc_principal`m_aplicarcomision within m_comisiones
+end type
+
+on m_aplicarcomision.create
+call super::create
+end on
+
+on m_aplicarcomision.destroy
+call super::destroy
+end on
+
+type m_gereraciónautomáticadefacturasporservic from m_cc_principal`m_gereraciónautomáticadefacturasporservic within m_procesos
+end type
+
+on m_gereraciónautomáticadefacturasporservic.create
+call super::create
+end on
+
+on m_gereraciónautomáticadefacturasporservic.destroy
+call super::destroy
+end on
+
+type m_6 from m_cc_principal`m_6 within m_procesos
+end type
+
+on m_6.create
+call super::create
+end on
+
+on m_6.destroy
+call super::destroy
+end on
+
+type m_especiales from m_cc_principal`m_especiales within m_procesos
+end type
+
+on m_especiales.create
+call super::create
+end on
+
+on m_especiales.destroy
+call super::destroy
+end on
+
+type m_modificacobradorenrecibos from m_cc_principal`m_modificacobradorenrecibos within m_procesos
+end type
+
+on m_modificacobradorenrecibos.create
+call super::create
+end on
+
+on m_modificacobradorenrecibos.destroy
+call super::destroy
+end on
+
+type m_division_pase from m_cc_principal`m_division_pase within m_procesos
+end type
+
+on m_division_pase.create
+call super::create
+end on
+
+on m_division_pase.destroy
+call super::destroy
+end on
+
+type m_pasescontablesadicionales from m_cc_principal`m_pasescontablesadicionales within m_procesos
+end type
+
+on m_pasescontablesadicionales.create
+call super::create
+end on
+
+on m_pasescontablesadicionales.destroy
+call super::destroy
+end on
+
+type m_10 from m_cc_principal`m_10 within m_pasescontablesadicionales
+end type
+
+on m_10.create
+call super::create
+end on
+
+on m_10.destroy
+call super::destroy
+end on
+
+type m_13 from m_cc_principal`m_13 within m_10
+end type
+
+on m_13.create
+call super::create
+end on
+
+on m_13.destroy
+call super::destroy
+end on
+
+type m_14 from m_cc_principal`m_14 within m_10
+end type
+
+on m_14.create
+call super::create
+end on
+
+on m_14.destroy
+call super::destroy
+end on
+
+type m_15 from m_cc_principal`m_15 within m_10
+end type
+
+on m_15.create
+call super::create
+end on
+
+on m_15.destroy
+call super::destroy
+end on
+
+type m_16 from m_cc_principal`m_16 within m_10
+end type
+
+on m_16.create
+call super::create
+end on
+
+on m_16.destroy
+call super::destroy
+end on
+
+type m_17 from m_cc_principal`m_17 within m_10
+end type
+
+on m_17.create
+call super::create
+end on
+
+on m_17.destroy
+call super::destroy
+end on
+
+type m_18 from m_cc_principal`m_18 within m_10
+end type
+
+on m_18.create
+call super::create
+end on
+
+on m_18.destroy
+call super::destroy
+end on
+
+type m_19 from m_cc_principal`m_19 within m_10
+end type
+
+on m_19.create
+call super::create
+end on
+
+on m_19.destroy
+call super::destroy
+end on
+
+type m_20 from m_cc_principal`m_20 within m_pasescontablesadicionales
+end type
+
+on m_20.create
+call super::create
+end on
+
+on m_20.destroy
+call super::destroy
+end on
+
+type m_21 from m_cc_principal`m_21 within m_20
+end type
+
+on m_21.create
+call super::create
+end on
+
+on m_21.destroy
+call super::destroy
+end on
+
+type m_22 from m_cc_principal`m_22 within m_20
+end type
+
+on m_22.create
+call super::create
+end on
+
+on m_22.destroy
+call super::destroy
+end on
+
+type m_23 from m_cc_principal`m_23 within m_20
+end type
+
+on m_23.create
+call super::create
+end on
+
+on m_23.destroy
+call super::destroy
+end on
+
+type m_revisiondetransaccionesrecibos from m_cc_principal`m_revisiondetransaccionesrecibos within m_pasescontablesadicionales
+end type
+
+on m_revisiondetransaccionesrecibos.create
+call super::create
+end on
+
+on m_revisiondetransaccionesrecibos.destroy
+call super::destroy
+end on
+
+type m_revisiondetransaccionesfacturas from m_cc_principal`m_revisiondetransaccionesfacturas within m_pasescontablesadicionales
+end type
+
+on m_revisiondetransaccionesfacturas.create
+call super::create
+end on
+
+on m_revisiondetransaccionesfacturas.destroy
+call super::destroy
+end on
+
+type m_-2002 from m_cc_principal`m_-2002 within m_procesos
+end type
+
+on m_-2002.create
+call super::create
+end on
+
+on m_-2002.destroy
+call super::destroy
+end on
+
+type m_importarinformaciónderegionales from m_cc_principal`m_importarinformaciónderegionales within m_procesos
+end type
+
+on m_importarinformaciónderegionales.create
+call super::create
+end on
+
+on m_importarinformaciónderegionales.destroy
+call super::destroy
+end on
+
+type m_ventana from m_cc_principal`m_ventana within m_cc_principal_listados
+end type
+
+on m_ventana.create
+call super::create
+end on
+
+on m_ventana.destroy
+call super::destroy
+end on
+
+type m_horizontal from m_cc_principal`m_horizontal within m_ventana
+end type
+
+on m_horizontal.create
+call super::create
+end on
+
+on m_horizontal.destroy
+call super::destroy
+end on
+
+type m_vertical from m_cc_principal`m_vertical within m_ventana
+end type
+
+on m_vertical.create
+call super::create
+end on
+
+on m_vertical.destroy
+call super::destroy
+end on
+
+type m_pantallacompleta from m_cc_principal`m_pantallacompleta within m_ventana
+end type
+
+on m_pantallacompleta.create
+call super::create
+end on
+
+on m_pantallacompleta.destroy
+call super::destroy
+end on
+
+type m_cascada from m_cc_principal`m_cascada within m_ventana
+end type
+
+on m_cascada.create
+call super::create
+end on
+
+on m_cascada.destroy
+call super::destroy
+end on
+
+type m_-9 from m_cc_principal`m_-9 within m_ventana
+end type
+
+on m_-9.create
+call super::create
+end on
+
+on m_-9.destroy
+call super::destroy
+end on
+
+type m_zoom from m_cc_principal`m_zoom within m_ventana
+end type
+
+on m_zoom.create
+call super::create
+end on
+
+on m_zoom.destroy
+call super::destroy
+end on
+
+type m_200% from m_cc_principal`m_200% within m_zoom
+end type
+
+on m_200%.create
+call super::create
+end on
+
+on m_200%.destroy
+call super::destroy
+end on
+
+type m_100% from m_cc_principal`m_100% within m_zoom
+end type
+
+on m_100%.create
+call super::create
+end on
+
+on m_100%.destroy
+call super::destroy
+end on
+
+type m_80% from m_cc_principal`m_80% within m_zoom
+end type
+
+on m_80%.create
+call super::create
+end on
+
+on m_80%.destroy
+call super::destroy
+end on
+
+type m_60% from m_cc_principal`m_60% within m_zoom
+end type
+
+on m_60%.create
+call super::create
+end on
+
+on m_60%.destroy
+call super::destroy
+end on
+
+type m_40% from m_cc_principal`m_40% within m_zoom
+end type
+
+on m_40%.create
+call super::create
+end on
+
+on m_40%.destroy
+call super::destroy
+end on
+
+type m_20% from m_cc_principal`m_20% within m_zoom
+end type
+
+on m_20%.create
+call super::create
+end on
+
+on m_20%.destroy
+call super::destroy
+end on
+
+type m_zoomnew from m_cc_principal`m_zoomnew within m_ventana
+end type
+
+on m_zoomnew.create
+call super::create
+end on
+
+on m_zoomnew.destroy
+call super::destroy
+end on
+
+type m_ayuda from m_cc_principal`m_ayuda within m_cc_principal_listados
+end type
+
+on m_ayuda.create
+call super::create
+end on
+
+on m_ayuda.destroy
+call super::destroy
+end on
+
+type m_reglasgeneralesdelsistema from m_cc_principal`m_reglasgeneralesdelsistema within m_ayuda
+end type
+
+on m_reglasgeneralesdelsistema.create
+call super::create
+end on
+
+on m_reglasgeneralesdelsistema.destroy
+call super::destroy
+end on
+
+type m_indicedeayudadelsistemadecuenta from m_cc_principal`m_indicedeayudadelsistemadecuenta within m_ayuda
+end type
+
+on m_indicedeayudadelsistemadecuenta.create
+call super::create
+end on
+
+on m_indicedeayudadelsistemadecuenta.destroy
+call super::destroy
+end on
+
+type m_-12 from m_cc_principal`m_-12 within m_ayuda
+end type
+
+on m_-12.create
+call super::create
+end on
+
+on m_-12.destroy
+call super::destroy
+end on
+
+type m_creadoresdelsistema from m_cc_principal`m_creadoresdelsistema within m_ayuda
+end type
+
+on m_creadoresdelsistema.create
+call super::create
+end on
+
+on m_creadoresdelsistema.destroy
+call super::destroy
+end on
+
+type m_4 from m_cc_principal`m_4 within m_ayuda
+end type
+
+on m_4.create
+call super::create
+end on
+
+on m_4.destroy
+call super::destroy
+end on
+

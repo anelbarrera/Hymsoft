@@ -1,0 +1,43 @@
+﻿//objectcomments Función que carga las impresoras en tabla de printers y toma la impresora de parámetros para imprimir los Documentos Comerciales
+global type gf_asigna_printer_trafico from function_object
+end type
+
+forward prototypes
+global function string gf_asigna_printer_trafico ()
+end prototypes
+
+global function string gf_asigna_printer_trafico ();string ls_defauld,ls_error
+string ls_impr_nueva,ls_puerto_nuevo,ls_impr_puerto_nuevo
+// Paso 1: Toma la impresora por defecto y la guarda para luego reasignarla al salir de la ventana
+
+RegistryGet("HKEY_LOCAL_MACHINE\Config\0001\System\CurrentControlSet\Control\Print\Printers","default",ls_defauld)
+
+  SELECT tzmprint.prin_impresora,   
+         tzmprint.prin_impresora_reg  
+    INTO :ls_impr_nueva,   
+         :ls_puerto_nuevo  
+    FROM tzmprint  
+   WHERE ( tzmprint.prin_maquina = :str.maquina ) AND  
+         ( tzmprint.prin_printer_trafico = 1 )   ;
+
+	if SQLCA.SQLCODE = -1 THEN
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("ATENCIÓN SR. USUARIO","Error al recuperar Impresora de Impresión de Documento Comercial de la estación "+str.maquina, "")
+		return("")	
+	end if
+
+	if SQLCA.SQLCODE = 0 THEN
+		// Setea la Nueva Impresora por defecto en el WIN.INI
+		gf_asigna_printer_default(ls_impr_nueva)
+		
+		return(ls_defauld)	
+	else
+		ls_error = sqlca.sqlerrtext
+		rollback;
+		mensaje("ATENCIÓN SR. USUARIO","No se ha podido recuperar la Impresora de Impresión de Documento de Mov. Comercial de la estación "+str.maquina, "Por favor vaya a Parámetros, opción parámetros generales y seleccione la impresora donde desea se impriman dichos documentos.. gracias !!!")
+		return("")	
+	end if
+
+end function
+

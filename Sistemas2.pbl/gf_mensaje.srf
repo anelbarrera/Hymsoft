@@ -1,0 +1,182 @@
+﻿//objectcomments Despliega el messagebox, segun los parámetros enviados
+global type gf_mensaje from function_object
+end type
+
+forward prototypes
+global function integer gf_mensaje (string titulo, string mensaje, integer opciones, integer defecto, string icono)
+end prototypes
+
+global function integer gf_mensaje (string titulo, string mensaje, integer opciones, integer defecto, string icono);//Función utilizada para desplegar los mensajes desde cualquier punto del sistema (R.M.)
+
+
+//** Recibe como parametros: --------->
+
+//** El titulo   : "Atencion", "Error", etc. si viene en blanco el default es "ATENCION SR. USUARIO"
+//** El mensaje  : Es el que requiera la situacion
+//** Las opciones: La que aparece en el message, YesNo!, YesNoCancel,etc. si es 1 es sin opciones
+//   asi sera su codificacion:
+//		1=	OK!  (Default) 	OK button
+//		2=	OKCancel! 			OK and Cancel buttons
+//		3=	YesNo! 				Yes and No buttons
+//		4=	YesNoCancel! 		Yes, No, and Cancel buttons
+//		5=	RetryCancel! 		Retry and Cancel buttons
+//		6= AbortRetryIgnore! Abort, Retry, and Ignore buttons
+//
+//** El default  : Donde quiere el cursor(1,2,3), al desplegar, si es 0 es Sin opciones o la primera
+//** y el Icono  : (Exclamation!, Question!, etc.)
+
+//** Y Retorna el numero de la opcion seleccionada ---------->
+
+integer li_opcion
+
+//Verifica, si el titulo esta en blanco se le asigna el default
+if titulo = "" then titulo = "ATENCIÓN SR. USUARIO"
+
+//Verifica si el mensaje esta en blanco, se le asigna el default
+if mensaje = "" then mensaje = "Falta Mensaje ?"
+
+//Se asigna el tipo de icono que se quiere mostrar en el mensaje
+ Choose Case upper(icono)	
+	case "S" //StopSign!
+		Choose case opciones
+			case 	1
+				//Muestra el Mensaje ----->
+				li_opcion = MessageBox(upper(titulo),mensaje,Stopsign!, Ok!, 1)		
+			case	2
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Stopsign!, OkCancel!, defecto)		
+			case	3
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Stopsign!, YesNo!, defecto)						
+			case  4
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Stopsign!, YesNoCancel!, defecto)				
+			case	5	
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Stopsign!, RetryCancel!, defecto)										
+			case	6	
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Stopsign!, AbortRetryIgnore!, defecto)										
+		End choose	
+	case "E" //Exclamation!
+		Choose case opciones
+			case 	1
+				//Muestra el Mensaje ----->
+				li_opcion = MessageBox(upper(titulo),mensaje,Exclamation!, Ok!, 1)		
+			case	2
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Exclamation!, OkCancel!, defecto)		
+			case	3
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Exclamation!, YesNo!, defecto)						
+			case  4
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Exclamation!, YesNoCancel!, defecto)				
+			case	5	
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Exclamation!, RetryCancel!, defecto)										
+			case	6	
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Exclamation!, AbortRetryIgnore!, defecto)										
+		End choose	
+	case "Q"	//question!
+		Choose case opciones
+			case 	1
+				//Muestra el Mensaje ----->
+				li_opcion = MessageBox(upper(titulo),mensaje,Question!, Ok!, 1)		
+			case	2
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Question!, OkCancel!, defecto)		
+			case	3
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Question!, YesNo!, defecto)						
+			case  4
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Question!, YesNoCancel!, defecto)				
+			case	5	
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Question!, RetryCancel!, defecto)										
+			case	6	
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Question!, AbortRetryIgnore!, defecto)										
+		End choose	
+	case "N"	//None!
+		Choose case opciones
+			case 	1
+				//Muestra el Mensaje ----->
+				li_opcion = MessageBox(upper(titulo),mensaje,None!, Ok!, 1)		
+			case	2
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,None!, OkCancel!, defecto)		
+			case	3
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,None!, YesNo!, defecto)						
+			case  4
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,None!, YesNoCancel!, defecto)				
+			case	5	
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,None!, RetryCancel!, defecto)										
+			case	6	
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,None!, AbortRetryIgnore!, defecto)										
+		End choose	
+	case else	//"Information!" 		//Si trae espacios entra por aqui, Default
+		Choose case opciones
+			case 	1
+				//Muestra el Mensaje ----->
+				li_opcion = MessageBox(upper(titulo),mensaje,Information!, Ok!, 1)		
+			case	2
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Information!, OkCancel!, defecto)		
+			case	3
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Information!, YesNo!, defecto)						
+			case  4
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Information!, YesNoCancel!, defecto)				
+			case	5	
+				if defecto > 2 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Information!, RetryCancel!, defecto)										
+			case	6	
+				if defecto > 3 then defecto = 1
+				if defecto <= 0 then defecto = 1
+				li_opcion = MessageBox(upper(titulo),mensaje,Information!, AbortRetryIgnore!, defecto)										
+		End choose	
+ End Choose
+
+//Se asignan los botones que se quieren mostrar y valida que el defecto este en los botones
+//seleccionados
+
+
+if li_opcion = -1 then
+	messagebox("ATENCIÓN SR. USUARIO","Error al configurar el mensaje",Exclamation!)
+end if
+
+return(li_opcion)
+end function
+

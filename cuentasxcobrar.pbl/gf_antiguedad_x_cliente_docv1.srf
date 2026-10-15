@@ -1,0 +1,190 @@
+﻿global type gf_antiguedad_x_cliente_docv1 from function_object
+end type
+
+forward prototypes
+global subroutine gf_antiguedad_x_cliente_docv1 (datetime fecha, long cliente, string idioma, datetime fecha2)
+end prototypes
+
+global subroutine gf_antiguedad_x_cliente_docv1 (datetime fecha, long cliente, string idioma, datetime fecha2);integer li_registros,li_registros2, li_dia_inicio, li_dia_fin, li_filas,li_filas2, li_row,&
+        li_suma, li_registros_
+datetime ld_fecha_inicio, ld_fecha_final
+decimal ld_saldo, ld_temporal, ld_recibos, ld_facturas, ld_saldo_total,  ld_saldoreal
+datastore dw_4, dw_5, dw_6//, dw_7
+string ls_ruc, ls_naturaleza
+decimal ld_saldo_d, ld_saldo_c,ldec_saldo_anterior
+long  lii_cliente
+date  ld_date
+
+dw_4 = create datastore
+dw_5 = create datastore
+dw_6 = create datastore
+dw_4.dataobject = 'dw_cc_ext_antiguedad'//externo
+dw_5.dataobject = 'dw_cc_inf_ayuda_antiguedad'//antiguedad definida en parametros
+dw_6.dataobject = 'dw_cc_inf_ccatempa'//dw_que se va a llenar
+//dw_7.dataobject = 'dw_cc_monto_recibo_ccatpan'//y17/5/00
+dw_4.settransobject(sqlca)
+dw_5.settransobject(sqlca)
+dw_6.settransobject(sqlca)
+//dw_7.settransobject(sqlca)
+
+
+dw_4.reset()
+ld_saldo_total = 0
+lii_cliente 	= cliente
+ls_ruc 			= string(lii_cliente)
+
+dw_5.retrieve(str.g_financiero, str.empresa)
+li_registros 			= dw_5.rowcount()
+
+//Calcula el saldo anterior de cada cliente 1/9/2000
+
+ldec_saldo_anterior = gf_saldo_anterior(cliente,fecha2,str.g_financiero, str.empresa)
+//messagebox('ldec_saldo_anterior',ldec_saldo_anterior)
+FOR li_filas 			= 1 TO li_registros
+	
+		li_row 				= dw_4.insertrow(0)
+		li_dia_inicio		= dw_5.getitemnumber(li_filas, 'ccan_diaini')
+		li_dia_fin	 		= dw_5.getitemnumber(li_filas, 'ccan_diafin')
+		li_dia_inicio 		= li_dia_inicio * -1
+		li_dia_fin 			= li_dia_fin * -1
+		if li_dia_inicio 	= -1 then
+			li_dia_inicio 	= 0 
+		end if
+	
+	
+	ld_fecha_inicio	= datetime(relativedate( date( fecha), li_dia_inicio ), 00:00:00)
+	ld_fecha_final 	= datetime(relativedate( date( fecha), li_dia_fin ))
+	
+//	messagebox('ld_fecha_final: '+string(ld_fecha_final), 'ld_fecha_inicio: '+string(ld_fecha_inicio))
+	
+	ld_saldoreal = 0
+	ld_saldo = 0
+	
+	
+	
+	
+	ld_date = date(ld_fecha_final)
+	string  ls_prueba, ls_ff
+	
+
+   ls_prueba = string(date(ld_fecha_inicio),'yyyy/mm/dd')//inicio
+	ls_ff     = string(date(ld_fecha_final),'yyyy/mm/dd')//fin
+	
+	
+	
+	SELECT SUM( case cchestado.est_naturaleza when 'D' then cchestado.est_monto_saldo else  - ( cchestado.est_monto_saldo) end )
+	INTO :ld_saldo
+    FROM cchestado  
+   WHERE ( cchestado.est_g_financiero = :str.g_financiero ) AND  
+         ( cchestado.est_empresa 	  = :str.empresa 		 ) AND  
+         ( cchestado.est_tercero 	  = :lii_cliente  	 ) AND  
+	     	( convert(char,cchestado.est_fecha_tran,111)   >=:ls_ff) AND
+			( convert(char,cchestado.est_fecha_tran,111)   <=:ls_prueba) AND			
+			( cchestado.est_estado 		  = 'IM'					 ) and
+			( cchestado.est_usuario_maquina = :str.maquina); 
+
+
+		
+		dw_4.setitem(li_row, 'inicio',  li_dia_inicio)
+		dw_4.setitem(li_row, 'fin',     li_dia_fin)
+		dw_4.setitem(li_row, 'facturas',ld_saldo)//ld_saldo
+
+	
+NEXT
+//Inserta los valores menores a la ultima fecha
+
+	SELECT SUM( case cchestado.est_naturaleza when 'D' then cchestado.est_monto_saldo else  - (cchestado.est_monto_saldo) end )
+	INTO :ld_saldo
+    FROM cchestado  
+   WHERE ( cchestado.est_g_financiero = :str.g_financiero ) AND  
+         ( cchestado.est_empresa 	  = :str.empresa 		 ) AND  
+         ( convert(char,cchestado.est_fecha_tran,111)  < :ls_ff) AND 
+         ( cchestado.est_tercero 	  = :lii_cliente  	 ) AND  
+			( cchestado.est_estado 		  = 'IM'					 )	and
+			( cchestado.est_usuario_maquina = :str.maquina);
+
+	if not isnull(ld_saldo) then
+		li_row = dw_4.InsertRow(0)
+		dw_4.setitem(li_row, 'inicio',  li_dia_inicio)
+		dw_4.setitem(li_row, 'fin',     li_dia_fin)
+		dw_4.setitem(li_row, 'facturas',ld_saldo)//ld_saldo
+	end if
+
+
+//commit using sqlca;
+
+li_registros_ = dw_4.rowcount()//dw_5.rowcount()
+dw_6.reset()
+
+
+FOR li_filas 		= 1 to  li_registros_
+	dw_6.insertrow(0)
+	ld_saldo = dw_4.getitemnumber(li_filas,'facturas')
+	
+	if isnull(ld_saldo) then
+		ld_saldo = 0
+	end if
+	
+	ld_saldo_total = ld_saldo_total + ld_saldo
+	dw_4.setitem(li_filas, 'saldo',ld_saldo)
+	dw_6.setitem(li_filas, 'tmpa_g_financiero', str.g_financiero									)
+	dw_6.setitem(li_filas, 'tmpa_empresa'		, str.empresa											)
+	dw_6.setitem(li_filas, 'tmpa_tercero'		, lii_cliente											)
+	dw_6.setitem(li_filas, 'tmpa_ruc_tercero'	, string(lii_cliente)								)
+	dw_6.setitem(li_filas, 'tmpa_maxdias'		, (dw_4.getitemnumber(li_filas, 'fin') * -1)	)
+	dw_6.setitem(li_filas, 'tmpa_orden'			, li_filas												)
+	dw_6.setitem(li_filas, 'tmpa_monto'			, ld_saldo												)//ld_saldo
+	if li_filas = 1 then
+		if idioma = 'I' then
+			dw_6.setitem(li_filas, 'tmpa_descantig', 'Current')
+		else
+			dw_6.setitem(li_filas, 'tmpa_descantig', 'Corriente')
+		end if
+	elseif li_filas = li_registros_ then
+		if idioma = 'I' then
+			dw_6.setitem(li_filas, 'tmpa_descantig', string((dw_4.getitemnumber(li_filas, 'inicio') + 1) * -1) + ' Days +' )
+		else
+			dw_6.setitem(li_filas, 'tmpa_descantig', string((dw_4.getitemnumber(li_filas, 'inicio') + 1) * -1) + ' Dias y Más' )
+		end if
+		dw_6.setitem(li_filas, 'tmpa_maxdias',1000000)
+	else
+		if idioma = 'I' then
+			dw_6.setitem(li_filas, 'tmpa_descantig', string((dw_4.getitemnumber(li_filas, 'inicio') + 1) * -1) + ' Days')
+		else
+			dw_6.setitem(li_filas, 'tmpa_descantig', string((dw_4.getitemnumber(li_filas, 'inicio') + 1) * -1) + ' Dias')
+		end if
+	end if	
+	dw_6.setitem(li_filas,'tmpa_saldo_anterior',ldec_saldo_anterior)
+	dw_6.setitem(li_filas,'tmpa_usuario_maquina',str.maquina)
+next
+
+
+if isnull(ld_saldo_total) then
+	ld_saldo_total = 0
+end if
+li_filas = dw_6.insertrow(0)
+	dw_6.setitem(li_filas, 'tmpa_g_financiero', 	 str.g_financiero		)
+	dw_6.setitem(li_filas, 'tmpa_empresa', 	 str.empresa	  		)
+	dw_6.setitem(li_filas, 'tmpa_tercero', 	 lii_cliente	   	)
+	dw_6.setitem(li_filas, 'tmpa_ruc_tercero', string(lii_cliente)	)
+	dw_6.setitem(li_filas, 'tmpa_maxdias', 	 1000001					)
+	if idioma = 'I' then
+		dw_6.setitem(li_filas, 'tmpa_descantig', 'Total Balance'		)
+	else
+		dw_6.setitem(li_filas, 'tmpa_descantig', 'Saldo Total'		)
+	end if
+	dw_6.setitem(li_filas, 'tmpa_monto', ld_saldo_total)
+	dw_6.setitem(li_filas, 'tmpa_orden', 21)
+
+	dw_6.setitem(li_filas,'tmpa_saldo_anterior',ldec_saldo_anterior)
+	dw_6.setitem(li_filas,'tmpa_usuario_maquina',str.maquina)
+  dw_6.update()
+
+	
+destroy dw_4
+destroy dw_5
+destroy dw_6
+
+
+end subroutine
+

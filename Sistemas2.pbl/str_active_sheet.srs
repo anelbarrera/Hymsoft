@@ -1,0 +1,6 @@
+﻿global type str_active_sheet from structure
+	string		nombre[]
+	string		titulo[]
+	window		wsheet[]
+end type
+

@@ -1,0 +1,34 @@
+﻿global type gf_busca_datos_usuario from function_object
+end type
+
+forward prototypes
+global function integer gf_busca_datos_usuario ()
+end prototypes
+
+global function integer gf_busca_datos_usuario ();// Busco en que grupo de seguridad, aplicación se encuentra el usuario
+  SELECT ssmgrupusemp.grue_grupo,   
+         ssmusuar.usua_nombre,   
+         ssmusuar.usua_apellido,   
+         ssmusuar.usua_clave  
+    INTO :str.grupo,   
+         :str.nombre,   
+         :str.apellido,   
+         :str.clave  
+    FROM ssmgrupusemp,   
+         ssmusuar  
+   WHERE ( ssmusuar.usua_id = ssmgrupusemp.grue_usuario ) AND
+			( ( ssmgrupusemp.grue_g_financiero = :str.g_financiero ) AND
+			( ssmgrupusemp.grue_aplicacion = :str.aplicacion ) AND
+         ( ssmgrupusemp.grue_empresa = :str.empresa ) AND
+         ( ssmusuar.usua_id = :str.usuario ) AND  
+         ( ssmgrupusemp.grue_estado = 'A' ) AND  
+         ( ssmusuar.usua_estado = 'A' ) )   ;
+
+			if sqlca.sqlcode = -1 then
+				messagebox("Atención Sr. Usuario","Error al Seleccionar los datos del Usuario (ssmgrupusemp) "+sqlca.sqlerrtext)
+				return -1
+			 end if
+			 
+ return 1
+end function
+

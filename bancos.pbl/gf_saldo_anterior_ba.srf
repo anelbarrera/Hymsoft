@@ -1,0 +1,97 @@
+﻿global type gf_saldo_anterior_ba from function_object
+end type
+
+forward prototypes
+global function decimal gf_saldo_anterior_ba (integer banco, string cuenta, datetime fecha)
+end prototypes
+
+global function decimal gf_saldo_anterior_ba (integer banco, string cuenta, datetime fecha);decimal ld_monto, ld_monto_conci ,ld_saldo_anterior, ld_saldo_inicial
+datetime ldt_fecha_conci, ldt_fecha_saldo_inicial
+  
+  
+   SELECT bamcuent.cuen_fecha_conci, bamcuent.cuen_monto_conciliacion  
+    INTO  :ldt_fecha_conci,
+	       :ld_monto_conci
+    FROM bamcuent  
+   WHERE ( bamcuent.cuen_g_financiero = :str.g_financiero   ) AND  
+         ( bamcuent.cuen_empresa = :str.empresa ) AND  
+         ( bamcuent.cuen_no_cuenta = :cuenta ) AND  
+         ( bamcuent.cuen_banco = :banco );
+    		if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al buscar saldo '+sqlca.sqlerrtext,1,1,'E')
+			end if
+			
+  SELECT batdiari.btdi_fecha_tran,   
+         batdiari.btdi_monto  
+    INTO :ldt_fecha_saldo_inicial,   
+         :ld_saldo_inicial  
+    FROM batdiari  
+   WHERE ( batdiari.btdi_g_financiero = :str.g_financiero ) AND  
+         ( batdiari.btdi_empresa = :str.empresa ) AND  
+         ( batdiari.btdi_tipo_transaccion = 'SI' ) AND  
+         ( batdiari.btdi_sub_transaccion = 'SI' ) AND  
+         ( batdiari.btdi_banco = :banco ) AND  
+         ( batdiari.btdi_no_cuenta = :cuenta )  ;
+    		if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al buscar saldo inicial'+sqlca.sqlerrtext,1,1,'E')
+			end if
+
+//			messagebox('ldt_fecha_conci', string(ldt_fecha_conci))
+//			messagebox('ldt_fecha_conci', ld_monto_conci )
+
+
+   
+  if	ldt_fecha_conci < fecha  then //si la conciliacion es menor a la fecha desde
+												//busca las trans. mayores a la conciliacion y la fecha desde
+		SELECT isnull(sum(case btdi_naturaleza when 'D' then batdiari.btdi_monto else - batdiari.btdi_monto end ),0)
+		INTO  :ld_monto  
+		FROM batdiari  
+		WHERE ( batdiari.btdi_g_financiero = :str.g_financiero  ) AND  
+				( batdiari.btdi_empresa = :str.empresa ) AND  
+				( batdiari.btdi_banco = :banco ) AND  
+				( batdiari.btdi_no_cuenta = :cuenta ) AND  
+				( batdiari.btdi_fecha_tran > :ldt_fecha_conci  ) and //Dateadd(dd,1,:ldt_fecha_conci) ) AND  
+				( batdiari.btdi_fecha_tran < :fecha ) AND  
+				( batdiari.btdi_tipo_transaccion <> 'SI' ) AND
+				( batdiari.btdi_estado <> 'X' );
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al buscar saldo '+sqlca.sqlerrtext,1,1,'E')
+			end if				
+		
+		 ld_saldo_anterior = (ld_monto_conci + ld_monto) 
+	
+	elseif ldt_fecha_conci > fecha then   //Si la fecha de la conciliacion es mayor a la fecha desde del reporte
+												 //Busca las transacciones entre la fecha desde y la fecha de la conciliacion
+		if fecha > ldt_fecha_saldo_inicial then										 
+												 
+			SELECT isnull(sum(case btdi_naturaleza when 'D' then batdiari.btdi_monto else - batdiari.btdi_monto end ),0)
+			INTO  :ld_monto
+			FROM batdiari  
+			WHERE ( batdiari.btdi_g_financiero = :str.g_financiero  ) AND  
+					( batdiari.btdi_empresa = :str.empresa ) AND  
+					( batdiari.btdi_banco = :banco ) AND  
+					( batdiari.btdi_no_cuenta = :cuenta ) AND  
+					( batdiari.btdi_fecha_tran > :fecha ) AND		//Dateadd(dd,1,:fecha) ) AND  
+					( batdiari.btdi_fecha_tran < :ldt_fecha_conci ) AND
+					( batdiari.btdi_tipo_transaccion <> 'SI' ) AND				
+					( batdiari.btdi_estado <> 'X' );			
+				if sqlca.sqlcode = -1 then
+					gf_mensaje('','Error al buscar saldo '+sqlca.sqlerrtext,1,1,'E')
+				end if
+						
+			 ld_saldo_anterior = (ld_monto_conci - ld_monto)
+		else //SI LA FECHA DESDE ES MENOR AL SALDO INICIAL DE LA CUENTA, NO ASIGNA SALDO
+			
+			ld_saldo_anterior = 0
+			
+		end if
+		
+   ELSEif fecha = ldt_fecha_conci  then  //SI LA FECHA DESDE ES IGUAL A LA FECHA DE LA CONCILIACION
+		if fecha > ldt_fecha_saldo_inicial then										 
+			ld_saldo_anterior = ld_monto_conci
+		end if
+   end if 
+ 
+return (ld_saldo_anterior)
+end function
+

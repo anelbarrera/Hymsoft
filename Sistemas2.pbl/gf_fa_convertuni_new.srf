@@ -1,0 +1,29 @@
+﻿global type gf_fa_convertuni_new from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_convertuni_new (string as_med, long al_fracciones, ref long al_cantidad, ref long al_fraccion)
+end prototypes
+
+global subroutine gf_fa_convertuni_new (string as_med, long al_fracciones, ref long al_cantidad, ref long al_fraccion);/*Esta Función Convierte de Unidad Mínima a la Unidad que se Quiere*/
+Double ld_cantidad
+long ll_ucom, ll_frac, ll_mconvera
+ 
+/*Extrae la Unidad comun "Pedo/Unidades/etc "*/
+ll_ucom = gf_medi_prod(as_med)
+
+/*Retorna el Factor de Conversión a unidades mínimas*/
+ll_mconvera = gf_unidad_venta(as_med, ll_ucom)
+
+If ll_mconvera <= 0 Then ll_mconvera = 1
+
+ld_cantidad =  al_fracciones / ll_mconvera
+
+ll_frac = (Mod(al_fracciones, ll_mconvera))
+
+al_cantidad = Long(ld_cantidad)
+al_fraccion = ll_frac
+
+
+end subroutine
+

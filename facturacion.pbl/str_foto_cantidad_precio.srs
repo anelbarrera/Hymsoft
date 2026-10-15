@@ -1,0 +1,6 @@
+﻿global type str_foto_cantidad_precio from structure
+	string		foto
+	decimal		ultima_cantidad
+	decimal		ultimo_precio
+end type
+

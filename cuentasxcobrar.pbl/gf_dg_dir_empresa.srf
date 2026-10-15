@@ -1,0 +1,20 @@
+﻿global type gf_dg_dir_empresa from function_object
+end type
+
+forward prototypes
+global function string gf_dg_dir_empresa (integer g_financiero, integer empresa)
+end prototypes
+
+global function string gf_dg_dir_empresa (integer g_financiero, integer empresa);/* retorna la direccion de la empresa que esta activa, 
+   se envia el numero del grupo financiero y de la empresa  para el estado de cuenta*/
+ string ls_dir
+  
+ SELECT dgmempre.empr_direccion   
+  INTO :ls_dir        
+   FROM dgmempre  
+   WHERE ( dgmempre.empr_g_financiero = :g_financiero ) AND 
+         ( dgmempre.empr_empresa = :empresa )   ;
+
+return (ls_dir)
+end function
+

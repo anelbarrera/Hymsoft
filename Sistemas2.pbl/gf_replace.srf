@@ -1,0 +1,19 @@
+﻿global type gf_replace from function_object
+end type
+
+forward prototypes
+global subroutine gf_replace (ref string as_texto, character ac_a_remplazar, character ac_remplazador)
+end prototypes
+
+global subroutine gf_replace (ref string as_texto, character ac_a_remplazar, character ac_remplazador);
+
+Integer	li_len, li_i
+
+li_len = Len(as_texto)
+
+FOR li_i=1 TO li_len
+	If Mid(as_texto,li_i,1) = ac_a_remplazar Then as_texto = Replace(as_texto, li_i, 1, ac_remplazador)
+NEXT
+
+end subroutine
+

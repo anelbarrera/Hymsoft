@@ -1,0 +1,48 @@
+﻿global type gf_valida_fecha_conta from function_object
+end type
+
+forward prototypes
+global function boolean gf_valida_fecha_conta (datetime adt_fecha_tran)
+end prototypes
+
+global function boolean gf_valida_fecha_conta (datetime adt_fecha_tran);datetime ldt_fecha_conta
+integer li_ann, li_mes
+
+//Para que no se valida mientras este en espanol mexico
+//return true
+
+if str.valida_contabilidad = 0 then return true
+
+  SELECT comparam.para_ann_actual,   
+         comparam.para_mes_actual  
+    INTO :li_ann,   
+         :li_mes  
+    FROM comparam  
+   WHERE ( comparam.para_g_financiero = :str.g_financiero ) AND  
+         ( comparam.para_empresa = :str.empresa )   ;
+	if sqlca.sqlcode = -1 then
+		gf_mensaje('','Error al Seleccionar fechas '+sqlca.sqlerrtext,1,1,'E')
+		return false
+	end if
+
+	if li_ann = 0 or li_mes = 0 then
+		gf_mensaje('','Debe Asignar los Parametros de Contabilidad, Verifique !!!',1,1,'E')
+		return false
+	end if
+	
+	li_mes --
+	if li_mes = 0 then
+		li_mes = 12
+		li_ann --
+	end if
+	
+	ldt_fecha_conta = datetime(date(string(gf_last_day(li_mes, li_ann))+'/'+string(li_mes)+'/'+string(li_ann)),23:59:59)
+
+	if adt_fecha_tran <= ldt_fecha_conta then
+		gf_mensaje('','Periodo Contable Cerrado, Verifique !!!',1,1,'E')
+		return false
+	end if
+	
+return true
+end function
+

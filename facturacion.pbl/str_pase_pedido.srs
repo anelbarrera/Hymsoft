@@ -1,0 +1,12 @@
+﻿global type str_pase_pedido from structure
+	string		pedido
+	integer		ann
+	string		referencia[]
+	long		cantidad[]
+	integer		fraccion[]
+	integer		linea[]
+	decimal { 2 }		costo[]
+	string		ordenes[]
+	integer		ann_orden[]
+end type
+

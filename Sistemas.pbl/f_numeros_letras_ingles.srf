@@ -1,0 +1,62 @@
+﻿global type f_numeros_letras_ingles from function_object
+end type
+
+forward prototypes
+global function string f_numeros_letras_ingles (readonly decimal numero_convertidor)
+end prototypes
+
+global function string f_numeros_letras_ingles (readonly decimal numero_convertidor);string	ls_cantidad, ls_num_convertir, Ls_h_extra,ls_punto, ls_areglo
+long		ll_largo, ll_pos_punto ,ll_num_convertir, ll_digito
+integer	li_pos
+string	ls_miles[9]  ={ls_areglo}
+
+
+ls_num_convertir =string(numero_convertidor)
+ll_digito = numero_convertidor
+trim(ls_num_convertir)
+li_pos = pos(ls_num_convertir, ".",1)
+
+ls_punto  = mid(ls_num_convertir, li_pos +1,len(ls_num_convertir))
+ls_punto  = mid(ls_punto, 0 + 1,2)
+
+if li_pos > 0 then ls_num_convertir=left(ls_num_convertir, li_pos -1)
+ll_largo = Len (ls_num_convertir)
+
+ll_num_convertir = long(ls_num_convertir)
+//messagebox("","ls_num_convertir: "+ls_num_convertir +&
+//"ll_num_convertir: "+string(ll_num_convertir))
+
+ll_pos_punto = len(ls_punto)
+
+//messagebox("","ls_punto: "+ls_punto+" ll_pos_punto: "+string(ll_pos_punto))
+if ll_pos_punto = 1 then ls_punto = ls_punto + "0"
+if ll_pos_punto > 2 then ls_punto = "00"
+if ll_digito > 0 then // verifica si es mayor a Cero 
+   // verifica si es de 1 a 99
+IF ll_largo <= 2 then ls_cantidad = f_convetir_numeros_2_digito_ingles(numero_convertidor)
+	 // verifica si es de 100 a 999 
+IF ll_largo = 3 then ls_cantidad = f_convetir_numeros_3_digito_ingles(numero_convertidor)
+   // verifica si es de 1,000 a 999,999 
+IF ll_largo >= 4 and  ll_largo <= 6 then ls_cantidad = f_convetir_numeros_4_digito_ingles(numero_convertidor)
+
+IF ll_largo = 7 then ls_cantidad = f_convetir_numeros_5_digito_ingles(ll_num_convertir)
+else           // verifica si es mayor a Cero
+	if ll_digito < 0 then
+		ls_cantidad = "**"
+		ls_punto = "**"
+	else
+	ls_cantidad = "ZERO"
+	end if
+end if         // verifica si es mayor a Cero
+if ll_digito < 0 then
+	ls_cantidad = "**"
+	ls_punto = "**"
+else
+//	ls_punto = "00"
+	ls_cantidad ="***" + ls_cantidad + " AND "+ ls_punto+ "/100***" 
+end if
+
+return (ls_cantidad)
+
+end function
+

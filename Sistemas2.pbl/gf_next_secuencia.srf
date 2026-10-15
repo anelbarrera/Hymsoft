@@ -1,0 +1,66 @@
+﻿//objectcomments Obtiene la próxima secuencia disponible para un documento bancarios específico
+global type gf_next_secuencia from function_object
+end type
+
+forward prototypes
+global function str_secuencia_doc gf_next_secuencia (string as_tip_doc)
+end prototypes
+
+global function str_secuencia_doc gf_next_secuencia (string as_tip_doc);// Herick
+Integer	li_existe
+str_secuencia_doc lstr_secuencia
+
+//Boolean  lb_cambio = false
+  SELECT dgmserie.mser_secuencia, dgmserie.mser_anno  
+    INTO :lstr_secuencia.secuencia, :lstr_secuencia.ano  
+    FROM dgmserie  
+   WHERE ( dgmserie.mser_g_financiero = :str.g_financiero ) AND  
+         ( dgmserie.mser_empresa = :str.empresa ) AND  
+//       ( dgmserie.mser_aplicacion = :str.aplicacion ) AND  
+         ( dgmserie.mser_tipo_transaccion = :as_tip_doc )   ;
+						
+If sqlca.sqlcode = -1 Then
+	Mensaje("Error", "No se logro obtener la secuencia.", sqlca.sqlerrtext)
+	lstr_secuencia.secuencia = -1
+	Return lstr_secuencia
+Else
+//	If
+End If
+
+If IsNull(lstr_secuencia.secuencia) or lstr_secuencia.secuencia = 0 Then
+	lstr_secuencia.secuencia = 1
+Else
+	lstr_secuencia.secuencia ++
+End If
+
+  SELECT Count(*)  
+    INTO :li_existe
+    FROM dgmserie
+   WHERE ( dgmserie.mser_g_financiero = :str.g_financiero ) AND  
+         ( dgmserie.mser_empresa = :str.empresa ) AND  
+//         ( dgmserie.mser_aplicacion = :str.aplicacion ) AND  
+         ( dgmserie.mser_tipo_transaccion = :as_tip_doc ) AND
+			( dgmserie.mser_secuencia = :lstr_secuencia.secuencia )	;
+
+Do While li_existe > 0
+//	lb_cambio = true
+ lstr_secuencia.secuencia++
+	
+	SELECT Count(*)  
+    INTO :li_existe
+    FROM dgmserie
+   WHERE ( dgmserie.mser_g_financiero = :str.g_financiero ) AND  
+         ( dgmserie.mser_empresa = :str.empresa ) AND  
+//         ( dgmserie.mser_aplicacion = :str.aplicacion ) AND  
+         ( dgmserie.mser_tipo_transaccion = :as_tip_doc ) AND
+			( dgmserie.mser_secuencia = :lstr_secuencia.secuencia);
+Loop
+
+//If li_cambio Then Mensaje("Información", "La Secuencia Anterior ha Cambiado por " + &
+//									string(ll_secuencia) + " ya que ", "")
+//messagebox("",lstr_secuencia.secuencia)
+
+Return lstr_secuencia
+
+end function
+

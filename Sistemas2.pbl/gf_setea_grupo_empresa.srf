@@ -1,0 +1,15 @@
+﻿//objectcomments Se Setea el grupo y empresa a la tabla que se envió como parametro en el DW
+global type gf_setea_grupo_empresa from function_object
+end type
+
+forward prototypes
+global subroutine gf_setea_grupo_empresa (datawindow adw_object, string as_tabla)
+end prototypes
+
+global subroutine gf_setea_grupo_empresa (datawindow adw_object, string as_tabla);// Se Setea el grupo y empresa a la tabla que se envió como parámetro
+
+adw_object.SetItem(adw_object.getrow(),as_tabla+"_g_financiero",str.g_financiero) 
+adw_object.SetItem(adw_object.getrow(),as_tabla+"_empresa",str.empresa) 
+
+end subroutine
+

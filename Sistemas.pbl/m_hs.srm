@@ -1,0 +1,110 @@
+﻿forward
+global type m_hs from menu
+end type
+type m_archivo from menu within m_hs
+end type
+type m_salir from menu within m_archivo
+end type
+type m_archivo from menu within m_hs
+m_salir m_salir
+end type
+global type m_hs from menu
+m_archivo m_archivo
+end type
+end forward
+
+global type m_hs from menu
+m_archivo m_archivo
+end type
+global m_hs m_hs
+
+event clicked;//--
+end event
+
+on m_hs.create
+m_hs=this
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_archivo=create m_archivo
+this.Item[UpperBound(this.Item)+1]=this.m_archivo
+end on
+
+on m_hs.destroy
+call super::destroy
+destroy(this.m_archivo)
+end on
+
+type m_archivo from menu within m_hs
+m_salir m_salir
+end type
+
+on m_archivo.create
+call super::create
+this.visible = false
+this.text = "Archivo"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_salir=create m_salir
+this.Item[UpperBound(this.Item)+1]=this.m_salir
+end on
+
+on m_archivo.destroy
+call super::destroy
+destroy(this.m_salir)
+end on
+
+type m_salir from menu within m_archivo
+end type
+
+on m_salir.create
+call super::create
+this.visible = false
+this.text = "salir"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_salir.destroy
+call super::destroy
+end on
+

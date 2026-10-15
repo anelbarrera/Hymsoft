@@ -1,0 +1,26 @@
+﻿//objectcomments Estructura utilizada para el informe de ventas por factura
+global type str_fa_ventafact from structure
+	string		tipo
+	string		fecha1
+	string		fecha2
+	string		ls_where
+	string		tipo_factura
+	string		nombre_dw
+	integer		ann
+	string		titulo
+	string		numero
+	string		arancel1
+	string		arancel2
+	integer		ocultar
+	integer		ocultar_precio
+	date		fecha_inicio
+	date		fecha_final
+	string		secuencia
+	integer		desc_sino
+	double		porciento
+	long		cod_vendedor
+	boolean		cbx_vendedor
+	integer		tipo_accion
+	integer		cliente_global
+end type
+

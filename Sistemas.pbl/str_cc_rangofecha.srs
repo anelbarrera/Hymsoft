@@ -1,0 +1,24 @@
+﻿global type str_cc_rangofecha from structure
+	date		fecha1
+	date		fecha2
+	long		cliente
+	string		ruc
+	integer		mes
+	integer		ano
+	string		opcion
+	integer		gfinanciero
+	integer		empresa
+	string		cadena
+	long		desdecliente
+	long		hastacliente
+	integer		tipo
+	string		mostrar_contado
+	string		imprime_contado
+	string		op_vendedor
+	integer		tipo_bd
+	string		tip_cliente
+	string		filtro_balance
+	integer		tipo_socio
+	integer		tipo_auditor
+end type
+

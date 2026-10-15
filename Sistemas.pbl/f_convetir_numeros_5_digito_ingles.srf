@@ -1,0 +1,37 @@
+﻿global type f_convetir_numeros_5_digito_ingles from function_object
+end type
+
+forward prototypes
+global function string f_convetir_numeros_5_digito_ingles (readonly long numero_convertidor)
+end prototypes
+
+global function string f_convetir_numeros_5_digito_ingles (readonly long numero_convertidor);string ls_cantidad, ls_num_convertir, ls_extrae
+long ll_largo
+integer li_pos
+STRING ls_miles[9]  ={"ONE MILLION","TWO MILLION", "THREE MILLION","FOUR MILLION","FIVE MILLION","SIX MILLION","SEVEN MILLION","EIGHT MILLION","NINE MILLION"}
+ls_num_convertir =string(numero_convertidor)
+//messagebox(" 5  numero_convertidor  5   ",string(numero_convertidor))
+ll_largo = Len (ls_num_convertir)
+IF ll_largo = 7  then  //and ll_largo < 7
+   ls_extrae = mid(ls_num_convertir, 1,1)
+	ls_cantidad = ls_miles[integer(ls_extrae)]
+end if
+ IF ll_largo =8 then
+	ls_extrae = mid(ls_num_convertir, 1,2)
+	ls_cantidad = f_convetir_numeros_2_digito_mil_ingles(long(ls_extrae))
+	ls_cantidad = ls_cantidad +" MILLION"
+ end if
+  IF ll_largo > 7 then
+	ls_extrae = mid(ls_num_convertir, 1,3)
+	ls_cantidad = f_convetir_numeros_3_digito_ingles(long(ls_extrae))
+	ls_cantidad = ls_cantidad +" MILLION" 
+ end if
+// next
+//else // es 1 digito de milenio
+//	ls_extrae = mid(ls_num_convertir, 1,1)
+//	ls_cantidad = ls_miles[integer(ls_extrae)]
+//end if
+ ls_cantidad = ls_cantidad +" "+ f_convetir_numeros_4_digito_ingles(numero_convertidor)
+return (ls_cantidad)
+end function
+

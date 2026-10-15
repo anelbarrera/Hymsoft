@@ -1,0 +1,57 @@
+﻿//objectcomments (D)para la clave de los precios
+global type gf_clave_precios from function_object
+end type
+
+forward prototypes
+global function string gf_clave_precios (double li_precios)
+end prototypes
+
+global function string gf_clave_precios (double li_precios);string cadena_precios, ls_precios, cadena_final,item,clave
+integer longitud,contador
+
+select para_clave_precios  //Clave de Precios
+into : cadena_precios
+from inaparam
+where (para_g_financiero =: str.g_financiero) and
+      (para_empresa =: str.empresa);
+//	messagebox('clave',cadena_precios)
+		
+ls_precios = string(round(li_precios,2))
+//messagebox('cadena precio',ls_precios)
+longitud = len(ls_precios)
+//messagebox('longitud',string(longitud))
+for contador = 1 to longitud
+	item = mid(ls_precios,contador,1)
+	if item = '0' then
+		clave = mid(cadena_precios,1,1)
+	elseif item = '1' then
+		clave = mid(cadena_precios,2,1)
+	elseif item = '2' then
+		clave = mid(cadena_precios,3,1)
+	elseif item = '3' then
+		clave = mid(cadena_precios,4,1)
+	elseif item = '4' then
+		clave = mid(cadena_precios,5,1)
+	elseif item = '5' then
+		clave = mid(cadena_precios,6,1)
+	elseif item = '6' then
+		clave = mid(cadena_precios,7,1)
+	elseif item = '7' then
+		clave = mid(cadena_precios,8,1)
+	elseif item = '8' then
+		clave = mid(cadena_precios,9,1)
+	elseif item = '9' then
+		clave = mid(cadena_precios,10,1)
+	elseif item = '.' then
+		clave = mid(cadena_precios,11,1)
+	else
+		clave = item
+	end if
+	cadena_final = cadena_final + clave
+next
+
+return cadena_final
+
+
+end function
+

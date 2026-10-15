@@ -1,0 +1,31 @@
+﻿//objectcomments Que no pueda meter una fecha menor a la conciliacion
+global type gf_valida_fecha_bancos from function_object
+end type
+
+forward prototypes
+global function boolean gf_valida_fecha_bancos (datetime adt_fecha_tran, string as_cuenta, integer ai_banco)
+end prototypes
+
+global function boolean gf_valida_fecha_bancos (datetime adt_fecha_tran, string as_cuenta, integer ai_banco);datetime ldt_fecha_banco
+integer li_ann, li_mes
+
+  SELECT bamcuent.cuen_fecha_conci  
+    INTO :ldt_fecha_banco
+    FROM bamcuent  
+   WHERE ( bamcuent.cuen_g_financiero = :str.g_financiero ) AND  
+         ( bamcuent.cuen_empresa = :str.empresa ) AND  
+         ( bamcuent.cuen_banco = :ai_banco ) AND  
+         ( bamcuent.cuen_no_cuenta = :as_cuenta )   ;	
+	if sqlca.sqlcode = -1 then
+		gf_mensaje('','Error al Seleccionar fechas '+sqlca.sqlerrtext,1,1,'E')
+		return false
+	end if
+
+	if adt_fecha_tran <= ldt_fecha_banco then
+		gf_mensaje('','Periodo de Conciliacion Bancaria Cerrado, Verifique !!!',1,1,'E')
+		return false
+	end if
+	
+return true
+end function
+

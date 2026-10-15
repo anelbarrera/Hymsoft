@@ -1,0 +1,30 @@
+﻿//objectcomments Devuelve la unidad de Venta del Producto 1, 12, 300, etc.
+global type gf_unidad_venta from function_object
+end type
+
+forward prototypes
+global function any gf_unidad_venta (string unidad_venta, long tipo_medida)
+end prototypes
+
+global function any gf_unidad_venta (string unidad_venta, long tipo_medida);	//* Carga Los Datos de Converción de la Unidad del Producto a la Nueva unidad o 
+	// Cantidad de unidades minimas de la unidad de Venta
+			
+	//Devuelve 1 si la unidad del producto es PZ : Piezas
+	//  "      12        "                    DO : Docenas
+	//  "      300        "                   GR : Gruesas
+
+	long ll_mconver_venta
+
+  SELECT isnull(inamedid.medi_cantidad,0)
+  INTO  :ll_mconver_venta
+  FROM  inamedid  
+  WHERE inamedid.medi_medida = :unidad_venta;
+  
+//inamedid.medi_tipo_medida = :tipo_medida and						  
+	if sqlca.sqlcode = -1 then
+		gf_mensaje("","Error en el Select "+sqlca.sqlerrtext,1,1,"E")
+	end if
+
+return(ll_mconver_venta)
+end function
+

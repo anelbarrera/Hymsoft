@@ -1,0 +1,21 @@
+﻿//objectcomments Cambia el Formato de la Fecha, de dd/mm/yyyy  a  mm/dd/yyyy
+global type gf_cambia_fecha from function_object
+end type
+
+forward prototypes
+global function string gf_cambia_fecha (string as_fecha, integer ai_suma)
+end prototypes
+
+global function string gf_cambia_fecha (string as_fecha, integer ai_suma);//Funcion que cambia el formato de la fecha, de dia/mes/año a mes/dia/año.
+//Recibe otro argumento, que suma 1 a los dias, cuando es la fecha final,
+//para poner < a.. en el SQL
+
+string	ls_hora = ''
+if ai_suma = 1 then
+	ls_hora = " 23:59:59"
+end if
+//return (mid(as_fecha,4,2)+"/"+string(integer(mid(as_fecha,1,2))+ai_suma)+"/"+mid(as_fecha,7))
+return (mid(as_fecha,4,2)+"/"+string(integer(mid(as_fecha,1,2)))+"/"+mid(as_fecha,7)+ls_hora)
+
+end function
+

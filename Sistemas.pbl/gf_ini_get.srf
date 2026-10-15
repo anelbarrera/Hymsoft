@@ -1,0 +1,23 @@
+﻿//objectcomments Función que Lee el Registro de Windows y Asigna los Valores a la Estructura Global
+global type gf_ini_get from function_object
+end type
+
+forward prototypes
+global function integer gf_ini_get ()
+end prototypes
+
+global function integer gf_ini_get ();string ls_grupo_finan, ls_empresa, ls_ruta
+/* Lee el Registro de Inicio de Aplicaciones desde windows */
+
+		/*Para Verificar si el Usuario puede entrar o no al Sistema*/			
+		if RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH", &
+			"ini", RegString!, str.path) = -1 then
+			return 0
+		end if
+		
+
+return 1 //Todo bien
+
+end function
+

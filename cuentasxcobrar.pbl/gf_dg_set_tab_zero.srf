@@ -1,0 +1,17 @@
+﻿global type gf_dg_set_tab_zero from function_object
+end type
+
+forward prototypes
+global subroutine gf_dg_set_tab_zero (datawindow adw_1)
+end prototypes
+
+global subroutine gf_dg_set_tab_zero (datawindow adw_1);Integer li_column, li_i
+
+
+li_column = Integer(adw_1.Describe("DataWindow.Column.Count"))
+
+FOR li_i=1 TO li_column
+	adw_1.Modify("#" + string(li_i) + ".TabSequence = 0")
+NEXT
+end subroutine
+

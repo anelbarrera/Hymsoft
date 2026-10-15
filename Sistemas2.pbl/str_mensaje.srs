@@ -1,0 +1,8 @@
+﻿global type str_mensaje from structure
+	string		title
+	string		error_1
+	string		error_2
+	boolean		boton
+	string		v_abrir
+end type
+

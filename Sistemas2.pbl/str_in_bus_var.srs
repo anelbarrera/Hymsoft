@@ -1,0 +1,10 @@
+﻿global type str_in_bus_var from structure
+	string		opcion
+	window		ventana
+	string		transaccion
+	string		concepto
+	long		secuencia
+	long		ann
+	string		aplicacion
+end type
+

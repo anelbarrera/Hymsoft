@@ -1,0 +1,12 @@
+﻿global type f_tz_anio_proceso from function_object
+end type
+
+forward prototypes
+global function integer f_tz_anio_proceso ()
+end prototypes
+
+global function integer f_tz_anio_proceso ();//Función que devuelve el año de proceso
+return(w_fa_fondo.str_param.anio)
+
+end function
+

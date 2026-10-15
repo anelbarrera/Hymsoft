@@ -1,0 +1,1210 @@
+﻿//objectcomments Menu Ancestro (NO TOCAR NO HEREDAR)
+forward
+global type m_granpa from menu
+end type
+type m_archivo from menu within m_granpa
+end type
+type m_cerrar from menu within m_archivo
+end type
+type m_guardar from menu within m_archivo
+end type
+type m_-0 from menu within m_archivo
+end type
+type m_imprimir from menu within m_archivo
+end type
+type m_-2 from menu within m_archivo
+end type
+type m_salir from menu within m_archivo
+end type
+type m_archivo from menu within m_granpa
+m_cerrar m_cerrar
+m_guardar m_guardar
+m_-0 m_-0
+m_imprimir m_imprimir
+m_-2 m_-2
+m_salir m_salir
+end type
+type m_edicin from menu within m_granpa
+end type
+type m_adicionar from menu within m_edicin
+end type
+type m_insertar from menu within m_edicin
+end type
+type m_eliminar from menu within m_edicin
+end type
+type m_-1 from menu within m_edicin
+end type
+type m_siguienteregistro from menu within m_edicin
+end type
+type m_registroanterior from menu within m_edicin
+end type
+type m_-3 from menu within m_edicin
+end type
+type m_primerregistro from menu within m_edicin
+end type
+type m_ultimoregistro from menu within m_edicin
+end type
+type m_-4 from menu within m_edicin
+end type
+type m_filtrar from menu within m_edicin
+end type
+type m_sortear from menu within m_edicin
+end type
+type m_edicin from menu within m_granpa
+m_adicionar m_adicionar
+m_insertar m_insertar
+m_eliminar m_eliminar
+m_-1 m_-1
+m_siguienteregistro m_siguienteregistro
+m_registroanterior m_registroanterior
+m_-3 m_-3
+m_primerregistro m_primerregistro
+m_ultimoregistro m_ultimoregistro
+m_-4 m_-4
+m_filtrar m_filtrar
+m_sortear m_sortear
+end type
+type m_ventanas from menu within m_granpa
+end type
+type m_horizontal from menu within m_ventanas
+end type
+type m_vertical from menu within m_ventanas
+end type
+type m_pantallacompleta from menu within m_ventanas
+end type
+type m_cascada from menu within m_ventanas
+end type
+type m_-6 from menu within m_ventanas
+end type
+type m_zoom from menu within m_ventanas
+end type
+type m_ventanas from menu within m_granpa
+m_horizontal m_horizontal
+m_vertical m_vertical
+m_pantallacompleta m_pantallacompleta
+m_cascada m_cascada
+m_-6 m_-6
+m_zoom m_zoom
+end type
+type m_ayuda from menu within m_granpa
+end type
+type m_acercadeharr from menu within m_ayuda
+end type
+type m_ayuda from menu within m_granpa
+m_acercadeharr m_acercadeharr
+end type
+global type m_granpa from menu
+m_archivo m_archivo
+m_edicin m_edicin
+m_ventanas m_ventanas
+m_ayuda m_ayuda
+end type
+end forward
+
+global type m_granpa from menu
+m_archivo m_archivo
+m_edicin m_edicin
+m_ventanas m_ventanas
+m_ayuda m_ayuda
+end type
+global m_granpa m_granpa
+
+on m_granpa.create
+m_granpa=this
+call super::create
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_archivo=create m_archivo
+this.m_edicin=create m_edicin
+this.m_ventanas=create m_ventanas
+this.m_ayuda=create m_ayuda
+this.Item[UpperBound(this.Item)+1]=this.m_archivo
+this.Item[UpperBound(this.Item)+1]=this.m_edicin
+this.Item[UpperBound(this.Item)+1]=this.m_ventanas
+this.Item[UpperBound(this.Item)+1]=this.m_ayuda
+end on
+
+on m_granpa.destroy
+call super::destroy
+destroy(this.m_archivo)
+destroy(this.m_edicin)
+destroy(this.m_ventanas)
+destroy(this.m_ayuda)
+end on
+
+type m_archivo from menu within m_granpa
+m_cerrar m_cerrar
+m_guardar m_guardar
+m_-0 m_-0
+m_imprimir m_imprimir
+m_-2 m_-2
+m_salir m_salir
+end type
+
+on m_archivo.create
+call super::create
+this.tag = "m_granpa.m_archivo"
+this.text = "&Archivo"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_cerrar=create m_cerrar
+this.m_guardar=create m_guardar
+this.m_-0=create m_-0
+this.m_imprimir=create m_imprimir
+this.m_-2=create m_-2
+this.m_salir=create m_salir
+this.Item[UpperBound(this.Item)+1]=this.m_cerrar
+this.Item[UpperBound(this.Item)+1]=this.m_guardar
+this.Item[UpperBound(this.Item)+1]=this.m_-0
+this.Item[UpperBound(this.Item)+1]=this.m_imprimir
+this.Item[UpperBound(this.Item)+1]=this.m_-2
+this.Item[UpperBound(this.Item)+1]=this.m_salir
+end on
+
+on m_archivo.destroy
+call super::destroy
+destroy(this.m_cerrar)
+destroy(this.m_guardar)
+destroy(this.m_-0)
+destroy(this.m_imprimir)
+destroy(this.m_-2)
+destroy(this.m_salir)
+end on
+
+type m_cerrar from menu within m_archivo
+end type
+
+on m_cerrar.create
+call super::create
+this.tag = "m_granpa.m_archivo.m_cerrar"
+this.text = "&Cerrar~tAlt+C"
+this.shortcut = 579
+this.microhelp = "Cerrar Ventana"
+this.toolbaritemtext = "Cerrar"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cerrar.destroy
+call super::destroy
+end on
+
+type m_guardar from menu within m_archivo
+end type
+
+on m_guardar.create
+call super::create
+this.tag = "m_granpa.m_archivo.m_guardar"
+this.text = "&Guardar~tAlt+G"
+this.enabled = false
+this.shortcut = 583
+this.microhelp = "Guardar"
+this.toolbaritemtext = "Guardar"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.triggerevent("ue_preaceptar")
+end event
+
+on m_guardar.destroy
+call super::destroy
+end on
+
+type m_-0 from menu within m_archivo
+end type
+
+on m_-0.create
+call super::create
+this.tag = "m_granpa.m_archivo.m_-0"
+this.visible = false
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-0.destroy
+call super::destroy
+end on
+
+type m_imprimir from menu within m_archivo
+end type
+
+on m_imprimir.create
+call super::create
+this.tag = "m_granpa.m_archivo.m_imprimir"
+this.visible = false
+this.text = "I&mprimir~tAlt+I"
+this.enabled = false
+this.shortcut = 585
+this.microhelp = "Imprimir "
+this.toolbaritemtext = "Imprimir"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_imprimir.destroy
+call super::destroy
+end on
+
+type m_-2 from menu within m_archivo
+end type
+
+on m_-2.create
+call super::create
+this.tag = "m_granpa.m_archivo.m_-2"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_salir from menu within m_archivo
+end type
+
+on m_salir.create
+call super::create
+this.tag = "m_granpa.m_archivo.m_salir"
+this.text = "&Salir~tAlt+S"
+this.shortcut = 595
+this.microhelp = "Salir de la Aplicación"
+this.toolbaritemname = "exit!"
+this.toolbaritemtext = "Salir"
+this.toolbaritemspace = 1
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;close(parentwindow)
+end event
+
+on m_salir.destroy
+call super::destroy
+end on
+
+type m_edicin from menu within m_granpa
+m_adicionar m_adicionar
+m_insertar m_insertar
+m_eliminar m_eliminar
+m_-1 m_-1
+m_siguienteregistro m_siguienteregistro
+m_registroanterior m_registroanterior
+m_-3 m_-3
+m_primerregistro m_primerregistro
+m_ultimoregistro m_ultimoregistro
+m_-4 m_-4
+m_filtrar m_filtrar
+m_sortear m_sortear
+end type
+
+on m_edicin.create
+call super::create
+this.tag = "m_granpa.m_edicin"
+this.visible = false
+this.text = "&Edición"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_adicionar=create m_adicionar
+this.m_insertar=create m_insertar
+this.m_eliminar=create m_eliminar
+this.m_-1=create m_-1
+this.m_siguienteregistro=create m_siguienteregistro
+this.m_registroanterior=create m_registroanterior
+this.m_-3=create m_-3
+this.m_primerregistro=create m_primerregistro
+this.m_ultimoregistro=create m_ultimoregistro
+this.m_-4=create m_-4
+this.m_filtrar=create m_filtrar
+this.m_sortear=create m_sortear
+this.Item[UpperBound(this.Item)+1]=this.m_adicionar
+this.Item[UpperBound(this.Item)+1]=this.m_insertar
+this.Item[UpperBound(this.Item)+1]=this.m_eliminar
+this.Item[UpperBound(this.Item)+1]=this.m_-1
+this.Item[UpperBound(this.Item)+1]=this.m_siguienteregistro
+this.Item[UpperBound(this.Item)+1]=this.m_registroanterior
+this.Item[UpperBound(this.Item)+1]=this.m_-3
+this.Item[UpperBound(this.Item)+1]=this.m_primerregistro
+this.Item[UpperBound(this.Item)+1]=this.m_ultimoregistro
+this.Item[UpperBound(this.Item)+1]=this.m_-4
+this.Item[UpperBound(this.Item)+1]=this.m_filtrar
+this.Item[UpperBound(this.Item)+1]=this.m_sortear
+end on
+
+on m_edicin.destroy
+call super::destroy
+destroy(this.m_adicionar)
+destroy(this.m_insertar)
+destroy(this.m_eliminar)
+destroy(this.m_-1)
+destroy(this.m_siguienteregistro)
+destroy(this.m_registroanterior)
+destroy(this.m_-3)
+destroy(this.m_primerregistro)
+destroy(this.m_ultimoregistro)
+destroy(this.m_-4)
+destroy(this.m_filtrar)
+destroy(this.m_sortear)
+end on
+
+type m_adicionar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_adicionar')
+end event
+
+on m_adicionar.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_adicionar"
+this.visible = false
+this.text = "&Adicionar"
+this.enabled = false
+this.toolbaritemtext = "Adicionar"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_adicionar.destroy
+call super::destroy
+end on
+
+type m_insertar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_insertar')
+end event
+
+on m_insertar.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_insertar"
+this.text = "&Insertar"
+this.microhelp = "Inserta un Nuevo Registro"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_insertar.destroy
+call super::destroy
+end on
+
+type m_eliminar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_pre_eliminar')
+end event
+
+on m_eliminar.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_eliminar"
+this.visible = false
+this.text = "&Eliminar"
+this.microhelp = "Eliminar Registro"
+this.toolbaritemtext = "Eliminar"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_eliminar.destroy
+call super::destroy
+end on
+
+type m_-1 from menu within m_edicin
+end type
+
+on m_-1.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_-1"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from menu within m_edicin
+end type
+
+on m_siguienteregistro.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_siguienteregistro"
+this.visible = false
+this.text = "&Siguiente Registro"
+this.microhelp = "Siguiente Registro"
+this.toolbaritemtext = "Siguiente Registro"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_siguiente_reg')
+end event
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from menu within m_edicin
+end type
+
+on m_registroanterior.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_registroanterior"
+this.visible = false
+this.text = "&Registro Anterior"
+this.microhelp = "Registro Anterior"
+this.toolbaritemtext = "Registro Anterior"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_reg_anterior')
+end event
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_-3 from menu within m_edicin
+end type
+
+on m_-3.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_-3"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_primerregistro from menu within m_edicin
+end type
+
+on m_primerregistro.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_primerregistro"
+this.visible = false
+this.text = "&Primer Registro"
+this.microhelp = "Primer Registro"
+this.toolbaritemtext = "Primer Registro"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_primer_reg')
+end event
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from menu within m_edicin
+end type
+
+on m_ultimoregistro.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_ultimoregistro"
+this.visible = false
+this.text = "&Ultimo Registro"
+this.microhelp = "Ultimo Registro"
+this.toolbaritemtext = "Ultimo Registro"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_ultimo_reg')
+end event
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-4 from menu within m_edicin
+end type
+
+on m_-4.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_-4"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-4.destroy
+call super::destroy
+end on
+
+type m_filtrar from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_filter')
+end event
+
+on m_filtrar.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_filtrar"
+this.text = "&Filtrar"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_filtrar.destroy
+call super::destroy
+end on
+
+type m_sortear from menu within m_edicin
+end type
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_sort')
+end event
+
+on m_sortear.create
+call super::create
+this.tag = "m_granpa.m_edicin.m_sortear"
+this.text = "&Sortear"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_sortear.destroy
+call super::destroy
+end on
+
+type m_ventanas from menu within m_granpa
+m_horizontal m_horizontal
+m_vertical m_vertical
+m_pantallacompleta m_pantallacompleta
+m_cascada m_cascada
+m_-6 m_-6
+m_zoom m_zoom
+end type
+
+on m_ventanas.create
+call super::create
+this.tag = "m_granpa.m_ventanas"
+this.text = "&Ventanas"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_horizontal=create m_horizontal
+this.m_vertical=create m_vertical
+this.m_pantallacompleta=create m_pantallacompleta
+this.m_cascada=create m_cascada
+this.m_-6=create m_-6
+this.m_zoom=create m_zoom
+this.Item[UpperBound(this.Item)+1]=this.m_horizontal
+this.Item[UpperBound(this.Item)+1]=this.m_vertical
+this.Item[UpperBound(this.Item)+1]=this.m_pantallacompleta
+this.Item[UpperBound(this.Item)+1]=this.m_cascada
+this.Item[UpperBound(this.Item)+1]=this.m_-6
+this.Item[UpperBound(this.Item)+1]=this.m_zoom
+end on
+
+on m_ventanas.destroy
+call super::destroy
+destroy(this.m_horizontal)
+destroy(this.m_vertical)
+destroy(this.m_pantallacompleta)
+destroy(this.m_cascada)
+destroy(this.m_-6)
+destroy(this.m_zoom)
+end on
+
+type m_horizontal from menu within m_ventanas
+end type
+
+on m_horizontal.create
+call super::create
+this.tag = "m_granpa.m_ventanas.m_horizontal"
+this.text = "&Horizontal"
+this.microhelp = "Organización Horizontal"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().ArrangeSheets(tilehorizontal!)
+end event
+
+on m_horizontal.destroy
+call super::destroy
+end on
+
+type m_vertical from menu within m_ventanas
+end type
+
+on m_vertical.create
+call super::create
+this.tag = "m_granpa.m_ventanas.m_vertical"
+this.text = "&Vertical"
+this.microhelp = "Organización Vertical"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().ArrangeSheets(tile!)
+end event
+
+on m_vertical.destroy
+call super::destroy
+end on
+
+type m_pantallacompleta from menu within m_ventanas
+end type
+
+on m_pantallacompleta.create
+call super::create
+this.tag = "m_granpa.m_ventanas.m_pantallacompleta"
+this.text = "&Pantalla Completa"
+this.microhelp = "Pantalla Completa"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().ArrangeSheets(layer!)
+end event
+
+on m_pantallacompleta.destroy
+call super::destroy
+end on
+
+type m_cascada from menu within m_ventanas
+end type
+
+on m_cascada.create
+call super::create
+this.tag = "m_granpa.m_ventanas.m_cascada"
+this.text = "&Cascada"
+this.microhelp = "Organización en Cascada"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().ArrangeSheets(cascade!)
+end event
+
+on m_cascada.destroy
+call super::destroy
+end on
+
+type m_-6 from menu within m_ventanas
+end type
+
+on m_-6.create
+call super::create
+this.tag = "m_granpa.m_ventanas.m_-6"
+this.text = "-"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-6.destroy
+call super::destroy
+end on
+
+type m_zoom from menu within m_ventanas
+end type
+
+on m_zoom.create
+call super::create
+this.tag = "m_granpa.m_ventanas.m_zoom"
+this.text = "&Zoom"
+this.microhelp = "Aumento Visual"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_zoom.destroy
+call super::destroy
+end on
+
+type m_ayuda from menu within m_granpa
+m_acercadeharr m_acercadeharr
+end type
+
+on m_ayuda.create
+call super::create
+this.tag = "m_granpa.m_ayuda"
+this.text = "A&yuda"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_acercadeharr=create m_acercadeharr
+this.Item[UpperBound(this.Item)+1]=this.m_acercadeharr
+end on
+
+on m_ayuda.destroy
+call super::destroy
+destroy(this.m_acercadeharr)
+end on
+
+type m_acercadeharr from menu within m_ayuda
+end type
+
+on m_acercadeharr.create
+call super::create
+this.tag = "m_granpa.m_ayuda.m_acercadeharr"
+this.text = "Acerca de H.A.R.R."
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 8388608
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 15780518
+this.toolbarhighlightcolor = 8388608
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;OpenSheet(w_acerca_de,parentwindow ,2, Original!)
+end event
+
+on m_acercadeharr.destroy
+call super::destroy
+end on
+

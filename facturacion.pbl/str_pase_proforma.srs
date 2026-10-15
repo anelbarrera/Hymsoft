@@ -1,0 +1,9 @@
+﻿global type str_pase_proforma from structure
+	string		proforma
+	integer		ann
+	string		referencia[]
+	decimal{3}		cantidad[]
+	integer		fraccion[]
+	integer		linea[]
+end type
+

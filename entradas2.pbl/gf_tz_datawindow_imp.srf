@@ -1,0 +1,40 @@
+﻿global type gf_tz_datawindow_imp from function_object
+end type
+
+forward prototypes
+global subroutine gf_tz_datawindow_imp (integer li_page, long ll_row, ref string ls_datawindow)
+end prototypes
+
+global subroutine gf_tz_datawindow_imp (integer li_page, long ll_row, ref string ls_datawindow);Long ll_blanco
+If ll_row > 0 then li_page++
+
+If ll_row > 0 then ll_blanco  = 10 - ll_row
+
+If ll_blanco >= li_page and li_page > 1 then
+	// Las líneas en blanco de la última página son = al pagecount()
+	If ll_blanco = li_page then	// Data window  de 9L	
+		ls_datawindow += "10"
+	else
+		// Las líneas en blanco de la última página son > al pagecount()
+		// Salen a más de 2 líneas en blanco por página
+		If ll_blanco /li_page >= 2 then
+			ls_datawindow += "8"
+		else
+			ls_datawindow += "10"	
+		end if
+	end if
+else
+	If (ll_blanco = 0 ) or (ll_blanco < li_page and li_page > 1 ) then	
+		ls_datawindow += "10"	
+	elseif ll_row < 10 then
+		Choose case ll_row
+			case 9
+				ls_datawindow += "10"	
+			case else
+				ls_datawindow += "8"	
+		end choose
+	end if					
+end if
+
+end subroutine
+

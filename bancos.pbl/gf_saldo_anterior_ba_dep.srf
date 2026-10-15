@@ -1,0 +1,88 @@
+﻿global type gf_saldo_anterior_ba_dep from function_object
+end type
+
+forward prototypes
+global function decimal gf_saldo_anterior_ba_dep (integer banco, string cuenta, datetime fecha_desde, datetime fecha, integer mayores_a_la_fecha)
+end prototypes
+
+global function decimal gf_saldo_anterior_ba_dep (integer banco, string cuenta, datetime fecha_desde, datetime fecha, integer mayores_a_la_fecha);decimal ld_monto, ld_monto_conci ,ld_saldo_anterior, ld_saldo_inicial
+datetime ldt_fecha_conci, ldt_fecha_saldo_inicial
+  
+ if mayores_a_la_fecha = 0 then
+	
+			SELECT isnull(sum( batdiari.btdi_monto),0)
+			INTO  :ld_monto
+			FROM batdiari  
+			WHERE ( batdiari.btdi_g_financiero = :str.g_financiero  ) AND  
+					( batdiari.btdi_empresa = :str.empresa ) AND  
+					( batdiari.btdi_banco = :banco ) AND  
+					( batdiari.btdi_no_cuenta = :cuenta ) AND  
+					( batdiari.btdi_fecha_habilita_deposito >= :fecha_desde ) AND		//Dateadd(dd,1,:fecha) ) AND  
+					( batdiari.btdi_fecha_habilita_deposito <= :fecha ) AND	
+					( batdiari.btdi_tipo_transaccion in ('DE','SD') ) AND				
+					( batdiari.btdi_estado <> 'X' );			
+				if sqlca.sqlcode = -1 then
+					gf_mensaje('','Error al buscar saldo '+sqlca.sqlerrtext,1,1,'E')
+				end if
+								
+			 ld_saldo_anterior = ld_monto
+		
+			SELECT isnull(sum( case btdi_naturaleza when 'D' then batdiari.btdi_monto else - batdiari.btdi_monto end),0)
+			INTO  :ld_monto
+			FROM batdiari  
+			WHERE ( batdiari.btdi_g_financiero = :str.g_financiero  ) AND  
+					( batdiari.btdi_empresa = :str.empresa ) AND  
+					( batdiari.btdi_banco = :banco ) AND  
+					( batdiari.btdi_no_cuenta = :cuenta ) AND  
+					( batdiari.btdi_fecha_tran >= :fecha_desde ) AND		//Dateadd(dd,1,:fecha) ) AND  
+					( batdiari.btdi_fecha_tran <= :fecha ) AND
+					( batdiari.btdi_tipo_transaccion not in ('DE','SD') ) AND				
+					( batdiari.btdi_estado <> 'X' );			
+				if sqlca.sqlcode = -1 then
+					gf_mensaje('','Error al buscar saldo '+sqlca.sqlerrtext,1,1,'E')
+				end if
+	
+	
+			ld_saldo_anterior = ld_saldo_anterior - abs(ld_monto)
+
+else //Para que busque los valores mayores a 5 dias habiles
+
+		SELECT isnull(sum( batdiari.btdi_monto),0)
+			INTO  :ld_monto
+			FROM batdiari  
+			WHERE ( batdiari.btdi_g_financiero = :str.g_financiero  ) AND  
+					( batdiari.btdi_empresa = :str.empresa ) AND  
+					( batdiari.btdi_banco = :banco ) AND  
+					( batdiari.btdi_no_cuenta = :cuenta ) AND  
+					( batdiari.btdi_fecha_habilita_deposito >= :fecha_desde ) AND		//Dateadd(dd,1,:fecha) ) AND  
+					( batdiari.btdi_fecha_habilita_deposito <= Dateadd(dd,3,:fecha_desde) ) AND  					
+					( batdiari.btdi_tipo_transaccion in ('DE','SD') ) AND				
+					( batdiari.btdi_estado <> 'X' );			
+				if sqlca.sqlcode = -1 then
+					gf_mensaje('','Error al buscar saldo '+sqlca.sqlerrtext,1,1,'E')
+				end if
+				
+			 ld_saldo_anterior = ld_monto
+		
+			SELECT isnull(sum( case btdi_naturaleza when 'D' then batdiari.btdi_monto else - batdiari.btdi_monto end),0)
+			INTO  :ld_monto
+			FROM batdiari  
+			WHERE ( batdiari.btdi_g_financiero = :str.g_financiero  ) AND  
+					( batdiari.btdi_empresa = :str.empresa ) AND  
+					( batdiari.btdi_banco = :banco ) AND  
+					( batdiari.btdi_no_cuenta = :cuenta ) AND  
+					( batdiari.btdi_fecha_tran >= :fecha_desde ) AND		//Dateadd(dd,1,:fecha) ) AND  
+					( batdiari.btdi_fecha_habilita_deposito <= Dateadd(dd,3,:fecha_desde) ) AND  										
+					( batdiari.btdi_tipo_transaccion not in ('DE','SD') ) AND				
+					( batdiari.btdi_estado <> 'X' );			
+				if sqlca.sqlcode = -1 then
+					gf_mensaje('','Error al buscar saldo '+sqlca.sqlerrtext,1,1,'E')
+				end if	
+	
+			ld_saldo_anterior = ld_saldo_anterior - abs(ld_monto)
+			
+end if
+
+return (ld_saldo_anterior)
+end function
+

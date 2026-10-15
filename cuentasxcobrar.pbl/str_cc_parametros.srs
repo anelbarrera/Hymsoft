@@ -1,0 +1,26 @@
+﻿//objectcomments Estructura de parámetros del Sistema de Cuentas por Cobrar
+global type str_cc_parametros from structure
+	integer		mes
+	integer		ano
+	datetime		ult_morosidad
+	datetime		proxcicaj
+	datetime		ulticicaj
+	string		nombre_clasificacion
+	string		nombre_sub_clasificacion
+	string		mens_aldia
+	string		mens_mora
+	string		mensaje_renovacion
+	integer		tiempo_aviso
+	character		aplica_morosidad
+	string		enlace_conta
+	string		empre_logo
+	string		empre_fondo
+	string		empre_logaplic
+	date		fecha_inicio
+	boolean		captura_inicial
+	boolean		estado
+	string		imp_informe
+	date		fecha_saldo_inicial
+	integer		tipo_bd
+end type
+

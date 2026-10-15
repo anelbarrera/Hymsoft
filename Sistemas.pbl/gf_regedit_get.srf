@@ -1,0 +1,242 @@
+﻿//objectcomments Función que Lee el Registro de Windows y Asigna los Valores a la Estructura Global
+global type gf_regedit_get from function_object
+end type
+
+forward prototypes
+global function integer gf_regedit_get (string as_aplicacion)
+end prototypes
+
+global function integer gf_regedit_get (string as_aplicacion);string ls_grupo_finan, ls_empresa, ls_entrar
+/* Lee el Registro de Inicio de Aplicaciones desde windows */
+	if ge_environment.OsType = Windows! then 
+		/*Para Verificar si el Usuario puede entrar o no al Sistema*/			
+		if RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+as_aplicacion, &
+			"Entrar", RegString!, ls_entrar) = -1 then
+			if RegistryGet( &
+				"HKEY_LOCAL_MACHINE\Config\ HAppl\Acceso"+as_aplicacion, &
+				"Entrar", RegString!, ls_entrar) = -1 then
+				mensaje("Atencion","Usted no tiene Autorización para Entrar al Sistema","")
+				halt close	
+			end if
+		end if
+		
+		//Si no tiene acceso retorna -2 y luego sale del sistema, de lo contrario, resetea 
+		//el campo a '0' nuevamente
+//		if ls_entrar <> '1' then		
+//			mensaje("Atencion","Usted no tiene Autorización para Entrar al Sistema","")
+//			halt close	
+//		end if
+		
+	
+		/*Para Verificar si el Usuario puede entrar o no al Sistema*/			
+		if RegistrySet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+as_aplicacion, &
+			"Entrar", RegString!, '0') = -1 then
+			mensaje("Aviso","Error al Asignar la Autorización de Entrada ",sqlca.sqlerrtext)
+			return -1
+		end if
+		
+		/*Aplicacion*/
+		if	RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+as_aplicacion, &
+			"Aplicacion", RegString!, str.aplicacion) = -1 then		
+			if	RegistryGet( &
+				"HKEY_LOCAL_MACHINE\Config\ HAppl\Acceso"+as_aplicacion, &
+				"Aplicacion", RegString!, str.aplicacion) = -1 then		
+				mensaje("Aviso","Error al Obtener la Aplicacion", sqlca.sqlerrtext)
+				return -1
+			END IF
+		end if		
+		/*Usuario del Sistema*/
+		if	RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+			"Usuario", RegString!, str.usuario) = -1 then
+			if	RegistryGet( &
+				"HKEY_LOCAL_MACHINE\Config\ HAppl\Acceso"+str.aplicacion, &
+				"Usuario", RegString!, str.usuario) = -1 then
+				mensaje("Aviso","Error al Obtener el Usuario del Sistema", sqlca.sqlerrtext)
+				return -1
+			end if
+		end if
+	
+		/*Nombre de la Aplicacion*/
+//		if RegistryGet( &
+//			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+//			"NombreAplicacion", RegString!, str.nombre_apli) = -1 then
+//				if RegistryGet( &
+//					"HKEY_LOCAL_MACHINE\Config\ HAppl\Acceso"+str.aplicacion, &
+//					"NombreAplicacion", RegString!, str.nombre_apli) = -1 then
+//					mensaje("Aviso","Error al Obtener el nombre de la Aplicacion ",sqlca.sqlerrtext)
+//					return -1
+//				end if			
+//		end if			
+		/*Grupo Financiero*/
+		if	RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+			"Str_grupo", RegString!, ls_grupo_finan) = -1 then
+			if	RegistryGet( &
+				"HKEY_LOCAL_MACHINE\Config\ HAppl\Acceso"+str.aplicacion, &
+				"Str_grupo", RegString!, ls_grupo_finan) = -1 then
+				mensaje("Aviso","Error al Obtener el Grupo Financiero", sqlca.sqlerrtext)
+				return -1
+			end if
+		end if
+
+		/*Empresa*/		
+		if RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+			"Str_empresa", RegString!,ls_empresa ) = -1 then
+			if RegistryGet( &
+				"HKEY_LOCAL_MACHINE\Config\ HAppl\Acceso"+str.aplicacion, &
+				"Str_empresa", RegString!,ls_empresa ) = -1 then
+				mensaje("Aviso","Error al Obtener la Empresa", sqlca.sqlerrtext)
+				return -1			
+			end if
+		end if
+
+		/*Usuario de windows*/
+		if RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+			"Str_WinUser", RegString!, str.win_user) = -1 then
+			if RegistryGet( &
+				"HKEY_LOCAL_MACHINE\Config\ HAppl\Acceso"+str.aplicacion, &
+				"Str_WinUser", RegString!, str.win_user) = -1 then
+				mensaje("Aviso","Error al Obtener el Usuario de Windows", sqlca.sqlerrtext)
+				return -1			
+			end if			
+		end if			
+
+		/*Nombre de la Maquina*/
+		if  RegistryGet( &
+			"HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ComputerName\Computername", &
+			"ComputerName", RegString!, str.maquina)	= -1 then
+			mensaje("Aviso","Error al Obtener el nombre de la máquina",sqlca.sqlerrtext)
+			return -1			
+		end if
+
+else //Si es NT
+		/*Para Verificar si el Usuario puede entrar o no al Sistema*/			
+		if RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+as_aplicacion, &
+			"Entrar", RegString!, ls_entrar) = -1 then
+			if RegistryGet( &
+				"HKEY_LOCAL_MACHINE\SOFTWARE\Config\ HAppl\Acceso"+as_aplicacion, &
+				"Entrar", RegString!, ls_entrar) = -1 then
+				mensaje("Atencion","Usted no tiene Autorización para Entrar al Sistema","")
+				halt close	
+			end if
+		end if
+		
+		//Si no tiene acceso retorna -2 y luego sale del sistema, de lo contrario, resetea 
+		//el campo a '0' nuevamente
+		if ls_entrar <> '1' then
+//			mensaje("Atencion","Usted no tiene Autorización para Entrar al Sistema","")
+//			halt close	
+		end if	
+		
+		/*Para Verificar si el Usuario puede entrar o no al Sistema*/			
+		if RegistrySet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+as_aplicacion, &
+			"Entrar", RegString!, '0') = -1 then
+			mensaje("Aviso","Error al Asignar la Autorización de Entrada ",sqlca.sqlerrtext)
+			return -1
+		end if	
+	
+		 /*Aplicacion*/
+		if	RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+as_aplicacion, &
+			"Aplicacion", RegString!, str.aplicacion) = -1 then		
+			if	RegistryGet( &
+				"HKEY_LOCAL_MACHINE\SOFTWARE\Config\ HAppl\Acceso"+as_aplicacion, &
+				"Aplicacion", RegString!, str.aplicacion) = -1 then		
+				mensaje("Aviso","Error al Obtener la Aplicacion", sqlca.sqlerrtext)
+				return -1			
+			end if					
+		end if
+		
+		/*Usuario del Sistema*/
+		if	RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+			"Usuario", RegString!, str.usuario) = -1 then
+			if	RegistryGet( &
+				"HKEY_LOCAL_MACHINE\SOFTWARE\Config\ HAppl\Acceso"+str.aplicacion, &
+				"Usuario", RegString!, str.usuario) = -1 then
+				mensaje("Aviso","Error al Obtener el Usuario del Sistema", sqlca.sqlerrtext)
+				return -1			
+			end if
+
+		end if
+	
+		/*Nombre de la Aplicacion*/
+//		if RegistryGet( &
+//			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+//			"NombreAplicacion", RegString!, str.nombre_apli) = -1 then
+//			if RegistryGet( &
+//				"HKEY_LOCAL_MACHINE\SOFTWARE\Config\ HAppl\Acceso"+str.aplicacion, &
+//				"NombreAplicacion", RegString!, str.nombre_apli) = -1 then
+//				mensaje("Aviso","Error al Obtener el nombre de la Aplicacion ",sqlca.sqlerrtext)
+//				return -1			
+//			end if			
+//
+//		end if			
+						
+		 /*Grupo Financiero*/
+		if	RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+			"Str_grupo", RegString!, ls_grupo_finan) = -1 then
+			if	RegistryGet( &
+				"HKEY_LOCAL_MACHINE\SOFTWARE\Config\ HAppl\Acceso"+str.aplicacion, &
+				"Str_grupo", RegString!, ls_grupo_finan) = -1 then
+				mensaje("Aviso","Error al Obtener el grupo financiero", sqlca.sqlerrtext)
+				return -1			
+			end if
+		end if
+		
+		 /*Empresa*/
+		if RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+			"Str_empresa", RegString!,ls_empresa ) = -1 then
+			if RegistryGet( &
+				"HKEY_LOCAL_MACHINE\SOFTWARE\Config\ HAppl\Acceso"+str.aplicacion, &
+				"Str_empresa", RegString!,ls_empresa ) = -1 then
+				mensaje("Aviso","Error al Obtener la empresa", sqlca.sqlerrtext)
+				return -1			
+			end if
+
+		end if
+
+		/*Nombre del Usuario de Windows*/
+		if RegistryGet( &
+			"HKEY_CURRENT_USER\Software\JavaH\ HAppl\Acceso"+str.aplicacion, &
+			"Str_WinUser", RegString!, str.win_user) = -1 then
+			if RegistryGet( &
+				"HKEY_LOCAL_MACHINE\SOFTWARE\Config\ HAppl\Acceso"+str.aplicacion, &
+				"Str_WinUser", RegString!, str.win_user) = -1 then
+				mensaje("Aviso","Error al Obtener el Usuario de Windows", sqlca.sqlerrtext)
+				return -1			
+			end if
+		end if
+		
+		/*Nombre de la Maquina*/	
+		if RegistryGet( &
+			"HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\ComputerName\ComputerName", &
+			"ComputerName", RegString!, str.maquina)	= -1 then
+			if RegistryGet( &
+				"HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Control\ComputerName\ComputerName", &
+				"ComputerName", RegString!, str.maquina)	= -1 then
+				mensaje("Aviso","Error al Obtener el nombre de la máquina", sqlca.sqlerrtext)
+				return -1			
+			end if	
+		end if	
+
+end if
+	
+str.g_financiero = integer(ls_grupo_finan)	
+
+str.empresa = integer(ls_empresa)
+
+return 1 //Todo bien
+
+end function
+

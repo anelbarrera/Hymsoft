@@ -1,0 +1,6 @@
+﻿global type str_fa_prod_x_bod from structure
+	string		producto
+	string		bodega
+	string		unidad
+end type
+

@@ -1,0 +1,11 @@
+﻿global type gf_dg_dwerror from function_object
+end type
+
+forward prototypes
+global function integer gf_dg_dwerror (readonly long asqlcode, readonly string asqltext, readonly string asqlsyntax)
+end prototypes
+
+global function integer gf_dg_dwerror (readonly long asqlcode, readonly string asqltext, readonly string asqlsyntax);//
+return 0
+end function
+

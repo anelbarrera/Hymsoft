@@ -1,0 +1,60 @@
+﻿//objectcomments Función que recalcula el tamaño de los objetos datawindows, groupboxs) sobre una ventana cuando esta se le hace Resize
+global type gf_fa_resizewin from function_object
+end type
+
+forward prototypes
+global function string gf_fa_resizewin (readonly window aw_activa, ref datawindow adw_lista[], ref groupbox agb_lista[], readonly integer ai_dwbordder[], readonly integer ai_gbbordder[], readonly integer ai_dwbordinf[], readonly integer ai_gbbordinf[], ref statictext ast_lista[], readonly integer ai_sty[])
+end prototypes
+
+global function string gf_fa_resizewin (readonly window aw_activa, ref datawindow adw_lista[], ref groupbox agb_lista[], readonly integer ai_dwbordder[], readonly integer ai_gbbordder[], readonly integer ai_dwbordinf[], readonly integer ai_gbbordinf[], ref statictext ast_lista[], readonly integer ai_sty[]);/* Función que recalcula el tamaño de los objetos (datawindows, groupboxs y staticstexts)
+ 	sobre una ventana cuando esta se le hace Resize. Retorna Error = Mensaje de error, 
+	Exitoso = Una cadena vacía */
+Integer li_dw, li_gb, li_st, li_cont, li_ww, li_wh, li_bd, li_bi
+String ls_error
+
+li_ww = aw_activa.width
+li_wh = aw_activa.height
+li_dw = Upperbound(adw_lista)
+li_gb = Upperbound(agb_lista)
+li_st = Upperbound(ast_lista)
+
+//Se valida si para la cantidad especificada de objetos se le definieron sus respectivos
+//bordes
+ls_error = "Cantidad de Objetos declarados no coinciden con la definición de sus bordes. "
+
+li_bd = Upperbound(ai_dwbordder)
+li_bi = Upperbound(ai_dwbordinf)
+If (li_dw <> li_bd) Or (li_dw <> li_bi) Then &
+	Return (ls_error+"DWs/Der/Inf = "+String(li_dw)+"/"+String(li_bd)+"/"+String(li_bi))
+
+li_bd = Upperbound(ai_gbbordder)
+li_bi = Upperbound(ai_gbbordinf)
+If (li_gb <> li_bd) Or (li_gb <> li_bi) Then &
+	Return (ls_error + "GBs/Der/Inf = " + String(li_gb)+"/" + String(li_bd)+"/"+ String(li_bi))
+	
+li_bi = Upperbound(ai_sty)
+If li_st <> li_bi Then Return (ls_error+"STs/Y = "+String(li_st)+"/"+String(li_bi))
+
+ls_error = ""
+If li_dw > 0 Then
+	For li_cont = 1 To li_dw
+		adw_lista[li_cont].Width = li_ww - ai_dwbordder[li_cont]
+		adw_lista[li_cont].Height = li_wh - ai_dwbordinf[li_cont]
+	Next
+End If
+
+If li_gb > 0 Then
+	For li_cont = 1 To li_gb
+		agb_lista[li_cont].Width = li_ww - ai_gbbordder[li_cont] + 14
+		agb_lista[li_cont].Height = li_wh - ai_gbbordinf[li_cont] + 40
+	Next
+End If
+
+If li_st > 0 Then
+	For li_cont = 1 To li_st
+		ast_lista[li_cont].Y = li_wh - ai_sty[li_cont]
+	Next
+End If
+Return ""
+end function
+

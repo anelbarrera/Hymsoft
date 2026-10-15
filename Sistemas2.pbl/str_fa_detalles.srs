@@ -1,0 +1,24 @@
+﻿global type str_fa_detalles from structure
+	string		tipo_transaccion
+	string		no_pedido
+	string		concepto
+	integer		renglon
+	string		cod_color
+	string		cod_clase_tam
+	double		cantidad_max
+	integer		fraccion_max
+	string		medida
+	datetime		fecha
+	string		bodega
+	string		ubicacion
+	string		producto
+	string		bodega_destino
+	string		ubicacion_destino
+	string		titulo
+	string		unid_medida
+	integer		anio
+	string		viene_de
+	datawindow		data_w
+	string		no_proforma
+end type
+

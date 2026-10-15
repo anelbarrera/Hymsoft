@@ -1,0 +1,60 @@
+﻿//objectcomments Estructura Global del Sistema
+global type str_general from structure
+	integer		g_financiero
+	integer		empresa
+	string		usuario
+	string		grupo
+	string		nombre
+	string		apellido
+	integer		zoom
+	string		clave
+	string		menus[]
+	string		ventanas[]
+	string		icono
+	window		frame
+	string		aplicacion
+	string		comando
+	string		path
+	string		s
+	string		win_user
+	string		maquina
+	string		ip
+	character		idle
+	integer		digito_decimal
+	long		tercero
+	string		nombre_empresa
+	string		empr_acceso_especial
+	decimal { 2 }		valor_fixing
+	string		printer1
+	string		printer2
+	string		printer3
+	integer		valida_contabilidad
+	integer		nd_por_subtransaccion
+	string		clave_estado_de_cuenta
+	string		ruc
+	string		dv
+	integer		contabiliza
+	integer		bodegas_definidas
+	string		bodega1
+	string		bodega2
+	string		bodega3
+	string		bodega4
+	string		bodega5
+	string		bodega6
+	string		bodega7
+	string		subtotal
+	string		total
+	decimal { 2 }		valor_itbm
+	integer		imprime_fiscal
+	string		puerto
+	string		numero_registro
+	decimal { 2 }		porc
+	string		cxc_default
+	string		cxp_default
+	integer		genera_asiento_entradas
+	integer		maneja_lotes
+	string		ruta_foto
+	string		producto
+	date		fecha
+end type
+

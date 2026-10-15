@@ -1,0 +1,10 @@
+﻿global type gf_titulo_total from function_object
+end type
+
+forward prototypes
+global function string gf_titulo_total ()
+end prototypes
+
+global function string gf_titulo_total ();return str.total
+end function
+

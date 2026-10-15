@@ -1,0 +1,126 @@
+﻿global type gf_fa_cambiar_titulos from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_cambiar_titulos (menu am_menu)
+end prototypes
+
+global subroutine gf_fa_cambiar_titulos (menu am_menu);string ls_titulo_kardex, ls_titulo_reservado, ls_titulo_entradas, ls_titulo_estado, ls_titulo_factura	
+
+if isvalid(am_menu) then
+
+	//Selecciona el titulo del kardex
+		SELECT Isnull(inaparam.para_titulo_kardex,'')
+		INTO :ls_titulo_kardex
+		FROM inaparam  
+		WHERE ( inaparam.para_g_financiero = :str.g_financiero ) AND  
+				( inaparam.para_empresa = :str.empresa )   ;
+		
+		if sqlca.sqlcode = -1 then
+			mensaje("Aviso","Error al Recuperar el Titulo del Kardex",sqlca.sqlerrtext)
+		end if
+	//selecciona los titulos de facturacion
+		  SELECT isnull(faaparam.fara_titulo_reservado,''),   
+				isnull(faaparam.fara_titulo_entradas,''),   
+				isnull(faaparam.fara_titulo_estado,''),
+				isnull(faaparam.fara_titulo_factura,'')
+		 INTO :ls_titulo_reservado,   
+				:ls_titulo_entradas,   
+				:ls_titulo_estado,
+				:ls_titulo_factura
+		 FROM faaparam  
+		WHERE ( faaparam.fara_g_financiero = :str.g_financiero ) AND  
+				( faaparam.fara_empresa = :str.empresa )   ;
+	
+		if sqlca.sqlcode = -1 then
+			mensaje("Aviso","Error al Recuperar el Titulos de Facturacion",sqlca.sqlerrtext)
+		end if
+/*		
+	choose case am_menu
+		case m_fa_padre
+			
+		  m_fa_padre.m_consultas.visible = false	
+		
+		/****************/							
+			if ls_titulo_kardex <> '' then
+				m_fa_padre.m_consultas1.m_kardex1.text = ls_titulo_kardex
+			end if			
+			//Titulo de la Disponibilidad	
+			if ls_titulo_reservado <> '' then
+				m_fa_padre.m_consultas1.m_disponibilidad1.text = ls_titulo_reservado
+			end if
+			//Titulo del listado de las entradas
+			if ls_titulo_entradas <> '' then
+				m_fa_padre.m_consultas1.m_consultadeentradas1.text = ls_titulo_entradas
+			end if
+			//Titulo de el estado de cuenta
+			if ls_titulo_estado <> '' then
+				m_fa_padre.m_consultas1.m_estadodecuentas1.text = ls_titulo_estado
+			end if
+			//Titulo de las Facturas
+			if ls_titulo_factura <> '' then
+				m_fa_padre.m_consultas1.m_consutladefacturas1.text = ls_titulo_factura
+			end if
+		/*******************/
+			
+		case m_fa_principal
+			
+		  m_fa_principal.m_consultas.visible = false	
+		
+		/****************/		
+		
+			if ls_titulo_kardex <> '' then
+				m_fa_principal.m_consultas1.m_kardex1.text = ls_titulo_kardex
+			end if
+			
+			//Titulo de la Disponibilidad	
+			if ls_titulo_reservado <> '' then
+				m_fa_principal.m_consultas1.m_disponibilidad1.text = ls_titulo_reservado
+			end if
+			//Titulo del listado de las entradas
+			if ls_titulo_entradas <> '' then
+				m_fa_principal.m_consultas1.m_consultadeentradas1.text = ls_titulo_entradas
+			end if
+			//Titulo de el estado de cuenta
+			if ls_titulo_estado <> '' then
+				m_fa_principal.m_consultas1.m_estadodecuentas1.text = ls_titulo_estado
+			end if
+			//Titulo de las Facturas
+			if ls_titulo_factura <> '' then
+				m_fa_principal.m_consultas1.m_consutladefacturas1.text = ls_titulo_factura
+			end if
+		/*******************/
+			
+		case m_fa_rep	
+			
+		  m_fa_rep.m_consultas.visible = false	
+		
+		/****************/		
+		
+			if ls_titulo_kardex <> '' then
+				m_fa_rep.m_consultas1.m_kardex1.text = ls_titulo_kardex
+			end if
+			
+			//Titulo de la Disponibilidad	
+			if ls_titulo_reservado <> '' then
+				m_fa_rep.m_consultas1.m_disponibilidad1.text = ls_titulo_reservado
+			end if
+			//Titulo del listado de las entradas
+			if ls_titulo_entradas <> '' then
+				m_fa_rep.m_consultas1.m_consultadeentradas1.text = ls_titulo_entradas
+			end if
+			//Titulo de el estado de cuenta
+			if ls_titulo_estado <> '' then
+				m_fa_rep.m_consultas1.m_estadodecuentas1.text = ls_titulo_estado
+			end if
+			//Titulo de las Facturas
+			if ls_titulo_factura <> '' then
+				m_fa_rep.m_consultas1.m_consutladefacturas1.text = ls_titulo_factura
+			end if
+		/*******************/
+	end choose		
+	*/
+end if
+
+end subroutine
+

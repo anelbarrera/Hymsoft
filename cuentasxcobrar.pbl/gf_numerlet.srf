@@ -1,0 +1,239 @@
+﻿//objectcomments Monto en palabra para cheques
+global type gf_numerlet from function_object
+end type
+
+forward prototypes
+global function string gf_numerlet (double ac_monto, integer ai_centimos)
+end prototypes
+
+global function string gf_numerlet (double ac_monto, integer ai_centimos);//	Esta función se utiliza para convertir una número determinado a texto
+//	
+//	Entrada:
+//	
+//		ac_monto		double		Cantidad que se desea convertir a texto
+//		ai_centimos		integer		indica si incluye los decimales, los valores son:
+//
+//							0 = la cantidad no incluye los decimales
+//							1 = la cantidad incluye decimales
+//	Salidas:
+//		
+//		ls_mes	string		Nombre correspondiente del mes en español
+//				
+//	Historia:	Fecha			Usuario		Detalle
+//	-------------------------------------------------------------------------------------
+
+long ll_largo_num_act 
+long ll_largo_numero_cnv
+long ll_apunta_celda_ini
+integer i
+string ls_numero
+string ls_fraccion
+string ls_entero
+string ls_num_en_letras
+string ls_num_letras
+string ls_proc
+
+
+ls_numero = string(ac_monto,"000000000000.00")          // convierte el doble a string
+ls_fraccion = mid(ls_numero,pos(ls_numero,'.') + 1,2)  // toma la parte decimal                
+ls_entero = mid(ls_numero,1,pos(ls_numero,'.') - 1)    // toma la parte entera
+
+ls_num_en_letras = ""
+
+ll_largo_numero_cnv = len(ls_entero)
+
+ll_apunta_celda_ini = ll_largo_numero_cnv
+
+// el ciclo empieza leyendo el número de atrás para adelante
+
+FOR i = 1 TO 4
+
+  ls_num_letras = ""
+  
+  ll_apunta_celda_ini = ll_apunta_celda_ini - 2
+
+  // pasa el substring a procesar en esta iteración
+  ls_proc = mid(ls_entero,ll_apunta_celda_ini,3)
+  
+  choose case mid(ls_proc,1,1)     // determina el valor relativo del tercer dígito
+    case '1'
+      if (mid(ls_proc,2,1) = '0') and (mid(ls_proc,3,1) = '0') then
+        ls_num_letras = ls_num_letras + "cien "
+      else 
+        ls_num_letras = ls_num_letras + "ciento "
+      end if
+    case '2' 
+      ls_num_letras = ls_num_letras + "doscientos "
+
+    case '3'
+      ls_num_letras = ls_num_letras + "trescientos "
+
+    case '4'
+      ls_num_letras = ls_num_letras + "cuatrocientos "
+
+    case '5'
+      ls_num_letras = ls_num_letras + "quinientos "
+
+    case '6'
+      ls_num_letras = ls_num_letras + "seiscientos "
+
+    case '7'
+      ls_num_letras = ls_num_letras + "setecientos "
+
+    case '8'
+      ls_num_letras = ls_num_letras + "ochocientos "
+
+    case '9'
+      ls_num_letras = ls_num_letras + "novecientos "
+    
+  end choose    
+
+                                   // determina el valor relativo del segundo número
+  choose case mid(ls_proc,2,1)     // toma el segundo caracter    
+    case '1'                       // si el segundo dígito es uno, determina el primer dígito
+   
+      choose case mid(ls_proc,3,1)
+        case '0'
+          ls_num_letras = ls_num_letras + "diez "
+
+        case '1'
+          ls_num_letras = ls_num_letras + "once "
+      
+        case '2'
+          ls_num_letras = ls_num_letras + "doce "
+
+        case '3'
+          ls_num_letras = ls_num_letras + "trece "
+
+        case '4'
+          ls_num_letras = ls_num_letras + "catorce "
+
+        case '5'
+          ls_num_letras = ls_num_letras + "quince "
+
+        case '6'
+          ls_num_letras = ls_num_letras + "dieciseis "
+
+        case '7'
+          ls_num_letras = ls_num_letras + "diecisiete "
+
+        case '8'
+          ls_num_letras = ls_num_letras + "dieciocho "
+
+        case '9'
+          ls_num_letras = ls_num_letras + "diecinueve "
+       
+        end choose
+
+    case '2'                         // si el segundo dígito es 2, determina el tercero
+                                     // para ver si debe poner VEINTE o VEINTI
+      choose case mid(ls_proc,3,1)
+        case '0' 
+          ls_num_letras = ls_num_letras + "veinte "
+        case else 
+          ls_num_letras = ls_num_letras + "veinti"
+      end choose
+
+    case '3'
+      ls_num_letras = ls_num_letras + "treinta "
+  
+    case '4'
+      ls_num_letras = ls_num_letras + "cuarenta "
+
+    case '5'
+      ls_num_letras = ls_num_letras + "cincuenta " 
+   
+    case '6'
+      ls_num_letras = ls_num_letras + "sesenta "
+
+    case '7'
+      ls_num_letras = ls_num_letras + "setenta "
+
+    case '8'
+      ls_num_letras = ls_num_letras + "ochenta "
+
+    case '9'
+      ls_num_letras = ls_num_letras + "noventa "
+         
+  end choose
+   
+
+  // debe haber un primer dígito para que haya entrado
+
+  // concatena "Y" en caso de que necesite y cuando las unidades son mayor que 0 (cero)
+  if (mid(ls_proc,2,1) > '2') and (mid(ls_proc,3,1) <> '0') then
+    ls_num_letras = ls_num_letras + "y "
+  end if
+ 
+  if (mid(ls_proc,2,1) <> '1') then
+   
+    choose case mid(ls_proc,3,1)
+      case '1'
+        choose case i
+          case 1
+            ls_num_letras = ls_num_letras + "uno "
+          case 2,4
+            if (mid(ls_proc,1,1) <> "0") or (mid(ls_proc,2,1) <> "0") then
+              ls_num_letras = ls_num_letras + "un "
+            end if 
+          case else
+            ls_num_letras = ls_num_letras + "un "
+        end choose
+
+      case '2'
+        ls_num_letras = ls_num_letras + "dos "
+
+      case '3'
+        ls_num_letras = ls_num_letras + "tres "
+
+      case '4'
+        ls_num_letras = ls_num_letras + "cuatro "
+
+      case '5'
+        ls_num_letras = ls_num_letras + "cinco "
+
+      case '6'
+        ls_num_letras = ls_num_letras + "seis "
+
+      case '7'
+        ls_num_letras = ls_num_letras + "siete "
+
+      case '8'
+        ls_num_letras = ls_num_letras + "ocho "
+
+      case '9'
+        ls_num_letras = ls_num_letras + "nueve "
+ 
+    end choose
+  end if
+
+  if (i = 4) or (i = 2) then  // si actualmente procesa los miles de millones o los miles
+    if (mid(ls_proc,1,1) <> '0') or (mid(ls_proc,2,1) <> '0') or (mid(ls_proc,3,1) <> '0') then
+      ls_num_letras = ls_num_letras + "mil " 
+    end if
+ 
+  elseif (i = 3) and ((mid(ls_proc,1,1) <> '0') or (mid(ls_proc,2,1) <> '0') or (mid(ls_proc,3,1) <> '0')) then
+    if (mid(ls_proc,3,1) = '1') and (mid(ls_proc,1,1) = '0') and (mid(ls_proc,2,1) = '0') then
+      ls_num_letras = ls_num_letras + "millon "
+    else
+      ls_num_letras = ls_num_letras + "millones "
+    end if
+
+  elseif (i = 3) and (mid(ls_proc,1,1) = '0') and (mid(ls_proc,2,1) = '0') and (mid(ls_proc,3,1) = '0') and &
+         (mid(ls_entero,1,3) <> "000") then   // verifica que haya miles de millones 
+      ls_num_letras = ls_num_letras + "millones "
+
+  end if
+
+  ls_num_en_letras = ls_num_letras + ls_num_en_letras  
+  ll_apunta_celda_ini --
+
+NEXT
+
+if (ai_centimos = 1) then
+  ls_num_en_letras = ls_num_en_letras + "con " + ls_fraccion + "/100"
+end if
+
+return trim(ls_num_en_letras)
+end function
+

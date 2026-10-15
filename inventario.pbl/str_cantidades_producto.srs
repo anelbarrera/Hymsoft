@@ -1,0 +1,6 @@
+﻿global type str_cantidades_producto from structure
+	integer		minima
+	integer		reorden
+	integer		maxima
+end type
+

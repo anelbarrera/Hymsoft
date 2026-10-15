@@ -1,0 +1,20 @@
+﻿global type gf_center_win from function_object
+end type
+
+forward prototypes
+global subroutine gf_center_win (window ventana)
+end prototypes
+
+global subroutine gf_center_win (window ventana);integer			li_ScreenH, li_ScreenW
+Environment		e
+
+If GetEnvironment(e) = -1 Then Return
+
+	li_ScreenH = PixelsToUnits(e.ScreenHeight, YPixelsToUnits!)
+	li_ScreenW = PixelsToUnits(e.ScreenWidth, XPixelsToUnits!)
+
+	ventana.y = ((li_ScreenH - ventana.Height) / 2 ) - 100
+	ventana.x = (li_ScreenW - ventana.Width) / 2
+
+end subroutine
+

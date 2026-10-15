@@ -1,0 +1,10 @@
+﻿global type str_tz_producto from structure
+	string		unidad
+	double		cubicaje
+	double		peso
+	string		unidadp
+	double		empaque
+	string		emp_um
+	string		em_desc
+end type
+

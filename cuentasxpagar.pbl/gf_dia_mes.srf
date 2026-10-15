@@ -1,0 +1,76 @@
+﻿//objectcomments Función que retorna la fecha completa en palabras (dd de mm de yyyy) y opcional (1,0) hora (hh:mm AM/PM)
+global type gf_dia_mes from function_object
+end type
+
+forward prototypes
+global function string gf_dia_mes (string as_date_time, boolean ab_completo)
+end prototypes
+
+global function string gf_dia_mes (string as_date_time, boolean ab_completo);string ls_cadena, ls_return, ls_date, ls_time, ls_dia_nombre, ls_mes_nombre
+integer li_pos, li_mes
+
+
+
+li_pos = Pos(as_date_time, " ")
+
+ls_date = Left(as_date_time, li_pos - 1)
+ls_time = Right(as_date_time, LEN(as_date_time) - li_pos)
+
+
+ls_dia_nombre = DAYNAME(DATE(ls_date))
+CHOOSE CASE UPPER(ls_dia_nombre)
+	CASE "MONDAY"
+		ls_dia_nombre = "Lunes"
+	CASE "TUESDAY"
+		ls_dia_nombre = "Martes"
+	CASE "WEDNESDAY"
+		ls_dia_nombre = "Miércoles"
+	CASE "THURSDAY"
+		ls_dia_nombre = "Jueves"
+	CASE "FRIDAY"
+		ls_dia_nombre = "Viernes"
+	CASE "SATURDAY"
+		ls_dia_nombre = "Sábado"
+	CASE "SUNDAY"
+		ls_dia_nombre = "Domingo"
+END CHOOSE
+
+
+li_mes = MONTH(DATE(ls_date))
+CHOOSE CASE li_mes
+	CASE 1
+		ls_mes_nombre = "Enero"
+	CASE 2
+		ls_mes_nombre = "Febrero"
+	CASE 3
+		ls_mes_nombre = "Marzo"
+	CASE 4
+		ls_mes_nombre = "Abril"
+	CASE 5
+		ls_mes_nombre = "Mayo"
+	CASE 6
+		ls_mes_nombre = "Junio"
+	CASE 7
+		ls_mes_nombre = "Julio"
+	CASE 8
+		ls_mes_nombre = "Agosto"
+	CASE 9
+		ls_mes_nombre = "Septiembre"
+	CASE 10
+		ls_mes_nombre = "Octubre"
+	CASE 11
+		ls_mes_nombre = "Noviembre"
+	CASE 12
+		ls_mes_nombre = "Diciembre"
+	
+END CHOOSE
+
+If ab_completo Then
+	ls_return = ls_dia_nombre + " " + string(DAY(DATE(ls_date))) +" de " + ls_mes_nombre + " de " + string(YEAR(DATE(ls_date))) + " a las " + ls_time
+Else	
+	ls_return = ls_dia_nombre + " " + string(DAY(DATE(ls_date))) +" de " + ls_mes_nombre + " de " + string(YEAR(DATE(ls_date)))
+End If	
+
+Return ls_return
+end function
+

@@ -1,0 +1,51 @@
+﻿global type gf_tz_ordenar from function_object
+end type
+
+forward prototypes
+global subroutine gf_tz_ordenar (datawindow adw)
+end prototypes
+
+global subroutine gf_tz_ordenar (datawindow adw);
+//Scrip que Permite Ordenar Ascendentemente, o Descendente en caso que se de click nuevamente
+//en la misma columna.
+
+string ls_objeto
+integer li_pos 
+string is_ultima_ = '', is_orden_ = ''
+
+adw.Setredraw(false)
+
+ls_objeto = adw.GetObjectAtPointer()
+
+li_pos 	 =  Pos(ls_objeto, "~t")
+ls_objeto = Left(ls_objeto, li_pos - 1)
+
+if right(ls_objeto,2)='_t' then
+
+	ls_objeto = left(ls_objeto,len(ls_objeto)-2)
+	
+	if ls_objeto = is_ultima_ or is_ultima_ = "" then	//Si es la misma columna 
+																	// o si es la primera vez
+		if is_orden_  = "" or is_orden_ = "D" then
+			is_orden_ = 'A'		
+			adw.SetSort(ls_objeto+" A")	//Ordena Ascendente
+			adw.sort()		
+		else
+			is_orden_ = 'D'					
+			adw.SetSort(ls_objeto+" D")	//Ordena Descendente
+			adw.sort()				
+		end if	
+		is_ultima_ = ls_objeto		
+	else				
+			is_orden_ = 'A'
+			adw.SetSort(ls_objeto+" A")
+			adw.sort()
+			is_ultima_ = ls_objeto
+	end if
+
+end if
+
+adw.Setredraw(true)
+
+end subroutine
+

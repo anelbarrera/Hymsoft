@@ -1,0 +1,25 @@
+﻿global type gf_fa_convertmin_new_deci from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_convertmin_new_deci (ref decimal al_unidminima, string as_med, decimal al_cantidad, long al_fraccion)
+end prototypes
+
+global subroutine gf_fa_convertmin_new_deci (ref decimal al_unidminima, string as_med, decimal al_cantidad, long al_fraccion);/*Esta función recibe la cantidad y fracción y retorna todo convertido a fracción*/
+Decimal		ld_ucom,	ld_mconvera	
+
+/*Extrae el Tipo de medida "Peso/Unidades/volumen/etc "*/
+ld_ucom = gf_medi_prod(as_med)
+
+/*Retorna el Factor de Conversión a unidades mínimas*/
+ld_mconvera = gf_unidad_venta_dec_new(as_med, ld_ucom)
+
+If ld_mconvera <= 0 Then ld_mconvera = 1
+
+if isNull(al_cantidad) then al_cantidad = 0
+if isNull(al_fraccion) then al_fraccion = 0
+
+al_unidminima = al_cantidad * ld_mconvera + al_fraccion
+
+end subroutine
+

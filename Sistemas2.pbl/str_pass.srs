@@ -1,0 +1,17 @@
+﻿//objectcomments OpenWithParm / CloseWithReturn structure
+global type str_pass from structure
+	powerobject		po_caller
+	string		s_win_title
+	string		s_dataobject
+	transaction		tr_trans
+	string		s_win_parms
+	integer		i_idx
+	string		s_action
+	string		s[]
+	double		d[]
+	boolean		b[]
+	date		dates[]
+	powerobject		po[]
+	real		por
+end type
+
