@@ -479,18 +479,27 @@ if isvalid(str_opcion) then
 	dw_1.setfocus()
 	dw_1.triggerevent('itemchanged')
 end if
-w_hs_frame.Post Event ue_evaluar_panel_acciones()
+//w_hs_frame.Post Event ue_evaluar_panel_acciones()
 end event
 
 event resize;//override
 end event
 
-event close;call super::close;
-w_hs_frame.Post Event ue_evaluar_panel_acciones()
-This.SetRedraw(false)
+event close;call super::close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
 end event
 
-event closequery;call super::closequery;This.SetRedraw(false)
+event closequery;call super::closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 end event
 
 event ue_aceptar;call super::ue_aceptar;String ls_contenido,ls_material,ls_producto,ls_nivel3,ls_nivel2,ls_nivel1,ls_prod

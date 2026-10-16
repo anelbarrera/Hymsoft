@@ -20,6 +20,7 @@ global type w_usuarios from w_fa_padre
 integer width = 2725
 integer height = 1664
 string title = "Mantenimiento de Usuarios"
+boolean controlmenu = false
 string icon = "AppIcon!"
 windowanimationstyle openanimation = bottomroll!
 windowanimationstyle closeanimation = bottomroll!
@@ -192,9 +193,15 @@ end event
 event key;//override
 end event
 
-event close;setredraw(false)
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
 if isvalid(this) then close(this)
-w_hs_frame.Post Event ue_evaluar_panel_acciones()
+ 
 end event
 
 event ue_hay_data;//Override
@@ -225,7 +232,7 @@ this.postevent("ue_post_open")
 //m_fa_principal.m_edicin.m_ultimoregistro.toolbaritemvisible= false
 //m_fa_principal.m_archivo.m_imprimir.toolbaritemvisible= false
 
-w_hs_frame.Post Event ue_evaluar_panel_acciones()
+//w_hs_frame.Post Event ue_evaluar_panel_acciones()
 end event
 
 event ue_aceptar;//override
@@ -261,6 +268,8 @@ end if
 end event
 
 event closequery;call super::closequery;setredraw(false)
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_usuarios

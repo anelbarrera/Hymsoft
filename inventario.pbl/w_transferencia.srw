@@ -314,9 +314,11 @@ event close;Window lw_frame
 lw_frame = ParentWindow()
 
 If IsValid(lw_frame) Then
-   lw_frame.PostEvent("ue_sheet_closed")
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
  End If
 if isvalid(this) then close(this)
+
+
 end event
 
 event ue_hay_data;//Override

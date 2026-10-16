@@ -60,6 +60,8 @@ Function Long CopyFile (String lpExistingFileName, String lpNewFileName, Long bF
 Function ULong GetCurrentDirectory(ULong nBufferLength, Ref String lpBuffer) Library "kernel32.dll" Alias for "GetCurrentDirectoryW"
 Function Boolean SetCurrentDirectory(String lpPathName) Library "kernel32.dll" Alias for "SetCurrentDirectoryW"
 
+FUNCTION boolean ShowWindow(longptr hWnd, integer nCmdShow) LIBRARY "user32.dll"
+
  
 end prototypes
 

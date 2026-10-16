@@ -26,6 +26,8 @@ global type w_reporte_transacciones_bco from w_fa_padre_reportes
 integer width = 4398
 integer height = 2680
 string title = "Reporte de Transacciones Bancarias"
+string menuname = "m_hs"
+boolean controlmenu = false
 boolean minbox = false
 boolean maxbox = false
 long backcolor = 12639424
@@ -52,6 +54,8 @@ end variables
 on w_reporte_transacciones_bco.create
 int iCurrent
 call super::create
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.st_sel_marca=create st_sel_marca
 this.ddlb_1=create ddlb_1
 this.dw_2=create dw_2
@@ -159,6 +163,16 @@ end event
 event open;call super::open;//str_informe = Message.PowerObjectParm
 //this.width  = 2680// this.width - 99
 //this.height = this.height - 90
+end event
+
+event close;Window lw_frame
+
+lw_frame = ParentWindow()
+
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_sheet_closed")
+ End If
+ Close(this)
 end event
 
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_reporte_transacciones_bco

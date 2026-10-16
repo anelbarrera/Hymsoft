@@ -7,9 +7,9 @@ end forward
 global type w_reporte_transacciones_cp from w_cc_padre_reporte
 string tag = "m_cc_principal_listados"
 integer width = 3570
-integer height = 1632
+integer height = 1556
 string title = "Informe de Pagos"
-string menuname = "m_fa_rep"
+boolean controlmenu = false
 boolean resizable = true
 windowtype windowtype = main!
 long backcolor = 12639424
@@ -22,12 +22,10 @@ end variables
 
 on w_reporte_transacciones_cp.create
 call super::create
-if this.MenuName = "m_fa_rep" then this.MenuID = create m_fa_rep
 end on
 
 on w_reporte_transacciones_cp.destroy
 call super::destroy
-if IsValid(MenuID) then destroy(MenuID)
 end on
 
 event resize;//Override
@@ -165,7 +163,7 @@ this.x=1
 THIS.SetToolbar(1, true, alignattop!)
 THIS.SetToolbarPos(1, 1, 50, false)
 
-if isnull(m_fa_rep) then ChangeMenu(m_fa_rep) 
+//if isnull(m_fa_rep) then ChangeMenu(m_fa_rep) 
 //m_cc_principal.m_archivo.m_guardar.ToolbarItemVisible= false
 //
 //m_cc_principal.m_edicin.m_registroanterior.ToolbarItemVisible= false                                   

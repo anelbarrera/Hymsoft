@@ -36,6 +36,8 @@ global type w_reporte_estados_financieros from w_fa_padre_reportes
 integer width = 4279
 integer height = 2680
 string title = "Estados Financieros"
+string menuname = "m_hs"
+boolean controlmenu = false
 boolean minbox = false
 long backcolor = 12639424
 st_sel_marca st_sel_marca
@@ -66,6 +68,8 @@ end variables
 on w_reporte_estados_financieros.create
 int iCurrent
 call super::create
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.st_sel_marca=create st_sel_marca
 this.ddlb_1=create ddlb_1
 this.cb_consultar=create cb_consultar
@@ -342,6 +346,16 @@ choose case li_respuesta
 		dw.saveas()
 end choose
 
+end event
+
+event close;Window lw_frame
+
+lw_frame = ParentWindow()
+
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_sheet_closed")
+ End If
+ Close(this)
 end event
 
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_reporte_estados_financieros

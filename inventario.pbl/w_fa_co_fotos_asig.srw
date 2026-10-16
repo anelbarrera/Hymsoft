@@ -234,7 +234,7 @@ il_swc = 0
 //this.y=1
 This.Icon = str.icono
 this.postevent("ue_post_open")
-w_hs_frame.Post Event ue_evaluar_panel_acciones()
+//w_hs_frame.Post Event ue_evaluar_panel_acciones()
 end event
 
 event ue_post_open;//Override
@@ -431,11 +431,21 @@ event activate;call super::activate;//if not isvalid(m_fa_rep) then
 //end if
 end event
 
-event close;call super::close;setredraw(false)
-w_hs_frame.Post Event ue_evaluar_panel_acciones()
+event close;call super::close;
+Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
 end event
 
 event closequery;call super::closequery;setredraw(false)
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
 end event
 
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_fa_co_fotos_asig

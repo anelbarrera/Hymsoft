@@ -106,6 +106,7 @@ event close;// Oculta la ventana instantáneamente (0 ms) antes de que Windows c
 // a destruir los controles hijos uno a uno en pantalla.
 this.Hide()
 this.SetRedraw(False)
+
 end event
 
 event ue_aceptar;call super::ue_aceptar;//override
@@ -138,6 +139,10 @@ event resize;call super::resize;dw_1.Resize(This.Width - 170, This.Height - 330)
 //gb_1.height = this.height - 220
 st_nom_ventana.x = 28
 st_nom_ventana.y = this.height - 180
+end event
+
+event closequery;call super::closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
 end event
 
 type st_nom_ventana from w_granpa`st_nom_ventana within w_fa_padre

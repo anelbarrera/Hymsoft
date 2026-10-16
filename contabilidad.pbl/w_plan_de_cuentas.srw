@@ -463,10 +463,15 @@ wf_grabar_cliente(tab_1.tabpage_1.dw_1, 1)
 
 end event
 
-event close;call super::close;This.SetRedraw(false)
-w_hs_frame.Post Event ue_evaluar_panel_acciones()
+event close;call super::close;
+Window lw_frame
 
-
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
  
 end event
 
@@ -533,6 +538,8 @@ end event
 
 event closequery;//override
 this.triggerevent("ue_valida_todo")
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
 end event
 
 event ue_valida_todo;//override

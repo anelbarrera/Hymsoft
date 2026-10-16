@@ -52,20 +52,18 @@ DrawMenuBar(Handle(this))
 this.TriggerEvent(Resize!)
 end event
 
-event ue_evaluar_panel_acciones();// Evento de usuario: w_hs_frame.ue_evaluar_panel_acciones()
-Window lw_sheet
-
+event ue_evaluar_panel_acciones();Window lw_sheet
+ mdi_1.SetRedraw(False)
 // Obtener la ventana activa actual dentro del Frame MDI
 lw_sheet = this.GetActiveSheet()
 
 If IsValid(lw_sheet) Then
-    // Hay al menos una ventana abierta -> Mostrar panel
     this.wf_set_panel( True)
 Else
-    // No quedan ventanas abiertas -> Ocultar panel
+    
     this.wf_set_panel( false)
 End If
-mdi_1.SetRedraw(False)
+
 mdi_1.SetRedraw(True)
 end event
 
@@ -196,7 +194,7 @@ mdi_1.Resize(this.WorkSpaceWidth(), this.WorkSpaceHeight() - rbb_1.Height)
 
 end event
 
-event closequery;call super::closequery;// Evento CloseQuery de w_hs_frame
+event closequery;call super::closequery; 
 Integer li_resp
 
 li_resp = MessageBox("Confirmación - HymSoft", &
@@ -206,11 +204,8 @@ li_resp = MessageBox("Confirmación - HymSoft", &
                      2)
 
 If li_resp = 2 Then
-    // El usuario seleccionó 'No', cancelamos el cierre
     Return 1
 Else
-    // El usuario seleccionó 'Sí', permitimos el cierre
-    // (Aquí puedes colocar código adicional de limpieza o desconexión SQL)
     Return 0
 End If
 end event
@@ -251,7 +246,7 @@ End If
 // Bloquea el repintado de la ventana principal
 // 1. Bloquear a nivel de sistema operativo todo el frame
 LockWindowUpdate(Handle(Parent)) // o Handle(w_frame)
- 
+ Parent.PostEvent('ue_evaluar_panel_acciones')
 Choose Case ls_tag	 
 	Case 'Close'
 		Parent.triggerevent('ue_salir')
@@ -378,12 +373,9 @@ Choose Case ls_tag
 	Case 'BTN_CONS_CONCIL_BANCARIA'
 		OpenSheet(w_conciliacion_bancaria,Parent,0, Original!)
   
-    Case "BTN_MANT_CLIENTES"
-		 wf_set_panel_visible("PAN_ACCIONES_CAT6", True)
+    Case "BTN_MANT_CLIENTES"		 
         OpenSheet(w_mant_clientes, Parent, 0, Original!)
-
-    Case "BTN_MANT_PRODUCTOS"
-        //OpenSheet(w_productos, this, 0, Original!)
+    Case "BTN_MANT_PRODUCTOS"        
 		  str_kardex  str_opciones
 			OpenSheetwithparm(w_productos,str_opciones,Parent,0, Original!)
 
@@ -438,26 +430,36 @@ Choose Case ls_tag
 	Case 'BTN_REP_AJUSTES'
 		OpenSheet(w_reporte_ajustes, Parent,0, Original!) 
 	Case 'BTN_CONT_MAYOR_GRAL'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_reporte_mayor_general,Parent,0, Original!)
 	Case 'BTN_CONT_BALANCE_PRUEBA'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_reporte_balance_de_prueba,Parent,0, Layered!)
 	Case 'BTN_CONT_AUX_CUENTAS'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)		
 		OpenSheet(w_reporte_auxiliares,Parent,0, Original!)
 	Case 'BTN_CONT_ESTADOS_FIN'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_reporte_estados_financieros,Parent,0, Layered!)
 	Case 'BTN_CONT_HIST_CUENTAS'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_reporte_historico_cuentas,Parent,0, Original!)
 	Case 'BTN_CONT_TX_BANCARIAS'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		str_cc_formatos lstr_sec
 		w_reporte_transacciones_bco 	lw_4
 		Opensheet(lw_4,Parent,0,Original!)	
 	Case 'BTN_CONT_TARJETA_VISA'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_ventas_resumen,Parent,0,Original!)
 	Case 'BTN_CONT_MORA_PROV'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_antiguedad_cxp,Parent,0, Original!) //w_movimiento_metal
 	Case 'BTN_CONT_SALDOS_PROV'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_reporte_proveedores,Parent,0, Original!)
 	Case 'BTN_CONT_TX_PROV'
+		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_rep_transacciones_cxp,Parent,0, Original!)
 End Choose
 
@@ -468,6 +470,12 @@ ElseIf Pos(ls_tag, "BTN_ACCION_INSERTAR") > 0 Then
     lw_activa.TriggerEvent("ue_adicionar")
 ElseIf Pos(ls_tag, "BTN_ACCION_ELIMINAR") > 0 Then
     lw_activa.TriggerEvent("ue_eliminar")
+ElseIf Pos(ls_tag, "BTN_ACCION_GUARDAR_COMO") > 0 Then 
+    lw_activa.TriggerEvent("ue_save_as") 
+ElseIf Pos(ls_tag, "BTN_ACCION_VISTA_PRELIMINAR") > 0 Then 
+    lw_activa.TriggerEvent("ue_vista") 
+ElseIf Pos(ls_tag, "BTN_ACCION_IMPRIMIR") > 0 Then 
+    lw_activa.TriggerEvent("ue_imprimir") 
 ElseIf Pos(ls_tag, "BTN_ACCION_CERRAR") > 0 Then 
     close(lw_activa)
 End If

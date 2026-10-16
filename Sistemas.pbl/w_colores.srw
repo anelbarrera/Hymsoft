@@ -12,6 +12,8 @@ integer height = 1788
 string title = "Personalización de Colores"
 boolean controlmenu = false
 string icon = "AppIcon!"
+boolean ib_modify = false
+boolean ib_aceptar = false
 event ue_syscommand pbm_syscommand
 gb_1 gb_1
 end type
@@ -171,8 +173,16 @@ end event
 event key;//override
 end event
 
-event close;w_hs_frame.Post Event ue_evaluar_panel_acciones()
+event close;
+Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
 if isvalid(this) then close(this)
+ 
 end event
 
 event ue_hay_data;//Override
@@ -192,7 +202,7 @@ THIS.Y = 1
 //m_fa_principal.m_edicin.m_siguienteregistro.toolbaritemvisible= false
 //m_fa_principal.m_edicin.m_ultimoregistro.toolbaritemvisible= false
 //m_fa_principal.m_archivo.m_imprimir.toolbaritemvisible= false
-w_hs_frame.Post Event ue_evaluar_panel_acciones()
+//w_hs_frame.Post Event ue_evaluar_panel_acciones()
 end event
 
 event ue_aceptar;call super::ue_aceptar;w_fa_fondo.wf_colores()
