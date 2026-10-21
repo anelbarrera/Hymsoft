@@ -259,7 +259,7 @@
                PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_16.png" 
                Clicked="ue_ribbon_click" 
                Tag="BTN_ACCION_CERRAR" />
-</Panel>
+		</Panel>
       </Category>
 
       <!-- ================================================================= -->
@@ -410,25 +410,27 @@
                        Clicked="ue_ribbon_click" 
                        Tag="BTN_CONT_TX_PROV" />
         </Panel>
+		<Panel Text="Acciones" Tag="PAN_ACCIONES_CAT5">
+		<SmallButton Text="Guardar como..." 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SaveAs_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_GUARDAR_COMO" />
 
-        <Panel Text="Acciones" Tag="PAN_ACCIONES_CAT5">
-          <LargeButton Text="Grabar" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Save_32.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="CAT5_BTN_ACCION_GRABAR" />
-          <LargeButton Text="Insertar" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Add_32.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="CAT5_BTN_ACCION_INSERTAR" />
-          <LargeButton Text="Eliminar" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Delete_32.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="CAT5_BTN_ACCION_ELIMINAR" />
-          <LargeButton Text="Cerrar" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_32.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="CAT5_BTN_ACCION_CERRAR" />
-        </Panel>
+		<SmallButton Text="Vista Preliminar" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\PrintPreview_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_VISTA_PRELIMINAR" />
+
+		<SmallButton Text="Imprimir" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Print_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_IMPRIMIR" />
+
+		<SmallButton Text="Cerrar" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_CERRAR" />
+		</Panel>
       </Category>
 
       <!-- ================================================================= -->
