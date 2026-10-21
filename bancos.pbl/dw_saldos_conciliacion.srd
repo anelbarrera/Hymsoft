@@ -24,11 +24,11 @@ table(column=(type=decimal(0) updatewhereclause=yes name=batdiari_btdi_g_financi
  column=(type=char(1) updatewhereclause=yes name=btdi_naturaleza dbname="batdiari.btdi_naturaleza" dbalias=".btdi_naturaleza" )
  retrieve="SELECT  batdiari.btdi_g_financiero ,
            batdiari.btdi_empresa ,
-           batdiari.btdi_transaccion btdi_tipo_transaccion ,
+           batdiari.btdi_tipo_transaccion  ,
            batdiari.btdi_banco ,
            batdiari.btdi_aplicacion ,
            batdiari.btdi_no_cuenta ,
-           batdiari.btdi_fecha_trans btdi_fecha_tran ,
+           batdiari.btdi_fecha_tran  ,
            batdiari.btdi_a_nombre_de ,
            batdiari.btdi_monto ,
            dgmserie.mser_movimiento ,
@@ -36,7 +36,7 @@ table(column=(type=decimal(0) updatewhereclause=yes name=batdiari_btdi_g_financi
            dgmserie.mser_descripcion ,
            bancos.banc_descripcion ,
            bamcuent.cuen_no_cuenta ,
-           batdiari.btdi_no_documento btdi_documento ,
+           batdiari.btdi_documento  ,
            batdiari.btdi_fecha_reg ,
            batdiari.btdi_conciliacion ,
 				batdiari.btdi_naturaleza    
@@ -46,7 +46,7 @@ table(column=(type=decimal(0) updatewhereclause=yes name=batdiari_btdi_g_financi
            bancos     
         WHERE ( dgmserie.mser_g_financiero = batdiari.btdi_g_financiero) and 
          ( dgmserie.mser_empresa = batdiari.btdi_empresa) and  
-        ( dgmserie.mser_tipo_transaccion = batdiari.btdi_transaccion) and    
+        ( dgmserie.mser_tipo_transaccion = batdiari.btdi_tipo_transaccion) and    
       ( bamcuent.cuen_g_financiero = batdiari.btdi_g_financiero ) and   
        ( bamcuent.cuen_empresa = batdiari.btdi_empresa ) and   
        ( bamcuent.cuen_no_cuenta = batdiari.btdi_no_cuenta ) and  
@@ -56,9 +56,9 @@ table(column=(type=decimal(0) updatewhereclause=yes name=batdiari_btdi_g_financi
         (  batdiari.btdi_empresa = :empresa  ) and   
        (  batdiari.btdi_banco = :banco  ) and  
         (  batdiari.btdi_no_cuenta = :no_cuenta  ) and  
-        (  batdiari.btdi_fecha_trans >= :fecha_ini  ) and     
-     (  batdiari.btdi_fecha_trans < dateadd(dd,1,:fecha_fin) ) and    
-       ( batdiari.btdi_transaccion not in ( 'SI' ) ) )  " arguments=(("g_financiero", number),("empresa", number),("banco", number),("no_cuenta", string),("fecha_ini", datetime),("fecha_fin", datetime))  sort="btdi_tipo_transaccion A " )
+        (  batdiari.btdi_fecha_tran >= :fecha_ini  ) and     
+     (  batdiari.btdi_fecha_tran < dateadd(dd,1,:fecha_fin) ) and    
+       ( batdiari.btdi_tipo_transaccion not in ( 'SI' ) ) )  " arguments=(("g_financiero", number),("empresa", number),("banco", number),("no_cuenta", string),("fecha_ini", datetime),("fecha_fin", datetime))  sort="btdi_tipo_transaccion A " )
 group(level=1 header.height=0 trailer.height=84 by=("btdi_tipo_transaccion" ) header.color="536870912" header.transparency="0" header.gradient.color="8421504" header.gradient.transparency="0" header.gradient.angle="0" header.brushmode="0" header.gradient.repetition.mode="0" header.gradient.repetition.count="0" header.gradient.repetition.length="100" header.gradient.focus="0" header.gradient.scale="100" header.gradient.spread="100" trailer.color="536870912" trailer.transparency="0" trailer.gradient.color="8421504" trailer.gradient.transparency="0" trailer.gradient.angle="0" trailer.brushmode="0" trailer.gradient.repetition.mode="0" trailer.gradient.repetition.count="0" trailer.gradient.repetition.length="100" trailer.gradient.focus="0" trailer.gradient.scale="100" trailer.gradient.spread="100" )
 text(band=header alignment="2" text="LIBROS" border="1" color="16777215" x="667" y="20" height="56" width="407" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
 compute(band=header alignment="1" expression="~"Saldo Segun Libros al ~"+Day(c_fecha_ini) + ~" de ~" +If(c_mes1 = 1,~"Enero~", 
