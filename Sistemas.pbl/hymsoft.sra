@@ -62,6 +62,8 @@ Function Boolean SetCurrentDirectory(String lpPathName) Library "kernel32.dll" A
 
 FUNCTION boolean ShowWindow(longptr hWnd, integer nCmdShow) LIBRARY "user32.dll"
 
+FUNCTION ulong GetTempPathW(ulong nBufferLength, ref string lpBuffer) LIBRARY "kernel32.dll"
+
  
 end prototypes
 
