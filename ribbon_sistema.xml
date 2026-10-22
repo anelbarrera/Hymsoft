@@ -18,7 +18,25 @@
     </ApplicationButton>
 
     <Categories>
-
+        <!-- ================================================================= -->
+      <!-- COMPRAS                                         -->
+      <!-- ================================================================= -->
+ <Category Text="Compras" Tag="CAT_COMPRAS">
+   <Panel Text="Compras" Tag="PAN_COMPRAS">
+     	   <LargeButton Text="Orden de Compra" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\PurchaseOrder_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_ORDEN_COMPRA" />
+          <LargeButton Text="Entrada Mercancía" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\GoodsReceipt_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_ENTRADA_MERCANCIA" />          
+          <LargeButton Text="Factura Tránsito" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SupplierInvoice_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_FACT_PROV_TRANS" />
+        </Panel>
+ </Category>
       <!-- ================================================================= -->
       <!-- 1. FACTURACIÓN Y ENTRADAS                                         -->
       <!-- ================================================================= -->
@@ -46,20 +64,7 @@
                        Tag="BTN_PROFORMAS" />
         </Panel>
 
-        <Panel Text="Compras" Tag="PAN_COMPRAS">
-          <LargeButton Text="Entrada Mercancía" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\GoodsReceipt_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_ENTRADA_MERCANCIA" />
-          <LargeButton Text="Orden de Compra" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\PurchaseOrder_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_ORDEN_COMPRA" />
-          <LargeButton Text="Factura Tránsito" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SupplierInvoice_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_FACT_PROV_TRANS" />
-        </Panel>
+        
 
         <Panel Text="Operaciones" Tag="PAN_OPERACIONES">
           <LargeButton Text="Transacciones" 
