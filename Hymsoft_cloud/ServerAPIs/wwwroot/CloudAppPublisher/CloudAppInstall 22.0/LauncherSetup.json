@@ -1,0 +1,10 @@
+{
+	"format": "1.0",
+	"package": "CloudAppLauncher_Installer.exe",
+	"mode": 0,
+	"checkcode": "bb0d5ef4",
+	"cloudappshell": {
+		   "version": "22.2.0.3305",
+		   "minver": "22.2.0.3305"
+	}
+}

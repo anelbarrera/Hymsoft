@@ -1,0 +1,21 @@
+Migracion Union
+inmprodu al 			10/12/2024		Pasar los de fecha creacion >= 02/12/2024 (23/10/2024), correr update al costo y para el arancel
+intmovim y indmovim 		al 10/12/2024		30/09/2024
+
+dgmterce y ccmclien 		al 10/12/2024
+cctmovim			al 10/12/2024
+
+Quitar return del Trigger de indmovim
+
+Migracion de Facturas y su detalle al   06/12/2024
+Quitar return del Trigger de faddiari
+Cargos y vendedores de facturas      al 06/12/2024
+
+Proformas Encabezado y Detalle de Proformas y cargos y vendedores al 30/09/2024
+
+Parametrizar el pais panama en dgmempre para bloquear o habilitar en clientes y facturas
+Ver formatos de facturas en las impresiones
+
+
+
+

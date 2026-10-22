@@ -1,0 +1,2 @@
+1	1	2991	131	256	439	0	441-8487	UNION ZONA LIBRE, S.A.	C:\zonalibre\crimsonlogic\pendientes	2991	0	BX	0	1	0	0			0	0	0				MAYRA FRANCO	
+1	3	8971	8	17	19	0	441-8487	TEXMUNDO, S.A.	C:\zonalibre\crimsonlogic\pendientes	8971	0	BX	0	1	0	0			0	0	0	0			MAYRA FRANCO	

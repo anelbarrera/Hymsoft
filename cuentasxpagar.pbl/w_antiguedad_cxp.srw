@@ -25,7 +25,14 @@ global type w_antiguedad_cxp from w_cc_padre
 integer width = 2126
 integer height = 812
 string title = "Antigüedad de Saldos de Proveedores"
+<<<<<<< HEAD
 long backcolor = 8421376
+=======
+string menuname = "m_hs"
+boolean controlmenu = false
+long backcolor = 8421376
+event ue_vistaprevia ( )
+>>>>>>> feature/Inventario
 cb_1 cb_1
 st_1 st_1
 rb_1 rb_1
@@ -42,9 +49,24 @@ type variables
 datastore ids_proveedores
 end variables
 
+<<<<<<< HEAD
 on w_antiguedad_cxp.create
 int iCurrent
 call super::create
+=======
+event ue_vistaprevia();if dw.object.datawindow.print.preview="no" then
+   dw.object.datawindow.print.preview="yes"
+else 
+	dw.object.datawindow.print.preview="no"
+end if
+end event
+
+on w_antiguedad_cxp.create
+int iCurrent
+call super::create
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
+>>>>>>> feature/Inventario
 this.cb_1=create cb_1
 this.st_1=create st_1
 this.rb_1=create rb_1
@@ -114,6 +136,19 @@ end event
 event open;call super::open;This.ToolbarVisible = false
 end event
 
+<<<<<<< HEAD
+=======
+event close;Window lw_frame
+
+lw_frame = ParentWindow()
+
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_sheet_closed")
+ End If
+ Close(this)
+end event
+
+>>>>>>> feature/Inventario
 type st_nom_ventana from w_cc_padre`st_nom_ventana within w_antiguedad_cxp
 boolean visible = false
 integer x = 18

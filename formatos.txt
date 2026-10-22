@@ -1,0 +1,9 @@
+1	1	FA	Factura	dw_ma_fa_imp_union_logo
+1	2	FA	Codigo de Barra y Foto	dw_ma_fa_imp_union_moderna
+1	4	FA	Lista de Empaque	dw_fa_rep_picking_list_fac
+1	5	FA	Factura con Logo Agrupada	dw_ma_fa_imp_union_logo_agrupado
+1	3	FA	Multiples Fotos	dw_ma_fa_imp_union_fotos
+1	6	FA	Formato Union Logo Ingles	dw_ma_fa_imp_union_logo_ingles
+1	7	FA	Formato Excel Detallado	dw_ma_fa_imp_fact_detalle_excel
+1	8	FA	Factura Detallada	dw_ma_fa_imp_union_detalle
+1	9	FA	Factura Excel	dw_ma_fa_imp_union_excel

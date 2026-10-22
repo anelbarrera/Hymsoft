@@ -1,0 +1,101 @@
+{
+  //Do NOT modify this file. Otherwise, unexpected upgrade issues may occur.
+
+  "PathBase": null,
+
+  // Sets the AppModels assembly name
+  // Updates the value here if ESql and Models exist in multiple projects, or the AppModels project is renamed
+  "AppModelsAssemblyNames": [ "AppModels.dll" ],
+
+  //Identifies the templates from different versions
+  "TemplateID": "30902413-F664-4F22-94DE-7A5C25F65F60",
+
+  //PowerBuilder version info
+  "VersionInfo": {
+    "Version": "2022",
+    "Revision": "R3",
+    "Build": "3391"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

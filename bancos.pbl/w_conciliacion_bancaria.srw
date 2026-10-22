@@ -42,6 +42,11 @@ global type w_conciliacion_bancaria from w_fa_padre_reportes
 integer width = 4553
 integer height = 2908
 string title = "Conciliacion Bancaria"
+<<<<<<< HEAD
+=======
+string menuname = "m_hs"
+boolean controlmenu = false
+>>>>>>> feature/Inventario
 boolean minbox = false
 boolean maxbox = false
 long backcolor = 12639424
@@ -137,6 +142,11 @@ end function
 on w_conciliacion_bancaria.create
 int iCurrent
 call super::create
+<<<<<<< HEAD
+=======
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
+>>>>>>> feature/Inventario
 this.st_sel_marca=create st_sel_marca
 this.ddlb_1=create ddlb_1
 this.dw_2=create dw_2
@@ -323,6 +333,12 @@ end choose
 
 end event
 
+<<<<<<< HEAD
+=======
+event close;call super::close;w_hs_frame.Post Event ue_evaluar_panel_acciones()
+end event
+
+>>>>>>> feature/Inventario
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_conciliacion_bancaria
 end type
 

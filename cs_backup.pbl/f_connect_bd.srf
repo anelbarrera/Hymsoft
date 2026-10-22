@@ -1,0 +1,46 @@
+﻿global type f_connect_bd from function_object
+end type
+
+forward prototypes
+global function boolean f_connect_bd (boolean ab_default, string as_bd)
+end prototypes
+
+global function boolean f_connect_bd (boolean ab_default, string as_bd);////ab_default=true quiere decir la se usa la BD x defecto
+////ab_default=false se usará otra BD
+////as_bd=contiene el nombre de la BD en caso que no sea la predeterminada
+////
+//IF Sqlca.SqlCode  = -1  or Sqlca.SqlCode = 100 or  Sqlca.SqlCode = 0 THEN 
+//	disconnect;
+//END IF
+//
+//if ab_default then	
+////	SQLCA.DBMS       = "MSS Microsoft SQL Server"
+////	SQLCA.Database	 = "BDventas"
+////	SQLCA.servername = "(local)"
+////	SQLCA.LogId      = "sa"
+////	SQLCA.LogPass    = "siga"
+////	SQLCA.AutoCommit = False
+//	
+//	// Profile BR_TEST
+//	SQLCA.DBMS = "ODBC"
+//	SQLCA.AutoCommit = False
+//	SQLCA.DBParm = "ConnectString='DSN=BR_BASICO;UID=dba;PWD=dba;SERVER=BR-PADECO-PC\SQLEXPRESS;APP=BR_B;WSID=WS;DATABASE=BR_TEST;LANGUAGE='us_english''"
+//	
+//else
+//	SQLCA.DBMS       = "MSS Microsoft SQL Server"
+//	SQLCA.Database	  = as_bd
+//	SQLCA.servername = "(local)"
+//	SQLCA.LogId      = "sa"
+//	SQLCA.LogPass    = "siga"	
+//end if
+//
+//connect using sqlca;
+//
+//IF Sqlca.SqlCode  = -1  then
+//	if ab_default then Messagebox('Error de Conexión: -1' ,string(sqlca.sqlerrtext),exclamation!)	
+//	Return false
+//end if
+return true
+
+end function
+

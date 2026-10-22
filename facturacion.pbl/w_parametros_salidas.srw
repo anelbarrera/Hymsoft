@@ -379,6 +379,7 @@ event open;call super::open;//this.width = str.frame.WorkSpaceWidth() - 35
 //dw_5.visible = false
 //cbx_1.checked = true
 gf_center_win(this)
+<<<<<<< HEAD
 w_hs_frame.Post Event ue_evaluar_panel_acciones()
 end event
 
@@ -386,6 +387,26 @@ event close;call super::close;w_hs_frame.Post Event ue_evaluar_panel_acciones()
 end event
 
 event closequery;call super::closequery;setredraw(false)
+=======
+//w_hs_frame.Post Event ue_evaluar_panel_acciones()
+end event
+
+event close;call super::close;
+Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+end event
+
+event closequery;call super::closequery;setredraw(false)
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+>>>>>>> feature/Inventario
 end event
 
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_parametros_salidas

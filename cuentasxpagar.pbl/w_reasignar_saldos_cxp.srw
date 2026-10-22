@@ -41,6 +41,10 @@ integer width = 6089
 integer height = 2104
 string title = "Revision de Saldos de Proveedores"
 string menuname = ""
+<<<<<<< HEAD
+=======
+boolean controlmenu = false
+>>>>>>> feature/Inventario
 boolean resizable = false
 long backcolor = 12639424
 windowanimationstyle openanimation = rightslide!
@@ -777,6 +781,10 @@ decimal{2} ld_monto, ld_saldo, ld_aplicado, ld_saldo_actual, ld_balance, ld_apli
 long ll_tercero
 datetime ldt_fecha_recibo, ldt_fecha_factura
 this.accepttext()
+<<<<<<< HEAD
+=======
+if dw_2.rowcount() = 0 Then return
+>>>>>>> feature/Inventario
 choose case dwo.name
 	case 'aplicado'
 		li_aplicado = integer(data)

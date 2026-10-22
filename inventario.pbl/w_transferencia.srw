@@ -314,9 +314,17 @@ event close;Window lw_frame
 lw_frame = ParentWindow()
 
 If IsValid(lw_frame) Then
+<<<<<<< HEAD
    lw_frame.PostEvent("ue_sheet_closed")
  End If
 if isvalid(this) then close(this)
+=======
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+
+
+>>>>>>> feature/Inventario
 end event
 
 event ue_hay_data;//Override

@@ -22,6 +22,10 @@ global type w_ventas_resumen from w_cc_padre_rango_fecha
 integer width = 1925
 integer height = 656
 string title = "Reporte de Tarjetas Visa"
+<<<<<<< HEAD
+=======
+boolean controlmenu = false
+>>>>>>> feature/Inventario
 long backcolor = 12639424
 string icon = "AppIcon!"
 windowanimationstyle openanimation = bottomroll!

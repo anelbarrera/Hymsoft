@@ -26,6 +26,11 @@ integer y = 20
 integer width = 5001
 integer height = 2692
 string title = "Reportes de Saldos de Proveedores"
+<<<<<<< HEAD
+=======
+string menuname = "m_hs"
+boolean controlmenu = false
+>>>>>>> feature/Inventario
 long backcolor = 12639424
 windowanimationstyle closeanimation = bottomroll!
 event ue_buscar ( )
@@ -315,6 +320,11 @@ end function
 on w_reporte_proveedores.create
 int iCurrent
 call super::create
+<<<<<<< HEAD
+=======
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
+>>>>>>> feature/Inventario
 this.st_1=create st_1
 this.dw_3=create dw_3
 this.gb_4=create gb_4
@@ -395,6 +405,19 @@ this.x = 805
 //cbx_1.checked = true
 end event
 
+<<<<<<< HEAD
+=======
+event close;Window lw_frame
+
+lw_frame = ParentWindow()
+
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_sheet_closed")
+ End If
+ Close(this)
+end event
+
+>>>>>>> feature/Inventario
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_reporte_proveedores
 end type
 

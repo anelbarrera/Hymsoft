@@ -30,6 +30,11 @@ global type w_reporte_balance_de_prueba from w_fa_padre_reportes
 integer width = 3904
 integer height = 2680
 string title = "Balance de Prueba"
+<<<<<<< HEAD
+=======
+string menuname = "m_hs"
+boolean controlmenu = false
+>>>>>>> feature/Inventario
 boolean minbox = false
 boolean maxbox = false
 long backcolor = 12639424
@@ -58,6 +63,11 @@ end variables
 on w_reporte_balance_de_prueba.create
 int iCurrent
 call super::create
+<<<<<<< HEAD
+=======
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
+>>>>>>> feature/Inventario
 this.st_sel_marca=create st_sel_marca
 this.ddlb_1=create ddlb_1
 this.cb_consultar=create cb_consultar
@@ -184,6 +194,19 @@ gf_mes_de_proceso(ls_mes)
 this.title = this.title + ls_mes 
 end event
 
+<<<<<<< HEAD
+=======
+event close;Window lw_frame
+
+lw_frame = ParentWindow()
+
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_sheet_closed")
+ End If
+ Close(this)
+end event
+
+>>>>>>> feature/Inventario
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_reporte_balance_de_prueba
 end type
 

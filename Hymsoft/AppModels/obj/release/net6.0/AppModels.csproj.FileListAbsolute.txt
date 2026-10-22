@@ -1,0 +1,12 @@
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\bin\release\net6.0\AppModels.deps.json
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\bin\release\net6.0\AppModels.dll
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\bin\release\net6.0\AppModels.pdb
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\AppModels.csproj.AssemblyReference.cache
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\AppModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\AppModels.AssemblyInfoInputs.cache
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\AppModels.AssemblyInfo.cs
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\AppModels.csproj.CoreCompileInputs.cache
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\AppModels.dll
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\refint\AppModels.dll
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\AppModels.pdb
+C:\Sistemas\PB2022\HymsoftZL\Hymsoft\AppModels\obj\release\net6.0\ref\AppModels.dll

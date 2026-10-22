@@ -1,0 +1,8 @@
+﻿global type s_user_session from structure
+	string		user_id
+	string		user_name
+	string		user_role
+	string		avatar_url
+	boolean		is_logged
+end type
+

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="PowerServer.Api" Version="2.2.0" />
+    <PackageReference Include="SnapObjects.Data.SqlServer" Version="4.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppModels\AppModels.csproj">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </ProjectReference>
+    <ProjectReference Include="..\UserExtensions\UserExtensions.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(PublishReadyToRun)==true">
+    <PublishReadyToRunExclude Include="PowerServer.Core.dll" />
+  </ItemGroup>
+  <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)\wwwroot')">
+    <Content Update="wwwroot\**\*.*" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+</Project>

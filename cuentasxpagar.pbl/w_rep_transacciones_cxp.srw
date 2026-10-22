@@ -164,6 +164,19 @@ dw_2.setitem(1,'transaccion','PA')
 
 end event
 
+<<<<<<< HEAD
+=======
+event close;Window lw_frame
+
+lw_frame = ParentWindow()
+
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_sheet_closed")
+ End If
+ Close(this)
+end event
+
+>>>>>>> feature/Inventario
 type st_nom_ventana from w_cc_padre_rango_fecha`st_nom_ventana within w_rep_transacciones_cxp
 boolean visible = false
 integer x = 23

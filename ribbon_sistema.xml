@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<RibbonBar>
+  <RibbonItems>
+    <ApplicationButton Text="HymSoft" Enabled="true" Tag="MyApp" Visible="true">
+      <ApplicationMenu>
+        <Master>
+          <Item Text="Cuenta" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Account_16.png" Checked="false" Enabled="true" Shortcut="Ctrl+Shift+A" Tag="Account" Type="0" Visible="true" Selected="ue_MenuUserSelected">            
+            <Item Text="Cerrar Sesión" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SignOut_16.png" Checked="false" Enabled="true" Tag="SignOut" Type="0" Visible="true" Clicked="ue_appmenu_click" Selected="ue_MenuSignOutSelected" />
+          </Item>
+          <Item Type="1" Visible="true"/>
+          <Item Text="Opciones" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Settings_16.png" Checked="false" Enabled="true" Tag="Options" Type="0" Visible="true" Clicked="ue_appmenu_click" Selected="ue_MenuOptionsSelected" />
+          <Item Text="Ayuda" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Help_16.png" Checked="false" Enabled="true" Tag="Help" Type="0" Visible="true" Selected="ue_MenuHelpSelected">            
+            <Item Text="Acerca de" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Info_16.png" Checked="false" Enabled="true" Tag="About app" Type="0" Visible="true" Clicked="ue_appmenu_click" Selected="ue_MenuAboutSelected" />
+          </Item>
+          <Item Text="Salir" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_16.png" Checked="false" Enabled="true" Tag="Close" Type="0" Visible="true" Clicked="ue_appmenu_click" Selected="ue_MenuCloseSelected" />
+        </Master> 
+      </ApplicationMenu>
+    </ApplicationButton>
+
+    <Categories>
+        <!-- ================================================================= -->
+      <!-- COMPRAS                                         -->
+      <!-- ================================================================= -->
+ <Category Text="Compras" Tag="CAT_COMPRAS">
+   <Panel Text="Compras" Tag="PAN_COMPRAS">
+     	   <LargeButton Text="Orden de Compra" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\PurchaseOrder_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_ORDEN_COMPRA" />
+          <LargeButton Text="Entrada Mercancía" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\GoodsReceipt_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_ENTRADA_MERCANCIA" />          
+          <LargeButton Text="Factura Tránsito" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SupplierInvoice_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_FACT_PROV_TRANS" />
+        </Panel>
+ </Category>
+      <!-- ================================================================= -->
+      <!-- 1. FACTURACIÓN Y ENTRADAS                                         -->
+      <!-- ================================================================= -->
+      <Category Text="Facturación" Tag="CAT_FACTURAS_ENTRADAS">      
+        <Panel Text="Ventas" Tag="PAN_VENTAS">
+          <LargeButton Text="Captura" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InvoiceNew_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CAPTURA" />
+          <LargeButton Text="Factura Directa" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InvoiceDirect_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_ORD_FACT_DIR" />
+          <LargeButton Text="Cotizaciones" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Quote_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_COTIZACIONES" />
+          <LargeButton Text="Pedidos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Order_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_PEDIDOS" />
+          <LargeButton Text="Proformas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Proforma_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_PROFORMAS" />
+        </Panel>
+
+        
+
+        <Panel Text="Operaciones" Tag="PAN_OPERACIONES">
+          <LargeButton Text="Transacciones" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Transactions_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_TRANSACCIONES" />
+          <LargeButton Text="Cargos Mora" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\LateFees_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CARGOS_MORA" />
+        </Panel>
+
+        <Panel Text="Acciones" Tag="PAN_ACCIONES_CAT1">
+          <LargeButton Text="Grabar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Save_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT1_BTN_ACCION_GRABAR" />
+          <LargeButton Text="Insertar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Add_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT1_BTN_ACCION_INSERTAR" />
+          <LargeButton Text="Eliminar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Delete_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT1_BTN_ACCION_ELIMINAR" />
+          <LargeButton Text="Cerrar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT1_BTN_ACCION_CERRAR" />
+        </Panel>
+      </Category>
+
+      <!-- ================================================================= -->
+      <!-- 2. TRANSACCIONES                                                  -->
+      <!-- ================================================================= -->
+      <Category Text="Transacciones" Tag="CAT_TRANSACCIONES">
+        <Panel Text="Inventario" Tag="PAN_TRANS_INV">
+          <LargeButton Text="Ajustes Inventario" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InventoryAdjust_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_AJUSTES_INV" />
+          <LargeButton Text="Transferencias" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Transfer_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_TRANSF_BODEGA" />
+        </Panel>
+
+        <Panel Text="Tesorería" Tag="PAN_TRANS_CAJA_BANCO">
+          <LargeButton Text="Caja" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\CashRegister_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CAJA" />
+          <LargeButton Text="Ajustes Caja" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\CashAdjust_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_AJUSTE_CAJA" />
+          <LargeButton Text="Bancos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Bank_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_BANCARIAS" />
+          <LargeButton Text="Depósitos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\BankDeposit_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_DEPOSITOS_BANCARIOS" />
+        </Panel>
+
+        <Panel Text="Contabilidad" Tag="PAN_TRANS_CONTAB">
+          <LargeButton Text="Comprobantes Diario" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\JournalEntry_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_COMP_DIARIOS" />
+          <LargeButton Text="Proveedores" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Supplier_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_TRANS_PROVEEDORES" />
+        </Panel>
+
+        <Panel Text="Acciones" Tag="PAN_ACCIONES_CAT2">
+          <LargeButton Text="Grabar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Save_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT2_BTN_ACCION_GRABAR" />
+          <LargeButton Text="Insertar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Add_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT2_BTN_ACCION_INSERTAR" />
+          <LargeButton Text="Eliminar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Delete_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT2_BTN_ACCION_ELIMINAR" />
+          <LargeButton Text="Cerrar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT2_BTN_ACCION_CERRAR" />
+        </Panel>
+      </Category>
+
+      <!-- ================================================================= -->
+      <!-- 3. CONSULTAS                                                      -->
+      <!-- ================================================================= -->
+      <Category Text="Consultas" Tag="CAT_CONSULTAS">
+        <Panel Text="Inventario" Tag="PAN_CONS_INV">
+          <LargeButton Text="Productos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ProductSearch_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_PRODUCTOS" />
+          <LargeButton Text="Kardex" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Kardex_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_KARDEX" />
+          <LargeButton Text="Reservados Ref." 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Reserved_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_RESERVADOS_REF" />
+        </Panel>
+
+        <Panel Text="Clientes" Tag="PAN_CONS_CLIENTES">
+          <LargeButton Text="Facturas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InvoiceSearch_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_FACTURAS" />
+          <LargeButton Text="Historial Ventas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ClientSales_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_HIST_VENTAS_CLI" />
+          <LargeButton Text="Estado de Cuenta" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AccountStatement_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_EST_CTA_CLI" />
+          <LargeButton Text="Transacciones" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ClientTx_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_TX_CLI" />
+        </Panel>
+
+        <Panel Text="Proveedores" Tag="PAN_CONS_PROV">
+          <LargeButton Text="Estado de Cuenta" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SupplierStatement_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_EST_CTA_PROV" />
+          <LargeButton Text="Transacciones" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SupplierTx_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_TX_PROV" />
+        </Panel>
+
+        <Panel Text="Bancos" Tag="PAN_CONS_BANCOS">
+          <LargeButton Text="Conciliaciones" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Reconciliation_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_CONCIL_BANCARIA" />
+          <LargeButton Text="Saldos Bancarios" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\BankBalances_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_SALDOS_BANCARIOS" />
+          <LargeButton Text="Comprobantes Diario" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\JournalSearch_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_COMP_DIARIOS" />
+        </Panel>
+
+        <Panel Text="Acciones" Tag="PAN_ACCIONES_CAT3">
+          <LargeButton Text="Grabar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Save_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT3_BTN_ACCION_GRABAR" />
+          <LargeButton Text="Insertar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Add_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT3_BTN_ACCION_INSERTAR" />
+          <LargeButton Text="Eliminar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Delete_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT3_BTN_ACCION_ELIMINAR" />
+          <LargeButton Text="Cerrar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT3_BTN_ACCION_CERRAR" />
+        </Panel>
+		<Panel Text="Acciones" Tag="PAN_ACCIONES_DOC">
+		<SmallButton Text="Guardar como..." 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SaveAs_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_GUARDAR_COMO" />
+
+		<SmallButton Text="Vista Preliminar" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\PrintPreview_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_VISTA_PRELIMINAR" />
+
+		<SmallButton Text="Imprimir" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Print_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_IMPRIMIR" />
+
+		<SmallButton Text="Cerrar" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_CERRAR" />
+		</Panel>
+      </Category>
+
+      <!-- ================================================================= -->
+      <!-- 4. REPORTES                                                       -->
+      <!-- ================================================================= -->
+      <Category Text="Reportes" Tag="CAT_REPORTES">
+        <Panel Text="Ventas" Tag="PAN_REP_VENTAS">
+          <LargeButton Text="Informe de Ventas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ReportSales_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_VENTAS" />
+          <LargeButton Text="Más Vendidos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\TopProducts_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_TOP_PROD" />
+          <LargeButton Text="Saldos Clientes" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ClientBalances_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_SALDOS_CLI" />
+          <LargeButton Text="Transacciones" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ClientTx_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_TX_CLI" />
+          <LargeButton Text="Antigüedad Saldos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AgingReport_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_ANT_SALDOS" />
+        </Panel>
+
+        <Panel Text="Inventario" Tag="PAN_REP_INV">
+          <LargeButton Text="Existencias" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ReportStock_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_INVENTARIOS" />
+          <LargeButton Text="Rotación Stock" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockTurnover_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_ROT_INV" />
+          <LargeButton Text="Antigüedad Stock" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockAging_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_ANT_INV" />
+          <LargeButton Text="Movimientos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockMovement_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_MOVIMIENTOS" />
+          <LargeButton Text="Catálogos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Catalog_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_CATALOGOS" />
+        </Panel>
+
+        <Panel Text="Compras" Tag="PAN_REP_COMPRAS">
+          <LargeButton Text="Sugerido Compras" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SuggestedPurchase_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_SUGERIDO_COMP" />
+          <LargeButton Text="Informe Órdenes" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\POReport_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_ORDENES" />
+          <LargeButton Text="Entradas Stock" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InboundReport_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_ENTRADAS" />
+        </Panel>
+
+        <Panel Text="Internos" Tag="PAN_REP_INTERNO">
+          <LargeButton Text="Transferencias" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\TransferReport_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_TRANSFERENCIAS" />
+          <LargeButton Text="Ajustes" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AdjustmentReport_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_REP_AJUSTES" />
+        </Panel>
+
+        <Panel Text="Acciones" Tag="PAN_ACCIONES_CAT4">
+          <LargeButton Text="Grabar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Save_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT4_BTN_ACCION_GRABAR" />
+          <LargeButton Text="Insertar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Add_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT4_BTN_ACCION_INSERTAR" />
+          <LargeButton Text="Eliminar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Delete_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT4_BTN_ACCION_ELIMINAR" />
+          <LargeButton Text="Cerrar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT4_BTN_ACCION_CERRAR" />
+        </Panel>    
+      </Category>
+
+      <!-- ================================================================= -->
+      <!-- 5. CONTABILIDAD                                                   -->
+      <!-- ================================================================= -->
+      <Category Text="Contabilidad" Tag="CAT_CONTABILIDAD">
+        <Panel Text="Balances" Tag="PAN_CONT_BALANCES">
+          <LargeButton Text="Mayor General" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\GeneralLedger_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_MAYOR_GRAL" />
+          <LargeButton Text="Balance Pruebas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\TrialBalance_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_BALANCE_PRUEBA" />
+          <LargeButton Text="Auxiliares" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SubLedger_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_AUX_CUENTAS" />
+          <LargeButton Text="Estados Fin." 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\FinancialStatements_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_ESTADOS_FIN" />
+          <LargeButton Text="Histórico Ctas." 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AccountHistory_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_HIST_CUENTAS" />
+        </Panel>
+
+        <Panel Text="Bancos" Tag="PAN_CONT_BANCOS">
+          <LargeButton Text="Transacciones" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\BankTx_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_TX_BANCARIAS" />
+          <LargeButton Text="Tarjeta Visa" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\CreditCard_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_TARJETA_VISA" />
+        </Panel>
+
+        <Panel Text="Cuentas por Pagar" Tag="PAN_CONT_CXP">
+          <LargeButton Text="Morosidad Prov." 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SupplierOverdue_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_MORA_PROV" />
+          <LargeButton Text="Saldos Prov." 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SupplierBalances_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_SALDOS_PROV" />
+          <LargeButton Text="Transacciones" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SupplierTx_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONT_TX_PROV" />
+        </Panel>
+		<Panel Text="Acciones" Tag="PAN_ACCIONES_CAT5">
+		<SmallButton Text="Guardar como..." 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SaveAs_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_GUARDAR_COMO" />
+
+		<SmallButton Text="Vista Preliminar" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\PrintPreview_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_VISTA_PRELIMINAR" />
+
+		<SmallButton Text="Imprimir" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Print_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_IMPRIMIR" />
+
+		<SmallButton Text="Cerrar" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_16.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_ACCION_CERRAR" />
+		</Panel>
+      </Category>
+
+      <!-- ================================================================= -->
+      <!-- 6. MANTENIMIENTO                                                  -->
+      <!-- ================================================================= -->
+      <Category Text="Mantenimiento" Tag="CAT_MANTENIMIENTO">
+        <Panel Text="Catálogos" Tag="PAN_MANT_MAESTROS">
+          <LargeButton Text="Clientes" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Clients_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_CLIENTES" />
+          <LargeButton Text="Productos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Products_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_PRODUCTOS" />
+          <LargeButton Text="Proveedores" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Suppliers_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_PROVEEDORES" />
+          <LargeButton Text="Plan de Cuentas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ChartAccounts_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_PLAN_CTAS" />
+          <LargeButton Text="Directorio" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Directory_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_DIRECTORIO" />
+          <LargeButton Text="Asignar Fotos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AssignPhotos_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_FOTOS" />
+        </Panel>
+
+        <Panel Text="Parámetros" Tag="PAN_MANT_PARAM">
+          <LargeButton Text="Generales" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\GeneralSettings_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_PARAM_GEN" />
+          <LargeButton Text="Inventario" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockSettings_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_PARAM_INV" />
+          <LargeButton Text="Ventas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SalesSettings_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_PARAM_VTA" />
+          <LargeButton Text="Sistema" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Settings_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_PARAM" />
+        </Panel>
+
+        <Panel Text="Seguridad" Tag="PAN_MANT_SEGURIDAD">
+          <LargeButton Text="Usuarios" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AddUser_16.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_MANT_USUARIOS" />
+        </Panel>
+
+        <Panel Text="Acciones" Tag="PAN_ACCIONES_CAT6">
+          <LargeButton Text="Grabar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Save_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT6_BTN_ACCION_GRABAR" />
+          <LargeButton Text="Insertar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Add_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT6_BTN_ACCION_INSERTAR" />
+          <LargeButton Text="Eliminar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Delete_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT6_BTN_ACCION_ELIMINAR" />
+          <LargeButton Text="Cerrar" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Close_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="CAT6_BTN_ACCION_CERRAR" />
+        </Panel>
+      </Category>
+
+    </Categories>
+  </RibbonItems>
+</RibbonBar>

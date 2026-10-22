@@ -149,6 +149,25 @@ THIS.SetToolbarPos(1, 1, 50, false)
 
 end event
 
+<<<<<<< HEAD
+=======
+event ue_vista;//if dw_1.object.datawindow.print.preview="no" then
+//   dw_1.object.datawindow.print.preview="yes"
+//else 
+//	dw_1.object.datawindow.print.preview="no"
+//end if
+
+string ls_estado
+ls_estado = dw.Describe("DataWindow.Print.Preview")
+If Upper(ls_estado) = 'YES' Then
+	dw.Modify("DataWindow.Print.Preview = No")
+Else
+	dw.Modify("DataWindow.Print.Preview = Yes")
+End If
+ 
+end event
+
+>>>>>>> feature/Inventario
 type st_ayuda from w_cc_padre_reporte`st_ayuda within w_antiguedad_imp_cxp
 end type
 

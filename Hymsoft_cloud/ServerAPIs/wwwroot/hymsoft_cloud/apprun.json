@@ -1,0 +1,7 @@
+﻿{
+    "deployment_urls": {
+        "launcher": "CloudAppPublisher/CloudAppInstall 22.0",
+        "runtime": "CloudAppPublisher/runtime/22.2.0.3305",
+        "web_api": "http://localhost:8085"
+    }
+}

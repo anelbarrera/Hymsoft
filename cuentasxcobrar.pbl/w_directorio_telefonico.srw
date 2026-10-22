@@ -476,9 +476,22 @@ Else
 End If		
 end event
 
+<<<<<<< HEAD
 event close;call super::close;SetRedraw(false)
 w_hs_frame.Post Event ue_evaluar_panel_acciones()
 close(this)
+=======
+event close;call super::close;
+Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+>>>>>>> feature/Inventario
 end event
 
 event ue_siguiente_reg;//siguiente registro
@@ -526,6 +539,11 @@ end event
 event closequery;//override
 SetRedraw(false)
 this.triggerevent("ue_valida_todo")
+<<<<<<< HEAD
+=======
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+>>>>>>> feature/Inventario
 end event
 
 event ue_valida_todo;//override
@@ -558,7 +576,11 @@ end event
 
 event open;call super::open;//this.y = 0
 //this.x = 805
+<<<<<<< HEAD
 w_hs_frame.Post Event ue_evaluar_panel_acciones()
+=======
+//w_hs_frame.Post Event ue_evaluar_panel_acciones()
+>>>>>>> feature/Inventario
 end event
 
 event resize;call super::resize;//

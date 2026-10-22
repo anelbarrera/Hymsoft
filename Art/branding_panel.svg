@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 620" width="480" height="620">
+  <defs>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00667e"/>
+      <stop offset="50%" stop-color="#024b66"/>
+      <stop offset="100%" stop-color="#032b43"/>
+    </linearGradient>
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo con esquinas redondeadas -->
+  <rect width="480" height="620" rx="28" fill="url(#panelGrad)"/>
+
+  <!-- Formas geométricas sutiles de fondo -->
+  <path d="M 0,160 L 240,0 L 480,80 L 480,0 L 0,0 Z" fill="#ffffff" opacity="0.04"/>
+  <circle cx="420" cy="520" r="160" fill="#38bdf8" opacity="0.06"/>
+  <path d="M -40,480 L 260,620 L -40,620 Z" fill="#ffffff" opacity="0.03"/>
+
+  <!-- Icono / Logo Central -->
+  <g transform="translate(160, 170)">
+    <rect x="20" y="10" width="55" height="110" rx="10" fill="#ffffff"/>
+    <path d="M 75,10 C 110,10 135,35 135,65 C 135,95 110,115 75,115 Z" fill="#ffffff" opacity="0.9"/>
+    <path d="M 50,45 C 80,45 105,65 105,95 C 105,125 75,145 40,145 Z" fill="url(#cyanAccent)"/>
+  </g>
+
+  <!-- Textos de Branding -->
+  <text x="240" y="420" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="700" fill="#ffffff" letter-spacing="1">PB Connect</text>
+  <text x="240" y="460" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" fill="#94a3b8">Acceso Seguro a su Plataforma v2025</text>
+</svg>

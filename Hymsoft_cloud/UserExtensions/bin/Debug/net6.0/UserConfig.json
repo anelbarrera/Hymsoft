@@ -1,0 +1,118 @@
+{
+  "AllowedHosts": "*",
+
+  // PowerServer server configuration
+  "PowerServer": {
+    "LicenseKey": "DSCC-GBIG-FDG4-233F-CB5F",
+    "LicenseCode": "eyJQYXlsb2FkIjoiNU9aMUhXSldyZXl2T2tYdTFBdUFuOVU3OGJ2XHUwMDJCaktkZUlYd2hRNlx1MDAyQlhtNEhFTVlrUTBaa0VPQ2lTT1lOMlx1MDAyQnFZbVx1MDAyQkRPaTFnbHY2N3U3ZkRPM2o4MDQ4eEhzRGUyNlByUkZUd1FvTlVSWDRVUlQ1UjNidGM1XHUwMDJCRWRCWk81SEdTXHUwMDJCNjF2U1gvY0YyWnNtN21aXHUwMDJCbkM1MWVtSi9NOGg5WTRVeDNBdXdiYXdrQXVFQlJVNEtlbHVMUWc5U1Y3RUhUSjlmTGQ1ajJSRFlQaUVsZXIzUThnTjdYQWx3aDZsUnhhb0lVQ2lYbjladmQwS0hsdWtURm5FXHUwMDJCdVdGQVcvb0xTbDNpUnNVc1VTYW1aSUtJQTA3emEvckRQZ1dnN0JwQlJBVUdqZ1h5eDNcdTAwMkJCQlNlellnWDdRUXd1b0tLVjV5ejh3U3VPcXA3Z2wyWm9XY291N2lqV3JFa3d1T3d1MHJwM2dzOWVVaXhHNEJWR2cvZFp1VEpcdTAwMkJlMzJtYTBXNGQ2TlVkbWIweVBXRzNYVzZYMkZGSXJRYW5uamp5QU9Va0lsZUdhQ25EaTdiXHUwMDJCai9uYzdRU0lwaGpnUVdQMzRoNkRcdTAwMkJOL1pNQnVQQzlSQ3pVWHgwN0ZFNkJkMnBQZ3RFejZvSFVNMlhCVml4dDEvS2RxR3Q5am02MjRncE9nNTd4SnpjaTh5OEppYXhDT3pxMS8yXHUwMDJCVFRidktTbEpTWGNPQkE9PSIsIlRpbWVzdGFtcCI6MTY5ODA5ODM5NywiU2lnbmF0dXJlIjoiRkRIZ1hGdUJwVHBrdjliNzQ5TmdITDMwLzRGQlNjXHUwMDJCTzR0OVlUbHVEY0xJVHhXaFJYRXNjR3JSaGtkSHUxV21BVlRxbXlMcDJPZjNhc29lVWxMYmNCOHFGS3Nod2N6V2pBVG02OUdmSTFra0ZTR1BzT080WXMwXHUwMDJCb0N0NGNPc1lOY2c2T2owVXJtWEJXbVx1MDAyQkxWVjE5czY1Y0p4L0JyY2VsOGExU2l1T0VcdTAwMkJaU1FqVno3YU1jOVYyMDZFTXoxQVNDQmxkbFU0XHUwMDJCblNKVnpidUxZdm1QXHUwMDJCN2p0UGd1Y0pLNjZRMk11akR1MGNpRTJBUVB1N0xtZTBJRHBMbVVIMmpubUI2MURkek1sT1V0L0xvMHV5TXFuT1J3U2oycDhvVFdvUEp3alpjMk80YXNCTkRxdFN5N3l5TjVZbUhVME5VbS9xOHR2L1pURzFFQzBqVmgxVmFhQ05yYWpDcmlGT3JscC9oOFRpZmpuXHUwMDJCTVgyRlRaRURQVDhueWhMNlRpQ3BCY1lUMXJhZWQ4cnRLSlhpbUxuXHUwMDJCd2NxTmVpTVZ0SFROcFh6QktveHZ0eU81c1hPNElhek5tVGJXQmhzdDFRRk43OGN1eFk1SG92STBrRTFVOUovYVRrdXJOTFx1MDAyQkd1VWN3R3UwM0JXV3pDRkhuQjlrbnhjcmZKY3dyOGNLL3k4Vk8ySmQyVWxwYjVwV2RFUlE4Q0pmaHBZXHUwMDJCcGt6VnN3bUt5dVZGOHR5WUxhQ240ZHlCd0MwVElZZzBCTHBKTHl3R21TXHUwMDJCeGpFRDdmUXVjbG5jQk1BXHUwMDJCRWtad2tubGVmalYzdW1KWWVxNkowN0haRUlsS2ZnMW1SOVpCRHpMOU8yNXRQaDRTZnY2TkY1cGcwT1VXdS9wSDlpMTNDQmRTdWtUbDVDMjkzXHUwMDJCaHVwVHhcdTAwMkJmYmtvcGJZPSJ9",
+
+    // Whether to have the sensitive data encrypted when transferring it from the configuration APIs to PowerServer
+    // If false, the sensitive data is not encrypted, then PowerServer will encrypt the data
+    // If true (recommended), the sensitive data is already encrypted, then PowerServer will not encrypt it
+    "EncryptedSensitiveData": false,
+
+    // Sets HTTP proxy for connection with the license server
+    "ProxyOptions": {
+
+      // Sets the proxy server
+      "Server": "",
+
+      // Sets the proxy server user name
+      "Username": "",
+
+      // Sets the proxy server password
+      "Password": ""
+    },
+
+    // Sets the email server 
+    "EmailOptions": {
+
+      // Sets the email server address
+      "SmtpServerAddress": "",
+
+      // Sets the email server port
+      "SmtpServerPort": 25,
+
+      // Sets whether to enable SSL
+      "SmtpServerSsl": false,
+
+      // Sets the email sender's account
+      "SenderAccount": "",
+
+      // Sets the email sender's account password
+      "SenderPassword": "",
+
+      // Sets the email sender's display name
+      "SenderDisplayName": "",
+
+      // Sets the recipient(s)
+      "Recipients": [ "" ]
+    },
+
+    // Sets the statistics options
+    "StatisticsOptions": {
+
+      // Sets whether to track the request details
+      "TrackRequestDetails": false,
+
+      // Sets whether to track the transaction details
+      "TrackTransactionDetails": false,
+
+      // Sets whether to track the failed request details
+      "TrackFailedRequestDetails": true,
+
+      // Sets whether to track the failed transaction details
+      "TrackFailedTransactionDetails": true,
+
+      // Sets the maximum number of requests to be recorded
+      "CountOfRequestDetailsToKeep": 1000,
+
+      // Sets the maximum number of transactions to be recorded
+      "CountOfTransactionDetailsToKeep": 500,
+
+      // Sets the maximum number of failed transactions to be recorded
+      "CountOfFailedTransactionDetailsToKeep": 100
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

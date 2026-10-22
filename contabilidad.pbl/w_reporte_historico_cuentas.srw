@@ -18,6 +18,11 @@ global type w_reporte_historico_cuentas from w_fa_padre_reportes
 integer width = 4398
 integer height = 2680
 string title = "Reporte Historico de Transacciones por Cuenta"
+<<<<<<< HEAD
+=======
+string menuname = "m_hs"
+boolean controlmenu = false
+>>>>>>> feature/Inventario
 boolean minbox = false
 boolean maxbox = false
 long backcolor = 12639424
@@ -149,6 +154,11 @@ end function
 on w_reporte_historico_cuentas.create
 int iCurrent
 call super::create
+<<<<<<< HEAD
+=======
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
+>>>>>>> feature/Inventario
 this.dw_2=create dw_2
 this.cb_consultar=create cb_consultar
 this.cb_2=create cb_2
@@ -257,6 +267,19 @@ event ue_save_as;call super::ue_save_as;if str.maquina = 'PBM-INT-MIA' then
 end if
 end event
 
+<<<<<<< HEAD
+=======
+event close;Window lw_frame
+
+lw_frame = ParentWindow()
+
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_sheet_closed")
+ End If
+ Close(this)
+end event
+
+>>>>>>> feature/Inventario
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_reporte_historico_cuentas
 end type
 

@@ -106,6 +106,10 @@ event close;// Oculta la ventana instantáneamente (0 ms) antes de que Windows c
 // a destruir los controles hijos uno a uno en pantalla.
 this.Hide()
 this.SetRedraw(False)
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/Inventario
 end event
 
 event ue_aceptar;call super::ue_aceptar;//override
@@ -140,6 +144,13 @@ st_nom_ventana.x = 28
 st_nom_ventana.y = this.height - 180
 end event
 
+<<<<<<< HEAD
+=======
+event closequery;call super::closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+end event
+
+>>>>>>> feature/Inventario
 type st_nom_ventana from w_granpa`st_nom_ventana within w_fa_padre
 long backcolor = 79416533
 end type
