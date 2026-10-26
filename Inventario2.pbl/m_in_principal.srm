@@ -1,0 +1,4930 @@
+﻿//objectcomments Menu para los reportes de inventario
+forward
+global type m_in_principal from m_in_padre
+end type
+type m_buscar from menu within m_edicion
+end type
+type m_edicion from m_in_padre`m_edicion within m_in_principal
+m_buscar m_buscar
+end type
+end forward
+
+global type m_in_principal from m_in_padre
+end type
+global m_in_principal m_in_principal
+
+on m_in_principal.create
+m_in_principal=this
+call super::create
+end on
+
+on m_in_principal.destroy
+call super::destroy
+end on
+
+type m_archivo from m_in_padre`m_archivo within m_in_principal
+end type
+
+on m_archivo.create
+call super::create
+this.tag = "m_in_principal.m_archivo"
+end on
+
+on m_archivo.destroy
+call super::destroy
+end on
+
+event m_archivo::clicked;call super::clicked;//
+
+end event
+
+type m_empresa from m_in_padre`m_empresa within m_archivo
+end type
+
+on m_empresa.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_empresa"
+end on
+
+on m_empresa.destroy
+call super::destroy
+end on
+
+type m_cerrar from m_in_padre`m_cerrar within m_archivo
+end type
+
+on m_cerrar.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_cerrar"
+this.visible = true
+this.toolbaritemvisible = true
+this.toolbaritemorder = 16
+this.toolbaritemspace = 2
+end on
+
+on m_cerrar.destroy
+call super::destroy
+end on
+
+type m_guardar from m_in_padre`m_guardar within m_archivo
+end type
+
+on m_guardar.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_guardar"
+this.enabled = true
+this.toolbaritemvisible = true
+end on
+
+on m_guardar.destroy
+call super::destroy
+end on
+
+type m_estatusdesesin from m_in_padre`m_estatusdesesin within m_archivo
+end type
+
+on m_estatusdesesin.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_estatusdesesin"
+end on
+
+on m_estatusdesesin.destroy
+call super::destroy
+end on
+
+type m_finalizarsesin from m_in_padre`m_finalizarsesin within m_archivo
+end type
+
+on m_finalizarsesin.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_finalizarsesin-"
+end on
+
+on m_finalizarsesin.destroy
+call super::destroy
+end on
+
+type m_-1 from m_in_padre`m_-1 within m_archivo
+end type
+
+on m_-1.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_-1"
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_imprimir from m_in_padre`m_imprimir within m_archivo
+end type
+
+on m_imprimir.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_imprimir"
+this.enabled = true
+this.toolbaritemvisible = true
+this.toolbaritemorder = 14
+this.toolbaritemspace = 0
+end on
+
+on m_imprimir.destroy
+call super::destroy
+end on
+
+type m_-2 from m_in_padre`m_-2 within m_archivo
+end type
+
+on m_-2.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_-2"
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_salir from m_in_padre`m_salir within m_archivo
+end type
+
+on m_salir.create
+call super::create
+this.tag = "m_in_principal.m_archivo.m_salir"
+this.toolbaritemspace = 0
+this.toolbaritemdown = true
+this.mergeoption = merge!
+end on
+
+on m_salir.destroy
+call super::destroy
+end on
+
+type m_actulizarentradastotal from m_in_padre`m_actulizarentradastotal within m_archivo
+end type
+
+on m_actulizarentradastotal.create
+call super::create
+end on
+
+on m_actulizarentradastotal.destroy
+call super::destroy
+end on
+
+type m_edicion from m_in_padre`m_edicion within m_in_principal
+m_buscar m_buscar
+end type
+
+on m_edicion.create
+call super::create
+this.tag = "m_in_principal.m_edicion"
+this.visible = true
+this.enabled = true
+this.m_buscar=create m_buscar
+this.Item[UpperBound(this.Item)+1]=this.m_buscar
+end on
+
+on m_edicion.destroy
+call super::destroy
+destroy(this.m_buscar)
+end on
+
+type m_adicionar from m_in_padre`m_adicionar within m_edicion
+end type
+
+on m_adicionar.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_adicionar"
+this.toolbaritemvisible = true
+end on
+
+on m_adicionar.destroy
+call super::destroy
+end on
+
+type m_insertar from m_in_padre`m_insertar within m_edicion
+end type
+
+on m_insertar.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_insertar"
+this.toolbaritemvisible = true
+end on
+
+on m_insertar.destroy
+call super::destroy
+end on
+
+type m_eliminar from m_in_padre`m_eliminar within m_edicion
+end type
+
+on m_eliminar.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_eliminar"
+this.toolbaritemvisible = true
+end on
+
+on m_eliminar.destroy
+call super::destroy
+end on
+
+type m_-3 from m_in_padre`m_-3 within m_edicion
+end type
+
+on m_-3.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_-3"
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_primerregistro from m_in_padre`m_primerregistro within m_edicion
+end type
+
+on m_primerregistro.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_primerregistro"
+this.toolbaritemvisible = true
+end on
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from m_in_padre`m_registroanterior within m_edicion
+end type
+
+on m_registroanterior.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_registroanterior"
+this.toolbaritemvisible = true
+end on
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from m_in_padre`m_siguienteregistro within m_edicion
+end type
+
+on m_siguienteregistro.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_siguienteregistro"
+this.toolbaritemvisible = true
+end on
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from m_in_padre`m_ultimoregistro within m_edicion
+end type
+
+on m_ultimoregistro.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_ultimoregistro"
+this.toolbaritemvisible = true
+end on
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-4 from m_in_padre`m_-4 within m_edicion
+end type
+
+on m_-4.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_-4"
+end on
+
+on m_-4.destroy
+call super::destroy
+end on
+
+type m_filtrar from m_in_padre`m_filtrar within m_edicion
+end type
+
+on m_filtrar.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_filtrar"
+this.enabled = false
+this.toolbaritemname = "defaultfonts!"
+end on
+
+on m_filtrar.destroy
+call super::destroy
+end on
+
+type m_sortear from m_in_padre`m_sortear within m_edicion
+end type
+
+on m_sortear.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_sortear"
+this.enabled = false
+this.toolbaritemname = "createruntime!"
+end on
+
+on m_sortear.destroy
+call super::destroy
+end on
+
+type m_ver from m_in_padre`m_ver within m_in_principal
+end type
+
+on m_ver.create
+call super::create
+this.tag = "m_in_principal.m_ver"
+end on
+
+on m_ver.destroy
+call super::destroy
+end on
+
+type m_mantenimientos from m_in_padre`m_mantenimientos within m_in_principal
+end type
+
+on m_mantenimientos.create
+call super::create
+this.tag = "m_in_principal.m_mantenimiento"
+end on
+
+on m_mantenimientos.destroy
+call super::destroy
+end on
+
+type m_parametrosdeinventarios from m_in_padre`m_parametrosdeinventarios within m_mantenimientos
+end type
+
+on m_parametrosdeinventarios.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_parametrosdeinventarios"
+end on
+
+on m_parametrosdeinventarios.destroy
+call super::destroy
+end on
+
+type m_organizacindeinventarios from m_in_padre`m_organizacindeinventarios within m_mantenimientos
+end type
+
+on m_organizacindeinventarios.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_organizacindeinventarios"
+end on
+
+on m_organizacindeinventarios.destroy
+call super::destroy
+end on
+
+type m_-15 from m_in_padre`m_-15 within m_mantenimientos
+end type
+
+on m_-15.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_-15"
+end on
+
+on m_-15.destroy
+call super::destroy
+end on
+
+type m_proveedores from m_in_padre`m_proveedores within m_mantenimientos
+end type
+
+on m_proveedores.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_proveedores"
+end on
+
+on m_proveedores.destroy
+call super::destroy
+end on
+
+type m_-13 from m_in_padre`m_-13 within m_mantenimientos
+end type
+
+on m_-13.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_-13"
+end on
+
+on m_-13.destroy
+call super::destroy
+end on
+
+type m_clases from m_in_padre`m_clases within m_mantenimientos
+end type
+
+on m_clases.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_clases"
+end on
+
+on m_clases.destroy
+call super::destroy
+end on
+
+type m_tipos from m_in_padre`m_tipos within m_mantenimientos
+end type
+
+on m_tipos.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_tipos"
+end on
+
+on m_tipos.destroy
+call super::destroy
+end on
+
+type m_especificaciones from m_in_padre`m_especificaciones within m_mantenimientos
+end type
+
+on m_especificaciones.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_especificaciones"
+end on
+
+on m_especificaciones.destroy
+call super::destroy
+end on
+
+type m_-16 from m_in_padre`m_-16 within m_mantenimientos
+end type
+
+on m_-16.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m-16"
+end on
+
+on m_-16.destroy
+call super::destroy
+end on
+
+type m_marcas from m_in_padre`m_marcas within m_mantenimientos
+end type
+
+on m_marcas.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_marcas"
+end on
+
+on m_marcas.destroy
+call super::destroy
+end on
+
+type m_modelos from m_in_padre`m_modelos within m_mantenimientos
+end type
+
+on m_modelos.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_modelos"
+end on
+
+on m_modelos.destroy
+call super::destroy
+end on
+
+type m_colores from m_in_padre`m_colores within m_mantenimientos
+end type
+
+on m_colores.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_colores"
+end on
+
+on m_colores.destroy
+call super::destroy
+end on
+
+type m_tamaos from m_in_padre`m_tamaos within m_mantenimientos
+end type
+
+on m_tamaos.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_tamaos"
+end on
+
+on m_tamaos.destroy
+call super::destroy
+end on
+
+type m_-11 from m_in_padre`m_-11 within m_mantenimientos
+end type
+
+on m_-11.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_-11"
+end on
+
+on m_-11.destroy
+call super::destroy
+end on
+
+type m_medidas from m_in_padre`m_medidas within m_mantenimientos
+end type
+
+on m_medidas.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_medidas"
+end on
+
+on m_medidas.destroy
+call super::destroy
+end on
+
+type m_-14 from m_in_padre`m_-14 within m_mantenimientos
+end type
+
+on m_-14.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_-14"
+end on
+
+on m_-14.destroy
+call super::destroy
+end on
+
+type m_aranceles from m_in_padre`m_aranceles within m_mantenimientos
+end type
+
+on m_aranceles.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_aranceles"
+end on
+
+on m_aranceles.destroy
+call super::destroy
+end on
+
+type m_impuestos from m_in_padre`m_impuestos within m_mantenimientos
+end type
+
+on m_impuestos.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_impuestos"
+end on
+
+on m_impuestos.destroy
+call super::destroy
+end on
+
+type m_establecerporcentajedeprecios from m_in_padre`m_establecerporcentajedeprecios within m_mantenimientos
+end type
+
+on m_establecerporcentajedeprecios.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_establecerporcentajedeprecios"
+end on
+
+on m_establecerporcentajedeprecios.destroy
+call super::destroy
+end on
+
+type m_-12 from m_in_padre`m_-12 within m_mantenimientos
+end type
+
+on m_-12.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos..m-12"
+end on
+
+on m_-12.destroy
+call super::destroy
+end on
+
+type m_bodegas from m_in_padre`m_bodegas within m_mantenimientos
+end type
+
+on m_bodegas.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_bodegas"
+end on
+
+on m_bodegas.destroy
+call super::destroy
+end on
+
+type m_ubicaciones from m_in_padre`m_ubicaciones within m_mantenimientos
+end type
+
+on m_ubicaciones.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_ubicaciones"
+end on
+
+on m_ubicaciones.destroy
+call super::destroy
+end on
+
+type m_-73 from m_in_padre`m_-73 within m_mantenimientos
+end type
+
+on m_-73.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_-73"
+end on
+
+on m_-73.destroy
+call super::destroy
+end on
+
+type m_productos from m_in_padre`m_productos within m_mantenimientos
+end type
+
+on m_productos.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_productos"
+end on
+
+on m_productos.destroy
+call super::destroy
+end on
+
+type m_capturaresumidadeproductos from m_in_padre`m_capturaresumidadeproductos within m_mantenimientos
+end type
+
+on m_capturaresumidadeproductos.create
+call super::create
+end on
+
+on m_capturaresumidadeproductos.destroy
+call super::destroy
+end on
+
+type cantidad_resumido_comp from m_in_padre`cantidad_resumido_comp within m_mantenimientos
+end type
+
+on cantidad_resumido_comp.create
+call super::create
+end on
+
+on cantidad_resumido_comp.destroy
+call super::destroy
+end on
+
+type m_-802 from m_in_padre`m_-802 within m_mantenimientos
+end type
+
+on m_-802.create
+call super::create
+end on
+
+on m_-802.destroy
+call super::destroy
+end on
+
+type m_productosbodega-ubicacin from m_in_padre`m_productosbodega-ubicacin within m_mantenimientos
+end type
+
+on m_productosbodega-ubicacin.create
+call super::create
+this.tag = "m_in_principal.m_mantenimientos.m_productosbodegaubicacin"
+end on
+
+on m_productosbodega-ubicacin.destroy
+call super::destroy
+end on
+
+type m_productosbodega-ubicacineliminar from m_in_padre`m_productosbodega-ubicacineliminar within m_mantenimientos
+end type
+
+on m_productosbodega-ubicacineliminar.create
+call super::create
+end on
+
+on m_productosbodega-ubicacineliminar.destroy
+call super::destroy
+end on
+
+type m_3 from m_in_padre`m_3 within m_mantenimientos
+end type
+
+on m_3.create
+call super::create
+end on
+
+on m_3.destroy
+call super::destroy
+end on
+
+type m_formatos from m_in_padre`m_formatos within m_mantenimientos
+end type
+
+on m_formatos.create
+call super::create
+end on
+
+on m_formatos.destroy
+call super::destroy
+end on
+
+type m_lotes from m_in_padre`m_lotes within m_mantenimientos
+end type
+
+on m_lotes.create
+call super::create
+end on
+
+on m_lotes.destroy
+call super::destroy
+end on
+
+type m_productosporcliente from m_in_padre`m_productosporcliente within m_mantenimientos
+end type
+
+on m_productosporcliente.create
+call super::create
+end on
+
+on m_productosporcliente.destroy
+call super::destroy
+end on
+
+type m_monedas from m_in_padre`m_monedas within m_mantenimientos
+end type
+
+on m_monedas.create
+call super::create
+end on
+
+on m_monedas.destroy
+call super::destroy
+end on
+
+type m_porcentajedegastos from m_in_padre`m_porcentajedegastos within m_mantenimientos
+end type
+
+on m_porcentajedegastos.create
+call super::create
+end on
+
+on m_porcentajedegastos.destroy
+call super::destroy
+end on
+
+type m_-5 from m_in_padre`m_-5 within m_mantenimientos
+end type
+
+on m_-5.create
+call super::create
+end on
+
+on m_-5.destroy
+call super::destroy
+end on
+
+type m_tiposdeproductos from m_in_padre`m_tiposdeproductos within m_mantenimientos
+end type
+
+on m_tiposdeproductos.create
+call super::create
+end on
+
+on m_tiposdeproductos.destroy
+call super::destroy
+end on
+
+type m_descripcionesdeproductos from m_in_padre`m_descripcionesdeproductos within m_mantenimientos
+end type
+
+on m_descripcionesdeproductos.create
+call super::create
+end on
+
+on m_descripcionesdeproductos.destroy
+call super::destroy
+end on
+
+type m_materialesycomposicion from m_in_padre`m_materialesycomposicion within m_mantenimientos
+end type
+
+on m_materialesycomposicion.create
+call super::create
+end on
+
+on m_materialesycomposicion.destroy
+call super::destroy
+end on
+
+type m_sexosdeitems from m_in_padre`m_sexosdeitems within m_mantenimientos
+end type
+
+on m_sexosdeitems.create
+call super::create
+end on
+
+on m_sexosdeitems.destroy
+call super::destroy
+end on
+
+type m_tallas from m_in_padre`m_tallas within m_mantenimientos
+end type
+
+on m_tallas.create
+call super::create
+end on
+
+on m_tallas.destroy
+call super::destroy
+end on
+
+type m_ratios from m_in_padre`m_ratios within m_mantenimientos
+end type
+
+on m_ratios.create
+call super::create
+end on
+
+on m_ratios.destroy
+call super::destroy
+end on
+
+type m_tiposdeempaques from m_in_padre`m_tiposdeempaques within m_mantenimientos
+end type
+
+on m_tiposdeempaques.create
+call super::create
+end on
+
+on m_tiposdeempaques.destroy
+call super::destroy
+end on
+
+type m_productosestructurados from m_in_padre`m_productosestructurados within m_mantenimientos
+end type
+
+on m_productosestructurados.create
+call super::create
+end on
+
+on m_productosestructurados.destroy
+call super::destroy
+end on
+
+type m_-46 from m_in_padre`m_-46 within m_mantenimientos
+end type
+
+on m_-46.create
+call super::create
+end on
+
+on m_-46.destroy
+call super::destroy
+end on
+
+type m_prouctosresumidos from m_in_padre`m_prouctosresumidos within m_mantenimientos
+end type
+
+on m_prouctosresumidos.create
+call super::create
+end on
+
+on m_prouctosresumidos.destroy
+call super::destroy
+end on
+
+type m_mantenimientodegeneracióndecódigos from m_in_padre`m_mantenimientodegeneracióndecódigos within m_mantenimientos
+end type
+
+on m_mantenimientodegeneracióndecódigos.create
+call super::create
+end on
+
+on m_mantenimientodegeneracióndecódigos.destroy
+call super::destroy
+end on
+
+type m_movimientosdeclaves from m_in_padre`m_movimientosdeclaves within m_mantenimientos
+end type
+
+on m_movimientosdeclaves.create
+call super::create
+end on
+
+on m_movimientosdeclaves.destroy
+call super::destroy
+end on
+
+type m_listados from m_in_padre`m_listados within m_in_principal
+end type
+
+on m_listados.create
+call super::create
+this.tag = "m_in_principal.m_listados"
+end on
+
+on m_listados.destroy
+call super::destroy
+end on
+
+type m_productos2 from m_in_padre`m_productos2 within m_listados
+end type
+
+on m_productos2.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_productos2"
+end on
+
+on m_productos2.destroy
+call super::destroy
+end on
+
+type m_productosdetallados1 from m_in_padre`m_productosdetallados1 within m_listados
+end type
+
+on m_productosdetallados1.create
+call super::create
+end on
+
+on m_productosdetallados1.destroy
+call super::destroy
+end on
+
+type m_2 from m_in_padre`m_2 within m_listados
+end type
+
+on m_2.create
+call super::create
+end on
+
+on m_2.destroy
+call super::destroy
+end on
+
+type m_productosdetallados from m_in_padre`m_productosdetallados within m_listados
+end type
+
+on m_productosdetallados.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_productosdetallados"
+end on
+
+on m_productosdetallados.destroy
+call super::destroy
+end on
+
+type m_-21 from m_in_padre`m_-21 within m_listados
+end type
+
+on m_-21.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_-21"
+end on
+
+on m_-21.destroy
+call super::destroy
+end on
+
+type m_clases2 from m_in_padre`m_clases2 within m_listados
+end type
+
+on m_clases2.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_clases2"
+end on
+
+on m_clases2.destroy
+call super::destroy
+end on
+
+type m_tipos1 from m_in_padre`m_tipos1 within m_listados
+end type
+
+on m_tipos1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_tipos1"
+end on
+
+on m_tipos1.destroy
+call super::destroy
+end on
+
+type m_especificaciones1 from m_in_padre`m_especificaciones1 within m_listados
+end type
+
+on m_especificaciones1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_especificaciones1"
+end on
+
+on m_especificaciones1.destroy
+call super::destroy
+end on
+
+type m_-26 from m_in_padre`m_-26 within m_listados
+end type
+
+on m_-26.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_-26"
+end on
+
+on m_-26.destroy
+call super::destroy
+end on
+
+type m_marcas1 from m_in_padre`m_marcas1 within m_listados
+end type
+
+on m_marcas1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_marcas1"
+end on
+
+on m_marcas1.destroy
+call super::destroy
+end on
+
+type m_modelos1 from m_in_padre`m_modelos1 within m_listados
+end type
+
+on m_modelos1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_modelos1"
+end on
+
+on m_modelos1.destroy
+call super::destroy
+end on
+
+type m_colores2 from m_in_padre`m_colores2 within m_listados
+end type
+
+on m_colores2.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_colores2"
+end on
+
+on m_colores2.destroy
+call super::destroy
+end on
+
+type m_tamaos2 from m_in_padre`m_tamaos2 within m_listados
+end type
+
+on m_tamaos2.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_tamaos2"
+end on
+
+on m_tamaos2.destroy
+call super::destroy
+end on
+
+type m_-32 from m_in_padre`m_-32 within m_listados
+end type
+
+on m_-32.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_-32"
+end on
+
+on m_-32.destroy
+call super::destroy
+end on
+
+type m_divisiones from m_in_padre`m_divisiones within m_listados
+end type
+
+on m_divisiones.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_divisiones"
+end on
+
+on m_divisiones.destroy
+call super::destroy
+end on
+
+type m_grupos from m_in_padre`m_grupos within m_listados
+end type
+
+on m_grupos.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_grupos"
+end on
+
+on m_grupos.destroy
+call super::destroy
+end on
+
+type m_sub_grupos from m_in_padre`m_sub_grupos within m_listados
+end type
+
+on m_sub_grupos.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_sub_grupos"
+end on
+
+on m_sub_grupos.destroy
+call super::destroy
+end on
+
+type m_lineas from m_in_padre`m_lineas within m_listados
+end type
+
+on m_lineas.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_lineas"
+end on
+
+on m_lineas.destroy
+call super::destroy
+end on
+
+type m_-34 from m_in_padre`m_-34 within m_listados
+end type
+
+on m_-34.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_-34"
+end on
+
+on m_-34.destroy
+call super::destroy
+end on
+
+type m_unidadesdemedidas from m_in_padre`m_unidadesdemedidas within m_listados
+end type
+
+on m_unidadesdemedidas.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_unidadesdemedidas"
+end on
+
+on m_unidadesdemedidas.destroy
+call super::destroy
+end on
+
+type m_proveedores1 from m_in_padre`m_proveedores1 within m_listados
+end type
+
+on m_proveedores1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_proveedores1"
+end on
+
+on m_proveedores1.destroy
+call super::destroy
+end on
+
+type m_-27 from m_in_padre`m_-27 within m_listados
+end type
+
+on m_-27.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_-27"
+end on
+
+on m_-27.destroy
+call super::destroy
+end on
+
+type m_bodegas1 from m_in_padre`m_bodegas1 within m_listados
+end type
+
+on m_bodegas1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_bodegas1"
+end on
+
+on m_bodegas1.destroy
+call super::destroy
+end on
+
+type m_ubicaciones1 from m_in_padre`m_ubicaciones1 within m_listados
+end type
+
+on m_ubicaciones1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_ubicaciones1"
+end on
+
+on m_ubicaciones1.destroy
+call super::destroy
+end on
+
+type m_-31 from m_in_padre`m_-31 within m_listados
+end type
+
+on m_-31.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_-31"
+end on
+
+on m_-31.destroy
+call super::destroy
+end on
+
+type m_aranceles1 from m_in_padre`m_aranceles1 within m_listados
+end type
+
+on m_aranceles1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_aranceles1"
+end on
+
+on m_aranceles1.destroy
+call super::destroy
+end on
+
+type m_impuestos1 from m_in_padre`m_impuestos1 within m_listados
+end type
+
+on m_impuestos1.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_impuestos1"
+end on
+
+on m_impuestos1.destroy
+call super::destroy
+end on
+
+type m_tipodetransacciones from m_in_padre`m_tipodetransacciones within m_listados
+end type
+
+on m_tipodetransacciones.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_tipodetransacciones"
+end on
+
+on m_tipodetransacciones.destroy
+call super::destroy
+end on
+
+type m_conceptosdetransacciones from m_in_padre`m_conceptosdetransacciones within m_listados
+end type
+
+on m_conceptosdetransacciones.create
+call super::create
+this.tag = "m_in_principal.m_listados.m_conceptosdetransacciones"
+end on
+
+on m_conceptosdetransacciones.destroy
+call super::destroy
+end on
+
+type m_verificarcodigodebarra from m_in_padre`m_verificarcodigodebarra within m_listados
+end type
+
+on m_verificarcodigodebarra.create
+call super::create
+end on
+
+on m_verificarcodigodebarra.destroy
+call super::destroy
+end on
+
+type m_6 from m_in_padre`m_6 within m_listados
+end type
+
+on m_6.create
+call super::create
+end on
+
+on m_6.destroy
+call super::destroy
+end on
+
+type m_transaccines from m_in_padre`m_transaccines within m_in_principal
+end type
+
+on m_transaccines.create
+call super::create
+this.tag = "m_in_principal.m_transaccines"
+end on
+
+on m_transaccines.destroy
+call super::destroy
+end on
+
+type m_entradas from m_in_padre`m_entradas within m_transaccines
+end type
+
+on m_entradas.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas"
+end on
+
+on m_entradas.destroy
+call super::destroy
+end on
+
+type m_captura from m_in_padre`m_captura within m_entradas
+end type
+
+on m_captura.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_captura"
+end on
+
+on m_captura.destroy
+call super::destroy
+end on
+
+type m_capturaconquilataje from m_in_padre`m_capturaconquilataje within m_entradas
+end type
+
+on m_capturaconquilataje.create
+call super::create
+end on
+
+on m_capturaconquilataje.destroy
+call super::destroy
+end on
+
+type m_impresin from m_in_padre`m_impresin within m_entradas
+end type
+
+on m_impresin.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_impresin"
+end on
+
+on m_impresin.destroy
+call super::destroy
+end on
+
+type m_impresióndeentradaespecial from m_in_padre`m_impresióndeentradaespecial within m_entradas
+end type
+
+on m_impresióndeentradaespecial.create
+call super::create
+end on
+
+on m_impresióndeentradaespecial.destroy
+call super::destroy
+end on
+
+type m_impresinconcostoprecios1-5 from m_in_padre`m_impresinconcostoprecios1-5 within m_entradas
+end type
+
+on m_impresinconcostoprecios1-5.create
+call super::create
+end on
+
+on m_impresinconcostoprecios1-5.destroy
+call super::destroy
+end on
+
+type m_impresinparasaladeventas from m_in_padre`m_impresinparasaladeventas within m_entradas
+end type
+
+on m_impresinparasaladeventas.create
+call super::create
+end on
+
+on m_impresinparasaladeventas.destroy
+call super::destroy
+end on
+
+type m_5 from m_in_padre`m_5 within m_entradas
+end type
+
+on m_5.create
+call super::create
+end on
+
+on m_5.destroy
+call super::destroy
+end on
+
+type m_-7 from m_in_padre`m_-7 within m_entradas
+end type
+
+on m_-7.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_-7"
+end on
+
+on m_-7.destroy
+call super::destroy
+end on
+
+type m_listadoverificacinparabodega from m_in_padre`m_listadoverificacinparabodega within m_entradas
+end type
+
+on m_listadoverificacinparabodega.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_listadoverificacinparabodega"
+end on
+
+on m_listadoverificacinparabodega.destroy
+call super::destroy
+end on
+
+type m_listadodeve from m_in_padre`m_listadodeve within m_entradas
+end type
+
+on m_listadodeve.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_listadodeve"
+end on
+
+on m_listadodeve.destroy
+call super::destroy
+end on
+
+type m_-17 from m_in_padre`m_-17 within m_entradas
+end type
+
+on m_-17.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_-17"
+end on
+
+on m_-17.destroy
+call super::destroy
+end on
+
+type m_proyecciondecostoyprecioestimado from m_in_padre`m_proyecciondecostoyprecioestimado within m_entradas
+end type
+
+on m_proyecciondecostoyprecioestimado.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_proyecciondecostoyprecioestimado"
+end on
+
+on m_proyecciondecostoyprecioestimado.destroy
+call super::destroy
+end on
+
+type m_proyecciondecostosconunsoloprec from m_in_padre`m_proyecciondecostosconunsoloprec within m_entradas
+end type
+
+on m_proyecciondecostosconunsoloprec.create
+call super::create
+end on
+
+on m_proyecciondecostosconunsoloprec.destroy
+call super::destroy
+end on
+
+type m_proyecciondecostosconunsoloprecio from m_in_padre`m_proyecciondecostosconunsoloprecio within m_entradas
+end type
+
+on m_proyecciondecostosconunsoloprecio.create
+call super::create
+end on
+
+on m_proyecciondecostosconunsoloprecio.destroy
+call super::destroy
+end on
+
+type m_proyeccindecargosseguntabladea from m_in_padre`m_proyeccindecargosseguntabladea within m_entradas
+end type
+
+on m_proyeccindecargosseguntabladea.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_proyeccindecargosseguntabladea"
+end on
+
+on m_proyeccindecargosseguntabladea.destroy
+call super::destroy
+end on
+
+type m_proyeccindecostossegunliquidaci from m_in_padre`m_proyeccindecostossegunliquidaci within m_entradas
+end type
+
+on m_proyeccindecostossegunliquidaci.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_proyeccindecostossegunliquidaci"
+end on
+
+on m_proyeccindecostossegunliquidaci.destroy
+call super::destroy
+end on
+
+type m_-9 from m_in_padre`m_-9 within m_entradas
+end type
+
+on m_-9.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_-9"
+end on
+
+on m_-9.destroy
+call super::destroy
+end on
+
+type m_informedecostofob from m_in_padre`m_informedecostofob within m_entradas
+end type
+
+on m_informedecostofob.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_informedecostofob"
+end on
+
+on m_informedecostofob.destroy
+call super::destroy
+end on
+
+type m_sincosto from m_in_padre`m_sincosto within m_entradas
+end type
+
+on m_sincosto.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_sincosto"
+end on
+
+on m_sincosto.destroy
+call super::destroy
+end on
+
+type m_informedeprecioestimado from m_in_padre`m_informedeprecioestimado within m_entradas
+end type
+
+on m_informedeprecioestimado.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_informedeprecioestimado"
+end on
+
+on m_informedeprecioestimado.destroy
+call super::destroy
+end on
+
+type m_precioreal from m_in_padre`m_precioreal within m_entradas
+end type
+
+on m_precioreal.create
+call super::create
+end on
+
+on m_precioreal.destroy
+call super::destroy
+end on
+
+type m_r from m_in_padre`m_r within m_entradas
+end type
+
+on m_r.create
+call super::create
+end on
+
+on m_r.destroy
+call super::destroy
+end on
+
+type m_estimaciondetodoslosprecios from m_in_padre`m_estimaciondetodoslosprecios within m_entradas
+end type
+
+on m_estimaciondetodoslosprecios.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_estimaciondetodoslosprecios"
+end on
+
+on m_estimaciondetodoslosprecios.destroy
+call super::destroy
+end on
+
+type m_preciosrealestodos from m_in_padre`m_preciosrealestodos within m_entradas
+end type
+
+on m_preciosrealestodos.create
+call super::create
+end on
+
+on m_preciosrealestodos.destroy
+call super::destroy
+end on
+
+type m_-8 from m_in_padre`m_-8 within m_entradas
+end type
+
+on m_-8.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_-8"
+end on
+
+on m_-8.destroy
+call super::destroy
+end on
+
+type m_inf from m_in_padre`m_inf within m_entradas
+end type
+
+on m_inf.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_inf"
+end on
+
+on m_inf.destroy
+call super::destroy
+end on
+
+type m_-10 from m_in_padre`m_-10 within m_entradas
+end type
+
+on m_-10.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_-10"
+end on
+
+on m_-10.destroy
+call super::destroy
+end on
+
+type m_comparativoentrecompras from m_in_padre`m_comparativoentrecompras within m_entradas
+end type
+
+on m_comparativoentrecompras.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_comparativoentrecompras"
+end on
+
+on m_comparativoentrecompras.destroy
+call super::destroy
+end on
+
+type m_-50 from m_in_padre`m_-50 within m_entradas
+end type
+
+on m_-50.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_-50"
+end on
+
+on m_-50.destroy
+call super::destroy
+end on
+
+type m_actualizaciondecostos from m_in_padre`m_actualizaciondecostos within m_entradas
+end type
+
+on m_actualizaciondecostos.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_entradas.m_actualizaciondecostos"
+end on
+
+on m_actualizaciondecostos.destroy
+call super::destroy
+end on
+
+type m_actualizaciondecostos0 from m_in_padre`m_actualizaciondecostos0 within m_entradas
+end type
+
+on m_actualizaciondecostos0.create
+call super::create
+end on
+
+on m_actualizaciondecostos0.destroy
+call super::destroy
+end on
+
+type m_asignarnumerodedmcalaentrada from m_in_padre`m_asignarnumerodedmcalaentrada within m_entradas
+end type
+
+on m_asignarnumerodedmcalaentrada.create
+call super::create
+end on
+
+on m_asignarnumerodedmcalaentrada.destroy
+call super::destroy
+end on
+
+type m_pasarentradasalenlacecontable from m_in_padre`m_pasarentradasalenlacecontable within m_entradas
+end type
+
+on m_pasarentradasalenlacecontable.create
+call super::create
+end on
+
+on m_pasarentradasalenlacecontable.destroy
+call super::destroy
+end on
+
+type m_registroanticipadodeentrada from m_in_padre`m_registroanticipadodeentrada within m_transaccines
+end type
+
+on m_registroanticipadodeentrada.create
+call super::create
+end on
+
+on m_registroanticipadodeentrada.destroy
+call super::destroy
+end on
+
+type m_captura1 from m_in_padre`m_captura1 within m_registroanticipadodeentrada
+end type
+
+on m_captura1.create
+call super::create
+end on
+
+on m_captura1.destroy
+call super::destroy
+end on
+
+type m_impresión1 from m_in_padre`m_impresión1 within m_registroanticipadodeentrada
+end type
+
+on m_impresión1.create
+call super::create
+end on
+
+on m_impresión1.destroy
+call super::destroy
+end on
+
+type m_resumendeentradasanticipadasporm from m_in_padre`m_resumendeentradasanticipadasporm within m_registroanticipadodeentrada
+end type
+
+on m_resumendeentradasanticipadasporm.create
+call super::create
+end on
+
+on m_resumendeentradasanticipadasporm.destroy
+call super::destroy
+end on
+
+type m_pase from m_in_padre`m_pase within m_registroanticipadodeentrada
+end type
+
+on m_pase.create
+call super::create
+end on
+
+on m_pase.destroy
+call super::destroy
+end on
+
+type m_salidas from m_in_padre`m_salidas within m_transaccines
+end type
+
+on m_salidas.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_salidas"
+end on
+
+on m_salidas.destroy
+call super::destroy
+end on
+
+type m_capturas from m_in_padre`m_capturas within m_salidas
+end type
+
+on m_capturas.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_salidas.m_capturas"
+end on
+
+on m_capturas.destroy
+call super::destroy
+end on
+
+type m_capturasconquilataje from m_in_padre`m_capturasconquilataje within m_salidas
+end type
+
+on m_capturasconquilataje.create
+call super::create
+end on
+
+on m_capturasconquilataje.destroy
+call super::destroy
+end on
+
+type m_-30 from m_in_padre`m_-30 within m_salidas
+end type
+
+on m_-30.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_salidas.m_-30"
+end on
+
+on m_-30.destroy
+call super::destroy
+end on
+
+type m_impresion_salida from m_in_padre`m_impresion_salida within m_salidas
+end type
+
+on m_impresion_salida.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_salidas.m_impresion_salida"
+end on
+
+on m_impresion_salida.destroy
+call super::destroy
+end on
+
+type m_informes1 from m_in_padre`m_informes1 within m_salidas
+end type
+
+on m_informes1.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_salidas.m_informes1"
+end on
+
+on m_informes1.destroy
+call super::destroy
+end on
+
+type m_listadeconfirmacionparabodega from m_in_padre`m_listadeconfirmacionparabodega within m_salidas
+end type
+
+on m_listadeconfirmacionparabodega.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_salidas.m_listadeconfirmacionparabodega"
+end on
+
+on m_listadeconfirmacionparabodega.destroy
+call super::destroy
+end on
+
+type m_-74 from m_in_padre`m_-74 within m_salidas
+end type
+
+on m_-74.create
+call super::create
+end on
+
+on m_-74.destroy
+call super::destroy
+end on
+
+type m_resumenparaasientocontable from m_in_padre`m_resumenparaasientocontable within m_salidas
+end type
+
+on m_resumenparaasientocontable.create
+call super::create
+end on
+
+on m_resumenparaasientocontable.destroy
+call super::destroy
+end on
+
+type m_-77 from m_in_padre`m_-77 within m_salidas
+end type
+
+on m_-77.create
+call super::create
+end on
+
+on m_-77.destroy
+call super::destroy
+end on
+
+type m_pasedesalidasaentradas from m_in_padre`m_pasedesalidasaentradas within m_salidas
+end type
+
+on m_pasedesalidasaentradas.create
+call super::create
+end on
+
+on m_pasedesalidasaentradas.destroy
+call super::destroy
+end on
+
+type m_transferencias from m_in_padre`m_transferencias within m_transaccines
+end type
+
+on m_transferencias.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_transferencias"
+end on
+
+on m_transferencias.destroy
+call super::destroy
+end on
+
+type m_capturadetranferencias from m_in_padre`m_capturadetranferencias within m_transferencias
+end type
+
+on m_capturadetranferencias.create
+call super::create
+this.tag = "m_in_principal.m_transferencias.m_capturadetranferencias"
+end on
+
+on m_capturadetranferencias.destroy
+call super::destroy
+end on
+
+type m_-33 from m_in_padre`m_-33 within m_transferencias
+end type
+
+on m_-33.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_transferencias.m_-33"
+end on
+
+on m_-33.destroy
+call super::destroy
+end on
+
+type m_formulariodetranferencias from m_in_padre`m_formulariodetranferencias within m_transferencias
+end type
+
+on m_formulariodetranferencias.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_transferencias.m_formulariodetranferencias"
+end on
+
+on m_formulariodetranferencias.destroy
+call super::destroy
+end on
+
+type m_informedetranferencias from m_in_padre`m_informedetranferencias within m_transferencias
+end type
+
+on m_informedetranferencias.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_transferencias.m_informedetranferencias"
+end on
+
+on m_informedetranferencias.destroy
+call super::destroy
+end on
+
+type m_ajustes from m_in_padre`m_ajustes within m_transaccines
+end type
+
+on m_ajustes.create
+call super::create
+this.tag = ""
+end on
+
+on m_ajustes.destroy
+call super::destroy
+end on
+
+event m_ajustes::clicked;call super::clicked;//
+end event
+
+type m_ajustedeexistenciasycostospreliminar from m_in_padre`m_ajustedeexistenciasycostospreliminar within m_ajustes
+end type
+
+on m_ajustedeexistenciasycostospreliminar.create
+call super::create
+end on
+
+on m_ajustedeexistenciasycostospreliminar.destroy
+call super::destroy
+end on
+
+type m_ajustedeexistenciasycostos from m_in_padre`m_ajustedeexistenciasycostos within m_ajustes
+end type
+
+on m_ajustedeexistenciasycostos.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_ajustedeexistenciasycostos"
+end on
+
+on m_ajustedeexistenciasycostos.destroy
+call super::destroy
+end on
+
+type m_ajustedecostos from m_in_padre`m_ajustedecostos within m_ajustes
+end type
+
+on m_ajustedecostos.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_ajustedecostos"
+end on
+
+on m_ajustedecostos.destroy
+call super::destroy
+end on
+
+type m_ajustedeprecios from m_in_padre`m_ajustedeprecios within m_ajustes
+end type
+
+on m_ajustedeprecios.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_ajustedeprecios"
+end on
+
+on m_ajustedeprecios.destroy
+call super::destroy
+end on
+
+type m_ajustedeexistenciasconclavesyco from m_in_padre`m_ajustedeexistenciasconclavesyco within m_ajustes
+end type
+
+on m_ajustedeexistenciasconclavesyco.create
+call super::create
+end on
+
+on m_ajustedeexistenciasconclavesyco.destroy
+call super::destroy
+end on
+
+type m_-18 from m_in_padre`m_-18 within m_ajustes
+end type
+
+on m_-18.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_-18"
+end on
+
+on m_-18.destroy
+call super::destroy
+end on
+
+type m_informedeajustes from m_in_padre`m_informedeajustes within m_ajustes
+end type
+
+on m_informedeajustes.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_informedeajustes"
+end on
+
+on m_informedeajustes.destroy
+call super::destroy
+end on
+
+type m_informedeexistenciasycostosprevio from m_in_padre`m_informedeexistenciasycostosprevio within m_informedeajustes
+end type
+
+on m_informedeexistenciasycostosprevio.create
+call super::create
+end on
+
+on m_informedeexistenciasycostosprevio.destroy
+call super::destroy
+end on
+
+type m_informedeexistenciasycostos from m_in_padre`m_informedeexistenciasycostos within m_informedeajustes
+end type
+
+on m_informedeexistenciasycostos.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_informedeajustes.m_informedeexistenciasycostos"
+end on
+
+on m_informedeexistenciasycostos.destroy
+call super::destroy
+end on
+
+type m_-52 from m_in_padre`m_-52 within m_informedeajustes
+end type
+
+on m_-52.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_informedeajustes.m_-52"
+end on
+
+on m_-52.destroy
+call super::destroy
+end on
+
+type m_informedecostos from m_in_padre`m_informedecostos within m_informedeajustes
+end type
+
+on m_informedecostos.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_informedeajustes.m_informedecostos"
+end on
+
+on m_informedecostos.destroy
+call super::destroy
+end on
+
+type m_-53 from m_in_padre`m_-53 within m_informedeajustes
+end type
+
+on m_-53.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_informedeajustes.m_-53"
+end on
+
+on m_-53.destroy
+call super::destroy
+end on
+
+type m_informedeprecios from m_in_padre`m_informedeprecios within m_informedeajustes
+end type
+
+on m_informedeprecios.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_ajustes.m_informedeajustes.m_informedeprecios"
+end on
+
+on m_informedeprecios.destroy
+call super::destroy
+end on
+
+type m_-78 from m_in_padre`m_-78 within m_informedeajustes
+end type
+
+on m_-78.create
+call super::create
+end on
+
+on m_-78.destroy
+call super::destroy
+end on
+
+type m_informedeclavesycostos from m_in_padre`m_informedeclavesycostos within m_informedeajustes
+end type
+
+on m_informedeclavesycostos.create
+call super::create
+end on
+
+on m_informedeclavesycostos.destroy
+call super::destroy
+end on
+
+type m_actualizacindecostos from m_in_padre`m_actualizacindecostos within m_ajustes
+end type
+
+on m_actualizacindecostos.create
+call super::create
+end on
+
+on m_actualizacindecostos.destroy
+call super::destroy
+end on
+
+type m_generaciondeajustespreliminares from m_in_padre`m_generaciondeajustespreliminares within m_ajustes
+end type
+
+on m_generaciondeajustespreliminares.create
+call super::create
+end on
+
+on m_generaciondeajustespreliminares.destroy
+call super::destroy
+end on
+
+type m_generacionautomaticadeajustes from m_in_padre`m_generacionautomaticadeajustes within m_ajustes
+end type
+
+on m_generacionautomaticadeajustes.create
+call super::create
+end on
+
+on m_generacionautomaticadeajustes.destroy
+call super::destroy
+end on
+
+type m_devoluciones from m_in_padre`m_devoluciones within m_transaccines
+end type
+
+on m_devoluciones.create
+call super::create
+end on
+
+on m_devoluciones.destroy
+call super::destroy
+end on
+
+type m_captura2 from m_in_padre`m_captura2 within m_devoluciones
+end type
+
+on m_captura2.create
+call super::create
+end on
+
+on m_captura2.destroy
+call super::destroy
+end on
+
+type m_-80 from m_in_padre`m_-80 within m_devoluciones
+end type
+
+on m_-80.create
+call super::create
+end on
+
+on m_-80.destroy
+call super::destroy
+end on
+
+type m_imprimir2 from m_in_padre`m_imprimir2 within m_devoluciones
+end type
+
+on m_imprimir2.create
+call super::create
+end on
+
+on m_imprimir2.destroy
+call super::destroy
+end on
+
+type m_informes2 from m_in_padre`m_informes2 within m_devoluciones
+end type
+
+on m_informes2.create
+call super::create
+end on
+
+on m_informes2.destroy
+call super::destroy
+end on
+
+type m_listadeconfirmacionparabodega2 from m_in_padre`m_listadeconfirmacionparabodega2 within m_devoluciones
+end type
+
+on m_listadeconfirmacionparabodega2.create
+call super::create
+end on
+
+on m_listadeconfirmacionparabodega2.destroy
+call super::destroy
+end on
+
+type m_-81 from m_in_padre`m_-81 within m_devoluciones
+end type
+
+on m_-81.create
+call super::create
+end on
+
+on m_-81.destroy
+call super::destroy
+end on
+
+type m_resumenparaasientocontable2 from m_in_padre`m_resumenparaasientocontable2 within m_devoluciones
+end type
+
+on m_resumenparaasientocontable2.create
+call super::create
+end on
+
+on m_resumenparaasientocontable2.destroy
+call super::destroy
+end on
+
+type m_-19 from m_in_padre`m_-19 within m_transaccines
+end type
+
+on m_-19.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_-19"
+end on
+
+on m_-19.destroy
+call super::destroy
+end on
+
+type m_liquidaciones from m_in_padre`m_liquidaciones within m_transaccines
+end type
+
+on m_liquidaciones.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_liquidaciones"
+end on
+
+on m_liquidaciones.destroy
+call super::destroy
+end on
+
+type m_capturarliquidaciones from m_in_padre`m_capturarliquidaciones within m_liquidaciones
+end type
+
+on m_capturarliquidaciones.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_liquidaciones.m_capturarliquidaciones"
+end on
+
+on m_capturarliquidaciones.destroy
+call super::destroy
+end on
+
+type m_consultasdeliquidaciones from m_in_padre`m_consultasdeliquidaciones within m_liquidaciones
+end type
+
+on m_consultasdeliquidaciones.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_liquidaciones.m_consultasdeliquidaciones"
+end on
+
+on m_consultasdeliquidaciones.destroy
+call super::destroy
+end on
+
+type m_informesdedistribuciondecostos from m_in_padre`m_informesdedistribuciondecostos within m_liquidaciones
+end type
+
+on m_informesdedistribuciondecostos.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_liquidaciones.m_informesdedistribuciondecostos"
+end on
+
+on m_informesdedistribuciondecostos.destroy
+call super::destroy
+end on
+
+type m_actualizarcostos from m_in_padre`m_actualizarcostos within m_liquidaciones
+end type
+
+on m_actualizarcostos.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_liquidaciones.m_actualizarcostos"
+end on
+
+on m_actualizarcostos.destroy
+call super::destroy
+end on
+
+type m_-20 from m_in_padre`m_-20 within m_transaccines
+end type
+
+on m_-20.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_-20"
+end on
+
+on m_-20.destroy
+call super::destroy
+end on
+
+type m_resumendetransacciones from m_in_padre`m_resumendetransacciones within m_transaccines
+end type
+
+on m_resumendetransacciones.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_resumendetransacciones"
+end on
+
+on m_resumendetransacciones.destroy
+call super::destroy
+end on
+
+type m_productoyfechas from m_in_padre`m_productoyfechas within m_resumendetransacciones
+end type
+
+on m_productoyfechas.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_resumendetransacciones.m_productoyfechas"
+end on
+
+on m_productoyfechas.destroy
+call super::destroy
+end on
+
+type m_fechas from m_in_padre`m_fechas within m_resumendetransacciones
+end type
+
+on m_fechas.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_resumendetransacciones.m_fechas"
+end on
+
+on m_fechas.destroy
+call super::destroy
+end on
+
+type m_detalladoportipodetransaccin from m_in_padre`m_detalladoportipodetransaccin within m_resumendetransacciones
+end type
+
+on m_detalladoportipodetransaccin.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_resumendetransacciones.m_detalladoportipodetransaccin"
+end on
+
+on m_detalladoportipodetransaccin.destroy
+call super::destroy
+end on
+
+type m_-54 from m_in_padre`m_-54 within m_resumendetransacciones
+end type
+
+on m_-54.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_resumendetransacciones.m_-54"
+end on
+
+on m_-54.destroy
+call super::destroy
+end on
+
+type m_cuadroanualdetransacciones from m_in_padre`m_cuadroanualdetransacciones within m_resumendetransacciones
+end type
+
+on m_cuadroanualdetransacciones.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_resumendetransacciones.m_cuadroanualdetransacciones"
+end on
+
+on m_cuadroanualdetransacciones.destroy
+call super::destroy
+end on
+
+type m_comparativoanual from m_in_padre`m_comparativoanual within m_resumendetransacciones
+end type
+
+on m_comparativoanual.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_resumendetransacciones.m_comparativoanual"
+end on
+
+on m_comparativoanual.destroy
+call super::destroy
+end on
+
+type m_actualizartransacciones from m_in_padre`m_actualizartransacciones within m_transaccines
+end type
+
+on m_actualizartransacciones.create
+call super::create
+this.tag = "m_in_principal.m_transaccines.m_actualizartransacciones"
+end on
+
+on m_actualizartransacciones.destroy
+call super::destroy
+end on
+
+type m_notasdecredito from m_in_padre`m_notasdecredito within m_transaccines
+end type
+
+on m_notasdecredito.create
+call super::create
+end on
+
+on m_notasdecredito.destroy
+call super::destroy
+end on
+
+type m_asientocontabledelasentradas from m_in_padre`m_asientocontabledelasentradas within m_transaccines
+end type
+
+on m_asientocontabledelasentradas.create
+call super::create
+end on
+
+on m_asientocontabledelasentradas.destroy
+call super::destroy
+end on
+
+type m_consultas from m_in_padre`m_consultas within m_in_principal
+end type
+
+on m_consultas.create
+call super::create
+this.tag = "m_in_principal.m_consultas"
+end on
+
+on m_consultas.destroy
+call super::destroy
+end on
+
+type m_porproducto from m_in_padre`m_porproducto within m_consultas
+end type
+
+on m_porproducto.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_porproducto"
+end on
+
+on m_porproducto.destroy
+call super::destroy
+end on
+
+type m_porproducto2 from m_in_padre`m_porproducto2 within m_consultas
+end type
+
+on m_porproducto2.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_porproducto2"
+end on
+
+on m_porproducto2.destroy
+call super::destroy
+end on
+
+type m_productosporbodegayubicacion from m_in_padre`m_productosporbodegayubicacion within m_consultas
+end type
+
+on m_productosporbodegayubicacion.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_productosporbodegayubicacion"
+end on
+
+on m_productosporbodegayubicacion.destroy
+call super::destroy
+end on
+
+type m_-23 from m_in_padre`m_-23 within m_consultas
+end type
+
+on m_-23.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_-23"
+end on
+
+on m_-23.destroy
+call super::destroy
+end on
+
+type m_existencias from m_in_padre`m_existencias within m_consultas
+end type
+
+on m_existencias.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_existencias"
+end on
+
+on m_existencias.destroy
+call super::destroy
+end on
+
+type m_existenciasconcostos from m_in_padre`m_existenciasconcostos within m_consultas
+end type
+
+on m_existenciasconcostos.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_existenciasconcostos"
+end on
+
+on m_existenciasconcostos.destroy
+call super::destroy
+end on
+
+type m_existenciasconprecios from m_in_padre`m_existenciasconprecios within m_consultas
+end type
+
+on m_existenciasconprecios.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_existenciasconprecios"
+end on
+
+on m_existenciasconprecios.destroy
+call super::destroy
+end on
+
+type m_existenciasconprecioycostos from m_in_padre`m_existenciasconprecioycostos within m_consultas
+end type
+
+on m_existenciasconprecioycostos.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_existenciasconprecioycostos"
+end on
+
+on m_existenciasconprecioycostos.destroy
+call super::destroy
+end on
+
+type m_-22 from m_in_padre`m_-22 within m_consultas
+end type
+
+on m_-22.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_-22"
+end on
+
+on m_-22.destroy
+call super::destroy
+end on
+
+type m_movimientodeproductosportipodet from m_in_padre`m_movimientodeproductosportipodet within m_consultas
+end type
+
+on m_movimientodeproductosportipodet.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet"
+end on
+
+on m_movimientodeproductosportipodet.destroy
+call super::destroy
+end on
+
+type m_entradas1 from m_in_padre`m_entradas1 within m_movimientodeproductosportipodet
+end type
+
+on m_entradas1.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet.m_entradas1"
+end on
+
+on m_entradas1.destroy
+call super::destroy
+end on
+
+type m_-55 from m_in_padre`m_-55 within m_movimientodeproductosportipodet
+end type
+
+on m_-55.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet.m_-55"
+end on
+
+on m_-55.destroy
+call super::destroy
+end on
+
+type m_ajustes1 from m_in_padre`m_ajustes1 within m_movimientodeproductosportipodet
+end type
+
+on m_ajustes1.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet.m_ajustes1"
+end on
+
+on m_ajustes1.destroy
+call super::destroy
+end on
+
+type m_existenciasycostos1 from m_in_padre`m_existenciasycostos1 within m_ajustes1
+end type
+
+on m_existenciasycostos1.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet.m_ajustes1.m_existenciasycostos1.m_existenciasycostos1"
+end on
+
+on m_existenciasycostos1.destroy
+call super::destroy
+end on
+
+type m_-56 from m_in_padre`m_-56 within m_ajustes1
+end type
+
+on m_-56.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet.m_ajustes1.m_-56"
+end on
+
+on m_-56.destroy
+call super::destroy
+end on
+
+type m_costos from m_in_padre`m_costos within m_ajustes1
+end type
+
+on m_costos.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet.m_ajustes1.m_costos"
+end on
+
+on m_costos.destroy
+call super::destroy
+end on
+
+type m_-57 from m_in_padre`m_-57 within m_ajustes1
+end type
+
+on m_-57.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet.m_ajustes1.m_-57"
+end on
+
+on m_-57.destroy
+call super::destroy
+end on
+
+type m_precios from m_in_padre`m_precios within m_ajustes1
+end type
+
+on m_precios.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosportipodet.m_ajustes1.m_precios"
+end on
+
+on m_precios.destroy
+call super::destroy
+end on
+
+type m_movimientodeproductosgeneralporf from m_in_padre`m_movimientodeproductosgeneralporf within m_consultas
+end type
+
+on m_movimientodeproductosgeneralporf.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_movimientodeproductosgeneralporf"
+end on
+
+on m_movimientodeproductosgeneralporf.destroy
+call super::destroy
+end on
+
+type m_-24 from m_in_padre`m_-24 within m_consultas
+end type
+
+on m_-24.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_-24"
+end on
+
+on m_-24.destroy
+call super::destroy
+end on
+
+type m_consultadearanceles from m_in_padre`m_consultadearanceles within m_consultas
+end type
+
+on m_consultadearanceles.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_consultadearanceles"
+end on
+
+on m_consultadearanceles.destroy
+call super::destroy
+end on
+
+type m_consultasdesalidasregistradas from m_in_padre`m_consultasdesalidasregistradas within m_consultas
+end type
+
+on m_consultasdesalidasregistradas.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_consultasdesalidasregistradas"
+end on
+
+on m_consultasdesalidasregistradas.destroy
+call super::destroy
+end on
+
+type m_consultasdetablas from m_in_padre`m_consultasdetablas within m_consultas
+end type
+
+on m_consultasdetablas.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_consultasdetablas"
+end on
+
+on m_consultasdetablas.destroy
+call super::destroy
+end on
+
+type m_-25 from m_in_padre`m_-25 within m_consultas
+end type
+
+on m_-25.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_-25"
+end on
+
+on m_-25.destroy
+call super::destroy
+end on
+
+type m_consultasatercerosclientesyprov from m_in_padre`m_consultasatercerosclientesyprov within m_consultas
+end type
+
+on m_consultasatercerosclientesyprov.create
+call super::create
+this.tag = "m_in_principal.m_consultas.m_consultasatercerosclientesyprov"
+end on
+
+on m_consultasatercerosclientesyprov.destroy
+call super::destroy
+end on
+
+type m_consultadeentradas from m_in_padre`m_consultadeentradas within m_consultas
+end type
+
+on m_consultadeentradas.create
+call super::create
+end on
+
+on m_consultadeentradas.destroy
+call super::destroy
+end on
+
+type m_informes from m_in_padre`m_informes within m_in_principal
+end type
+
+on m_informes.create
+call super::create
+this.tag = "m_in_principal.m_informes"
+end on
+
+on m_informes.destroy
+call super::destroy
+end on
+
+type m_existenciasporbodega from m_in_padre`m_existenciasporbodega within m_informes
+end type
+
+on m_existenciasporbodega.create
+call super::create
+end on
+
+on m_existenciasporbodega.destroy
+call super::destroy
+end on
+
+type m_existencias1 from m_in_padre`m_existencias1 within m_informes
+end type
+
+on m_existencias1.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1"
+end on
+
+on m_existencias1.destroy
+call super::destroy
+end on
+
+type m_sloexistencias from m_in_padre`m_sloexistencias within m_existencias1
+end type
+
+on m_sloexistencias.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_sloexistencias"
+end on
+
+on m_sloexistencias.destroy
+call super::destroy
+end on
+
+type m_existenciasdetalladoporbodega from m_in_padre`m_existenciasdetalladoporbodega within m_existencias1
+end type
+
+on m_existenciasdetalladoporbodega.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_existenciasdetalladoporbodega"
+end on
+
+on m_existenciasdetalladoporbodega.destroy
+call super::destroy
+end on
+
+type m_existenciasaunafechaespecifica from m_in_padre`m_existenciasaunafechaespecifica within m_existencias1
+end type
+
+on m_existenciasaunafechaespecifica.create
+call super::create
+end on
+
+on m_existenciasaunafechaespecifica.destroy
+call super::destroy
+end on
+
+type m_-59 from m_in_padre`m_-59 within m_existencias1
+end type
+
+on m_-59.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_-59"
+end on
+
+on m_-59.destroy
+call super::destroy
+end on
+
+type m_existenciasycostos from m_in_padre`m_existenciasycostos within m_existencias1
+end type
+
+on m_existenciasycostos.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_existenciasycostos"
+end on
+
+on m_existenciasycostos.destroy
+call super::destroy
+end on
+
+type m_7 from m_in_padre`m_7 within m_existencias1
+end type
+
+on m_7.create
+call super::create
+end on
+
+on m_7.destroy
+call super::destroy
+end on
+
+type m_existenciasycostos#2 from m_in_padre`m_existenciasycostos#2 within m_existencias1
+end type
+
+on m_existenciasycostos#2.create
+call super::create
+end on
+
+on m_existenciasycostos#2.destroy
+call super::destroy
+end on
+
+type m_existenciasyprecios from m_in_padre`m_existenciasyprecios within m_existencias1
+end type
+
+on m_existenciasyprecios.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_existenciasyprecios"
+end on
+
+on m_existenciasyprecios.destroy
+call super::destroy
+end on
+
+type m_existenciasyprecioszonalibre from m_in_padre`m_existenciasyprecioszonalibre within m_existencias1
+end type
+
+on m_existenciasyprecioszonalibre.create
+call super::create
+end on
+
+on m_existenciasyprecioszonalibre.destroy
+call super::destroy
+end on
+
+type m_existenciasconcostosyprecios from m_in_padre`m_existenciasconcostosyprecios within m_existencias1
+end type
+
+on m_existenciasconcostosyprecios.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_existenciasconcostosyprecios"
+end on
+
+on m_existenciasconcostosyprecios.destroy
+call super::destroy
+end on
+
+type m_existenciasconcostosypreciossin from m_in_padre`m_existenciasconcostosypreciossin within m_existencias1
+end type
+
+on m_existenciasconcostosypreciossin.create
+call super::create
+end on
+
+on m_existenciasconcostosypreciossin.destroy
+call super::destroy
+end on
+
+type m_existenciasquenosemueven from m_in_padre`m_existenciasquenosemueven within m_existencias1
+end type
+
+on m_existenciasquenosemueven.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_existenciasquenosemueven"
+end on
+
+on m_existenciasquenosemueven.destroy
+call super::destroy
+end on
+
+type m_-58 from m_in_padre`m_-58 within m_existencias1
+end type
+
+on m_-58.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_-58"
+end on
+
+on m_-58.destroy
+call super::destroy
+end on
+
+type m_mercadeo from m_in_padre`m_mercadeo within m_existencias1
+end type
+
+on m_mercadeo.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_existencias1.m_mercadeo"
+end on
+
+on m_mercadeo.destroy
+call super::destroy
+end on
+
+type m_-025 from m_in_padre`m_-025 within m_existencias1
+end type
+
+on m_-025.create
+call super::create
+end on
+
+on m_-025.destroy
+call super::destroy
+end on
+
+type m_existenciasreservadodisponiblepara from m_in_padre`m_existenciasreservadodisponiblepara within m_existencias1
+end type
+
+on m_existenciasreservadodisponiblepara.create
+call super::create
+end on
+
+on m_existenciasreservadodisponiblepara.destroy
+call super::destroy
+end on
+
+type m_existenciasreservadodisponibleparavende from m_in_padre`m_existenciasreservadodisponibleparavende within m_existencias1
+end type
+
+on m_existenciasreservadodisponibleparavende.create
+call super::create
+end on
+
+on m_existenciasreservadodisponibleparavende.destroy
+call super::destroy
+end on
+
+type m_listadodepreciosparavendedores from m_in_padre`m_listadodepreciosparavendedores within m_existencias1
+end type
+
+on m_listadodepreciosparavendedores.create
+call super::create
+end on
+
+on m_listadodepreciosparavendedores.destroy
+call super::destroy
+end on
+
+type m_existenciasreservadodara1 from m_in_padre`m_existenciasreservadodara1 within m_existencias1
+end type
+
+on m_existenciasreservadodara1.create
+call super::create
+end on
+
+on m_existenciasreservadodara1.destroy
+call super::destroy
+end on
+
+type m_listadopararevisióndebodegas from m_in_padre`m_listadopararevisióndebodegas within m_existencias1
+end type
+
+on m_listadopararevisióndebodegas.create
+call super::create
+end on
+
+on m_listadopararevisióndebodegas.destroy
+call super::destroy
+end on
+
+type m_-83 from m_in_padre`m_-83 within m_existencias1
+end type
+
+on m_-83.create
+call super::create
+end on
+
+on m_-83.destroy
+call super::destroy
+end on
+
+type m_existenciasmovimientosensa from m_in_padre`m_existenciasmovimientosensa within m_existencias1
+end type
+
+on m_existenciasmovimientosensa.create
+call super::create
+end on
+
+on m_existenciasmovimientosensa.destroy
+call super::destroy
+end on
+
+type m_-68 from m_in_padre`m_-68 within m_informes
+end type
+
+on m_-68.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_-68"
+end on
+
+on m_-68.destroy
+call super::destroy
+end on
+
+type m_preciosdeventa from m_in_padre`m_preciosdeventa within m_informes
+end type
+
+on m_preciosdeventa.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_preciosdeventa"
+end on
+
+on m_preciosdeventa.destroy
+call super::destroy
+end on
+
+type m_preciossolamente from m_in_padre`m_preciossolamente within m_preciosdeventa
+end type
+
+on m_preciossolamente.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_preciosdeventa.m_preciossolamente"
+end on
+
+on m_preciossolamente.destroy
+call super::destroy
+end on
+
+type m_costodeventaconporcentaje from m_in_padre`m_costodeventaconporcentaje within m_preciosdeventa
+end type
+
+on m_costodeventaconporcentaje.create
+call super::create
+end on
+
+on m_costodeventaconporcentaje.destroy
+call super::destroy
+end on
+
+type m_preciosconporcentajes from m_in_padre`m_preciosconporcentajes within m_preciosdeventa
+end type
+
+on m_preciosconporcentajes.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_preciosdeventa.m_preciosconporcentajes"
+end on
+
+on m_preciosconporcentajes.destroy
+call super::destroy
+end on
+
+type m_preciorealporentrada from m_in_padre`m_preciorealporentrada within m_preciosdeventa
+end type
+
+on m_preciorealporentrada.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_preciosdeventa.m_preciorealporentrada"
+end on
+
+on m_preciorealporentrada.destroy
+call super::destroy
+end on
+
+type m_-60 from m_in_padre`m_-60 within m_preciosdeventa
+end type
+
+on m_-60.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_preciosdeventa.m_-60"
+end on
+
+on m_-60.destroy
+call super::destroy
+end on
+
+type m_preciodeventacosto from m_in_padre`m_preciodeventacosto within m_preciosdeventa
+end type
+
+on m_preciodeventacosto.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_preciosdeventa.m_preciodeventacosto"
+end on
+
+on m_preciodeventacosto.destroy
+call super::destroy
+end on
+
+type m_productosvendidosbajocosto from m_in_padre`m_productosvendidosbajocosto within m_preciosdeventa
+end type
+
+on m_productosvendidosbajocosto.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_preciosdeventa.m_productosvendidosbajocosto"
+end on
+
+on m_productosvendidosbajocosto.destroy
+call super::destroy
+end on
+
+type m_listadeprecios from m_in_padre`m_listadeprecios within m_preciosdeventa
+end type
+
+on m_listadeprecios.create
+call super::create
+end on
+
+on m_listadeprecios.destroy
+call super::destroy
+end on
+
+type m_-69 from m_in_padre`m_-69 within m_informes
+end type
+
+on m_-69.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_-69"
+end on
+
+on m_-69.destroy
+call super::destroy
+end on
+
+type m_puntodereorden from m_in_padre`m_puntodereorden within m_informes
+end type
+
+on m_puntodereorden.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_puntodereorden"
+end on
+
+on m_puntodereorden.destroy
+call super::destroy
+end on
+
+type m_puntodereordenporproducto from m_in_padre`m_puntodereordenporproducto within m_puntodereorden
+end type
+
+on m_puntodereordenporproducto.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_puntodereorden.m_puntodereordenporproducto"
+end on
+
+on m_puntodereordenporproducto.destroy
+call super::destroy
+end on
+
+type m_existenciasbajoelpuntodereorden from m_in_padre`m_existenciasbajoelpuntodereorden within m_puntodereorden
+end type
+
+on m_existenciasbajoelpuntodereorden.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_puntodereorden.m_existenciasbajoelpuntodereorden"
+end on
+
+on m_existenciasbajoelpuntodereorden.destroy
+call super::destroy
+end on
+
+type m_-61 from m_in_padre`m_-61 within m_puntodereorden
+end type
+
+on m_-61.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_puntodereorden.m_-61"
+end on
+
+on m_-61.destroy
+call super::destroy
+end on
+
+type m_listadodemercanciaagotada from m_in_padre`m_listadodemercanciaagotada within m_puntodereorden
+end type
+
+on m_listadodemercanciaagotada.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_puntodereorden.m_listadodemercanciaagotada"
+end on
+
+on m_listadodemercanciaagotada.destroy
+call super::destroy
+end on
+
+type m_cantidadaperdirporproducto from m_in_padre`m_cantidadaperdirporproducto within m_puntodereorden
+end type
+
+on m_cantidadaperdirporproducto.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_puntodereorden.m_cantidadaperdirporproducto"
+end on
+
+on m_cantidadaperdirporproducto.destroy
+call super::destroy
+end on
+
+type m_4 from m_in_padre`m_4 within m_puntodereorden
+end type
+
+on m_4.create
+call super::create
+end on
+
+on m_4.destroy
+call super::destroy
+end on
+
+type m_productossobreellimitedeexisten from m_in_padre`m_productossobreellimitedeexisten within m_puntodereorden
+end type
+
+on m_productossobreellimitedeexisten.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_puntodereorden.m_productossobreellimitedeexisten"
+end on
+
+on m_productossobreellimitedeexisten.destroy
+call super::destroy
+end on
+
+type m_-70 from m_in_padre`m_-70 within m_informes
+end type
+
+on m_-70.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_-70"
+end on
+
+on m_-70.destroy
+call super::destroy
+end on
+
+type m_movimientodeproductoskardex from m_in_padre`m_movimientodeproductoskardex within m_informes
+end type
+
+on m_movimientodeproductoskardex.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_movimientodeproductoskardex"
+end on
+
+on m_movimientodeproductoskardex.destroy
+call super::destroy
+end on
+
+type m_movimientossolamente from m_in_padre`m_movimientossolamente within m_movimientodeproductoskardex
+end type
+
+on m_movimientossolamente.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_movimientodeproductoskardex.m_movimientossolamente"
+end on
+
+on m_movimientossolamente.destroy
+call super::destroy
+end on
+
+type m_-29 from m_in_padre`m_-29 within m_movimientodeproductoskardex
+end type
+
+on m_-29.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_movimientodeproductoskardex.m_-29"
+end on
+
+on m_-29.destroy
+call super::destroy
+end on
+
+type m_movimientosportipodetransaccin from m_in_padre`m_movimientosportipodetransaccin within m_movimientodeproductoskardex
+end type
+
+on m_movimientosportipodetransaccin.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_movimientodeproductoskardex.m_movimientosportipodetransaccin"
+end on
+
+on m_movimientosportipodetransaccin.destroy
+call super::destroy
+end on
+
+type m_-28 from m_in_padre`m_-28 within m_movimientodeproductoskardex
+end type
+
+on m_-28.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_movimientodeproductoskardex.m_-28"
+end on
+
+on m_-28.destroy
+call super::destroy
+end on
+
+type m_movimientoscostosprecios from m_in_padre`m_movimientoscostosprecios within m_movimientodeproductoskardex
+end type
+
+on m_movimientoscostosprecios.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_movimientodeproductoskardex.m_movimientoscostosprecios"
+end on
+
+on m_movimientoscostosprecios.destroy
+call super::destroy
+end on
+
+type m_movimientosdecostopromedioaplicad from m_in_padre`m_movimientosdecostopromedioaplicad within m_movimientodeproductoskardex
+end type
+
+on m_movimientosdecostopromedioaplicad.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_movimientodeproductoskardex.m_movimientosdecostopromedioaplicad"
+end on
+
+on m_movimientosdecostopromedioaplicad.destroy
+call super::destroy
+end on
+
+type m_-76 from m_in_padre`m_-76 within m_movimientodeproductoskardex
+end type
+
+on m_-76.create
+call super::create
+end on
+
+on m_-76.destroy
+call super::destroy
+end on
+
+type m_movimientossinbodegaubicacion from m_in_padre`m_movimientossinbodegaubicacion within m_movimientodeproductoskardex
+end type
+
+on m_movimientossinbodegaubicacion.create
+call super::create
+end on
+
+on m_movimientossinbodegaubicacion.destroy
+call super::destroy
+end on
+
+type m_-71 from m_in_padre`m_-71 within m_informes
+end type
+
+on m_-71.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_-71"
+end on
+
+on m_-71.destroy
+call super::destroy
+end on
+
+type m_valordelinventario from m_in_padre`m_valordelinventario within m_informes
+end type
+
+on m_valordelinventario.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_valordelinventario"
+end on
+
+on m_valordelinventario.destroy
+call super::destroy
+end on
+
+type m_fechaactual from m_in_padre`m_fechaactual within m_valordelinventario
+end type
+
+on m_fechaactual.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_valordelinventario.m_fechaactual"
+end on
+
+on m_fechaactual.destroy
+call super::destroy
+end on
+
+type m_fechaactualporgrupos from m_in_padre`m_fechaactualporgrupos within m_valordelinventario
+end type
+
+on m_fechaactualporgrupos.create
+call super::create
+end on
+
+on m_fechaactualporgrupos.destroy
+call super::destroy
+end on
+
+type m_-62 from m_in_padre`m_-62 within m_valordelinventario
+end type
+
+on m_-62.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_valordelinventario.m_-62"
+end on
+
+on m_-62.destroy
+call super::destroy
+end on
+
+type m_fechaespecfica from m_in_padre`m_fechaespecfica within m_valordelinventario
+end type
+
+on m_fechaespecfica.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_valordelinventario.m_fechaespecfica"
+end on
+
+on m_fechaespecfica.destroy
+call super::destroy
+end on
+
+type m_porproducto1 from m_in_padre`m_porproducto1 within m_fechaespecfica
+end type
+
+on m_porproducto1.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_valordelinventario.m_fechaespecfica.m_porproducto1"
+end on
+
+on m_porproducto1.destroy
+call super::destroy
+end on
+
+type m_-63 from m_in_padre`m_-63 within m_fechaespecfica
+end type
+
+on m_-63.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_valordelinventario.m_fechaespecfica.m_-63"
+end on
+
+on m_-63.destroy
+call super::destroy
+end on
+
+type m_porbodega from m_in_padre`m_porbodega within m_fechaespecfica
+end type
+
+on m_porbodega.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_valordelinventario.m_fechaespecfica.m_porbodega"
+end on
+
+on m_porbodega.destroy
+call super::destroy
+end on
+
+type m_fechaespecficaygrupos from m_in_padre`m_fechaespecficaygrupos within m_valordelinventario
+end type
+
+on m_fechaespecficaygrupos.create
+call super::create
+end on
+
+on m_fechaespecficaygrupos.destroy
+call super::destroy
+end on
+
+type m_porproductos2 from m_in_padre`m_porproductos2 within m_fechaespecficaygrupos
+end type
+
+on m_porproductos2.create
+call super::create
+end on
+
+on m_porproductos2.destroy
+call super::destroy
+end on
+
+type m_-64 from m_in_padre`m_-64 within m_fechaespecficaygrupos
+end type
+
+on m_-64.create
+call super::create
+end on
+
+on m_-64.destroy
+call super::destroy
+end on
+
+type m_porbodega2 from m_in_padre`m_porbodega2 within m_fechaespecficaygrupos
+end type
+
+on m_porbodega2.create
+call super::create
+end on
+
+on m_porbodega2.destroy
+call super::destroy
+end on
+
+type m_-79 from m_in_padre`m_-79 within m_valordelinventario
+end type
+
+on m_-79.create
+call super::create
+end on
+
+on m_-79.destroy
+call super::destroy
+end on
+
+type m_costodeventas from m_in_padre`m_costodeventas within m_valordelinventario
+end type
+
+on m_costodeventas.create
+call super::create
+end on
+
+on m_costodeventas.destroy
+call super::destroy
+end on
+
+type m_valortotaldelinventarioaunafech from m_in_padre`m_valortotaldelinventarioaunafech within m_valordelinventario
+end type
+
+on m_valortotaldelinventarioaunafech.create
+call super::create
+end on
+
+on m_valortotaldelinventarioaunafech.destroy
+call super::destroy
+end on
+
+type m_-801 from m_in_padre`m_-801 within m_valordelinventario
+end type
+
+on m_-801.create
+call super::create
+end on
+
+on m_-801.destroy
+call super::destroy
+end on
+
+type m_informedefindemes from m_in_padre`m_informedefindemes within m_valordelinventario
+end type
+
+on m_informedefindemes.create
+call super::create
+end on
+
+on m_informedefindemes.destroy
+call super::destroy
+end on
+
+type m_-72 from m_in_padre`m_-72 within m_informes
+end type
+
+on m_-72.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_-72"
+end on
+
+on m_-72.destroy
+call super::destroy
+end on
+
+type m_historicodetransacciones from m_in_padre`m_historicodetransacciones within m_informes
+end type
+
+on m_historicodetransacciones.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_historicodetransacciones"
+end on
+
+on m_historicodetransacciones.destroy
+call super::destroy
+end on
+
+type m_valordelinventariodemesesanterio from m_in_padre`m_valordelinventariodemesesanterio within m_historicodetransacciones
+end type
+
+on m_valordelinventariodemesesanterio.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_historicodetransacciones.m_valordelinventariodemesesanterio.m_valordelinventariodemesesanterio"
+end on
+
+on m_valordelinventariodemesesanterio.destroy
+call super::destroy
+end on
+
+type m_historicodetransaccionespormes from m_in_padre`m_historicodetransaccionespormes within m_historicodetransacciones
+end type
+
+on m_historicodetransaccionespormes.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_historicodetransacciones.m_historicodetransaccionespormes"
+end on
+
+on m_historicodetransaccionespormes.destroy
+call super::destroy
+end on
+
+type m_movimientodeproductosdeaosanter from m_in_padre`m_movimientodeproductosdeaosanter within m_historicodetransacciones
+end type
+
+on m_movimientodeproductosdeaosanter.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_historicodetransacciones.m_movimientodeproductosdeaosanter"
+end on
+
+on m_movimientodeproductosdeaosanter.destroy
+call super::destroy
+end on
+
+type m_-65 from m_in_padre`m_-65 within m_historicodetransacciones
+end type
+
+on m_-65.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_historicodetransacciones.m_-65"
+end on
+
+on m_-65.destroy
+call super::destroy
+end on
+
+type m_valordelinventariofisico from m_in_padre`m_valordelinventariofisico within m_historicodetransacciones
+end type
+
+on m_valordelinventariofisico.create
+call super::create
+this.tag = "m_in_principal.m_informes.m_historicodetransacciones.m_valordelinventariofisico"
+end on
+
+on m_valordelinventariofisico.destroy
+call super::destroy
+end on
+
+type m_rotacindelinventario from m_in_padre`m_rotacindelinventario within m_informes
+end type
+
+on m_rotacindelinventario.create
+call super::create
+end on
+
+on m_rotacindelinventario.destroy
+call super::destroy
+end on
+
+type m_marcasysubmarcas from m_in_padre`m_marcasysubmarcas within m_informes
+end type
+
+on m_marcasysubmarcas.create
+call super::create
+end on
+
+on m_marcasysubmarcas.destroy
+call super::destroy
+end on
+
+type m_costosconporcentaje from m_in_padre`m_costosconporcentaje within m_informes
+end type
+
+on m_costosconporcentaje.create
+call super::create
+end on
+
+on m_costosconporcentaje.destroy
+call super::destroy
+end on
+
+type m_utilidad from m_in_padre`m_utilidad within m_informes
+end type
+
+on m_utilidad.create
+call super::create
+end on
+
+on m_utilidad.destroy
+call super::destroy
+end on
+
+type m_costosypreciosenclaves from m_in_padre`m_costosypreciosenclaves within m_informes
+end type
+
+on m_costosypreciosenclaves.create
+call super::create
+end on
+
+on m_costosypreciosenclaves.destroy
+call super::destroy
+end on
+
+type m_especificaciondeproductos from m_in_padre`m_especificaciondeproductos within m_informes
+end type
+
+on m_especificaciondeproductos.create
+call super::create
+end on
+
+on m_especificaciondeproductos.destroy
+call super::destroy
+end on
+
+type m_movimientoenventasdeunproducto from m_in_padre`m_movimientoenventasdeunproducto within m_informes
+end type
+
+on m_movimientoenventasdeunproducto.create
+call super::create
+end on
+
+on m_movimientoenventasdeunproducto.destroy
+call super::destroy
+end on
+
+type m_desglosedeproductos from m_in_padre`m_desglosedeproductos within m_informes
+end type
+
+on m_desglosedeproductos.create
+call super::create
+end on
+
+on m_desglosedeproductos.destroy
+call super::destroy
+end on
+
+type m_desglosecontamanosdelproducto from m_in_padre`m_desglosecontamanosdelproducto within m_desglosedeproductos
+end type
+
+on m_desglosecontamanosdelproducto.create
+call super::create
+end on
+
+on m_desglosecontamanosdelproducto.destroy
+call super::destroy
+end on
+
+type m_desglosecongeneralesdelproducto from m_in_padre`m_desglosecongeneralesdelproducto within m_desglosedeproductos
+end type
+
+on m_desglosecongeneralesdelproducto.create
+call super::create
+end on
+
+on m_desglosecongeneralesdelproducto.destroy
+call super::destroy
+end on
+
+type m_productosconsencamer from m_in_padre`m_productosconsencamer within m_informes
+end type
+
+on m_productosconsencamer.create
+call super::create
+end on
+
+on m_productosconsencamer.destroy
+call super::destroy
+end on
+
+type m_catalogos from m_in_padre`m_catalogos within m_in_principal
+end type
+
+on m_catalogos.create
+call super::create
+this.tag = "m_in_principal.m_catalogos"
+end on
+
+on m_catalogos.destroy
+call super::destroy
+end on
+
+type m_creacindecatalogo from m_in_padre`m_creacindecatalogo within m_catalogos
+end type
+
+on m_creacindecatalogo.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_creacindecatalogo"
+end on
+
+on m_creacindecatalogo.destroy
+call super::destroy
+end on
+
+type m_impresiondecatalogos from m_in_padre`m_impresiondecatalogos within m_catalogos
+end type
+
+on m_impresiondecatalogos.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_impresiondecatalogos"
+end on
+
+on m_impresiondecatalogos.destroy
+call super::destroy
+end on
+
+type m_productosporcatalogo from m_in_padre`m_productosporcatalogo within m_catalogos
+end type
+
+on m_productosporcatalogo.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_productosporcatalogo"
+end on
+
+on m_productosporcatalogo.destroy
+call super::destroy
+end on
+
+type m_ubicaciondefotos from m_in_padre`m_ubicaciondefotos within m_catalogos
+end type
+
+on m_ubicaciondefotos.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_ubicaciondefotos"
+end on
+
+on m_ubicaciondefotos.destroy
+call super::destroy
+end on
+
+type m_-35 from m_in_padre`m_-35 within m_catalogos
+end type
+
+on m_-35.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_-35"
+end on
+
+on m_-35.destroy
+call super::destroy
+end on
+
+type m_listadodeproductossincatalogos from m_in_padre`m_listadodeproductossincatalogos within m_catalogos
+end type
+
+on m_listadodeproductossincatalogos.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_listadodeproductossincatalogos"
+end on
+
+on m_listadodeproductossincatalogos.destroy
+call super::destroy
+end on
+
+type m_-51 from m_in_padre`m_-51 within m_catalogos
+end type
+
+on m_-51.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_-51"
+end on
+
+on m_-51.destroy
+call super::destroy
+end on
+
+type m_impresindecatalogos from m_in_padre`m_impresindecatalogos within m_catalogos
+end type
+
+on m_impresindecatalogos.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_impresindecatalogos"
+end on
+
+on m_impresindecatalogos.destroy
+call super::destroy
+end on
+
+type m_-36 from m_in_padre`m_-36 within m_catalogos
+end type
+
+on m_-36.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_-36"
+end on
+
+on m_-36.destroy
+call super::destroy
+end on
+
+type m_catalogodefotosportipodetransac from m_in_padre`m_catalogodefotosportipodetransac within m_catalogos
+end type
+
+on m_catalogodefotosportipodetransac.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_catalogodefotosportipodetransac"
+end on
+
+on m_catalogodefotosportipodetransac.destroy
+call super::destroy
+end on
+
+type m_-37 from m_in_padre`m_-37 within m_catalogos
+end type
+
+on m_-37.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_-37"
+end on
+
+on m_-37.destroy
+call super::destroy
+end on
+
+type m_productosdelinventarioconfotos from m_in_padre`m_productosdelinventarioconfotos within m_catalogos
+end type
+
+on m_productosdelinventarioconfotos.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_productosdelinventarioconfotos"
+end on
+
+on m_productosdelinventarioconfotos.destroy
+call super::destroy
+end on
+
+type m_listadodeproductosquenoestanen from m_in_padre`m_listadodeproductosquenoestanen within m_catalogos
+end type
+
+on m_listadodeproductosquenoestanen.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_listadodeproductosquenoestanen"
+end on
+
+on m_listadodeproductosquenoestanen.destroy
+call super::destroy
+end on
+
+type m_-38 from m_in_padre`m_-38 within m_catalogos
+end type
+
+on m_-38.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_-38"
+end on
+
+on m_-38.destroy
+call super::destroy
+end on
+
+type m_impresiondeetiquetas from m_in_padre`m_impresiondeetiquetas within m_catalogos
+end type
+
+on m_impresiondeetiquetas.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_impresiondeetiquetas"
+end on
+
+on m_impresiondeetiquetas.destroy
+call super::destroy
+end on
+
+type m_parabultos from m_in_padre`m_parabultos within m_impresiondeetiquetas
+end type
+
+on m_parabultos.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_impresiondeetiquetas.m_parabultos"
+end on
+
+on m_parabultos.destroy
+call super::destroy
+end on
+
+type m_-66 from m_in_padre`m_-66 within m_impresiondeetiquetas
+end type
+
+on m_-66.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_impresiondeetiquetas.m_-66"
+end on
+
+on m_-66.destroy
+call super::destroy
+end on
+
+type m_paramuestras from m_in_padre`m_paramuestras within m_impresiondeetiquetas
+end type
+
+on m_paramuestras.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_impresiondeetiquetas.m_paramuestras"
+end on
+
+on m_paramuestras.destroy
+call super::destroy
+end on
+
+type m_-67 from m_in_padre`m_-67 within m_impresiondeetiquetas
+end type
+
+on m_-67.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_impresiondeetiquetas.m_-67"
+end on
+
+on m_-67.destroy
+call super::destroy
+end on
+
+type m_portipodetransaccin from m_in_padre`m_portipodetransaccin within m_impresiondeetiquetas
+end type
+
+on m_portipodetransaccin.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_impresiondeetiquetas.m_portipodetransaccin"
+end on
+
+on m_portipodetransaccin.destroy
+call super::destroy
+end on
+
+type m_li from m_in_padre`m_li within m_impresiondeetiquetas
+end type
+
+on m_li.create
+call super::create
+end on
+
+on m_li.destroy
+call super::destroy
+end on
+
+type m_etiquetasdebarra from m_in_padre`m_etiquetasdebarra within m_impresiondeetiquetas
+end type
+
+on m_etiquetasdebarra.create
+call super::create
+end on
+
+on m_etiquetasdebarra.destroy
+call super::destroy
+end on
+
+type m_- from m_in_padre`m_- within m_impresiondeetiquetas
+end type
+
+on m_-.create
+call super::create
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_etiquetasdebarraporproducto from m_in_padre`m_etiquetasdebarraporproducto within m_impresiondeetiquetas
+end type
+
+on m_etiquetasdebarraporproducto.create
+call super::create
+end on
+
+on m_etiquetasdebarraporproducto.destroy
+call super::destroy
+end on
+
+type m_consultadecatalogos from m_in_padre`m_consultadecatalogos within m_catalogos
+end type
+
+on m_consultadecatalogos.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_consultadecatalogos"
+end on
+
+on m_consultadecatalogos.destroy
+call super::destroy
+end on
+
+type m_edicindelaportadadelcatalogo from m_in_padre`m_edicindelaportadadelcatalogo within m_catalogos
+end type
+
+on m_edicindelaportadadelcatalogo.create
+call super::create
+this.tag = "m_in_principal.m_catalogos.m_edicindelaportadadelcatalogo"
+end on
+
+on m_edicindelaportadadelcatalogo.destroy
+call super::destroy
+end on
+
+type m_catalogoentranyconf from m_in_padre`m_catalogoentranyconf within m_catalogos
+end type
+
+on m_catalogoentranyconf.create
+call super::create
+end on
+
+on m_catalogoentranyconf.destroy
+call super::destroy
+end on
+
+type m_fisico from m_in_padre`m_fisico within m_in_principal
+end type
+
+on m_fisico.create
+call super::create
+this.tag = "m_in_principal.m_fisico"
+end on
+
+on m_fisico.destroy
+call super::destroy
+end on
+
+type m_generararchivoparainventario from m_in_padre`m_generararchivoparainventario within m_fisico
+end type
+
+on m_generararchivoparainventario.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_generararchivoparainventario"
+end on
+
+on m_generararchivoparainventario.destroy
+call super::destroy
+end on
+
+type m_-39 from m_in_padre`m_-39 within m_fisico
+end type
+
+on m_-39.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_-39"
+end on
+
+on m_-39.destroy
+call super::destroy
+end on
+
+type m_imprimirformulariodeconteo from m_in_padre`m_imprimirformulariodeconteo within m_fisico
+end type
+
+on m_imprimirformulariodeconteo.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_imprimirformulariodeconteo"
+end on
+
+on m_imprimirformulariodeconteo.destroy
+call super::destroy
+end on
+
+type m_-40 from m_in_padre`m_-40 within m_fisico
+end type
+
+on m_-40.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_-40"
+end on
+
+on m_-40.destroy
+call super::destroy
+end on
+
+type m_capturadeinventario from m_in_padre`m_capturadeinventario within m_fisico
+end type
+
+on m_capturadeinventario.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_capturadeinventario"
+end on
+
+on m_capturadeinventario.destroy
+call super::destroy
+end on
+
+type m_correccionesalregistrodeinventari from m_in_padre`m_correccionesalregistrodeinventari within m_fisico
+end type
+
+on m_correccionesalregistrodeinventari.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_correccionesalregistrodeinventari"
+end on
+
+on m_correccionesalregistrodeinventari.destroy
+call super::destroy
+end on
+
+type m_capturarapidapordivisionmarca from m_in_padre`m_capturarapidapordivisionmarca within m_fisico
+end type
+
+on m_capturarapidapordivisionmarca.create
+call super::create
+end on
+
+on m_capturarapidapordivisionmarca.destroy
+call super::destroy
+end on
+
+type m_-41 from m_in_padre`m_-41 within m_fisico
+end type
+
+on m_-41.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_-41"
+end on
+
+on m_-41.destroy
+call super::destroy
+end on
+
+type m_informedeverificacion from m_in_padre`m_informedeverificacion within m_fisico
+end type
+
+on m_informedeverificacion.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_informedeverificacion"
+end on
+
+on m_informedeverificacion.destroy
+call super::destroy
+end on
+
+type m_informesdevariacion from m_in_padre`m_informesdevariacion within m_fisico
+end type
+
+on m_informesdevariacion.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_informesdevariacion"
+end on
+
+on m_informesdevariacion.destroy
+call super::destroy
+end on
+
+type m_informesdevariacinconcostos from m_in_padre`m_informesdevariacinconcostos within m_fisico
+end type
+
+on m_informesdevariacinconcostos.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_informesdevariacinconcostos"
+end on
+
+on m_informesdevariacinconcostos.destroy
+call super::destroy
+end on
+
+type m_informesdevariacinconcostosresu from m_in_padre`m_informesdevariacinconcostosresu within m_fisico
+end type
+
+on m_informesdevariacinconcostosresu.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_informesdevariacinconcostosresu"
+end on
+
+on m_informesdevariacinconcostosresu.destroy
+call super::destroy
+end on
+
+type m_-42 from m_in_padre`m_-42 within m_fisico
+end type
+
+on m_-42.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_-42"
+end on
+
+on m_-42.destroy
+call super::destroy
+end on
+
+type m_consultarinventariosporactualizar from m_in_padre`m_consultarinventariosporactualizar within m_fisico
+end type
+
+on m_consultarinventariosporactualizar.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_consultarinventariosporactualizar"
+end on
+
+on m_consultarinventariosporactualizar.destroy
+call super::destroy
+end on
+
+type m_-0 from m_in_padre`m_-0 within m_fisico
+end type
+
+on m_-0.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_-0"
+end on
+
+on m_-0.destroy
+call super::destroy
+end on
+
+type m_actualizacinalinventario from m_in_padre`m_actualizacinalinventario within m_fisico
+end type
+
+on m_actualizacinalinventario.create
+call super::create
+this.tag = "m_in_principal.m_fisico.m_actualizacinalinventario"
+end on
+
+on m_actualizacinalinventario.destroy
+call super::destroy
+end on
+
+type m_otros from m_in_padre`m_otros within m_in_principal
+end type
+
+on m_otros.create
+call super::create
+this.tag = "m_in_principal.m_otros"
+end on
+
+on m_otros.destroy
+call super::destroy
+end on
+
+type m_desactivarproductos from m_in_padre`m_desactivarproductos within m_otros
+end type
+
+on m_desactivarproductos.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_desactivarproductos"
+end on
+
+on m_desactivarproductos.destroy
+call super::destroy
+end on
+
+type m_activarproductosdesactivados from m_in_padre`m_activarproductosdesactivados within m_otros
+end type
+
+on m_activarproductosdesactivados.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_activarproductosdesactivados"
+end on
+
+on m_activarproductosdesactivados.destroy
+call super::destroy
+end on
+
+type m_cambiodecodigoserrados from m_in_padre`m_cambiodecodigoserrados within m_otros
+end type
+
+on m_cambiodecodigoserrados.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_cambiodecodigoserrados"
+end on
+
+on m_cambiodecodigoserrados.destroy
+call super::destroy
+end on
+
+type m_cambiodeunidaddemedida from m_in_padre`m_cambiodeunidaddemedida within m_otros
+end type
+
+on m_cambiodeunidaddemedida.create
+call super::create
+end on
+
+on m_cambiodeunidaddemedida.destroy
+call super::destroy
+end on
+
+type m_1 from m_in_padre`m_1 within m_otros
+end type
+
+on m_1.create
+call super::create
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_actualizacinautomticadelcostoun from m_in_padre`m_actualizacinautomticadelcostoun within m_otros
+end type
+
+on m_actualizacinautomticadelcostoun.create
+call super::create
+end on
+
+on m_actualizacinautomticadelcostoun.destroy
+call super::destroy
+end on
+
+type m_actualizacinautomticadeprecios from m_in_padre`m_actualizacinautomticadeprecios within m_otros
+end type
+
+on m_actualizacinautomticadeprecios.create
+call super::create
+end on
+
+on m_actualizacinautomticadeprecios.destroy
+call super::destroy
+end on
+
+type m_pasedeentradasanticipadasaentrad from m_in_padre`m_pasedeentradasanticipadasaentrad within m_otros
+end type
+
+on m_pasedeentradasanticipadasaentrad.create
+call super::create
+end on
+
+on m_pasedeentradasanticipadasaentrad.destroy
+call super::destroy
+end on
+
+type m_actualizaciondelosajustespreliminares from m_in_padre`m_actualizaciondelosajustespreliminares within m_otros
+end type
+
+on m_actualizaciondelosajustespreliminares.create
+call super::create
+end on
+
+on m_actualizaciondelosajustespreliminares.destroy
+call super::destroy
+end on
+
+type m_-43 from m_in_padre`m_-43 within m_otros
+end type
+
+on m_-43.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_-43"
+end on
+
+on m_-43.destroy
+call super::destroy
+end on
+
+type m_pasedeproductosaotraempresa from m_in_padre`m_pasedeproductosaotraempresa within m_otros
+end type
+
+on m_pasedeproductosaotraempresa.create
+call super::create
+end on
+
+on m_pasedeproductosaotraempresa.destroy
+call super::destroy
+end on
+
+type m_pasedesalidasaentradas056 from m_in_padre`m_pasedesalidasaentradas056 within m_otros
+end type
+
+on m_pasedesalidasaentradas056.create
+call super::create
+end on
+
+on m_pasedesalidasaentradas056.destroy
+call super::destroy
+end on
+
+type m_-82 from m_in_padre`m_-82 within m_otros
+end type
+
+on m_-82.create
+call super::create
+end on
+
+on m_-82.destroy
+call super::destroy
+end on
+
+type m_cambiodepreciosdeventa from m_in_padre`m_cambiodepreciosdeventa within m_otros
+end type
+
+on m_cambiodepreciosdeventa.create
+call super::create
+end on
+
+on m_cambiodepreciosdeventa.destroy
+call super::destroy
+end on
+
+type m_cambiodeclavedecostosyprecios from m_in_padre`m_cambiodeclavedecostosyprecios within m_otros
+end type
+
+on m_cambiodeclavedecostosyprecios.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_cambiodeclavedecostosyprecios"
+end on
+
+on m_cambiodeclavedecostosyprecios.destroy
+call super::destroy
+end on
+
+type m_-49 from m_in_padre`m_-49 within m_otros
+end type
+
+on m_-49.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_-49"
+end on
+
+on m_-49.destroy
+call super::destroy
+end on
+
+type m_pases from m_in_padre`m_pases within m_otros
+end type
+
+on m_pases.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases"
+end on
+
+on m_pases.destroy
+call super::destroy
+end on
+
+type m_definirtransaccionesquepasanacon from m_in_padre`m_definirtransaccionesquepasanacon within m_pases
+end type
+
+on m_definirtransaccionesquepasanacon.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_definirtransaccionesquepasanacon"
+end on
+
+on m_definirtransaccionesquepasanacon.destroy
+call super::destroy
+end on
+
+type m_definicindepasesdecuentas from m_in_padre`m_definicindepasesdecuentas within m_pases
+end type
+
+on m_definicindepasesdecuentas.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_definicindepasesdecuentas"
+end on
+
+on m_definicindepasesdecuentas.destroy
+call super::destroy
+end on
+
+type m_asientopreliminaralpase from m_in_padre`m_asientopreliminaralpase within m_pases
+end type
+
+on m_asientopreliminaralpase.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_asientopreliminaralpase"
+end on
+
+on m_asientopreliminaralpase.destroy
+call super::destroy
+end on
+
+type m_pasedeinventariosacontabilidad from m_in_padre`m_pasedeinventariosacontabilidad within m_pases
+end type
+
+on m_pasedeinventariosacontabilidad.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_pasedeinventariosacontabilidad"
+end on
+
+on m_pasedeinventariosacontabilidad.destroy
+call super::destroy
+end on
+
+type m_-47 from m_in_padre`m_-47 within m_pases
+end type
+
+on m_-47.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_47"
+end on
+
+on m_-47.destroy
+call super::destroy
+end on
+
+type m_exportardatosdelinventario from m_in_padre`m_exportardatosdelinventario within m_pases
+end type
+
+on m_exportardatosdelinventario.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_exportardatosdelinventario"
+end on
+
+on m_exportardatosdelinventario.destroy
+call super::destroy
+end on
+
+type m_importardatosdelinventario from m_in_padre`m_importardatosdelinventario within m_pases
+end type
+
+on m_importardatosdelinventario.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_importardatosdelinventario"
+end on
+
+on m_importardatosdelinventario.destroy
+call super::destroy
+end on
+
+type m_-48 from m_in_padre`m_-48 within m_pases
+end type
+
+on m_-48.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_-48"
+end on
+
+on m_-48.destroy
+call super::destroy
+end on
+
+type m_actualizartransaccionesdecompras from m_in_padre`m_actualizartransaccionesdecompras within m_pases
+end type
+
+on m_actualizartransaccionesdecompras.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_pases.m_actualizartransaccionesdecompras"
+end on
+
+on m_actualizartransaccionesdecompras.destroy
+call super::destroy
+end on
+
+type m_-44 from m_in_padre`m_-44 within m_otros
+end type
+
+on m_-44.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_-44"
+end on
+
+on m_-44.destroy
+call super::destroy
+end on
+
+type m_cierres from m_in_padre`m_cierres within m_otros
+end type
+
+on m_cierres.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_cierres"
+end on
+
+on m_cierres.destroy
+call super::destroy
+end on
+
+type m_cierremensual from m_in_padre`m_cierremensual within m_cierres
+end type
+
+on m_cierremensual.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_cierres.m_cierremensual"
+end on
+
+on m_cierremensual.destroy
+call super::destroy
+end on
+
+type m_cierresdefindeao from m_in_padre`m_cierresdefindeao within m_cierres
+end type
+
+on m_cierresdefindeao.create
+call super::create
+this.tag = "m_in_principal.m_otros.m_cierres.m_cierresdefindeao"
+end on
+
+on m_cierresdefindeao.destroy
+call super::destroy
+end on
+
+type m_ventanas from m_in_padre`m_ventanas within m_in_principal
+end type
+
+on m_ventanas.create
+call super::create
+this.tag = "m_in_principal.m_ventanas"
+this.enabled = true
+end on
+
+on m_ventanas.destroy
+call super::destroy
+end on
+
+type m_horizontal from m_in_padre`m_horizontal within m_ventanas
+end type
+
+on m_horizontal.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_horizontal"
+end on
+
+on m_horizontal.destroy
+call super::destroy
+end on
+
+type m_vertical from m_in_padre`m_vertical within m_ventanas
+end type
+
+on m_vertical.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_vertical"
+end on
+
+on m_vertical.destroy
+call super::destroy
+end on
+
+type m_pantallacompleta from m_in_padre`m_pantallacompleta within m_ventanas
+end type
+
+on m_pantallacompleta.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_pantallacompleta"
+end on
+
+on m_pantallacompleta.destroy
+call super::destroy
+end on
+
+type m_cascada from m_in_padre`m_cascada within m_ventanas
+end type
+
+on m_cascada.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_cascada"
+end on
+
+on m_cascada.destroy
+call super::destroy
+end on
+
+type m_-6 from m_in_padre`m_-6 within m_ventanas
+end type
+
+on m_-6.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_-6"
+end on
+
+on m_-6.destroy
+call super::destroy
+end on
+
+type m_zoom from m_in_padre`m_zoom within m_ventanas
+end type
+
+on m_zoom.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_zoom"
+this.enabled = true
+end on
+
+on m_zoom.destroy
+call super::destroy
+end on
+
+type m_200% from m_in_padre`m_200% within m_zoom
+end type
+
+on m_200%.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_zoom.m_200%"
+end on
+
+on m_200%.destroy
+call super::destroy
+end on
+
+type m_100% from m_in_padre`m_100% within m_zoom
+end type
+
+on m_100%.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_zoom.m_100%"
+end on
+
+on m_100%.destroy
+call super::destroy
+end on
+
+type m_75% from m_in_padre`m_75% within m_zoom
+end type
+
+on m_75%.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_zoom.m_75%"
+end on
+
+on m_75%.destroy
+call super::destroy
+end on
+
+type m_50% from m_in_padre`m_50% within m_zoom
+end type
+
+on m_50%.create
+call super::create
+this.tag = "m_in_principal.m_ventanas.m_zoom.m_50%"
+end on
+
+on m_50%.destroy
+call super::destroy
+end on
+
+type m_ayuda from m_in_padre`m_ayuda within m_in_principal
+end type
+
+on m_ayuda.create
+call super::create
+this.tag = "m_in_principal.m_ayuda"
+end on
+
+on m_ayuda.destroy
+call super::destroy
+end on
+
+type m_-45 from m_in_padre`m_-45 within m_ayuda
+end type
+
+on m_-45.create
+call super::create
+this.tag = "m_in_principal.m_ayuda.m_-45"
+end on
+
+on m_-45.destroy
+call super::destroy
+end on
+
+type m_costearentradas from m_in_padre`m_costearentradas within m_ayuda
+end type
+
+on m_costearentradas.create
+call super::create
+end on
+
+on m_costearentradas.destroy
+call super::destroy
+end on
+
+type m_creadorsdelsistema from m_in_padre`m_creadorsdelsistema within m_ayuda
+end type
+
+on m_creadorsdelsistema.create
+call super::create
+this.tag = "m_in_principal.m_ayuda.m_creadorsdelsistema"
+end on
+
+on m_creadorsdelsistema.destroy
+call super::destroy
+end on
+
+type m_buscar from menu within m_edicion
+end type
+
+on m_buscar.create
+call super::create
+this.tag = "m_in_principal.m_edicion.m_buscar"
+this.text = "&Buscar"
+this.microhelp = "Busqueda"
+this.toolbaritemvisible = false
+this.toolbaritemname = "find!"
+this.toolbaritemtext = "Buscar"
+this.toolbaritemorder = 15
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;parentwindow.getactivesheet().triggerevent('ue_buscar')
+end event
+
+on m_buscar.destroy
+call super::destroy
+end on
+

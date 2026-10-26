@@ -1,0 +1,63 @@
+﻿//objectcomments  
+global type gf_in_mensaje from function_object
+end type
+
+forward prototypes
+global function boolean gf_in_mensaje (readonly string titulo, readonly string error1, readonly string error2, readonly string ventana)
+end prototypes
+
+global function boolean gf_in_mensaje (readonly string titulo, readonly string error1, readonly string error2, readonly string ventana);/*******************************************************************************************
+*	System Name:	
+*								
+********************************************************************************************
+*	
+*	PROPOSITO:
+*	 Capturar mensajes de Error y Despliega
+*	 una ventana de errores controlados
+*	
+*	OBJETO:						TIPO						NOMBRE						EVENTO
+*									----						------						------
+*							  Función Global			  Mensaje					xxxxxxxxxxxxx
+*	
+*	PARAMETROS:				 RECIBIDOS					ENVIADO
+*								 ---------					-------
+*								  titulo						Ninguno
+*								  error1
+*								  error2
+*	
+*	AUTOR:				Herick Guillén
+*	------
+*	DÍA DE CREACIÓN:	03 de Febrero de 1998
+*	----------------
+********************************************************************************************
+*	Modificaciones:
+*	---------------
+*	
+*	
+*	Fecha de la Modificación		Modificado por el Programador			Referencia
+*	------------------------		-----------------------------			----------
+*	
+*	
+********************************************************************************************
+*					DERECHO DE AUTOR (c) 1998						 
+*******************************************************************************************/
+
+
+
+Boolean lb_boton = false
+str_mensaje	str_m
+
+
+IF len(trim(error2)) > 0 THEN lb_boton = true
+
+str_m.title 	= titulo
+str_m.error_1 	= error1
+str_m.error_2 	= error2
+str_m.boton 	= lb_boton
+str_m.v_abrir  = ventana
+
+OpenWithParm(w_in_message, str_m)
+
+return true
+end function
+

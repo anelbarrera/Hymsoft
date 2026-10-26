@@ -1,0 +1,26 @@
+﻿//objectcomments  
+global type gf_tipo_inventario from function_object
+end type
+
+forward prototypes
+global function string gf_tipo_inventario ()
+end prototypes
+
+global function string gf_tipo_inventario ();//Función que retorna el tipo de inventario --Standard(S) o Desglose(D)--
+
+String	ls_tipo
+
+Select para_uso_desglose
+Into   :ls_tipo
+From   inaparam
+Where  (para_g_financiero =: str.g_financiero) And
+       (para_empresa =: str.empresa) ;
+
+if sqlca.sqlcode = -1 then
+	ls_tipo = 'Error'
+end if
+
+Return ls_tipo
+
+end function
+

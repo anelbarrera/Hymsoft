@@ -1,0 +1,29 @@
+﻿//objectcomments  
+global type gf_in_secuencia from function_object
+end type
+
+forward prototypes
+global function integer gf_in_secuencia (readonly string ls_transaccion)
+end prototypes
+
+global function integer gf_in_secuencia (readonly string ls_transaccion);/*  * Funcion global que segun la transaccion recupera el   *  */
+/*  * numero de la ultima secuencia utilizada               *  */
+/*  * Recibe el tipo de transaccion  (ls_transaccion)       *  */
+/*  * Retorna el numero de la ultima secuencia li_secuencia *  */
+
+integer li_secuencia
+Select dgmserie.mser_secuencia
+into : li_secuencia
+from dgmserie
+where (dgmserie.mser_g_financiero =:str.g_financiero) and
+      (dgmserie.mser_empresa =:str.empresa) and
+		(dgmserie.mser_tipo_transaccion =:ls_transaccion);	
+return (li_secuencia)
+
+/*    * * * *    */
+/* Alexis Receda */
+/* Harr Computer */
+/* 29 / Dic / 98 */
+/*      * *      */
+end function
+

@@ -1,0 +1,32 @@
+﻿//objectcomments  
+global type gf_in_para_a_um from function_object
+end type
+
+forward prototypes
+global subroutine gf_in_para_a_um (ref integer as_anio, ref integer as_um)
+end prototypes
+
+global subroutine gf_in_para_a_um (ref integer as_anio, ref integer as_um);/* Cambio - Recupera el Año y si la unidad de medida es fija o no */ 
+SELECT inaparam.para_anio, inaparam.para_um_fija
+INTO :as_anio, :as_um  
+FROM inaparam  
+WHERE ( inaparam.para_g_financiero = :str.g_financiero ) AND  
+		( inaparam.para_empresa = :str.empresa);
+
+if sqlca.sqlcode = -1 then
+	messagebox('Error','Descripción del error: '+sqlca.sqlerrtext,StopSign!)
+	return
+end if
+
+If IsNull(as_anio) or as_anio = 0 then
+	messagebox("Atención",'El año en Parámetros no ha sido configurado, por favor configúrelo, '+&
+	'de lo contrario se asumirá el que tenga el Servidor',Information!)
+	as_anio=year(date(gf_fecha_serv()))
+End If
+
+If IsNull(as_um)then
+	as_um = 0
+End If
+
+end subroutine
+

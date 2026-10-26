@@ -54,7 +54,7 @@ end prototypes
 type variables
 integer ii_linea
 datawindow dw
-String is_nombre
+String is_nombre,is_ultima_,is_orden_
 end variables
 
 forward prototypes

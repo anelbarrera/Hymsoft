@@ -40,6 +40,8 @@ end variables
 forward prototypes
 public function integer wf_set_panel_visible (string as_tag, boolean ab_visible)
 public subroutine wf_set_panel (boolean ab_val)
+public function integer wf_set_button_visible (string as_tag, boolean ab_visible)
+public subroutine wf_configurar_panel_acciones (boolean ab_nuevo, boolean ab_guardar, boolean ab_eliminar, boolean ab_imprimir, boolean ab_exportar)
 end prototypes
 
 event ue_quitar_menu();// Desvincular el menú de Windows de la ventana MDI
@@ -82,8 +84,11 @@ If Not IsValid(lw_active) Then
 	This.SetRedraw(False)
 	 wf_set_panel_visible("PAN_ACCIONES_CAT1", False)
 	 wf_set_panel_visible("PAN_ACCIONES_CAT2", False)
+	 wf_set_panel_visible("PAN_ACCIONES_CAT3", False)
 	 wf_set_panel_visible("PAN_ACCIONES_CAT5", False)
 	 wf_set_panel_visible("PAN_ACCIONES_CAT6", False)
+	 wf_set_panel_visible("PAN_ACCIONES_DOC", False)
+	 
 	 This.SetRedraw(True)
 End If
 end event
@@ -114,6 +119,59 @@ wf_set_panel_visible("PAN_ACCIONES_CAT5", ab_val)
 wf_set_panel_visible("PAN_ACCIONES_CAT6", ab_val)
 wf_set_panel_visible("PAN_ACCIONES_DOC", ab_val)
 
+end subroutine
+
+public function integer wf_set_button_visible (string as_tag, boolean ab_visible); 
+RibbonLargeButtonItem lr_large
+RibbonSmallButtonItem lr_small
+Integer li_rtn
+
+ 
+If rbb_1.GetItemByTag(as_tag, lr_large) = 1 Then
+    lr_large.Visible = ab_visible
+    li_rtn = rbb_1.SetItem(lr_large)
+    rbb_1.SetRedraw(True)
+    Return li_rtn
+End If
+
+ 
+If rbb_1.GetItemByTag(as_tag, lr_small) = 1 Then
+    lr_small.Visible = ab_visible
+    li_rtn = rbb_1.SetItem(lr_small)
+    rbb_1.SetRedraw(True)
+    Return li_rtn
+End If
+
+
+Return -1
+end function
+
+public subroutine wf_configurar_panel_acciones (boolean ab_nuevo, boolean ab_guardar, boolean ab_eliminar, boolean ab_imprimir, boolean ab_exportar); 
+//rbb_1.SetRedraw(False)
+
+
+//this.wf_set_button_visible("BTN_ACC_GUARDAR",  ab_guardar)
+
+//this.wf_set_button_visible("BTN_ACC_IMPRIMIR", ab_imprimir)
+//this.wf_set_button_visible("BTN_ACC_EXPORTAR", ab_exportar)
+
+//rbb_1.SetRedraw(True)
+
+//If Pos(ls_tag, "BTN_ACCION_GRABAR") > 0 Then
+//    this.wf_set_button_visible("BTN_ACC_GUARDAR",  ab_guardar)
+//ElseIf Pos(ls_tag, "BTN_ACCION_INSERTAR") > 0 Then
+//    this.wf_set_button_visible("BTN_ACC_NUEVO",    ab_nuevo)
+//ElseIf Pos(ls_tag, "BTN_ACCION_ELIMINAR") > 0 Then
+//    this.wf_set_button_visible("BTN_ACC_ELIMINAR", ab_eliminar)
+//ElseIf Pos(ls_tag, "BTN_ACCION_GUARDAR_COMO") > 0 Then 
+//    lw_activa.TriggerEvent("ue_save_as") 
+//ElseIf Pos(ls_tag, "BTN_ACCION_VISTA_PRELIMINAR") > 0 Then 
+//    lw_activa.TriggerEvent("ue_vista") 
+//ElseIf Pos(ls_tag, "BTN_ACCION_IMPRIMIR") > 0 Then 
+//    lw_activa.TriggerEvent("ue_imprimir") 
+//ElseIf Pos(ls_tag, "BTN_ACCION_CERRAR") > 0 Then 
+//    close(lw_activa)
+//End If
 end subroutine
 
 on w_hs_frame.create
@@ -299,9 +357,9 @@ Choose Case ls_tag
 		else
 			OpenSheet(w_ajustes_costeando,Parent,0, Original!)
 		end if
-	Case 'BTN_TRANSF_BODEGA'
+	Case 'BTN_NCR'
 		wf_set_panel_visible("PAN_ACCIONES_CAT2", True)
-		 OpenSheet(w_transferencia,Parent,0, Original!)	
+		OpenSheet(w_captura_notas_credito,Parent,0, Original!)	
 	Case 'BTN_CAJA'
 		wf_set_panel_visible("PAN_ACCIONES_CAT2", True)
 		 OpenSheet(w_caja_menuda_transito,Parent,0, Original!)
@@ -461,6 +519,19 @@ Choose Case ls_tag
 	Case 'BTN_CONT_TX_PROV'
 		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_rep_transacciones_cxp,Parent,0, Original!)
+	Case "BTN_CONS_ARANCELES"
+		 
+		parent.Post Dynamic wf_set_panel_visible("PAN_ACCIONES_CAT3", False)
+	 
+		Window lw_aranceles
+		str_kardex  str_opcion_arancel
+		str_opcion_arancel.opcion_menu = 'CAR'
+		str_opcion_arancel.titulo_ventana = '(IN) Consulta de Arancel  '
+		str_opcion_arancel.dwinforme_1 = 'in_dw_cod_arancel'
+		str_opcion_arancel.dwinforme_2 = 'in_dw_lis_cod_arancel'
+		Parent.SetRedraw(false)
+		OpenSheetWithParm(lw_aranceles,str_opcion_arancel,"w_in_cod_trans_gen",Parent,11,original!)
+		Parent.SetRedraw(TRUE)
 End Choose
 
 //Acciones

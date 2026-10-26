@@ -1,0 +1,18 @@
+﻿//objectcomments Estructura que contiene los Argumentos de la Ventana de Opciones de Reportes
+global type str_arg_opc_rep from structure
+	integer		opc
+	integer		numero
+	string		dwo
+	string		tipo
+	boolean		sort_descrip
+	boolean		fondo
+	string		zoom
+	boolean		rulers
+	boolean		encab
+	boolean		cr_in
+	string		titulo
+	date		fechaini
+	date		fechafin
+	string		numero_string
+end type
+

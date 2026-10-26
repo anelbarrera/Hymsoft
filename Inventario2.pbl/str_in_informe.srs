@@ -1,0 +1,32 @@
+﻿//objectcomments (D)utilizado para los informes de inventarios
+global type str_in_informe from structure
+	string		opcion_menu
+	string		titulo_ventana
+	string		cadena_where
+	string		dwinforme
+	string		dwinforme2
+	string		compute[5]
+	integer		orden[5]
+	string		encabezado[5]
+	string		descripcion[5]
+	string		codigo_reporte
+	string		descripcion_reporte
+	string		cod_encabezado
+	string		cod_tipo
+	window		ventana
+	string		periodo
+	string		fecha_periodo
+	decimal{2}		porcentaje
+	integer		precio
+	string		is_opcion
+	integer		pag_grupo
+	integer		cantidad_decimal
+	integer		orden_descripcion
+	datetime		fecha_ini
+	datetime		fecha_fin
+	string		codigos[5]
+	integer		mes
+	integer		anio
+	string		precio_fijo_sn
+end type
+

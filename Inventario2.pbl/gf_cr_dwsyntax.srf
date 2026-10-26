@@ -1,0 +1,70 @@
+﻿//objectcomments  
+global type gf_cr_dwsyntax from function_object
+end type
+
+forward prototypes
+global function string gf_cr_dwsyntax (string as_dwsyntax, readonly string as_clause)
+end prototypes
+
+global function string gf_cr_dwsyntax (string as_dwsyntax, readonly string as_clause);/******************************************************************************************
+ *																														*
+ * Function: gf_cr_dwsyntax																					*
+ *																														*
+ * Purpose: Obtiene una estructura específica dentro de la sintaxis del DW.					*
+ *		Ya sea el RETRIEVE (todo el SQL), el SELECT, el FROM, , o el WHERE.						*
+ *																														*
+ *	Scope: pública																									*
+ *																														*
+ *	Arguments: as_dwsyntax 	{String 	Sintaxis del DW. (retrieve, select, from, where)}		*
+ *				  as_clause    {String	Estructura solicitada}											*
+ *																														*
+ *	Returns: string {la estructura o claúsula solicitada}												*
+ *																														*
+ * Created:	29 / Marzo / 1999																					*
+ ******************************************************************************************/
+
+
+Integer 	li_ini, li_fin
+String 	ls_rtn, ls_retrieve
+
+as_dwsyntax = lower (as_dwsyntax)
+
+// Obteniendo la consulta SQL
+ls_retrieve = as_dwsyntax
+
+choose case lower (as_clause)
+	// SQL
+	case "retrieve"
+		ls_rtn = ls_retrieve
+		
+	// Claúsula SELECT
+	case "select"
+		li_ini = Pos (ls_retrieve, ' ', 3) + 1
+		li_fin = Pos (ls_retrieve, 'from')
+		ls_rtn = Mid (ls_retrieve, li_ini, li_fin - li_ini)
+		
+	// Claúsula FROM
+	case "from"
+		li_ini = Pos (ls_retrieve, "from")
+		li_ini = Pos (ls_retrieve, ' ', li_ini)
+		li_fin = Pos (ls_retrieve, "where")
+		If li_fin = 0 Then li_fin = Len (ls_retrieve)		// No existe FROM 
+		ls_rtn = Mid (ls_retrieve, li_ini, li_fin - li_ini)
+		
+	// Claúsula WHERE
+	case "where"
+		li_ini = Pos (ls_retrieve, "where")
+		li_ini = Pos (ls_retrieve, ' ', li_ini)
+		
+		// No existe WHERE
+		If li_ini > 0 Then 
+			ls_rtn = right	(ls_retrieve, len (ls_retrieve) -  li_ini)
+		else
+			ls_rtn = ''
+		end if
+end choose
+
+return ls_rtn
+
+end function
+

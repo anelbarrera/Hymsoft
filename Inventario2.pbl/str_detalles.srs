@@ -1,0 +1,29 @@
+﻿//objectcomments  
+global type str_detalles from structure
+	string		tipo_transaccion
+	long		secuencia
+	string		concepto
+	integer		renglon
+	string		cod_color
+	string		cod_clase_tam
+	double		cantidad_max
+	integer		fraccion_max
+	string		medida
+	integer		med_cant
+	datetime		fecha
+	string		bodega
+	string		ubicacion
+	string		producto
+	string		bodega_destino
+	string		ubicacion_destino
+	string		titulo
+	string		unid_medida
+	string		parte
+	integer		anio
+	string		opcion
+	string		secuencia1
+	integer		fila
+	integer		empresa_des
+	integer		costo_tran
+end type
+

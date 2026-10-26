@@ -1,0 +1,35 @@
+﻿//objectcomments  
+global type gf_in_enabled_save from function_object
+end type
+
+forward prototypes
+global subroutine gf_in_enabled_save (string as_menu, boolean ab_enabled)
+end prototypes
+
+global subroutine gf_in_enabled_save (string as_menu, boolean ab_enabled);/******************************************************************************************
+ *																														*
+ * Function: gf_in_enabled_save																				*
+ *																														*
+ * Purpose: Se encarga de habilitar o deshabilitar la opción de Guardar.						*
+ *																														*
+ *	Scope: pública																									*
+ *																														*
+ *	Arguments: ab_enabled {boolean	-	TRUE 	 Habilita la Opción de Guardar					*
+ *				  				  boolean	- 	FALSE	 Deshabilita la Opción de Guardar}				*
+ *																														*
+ *	Returns: Nada																									*
+ *																														*
+ * Created:	24 / Marzo / 1999																					*
+ ******************************************************************************************/
+ 
+CHOOSE CASE as_menu
+	CASE "m_in_principal"
+	//m_in_principal.m_archivo.m_guardar.enabled = ab_enabled
+	
+	CASE "m_in_parametros"
+	//m_in_parametros.m_archivo.m_guardar.enabled = ab_enabled
+	
+END CHOOSE
+
+end subroutine
+

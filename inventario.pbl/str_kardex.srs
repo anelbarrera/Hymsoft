@@ -14,5 +14,6 @@ global type str_kardex from structure
 	string		bodega
 	integer		precio
 	string		kproducto
+	string		periodo
 end type
 

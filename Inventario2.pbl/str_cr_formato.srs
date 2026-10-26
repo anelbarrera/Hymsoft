@@ -1,0 +1,17 @@
+﻿//objectcomments  
+global type str_cr_formato from structure
+	string		cod_formato
+	string		datawindow
+	string		tipo_formato
+	string		captura_o_para
+	string		datawindow_detalle
+	string		datawindow_listado
+	string		viene_de
+	string		num_oc_tran
+	string		fact_suplemento
+	integer		anio_oc_tran
+	boolean		cancel_sino
+	string		opcion
+	long		entrada
+end type
+
