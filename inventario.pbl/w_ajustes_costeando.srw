@@ -713,6 +713,9 @@ else
 end if
 end event
 
+event ue_imprimir;This.triggerevent('ue_print')
+end event
+
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_ajustes_costeando
 boolean visible = false
 integer x = 46

@@ -1,0 +1,5 @@
+﻿global type str_pase_fact from structure
+	string		orden
+	integer		anno
+end type
+

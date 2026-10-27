@@ -1,0 +1,38 @@
+﻿//objectcomments  
+global type gf_cr_mascara_dec from function_object
+end type
+
+forward prototypes
+global function any gf_cr_mascara_dec ()
+end prototypes
+
+global function any gf_cr_mascara_dec ();int	li_decimal
+
+SELECT isnull(mpar_formato_decimales,0)
+INTO :li_decimal
+FROM crmparam
+WHERE mpar_g_financiero = :str.g_financiero AND
+		mpar_empresa = :str.empresa;
+
+if sqlca.sqldbcode = -1 then
+	mensaje('Error','Descripción: '+sqlca.sqlerrtext,'')
+	return '#'
+end if
+
+choose case li_decimal
+	case 0
+		return '###,###'
+	case 1
+		return '###,###,##0.0'
+	case 2
+		return '###,###,##0.00'
+	case 3
+		return '###,###,##0.000'
+	case 4
+		return '###,###,##0.0000'
+	case 5
+		return '###,###,##0.00000'
+end choose
+
+end function
+

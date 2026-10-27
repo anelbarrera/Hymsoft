@@ -42,6 +42,7 @@ public function integer wf_set_panel_visible (string as_tag, boolean ab_visible)
 public subroutine wf_set_panel (boolean ab_val)
 public function integer wf_set_button_visible (string as_tag, boolean ab_visible)
 public subroutine wf_configurar_panel_acciones (boolean ab_nuevo, boolean ab_guardar, boolean ab_eliminar, boolean ab_imprimir, boolean ab_exportar)
+public function integer wf_set_category_visible (string as_tag, boolean ab_visible)
 end prototypes
 
 event ue_quitar_menu();// Desvincular el menú de Windows de la ventana MDI
@@ -54,18 +55,40 @@ DrawMenuBar(Handle(this))
 this.TriggerEvent(Resize!)
 end event
 
-event ue_evaluar_panel_acciones();Window lw_sheet
- mdi_1.SetRedraw(False)
-// Obtener la ventana activa actual dentro del Frame MDI
+event ue_evaluar_panel_acciones();//Window lw_sheet
+// mdi_1.SetRedraw(False)
+//// Obtener la ventana activa actual dentro del Frame MDI
+//lw_sheet = this.GetActiveSheet()
+
+//If IsValid(lw_sheet) Then
+//    this.wf_set_panel( True)
+//Else
+    
+//    this.wf_set_panel( false)
+//End If
+
+//mdi_1.SetRedraw(True)
+// Evento de usuario: w_hs_frame.ue_evaluar_panel_acciones()
+Window lw_sheet
+RibbonCategoryItem lr_cat
+
 lw_sheet = this.GetActiveSheet()
 
 If IsValid(lw_sheet) Then
-    this.wf_set_panel( True)
-Else
+    // 1. Mostrar la pestaña de acciones
+    this.wf_set_category_visible("CAT_ACCIONES", True)
     
-    this.wf_set_panel( false)
+    // 2. Seleccionar automáticamente la pestaña "Acciones" para que quede activa
+    If rbb_1.GetItemByTag("CAT_ACCIONES", lr_cat) = 1 Then
+        rbb_1.SetActiveCategory(lr_cat.ItemHandle)
+    End If
+Else
+    // Al no haber ventanas abiertas, ocultar la pestaña
+    this.wf_set_category_visible("CAT_ACCIONES", False)
 End If
 
+// Forzar repintado del área cliente MDI
+mdi_1.SetRedraw(False)
 mdi_1.SetRedraw(True)
 end event
 
@@ -174,6 +197,23 @@ public subroutine wf_configurar_panel_acciones (boolean ab_nuevo, boolean ab_gua
 //End If
 end subroutine
 
+public function integer wf_set_category_visible (string as_tag, boolean ab_visible);// Función de Ventana: wf_set_category_visible(string as_tag, boolean ab_visible)
+// Retorna: 1 = Modificado exitosamente, -1 = Error o Tag no encontrado
+
+RibbonCategoryItem lr_cat
+
+// 1. Obtener la categoría por su Tag (ej. "CAT_ACCIONES")
+If rbb_1.GetItemByTag(as_tag, lr_cat) = 1 Then
+    // 2. Modificar visibilidad
+    lr_cat.Visible = ab_visible
+    
+    // 3. Aplicar el cambio a la RibbonBar
+    Return rbb_1.SetItem(lr_cat)
+End If
+
+Return -1
+end function
+
 on w_hs_frame.create
 int iCurrent
 call super::create
@@ -219,6 +259,8 @@ li_rc = rbb_1.ImportFromXMLFile("ribbon_sistema.xml")
 If li_rc <> 1 Then
     MessageBox("Error", "Fallo al inicializar la RibbonBar. Código: " + String(li_rc), StopSign!)
 End If
+// Ocultar la categoría unificada de acciones al iniciar la aplicación
+this.wf_set_category_visible("CAT_ACCIONES", False)
 
 //selecciona el nombre de la empresa
   SELECT dgmempre.empr_razon_social  , empr_acceso_especial, empr_valor_fixing, isnull(empr_clave_estados_de_cuenta,''), empr_bodegas_definidas, isnull(empr_bodega1,''), isnull(empr_bodega2,''), isnull(empr_bodega3,''), isnull(empr_bodega4,''), isnull(empr_bodega5,''), isnull(empr_bodega6,''), isnull(empr_bodega7,'')
@@ -343,7 +385,8 @@ Choose Case ls_tag
 		OpenSheet(w_orden_compra,Parent,0, Original!)
 	Case 'BTN_FACT_PROV_TRANS'
 		wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
-		OpenSheet(w_transito,Parent,0, Original!)
+		//OpenSheet(w_transito,Parent,0, Original!)
+		OpenSheet(w_cz_ma_transito,Parent,0, Original!)
 	Case 'BTN_TRANSACCIONES'
 		wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
 		OpenSheet(w_transacciones,Parent,0, Original!)
@@ -532,24 +575,51 @@ Choose Case ls_tag
 		Parent.SetRedraw(false)
 		OpenSheetWithParm(lw_aranceles,str_opcion_arancel,"w_in_cod_trans_gen",Parent,11,original!)
 		Parent.SetRedraw(TRUE)
+	Case "BTN_ACCION_INSERTAR"
+        lw_activa = parent.GetActiveSheet()
+        If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_adicionar")
+
+    Case "BTN_ACCION_GRABAR"
+        lw_activa = parent.GetActiveSheet()
+        If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_aceptar")
+
+    Case "BTN_ACCION_ELIMINAR"
+        lw_activa = parent.GetActiveSheet()
+        If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_eliminar")
+
+    Case "BTN_ACCION_IMPRIMIR"
+        lw_activa = parent.GetActiveSheet()
+        If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_imprimir")
+
+    Case "BTN_ACCION_GUARDAR_COMO"
+        lw_activa = parent.GetActiveSheet()
+        If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_guardar_como")
+
+    Case "BTN_ACCION_VISTA_PRELIMINAR"
+        lw_activa = parent.GetActiveSheet()
+        If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_vista")
+
+    Case "BTN_ACCION_CERRAR"
+        lw_activa = parent.GetActiveSheet()
+        If IsValid(lw_activa) Then Close(lw_activa)
 End Choose
 
 //Acciones
-If Pos(ls_tag, "BTN_ACCION_GRABAR") > 0 Then
-    lw_activa.TriggerEvent("ue_aceptar")
-ElseIf Pos(ls_tag, "BTN_ACCION_INSERTAR") > 0 Then
-    lw_activa.TriggerEvent("ue_adicionar")
-ElseIf Pos(ls_tag, "BTN_ACCION_ELIMINAR") > 0 Then
-    lw_activa.TriggerEvent("ue_eliminar")
-ElseIf Pos(ls_tag, "BTN_ACCION_GUARDAR_COMO") > 0 Then 
-    lw_activa.TriggerEvent("ue_save_as") 
-ElseIf Pos(ls_tag, "BTN_ACCION_VISTA_PRELIMINAR") > 0 Then 
-    lw_activa.TriggerEvent("ue_vista") 
-ElseIf Pos(ls_tag, "BTN_ACCION_IMPRIMIR") > 0 Then 
-    lw_activa.TriggerEvent("ue_imprimir") 
-ElseIf Pos(ls_tag, "BTN_ACCION_CERRAR") > 0 Then 
-    close(lw_activa)
-End If
+//If Pos(ls_tag, "BTN_ACCION_GRABAR") > 0 Then
+//    lw_activa.TriggerEvent("ue_aceptar")
+//ElseIf Pos(ls_tag, "BTN_ACCION_INSERTAR") > 0 Then
+//    lw_activa.TriggerEvent("ue_adicionar")
+//ElseIf Pos(ls_tag, "BTN_ACCION_ELIMINAR") > 0 Then
+//    lw_activa.TriggerEvent("ue_eliminar")
+//ElseIf Pos(ls_tag, "BTN_ACCION_GUARDAR_COMO") > 0 Then 
+//    lw_activa.TriggerEvent("ue_save_as") 
+//ElseIf Pos(ls_tag, "BTN_ACCION_VISTA_PRELIMINAR") > 0 Then 
+//    lw_activa.TriggerEvent("ue_vista") 
+//ElseIf Pos(ls_tag, "BTN_ACCION_IMPRIMIR") > 0 Then 
+//    lw_activa.TriggerEvent("ue_imprimir") 
+//ElseIf Pos(ls_tag, "BTN_ACCION_CERRAR") > 0 Then 
+//    close(lw_activa)
+//End If
 LockWindowUpdate(0)
 end event
 

@@ -1,0 +1,19 @@
+﻿//objectcomments  
+global type str_in_parte from structure
+	string		parte
+	string		producto
+	string		color
+	string		medida
+	decimal { 4 }		peso
+	decimal { 4 }		cubicaje
+	integer		status
+	integer		definicion
+	string		cod_clase_tam
+	string		descripcion
+	string		nombre_color
+	decimal { 0 }		costo_unitario
+	integer		empaque
+	integer		cant_unidad_empaque
+	integer		cant_unidad
+end type
+

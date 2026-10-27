@@ -1,0 +1,86 @@
+﻿//objectcomments  
+global type gf_actualiza_transitos from function_object
+end type
+
+forward prototypes
+global function boolean gf_actualiza_transitos (string as_producto)
+end prototypes
+
+global function boolean gf_actualiza_transitos (string as_producto);string ls_error
+
+ sqlca.autocommit = true
+	UPDATE inmprodu
+	SET prod_cant_transito = 0
+	WHERE prod_g_financiero = :str.g_financiero and
+			prod_empresa = :str.empresa and
+			prod_producto = :as_producto and 
+			prod_cant_transito <> 0; 
+ 		if sqlca.sqlcode = -1 then
+			ls_error = sqlca.sqlerrtext
+			rollback;
+			mensaje("Aviso","Error al Actualizar las Reservas de los Productos Pendientes ",ls_error)
+			sqlca.autocommit = true
+			return false
+		end if
+
+ 
+/*Actualiza los reservados del producto, procedentes de orden de compra*/
+UPDATE inmprodu  
+SET 	 prod_cant_transito = convert(decimal(17,6),vi_cr_cantidad_transito.pendiente)
+FROM   inmprodu,   
+       vi_cr_cantidad_transito
+WHERE  ( inmprodu.prod_g_financiero = vi_cr_cantidad_transito.doco_g_financiero ) AND  
+       ( inmprodu.prod_empresa      = vi_cr_cantidad_transito.doco_empresa ) AND  
+       ( inmprodu.prod_producto     = vi_cr_cantidad_transito.doco_id_referencia )  AND
+		 ( inmprodu.prod_g_financiero = :str.g_financiero ) AND
+		 ( inmprodu.prod_empresa		  = :str.empresa ) AND
+		 ( inmprodu.prod_producto  	 = :as_producto);
+		 
+		if sqlca.sqlcode = -1 then
+			ls_error = sqlca.sqlerrtext
+			rollback;
+			mensaje("Aviso","Error al Actualizar las Reservas de los Productos Pendientes ",ls_error)
+			sqlca.autocommit = true
+			return false
+		end if
+
+return true
+
+///*Actualiza los reservados del producto, procedentes de compras(confirmación)*/
+//UPDATE inmbodeg  
+//SET 	 mbod_cant_transito = 0
+//FROM 	 inmbodeg
+//WHERE  ( inmbodeg.mbod_g_financiero = :str.g_financiero ) AND
+//  	    ( inmbodeg.mbod_empresa		  = :str.empresa ) ;
+//			  
+//		if sqlca.sqlcode = -1 then
+//			ls_error = sqlca.sqlerrtext
+//			rollback;
+//			mensaje("Aviso","Error al Actualizar a 0 las Reservas de los Productos en Bodega/Ubicación ",ls_error)
+//			sqlca.autocommit = true
+//			return
+//		end if
+//	  
+// Actualizando las reservas en las bodegas y ubicaciones en confirmación
+//UPDATE inmbodeg
+//SET mbod_cant_confirma = convert(decimal(17,6),vi_cr_cantidad_transito.pendiente)
+//FROM inmbodeg,   
+//     vi_cr_cantidad_transito
+//WHERE ( inmbodeg.mbod_g_financiero 	= vi_cr_cantidad_transito.doco_g_financiero ) AND  
+//      ( inmbodeg.mbod_empresa      	= vi_cr_cantidad_transito.doco_empresa ) AND  
+//		( inmbodeg.mbod_bodega     	= :w_cr_fondo.is_bodega )  AND
+//		( inmbodeg.mbod_ubicacion     = :w_cr_fondo.is_ubicacion)  AND			
+//	   ( inmbodeg.mbod_producto    	= vi_cr_cantidad_transito.doco_id_referencia )  AND
+//		( inmbodeg.mbod_g_financiero 	= :str.g_financiero ) AND
+//	  	( inmbodeg.mbod_empresa		  	= :str.empresa ) ;
+//			  
+//		if sqlca.sqlcode = -1 then
+//			ls_error = sqlca.sqlerrtext
+//			rollback;
+//			mensaje("Aviso","Error al Actualizar las Reservas de los Productos en la Bodega/Ubicación ",ls_error)
+//			sqlca.autocommit = true
+//			return
+//		end if	  
+
+end function
+

@@ -1,0 +1,14 @@
+﻿//objectcomments  
+global type str_in_desglose from structure
+	string		pedido
+	long		ann
+	integer		pmayor
+	long		linea
+	long		linea_ori
+	integer		data
+	string		vienede
+	string		titulo
+	string		empaque
+	long		ann_empa
+end type
+

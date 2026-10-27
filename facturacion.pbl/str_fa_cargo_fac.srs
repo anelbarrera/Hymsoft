@@ -7,5 +7,7 @@ global type str_fa_cargo_fac from structure
 	string		estado
 	integer		an
 	window		window
+	string		codigo_act
+	string		numero_fact
 end type
 
