@@ -1,0 +1,56 @@
+﻿//objectcomments  
+global type gf_cr_descripcion_oc from function_object
+end type
+
+forward prototypes
+global function string gf_cr_descripcion_oc (string codigo)
+end prototypes
+
+global function string gf_cr_descripcion_oc (string codigo);// Modificado por Gianni Araúz (13/10/2000)
+
+string	ls_descrip
+
+SELECT mpar_descripcion_oc
+INTO :ls_descrip
+FROM crmparam
+WHERE ( mpar_g_financiero = :str.g_financiero ) AND
+		( mpar_empresa = :str.empresa );
+		
+if sqlca.sqlcode <> 0 then
+	return '¡Error! No se encontró la descripción.'
+end if
+
+if isnull(ls_descrip) then ls_descrip = ''
+
+if codigo = 'TR' then
+	if len(trim(ls_descrip)) > 0 then
+		if pos(ls_descrip,',') > 0 then
+			if pos(ls_descrip,',') = 1 then
+				return mid(trim(ls_descrip),2)
+			else
+				return right(trim(ls_descrip),len(trim(ls_descrip)) - pos(trim(ls_descrip),','))
+			end if
+		else
+			return 'Tránsitos'
+		end if
+	else
+		return 'Tránsitos'
+	end if
+else
+	if len(trim(ls_descrip)) > 0 then
+		if pos(ls_descrip,',') > 0 then
+			if pos(ls_descrip,',') = 1 then
+				return 'Orden de Compra'
+			else
+				return left(trim(ls_descrip),pos(trim(ls_descrip),',') - 1)
+			end if
+		else
+			return ls_descrip
+		end if
+	else
+		return 'Orden de Compra'
+	end if
+end if
+
+end function
+

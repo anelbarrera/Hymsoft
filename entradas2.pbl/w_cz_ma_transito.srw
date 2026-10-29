@@ -3947,8 +3947,10 @@ end type
 event clicked;integer li_ann
 li_ann = tab_1.tabpage_1.dw_generales.getitemnumber(1,'toco_anno_oc')
 lstr_pase.anno = li_ann
-
-//Habilitar OpenWithParm(w_cz_pases_confirmacion,lstr_pase)
+int ll_open
+ OpenWithParm(w_pases_confirmacion,lstr_pase)
+//OpenSheetWithparm(w_pases_confirmacion,lstr_pase,Parent,0, Original!)	
+//messagebox('',string(ll_open))
 lstr_pase_devuelto = message.PowerObjectParm
 
 if not isvalid(lstr_pase_devuelto) then return

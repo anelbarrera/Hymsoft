@@ -192,7 +192,9 @@ destroy(this.p_close)
 destroy(this.p_branding)
 end on
 
-event open;gf_center_win(this)
+event open; 
+
+gf_center_win(this)
  
 dw_empresa.settransobject(sqlca)
 dw_empresa.GetChild("empresa", idwc_empresas)

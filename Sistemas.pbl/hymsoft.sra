@@ -289,6 +289,21 @@ end event
 event open;String	usuario, maquina, file, sector, ls_theme, ls_retorno,ls_pass,ls_key,ls_password
 Long		ll_size = 255
  
+String ls_ruta_app
+ 
+ 
+ls_ruta_app = "C:\Sistemas\Hymsoft\"
+str.path = GetCurrentDirectory()
+
+// Asegurar que termine en barra invertida si vas a concatenar archivos (.ini, .json, etc.)
+If Right(str.path, 1) <> "\" Then
+    str.path += "\"
+End If
+ 
+If Not SetCurrentDirectory(ls_ruta_app) Then
+    MessageBox("Error de Directorio", "No se pudo establecer la ruta base: " + ls_ruta_app, StopSign!)
+End If
+
 
 //---- Aplicación NOMINA --------\\
 
@@ -328,7 +343,7 @@ else
 
 	str.puerto = ProfileString(str.path, "HYMSOFT", "puerto", "")
 	
-	gf_find_path(str.path)
+	//gf_find_path(str.path)
 
 	maquina = space(ll_size)
 	

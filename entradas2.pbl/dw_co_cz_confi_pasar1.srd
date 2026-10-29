@@ -1,0 +1,112 @@
+﻿//objectcomments  
+release 25;
+datawindow(units=0 data.export.format=1 timer_interval=0 color=79741120 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=72 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=68 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes name=crtconfi_tcof_g_financiero dbname="tcof_g_financiero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=crtconfi_tcof_empresa dbname="tcof_empresa" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tcof_num_prove dbname="tcof_num_prove" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tcof_anno_oc dbname="tcof_anno_oc" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=tcof_cod_tipo_pago dbname="tcof_cod_tipo_pago" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=tcof_cod_forma_pago dbname="tcof_cod_forma_pago" )
+ column=(type=datetime update=yes updatewhereclause=yes name=tcof_fecha_conf_oc dbname="tcof_fecha_conf_oc" )
+ column=(type=datetime update=yes updatewhereclause=yes name=tcof_fecha_llegada dbname="tcof_fecha_llegada" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=tcof_representante_prov dbname="tcof_representante_prov" )
+ column=(type=long update=yes updatewhereclause=yes name=tcof_estatus_conf_oc dbname="tcof_estatus_conf_oc" values="Activo	1/Cancelado	2/" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=tcof_comentario_add dbname="tcof_comentario_add" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=tcof_tipo_costo dbname="tcof_tipo_costo" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=tcof_num_carta_credito dbname="tcof_num_carta_credito" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=crtconfi_tcof_banco dbname="tcof_banco" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=crtconfi_tcof_lista_empaque dbname="tcof_lista_empaque" )
+ column=(type=datetime update=yes updatewhereclause=yes name=crtconfi_tcof_fecha_llegada_puerto dbname="tcof_fecha_llegada_puerto" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=crtconfi_tcof_numero_vapor dbname="tcof_numero_vapor" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=crtconfi_tcof_puerto dbname="tcof_puerto" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=crtconfi_tcof_no_bultos dbname="tcof_no_bultos" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=tcof_clase_compra dbname="tcof_clase_compra" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=tcof_codigo_viaje dbname="tcof_codigo_viaje" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=tcof_tipo_conf dbname="tcof_tipo_conf" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=crtconfi_tcof_monto_total_orden dbname="tcof_monto_total_orden" )
+ column=(type=char(6) update=yes updatewhereclause=yes name=tcof_tipo_compra dbname="tcof_tipo_compra" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=tcof_estado dbname="tcof_estado" )
+ column=(type=decimal(2) updatewhereclause=yes name=cant_pase dbname="cant_pase" )
+ column=(type=char(5) updatewhereclause=yes name=tcof_contenedor dbname="tcof_contenedor" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=tcof_num_conf_oc dbname="tcof_num_conf_oc" )
+ retrieve="SELECT 
+    a.tcof_g_financiero,   
+    a.tcof_empresa,   
+    a.tcof_num_prove,   
+    a.tcof_anno_oc,   
+    a.tcof_cod_tipo_pago,   
+    a.tcof_cod_forma_pago,   
+    a.tcof_fecha_conf_oc,   
+    a.tcof_fecha_llegada,   
+    a.tcof_representante_prov,   
+    a.tcof_estatus_conf_oc,   
+    a.tcof_comentario_add,   
+    a.tcof_tipo_costo,   
+    a.tcof_num_carta_credito,   
+    a.tcof_banco,   
+    a.tcof_lista_empaque,   
+    a.tcof_fecha_llegada_puerto,   
+    a.tcof_numero_vapor,   
+    a.tcof_puerto,   
+    a.tcof_no_bultos,   
+    a.tcof_clase_compra,   
+    a.tcof_codigo_viaje,   
+    a.tcof_tipo_conf,   
+    a.tcof_monto_total_orden,   
+    a.tcof_tipo_compra,   
+    a.tcof_estado,   
+    0.00 AS cant_pase,   
+    a.tcof_contenedor,   
+    a.tcof_num_conf_oc  
+FROM dbo.crtconfi a
+CROSS APPLY (
+    SELECT 
+        MAX(CASE WHEN d.dcof_cantidad_total - d.dcof_cant_facturada >= 0 THEN 1 ELSE 0 END) AS cumple_d1,
+        MAX(CASE WHEN d.dcof_cantidad_total <> (
+            d.dcof_cant_facturada + 
+            CASE 
+                WHEN d.dcof_cant1_facturada = 0 THEN 0 
+                ELSE d.dcof_cant1_facturada * m.medi_cantidad
+            END
+        ) THEN 1 ELSE 0 END) AS cumple_d2
+    FROM dbo.crdconfi d
+    LEFT JOIN dbo.inamedid m 
+        ON d.dcof_cant1_facturada <> 0 
+       AND m.medi_medida = d.dcof_unidad
+    WHERE d.dcof_g_financiero = a.tcof_g_financiero
+      AND d.dcof_empresa = a.tcof_empresa
+      AND d.dcof_num_conf_oc = a.tcof_num_conf_oc
+      AND d.dcof_anno_oc = a.tcof_anno_oc
+) v
+WHERE a.tcof_g_financiero = :g_financiero
+  AND a.tcof_empresa = :empresa
+  AND a.tcof_num_prove = :cod_provee
+  AND v.cumple_d1 = 1
+  AND v.cumple_d2 = 1;" arguments=(("g_financiero", number),("empresa", number),("cod_provee", number))  sort="tcof_fecha_conf_oc D tcof_num_conf_oc A " )
+compute(band=header alignment="0" expression=" '#'+gf_cr_descripcion_oc('TR') "border="6" color="0" x="9" y="8" height="56" width="430" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="12632256" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Año" border="6" color="0" x="457" y="8" height="56" width="201" html.valueishtml="0"  name=toco_anno_oc_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Tipo Pago" border="6" color="0" x="672" y="8" height="56" width="370" html.valueishtml="0"  name=toco_cod_tipo_pago_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Fecha Conf." border="6" color="0" x="1061" y="8" height="56" width="347" html.valueishtml="0"  name=toco_fecha_oc_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Estatus " border="6" color="0" x="1426" y="8" height="56" width="649" html.valueishtml="0"  name=toco_estatus_oc_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Entregarse en" border="6" color="0" x="2094" y="8" height="56" width="709" html.valueishtml="0"  name=toco_entregarse_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="5" color="8388608" x="457" y="8" height="60" width="201" format="[general]" html.valueishtml="0"  name=tcof_anno_oc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=28 alignment="0" tabsequence=32766 border="5" color="8388608" x="9" y="8" height="60" width="430" format="[general]" html.valueishtml="0"  name=tcof_num_conf_oc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="5" color="8388608" x="672" y="8" height="60" width="370" format="[general]" html.valueishtml="0"  name=tcof_cod_tipo_pago visible="1" dddw.name=dddw_cr_tipo_pago dddw.displaycolumn=atpa_descripcion_tipo_pago dddw.datacolumn=atpa_cod_tipo_pago dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.validation=no dddw.autocompletemode=none dddw.useasborder=no dddw.case=any dddw.autoretrieve=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="5" color="8388608" x="1056" y="8" height="60" width="361" format="[shortdate] [time]" html.valueishtml="0"  name=tcof_fecha_conf_oc visible="1" editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="5" color="8388608" x="1426" y="8" height="60" width="649" format="[general]" html.valueishtml="0"  name=tcof_estatus_conf_oc visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.validation=no ddlb.autocompletemode=none ddlb.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="5" color="8388608" x="2094" y="8" height="60" width="709" format="[general]" html.valueishtml="0"  name=tcof_representante_prov visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.xhtml()
+ 

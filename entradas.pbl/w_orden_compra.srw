@@ -41,9 +41,9 @@ global w_orden_compra w_orden_compra
 
 type variables
 integer ii_ann, datawindow, il_row, ii_cantidad_unidad, ii_cantidad_empaque
-String  is_entrada, is_unidad_empaque, is_secuencia, is_actualiza
+String  is_entrada, is_unidad_empaque, is_secuencia, is_actualiza,is_sec_oc
 date	  idt_desde, idt_hasta
-long    il_tiempo, il_segundos, il_secuencia, il_empaque
+long    il_tiempo, il_segundos, il_secuencia, il_empaque,il_year,il_numero_oc
 decimal{4} id_peso, id_cubicaje, id_costo
 
 end variables
@@ -53,6 +53,7 @@ public function boolean wf_recupera ()
 public function boolean wf_orden_nueva ()
 public subroutine wf_eliminar_detalle ()
 public subroutine wf_eliminar_todo ()
+public function boolean wf_secuencia_oc ()
 end prototypes
 
 event ue_syscommand;call super::ue_syscommand;if commandtype = 61536 then
@@ -190,6 +191,60 @@ End If
 sqlca.autocommit = true;
 end subroutine
 
+public function boolean wf_secuencia_oc ();long ll_secuencia_oc
+integer li_ann,li_existe,li_largo_codigo_oc
+String ls_secuencia
+
+li_largo_codigo_oc = 6
+li_ann = year(date(gf_fecha_serv()))
+
+select max(convert(numeric(10), enca_secuencia))
+into	:ll_secuencia_oc
+from orden
+where enca_g_financiero = :str.g_financiero and
+		enca_empresa		= :str.empresa and
+		enca_ann				= :li_ann ;
+	if sqlca.sqlcode = -1  then
+		gf_mensaje('','Error al Buscar Secuencia '+sqlca.sqlerrtext,1,1,'E')		
+		return false
+	end if
+	
+	If isnull(ll_secuencia_oc) or ll_secuencia_oc = 0 then
+				ll_secuencia_oc = 1 
+	Else
+				ll_secuencia_oc += 1 
+	End if
+	//Para verificar si la secuencia existe en crtconfi
+ls_secuencia =  string('CO'+ fill('0',li_largo_codigo_oc - len(string(ll_secuencia_oc)))+string(ll_secuencia_oc))
+DO 
+					SELECT count(*)
+					INTO   :li_existe
+					FROM   crtconfi
+					WHERE ( tcof_g_financiero = :str.g_financiero ) AND
+							( tcof_empresa = :str.empresa ) and
+							( tcof_num_conf_oc = :ls_secuencia);
+				if sqlca.sqlcode = -1 then
+					rollback;
+					messagebox('Error','Descripción del error: '+sqlca.sqlerrtext)
+					close(this)
+					return false
+				elseif sqlca.sqlcode = 100 then
+					messagebox('Atención','No se recuperó la secuencia. Verifique Usted no puede continuar.',StopSign!)
+					close(this)
+					return false
+				end if							
+									
+				if li_existe > 0 then
+					ll_secuencia_oc ++
+					ls_secuencia =  string('CO'+ fill('0',li_largo_codigo_oc - len(string(ll_secuencia_oc)))+string(ll_secuencia_oc))
+				end if
+									
+			LOOP UNTIL li_existe = 0
+			dw.setitem(1,'tcof_num_conf_oc',ls_secuencia)
+			is_secuencia = String(ll_secuencia_oc)
+			Return true
+end function
+
 on w_orden_compra.create
 int iCurrent
 call super::create
@@ -233,7 +288,8 @@ datawindow = 1
 this.triggerevent('ue_adicionar')
 
 //Recupera la secuencia siguiente y da opcion para buscar una
-wf_orden_nueva()
+//wf_orden_nueva()
+wf_secuencia_oc()
 
 str.frame.setmicrohelp('Orden de Compra')
 //il_tiempo = 150
@@ -252,40 +308,42 @@ end event
 event ue_adicionar;//Override
 string ls_contrato
 if datawindow = 1 then	
+	if il_year = 0 or isnull(il_year) then il_year = year(date(gf_fecha_serv()))
 	dw_1.reset()
 	dw_2.reset()
 	dw_1.insertrow(1)
 	//Pone invisible el insertar	
-	dw_1.setitem(1,'enca_g_financiero',str.g_financiero)
-	dw_1.setitem(1,'enca_empresa',str.empresa)
-	dw_1.setitem(1,'enca_ann',ii_ann)
-	dw_1.setitem(1,'enca_estado','E')
-	dw_1.setitem(1,'enca_fecha',date(gf_fecha_serv()))
-	dw_1.setitem(1,'enca_fecha_despacho',date(gf_fecha_serv()))
-	dw_1.setitem(1,'enca_fecha_llegada',date(gf_fecha_serv()))
+	dw_1.setitem(1,'tcof_g_financiero',str.g_financiero)
+	dw_1.setitem(1,'tcof_empresa',str.empresa)
+	dw_1.setitem(1,'tcof_anno_oc',ii_ann)
+	//dw_1.setitem(1,'enca_estado','E')
+	dw_1.setitem(1,'tcof_fecha_conf_oc',date(gf_fecha_serv()))
+	//dw_1.setitem(1,'enca_fecha_despacho',date(gf_fecha_serv()))
+	dw_1.setitem(1,'tcof_fecha_llegada',date(gf_fecha_serv()))
 	dw_1.setfocus()
-	dw_1.setcolumn('enca_proveedor')
-	wf_orden_nueva()
+	dw_1.setcolumn('tcof_num_prove')
+	//wf_orden_nueva()
+	wf_secuencia_oc()
 	dw_5.insertrow(1)
 else
 	if dw_2.getrow() > 0 then	
-		if dw_2.getitemstring(dw_2.rowcount(), 'deta_referencia') <> '' or &
-			not isnull(dw_2.getitemstring(dw_2.rowcount(), 'deta_referencia')) then
+		if dw_2.getitemstring(dw_2.rowcount(), 'dcof_producto') <> '' or &
+			not isnull(dw_2.getitemstring(dw_2.rowcount(), 'dcof_producto')) then
 			dw_2.scrolltorow(dw_2.insertrow(0))
-			dw_2.setitem(dw_2.getrow(),'deta_g_financiero',str.g_financiero)
-			dw_2.setitem(dw_2.getrow(),'deta_empresa',str.empresa)
+			dw_2.setitem(dw_2.getrow(),'dcof_g_financiero',str.g_financiero)
+			dw_2.setitem(dw_2.getrow(),'dcof_empresa',str.empresa)
 		end if
-		if dw_2.getrow() > 1 then
-			ls_contrato = dw_2.getitemstring(dw_2.getrow() - 1,'deta_contrato')
-			dw_2.setitem(dw_2.getrow(),'deta_contrato',ls_contrato)
-		end if
+//		if dw_2.getrow() > 1 then
+//			ls_contrato = dw_2.getitemstring(dw_2.getrow() - 1,'deta_contrato')
+//			dw_2.setitem(dw_2.getrow(),'deta_contrato',ls_contrato)
+//		end if
 	else
 		dw_2.scrolltorow(dw_2.insertrow(0))
-		dw_2.setitem(dw_2.getrow(),'deta_g_financiero',str.g_financiero)
-		dw_2.setitem(dw_2.getrow(),'deta_empresa',str.empresa)
+		dw_2.setitem(dw_2.getrow(),'dcof_g_financiero',str.g_financiero)
+		dw_2.setitem(dw_2.getrow(),'dcof_empresa',str.empresa)
 	end if
 	dw_2.setfocus()
-	dw_2.setcolumn('deta_referencia')
+	dw_2.setcolumn('dcof_producto')
 end if
 
 end event
@@ -301,6 +359,7 @@ If IsValid(lw_frame) Then
    lw_frame.PostEvent("ue_sheet_closed")
  End If
 if isvalid(this) then close(this)
+w_hs_frame.Post Event ue_evaluar_panel_acciones()
 end event
 
 event ue_hay_data;//Override
@@ -329,13 +388,13 @@ This.Icon = str.icono
 
 datawindowchild ldwc_provee
 
-dw_1.getchild('enca_proveedor',ldwc_provee)
+dw_1.getchild('tcof_num_prove',ldwc_provee)
 ldwc_provee.settransobject(sqlca)
 ldwc_provee.retrieve(str.g_financiero, str.empresa)
 
-dw_1.getchild('enca_cliente',ldwc_provee)
-ldwc_provee.settransobject(sqlca)
-ldwc_provee.retrieve(str.g_financiero, str.empresa)
+//dw_1.getchild('enca_cliente',ldwc_provee)
+//ldwc_provee.settransobject(sqlca)
+//ldwc_provee.retrieve(str.g_financiero, str.empresa)
 
 this.postevent("ue_post_open")
 
@@ -371,24 +430,24 @@ end event
 event ue_aceptar;integer  li_contador,ll_update,ll_update2,li_encontro,li_lin_ref,li_posicion,li_frac2, li_find
 integer  li_costo,anulado=0,li_linea_uno,li_linea_dos,indice, li_existe_detalle, li_empresa ,li_salvar
 decimal  li_cantidad,li_cantid, li_cos_tran
-decimal{2} ldec_monto
+decimal{2} ldec_monto,ld_monto_oc
 datetime ldt_fecha,ldt_fecha_real
 string   ls_documento,ls_aplic,ls_tipo,ls_medida,ls_producto,ls_concepto, fila, ls_conc,ls_error,ls_cuenta, ls_expresion, ls_doc
-Long		ll_found, ll_ann,ll_secuencia
+Long		ll_found, ll_ann,ll_secuencia,ll_anio
 boolean  lb_existe
 
 dw_1.acceptText()
 dw_2.acceptText()
 //dw=dw_1  
 
-if dw_1.getitemstring(1,'enca_estado') <> 'E' then
-	gf_mensaje('','La Orden de Compra esta Actualizada, No se Puede Modificar, Verifique !!!',1,1,'E')
-	return
-end if
+//if dw_1.getitemstring(1,'enca_estado') <> 'E' then
+//	gf_mensaje('','La Orden de Compra esta Actualizada, No se Puede Modificar, Verifique !!!',1,1,'E')
+//	return
+//end if
 
-if (dw_1.getitemNumber(1,"enca_proveedor")) = 0 or isnull(dw_1.getitemNumber(1,"enca_proveedor")) then
+if (dw_1.getitemNumber(1,"tcof_num_prove")) = 0 or isnull(dw_1.getitemNumber(1,"tcof_num_prove")) then
 	gf_Mensaje("Atencion Sr. Usuario","Debe asignar el proveedor antes de guardar.",1,1,'E')
-	dw_1.setcolumn("enca_proveedor")
+	dw_1.setcolumn("tcof_num_prove")
 	return
 end if	
 
@@ -396,10 +455,10 @@ end if
 sqlca.autocommit = false
 
 indice = 0
-
-ls_documento = dw_1.getitemstring(1,"enca_secuencia")
+ll_anio = dw_1.getitemNumber(1,"tcof_anno_oc")
+ls_documento = dw_1.getitemstring(1,"tcof_num_conf_oc")
 is_secuencia = ls_documento
-/*grabamos los datos del DW_1 de la tabla de INTMOVIM*////////////////
+
 if dw_1.GetItemStatus(dw_1.getrow(),0,primary! ) = New! or &
 	dw_1.GetItemStatus(dw_1.getrow(),0,primary! ) = NewModified! then 	
 	
@@ -421,7 +480,7 @@ if dw_1.GetItemStatus(dw_1.getrow(),0,primary! ) = New! or &
 //
 //	dw_1.setitem(1,'no_orden',string(ll_secuencia))
 	
-	if (dw_1.getitemString(1,"enca_secuencia")) = '' or isnull(dw_1.getitemString(1,"enca_secuencia")) then
+	if (dw_1.getitemString(1,"tcof_num_conf_oc")) = '' or isnull(dw_1.getitemString(1,"tcof_num_conf_oc")) then
 		gf_Mensaje("Atencion Sr. Usuario","Debe Asignar un valor valido, Verifique.",1,1,'E')
 		sqlca.autocommit = true
 		return
@@ -429,7 +488,7 @@ if dw_1.GetItemStatus(dw_1.getrow(),0,primary! ) = New! or &
 	/*Actualiza el Encabezado*/
 	ll_update = dw_1.update()
 	
-	/*Actualiza la Secuencia en Dgmserie*/
+
 	if ll_update =1 then
 		 commit using sqlca;
 	else
@@ -453,8 +512,8 @@ else
   else
 	 ldec_monto  = 0
   end if
-  dw_1.setitem(1,'enca_costo_total',ldec_monto)
-  dw_1.setitem(1,'enca_usuario',str.usuario)
+  dw_1.setitem(1,'tcof_monto_total_orden',ldec_monto)
+  dw_1.setitem(1,'tcof_usuario',str.usuario)
   
   ll_update = dw_1.update()
   if ll_update = 1 then
@@ -474,34 +533,64 @@ end if
 
 sqlca.autocommit = false
 
-/*grabamos los datos de DW_2 en la tabla INDTRANS*/
+
 dwItemStatus ls_status
 
 
 // Borra registros en blanco
 
 for li_contador = 1 to dw_2.rowcount()
-	ls_producto = dw_2.getitemstring(li_contador,"deta_referencia")
+	ls_producto = dw_2.getitemstring(li_contador,"dcof_producto")
 	if ls_producto = "" or isnull(ls_producto) then		
 		dw_2.deleterow(li_contador)
 		li_contador --
-	End If
-	dw_2.setitem(li_contador,'deta_secuencia',is_secuencia)
-	dw_2.setitem(li_contador,'deta_ann',ii_ann)
-	dw_2.setitem(li_contador,"deta_linea",li_contador)
+	Else
+		dw_2.setitem(li_contador,'dcof_num_conf_oc',is_secuencia)
+		dw_2.setitem(li_contador,'dcof_num_oc',is_secuencia)
+		dw_2.setitem(li_contador,'dcof_anno_oc',ii_ann)
+		dw_2.setitem(li_contador,"dcof_num_ren_confi",li_contador)
+	
+		ls_producto = dw_2.getitemstring(li_contador,"dcof_producto")
 		
-	//Si la marca no existe, la adiciona
-//	if li_contador > 0 then
-//		wf_valida_existencia("DESCRIPCION", dw3.getitemstring(li_contador, "descripcion_item"), dw3)
-//		wf_valida_existencia("MARCA", dw3.getitemstring(li_contador, "marca"), dw3)
-//		wf_valida_existencia("SEX", dw3.getitemstring(li_contador, "sex"), dw3)
-//		wf_valida_existencia("MATERIAL", dw4.getitemstring(li_contador, "material"), dw4)
-//		wf_valida_existencia("MAT_DESCRIPCION", dw4.getitemstring(li_contador, "mat_descripcion"), dw4)
-//		wf_valida_existencia("SIZE", dw4.getitemstring(li_contador, "size"), dw4)
-//		wf_valida_existencia("RATIO", dw4.getitemstring(li_contador, "ratio"), dw4)
-//	end if
-//	
+		update inmprodu
+		set	prod_orden_compra = :ls_documento
+		where prod_g_financiero = :str.g_financiero and
+				prod_empresa		= :str.empresa and
+				prod_producto		= :ls_producto ;
+				if sqlca.sqlcode = -1 then
+					mensaje("Aviso","Error al Guardar orden en el producto "+sqlca.sqlerrtext,"")
+					rollback;
+					Return 
+				end if
+				
+		  UPDATE repeat  
+			  SET repeat.status = 'Croc' , fecha_creo_oc = getdate()
+			WHERE (( repeat.producto = :ls_producto  or  repeat.producto_new = :ls_producto )) AND  
+					( repeat.status <> 'Croc' ) and (repeat.oc = :ls_documento)   ;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al Actualizar Status de Repeat '+sqlca.sqlerrtext,1,1,'E')
+				rollback;
+				Return
+			end if	
+	End If
 Next
+	ld_monto_oc = 0
+	
+	if dw_2.rowcount() > 0 then	ld_monto_oc = dw_2.getitemnumber(1,'monto_total')
+
+	  update crabonos set crabonos.abon_monto_oc = :ld_monto_oc
+		 FROM crabonos  
+		WHERE ( crabonos.abon_g_financiero = :str.g_financiero ) AND  
+				( crabonos.abon_empresa = :str.empresa ) AND  
+				( crabonos.abon_oc = :ls_documento ) AND  
+				( crabonos.abon_ann = :ll_anio )    ;
+		if sqlca.sqlcode = -1 then
+			gf_mensaje('','No se actualizaron los datos  '+sqlca.sqlerrtext,1,1,'E')
+			rollback;
+			ib_modify= true 
+			return
+		end if
+
 //
 li_salvar=1
 
@@ -570,58 +659,101 @@ if il_segundos > il_tiempo then
 end if
 end event
 
-event ue_busqueda;call super::ue_busqueda;//
-String  ls_find,ls_codigo, ls_documento
+event ue_busqueda;//
+String  ls_find,ls_codigo, ls_documento,ls_syntres
 integer li_c, li_b
 long    ll_lter
 string  ls_lter,ls_des
 
 Datawindow        dww
-str_dg_dynamic_find	lstr_df
+//str_dg_dynamic_find	lstr_df
 
-	lstr_df.texto_campo [1,1] = "orden.enca_secuencia"
-	lstr_df.texto_campo [1,2] = "Secuencia"
-	lstr_df.texto_campo [1,3] = "enca_secuencia"
-	lstr_df.texto_campo [1,4] = 'V'
-	lstr_df.texto_campo [1,5] = '280'	
-	lstr_df.texto_campo [2,1] = "dgmterce.terc_descripcion"
-	lstr_df.texto_campo [2,2] = "Proveedor"
-	lstr_df.texto_campo [2,3] = ""
-	lstr_df.texto_campo [2,4] = 'V'
-	lstr_df.texto_campo [2,5] = '650'
-	lstr_df.texto_campo [3,1] = "orden.enca_fecha"
-	lstr_df.texto_campo [3,2] = "Fecha"
-	lstr_df.texto_campo [3,3] = ""
-	lstr_df.texto_campo [3,4] = 'V'
-	lstr_df.texto_campo [3,5] = '295'
-	lstr_df.texto_campo [4,1] = "orden.enca_documento"
-	lstr_df.texto_campo [4,2] = "Orden Compra"
-	lstr_df.texto_campo [4,3] = ""
-	lstr_df.texto_campo [4,4] = 'V'
-	lstr_df.texto_campo [4,5] = '385'
-	lstr_df.texto_campo [5,1] = "Tipo = case orden.enca_tipo when 0 then 'LOCAL' when 1 then 'EXTERIOR' else 'DIRECTA' end"
-	lstr_df.texto_campo [5,2] = "Tipo"
-	lstr_df.texto_campo [5,3] = ""
-	lstr_df.texto_campo [5,4] = 'V'
-	lstr_df.texto_campo [5,5] = '385'
-	lstr_df.texto_campo [6,1] = "Estado = case orden.enca_estado when 'P' then 'PASADA' when 'A' then 'ACTUALIZADA' else 'PENDIENTE' end"
-	lstr_df.texto_campo [6,2] = "Estado"
-	lstr_df.texto_campo [6,3] = ""
-	lstr_df.texto_campo [6,4] = 'V'
-	lstr_df.texto_campo [6,5] = '385'
-	lstr_df.texto_campo [7,1] = "cliente = (select max(b.terc_descripcion) from dgmterce b where b.terc_tercero = orden.enca_cliente and orden.enca_cliente <> 0)"
-	lstr_df.texto_campo [7,2] = "Cliente"
-	lstr_df.texto_campo [7,3] = ""
-	lstr_df.texto_campo [7,4] = 'V'
-	lstr_df.texto_campo [7,5] = '750'
-	lstr_df.tabla = " orden, dgmterce "
+//	lstr_df.texto_campo [1,1] = "orden.enca_secuencia"
+//	lstr_df.texto_campo [1,2] = "Secuencia"
+//	lstr_df.texto_campo [1,3] = "enca_secuencia"
+//	lstr_df.texto_campo [1,4] = 'V'
+//	lstr_df.texto_campo [1,5] = '280'	
+//	lstr_df.texto_campo [2,1] = "dgmterce.terc_descripcion"
+//	lstr_df.texto_campo [2,2] = "Proveedor"
+//	lstr_df.texto_campo [2,3] = ""
+//	lstr_df.texto_campo [2,4] = 'V'
+//	lstr_df.texto_campo [2,5] = '650'
+//	lstr_df.texto_campo [3,1] = "orden.enca_fecha"
+//	lstr_df.texto_campo [3,2] = "Fecha"
+//	lstr_df.texto_campo [3,3] = ""
+//	lstr_df.texto_campo [3,4] = 'V'
+//	lstr_df.texto_campo [3,5] = '295'
+//	lstr_df.texto_campo [4,1] = "orden.enca_documento"
+//	lstr_df.texto_campo [4,2] = "Orden Compra"
+//	lstr_df.texto_campo [4,3] = ""
+//	lstr_df.texto_campo [4,4] = 'V'
+//	lstr_df.texto_campo [4,5] = '385'
+//	lstr_df.texto_campo [5,1] = "Tipo = case orden.enca_tipo when 0 then 'LOCAL' when 1 then 'EXTERIOR' else 'DIRECTA' end"
+//	lstr_df.texto_campo [5,2] = "Tipo"
+//	lstr_df.texto_campo [5,3] = ""
+//	lstr_df.texto_campo [5,4] = 'V'
+//	lstr_df.texto_campo [5,5] = '385'
+//	lstr_df.texto_campo [6,1] = "Estado = case orden.enca_estado when 'P' then 'PASADA' when 'A' then 'ACTUALIZADA' else 'PENDIENTE' end"
+//	lstr_df.texto_campo [6,2] = "Estado"
+//	lstr_df.texto_campo [6,3] = ""
+//	lstr_df.texto_campo [6,4] = 'V'
+//	lstr_df.texto_campo [6,5] = '385'
+//	lstr_df.texto_campo [7,1] = "cliente = (select max(b.terc_descripcion) from dgmterce b where b.terc_tercero = orden.enca_cliente and orden.enca_cliente <> 0)"
+//	lstr_df.texto_campo [7,2] = "Cliente"
+//	lstr_df.texto_campo [7,3] = ""
+//	lstr_df.texto_campo [7,4] = 'V'
+//	lstr_df.texto_campo [7,5] = '750'
+//	lstr_df.tabla = " orden, dgmterce "
 		
-	lstr_df.tabla_where = &
-				"WHERE (orden.enca_g_financiero = " + string(str.g_financiero) + ") and " +&
-						 "(orden.enca_empresa = " + string(str.empresa) + ") 	and " +&
- 						 "(orden.enca_ann = " + string(ii_ann) + ") 	and " +&
-						"(orden.enca_proveedor = dgmterce.terc_tercero)"
-	
+//	lstr_df.tabla_where = &
+//				"WHERE (orden.enca_g_financiero = " + string(str.g_financiero) + ") and " +&
+//						 "(orden.enca_empresa = " + string(str.empresa) + ") 	and " +&
+// 						 "(orden.enca_ann = " + string(ii_ann) + ") 	and " +&
+//						"(orden.enca_proveedor = dgmterce.terc_tercero)"
+	str_dg_dynamic_find	lstr_df
+
+// Parámetros para la Búsqueda
+lstr_df.texto_campo [1,1] = "crtconfi.tcof_num_conf_oc"
+lstr_df.texto_campo [1,2] = "No. Confirmación "
+lstr_df.texto_campo [1,3] = "ttcof_num_conf_oc"
+lstr_df.texto_campo [1,4] = "V"
+
+lstr_df.texto_campo [2,1] = "dgmterce.terc_descripcion"
+lstr_df.texto_campo [2,2] = "Proveedor"
+lstr_df.texto_campo [2,3] = ""
+lstr_df.texto_campo [2,4] = "V"
+
+lstr_df.texto_campo [3,1] = "crtconfi.tcof_tipo_conf"
+lstr_df.texto_campo [3,2] = "Tipo"
+lstr_df.texto_campo [3,3] = ""
+lstr_df.texto_campo [3,4] = "V"
+
+lstr_df.texto_campo [4,1] = "crtconfi.tcof_fecha_conf_oc"
+lstr_df.texto_campo [4,2] = "Fecha"
+lstr_df.texto_campo [4,3] = ""
+lstr_df.texto_campo [4,4] = "V"
+
+lstr_df.texto_campo [5,1] = "tcof_anno_oc"
+lstr_df.texto_campo [5,2] = "Año"
+lstr_df.texto_campo [5,3] = "tcof_anno_oc"
+lstr_df.texto_campo [5,4] = "V"
+
+lstr_df.texto_campo [6,1] = "tcof_marca"
+lstr_df.texto_campo [6,2] = "Marca"
+lstr_df.texto_campo [6,3] = ""
+lstr_df.texto_campo [6,4] = "V"
+
+lstr_df.tabla 		  = "crtconfi, dgmterce"
+
+lstr_df.tabla_where = "WHERE ( crtconfi.tcof_g_financiero = "+string(str.g_financiero) +") AND "+& 
+							" ( crtconfi.tcof_empresa = "+ string(str.empresa)+" ) AND "+&
+							" ( crtconfi.tcof_num_prove = dgmterce.terc_tercero )"
+
+// Para la búsqueda del año que seleccioné							
+//if integer(em_1.text) > 0 then 
+//  lstr_df.tabla_where = 	lstr_df.tabla_where + &
+//  " AND   ( crtconfi.tcof_anno_oc = "+string( integer(em_1.text))+" ) " 		  
+//end if					
 	OpenWithParm(w_dg_a_custom_find, lstr_df)
 	ls_find = Message.StringParm
 
@@ -629,47 +761,136 @@ str_dg_dynamic_find	lstr_df
 
 If len (ls_find) = 0 Then Return
 	
-ls_codigo =  String(Right ( ls_find, Len (ls_find) - Pos (ls_find, "=") ))
-gf_replace_cadena(ls_codigo,"'"," ")
-ls_codigo = Trim(ls_codigo)
-is_secuencia = ls_codigo
+//ls_codigo =  String(Right ( ls_find, Len (ls_find) - Pos (ls_find, "=") ))
+//gf_replace_cadena(ls_codigo,"'"," ")
+//ls_codigo = Trim(ls_codigo)
+//is_secuencia = ls_codigo
+
+ls_syntres = Right(ls_find, Len (ls_find) - Pos(ls_find, "= '") - 2)
+ls_codigo = Left(ls_syntres, Pos(ls_syntres,"'") - 1)
+
+ii_ann = Integer( Right(Trim(ls_syntres), 4))
+
+
+
 dw_1.retrieve(str.g_financiero, str.empresa, ls_codigo, ii_ann )
 dw_2.reset()
 dw_2.retrieve(str.g_financiero, str.empresa, ls_codigo, ii_ann )
 dw_2.scrolltorow(dw_2.rowcount())
 dw_2.setfocus()
-if dw_1.rowcount() > 0 then
-	ll_lter = dw_1.getitemnumber(1,'enca_proveedor')
-	ls_documento = dw_1.getitemstring(1,'enca_documento')
-	dw_5.retrieve(str.g_financiero, str.empresa, ll_lter, ls_codigo, ii_ann )
-else
-	dw_5.reset()
-	dw_5.insertrow(1)
-end if
+//if dw_1.rowcount() > 0 then
+//	ll_lter = dw_1.getitemnumber(1,'tcof_num_prove')
+//	ls_documento = dw_1.getitemstring(1,'tcof_num_conf_oc')
+//	dw_5.retrieve(str.g_financiero, str.empresa, ll_lter, ls_codigo, ii_ann )
+//else
+//	dw_5.reset()
+//	dw_5.insertrow(1)
+//end if
 end event
 
-event ue_eliminar;//override
-Long resp
-If dw.RowCount() > 0 Then
+event ue_eliminar;////override
+//Long resp
+//If dw.RowCount() > 0 Then
 	
-	If datawindow = 1 Then
-		Resp = MessageBox("Aviso (Confirme el Siguiente Paso)",&
-	 "¿ Esta Seguro que quiere borrar toda la Orden y su detalle  ?",Question!,YesNo!)
-		If resp = 1 then
-			wf_eliminar_todo()
-		end IF
-	ElseIf datawindow = 2 Then
-		Resp = 1 //MessageBox("Aviso (Confirme el Siguiente Paso)",&
-					// "El Registro en "+This.Title+" va a ser eliminado!...~r~n~t&
-					//Está Seguro de Hacerlo Ahora?",Question!,YesNo!)
-		If resp = 1 then
-			wf_eliminar_detalle()
-		end If
-	End If
-	Return
-End If
+//	If datawindow = 1 Then
+//		Resp = MessageBox("Aviso (Confirme el Siguiente Paso)",&
+//	 "¿ Esta Seguro que quiere borrar toda la Orden y su detalle  ?",Question!,YesNo!)
+//		If resp = 1 then
+//			wf_eliminar_todo()
+//		end IF
+//	ElseIf datawindow = 2 Then
+//		Resp = 1 //MessageBox("Aviso (Confirme el Siguiente Paso)",&
+//					// "El Registro en "+This.Title+" va a ser eliminado!...~r~n~t&
+//					//Está Seguro de Hacerlo Ahora?",Question!,YesNo!)
+//		If resp = 1 then
+//			wf_eliminar_detalle()
+//		end If
+//	End If
+//	Return
+//End If
 	
+// OverRide
+// Eliminar el registro del desglose cuando se elimina el detalle de la Orden de Compra
+/*EVENTO MOFIFICADO POR HGN/28/01/03 PORQUE ENVIABA ERROR AL INTENTAR BORRAR EL ENCABEZADO
+ADEMAS PERMITIA BORRAR DETALLE DE UNA ORDEN DE COMPRA PASADA A TRANSITO*/
+Datawindow	ldw_2
+string ls_producto
 
+ldw_2 = dw_1
+
+if ldw_2.rowcount() <1 then return
+
+if ldw_2.getitemstring(1,'crtconfi_tcof_estado') ='S' then
+	messagebox('Atención ','Este documento ya fue pasado a Tránsito, no puede borrarlo, debe eliminar el Tránsito, para habilitarlo...!!')
+	return
+end if
+
+Integer li_respuesta
+ldw_2 = dw_2
+
+int	li_renglon, li_fila
+If dw = ldw_2 then
+	if dw.rowcount() > 0 then
+//		li_renglon = dw.object.dcof_num_ren_confi[dw.getrow()]
+		ls_producto = dw.getitemstring(dw.getrow(),'dcof_producto')
+		  UPDATE repeat  
+			  SET status = 'Clx', llego_a_bodega = 1, fecha_cancelado = getdate()
+			WHERE ( repeat.producto = :ls_producto  or repeat.producto_new = :ls_producto ) ;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al actualizar repeat '+sqlca.sqlerrtext,1,1,'E')
+			end if
+		dw.deleterow(dw.getrow())
+		
+//		for li_fila = 1 to dw_2.rowcount()
+//			if dw_2.object.dcoc_renglon[li_fila] = li_renglon then
+//				dw_2.deleterow(li_fila)
+//				li_fila --
+//			end if
+//		next
+		
+	else
+		messagebox("Atención","No hay registros para borrar!",Information!)
+	end if
+else
+	if ldw_2.rowcount() >0 then
+		messagebox('Atención ','Existen registros de detalle, debe eliminarlos todos para poder borrar el encabezado...!!!1')
+		return
+	else
+		If dw_1.rowcount() >0 then
+			
+			li_respuesta = MessageBox("Atención ","Está seguro de querer borrar el encabezado de este documento ?", Question!, YesNoCancel!) 
+			Choose Case li_respuesta 
+				Case 1 
+					dw_1.deleterow(1)
+					If dw_1.update() =1 then
+						commit;
+						dw_1.reset()
+						If dw_1.rowcount()=0 then
+							this.triggerevent("ue_adicionar")  
+						end if
+						messagebox("Atención ","Actualización Exitosa",Exclamation!)
+					else
+						rollback;
+						messagebox("Atención","¡Error al salvar el registros eliminado",Exclamation!)
+						
+					end if
+					ib_modify = false
+					return
+				Case 3
+					return 
+			End choose
+			
+		end if
+	end if	
+end if
+ib_modify = True
+
+end event
+
+event closequery;call super::closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_orden_compra
@@ -980,14 +1201,14 @@ event ue_enter;if this.getcolumnname() = 'deta_contrato' then
 		this.scrolltorow(this.getrow() + 1)
 		this.setcolumn('deta_referencia')
 	end if
-elseif this.getcolumnname() = 'deta_bultos' then	
+elseif this.getcolumnname() = 'dcof_bultos' then	
 	this.setcolumn('deta_contrato')	
-elseif this.getcolumnname() = 'deta_referencia' then	
-	this.setcolumn('deta_costo')
-elseif this.getcolumnname() = 'deta_costo' then	
-	this.setcolumn('deta_cantidad')	
-elseif this.getcolumnname() = 'deta_cantidad' then	
-	this.setcolumn('deta_bultos')	
+elseif this.getcolumnname() = 'dcof_producto' then	
+	this.setcolumn('dcof_precio_u')
+elseif this.getcolumnname() = 'dcof_precio_u' then	
+	this.setcolumn('dcof_cantidad')	
+elseif this.getcolumnname() = 'dcof_cantidad' then	
+	this.setcolumn('dcof_precio1')	
 elseif this.getcolumnname() = 'deta_precio_venta' then	
 	if this.getrow() + 1 <= this.rowcount() then  this.scrolltorow(this.getrow() + 1)
 	this.setcolumn('deta_referencia')		
@@ -1023,7 +1244,7 @@ Datawindow        dww
 str_dg_dynamic_find	lstr_df
 
 choose case this.getcolumnname()
-	case 'deta_referencia'
+	case 'dcof_producto'
 		
 	lstr_df.texto_campo [1,1] = "inmprodu.prod_producto"
 	lstr_df.texto_campo [1,2] = "Referencia"
@@ -1104,7 +1325,7 @@ choose case this.getcolumnname()
 	ls_codigo =  String(Right ( ls_find, Len (ls_find) - Pos (ls_find, "=") ))
 	gf_replace_cadena(ls_codigo,"'"," ")
 	ls_codigo = Trim(ls_codigo)
-	this.setitem(this.getrow(),'deta_referencia',ls_codigo)
+	this.setitem(this.getrow(),'dcof_producto',ls_codigo)
 	this.accepttext()
 	this.trigger event itemchanged(this.getrow(), object, ls_codigo)
 	
@@ -1146,7 +1367,7 @@ if dwo.name = 'b_producto' then
 		string ls_producto
 		str_kardex  str_opcion2
 		if dw_2.rowcount() > 0 then
-			ls_producto = dw_2.getitemstring(dw_2.getrow(),'deta_referencia')				
+			ls_producto = dw_2.getitemstring(dw_2.getrow(),'dcof_producto')				
 		end if			
 		str_opcion2.kproducto=ls_producto
 		OpenSheetWithParm(w_productos,str_opcion2,str.frame,2,Original!)		
@@ -1158,7 +1379,7 @@ elseif dwo.name = 'b_unidades' then
 	if dw_3.retrieve() = 0 then
 		dw_3.insertrow(1)
 	else
-		ls_codigo	= dw_2.getitemstring(dw_2.getrow(),'deta_unidad')
+		ls_codigo	= dw_2.getitemstring(dw_2.getrow(),'dcof_unidad')
 		li_encontro = dw_3.find('medi_unidad = "'+string(ls_codigo)+'"',1,dw_3.rowcount())
 		if li_encontro > 0 then
 			dw_3.scrolltorow(li_encontro)
@@ -1175,8 +1396,9 @@ event itemchanged;string ls_codigo, ls_descripcion, ls_uni_empaque, ls_uni
 long   ll_bultos, ll_cantidad
 
 
-if this.getcolumnname() = 'deta_referencia' then
-	  ls_codigo = data
+Choose Case dwo.name
+	Case 'dcof_producto' 
+		  ls_codigo = data
 	  SELECT inmprodu.prod_descripcion,   
          inmprodu.prod_empaque,   
          inmprodu.prod_medida,   
@@ -1207,35 +1429,41 @@ if this.getcolumnname() = 'deta_referencia' then
 		end if
 		if ls_descripcion = '' or isnull(ls_descripcion) then
 			gf_mensaje('','Referencia no Existe, Verifique !!!',1,1,'E')
-			this.setitem(row,'deta_referencia','')
-			this.setcolumn('deta_referencia')
+			this.setitem(row,'dcof_producto','')
+			this.setcolumn('dcof_producto')
 			return 2
 		else
 			this.setitem(row, 'prod_descripcion', ls_descripcion)
-			this.setitem(row, 'deta_unidad', ls_uni)
-			this.setitem(row, 'deta_costo', id_costo)
-			this.setcolumn('deta_costo')
+			this.setitem(row, 'dcof_unidad', ls_uni)
+			this.setitem(row, 'dcof_precio_u', id_costo)
+			this.setcolumn('dcof_precio_u')
 		end if
-elseif this.getcolumnname() = 'deta_cantidad' then
-	ll_cantidad = long(data)	
+	Case 'dcof_unidad'
+		ll_cantidad = long(data)	
 	if il_empaque = 0 or isnull(il_empaque) then il_empaque = 1
 	if ii_cantidad_empaque = 0 or isnull(ii_cantidad_empaque) then ii_cantidad_empaque = 1
 	ll_bultos = (ll_cantidad * ii_cantidad_unidad ) / (il_empaque * ii_cantidad_empaque)
 	if ll_bultos = 0 then ll_bultos = 1
-	this.setitem(row,'deta_bultos',ll_bultos)
-	this.setitem(row,'deta_peso',ll_bultos * id_peso)
-	this.setitem(row,'deta_cubicaje',round(ll_bultos * id_cubicaje,4))		
-	this.setcolumn('deta_bultos')
-elseif this.getcolumnname() = 'deta_costo' then	
-	this.setcolumn('deta_cantidad')
-elseif this.getcolumnname() = 'deta_bultos' then	
+	this.setitem(row,'dcof_bultos',ll_bultos)
+	this.setitem(row,'dcof_peso_neto',ll_bultos * id_peso)
+	this.setitem(row,'dcof_cubicaje',round(ll_bultos * id_cubicaje,4))		
+	//this.setcolumn('dcof_bultos')
+Case 'dcof_bultos' 
 	if this.getrow() = this.rowcount() then
 		parent.triggerevent('ue_adicionar')
 	else
 		this.scrolltorow(this.getrow() + 1)
 		this.setcolumn('deta_referencia')
 	end if
-end if
+	Case 'dcof_cantidad_total'
+		 // 1. Asignar el valor que viene en el argumento 'data' directamente a la columna
+        this.SetItem(row, "dcof_cantidad_total", Dec(data))
+        
+        // 2. Notificar al DataWindow que rechace la re-asignación tardía (ya la hicimos)
+        //    y fuerce el recálculo inmediato de los computes de la fila
+        Return 2
+End Choose
+
 end event
 
 event getfocus;datawindow = 2
@@ -1244,7 +1472,7 @@ end event
 event rowfocuschanged;
 string ls_codigo
 
-ls_codigo = this.getitemstring(currentrow,'deta_referencia')
+ls_codigo = this.getitemstring(currentrow,'dcof_producto')
 	  SELECT  inmprodu.prod_empaque,   
          inamedid_a.medi_cantidad,   
          inamedid_b.medi_cantidad,
@@ -1270,6 +1498,23 @@ ls_codigo = this.getitemstring(currentrow,'deta_referencia')
 			return 2
 		end if
 
+end event
+
+event editchanged;//Choose Case dwo.Name
+//    Case "dcof_cantidad_total"
+//        If IsNumber(data) Then
+//            this.SetItem(row, "dcof_cantidad_total", Dec(data))
+//        ElseIf Trim(data) = "" Then
+//            this.SetItem(row, "dcof_cantidad_total", 0)
+//        End If
+
+//    Case "dcof_precio_u"
+//        If IsNumber(data) Then
+//            this.SetItem(row, "dcof_precio_u", Dec(data))
+//        ElseIf Trim(data) = "" Then
+//            this.SetItem(row, "dcof_precio_u", 0)
+//        End If
+//End Choose
 end event
 
 type dw_3 from datawindow within w_orden_compra

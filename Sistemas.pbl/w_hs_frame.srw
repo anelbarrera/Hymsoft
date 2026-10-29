@@ -272,10 +272,10 @@ this.wf_set_category_visible("CAT_ACCIONES", False)
 				gf_mensaje('','Error al seleccionar el nombre de la empresa '+sqlca.sqlerrtext,1,1,'E')
 			end if
 //sle_1.text = str.nombre_empresa + ' - HYMSOFT V 2.0'
-str.frame.title = str.nombre_empresa	+ ' SISTEMA INTEGRADO HymSoft V 2.0'	
+This.title = str.nombre_empresa	+ ' SISTEMA INTEGRADO HymSoft V 2.0'	
  
 wf_set_panel(false)
-
+this.Post Event ue_post_open()
 this.Post Event ue_quitar_menu()
 end event
 
@@ -307,6 +307,16 @@ If li_resp = 2 Then
     Return 1
 Else
     Return 0
+End If
+end event
+
+event ue_post_open; 
+this.WindowState = Maximized!
+
+ 
+If IsValid(mdi_1) Then
+    mdi_1.SetRedraw(False)
+    mdi_1.SetRedraw(True)
 End If
 end event
 
@@ -600,8 +610,10 @@ Choose Case ls_tag
         If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_vista")
 
     Case "BTN_ACCION_CERRAR"
-        lw_activa = parent.GetActiveSheet()
-        If IsValid(lw_activa) Then Close(lw_activa)
+       lw_activa = parent.GetActiveSheet()
+        If IsValid(lw_activa) Then
+            Close(lw_activa) // Disparará el Close de la ventana y su Post Event
+        End If
 End Choose
 
 //Acciones

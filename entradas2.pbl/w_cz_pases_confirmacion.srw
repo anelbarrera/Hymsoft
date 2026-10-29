@@ -43,6 +43,7 @@ end type
 end forward
 
 global type w_cz_pases_confirmacion from w_fa_padre
+boolean visible = true
 integer x = 503
 integer y = 400
 integer width = 3643
@@ -146,7 +147,7 @@ END CHOOSE
 
 end event
 
-event ue_facturar;wf_efectuar_factura()
+event ue_facturar();wf_efectuar_factura()
 
 end event
 
@@ -176,7 +177,7 @@ If dw_3.Rowcount() < 1  then
 	return
 End If
 
-//Openwithparm(w_cz_selec_confirmacion,'')
+Openwithparm(w_cz_selec_confirmacion,'')
 
 If Message.StringParm <> 'Cancelar' then
 	SELECT isnull(mpar_largo_codigo_oc,0),
@@ -206,7 +207,7 @@ If Message.StringParm <> 'Cancelar' then
 	
 	ls_secuencia = string(ll_secuencia_tran)
 
-	//OpenWithParm(w_cz_sec_confirmacion,lstr_pase)
+	OpenWithParm(w_cz_sec_confirmacion,lstr_pase)
 	
 	lstr_pase = message.PowerObjectParm
 	if lstr_pase.orden = 'Cancelar' then
@@ -826,6 +827,9 @@ event close;call super::close;if trim(lstr_pase.orden) = '' or isnull(lstr_pase.
 end if
 end event
 
+event resize;//Override
+end event
+
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_cz_pases_confirmacion
 integer y = 1560
 string text = "w_cr_pases_confirmación"
@@ -837,9 +841,9 @@ integer y = 120
 integer width = 2743
 integer height = 316
 string dataobject = "dw_co_cz_confi_pasar1"
-boolean hscrollbar = false
-boolean border = false
-borderstyle borderstyle = stylebox!
+boolean vscrollbar = true
+boolean border = true
+boolean livescroll = true
 end type
 
 event dw_1::clicked;String	ls_orden , ls_producto
@@ -887,14 +891,6 @@ If currentrow = this.GetRow() Then
 End IF
 
 end event
-
-//type gb_ventana from w_fa_padre`gb_ventana within w_cz_pases_confirmacion
-//integer y = 1520
-//integer taborder = 110
-//end type
-
-//type st_micro from w_fa_padre`st_micro within w_cz_pases_confirmacion
-//end type
 
 type gb_4 from groupbox within w_cz_pases_confirmacion
 integer x = 3058
@@ -1565,4 +1561,7 @@ else
 	dw_1.Filter()
 end if
 end event
+
+type st_ayuda from w_fa_padre`st_ayuda within w_cz_pases_confirmacion
+end type
 

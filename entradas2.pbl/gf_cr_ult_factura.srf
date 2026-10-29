@@ -1,0 +1,50 @@
+﻿//objectcomments  
+global type gf_cr_ult_factura from function_object
+end type
+
+forward prototypes
+global subroutine gf_cr_ult_factura (ref string as_next_sec)
+end prototypes
+
+global subroutine gf_cr_ult_factura (ref string as_next_sec);string ls_pedido, ls_max, ls_tipo
+integer li_existe, li_contemp, li_existe2,li_anio
+long ll_pedexit
+
+
+ll_pedexit = long(as_next_sec)
+
+DO
+  SELECT count(*)
+    INTO :li_existe2  
+    FROM crtfactp
+   WHERE ( crtfactp.tfac_g_financiero = :str.g_financiero ) AND  
+         ( crtfactp.tfac_empresa = :str.empresa ) AND  
+         ( crtfactp.tfac_num_fact_prove = convert(varchar(14),:ll_pedexit))  AND  
+         ( crtfactp.tfac_ann_oc = :li_anio);
+
+		if sqlca.sqlcode = -1 then
+			mensaje("Aviso","Error al Validar Existencia",sqlca.sqlerrtext)
+		end if
+
+	If li_existe2 = 1 Then 
+		ll_pedexit++
+	Else
+		Update crmparam
+      Set    mpar_secuencia_fact  = :ll_pedexit
+      WHERE ( mpar_g_financiero = :str.g_financiero ) AND
+            ( mpar_empresa = :str.empresa ) AND
+			   ( mpar_secuencia_fact  < :ll_pedexit);
+				
+		If sqlca.Sqlcode <> 0 Then
+			mensaje("AVISO",sqlca.sqlerrtext,"")
+			Rollback;
+			return
+		End If
+	
+//		as_next_sec = string(ll_pedexit)
+	End If
+
+LOOP UNTIL li_existe2 = 0
+
+end subroutine
+
