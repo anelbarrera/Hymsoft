@@ -35,6 +35,8 @@ integer y = 60
 integer width = 5778
 integer height = 2532
 string title = "Consulta de Productos"
+string menuname = "m_hs"
+boolean controlmenu = false
 event ue_busqueda ( )
 sle_producto sle_producto
 cb_1 cb_1
@@ -165,6 +167,8 @@ end subroutine
 on w_fa_co_consulta_existencia.create
 int iCurrent
 call super::create
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.sle_producto=create sle_producto
 this.cb_1=create cb_1
 this.dw_3=create dw_3
@@ -529,9 +533,9 @@ string ls_codigo, ls_sort, ls_costos
 
 end event
 
-event activate;call super::activate;if not isvalid(m_fa_rep) then
-	this.changemenu(m_fa_rep)
-end if
+event activate;call super::activate;//if not isvalid(m_fa_rep) then
+//	this.changemenu(m_fa_rep)
+//end if
 end event
 
 event timer;call super::timer;ii_tiempo ++

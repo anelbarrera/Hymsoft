@@ -48,6 +48,8 @@ integer y = 20
 integer width = 5787
 integer height = 2828
 string title = "Consulta de Facturas Actualizadas"
+string menuname = "m_hs"
+boolean controlmenu = false
 long backcolor = 12639424
 event ue_buscar ( )
 dw_2 dw_2
@@ -703,6 +705,8 @@ end function
 on w_facturas_actualizadas.create
 int iCurrent
 call super::create
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.dw_2=create dw_2
 this.dw_3=create dw_3
 this.dw_4=create dw_4

@@ -73,5 +73,6 @@ global type str_fa_param from structure
 	integer		fara_formula_utilidad
 	integer		mostrar_producto_dos
 	string		costo_de_prod_bodega
+	integer		formato_decimal_costo
 end type
 

@@ -1,0 +1,9 @@
+﻿//objectcomments Estructura para las Devoluciones en Ventas
+global type str_fa_devolucion from structure
+	string		pedido
+	string		pedido2
+	string		tipo
+	integer		an
+	string		cadena_filtro
+end type
+

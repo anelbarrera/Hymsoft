@@ -54,6 +54,7 @@ public function boolean wf_orden_nueva ()
 public subroutine wf_eliminar_detalle ()
 public subroutine wf_eliminar_todo ()
 public function boolean wf_secuencia_oc ()
+public function integer wf_ajustar_a_una_pagina (datawindow adw)
 end prototypes
 
 event ue_syscommand;call super::ue_syscommand;if commandtype = 61536 then
@@ -245,6 +246,54 @@ DO
 			Return true
 end function
 
+public function integer wf_ajustar_a_una_pagina (datawindow adw);// Función: wf_ajustar_a_una_pagina(datawindow adw)
+// Ajusta dinámicamente el DataWindow para que quepa en exactamente 1 página (8 1/2 x 11)
+Long ll_paginas, ll_escala
+String ls_ret
+
+If Not IsValid(adw) Then Return -1
+If adw.RowCount() = 0 Then Return 1
+
+adw.SetRedraw(False)
+
+// 1. Forzar tamaño Carta (Letter 8 1/2 x 11 in) y márgenes estándar
+adw.Modify("DataWindow.Print.Paper.Size = 1")
+adw.Modify("DataWindow.Print.Margin.Left = 80")
+adw.Modify("DataWindow.Print.Margin.Right = 80")
+adw.Modify("DataWindow.Print.Margin.Top = 80")
+adw.Modify("DataWindow.Print.Margin.Bottom = 80")
+
+// 2. Activar vista preliminar para calcular páginas reales
+adw.Modify("DataWindow.Print.Preview = Yes")
+
+// 3. Comenzar al 100% de escala
+ll_escala = 90
+adw.Modify("DataWindow.Print.Scale = 100")
+
+// 4. Leer cantidad de páginas formateadas
+ls_ret = adw.Describe("Evaluate('pagecount()', 1)")
+ll_paginas = Long(ls_ret)
+
+// 5. Reducir escala gradualmente hasta que quepa en 1 sola página
+// Límite mínimo de seguridad: 35% (por debajo de eso la letra no es legible)
+Do While ll_paginas > 1 And ll_escala >= 35
+    ll_escala -= 5
+    adw.Modify("DataWindow.Print.Scale = " + String(ll_escala))
+    
+    ls_ret = adw.Describe("Evaluate('pagecount()', 1)")
+    ll_paginas = Long(ls_ret)
+Loop
+
+adw.SetRedraw(True)
+
+// Si aun al 35% sigue ocupando más de una página:
+If ll_paginas > 1 Then
+    Return -1 // Requiere cambiar a horizontal o paginar
+End If
+
+Return 1
+end function
+
 on w_orden_compra.create
 int iCurrent
 call super::create
@@ -413,13 +462,21 @@ dw_4.retrieve(str.g_financiero, str.empresa, is_secuencia , ii_ann)
 //
 if dw_4.rowcount() = 0 then return
 //
-ls_empresa = gf_dg_nombre_empresa()
-dw_4.object.nom_empresa.expression = "'"+ls_empresa+"'"
-
+//ls_empresa = gf_dg_nombre_empresa()
+//dw_4.object.nom_empresa.expression = "'"+ls_empresa+"'"
+dw_4.Modify("DataWindow.Print.Scale = 85")
 dw_4.object.datawindow.print.preview = 'yes'
 dw_4.object.datawindow.print.preview.zoom = 100
 dw_4.visible = true
 //
+ 
+If wf_ajustar_a_una_pagina(dw_4) = -1 Then
+    If MessageBox("Aviso", "El reporte contiene demasiados registros para comprimirlo en una sola página legible. ¿Desea cambiar la orientación a Horizontal?", Question!, YesNo!) = 1 Then
+        // Cambiar orientación a Landscape (1) y reintentar ajuste
+        dw_1.Modify("DataWindow.Print.Orientation = 1")
+        wf_ajustar_a_una_pagina(dw_4)
+    End If
+End If
 OpenWithParm(w_dw_print_options, dw_4)
 //
 If Message.DoubleParm = -1 Then Return
@@ -768,6 +825,8 @@ If len (ls_find) = 0 Then Return
 
 ls_syntres = Right(ls_find, Len (ls_find) - Pos(ls_find, "= '") - 2)
 ls_codigo = Left(ls_syntres, Pos(ls_syntres,"'") - 1)
+ls_codigo = Trim(ls_codigo)
+is_secuencia = ls_codigo
 
 ii_ann = Integer( Right(Trim(ls_syntres), 4))
 
@@ -891,6 +950,9 @@ event closequery;call super::closequery;constant int SW_HIDE = 0
 ShowWindow(Handle(this), SW_HIDE)
 
 This.SetRedraw(false)
+end event
+
+event ue_imprimir;This.triggerevent('ue_print')
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_orden_compra
@@ -1246,76 +1308,79 @@ str_dg_dynamic_find	lstr_df
 choose case this.getcolumnname()
 	case 'dcof_producto'
 		
-	lstr_df.texto_campo [1,1] = "inmprodu.prod_producto"
+	lstr_df.texto_campo [1,1] = "p.prod_producto"
 	lstr_df.texto_campo [1,2] = "Referencia"
 	lstr_df.texto_campo [1,3] = "prod_producto"
 	lstr_df.texto_campo [1,4] = 'V'
 //	lstr_df.texto_campo [1,5] = '280'	
-	lstr_df.texto_campo [2,1] = "inmprodu.prod_producto_dos"
+	lstr_df.texto_campo [2,1] = "p.prod_producto_dos"
 	lstr_df.texto_campo [2,2] = "Modelo"
 	lstr_df.texto_campo [2,3] = ""
 	lstr_df.texto_campo [2,4] = 'V'
 //	lstr_df.texto_campo [2,5] = '770'
-	lstr_df.texto_campo [3,1] = "inmprodu.prod_descripcion"
+	lstr_df.texto_campo [3,1] = "p.prod_descripcion"
 	lstr_df.texto_campo [3,2] = "Descripcion"
 	lstr_df.texto_campo [3,3] = ""
 	lstr_df.texto_campo [3,4] = 'V'
 	lstr_df.texto_campo [3,5] = '1070'
 	
-	lstr_df.texto_campo [4,1] = "convert(numeric(8,2),inmprodu.prod_existencia_total / medi_cantidad) prod_existencia_total"
+	lstr_df.texto_campo [4,1] = "convert(numeric(8,2),p.prod_existencia_total / m.medi_cantidad) prod_existencia_total"
 	lstr_df.texto_campo [4,2] = "Exist."
 	lstr_df.texto_campo [4,3] = ""
 	lstr_df.texto_campo [4,4] = 'V'
 	lstr_df.texto_campo [4,5] = '270'
 
-	lstr_df.texto_campo [5,1] = "convert(numeric(8,2),inmprodu.prod_reserva_total / medi_cantidad) prod_reserva_total"
+	lstr_df.texto_campo [5,1] = "convert(numeric(8,2),p.prod_reserva_total / m.medi_cantidad) prod_reserva_total"
 	lstr_df.texto_campo [5,2] = "Reserva"
 	lstr_df.texto_campo [5,3] = ""
 	lstr_df.texto_campo [5,4] = 'V'
 	lstr_df.texto_campo [5,5] = '270'
 
-	lstr_df.texto_campo [6,1] = "convert(numeric(8,2),(inmprodu.prod_existencia_total  - inmprodu.prod_reserva_total) / medi_cantidad) disponible"
+	lstr_df.texto_campo [6,1] = "convert(numeric(8,2),(p.prod_existencia_total  - p.prod_reserva_total) / m.medi_cantidad) disponible"
 	lstr_df.texto_campo [6,2] = "Dispo."
 	lstr_df.texto_campo [6,3] = ""
 	lstr_df.texto_campo [6,4] = 'V'
 	lstr_df.texto_campo [6,5] = '270'
 
-	lstr_df.texto_campo [7,1] = "convert(numeric(12), inmprodu.prod_empaque) prod_empaque"
+	lstr_df.texto_campo [7,1] = "convert(numeric(12), p.prod_empaque) prod_empaque"
 	lstr_df.texto_campo [7,2] = "Empaque"
 	lstr_df.texto_campo [7,3] = ""
 	lstr_df.texto_campo [7,4] = 'V'
 	lstr_df.texto_campo [7,5] = '270'
 	
-	lstr_df.texto_campo [8,1] = "inmprodu.prod_medida"
+	lstr_df.texto_campo [8,1] = "p.prod_medida"
 	lstr_df.texto_campo [8,2] = "Uni."
 	lstr_df.texto_campo [8,3] = ""
 	lstr_df.texto_campo [8,4] = 'V'
 	lstr_df.texto_campo [8,5] = '120'
-	lstr_df.texto_campo [9,1] = "cradivis.adiv_nombre_div"
+	lstr_df.texto_campo [9,1] = "d.adiv_nombre_div"
 	lstr_df.texto_campo [9,2] = "Division"
 	lstr_df.texto_campo [9,3] = ""
 	lstr_df.texto_campo [9,4] = 'V'
 	lstr_df.texto_campo [9,5] = '870'
-	lstr_df.texto_campo [10,1] = "cragrupo.agru_descripcion_grupo"
+	lstr_df.texto_campo [10,1] = "g.agru_descripcion_grupo"
 	lstr_df.texto_campo [10,2] = "Grupo"
 	lstr_df.texto_campo [10,3] = ""
 	lstr_df.texto_campo [10,4] = 'V'
 	lstr_df.texto_campo [10,5] = '870'
 
-	lstr_df.tabla = " inmprodu, cradivis, cragrupo, inamedid "
+	//lstr_df.tabla = " inmprodu, cradivis, cragrupo, inamedid "
+	lstr_df.tabla = " inmprodu p INNER JOIN cragrupo g " +&
+						 " ON g.agru_g_financiero = p.prod_g_financiero " +&
+						 "AND g.agru_empresa = p.prod_empresa "+&
+						 " AND g.agru_codigo_div = p.prod_division "+&
+						 "AND g.agru_codigo_grupo = p.prod_grupo "+&
+						 "INNER JOIN cradivis d "+&
+						 " ON p.prod_g_financiero = d.adiv_g_financiero "+&
+						 "AND p.prod_empresa = d.adiv_empresa "+&
+						 " AND p.prod_division = d.adiv_codigo_div "+&
+						 "INNER JOIN inamedid m "+&
+						 "ON p.prod_medida = m.medi_medida "
 		
 	lstr_df.tabla_where = &
-		"WHERE ( cragrupo.agru_g_financiero = inmprodu.prod_g_financiero ) and  " +&
-         "( cragrupo.agru_empresa = inmprodu.prod_empresa ) and  " +&
-         "( cragrupo.agru_codigo_div = inmprodu.prod_division ) and " +&  
-         "( cragrupo.agru_codigo_grupo = inmprodu.prod_grupo ) and " +&  			
-         "( inmprodu.prod_g_financiero = cradivis.adiv_g_financiero ) and " +& 
-         "( inmprodu.prod_empresa = cradivis.adiv_empresa ) and  " +&
-         "( inmprodu.prod_division = cradivis.adiv_codigo_div ) and " +&  
-         "( inmprodu.prod_medida = inamedid.medi_medida ) and " +&  			
-		"( inmprodu.prod_status = 1 ) and " + &	
-		"(inmprodu.prod_g_financiero = " + string(str.g_financiero) + ") and " +&
-		"(inmprodu.prod_empresa = " + string(str.empresa) + ") "	
+		"WHERE p.prod_status = 1  and " + &	
+		"p.prod_g_financiero = " + string(str.g_financiero) + " and " +&
+		"p.prod_empresa = " + string(str.empresa) + " "	
 						 
 	OpenWithParm(w_buscar_producto, lstr_df)
 	ls_find = Message.StringParm	
@@ -1648,7 +1713,7 @@ integer taborder = 20
 boolean bringtotop = true
 boolean titlebar = true
 string title = "Impresión de la Orden de Compra"
-string dataobject = "dw_impresion_orden"
+string dataobject = "dw_re_cz_conf_sin_detalle"
 boolean controlmenu = true
 boolean minbox = true
 boolean maxbox = true

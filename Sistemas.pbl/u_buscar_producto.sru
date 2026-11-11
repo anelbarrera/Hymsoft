@@ -206,7 +206,7 @@ Integer  li_campos , li_campo
 dw_1.SetRedraw(False)
 
 dw_1.Reset()
-If IsNull(istr_df.filtro) Then
+If IsNull(istr_df.filtro) or Len(Trim(istr_df.filtro)) = 0 Then
 	ls_sql = istr_df.sql
 Else
 	ls_sql = istr_df.sql + ' and ' +istr_df.filtro
@@ -916,5 +916,8 @@ end event
 event doubleclicked;//Dispara el Evento Aceptar
 Parent.TriggerEvent("ue_aceptar")
 
+end event
+
+event sqlpreview;//override
 end event
 

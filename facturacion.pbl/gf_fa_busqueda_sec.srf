@@ -1,0 +1,80 @@
+﻿//objectcomments  
+global type gf_fa_busqueda_sec from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_busqueda_sec (ref string as_next_sec, string as_proforma)
+end prototypes
+
+global subroutine gf_fa_busqueda_sec (ref string as_next_sec, string as_proforma);string ls_pedido, ls_max, ls_tipo
+integer li_existe, li_contemp, li_existe2,li_annio
+long ll_pedexit
+
+
+li_annio = Int(Year(Date(gf_fecha_serv())))
+//if w_fa_fondo.str_para.pasar_mismo_numero = 1 then
+//	as_next_sec = as_proforma
+//	ll_pedexit  = long(as_proforma)
+//else
+ 
+  SELECT faaparam.fara_ult_pedido  
+    INTO :as_next_sec
+    FROM faaparam  
+   WHERE ( faaparam.fara_g_financiero = :str.g_financiero ) AND  
+         ( faaparam.fara_empresa = :str.empresa )   ;
+			
+		if sqlca.sqlcode = -1 then
+			mensaje("Aviso","Error al Validar el Ultimo Pedido",sqlca.sqlerrtext)
+		end if
+			
+	ll_pedexit = long(as_next_sec) + 1
+	
+//end if	
+
+DO	
+//fatpedid.pedi_tipo	
+ SELECT count(*)
+    INTO :li_existe
+    FROM fatpedid
+   WHERE (fatpedid.pedi_g_financiero = :str.g_financiero ) AND  
+         ( fatpedid.pedi_empresa = :str.empresa ) AND  
+			( fatpedid.pedi_ann = :li_annio ) AND
+         ( fatpedid.pedi_no_pedido = convert(varchar(8),:ll_pedexit) ) ;
+		if sqlca.sqlcode = -1 then
+			mensaje("Aviso","Error al Validar el Ultimo Pedido",sqlca.sqlerrtext)
+		end if		
+			
+	If li_existe = 1 Then 
+		
+		SELECT fatpedid.pedi_tipo
+    INTO :ls_tipo
+    FROM fatpedid
+   WHERE (fatpedid.pedi_g_financiero = :str.g_financiero ) AND  
+         ( fatpedid.pedi_empresa = :str.empresa ) AND  
+			( fatpedid.pedi_ann = :w_fa_fondo.str_para.ano ) AND
+         ( fatpedid.pedi_no_pedido = convert(varchar(8),:ll_pedexit)) ;
+		if sqlca.sqlcode = -1 then
+			mensaje("Aviso","Error al Validar el Ultimo Pedido",sqlca.sqlerrtext)
+		end if
+		ll_pedexit++
+	Else
+		if ll_pedexit > 0 then //Si no tiene letras, viene mayor que 0
+			Update faaparam
+			Set fara_ult_pedido  = convert(varchar(8),:ll_pedexit)
+			WHERE ( fara_g_financiero = :str.g_financiero ) AND  
+				( fara_empresa = :str.empresa )  and
+				(fara_ult_pedido < convert(varchar(8),:ll_pedexit));
+				
+			If sqlca.Sqlcode <> 0 Then
+				mensaje("AVISO",sqlca.sqlerrtext,"")
+				Rollback using sqlca;
+			End If
+				
+			as_next_sec = string(ll_pedexit)
+		end if				
+	End If
+	
+LOOP UNTIL li_existe = 0
+
+end subroutine
+

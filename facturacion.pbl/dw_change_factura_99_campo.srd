@@ -1,0 +1,12 @@
+﻿//objectcomments  
+release 7;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(8) updatewhereclause=yes name=fact_no_pedido_1 dbname="fatdiari.fact_no_pedido" )
+ column=(type=char(91) updatewhereclause=yes name=fact_no_pedido dbname="campo" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"fatdiari~" ) COLUMN(NAME=~"fatdiari.fact_no_pedido~") COMPUTE(NAME=~"fatdiari.fact_no_pedido + '                                                       ' + fatdiari.fact_no_factura + fatdiari.fact_ruc_cliente campo~")) " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="5" color="8388608" x="9" y="4" height="64" width="576" format="[general]"  name=fact_no_pedido dddw.name=dw_dd_consulta_buscar_facturas dddw.displaycolumn=campo dddw.datacolumn=campo dddw.percentwidth=350 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

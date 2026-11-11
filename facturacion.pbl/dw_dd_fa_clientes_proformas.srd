@@ -1,0 +1,10 @@
+﻿//objectcomments Clientes que tienen proformas por pasar a Pedidos
+release 6;
+datawindow(units=3 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 635 print.margin.right = 635 print.margin.top = 635 print.margin.bottom = 635 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=608 color="536870912" )
+table(column=(type=number updatewhereclause=no name=notercero dbname="notercero" )
+ )
+column(band=detail id=1 alignment="1" tabsequence=10 border="5" color="8388608" x="132" y="80" height="449" width="6826" format="[general]"  name=notercero dddw.name=dw_pr_fa_prof_desg_x_pasar_pedi dddw.displaycolumn=descrip dddw.datacolumn=terc_tercero dddw.percentwidth=160 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.autohscroll=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

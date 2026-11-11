@@ -1,0 +1,78 @@
+﻿//objectcomments busca la secuencia de los pedidos en faddiari
+global type gf_fa_busqueda_secfad from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_busqueda_secfad (ref string as_next_sec, string as_tipo)
+end prototypes
+
+global subroutine gf_fa_busqueda_secfad (ref string as_next_sec, string as_tipo);string ls_pedido, ls_max, ls_tipo, ls_sec_fac
+integer li_existe, li_contemp, li_existe2
+long ll_pedexit
+
+ll_pedexit  = long(as_next_sec)
+
+if ll_pedexit <= 0 then //Si tiene letras
+	
+		SELECT count(*)
+		 INTO :li_existe2  
+		 FROM fatdiari
+		WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+				( fatdiari.fact_empresa = :str.empresa ) AND  
+				( fatdiari.fact_no_pedido = :as_next_sec) AND  
+				( fatdiari.fact_ann = :w_fa_fondo.str_para.ano )   ;
+			if sqlca.sqlcode = -1 then
+				mensaje("Aviso","Error al Validar Existencia del No. Pedido ",sqlca.sqlerrtext)
+				rollback using sqlca;
+				return
+			end if
+//				( fatdiari.fact_tipo = :as_tipo) AND  
+		
+		if li_existe2 > 0 then
+			as_next_sec = '0'
+			mensaje("Atención","La secuencia ya existe. Verifique","")
+		end if
+
+else
+	DO
+	  SELECT count(*)
+		 INTO :li_existe2  
+		 FROM fatdiari
+		WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+				( fatdiari.fact_empresa = :str.empresa ) AND  
+				( fatdiari.fact_no_pedido = :as_next_sec) AND  
+				( fatdiari.fact_ann = :w_fa_fondo.str_para.ano )   ;
+//				( fatdiari.fact_tipo = :as_tipo) AND  
+	
+			if sqlca.sqlcode = -1 then
+				mensaje("Aviso","Error al Validar Existencia del No. Pedido ",sqlca.sqlerrtext)
+				rollback using sqlca;
+				return
+			end if
+	
+		If li_existe2 > 0 Then 
+			ll_pedexit++
+			as_next_sec = trim(string(ll_pedexit))
+		Else
+			
+			Update faaparam
+			Set fara_ult_pedido  = :as_next_sec
+			WHERE ( fara_g_financiero = :str.g_financiero ) AND
+				( fara_empresa = :str.empresa )  and
+				(fara_ult_pedido < :as_next_sec);
+				
+			If sqlca.Sqlcode = -1 Then
+				mensaje("AVISO",sqlca.sqlerrtext,"")
+				Rollback using sqlca;
+				return
+			End If
+	
+	//		as_next_sec = string(ll_pedexit)	
+	
+		End If
+	
+	LOOP UNTIL li_existe2 = 0
+
+END IF
+end subroutine
+

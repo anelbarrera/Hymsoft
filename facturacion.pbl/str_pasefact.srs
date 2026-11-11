@@ -1,0 +1,6 @@
+﻿//objectcomments structura utilizada para efectuar el pase del numero de pedido y si esta es por mayor o por menor a la factura
+global type str_pasefact from structure
+	string		numped
+	string		tipo
+end type
+

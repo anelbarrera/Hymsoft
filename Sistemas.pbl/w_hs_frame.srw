@@ -16,6 +16,7 @@ event ue_evaluar_panel_acciones ( )
 event ue_salir ( )
 event ue_appmenu_clicked ( long itemhandle )
 event ue_sheet_closed ( )
+event ue_ribbon_click ( long al_handle )
 rbb_1 rbb_1
 end type
 global w_hs_frame w_hs_frame
@@ -114,6 +115,11 @@ If Not IsValid(lw_active) Then
 	 
 	 This.SetRedraw(True)
 End If
+end event
+
+event ue_ribbon_click(long al_handle);// Evento ue_ribbon_click(long al_handle) en w_hs_frame
+Messagebox('','ventana')
+rbb_1.Event ue_ribbon_click(al_handle)
 end event
 
 public function integer wf_set_panel_visible (string as_tag, boolean ab_visible);// Función de Ventana: wf_set_panel_visible(string as_tag, boolean ab_visible)
@@ -230,8 +236,9 @@ if IsValid(MenuID) then destroy(MenuID)
 destroy(this.rbb_1)
 end on
 
-event open;call super::open;Integer li_rc,li_ann,li_mes
+event open;call super::open;Integer li_rc,li_ann,li_mes,li_rtn
 String ls_retorno, ls_dir
+
 
 ls_dir = Space(512)
 GetCurrentDirectory(512, ls_dir)
@@ -259,6 +266,8 @@ li_rc = rbb_1.ImportFromXMLFile("ribbon_sistema.xml")
 If li_rc <> 1 Then
     MessageBox("Error", "Fallo al inicializar la RibbonBar. Código: " + String(li_rc), StopSign!)
 End If
+ 
+
 // Ocultar la categoría unificada de acciones al iniciar la aplicación
 this.wf_set_category_visible("CAT_ACCIONES", False)
 
@@ -323,6 +332,7 @@ end event
 type rbb_1 from ribbonbar within w_hs_frame
 event ue_ribbon_click ( long al_handle )
 event ue_appmenu_click ( long itemhandle,  long index,  long subindex )
+event ue_menu_click ( long al_handle,  long al_index,  long al_subindex )
 integer width = 1431
 integer height = 476
 long backcolor = 15132390
@@ -335,8 +345,11 @@ string facename = "Arial"
 end type
 
 event ue_ribbon_click(long al_handle);// Evento de usuario en w_frame: ue_ribbon_click(long al_handle)
-RibbonLargeButtonItem lrbb_large
-RibbonSmallButtonItem lrbb_small
+RibbonLargeButtonItem lr_large
+RibbonSmallButtonItem lr_small
+RibbonMenuItem lr_item
+PowerObject lpo_item
+
  
 window lw_activa
 String ls_tag
@@ -347,12 +360,26 @@ lw_activa = Parent.GetActiveSheet()
 SetCurrentDirectory(is_app_path)
 
  
-If rbb_1.GetLargeButton(al_handle, lrbb_large) = 1 Then
-    ls_tag = lrbb_large.Tag
-ElseIf rbb_1.GetSmallButton(al_handle, lrbb_small) = 1 Then
-    ls_tag = lrbb_small.Tag
+//If rbb_1.GetLargeButton(al_handle, lrbb_large) = 1 Then
+//    ls_tag = lrbb_large.Tag
+//ElseIf rbb_1.GetSmallButton(al_handle, lrbb_small) = 1 Then
+//    ls_tag = lrbb_small.Tag
+//End If
+// 1. Identificar si el clic provino de una opción del submenú
+If this.GetItem(al_handle, lr_item) = 1 Then
+    ls_tag = Trim(lr_item.Tag)
+
+ElseIf this.GetSmallButton(al_handle, lr_small) = 1 Then
+    ls_tag = Trim(lr_small.Tag)
+
+ElseIf this.GetLargeButton(al_handle, lr_large) = 1 Then
+    ls_tag = Trim(lr_large.Tag)
 End If
 
+ 
+ 
+
+If IsNull(ls_tag) Or ls_tag = "" Then Return
 // Bloquea el repintado de la ventana principal
 // 1. Bloquear a nivel de sistema operativo todo el frame
 LockWindowUpdate(Handle(Parent)) // o Handle(w_frame)
@@ -483,7 +510,9 @@ Choose Case ls_tag
 		opensheet(lw_3,Parent,0,Original!)	
 	Case 'BTN_CONS_CONCIL_BANCARIA'
 		OpenSheet(w_conciliacion_bancaria,Parent,0, Original!)
-  
+	Case 'BTN_CONS_FACT_DETALLE'
+		w_fa_co_facturas_cab_det_99	lw_fac
+		opensheet(lw_fac,Parent,0,Original!)
     Case "BTN_MANT_CLIENTES"		 
         OpenSheet(w_mant_clientes, Parent, 0, Original!)
     Case "BTN_MANT_PRODUCTOS"        
@@ -572,6 +601,14 @@ Choose Case ls_tag
 	Case 'BTN_CONT_TX_PROV'
 		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_rep_transacciones_cxp,Parent,0, Original!)
+	Case "BTN_DEV_CAPTURA"	   
+    parent.wf_set_panel_visible("PAN_ACCIONES_CAT5", True) 
+    OpenSheet(w_fa_man_devolucion, parent, 0, Original!)    
+    parent.Post Event ue_evaluar_panel_acciones()
+	Case "BTN_DEV_MODIFICA"
+    // Abrir ventana en modo búsqueda/edición de devolución existente
+    OpenSheet(w_fa_man_modi_devolucion, parent, 0, Original!)
+    parent.Post Event ue_evaluar_panel_acciones()
 	Case "BTN_CONS_ARANCELES"
 		 
 		parent.Post Dynamic wf_set_panel_visible("PAN_ACCIONES_CAT3", False)
@@ -614,6 +651,23 @@ Choose Case ls_tag
         If IsValid(lw_activa) Then
             Close(lw_activa) // Disparará el Close de la ventana y su Post Event
         End If
+		  // --- SUB-OPCIONES DE PROCESOS PENDIENTES ---
+    Case "BTN_PEND_REACTIVAR_FACT"
+		 messagebox('','Reactivar Factura')
+//        OpenSheet(w_proc_reactivar_factura, parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PEND_ACT_CLIENTES"
+//        OpenSheet(w_proc_act_clientes, parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PEND_ACT_INVENTARIO"
+//        OpenSheet(w_proc_act_inventario, parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PEND_ACT_FACTURAS"
+//        OpenSheet(w_proc_act_facturas, parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
 End Choose
 
 //Acciones
@@ -670,6 +724,144 @@ Choose Case Lower(Trim(lr_item.Tag))
         //Open(w_acerca_de)
 	Case "close"
 		Parent.postevent('ue_salir')
+End Choose
+end event
+
+event ue_menu_click(long al_handle, long al_index, long al_subindex);// ==============================================================================
+// Evento: ue_menu_click(long al_handle, long al_index, long al_subindex) en rbb_1
+// ==============================================================================
+RibbonSmallButtonItem lr_small
+RibbonLargeButtonItem lr_large
+RibbonMenu lr_menu
+RibbonMenuItem lr_item
+String ls_tag
+Integer li_rc
+
+// 1. Obtener el botón padre (SmallButton o LargeButton) dueño del menú desplegable
+If this.GetSmallButton(al_handle, lr_small) = 1 Then
+    li_rc = lr_small.GetMenu(lr_menu)
+ElseIf this.GetLargeButton(al_handle, lr_large) = 1 Then
+    li_rc = lr_large.GetMenu(lr_menu)
+End If
+
+If li_rc <> 1 Then Return
+
+// 2. Extraer el Item clickeado desde el objeto RibbonMenu usando su índice
+If al_subindex > 0 Then
+    li_rc = lr_menu.GetItem(al_index, al_subindex, lr_item)
+Else
+    li_rc = lr_menu.GetItem(al_index, lr_item)
+End If
+
+If li_rc <> 1 Then Return
+
+// 3. Leer el Tag configurado en el XML
+ls_tag = Trim(lr_item.Tag)
+If IsNull(ls_tag) Or ls_tag = "" Then Return
+
+ 
+// MessageBox("Menú Clickeado", "Tag capturado: " + ls_tag)
+
+ 
+Choose Case ls_tag
+    // --- PROCESOS PENDIENTES ---
+    Case "BTN_PEND_REACTIVAR_FACT"
+        OpenSheet(w_fa_man_reactiva_clien, parent, 0, Layered!)
+        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PEND_ACT_CLIENTES"
+        OpenSheet(w_fa_man_actualiza_clien, parent, 0, Layered!)
+        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PEND_ACT_INVENTARIO"
+        OpenSheet(w_fa_man_actualiza_inventario, parent, 0, Layered!)
+        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PEND_ACT_FACTURAS"
+       OpenSheet(w_fa_man_actualiza_facturas, parent, 0, Layered!)
+       parent.Post Event ue_evaluar_panel_acciones()
+
+    // --- PASES ---
+    Case "BTN_PASE_PROF_A_PED_COMP"
+//        OpenSheetWithParm(w_fa_co_prof_pasa_ped_directo, "PROF_PED_COMPLETO", parent, 0, Layered!)
+			 OpenSheet(w_fa_co_prof_pasa_ped_directo, parent, 0, Layered!)
+       	parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_PROF_A_PED"
+//        OpenSheetWithParm(w_proc_pase_documento, "PROF_PED_PARCIAL", parent, 0, Layered!)
+			 OpenSheet(w_fa_co_prof_pasa_ped, parent, 0, Layered!)
+        	 parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_PED_A_FACT"
+//        OpenSheetWithParm(w_proc_pase_documento, "PED_FACT_PARCIAL", parent, 0, Layered!)
+
+			OpenSheet(w_fa_co_ped_pasa_fact, parent, 0, Layered!)
+	      parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_PED_A_FACT_COMP"
+//        OpenSheetWithParm(w_proc_pase_documento, "PED_FACT_COMPLETO", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_LISTA_A_FACT"
+//        OpenSheet(w_proc_pase_empaque_fact, parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_ADICIONALES"
+//        OpenSheet(w_proc_pase_adicionales, parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_PROF_A_PED_FUT"
+//        OpenSheetWithParm(w_proc_pase_documento, "PROF_PED_FUTURO", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_PED_FUT_A_PROF"
+//        OpenSheetWithParm(w_proc_pase_documento, "PED_FUT_A_PROF", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_PED_ZIZHAKET"
+//        OpenSheetWithParm(w_proc_pase_intercia, "PEDIDO_ZIZHAKET", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_PASE_FACT_ZIZHAKET"
+//        OpenSheetWithParm(w_proc_pase_intercia, "FACTURA_ZIZHAKET", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    // --- ESPECIALES ---
+    Case "BTN_ESP_REST_PASE_PROF"
+//        OpenSheetWithParm(w_proc_especiales_doc, "REST_PASE_PROFORMA", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_ESP_REST_PASE_PED"
+//        OpenSheetWithParm(w_proc_especiales_doc, "REST_PASE_PEDIDO", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_ESP_PED_A_PASADO"
+//        OpenSheetWithParm(w_proc_especiales_doc, "PEDIDO_A_PASADO", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_ESP_ACTIVAR_FACT"
+//        OpenSheetWithParm(w_proc_especiales_doc, "ACTIVAR_FACTURA", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_ESP_CAMBIAR_NUM_FACT"
+//        OpenSheet(w_proc_cambiar_num_factura, parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_ESP_ACT_PESO_CUBIC"
+//        OpenSheetWithParm(w_proc_peso_cubicaje, "GENERAL", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_ESP_ACT_PESO_CUBIC_PED"
+//        OpenSheetWithParm(w_proc_peso_cubicaje, "PEDIDO", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_ESP_REST_LISTA_EMP"
+//        OpenSheetWithParm(w_proc_especiales_doc, "REST_LISTA_EMPAQUE", parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
+
+    Case "BTN_ESP_CAMBIAR_RES_PED_FUT"
+//        OpenSheet(w_proc_reserva_pedido_futuro, parent, 0, Layered!)
+//        parent.Post Event ue_evaluar_panel_acciones()
 End Choose
 end event
 

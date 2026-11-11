@@ -66,7 +66,7 @@ event ue_init;/*****************************************************************
 ********************************************************************************************
 *					DERECHO DE AUTOR (c) 1998	HARR Computer and SoftWare, S.A.									 
 *******************************************************************************************/
-
+istr_df.filtro = '(p.prod_existencia_total > 0)'
 uo_1.uf_carga_str(istr_df)
 
 /*Para que se posicione en la primera linea*/
@@ -82,8 +82,8 @@ end if
 uo_1.dw_1.SelectRow(0, False)
 uo_1.dw_1.SelectRow(1, True)
 
-uo_1.dw_1.setfilter('prod_existencia_total > 0')
-uo_1.dw_1.filter()
+//uo_1.dw_1.setfilter('prod_existencia_total > 0')
+//uo_1.dw_1.filter()
 
 end event
 
