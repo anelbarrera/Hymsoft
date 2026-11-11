@@ -16,31 +16,18 @@ type sle_lineas from singlelineedit within w_fa_man_pasar_facturas_a_empresa
 end type
 type cbx_cargos from checkbox within w_fa_man_pasar_facturas_a_empresa
 end type
-type st_1 from statictext within w_fa_man_pasar_facturas_a_empresa
-end type
-type em_ann from editmask within w_fa_man_pasar_facturas_a_empresa
-end type
-type st_2 from statictext within w_fa_man_pasar_facturas_a_empresa
-end type
-type dw_2 from datawindow within w_fa_man_pasar_facturas_a_empresa
-end type
 end forward
 
 global type w_fa_man_pasar_facturas_a_empresa from w_fa_padre_reportes
 integer x = 1271
 integer y = 160
 integer width = 2688
-integer height = 1740
-string title = "Pasar Facturas a ..."
+integer height = 1392
+string title = "(FA) Pasar los Pedidos a "
 string menuname = ""
-boolean minbox = false
 boolean maxbox = false
 boolean resizable = false
-windowtype windowtype = response!
-long backcolor = 12639424
 string icon = "Application!"
-boolean center = true
-windowanimationstyle openanimation = bottomslide!
 event ue_help ( )
 st_4 st_4
 cb_procesar cb_procesar
@@ -49,25 +36,22 @@ dw_4 dw_4
 dw_3 dw_3
 sle_lineas sle_lineas
 cbx_cargos cbx_cargos
-st_1 st_1
-em_ann em_ann
-st_2 st_2
-dw_2 dw_2
 end type
 global w_fa_man_pasar_facturas_a_empresa w_fa_man_pasar_facturas_a_empresa
 
 type variables
 //Variable para asignar el nombre de la Empresa al DW
 string is_unian
-Integer id_selec, ii_contador,id_fraccion,id_cantidad, ii_ann
+Integer id_selec, ii_contador,id_fraccion,id_cantidad
 window iw_pedidos
 integer ii_g_financiero, ii_empresa
-Datawindowchild dwc_tipo_fact, dwc_pedido, dwc_cliente, dwc_cliente_destino
+Datawindowchild dwc_tipo_fact, dwc_pedido, dwc_cliente
 long il_tercero
 end variables
 
 forward prototypes
 public subroutine wf_botones ()
+public function boolean wf_actualiza_enlace (datawindow adw_4, integer ai_linea)
 public subroutine wf_procesar ()
 end prototypes
 
@@ -88,35 +72,210 @@ public subroutine wf_botones ();//Deshabilitar botones no necesarios.
 
 end subroutine
 
+public function boolean wf_actualiza_enlace (datawindow adw_4, integer ai_linea);integer i, li_existe, li_ann
+datetime ldt_fecha, ldt_fecha_actual
+string ls_secuencia, ls_documento, ls_concepto, ls_comentario, ls_cuenta_compras, ls_cuenta_cxp, ls_proveedor, ls_pedido
+long ll_tercero
+decimal{2} ld_monto
+
+li_ann = adw_4.getitemnumber(ai_linea,'fact_ann')
+ls_secuencia = adw_4.getitemstring(ai_linea,'fact_no_factura')
+ls_pedido	 = adw_4.getitemstring(ai_linea,'fact_no_pedido')
+
+ldt_fecha_actual = gf_fecha_serv()
+ldt_fecha = adw_4.getitemdatetime(ai_linea,'fatdiari_fact_fecha')
+ls_documento = adw_4.getitemstring(ai_linea,'fact_no_factura')
+ls_concepto =  'CR' //adw_4.getitemstring(ai_linea,'tmov_concepto')
+ll_tercero   = 1 //adw_4.getitemnumber(ai_linea,'fact_cliente')
+
+ls_proveedor = 'TEMPO INTERNACIONAL'//adw_4.getitemstring(ai_linea,'fatdiari_fact_a_nombre')
+	
+ls_comentario = 'FACT. '+ls_documento+', '+ls_proveedor+', '+string(date(ldt_fecha))
+ld_monto		 = adw_4.getitemnumber(ai_linea,'fact_monto_final')
+
+  SELECT count(*)  
+    INTO :li_existe  
+    FROM dgtdiari  
+   WHERE ( dgtdiari.tdia_g_financiero = :ii_g_financiero) AND  
+         ( dgtdiari.tdia_empresa = :ii_empresa ) AND  
+         ( dgtdiari.tdia_aplicacion = 'CR' ) AND  
+         ( dgtdiari.tdia_tipo_transaccion = 'EN' ) AND  
+         ( dgtdiari.tdia_no_documento = :ls_secuencia ) AND  
+         ( dgtdiari.tdia_ann = :li_ann )   ;
+		if sqlca.sqlcode = -1 then
+			gf_mensaje('','Error al Validar Secuencia '+sqlca.sqlerrtext,1,1,'E')
+			return false
+		end if
+		
+	if li_existe = 0 then
+		  INSERT INTO dgtdiari  
+         ( tdia_g_financiero,   
+           tdia_empresa,   
+           tdia_aplicacion,   
+           tdia_tipo_transaccion,   
+           tdia_sub_tipo_transaccion,   
+           tdia_no_documento,   
+           tdia_ann,   
+           tdia_fecha_transaccion,   
+           tdia_descripcion,   
+           tdia_id_registro,   
+           tdia_fecha_reg,   
+           tdia_retenido,   
+           tdia_monto_total,   
+           tdia_lote,   
+           tdia_no_documento_ant,   
+           tdia_referencia )  
+			  VALUES ( :ii_g_financiero,   
+						  :ii_empresa,   
+						  'CR',   
+						  'EN',   
+						  :ls_concepto,   
+						  :ls_secuencia,   
+						  :li_ann,   
+						  :ldt_fecha,   
+						  :ls_comentario,   
+						  :str.usuario,   
+						  :ldt_fecha_actual,   
+						  'N',   
+						  :ld_monto,   
+						  null,   
+						  null,   
+						  :ls_pedido )  ;
+				if sqlca.sqlcode = -1 then
+					gf_mensaje('','Error al Insertar en el Enlace '+sqlca.sqlerrtext,1,1,'E')
+					return false
+				end if
+	else
+		
+		  UPDATE dgtdiari  
+			  SET tdia_fecha_transaccion = :ldt_fecha,   
+					tdia_descripcion = :ls_comentario,   
+					tdia_id_registro = :str.usuario,   
+					tdia_retenido = :ldt_fecha_actual,   
+					tdia_monto_total = :ld_monto,   
+					tdia_referencia = :ls_documento  
+			WHERE ( dgtdiari.tdia_g_financiero = :ii_g_financiero ) AND  
+					( dgtdiari.tdia_empresa = :ii_empresa ) AND  
+					( dgtdiari.tdia_aplicacion = 'CR' ) AND  
+					( dgtdiari.tdia_tipo_transaccion = 'EN' ) AND  
+					( dgtdiari.tdia_no_documento = :ls_secuencia ) AND  
+					( dgtdiari.tdia_ann = :li_ann )  ;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al actualizar encabezado '+sqlca.sqlerrtext,1,1,'E')
+				return false
+			end if
+			
+	end if
+	
+	//elimina el detalle del asiento y lo inserta de vuelta
+	  DELETE FROM dgddiari  
+		WHERE ( dgddiari.ddia_g_financiero = :ii_g_financiero ) AND  
+				( dgddiari.ddia_empresa = :ii_empresa ) AND  
+				( dgddiari.ddia_aplicacion = 'CR' ) AND  
+				( dgddiari.ddia_tipo_transaccion = 'EN' ) AND  
+				( dgddiari.ddia_no_documento = :ls_secuencia ) AND  
+				( dgddiari.ddia_ann = :li_ann )  ;
+			if sqlca.sqlcode = -1 then
+				gf_mensaje('','Error al eliminar detalle '+sqlca.sqlerrtext,1,1,'E')
+				return false
+			end if
+		
+			  SELECT dgmserdr.serd_mgcuenta  
+				 INTO :ls_cuenta_compras  
+				 FROM dgmserdr  
+				WHERE ( dgmserdr.serd_g_financiero = :ii_g_financiero ) AND  
+						( dgmserdr.serd_empresa = :ii_empresa ) AND  
+						( dgmserdr.serd_transaccion = 'EN' ) AND  
+						( dgmserdr.serd_sub_trans = :ls_concepto ) AND  
+						( dgmserdr.serd_aplicacion = 'IN' )  ;
+				if sqlca.sqlcode = -1 then
+					gf_mensaje('','Error al seleccionar cuenta de compras '+sqlca.sqlerrtext,1,1,'E')
+					return false
+				end if
+				
+			SELECT isnull(inaparam.para_cuenta_cxp_tempo  ,'')
+				 INTO :ls_cuenta_cxp
+				 FROM inaparam  
+				WHERE ( inaparam.para_g_financiero = :ii_g_financiero ) AND  
+						( inaparam.para_empresa = :ii_empresa )   ;
+
+				if sqlca.sqlcode = -1 then
+					gf_mensaje('','Error al seleccionar cuenta de compras '+sqlca.sqlerrtext,1,1,'E')
+					return false
+				end if				
+						
+				//Inserta el Debito de la compra
+				
+				  INSERT INTO dgddiari  
+							( ddia_g_financiero,   
+							  ddia_empresa,   
+							  ddia_aplicacion,   
+							  ddia_tipo_transaccion,   
+							  ddia_sub_tipo_transaccion,   
+							  ddia_no_documento,   
+							  ddia_no_linea,   
+							  ddia_ann,   
+							  ddia_mg_cuenta,   
+							  ddia_monto,   
+							  ddia_naturaleza,   
+							  ddia_tercero)  
+				  VALUES ( :ii_g_financiero,   
+							  :ii_empresa,   
+							  'CR',   
+							  'EN',   
+							  :ls_concepto,   
+							  :ls_secuencia,   
+							  1,   
+							  :li_ann,   
+							  :ls_cuenta_compras,   
+							  :ld_monto,   
+							  'D',   
+							  :ll_tercero )  ;
+							if sqlca.sqlcode = -1 then
+								gf_mensaje('','Error al insertar detalle de la compra '+sqlca.sqlerrtext,1,1,'E')
+								return false
+							end if
+		
+					//Inserta el credito de la compra
+					INSERT INTO dgddiari  
+							( ddia_g_financiero,   
+							  ddia_empresa,   
+							  ddia_aplicacion,   
+							  ddia_tipo_transaccion,   
+							  ddia_sub_tipo_transaccion,   
+							  ddia_no_documento,   
+							  ddia_no_linea,   
+							  ddia_ann,   
+							  ddia_mg_cuenta,   
+							  ddia_monto,   
+							  ddia_naturaleza,   
+							  ddia_tercero)  
+				  VALUES ( :ii_g_financiero,   
+							  :ii_empresa,   
+							  'CR',   
+							  'EN',   
+							  :ls_concepto,   
+							  :ls_secuencia,   
+							  2,   
+							  :li_ann,   
+							  :ls_cuenta_cxp,   
+							  :ld_monto,   
+							  'C',   
+							  :ll_tercero )  ;
+							if sqlca.sqlcode = -1 then
+								gf_mensaje('','Error al insertar detalle de la compra '+sqlca.sqlerrtext,1,1,'E')
+								return false
+							end if
+		
+			return true
+end function
+
 public subroutine wf_procesar ();//Función que hace el pase de los pedidos seleccionados hacia la empresa correspondiente
 integer  i, li_encontrado
-string	ls_incluir, ls_pedido, ls_tipo, ls_bodega_des, ls_ubicacion_des, ls_a_nombre_destino, ls_direccion_destino, ls_cuenta_destino
-long		ll_ann, ll_cliente_destino
+string	ls_incluir, ls_pedido, ls_tipo, ls_bodega_des, ls_ubicacion_des
+long		ll_ann
 boolean 	lb_entro = false
-
-ll_cliente_destino = dw_2.getitemnumber(1,'cliente')
-if ll_cliente_destino = 0 or isnull(ll_cliente_destino) then
-	gf_mensaje('','Debe Seleccionar el Cliente Destino, Verifique !!!',1,1,'E')
-	dw_2.setfocus()
-	return
-else
-	  SELECT ccmclien.clie_ref_anterior,   
-				dgmterce.terc_descripcion,   
-				dgmterce.terc_direccion  
-		 INTO :ls_cuenta_destino,   
-				:ls_a_nombre_destino,   
-				:ls_direccion_destino  
-		 FROM ccmclien,   
-				dgmterce  
-		WHERE ( dgmterce.terc_tercero = ccmclien.clie_tercero ) and  
-				( ( ccmclien.clie_g_financiero = :str.g_financiero ) AND  
-				( ccmclien.clie_empresa = :str.empresa ) AND  
-				( ccmclien.clie_tercero = :ll_cliente_destino ) )   ;
-			if sqlca.sqlcode = -1 then
-				gf_mensaje('','Error al Buscar datos del cliente '+sqlca.sqlerrtext,1,1,'E')
-				return
-			end if
-end if
+decimal{2} ld_monto_final
 
 dw_4.setfilter("fact_incluir = 'S'")
 dw_4.filter()
@@ -126,7 +285,7 @@ if dw_4.rowcount() = 0 then
 	dw_4.setfilter("")
 	dw_4.filter()
 	return
-elseif gf_mensaje('','Está seguro de Efectuar el Pase de la Factura',2,1,'E') = 2 then 
+elseif gf_mensaje('','Está seguro de Efectuar el Pase de la Factura',1,2,'E') = 2 then 
 	dw_4.setfilter("")
 	dw_4.filter()
 	return	
@@ -153,20 +312,19 @@ elseif ls_bodega_des = '' or ls_ubicacion_des = '' then
 	setnull(ls_ubicacion_des)
 end if
 
-sqlca.autocommit = false
-
 for i = 1 to dw_4.rowcount()
 		
 		  ls_pedido = dw_4.getitemString(i,"fact_no_pedido")
 		  ll_ann		= dw_4.getitemNumber(i,"fact_ann")
 		  ls_tipo	= dw_4.getitemString(i,"fact_tipo") //Para el detalle de faddiari
-					
+		
+			
 					//Valida la existencia del pedido
 					  SELECT count(*)  
 						 INTO :li_encontrado  
 						 FROM fatdiari  
-						WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
-								( fatdiari.fact_empresa = :str.empresa ) AND  
+						WHERE ( fatdiari.fact_g_financiero = :ii_g_financiero ) AND  
+								( fatdiari.fact_empresa = :ii_empresa ) AND  
 								( fatdiari.fact_no_pedido = :ls_pedido ) AND  
 								( fatdiari.fact_tipo = :ls_tipo ) AND  								
 								( fatdiari.fact_ann = :ll_ann )   ;				
@@ -231,18 +389,15 @@ for i = 1 to dw_4.rowcount()
 						  fact_cuatro_decimales,
 						  fact_usuario,
 						  fact_precio_a_utilizar,
-						  fact_costos_total,
-						  fact_fecha_despacho,
-						  fact_pasaporte,
-						  fact_linea_aerea)  
-				 Select  :str.g_financiero,
-							:str.empresa,
+						  fact_costos_total )  
+				 Select  :ii_g_financiero,
+							:ii_empresa,
 							fatdiari.fact_tipo,   
 							fatdiari.fact_no_pedido,   
 							fatdiari.fact_ann,   
 							'',
-							:ll_cliente_destino,   
-							:ls_cuenta_destino,   
+							fatdiari.fact_cliente,   
+							fatdiari.fact_ruc_cliente,   
 							fatdiari.fact_condicion_pago,   
 							fatdiari.fact_tipo_venta,   
 							fatdiari.fact_tipo_movimiento,   
@@ -254,8 +409,8 @@ for i = 1 to dw_4.rowcount()
 							isnull(fatdiari.fact_fecha_fin_plazo,fact_fecha),
 							null,
 							fatdiari.fact_consignado,   
-							:ls_a_nombre_destino,   
-							:ls_direccion_destino,   
+							fatdiari.fact_a_nombre,   
+							fatdiari.fact_a_nombre_direccion,   
 							fatdiari.fact_despachado,   
 							fatdiari.fact_via,   
 							fatdiari.fact_con_emb_no,   
@@ -280,13 +435,10 @@ for i = 1 to dw_4.rowcount()
 						   fatdiari.fact_cuatro_decimales,
 							:str.usuario,
 						   fatdiari.fact_precio_a_utilizar,
-						   fatdiari.fact_costos_total,
-						   fatdiari.fact_fecha_despacho,
-						   fatdiari.fact_pasaporte,
-						   fatdiari.fact_linea_aerea		
+						   fatdiari.fact_costos_total  							
 					 FROM fatdiari
-					WHERE ( fatdiari.fact_g_financiero = :ii_g_financiero ) AND  
-							( fatdiari.fact_empresa = :ii_empresa ) AND  
+					WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+							( fatdiari.fact_empresa = :str.empresa ) AND  
 							( fatdiari.fact_no_pedido = :ls_pedido ) AND  
 							( fatdiari.fact_tipo = :ls_tipo ) AND  															
 							( fatdiari.fact_ann = :ll_ann )   ;							 
@@ -339,11 +491,9 @@ for i = 1 to dw_4.rowcount()
 							  facd_costo_total,
 							  facd_bultos_cambiados,
 							  facd_peso_cambiado,
-							  facd_cubicaje_cambiado,
-							  facd_peso_neto,
-							  facd_cubicaje_metros) 
-							 SELECT  :str.g_financiero,
-									     :str.empresa,
+							  facd_cubicaje_cambiado) 
+							 SELECT  :ii_g_financiero,
+									   :ii_empresa,
 										:ls_tipo,
 										faddiari.facd_no_pedido,   
 										faddiari.facd_linea,   
@@ -381,12 +531,10 @@ for i = 1 to dw_4.rowcount()
 									   faddiari.facd_costo_total,
 									   faddiari.facd_bultos_cambiados,
 									   faddiari.facd_peso_cambiado,
-									   faddiari.facd_cubicaje_cambiado,
-									   facd_peso_neto,
-									   facd_cubicaje_metros
+									   faddiari.facd_cubicaje_cambiado										
 								 FROM faddiari  
-								WHERE ( faddiari.facd_g_financiero = :ii_g_financiero ) AND  
-										( faddiari.facd_empresa = :ii_empresa ) AND  
+								WHERE ( faddiari.facd_g_financiero = :str.g_financiero ) AND  
+										( faddiari.facd_empresa = :str.empresa ) AND  
 										( faddiari.facd_no_pedido = :ls_pedido ) AND  
 										( faddiari.facd_tipo = :ls_tipo ) AND  																		
 										( faddiari.facd_ann = :ll_ann )   ;
@@ -407,16 +555,16 @@ for i = 1 to dw_4.rowcount()
 									  dcar_ann,   
 									  dcar_codigo,   
 									  dcar_monto )  
-							  SELECT :str.g_financiero,   
-										:str.empresa,   
+							  SELECT :ii_g_financiero,   
+										:ii_empresa,   
 										:ls_tipo,   
 										fadcargo.dcar_no_pedido,   
 										fadcargo.dcar_ann,   
 										fadcargo.dcar_codigo,   
 										fadcargo.dcar_monto  
 								 FROM fadcargo  
-								WHERE ( fadcargo.dcar_g_financiero = :ii_g_financiero ) AND  
-										( fadcargo.dcar_empresa = :ii_empresa ) AND  
+								WHERE ( fadcargo.dcar_g_financiero = :str.g_financiero ) AND  
+										( fadcargo.dcar_empresa = :str.empresa ) AND  
 										( fadcargo.dcar_no_pedido = :ls_pedido ) AND  
 										( fadcargo.dcar_tipo = :ls_tipo ) AND  
 										( fadcargo.dcar_ann = :ll_ann ) ;							
@@ -427,7 +575,10 @@ for i = 1 to dw_4.rowcount()
 										dw_4.filter()																	
 										return
 									end if
-								
+							
+			//Genera el Asiento Contable para Izaketh
+			wf_actualiza_enlace(dw_4, i)
+							
 							//Se insertan los vendedores asociados
 								  INSERT INTO fadvenfa  
 										( vfac_g_financiero,   
@@ -436,15 +587,15 @@ for i = 1 to dw_4.rowcount()
 										  vfac_no_pedido,   
 										  vfac_ann,   
 										  vfac_vendedor )  
-								  SELECT :str.g_financiero,   
-											:str.empresa,   
+								  SELECT :ii_g_financiero,   
+											:ii_empresa,   
 											:ls_tipo,   
 											fadvenfa.vfac_no_pedido,   
 											fadvenfa.vfac_ann,   
 											fadvenfa.vfac_vendedor  
 									 FROM fadvenfa 
-									WHERE ( fadvenfa.vfac_g_financiero = :ii_g_financiero ) AND  
-											( fadvenfa.vfac_empresa = :ii_empresa ) AND  
+									WHERE ( fadvenfa.vfac_g_financiero = :str.g_financiero ) AND  
+											( fadvenfa.vfac_empresa = :str.empresa ) AND  
 											( fadvenfa.vfac_no_pedido = :ls_pedido ) AND  
 											( fadvenfa.vfac_tipo = :ls_tipo ) AND  											
 											( fadvenfa.vfac_ann = :ll_ann )   ;									
@@ -456,11 +607,12 @@ for i = 1 to dw_4.rowcount()
 										return
 									end if						
 							
+							
 			//Actualiza el Estado de Pasado a empresa = 1
 			  UPDATE fatdiari
 				  SET fact_pasado_a_empresa = 1  
-				WHERE ( fatdiari.fact_g_financiero = :ii_g_financiero ) AND  
-						( fatdiari.fact_empresa = :ii_empresa ) AND  
+				WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+						( fatdiari.fact_empresa = :str.empresa ) AND  
 						( fatdiari.fact_no_pedido = :ls_pedido ) AND  
 						( fatdiari.fact_tipo = :ls_tipo ) AND  
 						( fatdiari.fact_ann = :ll_ann )   ;
@@ -483,7 +635,7 @@ if lb_entro then
 	mensaje("Atención","Pase Ejecutado Satisfactoriamente","")
 	dw_4.setfilter("")
 	dw_4.filter()
-	dw_4.Retrieve(ii_g_financiero, ii_empresa,ii_ann,il_tercero)
+	dw_4.Retrieve(str.g_financiero, str.empresa,w_fa_fondo.str_para.ano,il_tercero)
 	dw_4.setfocus()
 end if
 end subroutine
@@ -498,10 +650,6 @@ this.dw_4=create dw_4
 this.dw_3=create dw_3
 this.sle_lineas=create sle_lineas
 this.cbx_cargos=create cbx_cargos
-this.st_1=create st_1
-this.em_ann=create em_ann
-this.st_2=create st_2
-this.dw_2=create dw_2
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_4
 this.Control[iCurrent+2]=this.cb_procesar
@@ -510,10 +658,6 @@ this.Control[iCurrent+4]=this.dw_4
 this.Control[iCurrent+5]=this.dw_3
 this.Control[iCurrent+6]=this.sle_lineas
 this.Control[iCurrent+7]=this.cbx_cargos
-this.Control[iCurrent+8]=this.st_1
-this.Control[iCurrent+9]=this.em_ann
-this.Control[iCurrent+10]=this.st_2
-this.Control[iCurrent+11]=this.dw_2
 end on
 
 on w_fa_man_pasar_facturas_a_empresa.destroy
@@ -525,21 +669,15 @@ destroy(this.dw_4)
 destroy(this.dw_3)
 destroy(this.sle_lineas)
 destroy(this.cbx_cargos)
-destroy(this.st_1)
-destroy(this.em_ann)
-destroy(this.st_2)
-destroy(this.dw_2)
 end on
 
 event ue_post_open;//Override
-long  	ll_tercero, ll_encontro
+long  	ll_tercero, ll_encontro,ll_annio
 string ls_nombre
 this.y = 1
-sqlca.autocommit = true
 
-ii_ann = year(date(gf_fecha_serv()))
-em_ann.text = string(ii_ann)
 
+ll_annio = Long(Year(Date(gf_fecha_serv())))
   SELECT inaparam.para_cliente_control ,
   			inaparam.para_grupo_f_entrada,
 			inaparam.para_empresa_entrada  
@@ -562,14 +700,17 @@ em_ann.text = string(ii_ann)
 		mensaje("Aviso","Error al seleccionar el nombre de la empresa",sqlca.sqlerrtext)
 	end if	
 
-	This.title = 'Pasar las Facturas de '+ls_nombre
+	This.title = '(FA) Pasar las Facturas a '+ls_nombre
 	
 dw_1.GetChild('cliente', dwc_cliente)
 dwc_cliente.Settransobject(sqlca);
-If dwc_cliente.Retrieve(ii_g_financiero, ii_empresa, ii_ann) < 1 Then  dwc_cliente.Insertrow(0)
+
+If dwc_cliente.Retrieve(str.g_financiero, str.empresa,w_fa_fondo.str_para.ano) < 1 Then  dwc_cliente.Insertrow(0)
+
 dw_1.insertrow(0)
 
 ll_encontro = dwc_cliente.find("terc_tercero = "+string(ll_tercero),1,dwc_cliente.rowcount())
+
 if ll_encontro <> 0 then
 	dwc_cliente.Scrolltorow(ll_encontro)
 	dw_1.setitem(1,"cliente",ll_tercero)
@@ -578,14 +719,10 @@ else
 	dwc_cliente.Scrolltorow(1)
 end if
 
-dw_2.GetChild('cliente', dwc_cliente_destino)
-dwc_cliente_destino.Settransobject(sqlca);
-If dwc_cliente_destino.Retrieve(str.g_financiero, str.empresa) < 1 Then  dwc_cliente_destino.Insertrow(0)
-dw_2.insertrow(0)
 
 dw_4.Settransobject(sqlca);
 dw_4.insertrow(0)
-dw_4.Retrieve(ii_g_financiero, ii_empresa, ii_ann, ll_tercero)
+dw_4.Retrieve(str.g_financiero, str.empresa,w_fa_fondo.str_para.ano,ll_tercero)
 
 dw_4.SetFocus()
 
@@ -625,11 +762,6 @@ dw.Print(True)
 
 end event
 
-type st_ayuda from w_fa_padre_reportes`st_ayuda within w_fa_man_pasar_facturas_a_empresa
-integer x = 1202
-integer y = 772
-end type
-
 type st_nom_ventana from w_fa_padre_reportes`st_nom_ventana within w_fa_man_pasar_facturas_a_empresa
 boolean visible = false
 integer y = 1196
@@ -637,27 +769,31 @@ integer width = 832
 integer height = 72
 end type
 
+type st_ayuda from w_fa_padre_reportes`st_ayuda within w_fa_man_pasar_facturas_a_empresa
+integer x = 1202
+integer y = 772
+end type
+
 type dw_1 from w_fa_padre_reportes`dw_1 within w_fa_man_pasar_facturas_a_empresa
 event ue_positemchanged ( string as_columna,  long row,  string data )
-integer x = 690
+integer x = 421
 integer y = 40
-integer width = 1056
-integer height = 92
-integer taborder = 10
+integer width = 1070
+integer height = 100
 string dataobject = "dw_pr_fa_facturas_cliente"
 boolean livescroll = false
 borderstyle borderstyle = stylelowered!
 end type
 
-event dw_1::ue_positemchanged(string as_columna, long row, string data);Integer	li_dias_pago
+event dw_1::ue_positemchanged;Integer	li_dias_pago
 String	ls_peri_descripcion,ls_condicion_de_pago,ls_cond_pago
 Long		ll_rows
 
 il_tercero = long(data)
 
-dw_4.Retrieve(ii_g_financiero, ii_empresa,ii_ann,il_tercero)
+dw_4.Retrieve(str.g_financiero, str.empresa,w_fa_fondo.str_para.ano,il_tercero)
 
-
+commit;
 end event
 
 event dw_1::ue_escape;//Override
@@ -686,8 +822,8 @@ borderstyle borderstyle = styleraised!
 end type
 
 type st_4 from statictext within w_fa_man_pasar_facturas_a_empresa
-integer x = 448
-integer y = 44
+integer x = 174
+integer y = 52
 integer width = 224
 integer height = 76
 boolean bringtotop = true
@@ -697,19 +833,17 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Arial"
-long textcolor = 16777215
-long backcolor = 8421376
+long textcolor = 8388608
+long backcolor = 67108864
 boolean enabled = false
 string text = "Cliente"
 alignment alignment = right!
-boolean border = true
-borderstyle borderstyle = styleraised!
 boolean focusrectangle = false
 end type
 
 type cb_procesar from commandbutton within w_fa_man_pasar_facturas_a_empresa
-integer x = 2245
-integer y = 1548
+integer x = 2208
+integer y = 1196
 integer width = 274
 integer height = 92
 integer taborder = 30
@@ -724,14 +858,15 @@ end type
 
 event clicked;//Función en la que se procede a pasar los pedidos seleccionados a la empresa seleccionada
 //en inventario
+sqlca.autocommit = false
 wf_procesar()
 end event
 
 type st_3 from statictext within w_fa_man_pasar_facturas_a_empresa
-integer x = 2235
-integer y = 1540
+integer x = 2199
+integer y = 1188
 integer width = 288
-integer height = 108
+integer height = 104
 integer textsize = -8
 integer weight = 700
 fontcharset fontcharset = ansi!
@@ -747,10 +882,10 @@ boolean focusrectangle = false
 end type
 
 type dw_4 from datawindow within w_fa_man_pasar_facturas_a_empresa
-integer x = 123
+integer x = 187
 integer y = 172
-integer width = 2395
-integer height = 1348
+integer width = 2299
+integer height = 1000
 integer taborder = 20
 string dataobject = "dw_pr_fa_facturas_por_pasar_cliente"
 boolean hscrollbar = true
@@ -854,90 +989,5 @@ long textcolor = 33554432
 long backcolor = 67108864
 string text = "Detalle de gastos"
 boolean lefttext = true
-end type
-
-type st_1 from statictext within w_fa_man_pasar_facturas_a_empresa
-integer x = 14
-integer y = 48
-integer width = 146
-integer height = 76
-boolean bringtotop = true
-integer textsize = -8
-integer weight = 700
-fontcharset fontcharset = ansi!
-fontpitch fontpitch = variable!
-fontfamily fontfamily = swiss!
-string facename = "Arial"
-long textcolor = 16777215
-long backcolor = 8421376
-boolean enabled = false
-string text = "Año:"
-alignment alignment = right!
-boolean border = true
-borderstyle borderstyle = styleraised!
-boolean focusrectangle = false
-end type
-
-type em_ann from editmask within w_fa_man_pasar_facturas_a_empresa
-integer x = 174
-integer y = 32
-integer width = 261
-integer height = 100
-integer taborder = 10
-boolean bringtotop = true
-integer textsize = -8
-integer weight = 700
-fontcharset fontcharset = ansi!
-fontpitch fontpitch = variable!
-fontfamily fontfamily = swiss!
-string facename = "Arial"
-long textcolor = 33554432
-string text = "none"
-alignment alignment = center!
-borderstyle borderstyle = stylelowered!
-string mask = "###0"
-boolean spin = true
-double increment = 1
-string minmax = "2014~~3000"
-end type
-
-event modified;ii_ann = integer(em_ann.text)
-
-If dwc_cliente.Retrieve(ii_g_financiero, ii_empresa, ii_ann) < 1 Then  dwc_cliente.Insertrow(0)
-end event
-
-type st_2 from statictext within w_fa_man_pasar_facturas_a_empresa
-integer x = 498
-integer y = 1548
-integer width = 224
-integer height = 76
-boolean bringtotop = true
-integer textsize = -8
-integer weight = 700
-fontcharset fontcharset = ansi!
-fontpitch fontpitch = variable!
-fontfamily fontfamily = swiss!
-string facename = "Arial"
-long textcolor = 16777215
-long backcolor = 8421376
-boolean enabled = false
-string text = "Cliente"
-alignment alignment = right!
-boolean border = true
-borderstyle borderstyle = styleraised!
-boolean focusrectangle = false
-end type
-
-type dw_2 from datawindow within w_fa_man_pasar_facturas_a_empresa
-integer x = 741
-integer y = 1536
-integer width = 1248
-integer height = 92
-integer taborder = 60
-boolean bringtotop = true
-string title = "none"
-string dataobject = "dw_external_clientes_nombre"
-boolean livescroll = true
-borderstyle borderstyle = stylelowered!
 end type
 

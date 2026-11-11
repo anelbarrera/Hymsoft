@@ -817,7 +817,8 @@ Choose Case ls_tag
 
     Case "BTN_PASE_PED_ZIZHAKET"
 //        OpenSheetWithParm(w_proc_pase_intercia, "PEDIDO_ZIZHAKET", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+			  OpenSheet(w_fa_man_pasar_facturas, parent, 0, Layered!)
+	        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_FACT_ZIZHAKET"
 //        OpenSheetWithParm(w_proc_pase_intercia, "FACTURA_ZIZHAKET", parent, 0, Layered!)
