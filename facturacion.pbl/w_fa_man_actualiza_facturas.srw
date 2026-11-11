@@ -714,11 +714,11 @@ destroy(this.st_3)
 destroy(this.dw_4)
 end on
 
-event ue_post_open;call super::ue_post_open;string ls_vienede, ls_where
+event ue_post_open;string ls_vienede, ls_where
 DataWindowChild child_produc
 
 dw_3.SetTransObject(SQLCA)
-
+dw.Settransobject(Sqlca)
 dw.Retrieve(str.g_financiero,str.empresa)
 
 dw_2.SetTransObject(SQLCA)
@@ -745,8 +745,9 @@ sle_hasta.text = string(date(gf_fecha_serv()))
 //dw.setfilter("fact_fecha >= '01/01/2001'")
 //"+string(date(idt_fecha_invent))+"'")
 //dw.filter()
-
+This.SetRedraw(False)
 This.PostEvent("ue_hay_data")
+This.SetRedraw(true)
 end event
 
 event ue_hay_data;//Override
@@ -760,9 +761,13 @@ If dw.RowCount() > 0 Then
 End If
 end event
 
-event open;call super::open;This.SetRedraw(False)
-wf_botones()
-This.SetRedraw(true)
+event open;
+  
+dw = dw_1
+ 
+
+this.postevent("ue_post_open")
+
 end event
 
 event ue_aceptar;//Override
@@ -883,6 +888,23 @@ this.postevent("ue_post_open")
 end event
 
 event resize;//Override
+end event
+
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+end event
+
+event closequery;call super::closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_actualiza_facturas

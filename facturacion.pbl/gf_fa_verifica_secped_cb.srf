@@ -1,0 +1,46 @@
+﻿//objectcomments  
+global type gf_fa_verifica_secped_cb from function_object
+end type
+
+forward prototypes
+global function string gf_fa_verifica_secped_cb (readonly string as_pedido, readonly string as_tipo)
+end prototypes
+
+global function string gf_fa_verifica_secped_cb (readonly string as_pedido, readonly string as_tipo);long ll_pedexit
+integer li_existe, li_existe2, li_existe3
+string ls_max, ls_pedexit
+
+
+ls_pedexit = as_pedido
+
+DO
+	SELECT count(*)  
+	 INTO :li_existe  
+	 FROM fatdiari  
+	WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+			( fatdiari.fact_empresa = :str.empresa ) AND  
+			( fatdiari.fact_no_pedido = :ls_pedexit) AND  
+			( fatdiari.fact_ann = :w_fa_fondo.str_para.ano );
+			//AND (fatdiari.fact_tipo = :as_tipo)   ;
+			
+	if sqlca.sqlcode = -1 then
+		mensaje("Aviso","Error al Validar Existencia de la Factura",sqlca.sqlerrtext)
+	end if					
+			
+	If li_existe > 0 then
+		
+		ll_pedexit++
+		ls_pedexit = as_pedido +"-"+string(ll_pedexit)
+							
+	End If
+LOOP UNTIL li_existe = 0
+	
+If ls_pedexit <> as_pedido Then
+	
+	return ls_pedexit
+Else
+	return as_pedido
+End If
+	
+end function
+

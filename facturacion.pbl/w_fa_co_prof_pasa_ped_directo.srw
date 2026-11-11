@@ -1079,12 +1079,27 @@ event close;//Override
 Destroy iuo_desglose
 Destroy iuo_desg_a_pasar
 
+  
+Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
 if isvalid(this) then close(this)
+ 
 end event
 
 event resize;//OVERRIDE
 
 
+end event
+
+event closequery;call super::closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 end event
 
 type st_nom_ventana from w_fa_padre_reportes`st_nom_ventana within w_fa_co_prof_pasa_ped_directo

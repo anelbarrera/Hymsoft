@@ -388,6 +388,23 @@ end event
 event resize;//Override
 end event
 
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+end event
+
+event closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
+end event
+
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_actualiza_clien
 boolean visible = false
 integer x = 27

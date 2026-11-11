@@ -16,6 +16,7 @@
     <Library Path="salidas.pbl"/>
     <Library Path="Sistemas2.pbl"/>
     <Library Path="Inventario2.pbl"/>
+    <Library Path="facturacion2.pbl"/>
   </Libraries>
   <Deployings>
     <Deploying Deploy="1" Library="Sistemas.pbl" Name="hymsoft_cloud"/>

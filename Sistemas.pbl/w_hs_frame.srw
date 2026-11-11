@@ -117,11 +117,6 @@ If Not IsValid(lw_active) Then
 End If
 end event
 
-event ue_ribbon_click(long al_handle);// Evento ue_ribbon_click(long al_handle) en w_hs_frame
-Messagebox('','ventana')
-rbb_1.Event ue_ribbon_click(al_handle)
-end event
-
 public function integer wf_set_panel_visible (string as_tag, boolean ab_visible);// Función de Ventana: wf_set_panel_visible(string as_tag, boolean ab_visible)
 // Retorna: 1 = Éxito, -1 = Error o Tag no encontrado
 
@@ -689,42 +684,42 @@ End Choose
 LockWindowUpdate(0)
 end event
 
-event ue_appmenu_click(long itemhandle, long index, long subindex);// Evento ue_appmenu_click(long itemhandle, long index, long subindex) en w_hs_frame
-RibbonApplicationButtonItem lr_appbtn
-RibbonApplicationMenu lr_appmenu
-RibbonMenuItem lr_item
-Long ll_rc
+event ue_appmenu_click(long itemhandle, long index, long subindex);//// Evento ue_appmenu_click(long itemhandle, long index, long subindex) en w_hs_frame
+//RibbonApplicationButtonItem lr_appbtn
+//RibbonApplicationMenu lr_appmenu
+//RibbonMenuItem lr_item
+//Long ll_rc
 
-// 1. Obtener la referencia al ApplicationButton y a su Menu
-ll_rc = rbb_1.GetApplicationButton(lr_appbtn)
-If ll_rc <> 1 Then Return
+//// 1. Obtener la referencia al ApplicationButton y a su Menu
+//ll_rc = rbb_1.GetApplicationButton(lr_appbtn)
+//If ll_rc <> 1 Then Return
 
-ll_rc = lr_appbtn.GetMenu(lr_appmenu)
-If ll_rc <> 1 Then Return
+//ll_rc = lr_appbtn.GetMenu(lr_appmenu)
+//If ll_rc <> 1 Then Return
 
-// 2. Extraer el item presionado según el índice recibido
-If subindex = 0 Then
-    ll_rc = lr_appmenu.GetMasterItem(index, lr_item)
-Else
-    // Si proviene de un submenú (ej. Cerrar Sesión dentro de Cuenta)
-    ll_rc = lr_appmenu.GetMasterItem(index, subindex, lr_item)
-End If
+//// 2. Extraer el item presionado según el índice recibido
+//If subindex = 0 Then
+//    ll_rc = lr_appmenu.GetMasterItem(index, lr_item)
+//Else
+//    // Si proviene de un submenú (ej. Cerrar Sesión dentro de Cuenta)
+//    ll_rc = lr_appmenu.GetMasterItem(index, subindex, lr_item)
+//End If
 
-If ll_rc <> 1 Then Return
+//If ll_rc <> 1 Then Return
 
-// 3. Evaluar el Tag
-Choose Case Lower(Trim(lr_item.Tag))
-    Case "signout"
-        MessageBox("HymSoft", "Cerrar sesión de usuario")
+//// 3. Evaluar el Tag
+//Choose Case Lower(Trim(lr_item.Tag))
+//    Case "signout"
+//        MessageBox("HymSoft", "Cerrar sesión de usuario")
 
-    Case "options"
-       // OpenSheet(w_opciones, This, 0, Original!)
+//    Case "options"
+//       // OpenSheet(w_opciones, This, 0, Original!)
 
-    Case "about app"
-        //Open(w_acerca_de)
-	Case "close"
-		Parent.postevent('ue_salir')
-End Choose
+//    Case "about app"
+//        //Open(w_acerca_de)
+//	Case "close"
+//		Parent.postevent('ue_salir')
+//End Choose
 end event
 
 event ue_menu_click(long al_handle, long al_index, long al_subindex);// ==============================================================================
@@ -767,7 +762,7 @@ Choose Case ls_tag
     // --- PROCESOS PENDIENTES ---
     Case "BTN_PEND_REACTIVAR_FACT"
         OpenSheet(w_fa_man_reactiva_clien, parent, 0, Layered!)
-        parent.Post Event ue_evaluar_panel_acciones()
+       parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PEND_ACT_CLIENTES"
         OpenSheet(w_fa_man_actualiza_clien, parent, 0, Layered!)
@@ -800,23 +795,25 @@ Choose Case ls_tag
 
     Case "BTN_PASE_PED_A_FACT_COMP"
 //        OpenSheetWithParm(w_proc_pase_documento, "PED_FACT_COMPLETO", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+
+			  OpenSheet(w_fa_co_ped_pasa_fact_directo, parent, 0, Original!)
+	        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_LISTA_A_FACT"
-//        OpenSheet(w_proc_pase_empaque_fact, parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+        OpenSheet(w_fa_co_pak_pase_fact, parent, 0, Original!)
+        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_ADICIONALES"
-//        OpenSheet(w_proc_pase_adicionales, parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+        OpenSheet(w_fa_co_adicionar_pase_cb, parent, 0, Layered!)
+        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PROF_A_PED_FUT"
-//        OpenSheetWithParm(w_proc_pase_documento, "PROF_PED_FUTURO", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+   		OpenSheet(w_fa_co_prof_pasa_ped_futuro, parent, 0, Layered!)
+   		parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_FUT_A_PROF"
-//        OpenSheetWithParm(w_proc_pase_documento, "PED_FUT_A_PROF", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+			OpenSheet(w_fa_co_ped_pasa_prof, parent, 0, Layered!)
+        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_ZIZHAKET"
 //        OpenSheetWithParm(w_proc_pase_intercia, "PEDIDO_ZIZHAKET", parent, 0, Layered!)

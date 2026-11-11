@@ -1,0 +1,25 @@
+﻿//objectcomments  
+global type gf_clean_desc_prof_pedi from function_object
+end type
+
+forward prototypes
+global function integer gf_clean_desc_prof_pedi (readonly string as_pedido, readonly integer as_ano)
+end prototypes
+
+global function integer gf_clean_desc_prof_pedi (readonly string as_pedido, readonly integer as_ano);/*Función que limpia los descuentos del detalle de pedidos*/  
+  
+  UPDATE fadprofo  
+     SET dpro_monto_final = dpro_monto_total,   
+         dpro_por_descuento = 0  
+   WHERE ( fadprofo.dpro_g_financiero = :str.g_financiero ) AND  
+         ( fadprofo.dpro_empresa = :str.empresa ) AND  
+         ( fadprofo.dpro_no_proforma = :as_pedido ) AND  
+         ( fadprofo.dpro_ann = :as_ano )   ;
+			
+If Sqlca.sqlcode = -1 Then
+	Return(-1)
+Else
+	Return(1)
+End If	
+end function
+

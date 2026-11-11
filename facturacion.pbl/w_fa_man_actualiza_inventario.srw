@@ -719,11 +719,11 @@ destroy(this.st_3)
 destroy(this.dw_4)
 end on
 
-event ue_post_open;call super::ue_post_open;string ls_vienede, ls_where
+event ue_post_open;string ls_vienede, ls_where
 DataWindowChild child_produc
 
 dw_3.SetTransObject(SQLCA)
-
+dw.settransobject(Sqlca)
 dw.Retrieve(str.g_financiero,str.empresa)
 
 dw_2.SetTransObject(SQLCA)
@@ -765,9 +765,12 @@ If dw.RowCount() > 0 Then
 End If
 end event
 
-event open;call super::open;This.SetRedraw(False)
+event open;This.SetRedraw(False)
 wf_botones()
 This.SetRedraw(true)
+dw = dw_1
+this.postevent("ue_post_open")
+
 end event
 
 event ue_aceptar;//Override
@@ -890,6 +893,23 @@ dw_1.Filter()
 end event
 
 event resize;//Override
+end event
+
+event closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
+end event
+
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_actualiza_inventario

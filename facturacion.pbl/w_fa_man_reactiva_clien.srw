@@ -241,11 +241,11 @@ destroy(this.cbx_4)
 destroy(this.cbx_5)
 end on
 
-event ue_post_open;call super::ue_post_open;integer li_mes, li_ann
+event ue_post_open;integer li_mes, li_ann
 em_desde.text = string(RelativeDate(date(gf_fecha_serv()), - 30))
 em_hasta.text = string(date(gf_fecha_serv()))
 	/*ADDED BY HGN/05/07/2002*/ //cambio inicio
-	
+	This.SetRedraw(False)
 	if pos( upper(str.empr_acceso_especial),'ACISA,') >0 then
 		String	ls_autoriza_s_n,ls_autoriza
 		is_user =''
@@ -332,6 +332,8 @@ idt_fecha_conta = date('01/'+string(li_mes)+'/'+string(li_ann))
 if idt_fecha_conta < date('01/01/1990') or isnull(idt_fecha_conta) then 
 	idt_fecha_conta = date(RelativeDate(date(gf_fecha_serv()), - 365))
 end if
+
+This.SetRedraw(True)
 end event
 
 event ue_aceptar;//Override Ancestor Script
@@ -397,12 +399,34 @@ End If
 sqlca.autocommit = true
 end event
 
-event open;call super::open;This.SetRedraw(False)
-wf_botones()
-This.SetRedraw(True)
+event open;//This.SetRedraw(False)
+////wf_botones()
+
+//This.SetRedraw(True)
+
+dw = dw_1
+this.postevent("ue_post_open")
+
 end event
 
 event resize;//Override
+end event
+
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+end event
+
+event closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_reactiva_clien
