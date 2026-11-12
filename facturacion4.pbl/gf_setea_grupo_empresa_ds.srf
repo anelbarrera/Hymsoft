@@ -1,0 +1,14 @@
+﻿//objectcomments Se Setea el grupo y empresa a la tabla que se envió como parametro en el Data Store Especificado
+global type gf_setea_grupo_empresa_ds from function_object
+end type
+
+forward prototypes
+global subroutine gf_setea_grupo_empresa_ds (datastore adw_object, string as_tabla, long al_fila)
+end prototypes
+
+global subroutine gf_setea_grupo_empresa_ds (datastore adw_object, string as_tabla, long al_fila);//Se Setea el grupo y empresa a la tabla que se envió como parametro
+
+adw_object.SetItem(al_fila,as_tabla+"_g_financiero", str.g_financiero) 
+adw_object.SetItem(al_fila,as_tabla+"_empresa", str.empresa) 
+end subroutine
+

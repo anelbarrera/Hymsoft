@@ -1,0 +1,20 @@
+﻿//objectcomments Estructura para Recuperar los datos de la Linea del  Pedido que se va a Recuperar, Para Distribuir
+global type str_fa_desglose from structure
+	string		pedido
+	long		ann
+	string		tipo
+	long		linea
+	long		linea_ori
+	integer		data
+	string		vienede
+	string		titulo
+	string		empaque
+	long		ann_empa
+	decimal { 2 }		cantidad
+	boolean		cambio
+	string		producto
+	decimal { 2 }		cantidad_vis
+	datawindow		dataobject
+	string		devuelve
+end type
+

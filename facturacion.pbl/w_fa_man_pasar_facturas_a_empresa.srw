@@ -23,8 +23,9 @@ integer x = 1271
 integer y = 160
 integer width = 2688
 integer height = 1392
-string title = "(FA) Pasar los Pedidos a "
+string title = "Pasar los Pedidos a "
 string menuname = ""
+boolean controlmenu = false
 boolean maxbox = false
 boolean resizable = false
 string icon = "Application!"
@@ -65,9 +66,9 @@ public subroutine wf_botones ();//Deshabilitar botones no necesarios.
 //	m_fa_padre.m_edicin.m_ultimoregistro.toolbaritemvisible=false
 //	m_fa_padre.m_edicin.m_primerregistro.toolbaritemvisible=false
 
-   m_fa_padre.m_archivo.m_vistapreliminar.toolbaritemvisible=false
-   m_fa_padre.m_edicin.m_sortear.toolbaritemvisible=false
-	m_fa_padre.m_edicin.m_filtrar.toolbaritemvisible=false
+//   m_fa_padre.m_archivo.m_vistapreliminar.toolbaritemvisible=false
+//   m_fa_padre.m_edicin.m_sortear.toolbaritemvisible=false
+//	m_fa_padre.m_edicin.m_filtrar.toolbaritemvisible=false
 
 
 end subroutine
@@ -273,10 +274,11 @@ end function
 public subroutine wf_procesar ();//Función que hace el pase de los pedidos seleccionados hacia la empresa correspondiente
 integer  i, li_encontrado
 string	ls_incluir, ls_pedido, ls_tipo, ls_bodega_des, ls_ubicacion_des
-long		ll_ann
+long		ll_ann,ll_annio
 boolean 	lb_entro = false
 decimal{2} ld_monto_final
 
+ll_annio = Long(Year(Date(gf_fecha_serv())))
 dw_4.setfilter("fact_incluir = 'S'")
 dw_4.filter()
 
@@ -635,7 +637,7 @@ if lb_entro then
 	mensaje("Atención","Pase Ejecutado Satisfactoriamente","")
 	dw_4.setfilter("")
 	dw_4.filter()
-	dw_4.Retrieve(str.g_financiero, str.empresa,w_fa_fondo.str_para.ano,il_tercero)
+	dw_4.Retrieve(str.g_financiero, str.empresa,ll_annio,il_tercero)
 	dw_4.setfocus()
 end if
 end subroutine
@@ -705,7 +707,7 @@ ll_annio = Long(Year(Date(gf_fecha_serv())))
 dw_1.GetChild('cliente', dwc_cliente)
 dwc_cliente.Settransobject(sqlca);
 
-If dwc_cliente.Retrieve(str.g_financiero, str.empresa,w_fa_fondo.str_para.ano) < 1 Then  dwc_cliente.Insertrow(0)
+If dwc_cliente.Retrieve(str.g_financiero, str.empresa,ll_annio) < 1 Then  dwc_cliente.Insertrow(0)
 
 dw_1.insertrow(0)
 
@@ -722,7 +724,7 @@ end if
 
 dw_4.Settransobject(sqlca);
 dw_4.insertrow(0)
-dw_4.Retrieve(str.g_financiero, str.empresa,w_fa_fondo.str_para.ano,ll_tercero)
+dw_4.Retrieve(str.g_financiero, str.empresa,ll_annio,ll_tercero)
 
 dw_4.SetFocus()
 
@@ -736,7 +738,7 @@ event resize;//Override
 end event
 
 event key;call super::key;if key = keyF1! then
-//	this.Postevent("ue_help")
+//	this.Postevent("ue_help") 
 end if
 end event
 
@@ -762,6 +764,23 @@ dw.Print(True)
 
 end event
 
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+end event
+
+event closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
+end event
+
 type st_nom_ventana from w_fa_padre_reportes`st_nom_ventana within w_fa_man_pasar_facturas_a_empresa
 boolean visible = false
 integer y = 1196
@@ -785,15 +804,15 @@ boolean livescroll = false
 borderstyle borderstyle = stylelowered!
 end type
 
-event dw_1::ue_positemchanged;Integer	li_dias_pago
+event dw_1::ue_positemchanged(string as_columna, long row, string data);Integer	li_dias_pago
 String	ls_peri_descripcion,ls_condicion_de_pago,ls_cond_pago
-Long		ll_rows
+Long		ll_rows,ll_annio
 
 il_tercero = long(data)
+ll_annio = Long(Year(date(gf_fecha_serv())))
+dw_4.Retrieve(str.g_financiero, str.empresa,ll_annio,il_tercero)
 
-dw_4.Retrieve(str.g_financiero, str.empresa,w_fa_fondo.str_para.ano,il_tercero)
-
-commit;
+//commit;
 end event
 
 event dw_1::ue_escape;//Override

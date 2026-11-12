@@ -31,7 +31,7 @@ long richtextedittype = 5
 long richtexteditx64type = 5
 long richtexteditversion = 3
 string richtexteditkey = ""
-string appicon = "C:\Sistemas\Hymsoft\Art\ICONO HYMOFT.ico"
+string appicon = "C:\Sistemas\Hymsoft\ART\ICONO HYMOFT.ico"
 string appruntimeversion = "25.1.0.6430"
 boolean manualsession = false
 boolean unsupportedapierror = true
@@ -89,8 +89,8 @@ end variables
 forward prototypes
 public subroutine af_idle ()
 public subroutine af_find_ini ()
-public function string af_encriptar (string as_password, string as_key, string as_ini_path)
-public function string af_desencriptar (string as_encrypted_base64, string as_key)
+public function string af_encriptar (string as_password, string as_keys, string as_ini_path)
+public function string af_desencriptar (string as_encrypted_base64, string as_keys)
 public function string af_check_password (string as_file, string as_sector)
 end prototypes
 
@@ -166,7 +166,7 @@ End If
 
 end subroutine
 
-public function string af_encriptar (string as_password, string as_key, string as_ini_path);// Parámetros:
+public function string af_encriptar (string as_password, string as_keys, string as_ini_path);// Parámetros:
 //   string as_password (texto a encriptar)
 //   string as_key      (cualquier frase o palabra, sin importar la longitud)
 // Retorna: string
@@ -180,7 +180,7 @@ lnv_crypter = CREATE CrypterObject
 lnv_coder   = CREATE CoderObject
 
 // 1. Derivar la clave a exactamente 32 bytes (AES-256) mediante SHA-256
-lblb_raw_key = Blob(as_key, EncodingUTF8!)
+lblb_raw_key = Blob(as_keys, EncodingUTF8!)
 lblb_aes_key = lnv_crypter.SHA(SHA256!, lblb_raw_key)
 
 // 2. Encriptar los datos
@@ -197,7 +197,7 @@ RETURN ls_encrypted_base64
 
 end function
 
-public function string af_desencriptar (string as_encrypted_base64, string as_key);// Parámetros:
+public function string af_desencriptar (string as_encrypted_base64, string as_keys);// Parámetros:
 //   string as_encrypted_base64 (cadena cifrada leída del INI)
 //   string as_key              (misma frase usada para encriptar)
 // Retorna: string
@@ -215,7 +215,7 @@ lnv_crypter = CREATE CrypterObject
 lnv_coder   = CREATE CoderObject
 
 // 1. Recrear exactamente la misma clave de 32 bytes
-lblb_raw_key = Blob(as_key, EncodingUTF8!)
+lblb_raw_key = Blob(as_keys, EncodingUTF8!)
 lblb_aes_key = lnv_crypter.SHA(SHA256!, lblb_raw_key)
 
 // 2. Decodificar Base64 a binario

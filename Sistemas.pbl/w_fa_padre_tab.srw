@@ -388,8 +388,8 @@ iw_this = This
 This.SetToolbar(1,true,AlignatTop!)
 This.SetToolbarPos(1,1,50,false)
 
-m_fa_principal.m_edicin.m_insertar.visible = false
-m_fa_principal.m_edicin.m_filtrar.visible = false
+//m_fa_principal.m_edicin.m_insertar.visible = false
+//m_fa_principal.m_edicin.m_filtrar.visible = false
 
 //Opciones de mostrar fotos para las opciones de Proforma, Pedidos y Factura
 ls_win = This.ClassName()
@@ -492,6 +492,17 @@ If (ls_win = "w_fa_man_proformas") Or (ls_win = "w_fa_man_pedidos") Or (ls_win =
 End If
 
 end event
+
+on tab_1.create
+call super::create
+this.Control[]={this.tabpage_1,&
+this.tabpage_2,&
+this.tabpage_3}
+end on
+
+on tab_1.destroy
+call super::destroy
+end on
 
 type tabpage_1 from w_grampa_tab`tabpage_1 within tab_1
 integer width = 2185

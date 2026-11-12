@@ -1,0 +1,25 @@
+﻿//objectcomments Retorna la Medida de la unidad del producto
+global type gf_fa_medi_prod from function_object
+end type
+
+forward prototypes
+global function long gf_fa_medi_prod (string unidad_prod)
+end prototypes
+
+global function long gf_fa_medi_prod (string unidad_prod);//Tipo de medida de la unidad del producto	(UNIDADES, UNIDAD DE PESO, CONVERSIONES, ETC)
+// Devuleve 10 en caso de que sea una medida
+
+Decimal ld_ucom
+
+  SELECT isnull(inamedid.medi_tipo_medida,0)
+  INTO :ld_ucom
+  FROM inamedid
+  WHERE inamedid.medi_medida = :unidad_prod  ;
+if sqlca.sqlcode = -1 then
+	mensaje("Aviso","Error al Seleccionar la Medida Enlace", sqlca.sqlerrtext)
+	return 0
+end if
+
+return(ld_ucom)
+end function
+

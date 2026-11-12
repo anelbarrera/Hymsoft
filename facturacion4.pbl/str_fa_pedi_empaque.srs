@@ -1,0 +1,15 @@
+﻿//objectcomments Estructura para Recuperar los Articulos del Pedido o Factura al que se le Está Haciendo la Lista de Empaque
+global type str_fa_pedi_empaque from structure
+	string		fuente
+	string		pedido
+	long		ann
+	string		tipo
+	string		empaque
+	long		ann_empaque
+	string		titulo
+	string		producto
+	boolean		devuelve
+	string		viene_de
+	string		viene_de_ventana
+end type
+

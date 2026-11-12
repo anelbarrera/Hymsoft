@@ -1,0 +1,10 @@
+﻿//objectcomments Para Enviar los Datos del Cubicaje a la Ventana de Cubicaje
+global type str_fa_cubicaje from structure
+	double		largo
+	double		alto
+	double		ancho
+	string		unidad_comp
+	double		cubicaje
+	string		unidad_cub
+end type
+

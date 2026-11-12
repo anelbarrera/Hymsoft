@@ -36,6 +36,7 @@ uo_configuracion_regional uo_regional
 Date idt_fecha_contabilidad
 str_fa_param str_para
 str_tr_param str_param
+str_fa_carg_ped str_formato
 end variables
 
 forward prototypes
@@ -44,6 +45,7 @@ public subroutine wf_set_panel (boolean ab_val)
 public function integer wf_set_button_visible (string as_tag, boolean ab_visible)
 public subroutine wf_configurar_panel_acciones (boolean ab_nuevo, boolean ab_guardar, boolean ab_eliminar, boolean ab_imprimir, boolean ab_exportar)
 public function integer wf_set_category_visible (string as_tag, boolean ab_visible)
+public subroutine wf_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato)
 end prototypes
 
 event ue_quitar_menu();// Desvincular el menú de Windows de la ventana MDI
@@ -215,6 +217,51 @@ End If
 Return -1
 end function
 
+public subroutine wf_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato);/* Esta función verifica cuantos formatos existen del documento
+solicitado, si hay más de uno abre la ventana de selección, si sólo
+hay uno toma el datawindow del mismo y abre la ventana principal*/
+
+String	ls_dberror
+
+SELECT count(*) 
+ INTO :ai_existe
+    FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato =:as_forma_formato);   
+
+if ai_existe <= 0 then
+	mensaje("Atención ","No se ha configurado el formato del documento, por favor contacte al personal de soporte, o al programador..gracias", "")
+	ab_aceptar = false
+	return
+End If
+
+If ai_existe = 1 then
+	// Sólo hay un formato no abre ventana selección de formatos
+	  SELECT faaforma.forma_datawindow  
+	 INTO :str_formato.datawindow 
+	 FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato = :as_forma_formato);   
+	
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al leer el formato del documento", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+	
+	//Scrip que asigna el datawindow de listas de empaques de facturas
+	if as_forma_formato = 'LEMPQ' then
+	  integer li_pos
+	  li_pos = pos(str_formato.datawindow,"_pedi_")
+     str_formato.datawindow2	= left(str_formato.datawindow,li_pos)+"fact_"+mid(str_formato.datawindow,li_pos + 6)	  
+   end if
+end  if
+
+ab_aceptar = true
+
+end subroutine
+
 on w_hs_frame.create
 int iCurrent
 call super::create
@@ -345,7 +392,8 @@ RibbonSmallButtonItem lr_small
 RibbonMenuItem lr_item
 PowerObject lpo_item
 
- 
+Integer	li_existe = 0
+Boolean	lb_aceptar = false
 window lw_activa
 String ls_tag
 str_fa_formato lstr_datawindow	
@@ -617,6 +665,35 @@ Choose Case ls_tag
 		Parent.SetRedraw(false)
 		OpenSheetWithParm(lw_aranceles,str_opcion_arancel,"w_in_cod_trans_gen",Parent,11,original!)
 		Parent.SetRedraw(TRUE)
+	Case 'BTN_PROC_PASE_CONTAB'
+		wf_set_panel_visible("PAN_ACC_EDICION", False)
+		wf_set_panel_visible("PAN_ACC_DOC", False)
+ 		OpenSheet(w_fa_man_pase_a_conta, parent, 0, Original!)    
+    	parent.Post Event ue_evaluar_panel_acciones()
+	Case 'BTN_PROC_LISTA_EMPAQUE'
+		str_formato.reporte_o_para ='CAP'
+		str_formato.tipo_formato   ='LEM'	//Formato de Lista de Empaque
+		str_formato.cod_formato		='LEMPQ'	//Captura de Lista de Empaque
+		wf_selec_formato(li_existe,lb_aceptar,str_formato.tipo_formato,str_formato.cod_formato)
+
+		If lb_aceptar = false then
+				return
+		end if
+
+		If li_existe <= 0 then
+				mensaje("Atención ","El formato del documento no ha sido configurado, por favor contacte al personal de soporte técnico o a su programador..gracias.. !!","")
+				return
+		end if
+		Parent.SetRedraw ( false )
+
+		If li_existe > 1 then
+				OpenSheetWithParm(w_fa_man_selec_formatos, str_formato, str.frame,9,Original!)
+		else
+				OpenSheetWithParm(w_fa_man_packing_list,str_formato, str.frame,9, Layered!)		
+		end If
+
+		Parent.SetRedraw ( True )
+		
 	Case "BTN_ACCION_INSERTAR"
         lw_activa = parent.GetActiveSheet()
         If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_adicionar")
@@ -761,68 +838,91 @@ If IsNull(ls_tag) Or ls_tag = "" Then Return
 Choose Case ls_tag
     // --- PROCESOS PENDIENTES ---
     Case "BTN_PEND_REACTIVAR_FACT"
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)		 
         OpenSheet(w_fa_man_reactiva_clien, parent, 0, Layered!)
        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PEND_ACT_CLIENTES"
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)		 
         OpenSheet(w_fa_man_actualiza_clien, parent, 0, Layered!)
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PEND_ACT_INVENTARIO"
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)		 
         OpenSheet(w_fa_man_actualiza_inventario, parent, 0, Layered!)
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PEND_ACT_FACTURAS"
+		 wf_set_panel_visible("PAN_ACC_EDICION", False)
+		 wf_set_panel_visible("PAN_ACC_DOC", False)		 
        OpenSheet(w_fa_man_actualiza_facturas, parent, 0, Layered!)
        parent.Post Event ue_evaluar_panel_acciones()
 
     // --- PASES ---
     Case "BTN_PASE_PROF_A_PED_COMP"
-//        OpenSheetWithParm(w_fa_co_prof_pasa_ped_directo, "PROF_PED_COMPLETO", parent, 0, Layered!)
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)
 			 OpenSheet(w_fa_co_prof_pasa_ped_directo, parent, 0, Layered!)
        	parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PROF_A_PED"
-//        OpenSheetWithParm(w_proc_pase_documento, "PROF_PED_PARCIAL", parent, 0, Layered!)
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)
 			 OpenSheet(w_fa_co_prof_pasa_ped, parent, 0, Layered!)
         	 parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_A_FACT"
-//        OpenSheetWithParm(w_proc_pase_documento, "PED_FACT_PARCIAL", parent, 0, Layered!)
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)
 
 			OpenSheet(w_fa_co_ped_pasa_fact, parent, 0, Layered!)
 	      parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_A_FACT_COMP"
-//        OpenSheetWithParm(w_proc_pase_documento, "PED_FACT_COMPLETO", parent, 0, Layered!)
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)
 
 			  OpenSheet(w_fa_co_ped_pasa_fact_directo, parent, 0, Original!)
 	        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_LISTA_A_FACT"
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)		 
         OpenSheet(w_fa_co_pak_pase_fact, parent, 0, Original!)
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_ADICIONALES"
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)
         OpenSheet(w_fa_co_adicionar_pase_cb, parent, 0, Layered!)
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PROF_A_PED_FUT"
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)
    		OpenSheet(w_fa_co_prof_pasa_ped_futuro, parent, 0, Layered!)
    		parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_FUT_A_PROF"
+		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", False)
 			OpenSheet(w_fa_co_ped_pasa_prof, parent, 0, Layered!)
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_ZIZHAKET"
-//        OpenSheetWithParm(w_proc_pase_intercia, "PEDIDO_ZIZHAKET", parent, 0, Layered!)
+				wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
 			  OpenSheet(w_fa_man_pasar_facturas, parent, 0, Layered!)
 	        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_FACT_ZIZHAKET"
-//        OpenSheetWithParm(w_proc_pase_intercia, "FACTURA_ZIZHAKET", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+			  	OpenSheet(w_fa_man_pasar_facturas_a_empresa, parent, 0, Layered!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
 
     // --- ESPECIALES ---
     Case "BTN_ESP_REST_PASE_PROF"
