@@ -325,6 +325,10 @@ this.wf_set_category_visible("CAT_ACCIONES", False)
 //sle_1.text = str.nombre_empresa + ' - HYMSOFT V 2.0'
 This.title = str.nombre_empresa	+ ' SISTEMA INTEGRADO HymSoft V 2.0'	
  
+ str_para.bodega_en_transito = 'BTZL'
+ str_para.ubicacion_en_transito = 'NU'
+ str_para.ano = Year(Date(gf_fecha_serv()))
+ 
 wf_set_panel(false)
 this.Post Event ue_post_open()
 this.Post Event ue_quitar_menu()
@@ -694,6 +698,14 @@ Choose Case ls_tag
 
 		Parent.SetRedraw ( True )
 		
+	Case 'BTN_PROC_CAMBIAR_TIPO'
+		Parent.SetRedraw ( false )
+		OpenSheet(w_fa_change_key,Parent, 0, Original!)
+		Parent.SetRedraw ( True )
+	Case 'BTN_PROC_PEDIDOS_CAMBIO'
+		Parent.SetRedraw ( false )
+		OpenSheet(w_fa_change_key_pedido,Parent, 0, Original!)
+		Parent.SetRedraw ( True )
 	Case "BTN_ACCION_INSERTAR"
         lw_activa = parent.GetActiveSheet()
         If IsValid(lw_activa) Then lw_activa.DYNAMIC TriggerEvent("ue_adicionar")
@@ -724,6 +736,18 @@ Choose Case ls_tag
             Close(lw_activa) // Disparará el Close de la ventana y su Post Event
         End If
 		  // --- SUB-OPCIONES DE PROCESOS PENDIENTES ---
+	 Case 'BTN_PROC_COPIAR_PROFORMA'
+		 Parent.SetRedraw ( false )
+		 OpenSheet(w_fa_copia_identica_fapepro,Parent, 0, Original!)
+		 Parent.SetRedraw ( True )
+	 Case 'BTN_PROC_MODIF_DET_FACT'
+		 Parent.SetRedraw ( false )
+		 OpenSheet(w_fa_ma_modificar_detalle,Parent, 0,Layered! )
+		 Parent.SetRedraw ( True )
+	 Case 'BTN_PROC_SEPARAR_REFS'
+		Parent.SetRedraw ( false )
+		OpenSheet(w_fa_man_separar_futuros,Parent, 0, Original!)
+		Parent.SetRedraw ( True )
     Case "BTN_PEND_REACTIVAR_FACT"
 		 messagebox('','Reactivar Factura')
 //        OpenSheet(w_proc_reactivar_factura, parent, 0, Layered!)
@@ -832,7 +856,7 @@ ls_tag = Trim(lr_item.Tag)
 If IsNull(ls_tag) Or ls_tag = "" Then Return
 
  
-// MessageBox("Menú Clickeado", "Tag capturado: " + ls_tag)
+//MessageBox("Menú Clickeado", "Tag capturado: " + ls_tag)
 
  
 Choose Case ls_tag
@@ -924,18 +948,22 @@ Choose Case ls_tag
 			  	OpenSheet(w_fa_man_pasar_facturas_a_empresa, parent, 0, Layered!)
 	        	parent.Post Event ue_evaluar_panel_acciones()
 
-    // --- ESPECIALES ---
-    Case "BTN_ESP_REST_PASE_PROF"
-//        OpenSheetWithParm(w_proc_especiales_doc, "REST_PASE_PROFORMA", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
-
+    // --- ESPECIALES ---  
+    Case "BTN_ESP_REST_PASE_PROF"			
+		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheet(w_fa_man_restaurar_pase_prof, parent, 0, Layered!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
     Case "BTN_ESP_REST_PASE_PED"
-//        OpenSheetWithParm(w_proc_especiales_doc, "REST_PASE_PEDIDO", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
-
-    Case "BTN_ESP_PED_A_PASADO"
-//        OpenSheetWithParm(w_proc_especiales_doc, "PEDIDO_A_PASADO", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+				wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheet(w_fa_man_restaurar_pase, parent, 0, Layered!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
+    Case "BTN_ESP_PED_A_PASADO"		 
+		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheet(w_fa_man_cambiar_a_pasado, parent, 0, Original!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_ESP_ACTIVAR_FACT"
 //        OpenSheetWithParm(w_proc_especiales_doc, "ACTIVAR_FACTURA", parent, 0, Layered!)

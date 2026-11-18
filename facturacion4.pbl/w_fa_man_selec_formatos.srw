@@ -193,101 +193,187 @@ event ue_pre_aceptar;this.postevent("ue_aceptar")
 yield()
 end event
 
-event ue_post_open;//Override
-Integer li_hay,li_max
-String	ls_forma
+event ue_post_open;////Override
+//Integer li_hay,li_max
+//String	ls_forma
+//is_nombre = This.ClassName()
+//this.y = 600
+
+//gf_win_used_by_user(is_nombre, true)
+
+//st_nom_ventana.text = is_nombre
+
+//dw_1.settransObject(SQLCA)
+////	str_pedi.reporte_o_para ='CAPPESO'
+//ls_forma = '(FA) Mantenimiento de Formatos de'
+//If str_pedi.reporte_o_para ='REP' Then ls_forma ='(FA) Selección de Formatos de Reporte'
+//If str_pedi.reporte_o_para ='CAP' or str_pedi.reporte_o_para ='CAPPESO' Then ls_forma ='(FA) Selección de Formatos de Reporte'
+
+//CHOOSE CASE str_pedi.tipo_formato
+//	CASE 'PAK'
+//		ls_forma +=' Packing'
+//	CASE 'PIK'
+//		ls_forma +=' Picking List'
+//	CASE 'LEM'
+//		ls_forma +=' Lista de Empaque'
+//	CASE 'LEE'	
+//		ls_forma +=' Lista de Empaque Especial (Cliente)'		
+//	CASE 'PRO'
+//		ls_forma +=' Proformas'
+//	CASE 'PEDPESO'
+//		ls_forma +=' Proformas tipo Peso'
+//	CASE 'PED'
+//		ls_forma +=' Pedidos'
+//	CASE 'PEDPESO'
+//		ls_forma +=' Pedidos tipo Peso'
+//	CASE 'FAC'
+//		ls_forma +=' Factura'
+//	CASE 'DEV'
+//		ls_forma +=' Devolución'
+//	CASE 'TRA'
+//		ls_forma +=' Factura tipo Tráfico'
+//END CHOOSE
+
+//This.Title = ls_forma
+
+//CHOOSE CASE str_pedi.reporte_o_para
+//	CASE 'REP','CAP','CAPPESO'
+////		gf_fa_set_tab_zero(dw)
+////		gf_fa_hide_item()
+//	CASE 'PARA'
+//		cb_aceptar.visible = false
+//		cb_aceptar.enabled = false
+//		st_1.visible=false
+//		st_1.enabled = false
+//		cb_cancelar.visible = false
+//		cb_cancelar.enabled = false
+//		st_2.visible=false
+//		st_2.enabled = false
+//END CHOOSE
+
+//if dw_1.retrieve(str_pedi.tipo_formato,str_pedi.cod_formato) < 1 then
+//	If str_pedi.reporte_o_para ='PARA' Then
+//		this.triggerevent("ue_adicionar")
+//	else
+//		mensaje("Atención","No se ha configurado el formato de "+ls_forma+' , por favor contacte al soporte técnico o al programador que lo atiende',"")
+//		close(This)
+//		return
+//	end If
+//Else
+//	If dw_1.rowcount() = 1 and (str_pedi.reporte_o_para ='REP' &	
+//	   or str_pedi.reporte_o_para ='CAP' or str_pedi.reporte_o_para ='CAPPESO') Then
+//		dw_1.setcolumn(1)
+//		dw_1.setfocus()
+//		dw_1.enabled = true
+//		wf_aceptar()
+//		//close(This)
+//		Return
+//	End if
+//end if
+
+//dw_1.ScrollTorow(1)
+//dw_1.SelectRow(1, true)
+//dw_1.enabled = true
+//dw_1.setcolumn(1)
+//dw_1.setfocus()
+ // Override
+String ls_forma
+Long ll_filas
+
 is_nombre = This.ClassName()
-this.y = 600
+This.y = 600
 
-gf_win_used_by_user(is_nombre, true)
+gf_win_used_by_user(is_nombre, True)
+st_nom_ventana.Text = is_nombre
 
-st_nom_ventana.text = is_nombre
+dw_1.SetTransObject(SQLCA)
 
-dw_1.settransObject(SQLCA)
-//	str_pedi.reporte_o_para ='CAPPESO'
 ls_forma = '(FA) Mantenimiento de Formatos de'
-If str_pedi.reporte_o_para ='REP' Then ls_forma ='(FA) Selección de Formatos de Reporte'
-If str_pedi.reporte_o_para ='CAP' or str_pedi.reporte_o_para ='CAPPESO' Then ls_forma ='(FA) Selección de Formatos de Reporte'
+If str_pedi.reporte_o_para = 'REP' Or str_pedi.reporte_o_para = 'CAP' Or str_pedi.reporte_o_para = 'CAPPESO' Then
+	ls_forma = '(FA) Selección de Formatos de Reporte'
+End If
 
 CHOOSE CASE str_pedi.tipo_formato
 	CASE 'PAK'
-		ls_forma +=' Packing'
+		ls_forma += ' Packing'
 	CASE 'PIK'
-		ls_forma +=' Picking List'
+		ls_forma += ' Picking List'
 	CASE 'LEM'
-		ls_forma +=' Lista de Empaque'
+		ls_forma += ' Lista de Empaque'
 	CASE 'LEE'	
-		ls_forma +=' Lista de Empaque Especial (Cliente)'		
+		ls_forma += ' Lista de Empaque Especial (Cliente)'		
 	CASE 'PRO'
-		ls_forma +=' Proformas'
+		ls_forma += ' Proformas'
 	CASE 'PEDPESO'
-		ls_forma +=' Proformas tipo Peso'
+		ls_forma += ' Pedidos tipo Peso'
 	CASE 'PED'
-		ls_forma +=' Pedidos'
-	CASE 'PEDPESO'
-		ls_forma +=' Pedidos tipo Peso'
+		ls_forma += ' Pedidos'
 	CASE 'FAC'
-		ls_forma +=' Factura'
+		ls_forma += ' Factura'
 	CASE 'DEV'
-		ls_forma +=' Devolución'
+		ls_forma += ' Devolución'
 	CASE 'TRA'
-		ls_forma +=' Factura tipo Tráfico'
+		ls_forma += ' Factura tipo Tráfico'
 END CHOOSE
 
 This.Title = ls_forma
 
-CHOOSE CASE str_pedi.reporte_o_para
-	CASE 'REP','CAP','CAPPESO'
-//		gf_fa_set_tab_zero(dw)
-//		gf_fa_hide_item()
-	CASE 'PARA'
-		cb_aceptar.visible = false
-		cb_aceptar.enabled = false
-		st_1.visible=false
-		st_1.enabled = false
-		cb_cancelar.visible = false
-		cb_cancelar.enabled = false
-		st_2.visible=false
-		st_2.enabled = false
-END CHOOSE
+If str_pedi.reporte_o_para = 'PARA' Then
+	cb_aceptar.Visible  = False
+	cb_aceptar.Enabled  = False
+	st_1.Visible        = False
+	st_1.Enabled        = False
+	cb_cancelar.Visible = False
+	cb_cancelar.Enabled = False
+	st_2.Visible        = False
+	st_2.Enabled        = False
+End If
 
-if dw_1.retrieve(str_pedi.tipo_formato,str_pedi.cod_formato) < 1 then
-	If str_pedi.reporte_o_para ='PARA' Then
-		this.triggerevent("ue_adicionar")
-	else
-		mensaje("Atención","No se ha configurado el formato de "+ls_forma+' , por favor contacte al soporte técnico o al programador que lo atiende',"")
-		close(This)
-		return
-	end If
-Else
-	If dw_1.rowcount() = 1 and (str_pedi.reporte_o_para ='REP' &	
-	   or str_pedi.reporte_o_para ='CAP' or str_pedi.reporte_o_para ='CAPPESO') Then
-		dw_1.setcolumn(1)
-		dw_1.setfocus()
-		dw_1.enabled = true
-		wf_aceptar()
-		close(This)
+ll_filas = dw_1.Retrieve(str_pedi.tipo_formato, str_pedi.cod_formato)
+
+If ll_filas < 1 Then
+	If str_pedi.reporte_o_para = 'PARA' Then
+		This.TriggerEvent("ue_adicionar")
+	Else
+		mensaje("Atención", "No se ha configurado el formato de " + ls_forma + ", por favor contacte al soporte técnico.", "")
+		Close(This)
 		Return
-	End if
-end if
+	End If
+ElseIf ll_filas = 1 And (str_pedi.reporte_o_para = 'REP' Or str_pedi.reporte_o_para = 'CAP' Or str_pedi.reporte_o_para = 'CAPPESO') Then
+	// Seleccionar la única fila y postear el clic de Aceptar para no destruir la ventana a mitad de ue_post_open
+	dw_1.ScrollToRow(1)
+	dw_1.SelectRow(1, True)
+	dw_1.SetColumn(1)
+	dw_1.Enabled = True
+	cb_aceptar.PostEvent(Clicked!)
+	Return
+End If
 
-dw_1.ScrollTorow(1)
-dw_1.SelectRow(1, true)
-dw_1.enabled = true
-dw_1.setcolumn(1)
-dw_1.setfocus()
-
+dw_1.ScrollToRow(1)
+dw_1.SelectRow(1, True)
+dw_1.Enabled = True
+dw_1.SetColumn(1)
+dw_1.SetFocus()
+ 
 end event
 
-event open;call super::open;dw_1.x = 75
+event open;//dw_1.x = 75
+//dw_1.y = 75
+////centrar_w()
+////m_fa_principal.m_edicin.m_busqueda.Visible = True
+////m_fa_principal.m_edicin.m_busqueda.ToolBarItemVisible = True
+
+
+//str_pedi = Message.PowerObjectParm
+
+If IsValid(Message.PowerObjectParm) And Not IsNull(Message.PowerObjectParm) Then
+	str_pedi = Message.PowerObjectParm
+End If
+
+call super::open;
+
+dw_1.x = 75
 dw_1.y = 75
-//centrar_w()
-//m_fa_principal.m_edicin.m_busqueda.Visible = True
-//m_fa_principal.m_edicin.m_busqueda.ToolBarItemVisible = True
-
-
-str_pedi = Message.PowerObjectParm
-
 end event
 
 event ue_adicionar;integer	li_sec_pais
@@ -383,13 +469,30 @@ long ll_dw_ancho,ll_dw_alto
 
 end event
 
-event close;close(This)
+event close;//close(This)
+Window lw_frame
 
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
 end event
 
 event ue_insertar;// Override
 this.postevent("ue_adicionar")
 
+end event
+
+event key;// 
+end event
+
+event closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_selec_formatos
@@ -420,8 +523,8 @@ boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
 
-event dw_1::ue_set_column;//Devuelve el cursor para que se edite un codigo valido
-dw.setcolumn("forma_formato")
+event dw_1::ue_set_column();//Devuelve el cursor para que se edite un codigo valido
+//dw.setcolumn("forma_formato")
 			
 end event
 
@@ -449,79 +552,158 @@ event dw_1::key;//long ll_i
 //
 end event
 
-event dw_1::clicked;//override
-dw=this
-//validaciones de las teclas
+event dw_1::clicked;////override
+//dw=this
+////validaciones de las teclas
+//long ll_i
+
+//If keyDown(keyControl!) Then  
+//	If IsSelected(row) Then
+//		this.SelectRow(row,false)
+//	Else
+//		this.SelectRow(row,true)
+//	End if
+//ElseIf keyDown(KeyShift!) Then
+//	FOR ll_i = il_old_row TO row
+//		this.SelectRow(ll_i,true)
+//	NEXT
+//ElseIf keyDown(KeyLeftButton!) Then
+//	this.SelectRow(0,false)
+//	this.SelectRow(row,true)
+//End If
+//il_old_row = row
+////messagebox('', dw_1.GetItemString(row,"forma_datawindow") )
+// Override
+// Override
+dw = this
 long ll_i
 
-If keyDown(keyControl!) Then  
-	If IsSelected(row) Then
-		this.SelectRow(row,false)
+//If row <= 0 Then Return
+
+//This.SetRedraw(False)
+
+//If KeyDown(KeyControl!) Then  
+//	this.SelectRow(row, Not this.IsSelected(row))
+//ElseIf KeyDown(KeyShift!) Then
+//	this.SelectRow(0, False)
+//	If il_old_row > 0 Then
+//		If row >= il_old_row Then
+//			FOR ll_i = il_old_row TO row
+//				this.SelectRow(ll_i, True)
+//			NEXT
+//		Else
+//			FOR ll_i = il_old_row TO row STEP -1
+//				this.SelectRow(ll_i, True)
+//			NEXT
+//		End If
+//	Else
+//		this.SelectRow(row, True)
+//	End If
+//Else
+//	If il_old_row > 0 And il_old_row <= this.RowCount() Then
+//		this.SelectRow(il_old_row, False)
+//	Else
+//		this.SelectRow(0, False)
+//	End If
+//	this.SelectRow(row, True)
+//End If
+	If il_old_row > 0 And il_old_row <= this.RowCount() Then
+		this.SelectRow(il_old_row, False)
 	Else
-		this.SelectRow(row,true)
-	End if
-ElseIf keyDown(KeyShift!) Then
-	FOR ll_i = il_old_row TO row
-		this.SelectRow(ll_i,true)
-	NEXT
-ElseIf keyDown(KeyLeftButton!) Then
-	this.SelectRow(0,false)
-	this.SelectRow(row,true)
-End If
+		this.SelectRow(0, False)
+	End If
+	this.SelectRow(row, True)
 il_old_row = row
-//messagebox('', dw_1.GetItemString(row,"forma_datawindow") )
+This.SetRedraw(True)
 end event
 
 event dw_1::editchanged;
 //wf_valida_menu()
-m_fa_principal.m_archivo.m_guardar.enabled = True
+//m_fa_principal.m_archivo.m_guardar.enabled = True
 
 end event
 
-event dw_1::ue_down;call super::ue_down;Integer li_column,li_row
+event dw_1::ue_down;//Integer li_column,li_row
 
-li_row = getrow()
+//li_row = getrow()
 
-If  li_row = dw.rowcount() Then
-	If key = Keyenter! or keydown(KeyTab!) Then
+//If  li_row = dw.rowcount() Then
+//	If key = Keyenter! or keydown(KeyTab!) Then
 		
-		li_column = dw_1.getcolumn() + 1
+//		li_column = dw_1.getcolumn() + 1
 		
-		if li_column > 3 then
-			li_column = 1
-			If li_row = dw.rowcount() and str_pedi.reporte_o_para ='PARA' then
-				Parent.triggerevent("ue_adicionar")
-			Else
-				dw_1.ScrollToRow(li_row+1)
-			End If
-		end if
-		dw_1.setcolumn(li_column)
-		dw_1.setfocus()	
+//		if li_column > 3 then
+//			li_column = 1
+//			If li_row = dw.rowcount() and str_pedi.reporte_o_para ='PARA' then
+//				Parent.triggerevent("ue_adicionar")
+//			Else
+//				dw_1.ScrollToRow(li_row+1)
+//			End If
+//		end if
+//		dw_1.setcolumn(li_column)
+//		dw_1.setfocus()	
 
-	end if
-Else	
-//or key = KeyTab!
-	If key = Keyenter!   Then
-		li_column = dw_1.getcolumn() + 1
-		if li_column > 3 then
-			li_row = dw_1.getrow() + 1
+//	end if
+//Else	
+////or key = KeyTab!
+//	If key = Keyenter!   Then
+//		li_column = dw_1.getcolumn() + 1
+//		if li_column > 3 then
+//			li_row = dw_1.getrow() + 1
 
-			li_column = 1
-			dw_1.ScrollToRow(li_row )
-		End If
-		dw_1.setcolumn(li_column)
-		dw_1.setfocus()	
-		return 2
-	End If
-end if
+//			li_column = 1
+//			dw_1.ScrollToRow(li_row )
+//		End If
+//		dw_1.setcolumn(li_column)
+//		dw_1.setfocus()	
+//		return 2
+//	End If
+//end if
 
 end event
 
 event dw_1::getfocus;dw=this
 end event
 
-event dw_1::doubleclicked;If str_pedi.reporte_o_para ='PARA' then Return
-cb_aceptar.Postevent("clicked")
+event dw_1::doubleclicked;//If str_pedi.reporte_o_para ='PARA' then Return
+//cb_aceptar.Postevent("clicked")
+
+If str_pedi.reporte_o_para = 'PARA' Then Return
+If row <= 0 Then Return
+
+// Asegura que la fila donde se hizo doble clic quede activa y seleccionada
+this.SelectRow(0, false)
+this.SelectRow(row, true)
+this.SetRow(row)
+
+cb_aceptar.PostEvent(Clicked!)
+end event
+
+event dw_1::dberror;//
+end event
+
+event dw_1::itemchanged;//
+end event
+
+event dw_1::itemfocuschanged;//
+end event
+
+event dw_1::rbuttondown;//
+end event
+
+event dw_1::ue_tabfinal;//
+end event
+
+event dw_1::ue_entercol;//
+end event
+
+event dw_1::ue_escape;//
+end event
+
+event dw_1::ue_helpcol;//
+end event
+
+event dw_1::ue_microayuda;//
 end event
 
 type st_ayuda from w_fa_padre`st_ayuda within w_fa_man_selec_formatos
@@ -594,7 +776,8 @@ string facename = "Arial"
 string text = "Cancelar"
 end type
 
-event clicked;Parent.triggerevent("Close")
+event clicked;//Parent.triggerevent("Close")
+Close(Parent)
 
 end event
 

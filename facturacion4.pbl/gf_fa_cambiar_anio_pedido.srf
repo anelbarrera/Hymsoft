@@ -1,0 +1,226 @@
+﻿//objectcomments  
+global type gf_fa_cambiar_anio_pedido from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_cambiar_anio_pedido (string ls_ped_sel, string ls_fact_sel, string ls_tipo_sel, integer li_ann_sel, string is_tipo_repl, integer ii_ann_repl, string is_pedido_repl, ref boolean lb_salvo)
+end prototypes
+
+global subroutine gf_fa_cambiar_anio_pedido (string ls_ped_sel, string ls_fact_sel, string ls_tipo_sel, integer li_ann_sel, string is_tipo_repl, integer ii_ann_repl, string is_pedido_repl, ref boolean lb_salvo);// Esta función permite cambiar el tipo de factura de un 
+// pedido de factura , el año de la misma o el número del pedido
+// Siempre y cuando no haya sido Impresa
+
+String ls_tipo, ls_sqlerrtext,ls_pedido_repl
+Integer li_anio
+
+If is_tipo_repl = '' or isNull(is_tipo_repl) then
+	ls_tipo = ls_tipo_sel
+else
+	ls_tipo = is_tipo_repl
+end if
+
+If ii_ann_repl = 0 or isNull(ii_ann_repl) then
+	li_anio = li_ann_sel
+else
+	li_anio = ii_ann_repl
+end if
+
+If is_pedido_repl = '' or isNull(is_pedido_repl) then
+	ls_pedido_repl = ls_ped_sel
+else
+	ls_pedido_repl = is_pedido_repl
+end if
+
+  INSERT INTO fatpedid  
+         ( pedi_g_financiero,   
+           pedi_empresa,   
+           pedi_tipo,   
+           pedi_no_pedido,   
+           pedi_ann,   
+           pedi_cliente,   
+           pedi_ruc_cliente,   
+           pedi_condicion_pago,   
+           pedi_tipo_venta,   
+           pedi_tipo_movimiento,   
+           pedi_no_traspaso,   
+           pedi_fecha,   
+           pedi_fecha_creacion,   
+           pedi_fecha_modificacion,   
+           pedi_dias_pago,   
+           pedi_consignado,   
+           pedi_a_nombre,   
+           pedi_a_nombre_direccion,   
+           pedi_despachado,   
+           pedi_via,   
+           pedi_con_emb_no,   
+           pedi_marca,   
+           pedi_bultos_total,   
+           pedi_cubicaje_total,   
+           pedi_peso_total,   
+           pedi_unidad_peso,   
+           pedi_gastos_total,   
+           pedi_monto_total,   
+           pedi_descu_subt_deta,   
+           pedi_por_descuento,   
+           pedi_supervisor,   
+           pedi_monto_final,   
+           pedi_comentario,   
+           pedi_estado,   
+           pedi_autorizacion,   
+           pedi_actualizo_cargos,   
+           pedi_actualizo_vendedor,   
+           pedi_factura_de_bodega,   
+           pedi_fecha_fin_plazo,   
+           pedi_pasado_a_empresa,   
+           pedi_pedido_vta_diaria,   
+           pedi_restaurado_por,   
+           pedi_cuatro_decimales,   
+           pedi_reserva_origen,   
+           pedi_usuario,   
+           pedi_precio_a_utilizar,   
+           pedi_costos_total,   
+           pedi_viene_de_pedido,   
+           pedi_estado_pedido,   
+           pedi_sec_impresion,   
+           pedi_ncr_descuento,   
+           pedi_guia,   
+           pedi_destino,   
+           pedi_autor_packing,   
+           pedi_descuento_ncr,   
+           pedi_fecha_impresion )  
+     SELECT fatpedid.pedi_g_financiero,   
+            fatpedid.pedi_empresa,   
+            fatpedid.pedi_tipo,   
+				fatpedid.pedi_no_pedido,   
+            :li_anio,				
+            fatpedid.pedi_cliente,   
+            fatpedid.pedi_ruc_cliente,   
+            fatpedid.pedi_condicion_pago,   
+            fatpedid.pedi_tipo_venta,   
+            fatpedid.pedi_tipo_movimiento,   
+            fatpedid.pedi_no_traspaso,   
+            fatpedid.pedi_fecha,   
+            fatpedid.pedi_fecha_creacion,   
+            fatpedid.pedi_fecha_modificacion,   
+            fatpedid.pedi_dias_pago,   
+            fatpedid.pedi_consignado,   
+            fatpedid.pedi_a_nombre,   
+            fatpedid.pedi_a_nombre_direccion,   
+            fatpedid.pedi_despachado,   
+            fatpedid.pedi_via,   
+            fatpedid.pedi_con_emb_no,   
+            fatpedid.pedi_marca,   
+            fatpedid.pedi_bultos_total,   
+            fatpedid.pedi_cubicaje_total,   
+            fatpedid.pedi_peso_total,   
+            fatpedid.pedi_unidad_peso,   
+            fatpedid.pedi_gastos_total,   
+            fatpedid.pedi_monto_total,   
+            fatpedid.pedi_descu_subt_deta,   
+            fatpedid.pedi_por_descuento,   
+            fatpedid.pedi_supervisor,   
+            fatpedid.pedi_monto_final,   
+            fatpedid.pedi_comentario,   
+            fatpedid.pedi_estado,   
+            fatpedid.pedi_autorizacion,   
+            fatpedid.pedi_actualizo_cargos,   
+            fatpedid.pedi_actualizo_vendedor,   
+            fatpedid.pedi_factura_de_bodega,   
+            fatpedid.pedi_fecha_fin_plazo,   
+            fatpedid.pedi_pasado_a_empresa,   
+            fatpedid.pedi_pedido_vta_diaria,   
+            fatpedid.pedi_restaurado_por,   
+            fatpedid.pedi_cuatro_decimales,   
+            fatpedid.pedi_reserva_origen,   
+            fatpedid.pedi_usuario,   
+            fatpedid.pedi_precio_a_utilizar,   
+            fatpedid.pedi_costos_total,   
+            fatpedid.pedi_viene_de_pedido,   
+            fatpedid.pedi_estado_pedido,   
+            fatpedid.pedi_sec_impresion,   
+            fatpedid.pedi_ncr_descuento,   
+            fatpedid.pedi_guia,   
+            fatpedid.pedi_destino,   
+            fatpedid.pedi_autor_packing,   
+            fatpedid.pedi_descuento_ncr,   
+            fatpedid.pedi_fecha_impresion  
+       FROM fatpedid  
+      WHERE ( fatpedid.pedi_g_financiero = :str.g_financiero ) AND  
+            ( fatpedid.pedi_empresa = :str.empresa ) AND  
+            ( fatpedid.pedi_no_pedido = :ls_ped_sel ) AND  
+            ( fatpedid.pedi_ann = :li_ann_sel ) ;
+				
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al Insertar registro en fatpedid",ls_sqlerrtext)
+			return
+		end if			
+
+//***********************************************
+  UPDATE fadpecar  
+     SET peca_ann =: li_anio  
+   WHERE ( fadpecar.peca_g_financiero = :str.g_financiero ) AND  
+         ( fadpecar.peca_empresa = :str.empresa ) AND  
+         ( fadpecar.peca_no_pedido = :ls_ped_sel ) AND  
+         ( fadpecar.peca_ann = :li_ann_sel  )   ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en fadpecar",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+  UPDATE fadvenpe  
+     SET vped_ann = :li_anio  
+   WHERE ( fadvenpe.vped_g_financiero = :str.g_financiero ) AND  
+         ( fadvenpe.vped_empresa = :str.empresa ) AND  
+         ( fadvenpe.vped_no_pedido = :ls_ped_sel ) AND  
+         ( fadvenpe.vped_ann = :li_ann_sel ) ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en fadvenpe",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+  UPDATE fadpedid  
+     SET dped_ann = :li_anio  
+   WHERE ( fadpedid.dped_g_financiero = :str.g_financiero ) AND  
+         ( fadpedid.dped_empresa = :str.empresa ) AND  
+         ( fadpedid.dped_no_pedido = :ls_ped_sel ) AND  
+         ( fadpedid.dped_ann = :li_ann_sel )       ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en fadpedid",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+  DELETE FROM fatpedid  
+   WHERE ( fatpedid.pedi_g_financiero = :str.g_financiero ) AND  
+         ( fatpedid.pedi_empresa = :str.empresa ) AND  
+         ( fatpedid.pedi_no_pedido = :ls_ped_sel ) AND  
+         ( fatpedid.pedi_ann = :li_ann_sel )  ;
+			
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al eliminar registro en fatpedid",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+commit using sqlca;
+lb_salvo = true
+mensaje("","El Cambio fue Realizado Exitosamente","")
+return
+end subroutine
+

@@ -1,0 +1,1268 @@
+﻿//objectcomments  
+global type gf_fa_copia_identica_doc from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_copia_identica_doc (string ls_ped_sel, string ls_fact_sel, string ls_tipo_sel, integer li_ann_sel, string is_tipo_repl, integer ii_ann_repl, string is_pedido_repl, ref boolean lb_salvo, integer ll_sw)
+end prototypes
+
+global subroutine gf_fa_copia_identica_doc (string ls_ped_sel, string ls_fact_sel, string ls_tipo_sel, integer li_ann_sel, string is_tipo_repl, integer ii_ann_repl, string is_pedido_repl, ref boolean lb_salvo, integer ll_sw);//Para copiar documentos
+String  ls_tipo, ls_sqlerrtext,ls_pedido_repl, ls_estado = 'A'
+Integer li_anio, li_resultado
+long    ll_valor,ll_dias_pago
+datetime ldt_fecha_fin_plazo
+date ldt_fecha_servidor
+	
+ldt_fecha_servidor = date(gf_fecha_serv())
+
+If is_tipo_repl = '' or isNull(is_tipo_repl) then
+	ls_tipo = ls_tipo_sel
+else
+	ls_tipo = is_tipo_repl
+end if
+
+If ii_ann_repl = 0 or isNull(ii_ann_repl) then
+	li_anio = li_ann_sel
+else
+	li_anio = ii_ann_repl
+end if
+
+If is_pedido_repl = '' or isNull(is_pedido_repl) then
+	ls_pedido_repl = ls_ped_sel
+else
+	ls_pedido_repl = is_pedido_repl
+end if
+
+ll_valor = long(ls_pedido_repl) 
+
+if ll_sw = 1 then 
+
+  li_resultado = gf_mensaje('','Desea que la Copia de la Factura Reserve la Mercancia ? ',3,1,'E')
+  if li_resultado = 2 then
+	ls_estado = 'N'
+ elseif li_resultado = 3 then
+	 lb_salvo = false
+	 return
+ end if
+
+  select fact_dias_pago
+  into :ll_dias_pago
+  from fatdiari
+  WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+        ( fatdiari.fact_empresa = :str.empresa ) AND  
+        ( fatdiari.fact_tipo = :ls_tipo_sel ) AND  
+        ( fatdiari.fact_ann = :li_ann_sel ) AND  
+        ( fatdiari.fact_no_pedido = :ls_ped_sel )   ;
+	
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;  
+			lb_salvo=false
+			mensaje("Información","Error al Insertar registro en fatdiari",ls_sqlerrtext)
+			return
+		else
+			if sqlca.sqlcode = 0 then
+				ldt_fecha_fin_plazo = gf_recupera_dias(ll_dias_pago,date(ldt_fecha_servidor))
+			end if
+		end if			
+
+//************************************************
+  INSERT INTO fatdiari  
+         ( fact_g_financiero,   
+           fact_empresa,   
+           fact_tipo,   
+           fact_no_pedido,   
+           fact_ann,   
+           fact_no_factura,   
+           fact_cliente,   
+           fact_ruc_cliente,   
+           fact_condicion_pago,   
+           fact_tipo_venta,   
+           fact_tipo_movimiento,   
+           fact_no_traspaso,   
+           fact_fecha,   
+           fact_fecha_creacion,   
+           fact_fecha_modificacion,   
+           fact_dias_pago,   
+           fact_fecha_fin_plazo,   
+           fact_fecha_cancelado,   
+           fact_consignado,   
+           fact_a_nombre,   
+           fact_a_nombre_direccion,   
+           fact_despachado,   
+           fact_via,   
+           fact_con_emb_no,   
+           fact_marca,   
+           fact_bultos_total,   
+           fact_cubicaje_total,   
+           fact_peso_total,   
+           fact_unidad_peso,   
+           fact_gastos_total,   
+           fact_monto_fact_total,   
+           fact_descuento_subt_deta,   
+           fact_por_descuento,   
+           fact_supervisor,   
+           fact_monto_final,   
+           fact_comentario,   
+           fact_estado,   
+           fact_act_cliente,   
+           fact_act_inventario,   
+           fact_act_conta,   
+           fact_cerrada,   
+           fact_referencia_fac,   
+           fact_monto_abonado,   
+           fact_fecha_act_conta,   
+           fact_pedido_original,   
+           fact_autorizacion,   
+           fact_actualizo_cargos,   
+           fact_actualizo_vendedor,   
+           fact_factura_de_bodega,   
+           fact_viene_de_pedido,   
+           fact_habilitada_por,   
+           fact_cuatro_decimales,   
+           fact_usuario,   
+           fact_precio_a_utilizar,   
+           fact_costos_total,   
+           fact_pasado_a_empresa )  
+     SELECT fatdiari.fact_g_financiero,   
+            fatdiari.fact_empresa,   
+            :ls_tipo,   
+            :ls_pedido_repl,   
+            :li_anio,   
+            '0',   
+            fatdiari.fact_cliente,   
+            fatdiari.fact_ruc_cliente,   
+            fatdiari.fact_condicion_pago,   
+            fatdiari.fact_tipo_venta,   
+            fatdiari.fact_tipo_movimiento,   
+            fatdiari.fact_no_traspaso,   
+            :ldt_fecha_servidor,   
+            getdate(),    
+            fatdiari.fact_fecha_modificacion,   
+            fatdiari.fact_dias_pago,   
+            :ldt_fecha_fin_plazo,   
+            fatdiari.fact_fecha_cancelado,   
+            fatdiari.fact_consignado,   
+            fatdiari.fact_a_nombre,   
+            fatdiari.fact_a_nombre_direccion,   
+            fatdiari.fact_despachado,   
+            fatdiari.fact_via,   
+            fatdiari.fact_con_emb_no,   
+            fatdiari.fact_marca,   
+            fatdiari.fact_bultos_total,   
+            fatdiari.fact_cubicaje_total,   
+            fatdiari.fact_peso_total,   
+            fatdiari.fact_unidad_peso,   
+            fatdiari.fact_gastos_total,   
+            fatdiari.fact_monto_fact_total,   
+            fatdiari.fact_descuento_subt_deta,   
+            fatdiari.fact_por_descuento,   
+            fatdiari.fact_supervisor,   
+            fatdiari.fact_monto_final,   
+            fatdiari.fact_comentario,   
+            :ls_estado,   
+            0,   
+            0,   
+            0,   
+            fatdiari.fact_cerrada,   
+            fatdiari.fact_referencia_fac,   
+            fatdiari.fact_monto_abonado,   
+            fatdiari.fact_fecha_act_conta,   
+            fatdiari.fact_pedido_original,   
+            fatdiari.fact_autorizacion,   
+            fatdiari.fact_actualizo_cargos,   
+            fatdiari.fact_actualizo_vendedor,   
+            fatdiari.fact_factura_de_bodega,   
+            0,   
+            '',   
+            fatdiari.fact_cuatro_decimales,   
+            :str.usuario,   
+            fatdiari.fact_precio_a_utilizar,   
+            fatdiari.fact_costos_total,   
+            0  
+       FROM fatdiari  
+       WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+             ( fatdiari.fact_empresa = :str.empresa ) AND  
+             ( fatdiari.fact_tipo = :ls_tipo_sel ) AND  
+             ( fatdiari.fact_ann = :li_ann_sel ) AND  
+             ( fatdiari.fact_no_pedido = :ls_ped_sel )   ;
+				
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al Insertar registro en fatiari",ls_sqlerrtext)
+			return
+		end if			
+
+//************************************************
+  INSERT INTO faddiari  
+         ( facd_g_financiero,   
+           facd_empresa,   
+           facd_tipo,   
+           facd_no_pedido,   
+           facd_pedido_original,   
+           facd_linea,   
+           facd_ann,   
+           facd_producto_servicio,   
+           facd_codigo_item,   
+           facd_descripcion_alterna,   
+           facd_cubicaje,   
+           facd_peso,   
+           facd_unidad_peso,   
+           facd_unidad_producto,   
+           facd_precio_mayor,   
+           facd_precio_menor,   
+           facd_bodega,   
+           facd_costo_fob,   
+           facd_costo_cif,   
+           facd_precio_unidad_producto,   
+           facd_unidad_venta,   
+           facd_cantidad,   
+           facd_cantidad_fraccion,   
+           facd_monto_total,   
+           facd_por_descuento,   
+           facd_monto_final,   
+           facd_fecha_reg,   
+           facd_usuario,   
+           facd_supervisor,   
+           facd_bultos,   
+           facd_pais,   
+           facd_ubicacion,   
+           facd_cant_devuelta,   
+           facd_linea_articulo_dev,   
+           facd_cant_asignada,   
+           facd_index,   
+           facd_validado,   
+           facd_viene_de_pedido,   
+           facd_bulto_inicio,   
+           facd_bulto_fin,   
+           facd_precio_original,   
+           facd_actualizado,   
+           facd_costo_total,
+		  facd_vendedor)  
+     SELECT faddiari.facd_g_financiero,   
+            faddiari.facd_empresa,   
+            :ls_tipo,   
+            :ls_pedido_repl,   
+            faddiari.facd_pedido_original,   
+            faddiari.facd_linea,   
+            :li_anio,   
+            faddiari.facd_producto_servicio,   
+            faddiari.facd_codigo_item,   
+            faddiari.facd_descripcion_alterna,   
+            faddiari.facd_cubicaje,   
+            faddiari.facd_peso,   
+            faddiari.facd_unidad_peso,   
+            faddiari.facd_unidad_producto,   
+            faddiari.facd_precio_mayor,   
+            faddiari.facd_precio_menor,   
+            faddiari.facd_bodega,   
+            faddiari.facd_costo_fob,   
+            faddiari.facd_costo_cif,   
+            faddiari.facd_precio_unidad_producto,   
+            faddiari.facd_unidad_venta,   
+            faddiari.facd_cantidad,   
+            faddiari.facd_cantidad_fraccion,   
+            faddiari.facd_monto_total,   
+            faddiari.facd_por_descuento,   
+            faddiari.facd_monto_final,   
+            faddiari.facd_fecha_reg,   
+            :str.usuario,   
+            faddiari.facd_supervisor,   
+            faddiari.facd_bultos,   
+            faddiari.facd_pais,   
+            faddiari.facd_ubicacion,   
+            faddiari.facd_cant_devuelta,   
+            faddiari.facd_linea_articulo_dev,   
+            faddiari.facd_cant_asignada,    
+            faddiari.facd_index,   
+            faddiari.facd_validado,   
+            0,   
+            faddiari.facd_bulto_inicio,   
+            faddiari.facd_bulto_fin,   
+            faddiari.facd_precio_original,   
+            faddiari.facd_actualizado,   
+            faddiari.facd_costo_total,
+		   faddiari.facd_vendedor
+       FROM faddiari 
+       WHERE ( faddiari.facd_g_financiero = :str.g_financiero ) AND  
+             ( faddiari.facd_empresa = :str.empresa) AND  
+             ( faddiari.facd_tipo = :ls_tipo_sel ) AND  
+             ( faddiari.facd_ann = :li_ann_sel ) AND  
+             ( faddiari.facd_no_pedido = :ls_ped_sel )   ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en faddiari",ls_sqlerrtext)
+			return
+		end if			
+
+//***********************************************
+  INSERT INTO fadcargo  
+         ( dcar_g_financiero,   
+           dcar_empresa,   
+           dcar_tipo,   
+           dcar_no_pedido,   
+           dcar_ann,   
+           dcar_codigo,   
+           dcar_monto )  
+     SELECT fadcargo.dcar_g_financiero,   
+            fadcargo.dcar_empresa,   
+            :ls_tipo,   
+            :ls_pedido_repl,   
+            :li_anio,   
+            fadcargo.dcar_codigo,   
+            fadcargo.dcar_monto  
+       FROM fadcargo 
+  		 WHERE ( fadcargo.dcar_g_financiero = :str.g_financiero ) AND  
+			 	 ( fadcargo.dcar_empresa = :str.empresa ) AND  
+				 ( fadcargo.dcar_tipo = :ls_tipo_sel ) AND  
+				 ( fadcargo.dcar_no_pedido = :ls_ped_sel ) and
+				 ( fadcargo.dcar_ann = :li_ann_sel ) ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al Insertar registro en fadcargo",ls_sqlerrtext)
+			return
+		end if			
+
+//************************************************
+  INSERT INTO fadvenfa  
+         ( vfac_g_financiero,   
+           vfac_empresa,   
+           vfac_tipo,   
+           vfac_no_pedido,   
+           vfac_ann,   
+           vfac_vendedor )  
+     SELECT fadvenfa.vfac_g_financiero,   
+            fadvenfa.vfac_empresa,   
+            :ls_tipo,   
+            :ls_pedido_repl,   
+            :li_anio,   
+            fadvenfa.vfac_vendedor  
+       FROM fadvenfa  
+  		 WHERE ( fadvenfa.vfac_g_financiero = :str.g_financiero ) AND  
+			 	 ( fadvenfa.vfac_empresa = :str.empresa ) AND  
+				 ( fadvenfa.vfac_tipo = :ls_tipo_sel ) AND  
+				 ( fadvenfa.vfac_ann = :li_ann_sel ) AND  
+				 ( fadvenfa.vfac_no_pedido = :ls_ped_sel )   ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en fadvenfa",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+		if ll_valor > 0 then
+			update faaparam
+			set fara_ult_pedido = :ls_pedido_repl
+			where fara_g_financiero = :str.g_financiero
+			and   fara_empresa = :str.empresa ;
+			if sqlca.sqlcode = -1 then
+				ls_sqlerrtext = sqlca.sqlerrtext
+				rollback;
+				lb_salvo=false
+				mensaje("Información","Error al actualizar registro en faaparam",ls_sqlerrtext)
+				return
+			end if			
+		end if
+//************************************************
+else
+   if ll_sw = 2 then
+
+	  select pedi_dias_pago
+	  into :ll_dias_pago
+	  from fatpedid
+  	  WHERE ( fatpedid.pedi_g_financiero = :str.g_financiero ) AND  
+		     ( fatpedid.pedi_empresa = :str.empresa ) AND  
+			  ( fatpedid.pedi_tipo = :ls_tipo_sel ) AND  
+			  ( fatpedid.pedi_ann = :li_ann_sel ) AND  
+			  ( fatpedid.pedi_no_pedido = :ls_ped_sel )   ;
+		
+			if sqlca.sqlcode = -1 then
+				ls_sqlerrtext = sqlca.sqlerrtext
+				rollback;
+				lb_salvo=false
+				mensaje("Información","Error al Insertar registro en fatiari",ls_sqlerrtext)
+				return
+			else
+				if sqlca.sqlcode = 0 then
+					ldt_fecha_fin_plazo = gf_recupera_dias(ll_dias_pago,date(ldt_fecha_servidor))
+				end if
+			end if			
+
+//************************************************
+	  
+	  INSERT INTO fatpedid  
+         ( pedi_g_financiero,   
+           pedi_empresa,   
+           pedi_tipo,   
+           pedi_no_pedido,   
+           pedi_ann,   
+           pedi_cliente,   
+           pedi_ruc_cliente,   
+           pedi_condicion_pago,   
+           pedi_tipo_venta,   
+           pedi_tipo_movimiento,   
+           pedi_no_traspaso,   
+           pedi_fecha,   
+			  pedi_fecha_creacion,
+           pedi_fecha_modificacion,   
+           pedi_dias_pago,   
+           pedi_consignado,   
+           pedi_a_nombre,   
+           pedi_a_nombre_direccion,   
+           pedi_despachado,   
+           pedi_via,   
+           pedi_con_emb_no,   
+           pedi_marca,   
+           pedi_bultos_total,   
+           pedi_cubicaje_total,   
+           pedi_peso_total,   
+           pedi_unidad_peso,   
+           pedi_gastos_total,   
+           pedi_monto_total,   
+           pedi_descu_subt_deta,   
+           pedi_por_descuento,   
+           pedi_supervisor,   
+           pedi_monto_final,   
+           pedi_comentario,   
+           pedi_estado,   
+           pedi_autorizacion,   
+           pedi_actualizo_cargos,   
+           pedi_actualizo_vendedor,   
+           pedi_factura_de_bodega,   
+           pedi_fecha_fin_plazo,   
+           pedi_pasado_a_empresa,   
+           pedi_pedido_vta_diaria,   
+           pedi_restaurado_por,   
+           pedi_cuatro_decimales,   
+           pedi_usuario,   
+           pedi_precio_a_utilizar,   
+           pedi_costos_total,
+			  pedi_viene_de_pedido)  
+     SELECT fatpedid.pedi_g_financiero,   
+            fatpedid.pedi_empresa,   
+            :ls_tipo,   
+            :ls_pedido_repl,   
+            :li_anio,   
+            fatpedid.pedi_cliente,   
+            fatpedid.pedi_ruc_cliente,   
+            fatpedid.pedi_condicion_pago,   
+            fatpedid.pedi_tipo_venta,   
+            fatpedid.pedi_tipo_movimiento,   
+            fatpedid.pedi_no_traspaso,   
+            :ldt_fecha_servidor,   
+  		   getdate(),
+            fatpedid.pedi_fecha_modificacion,   
+            fatpedid.pedi_dias_pago,   
+            fatpedid.pedi_consignado,   
+            fatpedid.pedi_a_nombre,   
+            fatpedid.pedi_a_nombre_direccion,   
+            fatpedid.pedi_despachado,   
+            fatpedid.pedi_via,   
+            fatpedid.pedi_con_emb_no,   
+            fatpedid.pedi_marca,   
+            fatpedid.pedi_bultos_total,   
+            fatpedid.pedi_cubicaje_total,   
+            fatpedid.pedi_peso_total,   
+            fatpedid.pedi_unidad_peso,   
+            fatpedid.pedi_gastos_total,   
+            fatpedid.pedi_monto_total,   
+            fatpedid.pedi_descu_subt_deta,   
+            fatpedid.pedi_por_descuento,   
+            fatpedid.pedi_supervisor,   
+            fatpedid.pedi_monto_final,   
+            fatpedid.pedi_comentario,   
+            'A',   
+            fatpedid.pedi_autorizacion,   
+            fatpedid.pedi_actualizo_cargos,   
+            fatpedid.pedi_actualizo_vendedor,   
+            fatpedid.pedi_factura_de_bodega,   
+            :ldt_fecha_fin_plazo,   
+            fatpedid.pedi_pasado_a_empresa,   
+            fatpedid.pedi_pedido_vta_diaria,   
+            fatpedid.pedi_restaurado_por,   
+            fatpedid.pedi_cuatro_decimales,   
+            :str.usuario,   
+            fatpedid.pedi_precio_a_utilizar,   
+            fatpedid.pedi_costos_total,
+				0
+       FROM fatpedid  
+  		 WHERE ( fatpedid.pedi_g_financiero = :str.g_financiero ) AND  
+			 	 ( fatpedid.pedi_empresa = :str.empresa ) AND  
+				 ( fatpedid.pedi_tipo = :ls_tipo_sel ) AND  
+				 ( fatpedid.pedi_ann = :li_ann_sel ) AND  
+				 ( fatpedid.pedi_no_pedido = :ls_ped_sel )   ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en fatpedid",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+	  INSERT INTO fadpedid  
+				( dped_g_financiero,   
+				  dped_empresa,   
+				  dped_no_pedido,   
+				  dped_ann,   
+				  dped_linea,   
+				  dped_producto_servicio,   
+				  dped_codigo_item,   
+				  dped_descripcion_alterna,   
+				  dped_cubicaje,   
+				  dped_peso,   
+				  dped_unidad_peso,   
+				  dped_unidad_producto,   
+				  dped_precio_mayor,   
+				  dped_precio_menor,   
+				  dped_bodega,   
+				  dped_costo_fob,   
+				  dped_costo_cif,   
+				  dped_precio_unidad_producto,   
+				  dped_unidad_venta,   
+				  dped_cantidad,   
+				  dped_fraccion,   
+				  dped_monto_total,   
+				  dped_por_descuento,   
+				  dped_monto_final,   
+				  dped_fecha_reg,   
+				  dped_usuario,   
+				  dped_supervisor,   
+				  dped_bultos,   
+				  dped_ubicacion,   
+				  dped_pasada,   
+				  dped_cant_asignada,   
+				  dped_index,   
+				  dped_validado,   
+				  dped_vendedor,   
+				  dped_pedido_vta_detal,   
+				  dped_promocion,   
+				  dped_bulto_inicio,   
+				  dped_bulto_fin,   
+				  dped_precio_original,   
+				  dped_reserva_origen,   
+				  dped_num_orden_compra,   
+				  dped_ann_orden_compra,   
+				  dped_num_transito,   
+				  dped_ann_transito,   
+				  dped_linea_orden,   
+				  dped_linea_transito,   
+				  dped_costo_total)  
+		  SELECT fadpedid.dped_g_financiero,   
+					fadpedid.dped_empresa,   
+					:ls_pedido_repl,   
+					:li_anio,   
+					fadpedid.dped_linea,   
+					fadpedid.dped_producto_servicio,   
+					fadpedid.dped_codigo_item,   
+					fadpedid.dped_descripcion_alterna,   
+					fadpedid.dped_cubicaje,   
+					fadpedid.dped_peso,   
+					fadpedid.dped_unidad_peso,   
+					fadpedid.dped_unidad_producto,   
+					fadpedid.dped_precio_mayor,   
+					fadpedid.dped_precio_menor,   
+					fadpedid.dped_bodega,   
+					fadpedid.dped_costo_fob,   
+					fadpedid.dped_costo_cif,   
+					fadpedid.dped_precio_unidad_producto,   
+					fadpedid.dped_unidad_venta,   
+					fadpedid.dped_cantidad,   
+					fadpedid.dped_fraccion,   
+					fadpedid.dped_monto_total,   
+					fadpedid.dped_por_descuento,   
+					fadpedid.dped_monto_final,   
+					getdate(),   
+					:str.usuario,   
+					fadpedid.dped_supervisor,   
+					fadpedid.dped_bultos,   
+					fadpedid.dped_ubicacion,   
+					0,   
+					0,   
+					fadpedid.dped_index,   
+					fadpedid.dped_validado,   
+					fadpedid.dped_vendedor,   
+					fadpedid.dped_pedido_vta_detal,   
+					fadpedid.dped_promocion,   
+					fadpedid.dped_bulto_inicio,   
+					fadpedid.dped_bulto_fin,   
+					fadpedid.dped_precio_original,   
+					fadpedid.dped_reserva_origen,   
+					fadpedid.dped_num_orden_compra,   
+					fadpedid.dped_ann_orden_compra,   
+					fadpedid.dped_num_transito,   
+					fadpedid.dped_ann_transito,   
+					fadpedid.dped_linea_orden,   
+					fadpedid.dped_linea_transito,   
+					fadpedid.dped_costo_total
+			 FROM fadpedid  
+  		    WHERE ( fadpedid.dped_g_financiero = :str.g_financiero ) AND  
+			    	 ( fadpedid.dped_empresa = :str.empresa ) AND  
+				    ( fadpedid.dped_ann = :li_ann_sel ) AND  
+				    ( fadpedid.dped_no_pedido = :ls_ped_sel )   ;
+
+			if sqlca.sqlcode = -1 then
+				ls_sqlerrtext = sqlca.sqlerrtext
+				rollback;
+				lb_salvo=false
+				mensaje("Información","Error al actualizar registro en fadpedid",ls_sqlerrtext)
+				return
+			end if			
+//************************************************
+		  INSERT INTO fadvenpe  
+					( vped_g_financiero,   
+					  vped_empresa,   
+					  vped_tipo,   
+					  vped_no_pedido,   
+					  vped_ann,   
+					  vped_vendedor )  
+			  SELECT fadvenpe.vped_g_financiero,   
+						fadvenpe.vped_empresa,   
+						:ls_tipo,   
+						:ls_pedido_repl,   
+						:li_anio,   
+						fadvenpe.vped_vendedor  
+				 FROM fadvenpe  
+				 WHERE ( fadvenpe.vped_g_financiero = :str.g_financiero ) AND  
+						 ( fadvenpe.vped_empresa = :str.empresa ) AND  
+//						 ( fadvenpe.vped_tipo = :ls_tipo_sel ) AND  
+						 ( fadvenpe.vped_ann = :li_ann_sel ) AND  
+						 ( fadvenpe.vped_no_pedido = :ls_ped_sel )   ;
+	
+				if sqlca.sqlcode = -1 then
+					ls_sqlerrtext = sqlca.sqlerrtext
+					rollback;
+					lb_salvo=false
+					mensaje("Información","Error al actualizar registro en fadvenpe",ls_sqlerrtext)
+					return
+				end if			
+//************************************************
+			  INSERT INTO fadpecar  
+						( peca_g_financiero,   
+						  peca_empresa,   
+						  peca_no_pedido,   
+						  peca_ann,   
+						  peca_codigo_cargo,   
+						  peca_monto )  
+				  SELECT fadpecar.peca_g_financiero,   
+							fadpecar.peca_empresa,   
+							:ls_pedido_repl,   
+							:li_anio,   
+							fadpecar.peca_codigo_cargo,   
+							fadpecar.peca_monto  
+					 FROM fadpecar  
+				    WHERE ( fadpecar.peca_g_financiero = :str.g_financiero ) AND  
+						    ( fadpecar.peca_empresa = :str.empresa ) AND  
+						    ( fadpecar.peca_ann = :li_ann_sel ) AND  
+						    ( fadpecar.peca_no_pedido = :ls_ped_sel )   ;
+
+					if sqlca.sqlcode = -1 then
+						ls_sqlerrtext = sqlca.sqlerrtext
+						rollback;
+						lb_salvo=false
+						mensaje("Información","Error al actualizar registro en fadpecar",ls_sqlerrtext)
+						return
+					end if			
+
+//************************************************
+					if ll_valor > 0 then
+						update faaparam
+						set fara_ult_pedido = :ls_pedido_repl
+						where fara_g_financiero = :str.g_financiero
+						and   fara_empresa = :str.empresa ;
+						if sqlca.sqlcode = -1 then
+							ls_sqlerrtext = sqlca.sqlerrtext
+							rollback;
+							lb_salvo=false
+							mensaje("Información","Error al actualizar registro en faaparam",ls_sqlerrtext)
+							return
+						end if			
+					end if
+//************************************************
+
+	else
+		if ll_sw = 3 then
+
+		  select prof_dias_pago
+		  into :ll_dias_pago
+		  from fatprofo
+		  WHERE ( fatprofo.prof_g_financiero = :str.g_financiero ) AND  
+			 	  ( fatprofo.prof_empresa = :str.empresa ) AND  
+				  ( fatprofo.prof_tipo = :ls_tipo_sel ) AND  
+				  ( fatprofo.prof_ann = :li_ann_sel ) AND  
+				  ( fatprofo.prof_no_proforma = :ls_ped_sel )   ;
+			
+				if sqlca.sqlcode = -1 then
+					ls_sqlerrtext = sqlca.sqlerrtext
+					rollback;
+					lb_salvo=false
+					mensaje("Información","Error al Insertar registro en fatiari",ls_sqlerrtext)
+					return
+				else
+					if sqlca.sqlcode = 0 then
+						ldt_fecha_fin_plazo = gf_recupera_dias(ll_dias_pago,date(ldt_fecha_servidor))
+					end if
+				end if			
+
+//************************************************
+			  
+			  INSERT INTO fatprofo  
+						( prof_g_financiero,   
+						  prof_empresa,   
+						  prof_tipo,   
+						  prof_no_proforma,   
+						  prof_ann,   
+						  prof_cliente,   
+						  prof_ruc_cliente,   
+						  prof_condicion_pago,   
+						  prof_tipo_venta,   
+						  prof_tipo_movimiento,   
+						  prof_no_traspaso,   
+						  prof_fecha,
+						  prof_fecha_creacion,
+						  prof_fecha_modificacion,   
+						  prof_dias_pago,   
+						  prof_consignado,   
+						  prof_a_nombre,   
+						  prof_a_nombre_direccion,   
+						  prof_despachado,   
+						  prof_via,   
+						  prof_con_emb_no,   
+						  prof_marca,   
+						  prof_bultos_total,   
+						  prof_cubicaje_total,   
+						  prof_peso_total,   
+						  prof_unidad_peso,   
+						  prof_gastos_total,   
+						  prof_monto_total,   
+						  prof_descu_subt_deta,   
+						  prof_por_descuento,   
+						  prof_supervisor,   
+						  prof_monto_final,   
+						  prof_comentario,   
+						  prof_estado,   
+						  prof_documento,   
+						  prof_actualizo_cargos,   
+						  prof_actualizo_vendedor,   
+						  prof_factura_de_bodega,   
+						  prof_fecha_fin_plazo,   
+						  prof_autorizacion,   
+						  prof_cuatro_decimales,   
+						  prof_precio_a_utilizar,   
+						  prof_costos_total,   
+						  prof_usuario,   
+						  prof_restaurado_por )  
+				  SELECT fatprofo.prof_g_financiero,   
+							fatprofo.prof_empresa,   
+							:ls_tipo,   
+							:ls_pedido_repl,   
+							:li_anio,   
+							fatprofo.prof_cliente,   
+							fatprofo.prof_ruc_cliente,   
+							fatprofo.prof_condicion_pago,   
+							fatprofo.prof_tipo_venta,   
+							fatprofo.prof_tipo_movimiento,   
+							fatprofo.prof_no_traspaso,   
+							:ldt_fecha_servidor,   
+							getdate(),   
+							fatprofo.prof_fecha_modificacion,   
+							fatprofo.prof_dias_pago,   
+							fatprofo.prof_consignado,   
+							fatprofo.prof_a_nombre,   
+							fatprofo.prof_a_nombre_direccion,   
+							fatprofo.prof_despachado,   
+							fatprofo.prof_via,   
+							fatprofo.prof_con_emb_no,   
+							fatprofo.prof_marca,   
+							fatprofo.prof_bultos_total,   
+							fatprofo.prof_cubicaje_total,   
+							fatprofo.prof_peso_total,   
+							fatprofo.prof_unidad_peso,   
+							fatprofo.prof_gastos_total,   
+							fatprofo.prof_monto_total,   
+							fatprofo.prof_descu_subt_deta,   
+							fatprofo.prof_por_descuento,   
+							fatprofo.prof_supervisor,   
+							fatprofo.prof_monto_final,   
+							fatprofo.prof_comentario,   
+							fatprofo.prof_estado,   
+							fatprofo.prof_documento,   
+							fatprofo.prof_actualizo_cargos,   
+							fatprofo.prof_actualizo_vendedor,   
+							fatprofo.prof_factura_de_bodega,   
+							:ldt_fecha_fin_plazo,   
+							fatprofo.prof_autorizacion,   
+							fatprofo.prof_cuatro_decimales,   
+							fatprofo.prof_precio_a_utilizar,   
+							fatprofo.prof_costos_total,   
+							:str.usuario,   
+							fatprofo.prof_restaurado_por  
+					 FROM fatprofo  
+				    WHERE ( fatprofo.prof_g_financiero = :str.g_financiero ) AND  
+						    ( fatprofo.prof_empresa = :str.empresa ) AND  
+				    		 ( fatprofo.prof_tipo = :ls_tipo_sel ) AND  
+						    ( fatprofo.prof_ann = :li_ann_sel ) AND  
+						    ( fatprofo.prof_no_proforma = :ls_ped_sel )   ;
+
+					if sqlca.sqlcode = -1 then
+						ls_sqlerrtext = sqlca.sqlerrtext
+						rollback;
+						lb_salvo=false
+						mensaje("Información","Error al actualizar registro en fatprofo",ls_sqlerrtext)
+						return
+					end if			
+
+//************************************************
+				  INSERT INTO fadprofo  
+							( dpro_g_financiero,   
+							  dpro_empresa,   
+							  dpro_no_proforma,   
+							  dpro_ann,   
+							  dpro_linea,   
+							  dpro_producto_servicio,   
+							  dpro_codigo_item,   
+							  dpro_descripcion_alterna,   
+							  dpro_cubucaje,   
+							  dpro_peso,   
+							  dpro_unidad_peso,   
+							  dpro_unidad_producto,   
+							  dpro_precio_mayor,   
+							  dpro_precio_menor,   
+							  dpro_bodega,   
+							  dpro_costo_fob,   
+							  dpro_costo_cif,   
+							  dpro_precio_unidad_producto,   
+							  dpro_unidad_venta,   
+							  dpro_cantidad,   
+							  dpro_fraccion,   
+							  dpro_monto_total,   
+							  dpro_por_descuento,   
+							  dpro_monto_final,   
+							  dpro_fecha_reg,   
+							  dpro_usuario,   
+							  dpro_supervisor,   
+							  dpro_bultos,   
+							  dpro_ubicacion,   
+							  dpro_pasada,   
+							  dpro_index,   
+							  dpro_validado,   
+							  dpro_bulto_inicio,   
+							  dpro_bulto_fin,   
+							  dpro_precio_original,   
+							  dpro_costo_total,
+							  dpro_vendedor)  
+					  SELECT fadprofo.dpro_g_financiero,   
+								fadprofo.dpro_empresa,   
+								:ls_pedido_repl,   
+								:li_anio,   
+								fadprofo.dpro_linea,   
+								fadprofo.dpro_producto_servicio,   
+								fadprofo.dpro_codigo_item,   
+								fadprofo.dpro_descripcion_alterna,   
+								fadprofo.dpro_cubucaje,   
+								fadprofo.dpro_peso,   
+								fadprofo.dpro_unidad_peso,   
+								fadprofo.dpro_unidad_producto,   
+								fadprofo.dpro_precio_mayor,   
+								fadprofo.dpro_precio_menor,   
+								fadprofo.dpro_bodega,   
+								fadprofo.dpro_costo_fob,   
+								fadprofo.dpro_costo_cif,   
+								fadprofo.dpro_precio_unidad_producto,   
+								fadprofo.dpro_unidad_venta,   
+								fadprofo.dpro_cantidad,   
+								fadprofo.dpro_fraccion,   
+								fadprofo.dpro_monto_total,   
+								fadprofo.dpro_por_descuento,   
+								fadprofo.dpro_monto_final,   
+								getdate(),   
+								:str.usuario,   
+								fadprofo.dpro_supervisor,   
+								fadprofo.dpro_bultos,   
+								fadprofo.dpro_ubicacion,   
+								fadprofo.dpro_pasada,   
+								fadprofo.dpro_index,   
+								fadprofo.dpro_validado,   
+								fadprofo.dpro_bulto_inicio,   
+								fadprofo.dpro_bulto_fin,   
+								fadprofo.dpro_precio_original,   
+								fadprofo.dpro_costo_total,
+								fadprofo.dpro_vendedor
+						 FROM fadprofo  
+				       WHERE ( fadprofo.dpro_g_financiero = :str.g_financiero ) AND  
+						       ( fadprofo.dpro_empresa = :str.empresa ) AND  
+						       ( fadprofo.dpro_ann = :li_ann_sel ) AND  
+						       ( fadprofo.dpro_no_proforma = :ls_ped_sel )   ;
+
+						if sqlca.sqlcode = -1 then
+							ls_sqlerrtext = sqlca.sqlerrtext
+							rollback;
+							lb_salvo=false
+							mensaje("Información","Error al actualizar registro en fadprofo",ls_sqlerrtext)
+							return
+						end if			
+//************************************************
+					  INSERT INTO fadvenpr  
+								( vpro_g_financiero,   
+								  vpro_empresa,   
+								  vpro_tipo,   
+								  vpro_no_proforma,   
+								  vpro_ann,   
+								  vpro_vendedor )  
+						  SELECT fadvenpr.vpro_g_financiero,   
+									fadvenpr.vpro_empresa,   
+									:ls_tipo,   
+									:ls_pedido_repl,   
+									:li_anio,   
+									fadvenpr.vpro_vendedor  
+							 FROM fadvenpr  
+							 WHERE ( fadvenpr.vpro_g_financiero = :str.g_financiero ) AND  
+									 ( fadvenpr.vpro_empresa = :str.empresa ) AND  
+	//								 ( fadvenpr.vpro_tipo = :ls_tipo_sel ) AND  
+									 ( fadvenpr.vpro_ann = :li_ann_sel ) AND  
+									 ( fadvenpr.vpro_no_proforma = :ls_ped_sel )   ;
+	
+							if sqlca.sqlcode = -1 then
+								ls_sqlerrtext = sqlca.sqlerrtext
+								rollback;
+								lb_salvo=false
+								mensaje("Información","Error al actualizar registro en fadvenpr",ls_sqlerrtext)
+								return
+							end if			
+//************************************************
+						  INSERT INTO fadproca  
+									( prca_g_financiero,   
+									  prca_empresa,   
+									  prca_ann,   
+									  prca_no_proforma,   
+									  prca_codigo_cargo,   
+									  prca_monto )  
+							  SELECT fadproca.prca_g_financiero,   
+										fadproca.prca_empresa,   
+										:li_anio,   
+										:ls_pedido_repl,   
+										fadproca.prca_codigo_cargo,   
+										fadproca.prca_monto  
+								 FROM fadproca  
+								 WHERE ( fadproca.prca_g_financiero = :str.g_financiero ) AND  
+										 ( fadproca.prca_empresa = :str.empresa ) AND  
+										 ( fadproca.prca_ann = :li_ann_sel ) AND  
+										 ( fadproca.prca_no_proforma = :ls_ped_sel )   ;
+		
+								if sqlca.sqlcode = -1 then
+									ls_sqlerrtext = sqlca.sqlerrtext
+									rollback;
+									lb_salvo=false
+									mensaje("Información","Error al actualizar registro en fadproca",ls_sqlerrtext)
+									return
+								end if			
+//************************************************
+                        if ll_valor > 0 then
+									update faaparam
+									set fara_ult_proforma = :ls_pedido_repl
+									where fara_g_financiero = :str.g_financiero
+									and   fara_empresa = :str.empresa ;
+									if sqlca.sqlcode = -1 then
+										ls_sqlerrtext = sqlca.sqlerrtext
+										rollback;
+										lb_salvo=false
+										mensaje("Información","Error al actualizar registro en faaparam",ls_sqlerrtext)
+										return
+									end if			
+								end if
+		else	//Inserta de Factura a Proformas
+			if ll_sw = 4 then
+				//No calcula la fecha proxima, ya que la copia se hace con la fecha original de la factura	
+				//Encabezado de Facturas para Proformas
+			  INSERT INTO fatprofo  
+						( prof_g_financiero,   
+						  prof_empresa,   
+						  prof_tipo,   
+						  prof_no_proforma,   
+						  prof_ann,   
+						  prof_cliente,   
+						  prof_ruc_cliente,   
+						  prof_condicion_pago,   
+						  prof_tipo_venta,   
+						  prof_tipo_movimiento,   
+						  prof_no_traspaso,   
+						  prof_fecha,
+						  prof_fecha_creacion,
+						  prof_fecha_modificacion,   
+						  prof_dias_pago,   
+						  prof_consignado,   
+						  prof_a_nombre,   
+						  prof_a_nombre_direccion,   
+						  prof_despachado,   
+						  prof_via,   
+						  prof_con_emb_no,   
+						  prof_marca,   
+						  prof_bultos_total,   
+						  prof_cubicaje_total,   
+						  prof_peso_total,   
+						  prof_unidad_peso,   
+						  prof_gastos_total,   
+						  prof_monto_total,   
+						  prof_descu_subt_deta,   
+						  prof_por_descuento,   
+						  prof_supervisor,   
+						  prof_monto_final,   
+						  prof_comentario,   
+						  prof_estado,   
+						  prof_documento,   
+						  prof_actualizo_cargos,   
+						  prof_actualizo_vendedor,   
+						  prof_factura_de_bodega,   
+						  prof_fecha_fin_plazo,   
+						  prof_autorizacion,   
+						  prof_cuatro_decimales,   
+						  prof_precio_a_utilizar,   
+						  prof_costos_total,   
+						  prof_usuario,
+						  prof_no_pedido,
+						  prof_no_factura)  
+				  SELECT fatdiari.fact_g_financiero,   
+							fatdiari.fact_empresa,   
+							:ls_tipo,   
+							:ls_pedido_repl,   
+							:li_anio,   
+							fatdiari.fact_cliente,   
+							fatdiari.fact_ruc_cliente,   
+							fatdiari.fact_condicion_pago,   
+							fatdiari.fact_tipo_venta,   
+							fatdiari.fact_tipo_movimiento,   
+							fatdiari.fact_no_traspaso,   
+							fatdiari.fact_fecha,	//Para mantener la misma de la factura
+							getdate(),
+							fatdiari.fact_fecha_modificacion,   
+							fatdiari.fact_dias_pago,   
+							fatdiari.fact_consignado,   
+							fatdiari.fact_a_nombre,   
+							fatdiari.fact_a_nombre_direccion,   
+							fatdiari.fact_despachado,   
+							fatdiari.fact_via,   
+							fatdiari.fact_con_emb_no,   
+							fatdiari.fact_marca,   
+							fatdiari.fact_bultos_total,   
+							fatdiari.fact_cubicaje_total,   
+							fatdiari.fact_peso_total,   
+							fatdiari.fact_unidad_peso,   
+							fatdiari.fact_gastos_total,   
+							fatdiari.fact_monto_fact_total,   
+							fatdiari.fact_descuento_subt_deta,   
+							fatdiari.fact_por_descuento,   
+							fatdiari.fact_supervisor,   
+							fatdiari.fact_monto_final,   
+							fatdiari.fact_comentario,   
+							'A',   
+							fatdiari.fact_no_factura, //En el documento, para que salga la factura
+							fatdiari.fact_actualizo_cargos,   
+							fatdiari.fact_actualizo_vendedor,   							
+							fatdiari.fact_factura_de_bodega,   
+							fatdiari.fact_fecha_fin_plazo,
+							fatdiari.fact_autorizacion,   						
+							fatdiari.fact_cuatro_decimales,   
+							fatdiari.fact_precio_a_utilizar,   
+							fatdiari.fact_costos_total,   							
+							:str.usuario,
+							fact_no_pedido,
+							fact_no_factura
+					 FROM fatdiari  
+					 WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+							 ( fatdiari.fact_empresa = :str.empresa ) AND  
+							 ( fatdiari.fact_tipo = :ls_tipo_sel ) AND  
+							 ( fatdiari.fact_ann = :li_ann_sel ) AND  
+							 ( fatdiari.fact_no_pedido = :ls_ped_sel )   ;							
+								
+					if sqlca.sqlcode = -1 then
+						ls_sqlerrtext = sqlca.sqlerrtext
+						rollback;
+						lb_salvo=false
+						mensaje("Información","Error al actualizar registro en fatprofo",ls_sqlerrtext)
+						return
+					end if			
+					//************************************************
+					//Detalle de la factura para Proformas
+				  INSERT INTO fadprofo  
+							( dpro_g_financiero,   
+							  dpro_empresa,   
+							  dpro_no_proforma,   
+							  dpro_ann,   
+							  dpro_linea,   
+							  dpro_producto_servicio,   
+							  dpro_codigo_item,   
+							  dpro_descripcion_alterna,   
+							  dpro_cubucaje,   
+							  dpro_peso,   
+							  dpro_unidad_peso,   
+							  dpro_unidad_producto,   
+							  dpro_precio_mayor,   
+							  dpro_precio_menor,   
+							  dpro_bodega,   
+							  dpro_costo_fob,   
+							  dpro_costo_cif,   
+							  dpro_precio_unidad_producto,   
+							  dpro_unidad_venta,   
+							  dpro_cantidad,   
+							  dpro_fraccion,   
+							  dpro_monto_total,   
+							  dpro_por_descuento,   
+							  dpro_monto_final,   
+							  dpro_fecha_reg,   
+							  dpro_usuario,   
+							  dpro_supervisor,   
+							  dpro_bultos,   
+							  dpro_ubicacion,   
+							  dpro_pasada,   
+							  dpro_index,   
+							  dpro_validado,   
+							  dpro_bulto_inicio,   
+							  dpro_bulto_fin,   
+							  dpro_precio_original,   
+							  dpro_costo_total,
+							  dpro_vendedor)  
+					  SELECT faddiari.facd_g_financiero,   
+								faddiari.facd_empresa,   
+								:ls_pedido_repl,   
+								:li_anio,   
+								faddiari.facd_linea,   
+								faddiari.facd_producto_servicio,   
+								faddiari.facd_codigo_item,   
+								faddiari.facd_descripcion_alterna,   
+								convert(numeric(12,4), faddiari.facd_cubicaje) ,   
+								faddiari.facd_peso,   
+								faddiari.facd_unidad_peso,   
+								faddiari.facd_unidad_producto,   
+								faddiari.facd_precio_mayor,   
+								faddiari.facd_precio_menor,   
+								faddiari.facd_bodega,   
+								faddiari.facd_costo_fob,   
+								faddiari.facd_costo_cif,   
+								faddiari.facd_precio_unidad_producto,   
+								faddiari.facd_unidad_venta,   
+								faddiari.facd_cantidad,   
+								faddiari.facd_cantidad_fraccion,   
+								faddiari.facd_monto_total,   
+								faddiari.facd_por_descuento,   
+								faddiari.facd_monto_final,   
+								getdate(),   
+								:str.usuario,   
+								faddiari.facd_supervisor,   
+								faddiari.facd_bultos,   
+								faddiari.facd_ubicacion,   
+								0,
+								faddiari.facd_index,   
+								faddiari.facd_validado,   
+								faddiari.facd_bulto_inicio,   
+								faddiari.facd_bulto_fin,  								
+								faddiari.facd_precio_original,   
+								faddiari.facd_costo_total,
+								faddiari.facd_vendedor
+						 FROM faddiari 
+						 WHERE ( faddiari.facd_g_financiero = :str.g_financiero ) AND  
+								 ( faddiari.facd_empresa = :str.empresa) AND  
+								 ( faddiari.facd_tipo = :ls_tipo_sel ) AND  
+								 ( faddiari.facd_ann = :li_ann_sel ) AND  
+								 ( faddiari.facd_no_pedido = :ls_ped_sel )   ;
+				
+				
+						if sqlca.sqlcode = -1 then
+							ls_sqlerrtext = sqlca.sqlerrtext
+							rollback;
+							lb_salvo=false
+							mensaje("Información","Error al actualizar registro en fadprofo",ls_sqlerrtext)
+							return
+						end if			
+						//************************************************
+						  INSERT INTO fadproca  
+									( prca_g_financiero,   
+									  prca_empresa,   
+									  prca_ann,   
+									  prca_no_proforma,   
+									  prca_codigo_cargo,   
+									  prca_monto )  
+							  SELECT fadcargo.dcar_g_financiero,   
+										fadcargo.dcar_empresa,   
+										:li_anio,   										
+										:ls_pedido_repl,   
+										fadcargo.dcar_codigo,   
+										fadcargo.dcar_monto  
+								 FROM fadcargo 
+								 WHERE ( fadcargo.dcar_g_financiero = :str.g_financiero ) AND  
+										 ( fadcargo.dcar_empresa = :str.empresa ) AND  
+										 ( fadcargo.dcar_tipo = :ls_tipo_sel ) AND  
+										 ( fadcargo.dcar_no_pedido = :ls_ped_sel ) and
+										 ( fadcargo.dcar_ann = :li_ann_sel ) ;
+		
+								if sqlca.sqlcode = -1 then
+									ls_sqlerrtext = sqlca.sqlerrtext
+									rollback;
+									lb_salvo=false
+									mensaje("Información","Error al actualizar registro en fadproca",ls_sqlerrtext)
+									return
+								end if									
+						//************************************************
+					  	  INSERT INTO fadvenpr  
+								( vpro_g_financiero,   
+								  vpro_empresa,   
+								  vpro_tipo,   
+								  vpro_no_proforma,   
+								  vpro_ann,   
+								  vpro_vendedor )  
+						  SELECT fadvenfa.vfac_g_financiero,   
+									fadvenfa.vfac_empresa,   
+									:ls_tipo,   
+									:ls_pedido_repl,   
+									:li_anio,   
+									fadvenfa.vfac_vendedor  
+							 FROM fadvenfa  
+							 WHERE ( fadvenfa.vfac_g_financiero = :str.g_financiero ) AND  
+									 ( fadvenfa.vfac_empresa = :str.empresa ) AND  
+									 ( fadvenfa.vfac_tipo = :ls_tipo_sel ) AND  
+									 ( fadvenfa.vfac_ann = :li_ann_sel ) AND  
+									 ( fadvenfa.vfac_no_pedido = :ls_ped_sel )   ;
+	
+							if sqlca.sqlcode = -1 then
+								ls_sqlerrtext = sqlca.sqlerrtext
+								rollback;
+								lb_salvo=false
+								mensaje("Información","Error al actualizar registro en fadvenpr",ls_sqlerrtext)
+								return
+							end if			
+									
+									update faaparam
+									set fara_ult_proforma = :ls_pedido_repl
+									where fara_g_financiero = :str.g_financiero
+											and   fara_empresa = :str.empresa ;
+										if sqlca.sqlcode = -1 then
+											ls_sqlerrtext = sqlca.sqlerrtext
+											rollback;
+											lb_salvo=false
+											mensaje("Información","Error al actualizar secuencia de Parametros ",ls_sqlerrtext)
+											return
+										end if			
+											
+						//************************************************												
+			end if								
+		end if
+   end if
+end if
+
+//************************************************
+commit using sqlca;
+lb_salvo = true
+mensaje("","Copia Generada Exitosamente","")
+return
+
+end subroutine
+

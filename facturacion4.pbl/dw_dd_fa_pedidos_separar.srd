@@ -1,0 +1,68 @@
+﻿//objectcomments Pedidos a restaurar el pase
+release 7;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=64 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=4 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(8) updatewhereclause=yes name=pedi_no_pedido dbname="fatpedid.pedi_no_pedido" )
+ column=(type=decimal(0) updatewhereclause=yes name=pedi_ann dbname="fatpedid.pedi_ann" )
+ column=(type=char(3) updatewhereclause=yes name=fatpedid_pedi_tipo dbname="fatpedid.pedi_tipo" )
+ column=(type=char(100) updatewhereclause=yes name=fatpedid_pedi_a_nombre dbname="fatpedid.pedi_a_nombre" )
+ column=(type=datetime updatewhereclause=yes name=pedi_fecha dbname="fatpedid.pedi_fecha" )
+ column=(type=char(1) updatewhereclause=yes name=pedi_estado dbname="fatpedid.pedi_estado" )
+ column=(type=decimal(0) updatewhereclause=yes name=fatpedid_pedi_cliente dbname="fatpedid.pedi_cliente" )
+ column=(type=char(20) updatewhereclause=yes name=fatpedid_pedi_ruc_cliente dbname="fatpedid.pedi_ruc_cliente" )
+ column=(type=long updatewhereclause=yes name=pedi_pasado_a_empresa dbname="fatpedid.pedi_pasado_a_empresa" )
+ column=(type=datetime updatewhereclause=yes name=pedi_fecha_impresion dbname="fatpedid.pedi_fecha_impresion" )
+ column=(type=decimal(4) updatewhereclause=yes name=fatpedid_pedi_monto_final dbname="fatpedid.pedi_monto_final" )
+ column=(type=char(100) updatewhereclause=yes name=fatpedid_pedi_a_nombre dbname="fatpedid.pedi_a_nombre" )
+ column=(type=char(2) updatewhereclause=yes name=pedi_condicion_pago dbname="fatpedid.pedi_condicion_pago" )
+ column=(type=char(100) updatewhereclause=yes name=fatpedid_pedi_marca dbname="fatpedid.pedi_marca" )
+ column=(type=char(100) updatewhereclause=yes name=fatpedid_pedi_despachado dbname="fatpedid.pedi_despachado" )
+ column=(type=datetime updatewhereclause=yes name=fatpedid_pedi_fecha_creacion dbname="fatpedid.pedi_fecha_creacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=fatpedid_pedi_g_financiero dbname="fatpedid.pedi_g_financiero" )
+ column=(type=decimal(0) updatewhereclause=yes name=fatpedid_pedi_empresa dbname="fatpedid.pedi_empresa" )
+ retrieve="SELECT distinct fatpedid.pedi_no_pedido,
+         fatpedid.pedi_ann,
+         fatpedid.pedi_tipo,   
+         fatpedid.pedi_a_nombre,
+         fatpedid.pedi_fecha,
+         fatpedid.pedi_estado,
+         fatpedid.pedi_cliente,
+         fatpedid.pedi_ruc_cliente,
+         fatpedid.pedi_pasado_a_empresa,   
+         fatpedid.pedi_fecha_impresion,   
+         fatpedid.pedi_monto_final,
+         fatpedid.pedi_a_nombre,
+         fatpedid.pedi_condicion_pago,
+         fatpedid.pedi_marca,
+         fatpedid.pedi_despachado,
+         fatpedid.pedi_fecha_creacion,
+			fatpedid.pedi_g_financiero,
+         fatpedid.pedi_empresa
+  FROM fadpedid,
+         fatpedid
+   WHERE ( fatpedid.pedi_g_financiero = fadpedid.dped_g_financiero ) and
+         ( fatpedid.pedi_empresa = fadpedid.dped_empresa ) and
+         ( fatpedid.pedi_no_pedido = fadpedid.dped_no_pedido ) and
+         ( fatpedid.pedi_ann = fadpedid.dped_ann ) and
+			( fadpedid.dped_reserva_origen <> 'E' ) and
+         (   fadpedid.dped_pasada <  (fadpedid.dped_fraccion + (fadpedid.dped_cantidad * (SELECT inamedid.medi_cantidad
+																					FROM    inamedid
+																					WHERE inamedid.medi_medida = fadpedid.dped_unidad_venta)) ) or (fatpedid.pedi_estado = 'A') )
+			 AND fatpedid.pedi_g_financiero = :pedi_grupo  and fatpedid.pedi_empresa = :pedi_empresa" arguments=(("pedi_grupo", number),("pedi_empresa", number))  sort="pedi_no_pedido A pedi_ann A pedi_fecha A " )
+text(band=header alignment="2" text="Pedido" border="6" color="8388608" x="5" y="4" height="56" width="247"  name=t_1  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Año" border="6" color="8388608" x="270" y="4" height="56" width="165"  name=t_3  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="5" color="8388608" x="14" y="4" height="56" width="233" format="[general]"  name=pedi_no_pedido edit.limit=8 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="5" color="8388608" x="261" y="4" height="56" width="169" format="[general]"  name=pedi_ann edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="8388608" x="2107" y="16" height="56" width="46" format="[general]"  name=pedi_condicion_pago visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Cliente" border="6" color="8388608" x="453" y="4" height="56" width="914"  name=t_4  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Fecha" border="6" color="8388608" x="1385" y="4" height="56" width="329"  name=t_5  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Tipo" border="6" color="8388608" x="1733" y="4" height="56" width="114"  name=t_2  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="5" color="8388608" x="443" y="4" height="56" width="933" format="[general]"  name=fatpedid_pedi_a_nombre edit.limit=100 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="5" color="8388608" x="1381" y="4" height="56" width="334" format="dd/mm/yyyy"  name=pedi_fecha edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="8388608" x="1778" y="12" height="56" width="183" format="[shortdate] [time]"  name=pedi_fecha_impresion visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="5" color="8388608" x="1723" y="4" height="56" width="123" format="[general]"  name=fatpedid_pedi_tipo edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

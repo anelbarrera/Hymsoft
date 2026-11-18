@@ -50,6 +50,7 @@ string menuname = "m_hs"
 boolean controlmenu = false
 event ue_busqueda ( )
 event ue_post_aceptar ( )
+event ue_imprimir ( )
 st_1 st_1
 cb_1 cb_1
 st_microhelp st_microhelp
@@ -134,7 +135,10 @@ event ue_busqueda;//Scrip para buscar los pedidos o las Facturas
 tab_1.tabpage_1.dw_1.Triggerevent("ue_busqueda")
 end event
 
-event ue_post_aceptar;sqlca.autocommit = true
+event ue_post_aceptar();sqlca.autocommit = true
+end event
+
+event ue_imprimir();This.triggerevent('ue_print')
 end event
 
 public subroutine wf_botones ();////Para Habilitar o Deshabilitar Botones
@@ -1719,7 +1723,7 @@ destroy(this.st_microhelp)
 destroy(this.dw_9)
 end on
 
-event ue_post_open;call super::ue_post_open;String 	 ls_lista
+event ue_post_open;String 	 ls_lista
 Environment env
 
 DataWindow ldw_1
@@ -1791,14 +1795,22 @@ wf_botones()
 
 end event
 
-event open;call super::open;//Centrea la Ventana
+event open;//Centrea la Ventana
 //gf_center_win(this)
 //this.y = 5
-str_pedi = message.PowerObjectParm
-sqlca.autocommit = true
+//str_pedi = message.PowerObjectParm
+//sqlca.autocommit = true
+str_fa_carg_ped lstr_parm
+If IsValid(Message.PowerObjectParm) And Not IsNull(Message.PowerObjectParm) Then
+	lstr_parm = Message.PowerObjectParm
+End If
+call super::open
+
+str_pedi = lstr_parm
+sqlca.AutoCommit = True
 end event
 
-event key;call super::key;long ll_tab
+event key;long ll_tab
 
 If keyDown(Keycontrol!) and keyDown(KeyShift!) Then
 		ll_tab = tab_1.SelectedTab
@@ -1819,14 +1831,14 @@ event ue_adicionar;//OVERRIDE
 //Llamado desde: ue_aceptar, ue_eliminar y desde el menu
 
 String				ls_syntax, ls_empaque, ls_pedido
-long					ll_row_final, ll_row, ll_bultos_total
+long					ll_row_final, ll_row, ll_bultos_total,ll_annio
 Integer				li_recupero, li_resp
 DataWindow			ldw_1, ldw_2, ldw_4
 
 ldw_1 = tab_1.tabpage_1.dw_1
 ldw_2 = tab_1.tabpage_2.dw_2
 ldw_4 = tab_1.tabpage_1.dw_4
-
+ll_annio = Long(Year(Date(gf_fecha_serv())))
 str_dg_dynamic_find	lstr_df
 
 if idw_proximo = ldw_1 then  //Si es el DW_1
@@ -1957,7 +1969,7 @@ if idw_proximo = ldw_1 then  //Si es el DW_1
 			//Extrae el # de Pedido de la Cadena ls_syntax
 			is_pedido 	   = wf_extraer_pedido(ls_syntax)
 			il_ann	 	   = wf_extraer_ann(ls_syntax)
-			il_ann_empa    = w_fa_fondo.str_para.ano		//Es el año de Parametros
+			il_ann_empa    = ll_annio //w_fa_fondo.str_para.ano		//Es el año de Parametros
 			is_tipo 	      = wf_extraer_pormayor(ls_syntax)
 			is_cliente	   = wf_extraer_cliente_new(ls_syntax)
 			ll_bultos_total= wf_extraer_bultos(ls_syntax)
@@ -1965,7 +1977,7 @@ if idw_proximo = ldw_1 then  //Si es el DW_1
 			//Recupera los Artículos del Pedido o Factura, a la Que se le Hará Lista de Empaque
 			if is_fuente = 'PE' then
 				ldw_4.Settransobject(sqlca)
-				if ldw_4.Retrieve(str.g_financiero, str.empresa, is_pedido, il_ann, w_fa_fondo.str_para.bodega_en_transito, w_fa_fondo.str_para.ubicacion_en_transito) = 0 then
+				if ldw_4.Retrieve(str.g_financiero, str.empresa, is_pedido, il_ann, w_hs_frame.str_para.bodega_en_transito, w_hs_frame.str_para.ubicacion_en_transito) = 0 then
 					gf_mensaje("","Este Pedido NO se Pudo Recuperar, Verifique..!",1,1,"E")
 					is_pedido	 = ''		//Para que no setee los datos del encabezado en wf_setear_iniciales()					
 				end if
@@ -2189,7 +2201,10 @@ If ib_cambio then
 		case 3
 			return 1
 	end choose
-	
+	constant int SW_HIDE = 0
+	ShowWindow(Handle(this), SW_HIDE)
+
+	This.SetRedraw(false)
 	ib_cambio = false
 	
 end if
@@ -2411,8 +2426,8 @@ end if
 This.Setredraw(true)
 end event
 
-event timer;st_microhelp.visible = false
-str.frame.Setmicrohelp("")
+event timer;//st_microhelp.visible = false
+//str.frame.Setmicrohelp("")
 end event
 
 event ue_print;integer i, li_fraccion, li_linea, li_retorno
@@ -2452,9 +2467,9 @@ if idw_11.rowcount() > 0 then
 	next
 end if
 
-If w_fa_fondo.str_para.lista_emp_especial = 1 then
-	openwithParm(w_dw_Print_options,tab_1.Tabpage_3.dw_8)
-else
+//If w_fa_fondo.str_para.lista_emp_especial = 1 then
+//	openwithParm(w_dw_Print_options,tab_1.Tabpage_3.dw_8)
+//else
   SELECT usua_nombre + ' '+usua_apellido  
     INTO :ls_nombre  
     FROM ssmusuar  
@@ -2468,7 +2483,7 @@ else
 	end if
 	
 	openwithParm(w_dw_Print_options,tab_1.Tabpage_3.dw_3)
-end if
+//end if
 If Message.DoubleParm = -1 Then Return
 //**************Segmento agregado por HGN 28/03/2000********************//
 		
@@ -2482,11 +2497,11 @@ If Message.DoubleParm = -1 Then Return
 //	end if
 //**********************************************************************//
 tab_1.Tabpage_3.dw_3.object.empresanom.expression = "'"+gf_dg_nombre_empresa()+"'"
-If w_fa_fondo.str_para.lista_emp_especial = 1 then
-	tab_1.Tabpage_3.dw_8.Print(True)
-else
+//If w_fa_fondo.str_para.lista_emp_especial = 1 then
+//	tab_1.Tabpage_3.dw_8.Print(True)
+//else
 	tab_1.Tabpage_3.dw_3.Print(True)
-end if
+//end if
 
 		 update fatempaq  
 			 set	enca_impreso = 1
@@ -2504,7 +2519,7 @@ end if
 			ii_impreso = 1
 end event
 
-event resize;call super::resize;this.setredraw(false)
+event resize;this.setredraw(false)
 //Alto de los objetos
 tab_1.tabpage_3.dw_3.height = newheight - 260
 tab_1.tabpage_3.gb_3.height = newheight - 195
@@ -2522,6 +2537,20 @@ st_1.y = newheight - 55
 //boton de pasar
 tab_1.tabpage_2.cb_pasar.y = newheight - 300
 this.setredraw(true)
+end event
+
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+end event
+
+event deactivate;//
 end event
 
 type tab_1 from w_fa_padre_tab`tab_1 within w_fa_man_packing_list
@@ -2543,28 +2572,28 @@ Datawindow	ldw_3
 
 ldw_3 = tab_1.tabpage_3.dw_3
 
-if not isvalid(m_fa_principal) then
-	iw_this.changemenu(m_fa_principal)
-	wf_botones()
-end if
+//if not isvalid(m_fa_principal) then
+//	iw_this.changemenu(m_fa_principal)
+//	wf_botones()
+//end if
 sqlca.autocommit = true
 // Opción de mostrar foto de Producto
 
-	If (newindex = 2 And tab_1.tabpage_2.dw_2.Rowcount() > 0) Then
-		m_fa_principal.m_edicin.m_verfoto.enabled = True
-	Else
-		m_fa_principal.m_edicin.m_verfoto.enabled = False
-	End If
+//	If (newindex = 2 And tab_1.tabpage_2.dw_2.Rowcount() > 0) Then
+//		m_fa_principal.m_edicin.m_verfoto.enabled = True
+//	Else
+//		m_fa_principal.m_edicin.m_verfoto.enabled = False
+//	End If
 
 ii_nex_tab = newindex
 
 choose case newindex
 	case 1		//DW DEL ENCABEZADO DEL PACKING
 		idw_proximo = tab_1.tabpage_1.dw_1
-		m_fa_principal.m_edicin.m_busqueda.enabled=true //Habilita el boton de busqueda		
+		//m_fa_principal.m_edicin.m_busqueda.enabled=true //Habilita el boton de busqueda		
 	case 2		//DW DEL DETALLE DEL PACKING				
 		idw_proximo = tab_1.tabpage_2.dw_2
-		m_fa_principal.m_edicin.m_busqueda.enabled=false //Deshabilita el boton de busqueda
+//		m_fa_principal.m_edicin.m_busqueda.enabled=false //Deshabilita el boton de busqueda
 		
 		if idw_proximo.Rowcount() > 0 then
 			//Preguntar por los estatus y los codigos, para recuperar o no
@@ -2595,7 +2624,7 @@ choose case newindex
 		
 	case 3	
 	
-		m_fa_principal.m_edicin.m_busqueda.enabled=false //Deshabilita el boton de busqueda
+//		m_fa_principal.m_edicin.m_busqueda.enabled=false //Deshabilita el boton de busqueda
 		if is_fuente = 'PE' then
 		 if ldw_3.dataobject = '' or isnull(ldw_3.dataobject) or ldw_3.dataobject <> "dw_ma_fa_imp_pedi_pack" then
 			if str_pedi.datawindow = '' or isnull(str_pedi.datawindow) then		
@@ -2619,21 +2648,21 @@ choose case newindex
 	
 		ldw_3.settransobject(sqlca)
 		
-		If w_fa_fondo.str_para.lista_emp_especial = 1 then
-			tab_1.tabpage_3.dw_8.Reset()
-			ldw_3.visible = false
-			tab_1.tabpage_3.dw_8.visible = true
-			/*Hace visible checkbox para mostrar o no el precio y monto*/
-			tab_1.tabpage_3.cbx_precio_monto.visible = true
-			tab_1.tabpage_3.cbx_precio_monto.checked = true
-			tab_1.tabpage_3.cbx_precio_monto.Triggerevent("clicked")
-		else
+//		If w_fa_fondo.str_para.lista_emp_especial = 1 then
+//			tab_1.tabpage_3.dw_8.Reset()
+//			ldw_3.visible = false
+//			tab_1.tabpage_3.dw_8.visible = true
+//			/*Hace visible checkbox para mostrar o no el precio y monto*/
+//			tab_1.tabpage_3.cbx_precio_monto.visible = true
+//			tab_1.tabpage_3.cbx_precio_monto.checked = true
+//			tab_1.tabpage_3.cbx_precio_monto.Triggerevent("clicked")
+//		else
 			ldw_3.visible = true
 			tab_1.tabpage_3.dw_8.visible = false
 			tab_1.tabpage_3.cbx_precio_monto.checked = false
 			/*Hace invisible checkbox para mostrar o no el precio y monto*/
 			tab_1.tabpage_3.cbx_precio_monto.visible = false
-		end if
+//		end if
 	
 
 		ldw_3.Retrieve(str.g_financiero,str.empresa,is_pedido,il_ann,is_empaque)
@@ -2659,7 +2688,7 @@ choose case newindex
 end choose
 end event
 
-event tab_1::ue_microhelp;call super::ue_microhelp;//Override
+event tab_1::ue_microhelp;//Override
 end event
 
 on tab_1.create
@@ -3800,28 +3829,51 @@ if ls_objeto = 'eliminar' then
 end if
 end event
 
-event dw_2::rowfocuschanged;//Override
+event dw_2::rowfocuschanged;////Override
+//if currentrow < 1 then return
+
+//string ls_producto
+//Long	 ll_linea
+//Datawindow ldw_5
+//ldw_5 = tab_1.tabpage_2.dw_5
+
+
+//ls_producto = This.Getitemstring(currentrow,"empa_codigo_producto")
+//ll_linea		= This.GetitemNumber(currentrow,"empa_linea_original")
+
+//if ls_producto = '' or isnull(ls_producto) then 
+//	ldw_5.Scrolltorow(ldw_5.insertrow(0))
+//	return 2
+//end if
+
+////Dirige el cursor al producto actual
+//wf_scroll_a_disponibles(ldw_5, ls_producto, ll_linea)
+
+////Recupera el dw6 del desgloce por linea de detalle
+////wf_recupera_desgloce(ll_linea)
+
+ // Override
 if currentrow < 1 then return
 
 string ls_producto
-Long	 ll_linea
+Long ll_linea
 Datawindow ldw_5
+
 ldw_5 = tab_1.tabpage_2.dw_5
 
-
-ls_producto = This.Getitemstring(currentrow,"empa_codigo_producto")
-ll_linea		= This.GetitemNumber(currentrow,"empa_linea_original")
+ls_producto = This.Getitemstring(currentrow, "empa_codigo_producto")
+ll_linea    = This.GetitemNumber(currentrow, "empa_linea_original")
 
 if ls_producto = '' or isnull(ls_producto) then 
-	ldw_5.Scrolltorow(ldw_5.insertrow(0))
-	return 2
+	return 0
 end if
 
-//Dirige el cursor al producto actual
+// Dirige el cursor al producto actual
 wf_scroll_a_disponibles(ldw_5, ls_producto, ll_linea)
 
-//Recupera el dw6 del desgloce por linea de detalle
-//wf_recupera_desgloce(ll_linea)
+end event
+
+event dw_2::dberror;//
 end event
 
 type tabpage_3 from w_fa_padre_tab`tabpage_3 within tab_1

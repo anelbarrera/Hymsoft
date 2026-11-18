@@ -1,0 +1,253 @@
+﻿//objectcomments  
+global type gf_fa_cambiar_tipo_fac_anio2 from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_cambiar_tipo_fac_anio2 (string ls_ped_sel, string ls_fact_sel, string ls_tipo_sel, integer li_ann_sel, string is_tipo_repl, integer ii_ann_repl, string is_pedido_repl, ref boolean lb_salvo)
+end prototypes
+
+global subroutine gf_fa_cambiar_tipo_fac_anio2 (string ls_ped_sel, string ls_fact_sel, string ls_tipo_sel, integer li_ann_sel, string is_tipo_repl, integer ii_ann_repl, string is_pedido_repl, ref boolean lb_salvo);// Esta función permite cambiar el tipo de factura de un 
+// pedido de factura , el año de la misma o el número del pedido
+// Siempre y cuando no haya sido Impresa
+
+String ls_tipo, ls_sqlerrtext,ls_pedido_repl
+Integer li_anio
+
+If is_tipo_repl = '' or isNull(is_tipo_repl) then
+	ls_tipo = ls_tipo_sel
+else
+	ls_tipo = is_tipo_repl
+end if
+
+If ii_ann_repl = 0 or isNull(ii_ann_repl) then
+	li_anio = li_ann_sel
+else
+	li_anio = ii_ann_repl
+end if
+
+If is_pedido_repl = '' or isNull(is_pedido_repl) then
+	ls_pedido_repl = ls_ped_sel
+else
+	ls_pedido_repl = is_pedido_repl
+end if
+
+  INSERT INTO fatdiari  
+         ( fact_g_financiero,   
+           fact_empresa,   
+           fact_tipo,   
+           fact_no_pedido,   
+           fact_ann,   
+           fact_no_factura,   
+           fact_cliente,   
+           fact_ruc_cliente,   
+           fact_condicion_pago,   
+           fact_tipo_venta,   
+           fact_tipo_movimiento,   
+           fact_no_traspaso,   
+           fact_fecha,   
+           fact_fecha_creacion,   
+           fact_fecha_modificacion,   
+           fact_dias_pago,   
+           fact_fecha_fin_plazo,   
+           fact_fecha_cancelado,   
+           fact_consignado,   
+           fact_a_nombre,   
+           fact_a_nombre_direccion,   
+           fact_despachado,   
+           fact_via,   
+           fact_con_emb_no,   
+           fact_marca,   
+           fact_bultos_total,   
+           fact_cubicaje_total,   
+           fact_peso_total,   
+           fact_unidad_peso,   
+           fact_gastos_total,   
+           fact_monto_fact_total,   
+           fact_descuento_subt_deta,   
+           fact_por_descuento,   
+           fact_supervisor,   
+           fact_monto_final,   
+           fact_comentario,   
+           fact_estado,   
+           fact_act_cliente,   
+           fact_act_inventario,   
+           fact_act_conta,   
+           fact_cerrada,   
+           fact_referencia_fac,   
+           fact_monto_abonado,   
+           fact_fecha_act_conta,   
+           fact_pedido_original,   
+           fact_autorizacion,   
+           fact_actualizo_cargos,   
+           fact_actualizo_vendedor,   
+           fact_factura_de_bodega,
+				fact_viene_de_pedido,   
+				fact_habilitada_por,   
+				fact_cuatro_decimales,   
+				fact_usuario,   
+				fact_precio_a_utilizar,   
+				fact_costos_total,   
+				fact_pasado_a_empresa,   
+				fact_modificada_por,   
+				fact_descartada_por,   
+				fact_fecha_descarte,   
+				fact_viene_de_ventas_diarias,   
+				fact_ncr_descuento,   
+				fact_descuento_ncr,   
+				fact_guia,   
+				fact_destino)  
+     SELECT fatdiari.fact_g_financiero,   
+            fatdiari.fact_empresa,   
+            :ls_tipo,   
+            :ls_pedido_repl,   
+            :li_anio,   
+            fatdiari.fact_no_factura,   
+            fatdiari.fact_cliente,   
+            fatdiari.fact_ruc_cliente,   
+            fatdiari.fact_condicion_pago,   
+            fatdiari.fact_tipo_venta,   
+            fatdiari.fact_tipo_movimiento,   
+            fatdiari.fact_no_traspaso,   
+            fatdiari.fact_fecha,   
+            fatdiari.fact_fecha_creacion,   
+            fatdiari.fact_fecha_modificacion,   
+            fatdiari.fact_dias_pago,   
+            fatdiari.fact_fecha_fin_plazo,   
+            fatdiari.fact_fecha_cancelado,   
+            fatdiari.fact_consignado,   
+            fatdiari.fact_a_nombre,   
+            fatdiari.fact_a_nombre_direccion,   
+            fatdiari.fact_despachado,   
+            fatdiari.fact_via,   
+            fatdiari.fact_con_emb_no,   
+            fatdiari.fact_marca,   
+            fatdiari.fact_bultos_total,   
+            fatdiari.fact_cubicaje_total,   
+            fatdiari.fact_peso_total,   
+            fatdiari.fact_unidad_peso,   
+            fatdiari.fact_gastos_total,   
+            fatdiari.fact_monto_fact_total,   
+            fatdiari.fact_descuento_subt_deta,   
+            fatdiari.fact_por_descuento,   
+            fatdiari.fact_supervisor,   
+            fatdiari.fact_monto_final,   
+            fatdiari.fact_comentario,   
+            fatdiari.fact_estado,   
+            fatdiari.fact_act_cliente,   
+            fatdiari.fact_act_inventario,   
+            fatdiari.fact_act_conta,   
+            fatdiari.fact_cerrada,   
+            fatdiari.fact_referencia_fac,   
+            fatdiari.fact_monto_abonado,   
+            fatdiari.fact_fecha_act_conta,   
+            fatdiari.fact_pedido_original,   
+            fatdiari.fact_autorizacion,   
+            fatdiari.fact_actualizo_cargos,   
+            fatdiari.fact_actualizo_vendedor,   
+            fatdiari.fact_factura_de_bodega,
+				fatdiari.fact_viene_de_pedido,   
+				fatdiari.fact_habilitada_por,   
+				fatdiari.fact_cuatro_decimales,   
+				fatdiari.fact_usuario,   
+				fatdiari.fact_precio_a_utilizar,   
+				fatdiari.fact_costos_total,   
+				fatdiari.fact_pasado_a_empresa,   
+				fatdiari.fact_modificada_por,   
+				fatdiari.fact_descartada_por,   
+				fatdiari.fact_fecha_descarte,   
+				fatdiari.fact_viene_de_ventas_diarias,   
+				fatdiari.fact_ncr_descuento,   
+				fatdiari.fact_descuento_ncr,   
+				fatdiari.fact_guia,   
+				fatdiari.fact_destino  
+       FROM fatdiari  
+      WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+            ( fatdiari.fact_empresa = :str.empresa ) AND  
+            ( fatdiari.fact_tipo = :ls_tipo_sel ) AND  
+            ( fatdiari.fact_ann = :li_ann_sel ) AND  
+            ( fatdiari.fact_no_pedido = :ls_ped_sel )   ;
+				
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al Insertar registro en fatiari",ls_sqlerrtext)
+			return
+		end if			
+
+//***********************************************
+  UPDATE fadcargo  
+     SET dcar_tipo = :ls_tipo,   
+         dcar_ann  = :li_anio,
+			dcar_no_pedido =:ls_pedido_repl
+   WHERE ( fadcargo.dcar_g_financiero = :str.g_financiero) AND  
+         ( fadcargo.dcar_empresa = :str.empresa ) AND  
+         ( fadcargo.dcar_tipo = :ls_tipo_sel ) AND  
+         ( fadcargo.dcar_ann = :li_ann_sel ) AND  
+         ( fadcargo.dcar_no_pedido = :ls_ped_sel )   ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en fadcargo",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+  UPDATE fadvenfa  
+     SET vfac_tipo = :ls_tipo,   
+         vfac_ann  = :li_anio,
+			vfac_no_pedido =:ls_pedido_repl
+   WHERE ( fadvenfa.vfac_g_financiero = :str.g_financiero ) AND  
+         ( fadvenfa.vfac_empresa = :str.empresa ) AND  
+         ( fadvenfa.vfac_tipo = :ls_tipo_sel ) AND  
+         ( fadvenfa.vfac_ann = :li_ann_sel ) AND  
+         ( fadvenfa.vfac_no_pedido = :ls_ped_sel )   ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en fadvenfa",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+  UPDATE faddiari  
+     SET facd_tipo = :ls_tipo,   
+         facd_ann = :li_anio,
+			facd_no_pedido= :ls_pedido_repl
+   WHERE ( faddiari.facd_g_financiero = :str.g_financiero ) AND  
+         ( faddiari.facd_empresa = :str.empresa) AND  
+         ( faddiari.facd_tipo = :ls_tipo_sel ) AND  
+         ( faddiari.facd_ann = :li_ann_sel ) AND  
+         ( faddiari.facd_no_pedido = :ls_ped_sel )   ;
+
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al actualizar registro en faddiari",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+  DELETE FROM fatdiari  
+   WHERE ( fatdiari.fact_g_financiero = :str.g_financiero ) AND  
+         ( fatdiari.fact_empresa = :str.empresa ) AND  
+         ( fatdiari.fact_tipo = :ls_tipo_sel ) AND  
+         ( fatdiari.fact_ann = :li_ann_sel ) AND  
+         ( fatdiari.fact_no_pedido = :ls_ped_sel )   ;
+			
+		if sqlca.sqlcode = -1 then
+			ls_sqlerrtext = sqlca.sqlerrtext
+			rollback;
+			lb_salvo=false
+			mensaje("Información","Error al eliminar registro en fatdiari",ls_sqlerrtext)
+			return
+		end if			
+//************************************************
+commit using sqlca;
+lb_salvo = true
+mensaje("","El Cambio fue Realizado Exitosamente","")
+return
+end subroutine
+

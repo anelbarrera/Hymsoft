@@ -207,15 +207,15 @@
               <!-- Bloque Restauración de Pases -->
               <Item Text="Restaurar Pase de Proformas" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_RestPaseProf_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_REST_PASE_PROF" />
               <Item Text="Restaurar Pase de Pedidos" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_RestPasePed_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_REST_PASE_PED" />
               <Item Text="Cambiar Pedido a Pasado" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_PedAPasado_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_PED_A_PASADO" />
 
               <Item Type="1" /> <!-- Separador -->
@@ -223,11 +223,11 @@
               <!-- Bloque Estado y Número de Facturación -->
               <Item Text="Activar Factura" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_ActivarFact_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_ACTIVAR_FACT" />
               <Item Text="Cambiar Número de Factura" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_CambiarNumFact_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_CAMBIAR_NUM_FACT" />
 
               <Item Type="1" /> <!-- Separador -->
@@ -235,11 +235,11 @@
               <!-- Bloque Pesos y Cubicajes -->
               <Item Text="Actualizar Peso y/o Cubicaje" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_ActPesoCubic_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_ACT_PESO_CUBIC" />
               <Item Text="Actualizar Peso y/o Cubicaje Pedido" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_ActPesoCubicPed_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_ACT_PESO_CUBIC_PED" />
 
               <Item Type="1" /> <!-- Separador -->
@@ -247,11 +247,11 @@
               <!-- Bloque Empaque y Reservas Futuras -->
               <Item Text="Restaurar Lista de Empaque" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_RestListaEmp_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_REST_LISTA_EMP" />
               <Item Text="Cambiar Reserva de Pedido Futuro" 
                     PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Esp_CambiarResPedFut_16.png" 
-                    Clicked="ue_ribbon_click" 
+                    Clicked="ue_menu_click" 
                     Tag="BTN_ESP_CAMBIAR_RES_PED_FUT" />
             </Menu>
           </SmallButton>
