@@ -19,6 +19,7 @@ end type
 end forward
 
 global type w_dg_man_clave from w_fa_padre
+boolean visible = true
 integer width = 1019
 integer height = 624
 string title = "[FA]  Control de Modificaciones"
@@ -130,7 +131,6 @@ string facename = "Arial"
 long textcolor = 16711680
 long backcolor = 15780518
 string text = "Introduzca la Clave de Autorización"
-borderstyle borderstyle = stylelowered!
 end type
 
 type st_1 from statictext within w_dg_man_clave
@@ -285,4 +285,7 @@ end type
 event losefocus;sle_clave.setfocus()
 
 end event
+
+type st_ayuda from w_fa_padre`st_ayuda within w_dg_man_clave
+end type
 

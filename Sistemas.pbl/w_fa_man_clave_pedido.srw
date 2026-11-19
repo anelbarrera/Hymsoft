@@ -19,16 +19,17 @@ end type
 end forward
 
 global type w_fa_man_clave_pedido from w_fa_padre
-int Width=1125
-int Height=648
-WindowType WindowType=response!
-boolean TitleBar=true
-string Title="Clave"
-long BackColor=79741120
-boolean ControlMenu=false
-boolean MinBox=false
-boolean MaxBox=false
-boolean Resizable=false
+boolean visible = true
+integer width = 1125
+integer height = 648
+string title = "Clave"
+boolean controlmenu = false
+boolean minbox = false
+boolean maxbox = false
+boolean resizable = false
+windowtype windowtype = response!
+long backcolor = 79741120
+boolean center = true
 event ue_postopen ( )
 gb_1 gb_1
 st_1 st_1
@@ -43,21 +44,32 @@ global w_fa_man_clave_pedido w_fa_man_clave_pedido
 type variables
 //nv_encryptor io_encryptor
 window iw_window
+String is_user
 end variables
 
-event ue_postopen;//io_encryptor = Create nv_encryptor
+event ue_postopen();//io_encryptor = Create nv_encryptor
 //io_encryptor.of_setkey("ReMe")
 
-iw_window = message.PowerObjectParm
+//iw_window = message.PowerObjectParm
 
-em_user.Setfocus()
+//em_user.Setfocus()
 
-this.Setredraw(true)
+//this.Setredraw(true)
+
+this.SetRedraw(true)
+em_user.SetFocus()
 end event
 
-event open;call super::open;this.Setredraw(false)
-gf_center_win(this)
-this.postevent("ue_postopen")
+event open;// 1. Capturar el parámetro inmediatamente en el open (antes de cualquier PostEvent)
+if IsValid(Message.PowerObjectParm) then
+    iw_window = Message.PowerObjectParm
+end if
+
+// 2. Forzar que la ventana sea visible y se redibuje correctamente
+this.SetRedraw(true)
+this.BringToTop = true
+
+this.PostEvent("ue_postopen")
 end event
 
 on w_fa_man_clave_pedido.create
@@ -95,98 +107,114 @@ event key;//Override
 
 end event
 
-event closequery;call super::closequery;//destroy io_encryptor
+event closequery;//destroy io_encryptor
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
+end event
+
+event resize;//override
+end event
+
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then CloseWithReturn(This,is_user)
+ 
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_clave_pedido
-int X=18
-int Y=644
-boolean Visible=false
+boolean visible = false
+integer x = 18
+integer y = 644
 end type
 
 type dw_1 from w_fa_padre`dw_1 within w_fa_man_clave_pedido
-int X=78
-int Y=136
-int Width=69
-int Height=36
-int TabOrder=10
-boolean Visible=false
+boolean visible = false
+integer x = 78
+integer y = 136
+integer width = 69
+integer height = 36
+integer taborder = 10
 end type
 
 type st_ayuda from w_fa_padre`st_ayuda within w_fa_man_clave_pedido
-boolean BringToTop=true
 end type
 
 type gb_1 from groupbox within w_fa_man_clave_pedido
-int X=14
-int Width=1079
-int Height=544
-string Text="Introduzca la Clave de Autorización"
-BorderStyle BorderStyle=StyleLowered!
-long TextColor=8388608
-long BackColor=67108864
-int TextSize=-9
-int Weight=700
-string FaceName="Arial"
-FontCharSet FontCharSet=Ansi!
-FontFamily FontFamily=Swiss!
-FontPitch FontPitch=Variable!
+integer x = 14
+integer width = 1079
+integer height = 544
+integer textsize = -9
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 8388608
+long backcolor = 67108864
+string text = "Introduzca la Clave de Autorización"
 end type
 
 type st_1 from statictext within w_fa_man_clave_pedido
-int X=187
-int Y=240
-int Width=297
-int Height=80
-boolean Enabled=false
-boolean BringToTop=true
-string Text="Clave:"
-Alignment Alignment=Right!
-boolean FocusRectangle=false
-long TextColor=33554432
-long BackColor=67108864
-int TextSize=-14
-int Weight=700
-string FaceName="Calisto MT"
-FontCharSet FontCharSet=Ansi!
-FontFamily FontFamily=Roman!
-FontPitch FontPitch=Variable!
+integer x = 187
+integer y = 240
+integer width = 297
+integer height = 80
+boolean bringtotop = true
+integer textsize = -14
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = roman!
+string facename = "Calisto MT"
+long textcolor = 33554432
+long backcolor = 67108864
+boolean enabled = false
+string text = "Clave:"
+alignment alignment = right!
+boolean focusrectangle = false
 end type
 
 type sle_1 from singlelineedit within w_fa_man_clave_pedido
-int X=535
-int Y=236
-int Width=343
-int Height=100
-int TabOrder=30
-boolean BringToTop=true
-BorderStyle BorderStyle=StyleLowered!
-boolean AutoHScroll=false
-boolean PassWord=true
-long TextColor=33554432
-int TextSize=-14
-int Weight=700
-string FaceName="Arial"
-FontCharSet FontCharSet=Ansi!
-FontFamily FontFamily=Swiss!
-FontPitch FontPitch=Variable!
+integer x = 535
+integer y = 236
+integer width = 343
+integer height = 100
+integer taborder = 30
+boolean bringtotop = true
+integer textsize = -14
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+boolean autohscroll = false
+boolean password = true
+borderstyle borderstyle = stylelowered!
 end type
 
 type cb_1 from commandbutton within w_fa_man_clave_pedido
-int X=192
-int Y=396
-int Width=311
-int Height=108
-int TabOrder=40
-boolean BringToTop=true
-string Text="Aceptar"
-boolean Default=true
-int TextSize=-10
-int Weight=700
-string FaceName="Times New Roman"
-FontCharSet FontCharSet=Ansi!
-FontFamily FontFamily=Roman!
-FontPitch FontPitch=Variable!
+integer x = 192
+integer y = 396
+integer width = 311
+integer height = 108
+integer taborder = 40
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = roman!
+string facename = "Times New Roman"
+string text = "Aceptar"
+boolean default = true
 end type
 
 event clicked;string  ls_clave
@@ -213,8 +241,9 @@ else
 			end if
 			
 			if li_ok > 0 then
-				iw_window.Dynamic wf_setear_user(em_user.text)
-				Close(Parent)
+//				iw_window.Dynamic wf_setear_user(em_user.text)
+//				Close(Parent)
+				closewithreturn(Parent,em_user.text)
 			else
 				gf_mensaje("","El Usuario no Está Autorizado ",1,1,"E")
 				sle_1.SetFocus()
@@ -224,63 +253,67 @@ end if
 end event
 
 type cb_2 from commandbutton within w_fa_man_clave_pedido
-int X=558
-int Y=396
-int Width=302
-int Height=108
-int TabOrder=50
-boolean BringToTop=true
-string Text="Cancelar"
-int TextSize=-12
-int Weight=700
-string FaceName="Times New Roman"
-FontCharSet FontCharSet=Ansi!
-FontFamily FontFamily=Roman!
-FontPitch FontPitch=Variable!
+integer x = 558
+integer y = 396
+integer width = 302
+integer height = 108
+integer taborder = 50
+boolean bringtotop = true
+integer textsize = -12
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = roman!
+string facename = "Times New Roman"
+string text = "Cancelar"
 end type
 
 event clicked;//w_fa_man_pedidos.is_clave = '*'
-iw_window.Dynamic wf_setear_user("*")	
- Close(Parent)
-//closeWithReturn(parent,"*")
+//iw_window.Dynamic wf_setear_user("*")	
+// Close(Parent)
+ 
+
+is_user = '*'
+
+CloseWithReturn(parent,is_user)
 end event
 
 type st_2 from statictext within w_fa_man_clave_pedido
-int X=114
-int Y=120
-int Width=370
-int Height=76
-boolean Enabled=false
-boolean BringToTop=true
-string Text="Usuario:"
-Alignment Alignment=Right!
-boolean FocusRectangle=false
-long TextColor=33554432
-long BackColor=67108864
-int TextSize=-14
-int Weight=700
-string FaceName="Calisto MT"
-FontCharSet FontCharSet=Ansi!
-FontFamily FontFamily=Roman!
-FontPitch FontPitch=Variable!
+integer x = 114
+integer y = 120
+integer width = 370
+integer height = 76
+boolean bringtotop = true
+integer textsize = -14
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = roman!
+string facename = "Calisto MT"
+long textcolor = 33554432
+long backcolor = 67108864
+boolean enabled = false
+string text = "Usuario:"
+alignment alignment = right!
+boolean focusrectangle = false
 end type
 
 type em_user from editmask within w_fa_man_clave_pedido
-int X=535
-int Y=104
-int Width=343
-int Height=100
-int TabOrder=20
-boolean BringToTop=true
-BorderStyle BorderStyle=StyleLowered!
-string Mask="xxxxx"
-MaskDataType MaskDataType=StringMask!
-long TextColor=33554432
-int TextSize=-12
-int Weight=700
-string FaceName="Arial"
-FontCharSet FontCharSet=Ansi!
-FontFamily FontFamily=Swiss!
-FontPitch FontPitch=Variable!
+integer x = 535
+integer y = 104
+integer width = 343
+integer height = 100
+integer taborder = 20
+boolean bringtotop = true
+integer textsize = -12
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+borderstyle borderstyle = stylelowered!
+maskdatatype maskdatatype = stringmask!
+string mask = "xxxxx"
 end type
 

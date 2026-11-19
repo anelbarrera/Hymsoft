@@ -31,12 +31,13 @@ end prototypes
 
 type variables
 boolean lb_primera_entrada = true
-String is_app_path
+String is_app_path,is_user
 uo_configuracion_regional uo_regional
 Date idt_fecha_contabilidad
 str_fa_param str_para
 str_tr_param str_param
 str_fa_carg_ped str_formato
+str_aplica_links str_aplica_links
 end variables
 
 forward prototypes
@@ -46,6 +47,7 @@ public function integer wf_set_button_visible (string as_tag, boolean ab_visible
 public subroutine wf_configurar_panel_acciones (boolean ab_nuevo, boolean ab_guardar, boolean ab_eliminar, boolean ab_imprimir, boolean ab_exportar)
 public function integer wf_set_category_visible (string as_tag, boolean ab_visible)
 public subroutine wf_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato)
+public function boolean wf_habilitar_factura ()
 end prototypes
 
 event ue_quitar_menu();// Desvincular el menú de Windows de la ventana MDI
@@ -262,6 +264,57 @@ ab_aceptar = true
 
 end subroutine
 
+public function boolean wf_habilitar_factura (); 
+String	ls_autoriza_s_n,ls_autoriza
+is_user =''
+if This.str_aplica_links.controla_modificaciones =1 then /*Controla modificaciones*/	
+	is_user ='yes'
+	openwithparm(w_dg_man_clave,ls_autoriza)
+	
+	ls_autoriza_s_n = Message.StringParm 
+	
+	CHOOSE CASE ls_autoriza_s_n
+	CASE '1'	//Usuario Autorizado
+	CASE '2'	//Usuario no Autorizado
+		messagebox('Atención ','Estimado Usuario Ud. no está autorizado para Activar Facturas, consulte a su Supervisor...!!!')
+		 
+		return false
+	CASE ELSE
+	 
+		return false
+	END CHOOSE
+
+end if
+
+/**/
+If is_user <> 'yes' then	//Si no pasó por control de modificaciones	
+	//OpenSheetWithparm(w_fa_man_clave_pedido,0,this,0, Original!)	
+	OpenWithParm(w_fa_man_clave_pedido, this)
+	is_user = message.stringparm;
+	If is_user = "*" then		 
+		return false
+	end if
+	
+	is_user ='yes'
+	openwithparm(w_dg_man_clave,this)
+	
+	ls_autoriza_s_n = Message.StringParm 
+	
+	CHOOSE CASE ls_autoriza_s_n
+	CASE '1'	//Usuario Autorizado
+	CASE '2'	//Usuario no Autorizado
+		messagebox('Atención ','Estimado Usuario Ud. no está autorizado para Activar Facturas, consulte a su Supervisor...!!!')
+		 
+		return false
+	CASE ELSE
+		 
+		return false
+	END CHOOSE
+	
+end if
+Return true
+end function
+
 on w_hs_frame.create
 int iCurrent
 call super::create
@@ -328,6 +381,27 @@ This.title = str.nombre_empresa	+ ' SISTEMA INTEGRADO HymSoft V 2.0'
  str_para.bodega_en_transito = 'BTZL'
  str_para.ubicacion_en_transito = 'NU'
  str_para.ano = Year(Date(gf_fecha_serv()))
+
+ String ls_factura_activa_fa,ls_inventario_activa_in,ls_cxc_activa_cc,ls_cxp_activa_cp
+Integer li_habilita_links,li_control_modif
+
+gf_aplica_links(ls_factura_activa_fa,ls_inventario_activa_in,ls_cxc_activa_cc,ls_cxp_activa_cp,li_habilita_links,li_control_modif)
+
+If isNull(ls_factura_activa_fa) then ls_factura_activa_fa =''
+If isNull(ls_inventario_activa_in) then ls_inventario_activa_in =''
+If isNull(ls_cxc_activa_cc) then ls_cxc_activa_cc =''
+If isNull(ls_cxp_activa_cp) then ls_cxp_activa_cp =''
+If isNull(li_habilita_links) then li_habilita_links =0
+If isNull(li_control_modif) then li_control_modif =0
+
+str_aplica_links.factura_activa_fa = ls_factura_activa_fa
+str_aplica_links.inventario_activa_in = ls_inventario_activa_in
+str_aplica_links.cxc_activa_cc = ls_cxc_activa_cc
+str_aplica_links.cxp_activa_cp = ls_cxp_activa_cp
+str_aplica_links.habilita_links = li_habilita_links
+/*0 no controla o se produjo error, 1 = Controla mofificaciones */
+str_aplica_links.controla_modificaciones = li_control_modif
+ 
  
 wf_set_panel(false)
 this.Post Event ue_post_open()
@@ -966,28 +1040,42 @@ Choose Case ls_tag
 	        	parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_ESP_ACTIVAR_FACT"
-//        OpenSheetWithParm(w_proc_especiales_doc, "ACTIVAR_FACTURA", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+				wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				If wf_habilitar_factura() Then
+					wf_set_panel_visible("PAN_ACC_EDICION", False)
+					wf_set_panel_visible("PAN_ACC_DOC", False)
+					OpenSheet(w_fa_habilitar_factura, parent, 0, Original!)
+	        		parent.Post Event ue_evaluar_panel_acciones()
+				Else
+					Return
+				End If
+    Case "BTN_ESP_CAMBIAR_NUM_FACT" 
+		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheet(w_fa_cambio_num_factura, parent, 0, Original!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
+    Case "BTN_ESP_ACT_PESO_CUBIC" 
+				wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheet(w_fa_man_recalcula_factura, parent, 0, Original!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
+    Case "BTN_ESP_ACT_PESO_CUBIC_PED" 
+				wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheet(w_fa_man_recalcula_pedido, parent, 0, Original!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
 
-    Case "BTN_ESP_CAMBIAR_NUM_FACT"
-//        OpenSheet(w_proc_cambiar_num_factura, parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
-
-    Case "BTN_ESP_ACT_PESO_CUBIC"
-//        OpenSheetWithParm(w_proc_peso_cubicaje, "GENERAL", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
-
-    Case "BTN_ESP_ACT_PESO_CUBIC_PED"
-//        OpenSheetWithParm(w_proc_peso_cubicaje, "PEDIDO", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
-
-    Case "BTN_ESP_REST_LISTA_EMP"
-//        OpenSheetWithParm(w_proc_especiales_doc, "REST_LISTA_EMPAQUE", parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
-
-    Case "BTN_ESP_CAMBIAR_RES_PED_FUT"
-//        OpenSheet(w_proc_reserva_pedido_futuro, parent, 0, Layered!)
-//        parent.Post Event ue_evaluar_panel_acciones()
+    Case "BTN_ESP_REST_LISTA_EMP" 
+				wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheet(w_fa_man_restaurar_lista_empaque, parent, 0, Original!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
+    Case "BTN_ESP_CAMBIAR_RES_PED_FUT"		 
+				wf_set_panel_visible("PAN_ACC_EDICION", False)
+				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheet(w_fa_man_cambiar_de_oc_a_existencias, parent, 0, Original!)
+	        	parent.Post Event ue_evaluar_panel_acciones()
 End Choose
 end event
 

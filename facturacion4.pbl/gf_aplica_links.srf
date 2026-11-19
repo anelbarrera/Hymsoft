@@ -1,0 +1,77 @@
+﻿//objectcomments  
+global type gf_aplica_links from function_object
+end type
+
+forward prototypes
+global subroutine gf_aplica_links (ref string factura_activa_fa, ref string inventario_activa_in, ref string cxc_activa_cc, ref string cxp_activa_cp, ref integer habilita_links, ref integer controla_modificaciones)
+end prototypes
+
+global subroutine gf_aplica_links (ref string factura_activa_fa, ref string inventario_activa_in, ref string cxc_activa_cc, ref string cxp_activa_cp, ref integer habilita_links, ref integer controla_modificaciones);/*Función que carga las aplicaciones activas con links para activarlos*/
+ SELECT dgmaplica.apli_estado  
+    INTO :factura_activa_fa
+    FROM dgmaplica  
+   WHERE dgmaplica.apli_aplicacion = 'FA'   ;
+	
+	If sqlca.sqlcode = -1 then
+		messagebox('Atención ','Error al leer estado de la aplicación FA')
+		return
+	end if
+
+ SELECT dgmaplica.apli_estado  
+    INTO :inventario_activa_in
+    FROM dgmaplica  
+   WHERE dgmaplica.apli_aplicacion = 'IN'   ;
+	
+	If sqlca.sqlcode = -1 then
+		messagebox('Atención ','Error al leer estado de la aplicación IN')
+		return
+	end if
+	
+ SELECT dgmaplica.apli_estado  
+    INTO :cxc_activa_cc
+    FROM dgmaplica  
+   WHERE dgmaplica.apli_aplicacion = 'CC'   ;
+	
+	If sqlca.sqlcode = -1 then
+		messagebox('Atención ','Error al leer estado de la aplicación CC')
+		return
+	end if
+	
+ SELECT dgmaplica.apli_estado  
+    INTO :cxp_activa_cp
+    FROM dgmaplica  
+   WHERE dgmaplica.apli_aplicacion = 'CP'   ;
+	
+	If sqlca.sqlcode = -1 then
+		messagebox('Atención ','Error al leer estado de la aplicación CP')
+		return
+	end if
+
+/**/
+If inventario_activa_in ='A' then	
+	SELECT inaparam.para_habilita_links,para_controla_modificaciones
+		 INTO :habilita_links ,
+		 		:controla_modificaciones
+		 FROM inaparam  
+		WHERE ( inaparam.para_g_financiero = :str.g_financiero ) AND  
+				( inaparam.para_empresa = :str.empresa )   ;
+	
+		If sqlca.sqlcode = -1 then
+			messagebox('Atención ','Error al leer parámetro de los links')
+			return
+		end if
+else
+	SELECT para_controla_modificaciones
+		 INTO :controla_modificaciones
+		 FROM inaparam  
+		WHERE ( inaparam.para_g_financiero = :str.g_financiero ) AND  
+				( inaparam.para_empresa = :str.empresa )   ;
+	
+		If sqlca.sqlcode = -1 then
+			messagebox('Atención ','Error al leer parámetro de control de modificaciones')
+			return
+		end if
+end if
+/**/
+end subroutine
+
