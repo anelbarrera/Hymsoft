@@ -547,6 +547,25 @@ else
 end if
 end event
 
+event close; 
+Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+end event
+
+event closequery;call super::closequery;//destroy io_encryptor
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
+end event
+
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_fa_co_consulta_existencia
 end type
 
@@ -1196,8 +1215,11 @@ if dwo.name = 'tmov_documento' then
 	lstr_entrada.secuencia = ll_secuencia
 	lstr_entrada.ann = li_ann
 	lstr_entrada.concepto = ls_concepto
-	
+	w_hs_frame.wf_set_panel_visible("PAN_ACC_EDICION", False)
+	w_hs_frame.wf_set_panel_visible("PAN_ACC_DOC", true)
 	OpenSheetWithParm(w_in_rep_entradas,lstr_entrada,str.frame,11,Layered!)	
+	w_hs_frame.Post Event ue_evaluar_panel_acciones()
+	
 end if
 end event
 

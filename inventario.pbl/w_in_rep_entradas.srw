@@ -14,6 +14,8 @@ global type w_in_rep_entradas from w_fa_padre_reportes
 integer width = 3035
 integer height = 2164
 string title = "Reporte de Entrada"
+string menuname = "m_hs"
+boolean controlmenu = false
 boolean minbox = false
 boolean maxbox = false
 dw_2 dw_2
@@ -29,6 +31,8 @@ end variables
 on w_in_rep_entradas.create
 int iCurrent
 call super::create
+if IsValid(this.MenuID) then destroy(this.MenuID)
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.dw_2=create dw_2
 this.dw_3=create dw_3
 this.cb_1=create cb_1
@@ -86,9 +90,9 @@ end event
 event activate;call super::activate;Integer li_tp
 Long 	  ll_rtn
 
-if not isvalid(m_fa_rep) then 
-	this.changemenu(m_fa_rep)
-end if
+//if not isvalid(m_fa_rep) then 
+//	this.changemenu(m_fa_rep)
+//end if
 
 end event
 
@@ -124,6 +128,25 @@ elseif dw_3.visible and getfocus() <> dw_1 then	//Si el dw del detalle esta visi
 end if
 
 
+end event
+
+event close; 
+Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
+end event
+
+event closequery;call super::closequery;//destroy io_encryptor
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 end event
 
 type st_ayuda from w_fa_padre_reportes`st_ayuda within w_in_rep_entradas

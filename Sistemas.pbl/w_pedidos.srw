@@ -32,7 +32,7 @@ global w_pedidos w_pedidos
 
 type variables
 integer ii_ann, datawindow, il_row, ii_cantidad_unidad, ii_cantidad_empaque
-String  is_entrada, is_unidad_empaque, is_secuencia, is_actualiza
+String  is_entrada, is_unidad_empaque, is_secuencia, is_actualiza,is_pedido
 date	  idt_desde, idt_hasta
 long    il_tiempo, il_segundos, il_secuencia, il_empaque
 decimal{4} id_peso, id_cubicaje
@@ -533,6 +533,7 @@ if dwo.name = 'b_cliente' then
 		dw_3.insertrow(1)
 	else
 		ll_codigo	= dw_1.getitemnumber(1,'pedi_cliente')
+		is_pedido = String(ll_codigo)
 		li_encontro = dw_3.find('clie_codigo = '+string(ll_codigo),1,dw_3.rowcount())
 		if li_encontro > 0 then
 			dw_3.scrolltorow(li_encontro)

@@ -342,11 +342,19 @@
         </Panel>
         
         <Panel Text="Facturación" Tag="PAN_CONS_FACTURACION">
-          <LargeButton Text="Facturas con Detalle" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InvoiceDetail_32.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_CONS_FACT_DETALLE" />
-        </Panel>
+  <LargeButton Text="Facturas con Detalle" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InvoiceDetail_32.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_CONS_FACT_DETALLE" />
+  <LargeButton Text="Existencias" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockQuery_32.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_CONS_EXISTENCIAS" />
+  <LargeButton Text="Existencias (Con Especificación)" 
+               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockQuerySpec_32.png" 
+               Clicked="ue_ribbon_click" 
+               Tag="BTN_CONS_EXISTENCIAS_ESP" />
+</Panel>
 
         <Panel Text="Clientes" Tag="PAN_CONS_CLIENTES">
           <LargeButton Text="Facturas" 
@@ -394,80 +402,77 @@
         </Panel>
       </Category>
 
-      <!-- ================================================================= -->
-      <!-- 4. REPORTES                                                       -->
+   <!-- ================================================================= -->
+      <!-- 4. REPORTES (Iconos grandes 32x32 reales con menú desplegable)    -->
       <!-- ================================================================= -->
       <Category Text="Reportes" Tag="CAT_REPORTES">
-        <Panel Text="Ventas" Tag="PAN_REP_VENTAS">
-          <LargeButton Text="Informe de Ventas" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ReportSales_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_VENTAS" />
-          <LargeButton Text="Más Vendidos" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\TopProducts_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_TOP_PROD" />
-          <LargeButton Text="Saldos Clientes" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ClientBalances_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_SALDOS_CLI" />
-          <LargeButton Text="Transacciones" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ClientTx_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_TX_CLI" />
-          <LargeButton Text="Antigüedad Saldos" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AgingReport_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_ANT_SALDOS" />
-        </Panel>
+        <Panel Text="Reportes del Sistema" Tag="PAN_REPORTES_MAIN">
+          
+          <LargeButton Text="Facturación" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Panel_RepFacturacion_32.png" 
+                       Tag="BTN_MENU_REP_FACTURACION">
+            <Menu>
+              <Item Text="Control de Pedidos Aprobados" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersApproved_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PED_APROBADOS" />
+              <Item Text="Lista de Empaque de Verificación" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_PackVerify_16.png" Clicked="ue_menu_click" Tag="BTN_REP_LISTA_EMP_VERIF" />
+              <Item Text="Pedidos Registrados" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersRegistered_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PED_REGISTRADOS" />
+              <Item Type="1" />
+              <Item Text="Pedidos Reservados" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersReserved_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PED_RESERVADOS" />
+              <Item Text="Pedidos Reservados en Tránsito o Confirmados" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersTransitConf_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PED_RES_TRANS_CONF" />
+              <Item Text="Pedidos Sin Empaque" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersNoPack_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PED_SIN_EMPAQUE" />
+              <Item Type="1" />
+              <Item Text="Proformas Pendientes" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_ProformasPending_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PROFORMAS_PEND" />
+              <Item Text="Mercancías Agotadas" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutOfStock_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MERC_AGOTADAS" />
+              <Item Text="Verificación de Pedidos vs Lista de Empaque" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersVsPack_16.png" Clicked="ue_menu_click" Tag="BTN_REP_VERIF_PED_VS_EMP" />
+              <Item Type="1" />
+              <Item Text="Ventas Diarias" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_DailySales_16.png" Clicked="ue_menu_click" Tag="BTN_REP_VENTAS_DIARIAS" />
+              <Item Text="Informe de Productos Reservados en Tránsito" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_ProdReservedTransit_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PROD_RES_TRANSITO" />
+              <Item Text="Reporte de Tipo de Facturas" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_InvoiceTypes_16.png" Clicked="ue_menu_click" Tag="BTN_REP_TIPO_FACTURAS" />
+            </Menu>
+          </LargeButton>
 
-        <Panel Text="Inventario" Tag="PAN_REP_INV">
-          <LargeButton Text="Existencias" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ReportStock_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_INVENTARIOS" />
-          <LargeButton Text="Rotación Stock" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockTurnover_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_ROT_INV" />
-          <LargeButton Text="Antigüedad Stock" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockAging_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_ANT_INV" />
-          <LargeButton Text="Movimientos" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockMovement_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_MOVIMIENTOS" />
-          <LargeButton Text="Catálogos" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Catalog_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_CATALOGOS" />
-        </Panel>
+          <LargeButton Text="Ventas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Panel_RepVentas_32.png" 
+                       Tag="BTN_MENU_REP_VENTAS">
+            <Menu>
+              <Item Text="Informe de Ventas" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ReportSales_16.png" Clicked="ue_menu_click" Tag="BTN_REP_VENTAS" />
+              <Item Text="Más Vendidos" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\TopProducts_16.png" Clicked="ue_menu_click" Tag="BTN_REP_TOP_PROD" />
+              <Item Text="Saldos Clientes" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ClientBalances_16.png" Clicked="ue_menu_click" Tag="BTN_REP_SALDOS_CLI" />
+              <Item Text="Transacciones" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ClientTx_16.png" Clicked="ue_menu_click" Tag="BTN_REP_TX_CLI" />
+              <Item Text="Antigüedad Saldos" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AgingReport_16.png" Clicked="ue_menu_click" Tag="BTN_REP_ANT_SALDOS" />
+            </Menu>
+          </LargeButton>
 
-        <Panel Text="Compras" Tag="PAN_REP_COMPRAS">
-          <LargeButton Text="Sugerido Compras" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SuggestedPurchase_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_SUGERIDO_COMP" />
-          <LargeButton Text="Informe Órdenes" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\POReport_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_ORDENES" />
-          <LargeButton Text="Entradas Stock" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InboundReport_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_ENTRADAS" />
-        </Panel>
+          <LargeButton Text="Inventario" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Panel_RepInventario_32.png" 
+                       Tag="BTN_MENU_REP_INV">
+            <Menu>
+              <Item Text="Existencias" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\ReportStock_16.png" Clicked="ue_menu_click" Tag="BTN_REP_INVENTARIOS" />
+              <Item Text="Rotación Stock" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockTurnover_16.png" Clicked="ue_menu_click" Tag="BTN_REP_ROT_INV" />
+              <Item Text="Antigüedad Stock" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockAging_16.png" Clicked="ue_menu_click" Tag="BTN_REP_ANT_INV" />
+              <Item Text="Movimientos" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockMovement_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MOVIMIENTOS" />
+              <Item Text="Catálogos" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Catalog_16.png" Clicked="ue_menu_click" Tag="BTN_REP_CATALOGOS" />
+            </Menu>
+          </LargeButton>
 
-        <Panel Text="Internos" Tag="PAN_REP_INTERNO">
-          <LargeButton Text="Transferencias" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\TransferReport_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_TRANSFERENCIAS" />
-          <LargeButton Text="Ajustes" 
-                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AdjustmentReport_16.png" 
-                       Clicked="ue_ribbon_click" 
-                       Tag="BTN_REP_AJUSTES" />
+          <LargeButton Text="Compras" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Panel_RepCompras_32.png" 
+                       Tag="BTN_MENU_REP_COMPRAS">
+            <Menu>
+              <Item Text="Sugerido Compras" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\SuggestedPurchase_16.png" Clicked="ue_menu_click" Tag="BTN_REP_SUGERIDO_COMP" />
+              <Item Text="Informe Órdenes" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\POReport_16.png" Clicked="ue_menu_click" Tag="BTN_REP_ORDENES" />
+              <Item Text="Entradas Stock" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InboundReport_16.png" Clicked="ue_menu_click" Tag="BTN_REP_ENTRADAS" />
+            </Menu>
+          </LargeButton>
+
+          <LargeButton Text="Internos" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Panel_RepInternos_32.png" 
+                       Tag="BTN_MENU_REP_INTERNO">
+            <Menu>
+              <Item Text="Transferencias" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\TransferReport_16.png" Clicked="ue_menu_click" Tag="BTN_REP_TRANSFERENCIAS" />
+              <Item Text="Ajustes" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\AdjustmentReport_16.png" Clicked="ue_menu_click" Tag="BTN_REP_AJUSTES" />
+            </Menu>
+          </LargeButton>
+
         </Panel>
       </Category>
 

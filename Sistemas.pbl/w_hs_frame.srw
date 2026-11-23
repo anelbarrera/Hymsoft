@@ -38,6 +38,7 @@ str_fa_param str_para
 str_tr_param str_param
 str_fa_carg_ped str_formato
 str_aplica_links str_aplica_links
+str_fa_carg_ped str_pedi
 end variables
 
 forward prototypes
@@ -441,7 +442,7 @@ end event
 
 event ue_post_open; 
 this.WindowState = Maximized!
-
+gf_fa_param()	
  
 If IsValid(mdi_1) Then
     mdi_1.SetRedraw(False)
@@ -634,6 +635,25 @@ Choose Case ls_tag
 	Case 'BTN_CONS_FACT_DETALLE'
 		w_fa_co_facturas_cab_det_99	lw_fac
 		opensheet(lw_fac,Parent,0,Original!)
+	Case 'BTN_CONS_EXISTENCIAS'
+		lstr_datawindow.tipo_formato = "W=2935 H=1102 Y=800 Wd=2721 Sy=1106"
+
+		if w_hs_frame.str_para.utiliza_decimales = 1 then
+				lstr_datawindow.datawindow = "dw_co_fa_consulta_existencias_venta_te" //dw_co_fa_consulta_factura
+		else
+				lstr_datawindow.datawindow = "dw_co_fa_consulta_existencias_venta" //dw_co_fa_consulta_factura
+		end if
+		OpenSheetWithParm(w_fa_co_consulta_existencia, lstr_datawindow, Parent,0,Original!)
+		
+	Case 'BTN_CONS_EXISTENCIAS_ESP'
+		lstr_datawindow.tipo_formato = "W=2935 H=1102 Y=800 Wd=2721 Sy=1106"
+
+		if w_hs_frame.str_para.utiliza_decimales = 1 then
+				lstr_datawindow.datawindow = "dw_co_fa_consulta_existencias_precio_te" //dw_co_fa_consulta_factura
+		else
+				lstr_datawindow.datawindow = "dw_co_fa_consulta_existencias_precio" //dw_co_fa_consulta_factura
+		end if
+		OpenSheetWithParm(w_fa_co_consulta_existencia, lstr_datawindow, Parent,0,Original!)		
     Case "BTN_MANT_CLIENTES"		 
         OpenSheet(w_mant_clientes, Parent, 0, Original!)
     Case "BTN_MANT_PRODUCTOS"        
@@ -906,6 +926,9 @@ RibbonMenu lr_menu
 RibbonMenuItem lr_item
 String ls_tag
 Integer li_rc
+str_fa_carg_ped str_pedi
+window lw_activa
+String ls_activa,ls_pedid
 
 // 1. Obtener el botón padre (SmallButton o LargeButton) dueño del menú desplegable
 If this.GetSmallButton(al_handle, lr_small) = 1 Then
@@ -933,7 +956,27 @@ If IsNull(ls_tag) Or ls_tag = "" Then Return
 //MessageBox("Menú Clickeado", "Tag capturado: " + ls_tag)
 
  
-Choose Case ls_tag
+Choose Case ls_tag	
+	// Reportes
+	Case 'BTN_REP_PED_APROBADOS'
+		
+
+
+ 		ls_pedid = "w_pedidos"
+		lw_activa = str.frame.GetFirstSheet()
+		IF IsValid(lw_activa) then
+				ls_activa = lw_activa.Classname()	
+		if ls_activa = ls_pedid THEN		
+					str_pedi.pedido = w_pedidos.is_pedido
+					str_pedi.ano    = w_pedidos.ii_ann
+		else		
+				str_pedi.pedido = ""
+				str_pedi.ano = 0			
+	end if		
+end if
+
+//OpenSheetWithParm ( w_fa_rep_packing_geren, str_pedi , parentwindow ,9,Original!)
+	OpenSheetWithParm ( w_fa_rep_aprobacion, str_pedi , Parent ,9,Original!)
     // --- PROCESOS PENDIENTES ---
     Case "BTN_PEND_REACTIVAR_FACT"
 		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
@@ -962,7 +1005,7 @@ Choose Case ls_tag
     // --- PASES ---
     Case "BTN_PASE_PROF_A_PED_COMP"
 		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)
+			wf_set_panel_visible("PAN_ACC_DOC", true)
 			 OpenSheet(w_fa_co_prof_pasa_ped_directo, parent, 0, Layered!)
        	parent.Post Event ue_evaluar_panel_acciones()
 
