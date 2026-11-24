@@ -1,0 +1,10 @@
+﻿//objectcomments  
+release 6;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes name=serd_sub_trans dbname="dgmserdr.serd_sub_trans" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dgmserdr~" ) COLUMN(NAME=~"dgmserdr.serd_sub_trans~")) " )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="0" x="9" y="4" height="56" width="581" format="[general]"  name=serd_sub_trans dddw.name=dw_dd_dg_subtrans_apli dddw.displaycolumn=descrip dddw.datacolumn=dgmsubse_subs_sub_trans dddw.percentwidth=225 dddw.lines=5 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

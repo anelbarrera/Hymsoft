@@ -1,0 +1,57 @@
+﻿//objectcomments  
+global type gf_fa_selec_formato from function_object
+end type
+
+forward prototypes
+global subroutine gf_fa_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato, ref string as_datawindow)
+end prototypes
+
+global subroutine gf_fa_selec_formato (ref integer ai_existe, ref boolean ab_aceptar, ref string as_tipo_formato, ref string as_forma_formato, ref string as_datawindow);/*Scrip agregado por HGN el 20 de marzo del 2000*/
+
+/* Esta función verifica cuantos formatos existen del documento
+solicitado, si hay más de uno abre la ventana de selección, si sólo
+hay uno toma el datawindow del mismo y abre la ventana principal*/
+
+String	ls_dberror
+SELECT count(*) 
+ INTO :ai_existe
+    FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato =:as_forma_formato);   
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al Validar la existencia del documento", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+
+
+if ai_existe <= 0 then
+	mensaje("Atención ","No se ha configurado el formato del documento, por favor contacte al personal de soporte, o al programador..gracias", "")
+	ab_aceptar = false
+	return
+End If
+
+If ai_existe = 1 then
+	// Sólo hay un formato no abre ventana selección de formatos
+	  SELECT faaforma.forma_datawindow  
+	 INTO :as_datawindow 
+	 FROM faaforma  
+   WHERE (faaforma.forma_tipo_formato = :as_tipo_formato ) AND  
+         (faaforma.forma_formato = :as_forma_formato);   
+	
+	if sqlca.sqlcode = -1 then
+		ls_dberror = sqlca.sqlerrtext
+		mensaje("Atención ","Error al leer el formato del documento", ls_dberror)
+		ab_aceptar = false
+		return
+	End If
+end  if
+ab_aceptar = true
+
+
+
+
+
+end subroutine
+

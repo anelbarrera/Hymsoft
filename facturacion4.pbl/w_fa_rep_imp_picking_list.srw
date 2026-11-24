@@ -12,7 +12,8 @@ global type w_fa_rep_imp_picking_list from w_fa_padre_reportes
 integer width = 3333
 integer height = 1752
 string title = "Informe de Picking List"
-string menuname = "m_fa_rep"
+string menuname = "m_hs"
+boolean controlmenu = false
 dw_2 dw_2
 pb_5 pb_5
 end type
@@ -357,7 +358,7 @@ on w_fa_rep_imp_picking_list.create
 int iCurrent
 call super::create
 if IsValid(this.MenuID) then destroy(this.MenuID)
-if this.MenuName = "m_fa_rep" then this.MenuID = create m_fa_rep
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.dw_2=create dw_2
 this.pb_5=create pb_5
 iCurrent=UpperBound(this.Control)
@@ -419,10 +420,10 @@ if dw_1.dataobject <> "" then
 				return
 			end if
 			//Para Asignar el Orden por default, si es 2 o nulo, queda con el orden por índice o creacion
-			if w_fa_fondo.str_para.orden = 0 then //Orden por codigo
+			if w_hs_frame.str_para.orden = 0 then //Orden por codigo
 				dw_1.SetSort('dped_codigo_item A')
 				dw_1.Sort()	
-			elseif w_fa_fondo.str_para.orden = 1 then //Orden por descripcion,codigo
+			elseif w_hs_frame.str_para.orden = 1 then //Orden por descripcion,codigo
 				dw_1.SetSort('dped_descripcion_alterna A dped_codigo_item A')
 				dw_1.Sort()	
 			else
@@ -431,9 +432,9 @@ if dw_1.dataobject <> "" then
 			end if
 			
 			//Si tienen seleccionada alguna ubicacion en transito, en parámetros
-			if trim(w_fa_fondo.str_para.ubicacion_en_transito) <> '' and not isnull(w_fa_fondo.str_para.ubicacion_en_transito) then
+			if trim(w_hs_frame.str_para.ubicacion_en_transito) <> '' and not isnull(w_hs_frame.str_para.ubicacion_en_transito) then
 				if dw_1.Describe("dped_ubicacion.x") <> "?" and dw_1.Describe("dped_ubicacion.x") <> "!" then 	 				
-					dw_1.setfilter("dped_ubicacion <> '"+w_fa_fondo.str_para.ubicacion_en_transito+"'")
+					dw_1.setfilter("dped_ubicacion <> '"+w_hs_frame.str_para.ubicacion_en_transito+"'")
 					dw_1.filter()	
 				end if
 			end if
@@ -462,10 +463,10 @@ if dw_1.dataobject <> "" then
 				return
 			end if		
 			//Para Asignar el Orden por default, si es 2 o nulo, queda con el orden por índice o creacion
-			if w_fa_fondo.str_para.orden = 0 then //Orden por codigo
+			if w_hs_frame.str_para.orden = 0 then //Orden por codigo
 				dw_1.SetSort('dpro_codigo_item A')
 				dw_1.Sort()	
-			elseif w_fa_fondo.str_para.orden = 1 then //Orden por descripcion,codigo
+			elseif w_hs_frame.str_para.orden = 1 then //Orden por descripcion,codigo
 				dw_1.SetSort('dpro_descripcion_alterna A dpro_codigo_item A')
 				dw_1.Sort()	
 			else
@@ -473,9 +474,9 @@ if dw_1.dataobject <> "" then
 				dw_1.Sort()	
 			end if
 			//Si tienen seleccionada alguna ubicacion en transito, en parámetros
-			if trim(w_fa_fondo.str_para.ubicacion_en_transito) <> '' and not isnull(w_fa_fondo.str_para.ubicacion_en_transito) then
+			if trim(w_hs_frame.str_para.ubicacion_en_transito) <> '' and not isnull(w_hs_frame.str_para.ubicacion_en_transito) then
 				if dw_1.Describe("dpro_ubicacion.x") <> "?" and dw_1.Describe("dpro_ubicacion.x") <> "!" then 	 				
-					dw_1.setfilter("dpro_ubicacion <> '"+w_fa_fondo.str_para.ubicacion_en_transito+"'")
+					dw_1.setfilter("dpro_ubicacion <> '"+w_hs_frame.str_para.ubicacion_en_transito+"'")
 					dw_1.filter()	
 				end if
 			end if			
@@ -556,6 +557,7 @@ dw.Print(True)
 end event
 
 type st_nom_ventana from w_fa_padre_reportes`st_nom_ventana within w_fa_rep_imp_picking_list
+boolean visible = false
 integer x = 23
 integer y = 1512
 end type

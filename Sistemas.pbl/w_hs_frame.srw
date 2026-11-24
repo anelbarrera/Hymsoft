@@ -959,24 +959,44 @@ If IsNull(ls_tag) Or ls_tag = "" Then Return
 Choose Case ls_tag	
 	// Reportes
 	Case 'BTN_REP_PED_APROBADOS'
-		
-
-
- 		ls_pedid = "w_pedidos"
-		lw_activa = str.frame.GetFirstSheet()
-		IF IsValid(lw_activa) then
+ 			ls_pedid = "w_pedidos"
+			lw_activa = str.frame.GetFirstSheet()
+			IF IsValid(lw_activa) then
 				ls_activa = lw_activa.Classname()	
-		if ls_activa = ls_pedid THEN		
-					str_pedi.pedido = w_pedidos.is_pedido
-					str_pedi.ano    = w_pedidos.ii_ann
-		else		
-				str_pedi.pedido = ""
-				str_pedi.ano = 0			
-	end if		
-end if
+				if ls_activa = ls_pedid THEN		
+						str_pedi.pedido = w_pedidos.is_pedido
+						str_pedi.ano    = w_pedidos.ii_ann
+				else		
+						str_pedi.pedido = ""
+						str_pedi.ano = 0			
+				end if		
+			end if
 
-//OpenSheetWithParm ( w_fa_rep_packing_geren, str_pedi , parentwindow ,9,Original!)
-	OpenSheetWithParm ( w_fa_rep_aprobacion, str_pedi , Parent ,9,Original!)
+			//OpenSheetWithParm ( w_fa_rep_packing_geren, str_pedi , parentwindow ,9,Original!)
+			wf_set_panel_visible("PAN_ACC_EDICION", False)
+			wf_set_panel_visible("PAN_ACC_DOC", True)		
+			OpenSheetWithParm ( w_fa_rep_aprobacion, str_pedi , Parent ,9,Original!)
+			parent.Post Event ue_evaluar_panel_acciones()
+	Case 'BTN_REP_LISTA_EMP_VERIF'
+		str_pedi.tipo_formato   ='PIK'
+		wf_set_panel_visible("PAN_ACC_EDICION", False)
+		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpenSheetWithParm ( w_fa_rep_picking_list, str_pedi , Parent ,9,Original!)
+		parent.Post Event ue_evaluar_panel_acciones()
+	Case 'BTN_REP_PED_REGISTRADOS'
+		Parent.SetRedraw (false)
+		wf_set_panel_visible("PAN_ACC_EDICION", False)
+		wf_set_panel_visible("PAN_ACC_DOC", True)			
+		Opensheet(w_fa_rep_pedidos_registrados,Parent,9,Original!)
+		Parent.SetRedraw (true)
+		parent.Post Event ue_evaluar_panel_acciones()
+	Case 'BTN_REP_PED_RESERVADOS'
+		Parent.SetRedraw (false)
+		wf_set_panel_visible("PAN_ACC_EDICION", False)
+		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		Opensheet(w_fa_rep_pedidos_pend,Parent,9,Original!)
+		Parent.SetRedraw (true)
+		parent.Post Event ue_evaluar_panel_acciones()
     // --- PROCESOS PENDIENTES ---
     Case "BTN_PEND_REACTIVAR_FACT"
 		 	wf_set_panel_visible("PAN_ACC_EDICION", False)

@@ -81,8 +81,8 @@ End If
 
 If lb_selecciono Then
 	CHOOSE CASE str_pedi.tipo_formato
-//		CASE 'PIK'	//Picking List
-//			OpenSheetWithParm(w_fa_rep_imp_picking_list, str_pedi, str.frame, 9, Layered!)	
+		CASE 'PIK'	//Picking List
+			OpenSheetWithParm(w_fa_rep_imp_picking_list, str_pedi, str.frame, 9, Layered!)	
 //		CASE 'PAK'	//Packing List Gerencial
 //		   OpenSheetWithParm(w_fa_rep_imp_picking_geren, str_pedi, str.frame,9,Layered!)
 		CASE 'LEM'	// Lista de Empaques			
