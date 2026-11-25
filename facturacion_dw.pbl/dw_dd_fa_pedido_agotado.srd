@@ -1,0 +1,16 @@
+﻿//objectcomments D.W.Listado de Pedidos  agotados, tomando en consideración el Año.
+release 7;
+datawindow(units=0 timer_interval=0 color=12632256 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(8) updatewhereclause=yes name=agot_no_pedido dbname="fadagota.agot_no_pedido" )
+ column=(type=decimal(0) updatewhereclause=yes name=agot_anno dbname="fadagota.agot_anno" )
+ retrieve="PBSELECT( VERSION(400) DISTINCT ()TABLE(NAME=~"fadagota~" ) COLUMN(NAME=~"fadagota.agot_no_pedido~") COLUMN(NAME=~"fadagota.agot_anno~")WHERE(    EXP1 =~"fadagota.agot_g_financiero~"   OP =~"=~"    EXP2 =~":g_financiero~"    LOGIC =~"And~" ) WHERE(    EXP1 =~"fadagota.agot_empresa~"   OP =~"=~"    EXP2 =~":empresa~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"fadagota.agot_anno~"   OP =~"=~"    EXP2 =~":anio~" ) ) ARG(NAME = ~"g_financiero~" TYPE = number)  ARG(NAME = ~"empresa~" TYPE = number)  ARG(NAME = ~"anio~" TYPE = number) " arguments=(("g_financiero", number),("empresa", number),("anio", number))  sort="agot_anno A agot_no_pedido A " )
+text(band=header alignment="2" text="Año" border="6" color="0" x="453" y="12" height="56" width="320"  name=agot_anno_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="No. Pedido" border="6" color="0" x="23" y="12" height="56" width="407"  name=agot_no_pedido_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="5" color="0" x="23" y="4" height="52" width="393" format="[general]"  name=agot_no_pedido edit.limit=8 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="5" color="0" x="443" y="4" height="52" width="325" format="[general]"  name=agot_anno edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

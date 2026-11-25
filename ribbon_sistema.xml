@@ -421,7 +421,10 @@
               <Item Text="Pedidos Sin Empaque" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersNoPack_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PED_SIN_EMPAQUE" />
               <Item Type="1" />
               <Item Text="Proformas Pendientes" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_ProformasPending_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PROFORMAS_PEND" />
-              <Item Text="Mercancías Agotadas" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutOfStock_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MERC_AGOTADAS" />
+              <Item Text="Mercancías Agotadas" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutOfStock_16.png" Tag="BTN_REP_MERC_AGOTADAS">  
+			  <Item Text="Mercancía Agotada" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutOfStock_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MERC_AGOTADA" />
+			  <Item Text="Por Pedidos" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutStock_Orders_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MERC_AGOT_POR_PED" />
+			  </Item>
               <Item Text="Verificación de Pedidos vs Lista de Empaque" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersVsPack_16.png" Clicked="ue_menu_click" Tag="BTN_REP_VERIF_PED_VS_EMP" />
               <Item Type="1" />
               <Item Text="Ventas Diarias" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_DailySales_16.png" Clicked="ue_menu_click" Tag="BTN_REP_VENTAS_DIARIAS" />

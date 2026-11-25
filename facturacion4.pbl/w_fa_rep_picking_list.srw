@@ -29,6 +29,7 @@ end type
 end forward
 
 global type w_fa_rep_picking_list from w_fa_padre_reportes
+boolean visible = false
 integer x = 1271
 integer y = 160
 integer width = 1632
@@ -375,6 +376,7 @@ if isvalid(this) then close(this)
 end event
 
 type st_nom_ventana from w_fa_padre_reportes`st_nom_ventana within w_fa_rep_picking_list
+boolean visible = false
 integer x = 41
 integer y = 432
 integer width = 832

@@ -19,6 +19,7 @@
     <Library Path="facturacion2.pbl"/>
     <Library Path="facturacion3.pbl"/>
     <Library Path="facturacion4.pbl"/>
+    <Library Path="facturacion_dw.pbl"/>
   </Libraries>
   <Deployings>
     <Deploying Deploy="1" Library="Sistemas.pbl" Name="hymsoft_cloud"/>

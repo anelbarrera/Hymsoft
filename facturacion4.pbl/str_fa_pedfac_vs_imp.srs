@@ -1,0 +1,11 @@
+﻿//objectcomments Estructura de los pedidos o facturas usada en la ventana (w_fa_rep_ped_vs_emp) para pasar a la ventana del informe de pedidos y facturas contra lista de empaque
+global type str_fa_pedfac_vs_imp from structure
+	string		codigo
+	long		anno
+	string		tipo
+	string		codempaq
+	boolean		por_tipo
+	boolean		asignado
+	long		reportes
+end type
+
