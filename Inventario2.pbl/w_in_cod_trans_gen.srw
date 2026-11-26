@@ -835,10 +835,10 @@ end event
 
 event close;call super::close;Window lw_frame
 
+setredraw(false)
 lw_frame = ParentWindow()
-
 If IsValid(lw_frame) Then
-   lw_frame.PostEvent("ue_sheet_closed")
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
  End If
 if isvalid(this) then close(this)
 end event
@@ -847,6 +847,12 @@ event ue_imprimir;dw = dw3
 OpenWithParm(w_dw_print_options, dw)
 If Message.DoubleParm = -1 Then Return
 dw.Print(True)
+end event
+
+event closequery;call super::closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 end event
 
 type st_ayuda from w_in_padre_reportes`st_ayuda within w_in_cod_trans_gen

@@ -31,7 +31,7 @@ end prototypes
 
 type variables
 boolean lb_primera_entrada = true
-String is_app_path,is_user
+String is_app_path,is_user,is_tag_modulo
 uo_configuracion_regional uo_regional
 Date idt_fecha_contabilidad
 str_fa_param str_para
@@ -362,7 +362,10 @@ li_rc = rbb_1.ImportFromXMLFile("ribbon_sistema.xml")
 If li_rc <> 1 Then
     MessageBox("Error", "Fallo al inicializar la RibbonBar. Código: " + String(li_rc), StopSign!)
 End If
- 
+
+IF gnv_seg.of_cargar_permisos(str.usuario) = 1 THEN
+    gnv_seg.of_aplicar_ribbon(rbb_1)
+END IF
 
 // Ocultar la categoría unificada de acciones al iniciar la aplicación
 this.wf_set_category_visible("CAT_ACCIONES", False)
@@ -437,7 +440,7 @@ If li_resp = 2 Then
     Return 1
 Else
     Return 0
-End If
+End If 
 end event
 
 event ue_post_open; 
@@ -506,32 +509,64 @@ If IsNull(ls_tag) Or ls_tag = "" Then Return
 // 1. Bloquear a nivel de sistema operativo todo el frame
 LockWindowUpdate(Handle(Parent)) // o Handle(w_frame)
  Parent.PostEvent('ue_evaluar_panel_acciones')
+ Boolean lb_ver, lb_ejec
+
+IF Left(Upper(Trim(ls_tag)), 11) <> "BTN_ACCION_" THEN
+	IF NOT gnv_seg.of_get_permiso(ls_tag, lb_ver, lb_ejec) OR NOT lb_ejec THEN
+		MessageBox("Acceso Denegado", "No cuenta con permisos para ejecutar esta opción.", StopSign!)
+		RETURN
+	END IF
+END IF
 Choose Case ls_tag	 
 	Case 'Close'
 		Parent.triggerevent('ue_salir')
 	Case 'BTN_CAPTURA'
-				SetPointer(HourGlass!)		
-		
+		SetPointer(HourGlass!)	
+//		wf_set_panel_visible("PAN_ACC_EDICION", True)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)
 		if str.imprime_fiscal = 1 then	//Facturacion de Pesos, decimales en la cantidad
 			OpenSheetWithparm(w_facturacion_fiscal,0,Parent,0, Original!)			
 		else					
-			Opensheet(w_facturacion, Parent, 0, Layered! ) 
-			w_facturacion.WindowState = Maximized!
+			OpenSheetWithparm(w_facturacion,ls_tag, Parent, 0, Layered! ) 
+			IF IsValid(w_facturacion) THEN
+					w_facturacion.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF
+			parent.Post Event ue_evaluar_panel_acciones()
 		end if
 		SetPointer(Arrow!)
 	Case 'BTN_COTIZACIONES'
-		wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
+		//wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
+//		wf_set_panel_visible("PAN_ACC_EDICION", True)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)
 		if str.imprime_fiscal = 1 or pos(upper(str.empr_acceso_especial),'CITY') > 0 then
 			OpenSheet(w_captura_proformas_fiscal,Parent,0,Original!)
 		else
-			OpenSheet(w_captura_proformas,Parent,0,Original!)
+			OpenSheetWithParm(w_captura_proformas,ls_tag,Parent,0,Original!)
+			IF IsValid(w_captura_proformas) THEN
+					w_captura_proformas.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF
+			parent.Post Event ue_evaluar_panel_acciones()
 		end if
 	Case 'BTN_PEDIDOS'
-		wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
-		OpenSheet(w_captura_pedidos,Parent,0,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", True)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)
+		OpenSheetWithParm(w_captura_pedidos,ls_tag,Parent,0,Original!)
+		IF IsValid(w_captura_pedidos) THEN
+					w_captura_pedidos.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF
+		parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_PROFORMAS'
-		wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
-		OpenSheet(w_captura_proformas_productos_no_creados,Parent,0, Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", True)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)
+		OpenSheetWithParm(w_captura_proformas_productos_no_creados,ls_tag,Parent,0, Original!)
+		IF IsValid(w_captura_proformas_productos_no_creados) THEN
+					w_captura_proformas_productos_no_creados.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF
+		parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_ENTRADA_MERCANCIA'
 		wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
 		if str.contabiliza = 0 then
@@ -547,11 +582,21 @@ Choose Case ls_tag
 		//OpenSheet(w_transito,Parent,0, Original!)
 		OpenSheet(w_cz_ma_transito,Parent,0, Original!)
 	Case 'BTN_TRANSACCIONES'
-		wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
-		OpenSheet(w_transacciones,Parent,0, Original!)
+		//wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
+		OpenSheetWithParm(w_transacciones,ls_tag,Parent,0, Original!)
+		IF IsValid(w_transacciones) THEN
+			w_transacciones.Tag = ls_tag
+			gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF
+		parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_CARGOS_MORA'
-		wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
-		OpenSheet(w_generar_cargos_por_mora,Parent,0, Original!)	
+		//wf_set_panel_visible("PAN_ACCIONES_CAT1", True)
+		OpenSheetWithParm(w_generar_cargos_por_mora,ls_tag,Parent,0, Original!)	
+		IF IsValid(w_generar_cargos_por_mora) THEN
+			w_generar_cargos_por_mora.Tag = ls_tag
+			gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF
+		parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_AJUSTES_INV'
 		wf_set_panel_visible("PAN_ACCIONES_CAT2", True)
 		if str.contabiliza = 0 then
@@ -559,7 +604,7 @@ Choose Case ls_tag
 		else
 			OpenSheet(w_ajustes_costeando,Parent,0, Original!)
 		end if
-	Case 'BTN_NCR'
+	Case 'BTN_NCR,','BTN_INV_NCR'
 		wf_set_panel_visible("PAN_ACCIONES_CAT2", True)
 		OpenSheet(w_captura_notas_credito,Parent,0, Original!)	
 	Case 'BTN_CAJA'
@@ -678,7 +723,14 @@ Choose Case ls_tag
 	Case 'BTN_MANT_PARAM_VTA'
 		OpenSheet(w_parametros_salidas,Parent,0, Original!)
 	Case 'BTN_MANT_USUARIOS'
-			OpenSheet(w_usuarios,Parent,0, Original!)
+		wf_set_panel_visible("PAN_ACC_EDICION", True)
+		wf_set_panel_visible("PAN_ACC_DOC", false)
+			OpenSheetWithParm(w_usuarios,ls_tag,Parent,0, Original!)
+			IF IsValid(w_usuarios) THEN
+					w_usuarios.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF
+			parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_REP_VENTAS'
 		OpenSheet(w_reportes_ventas,Parent,0, Original!)
 	Case 'BTN_REP_TOP_PROD'
@@ -743,13 +795,20 @@ Choose Case ls_tag
 		wf_set_panel_visible("PAN_ACCIONES_CAT5", True)
 		OpenSheet(w_rep_transacciones_cxp,Parent,0, Original!)
 	Case "BTN_DEV_CAPTURA"	   
-    parent.wf_set_panel_visible("PAN_ACCIONES_CAT5", True) 
-    OpenSheet(w_fa_man_devolucion, parent, 0, Original!)    
-    parent.Post Event ue_evaluar_panel_acciones()
-	Case "BTN_DEV_MODIFICA"
-    // Abrir ventana en modo búsqueda/edición de devolución existente
-    OpenSheet(w_fa_man_modi_devolucion, parent, 0, Original!)
-    parent.Post Event ue_evaluar_panel_acciones()
+//    parent.wf_set_panel_visible("PAN_ACCIONES_CAT5", True) 
+    	OpenSheetWithParm(w_fa_man_devolucion, ls_tag,parent, 0, Original!)    
+    	IF IsValid(w_fa_man_devolucion) THEN
+			w_fa_man_devolucion.Tag = ls_tag
+			gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF
+		parent.Post Event ue_evaluar_panel_acciones()
+	Case "BTN_DEV_MODIFICA"    
+    	OpenSheetWithParm(w_fa_man_modi_devolucion,ls_tag,parent, 0, Original!)
+    	IF IsValid(w_fa_man_modi_devolucion) THEN
+			w_fa_man_modi_devolucion.Tag = ls_tag
+			gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF
+		parent.Post Event ue_evaluar_panel_acciones()
 	Case "BTN_CONS_ARANCELES"
 		 
 		parent.Post Dynamic wf_set_panel_visible("PAN_ACCIONES_CAT3", False)
@@ -954,7 +1013,14 @@ If IsNull(ls_tag) Or ls_tag = "" Then Return
 
  
 //MessageBox("Menú Clickeado", "Tag capturado: " + ls_tag)
+Boolean lb_ver, lb_ejec
 
+IF Left(Upper(Trim(ls_tag)), 11) <> "BTN_ACCION_" THEN
+	IF NOT gnv_seg.of_get_permiso(ls_tag, lb_ver, lb_ejec) OR NOT lb_ejec THEN
+		MessageBox("Acceso Denegado", "No cuenta con permisos para ejecutar esta opción.", StopSign!)
+		RETURN
+	END IF
+END IF
  
 Choose Case ls_tag	
 	// Reportes
@@ -1062,15 +1128,22 @@ Choose Case ls_tag
 		parent.Post Event ue_evaluar_panel_acciones()			
     // --- PROCESOS PENDIENTES ---
     Case "BTN_PEND_REACTIVAR_FACT"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)		 
-        OpenSheet(w_fa_man_reactiva_clien, parent, 0, Layered!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)		 
+        OpenSheetWithParm(w_fa_man_reactiva_clien,ls_tag, parent, 0, Layered!)
+		  IF IsValid(w_fa_man_reactiva_clien) THEN
+					w_fa_man_reactiva_clien.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF
        parent.Post Event ue_evaluar_panel_acciones()
-
     Case "BTN_PEND_ACT_CLIENTES"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)		 
-        OpenSheet(w_fa_man_actualiza_clien, parent, 0, Layered!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)		 
+        OpenSheetWithParm(w_fa_man_actualiza_clien,ls_tag, parent, 0, Layered!)
+		  IF IsValid(w_fa_man_actualiza_clien) THEN
+					w_fa_man_actualiza_clien.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PEND_ACT_INVENTARIO"

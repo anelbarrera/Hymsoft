@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <RibbonBar>
   <RibbonItems>
     <ApplicationButton Text="HymSoft" Enabled="true" Tag="MyApp" Visible="true">
@@ -273,6 +273,72 @@
       </Category>
 
       <!-- ================================================================= -->
+      <!-- INVENTARIO                                                        -->
+      <!-- ================================================================= -->
+      <Category Text="Inventario" Tag="CAT_INVENTARIO">
+        <Panel Text="Procesos" Tag="PAN_INV_PROCESOS">
+          <LargeButton Text="Ajustes" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_Ajustes_32.png" 
+                       Tag="BTN_INV_AJUSTES">
+            <Menu>
+              <Item Text="Existencias y Costo Preliminar" 
+                    PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_AjExistCostoPrel_16.png" 
+                    Clicked="ue_menu_click" 
+                    Tag="BTN_INV_AJ_EXIST_COSTO_PREL" />
+              <Item Text="Existencias y Costo" 
+                    PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_AjExistCosto_16.png" 
+                    Clicked="ue_menu_click" 
+                    Tag="BTN_INV_AJ_EXIST_COSTO" />
+              <Item Text="Costos" 
+                    PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_AjCostos_16.png" 
+                    Clicked="ue_menu_click" 
+                    Tag="BTN_INV_AJ_COSTOS" />
+              <Item Text="Precios" 
+                    PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_AjPrecios_16.png" 
+                    Clicked="ue_menu_click" 
+                    Tag="BTN_INV_AJ_PRECIOS" />
+              <Item Type="1" />
+              <Item Text="Actualización de Costos" 
+                    PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_AjActCostos_16.png" 
+                    Clicked="ue_menu_click" 
+                    Tag="BTN_INV_AJ_ACT_COSTOS" />
+              <Item Text="Generación de Ajustes Preliminares" 
+                    PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_AjGenPrel_16.png" 
+                    Clicked="ue_menu_click" 
+                    Tag="BTN_INV_AJ_GEN_PREL" />
+              <Item Text="Generación Automática de Ajustes" 
+                    PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_AjGenAuto_16.png" 
+                    Clicked="ue_menu_click" 
+                    Tag="BTN_INV_AJ_GEN_AUTO" />
+            </Menu>
+          </LargeButton>
+          <LargeButton Text="Notas de Crédito" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_NotasCredito_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_INV_NCR" />
+          <LargeButton Text="Cambio de Código Errado" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_CambioCodErrado_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_INV_CAMBIO_COD_ERRADO" />
+          <LargeButton Text="Cambio de Unidad de Medida" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_CambioUM_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_INV_CAMBIO_UM" />
+        </Panel>
+
+        <Panel Text="Consulta" Tag="PAN_INV_CONSULTA">
+          <LargeButton Text="Aranceles" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\TariffSearch_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_ARANCELES" />
+          <LargeButton Text="Entradas" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Inv_ConsEntradas_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_INV_CONS_ENTRADAS" />
+        </Panel>
+      </Category>
+
+      <!-- ================================================================= -->
       <!-- 2. TRANSACCIONES                                                  -->
       <!-- ================================================================= -->
       <Category Text="Transacciones" Tag="CAT_TRANSACCIONES">
@@ -342,19 +408,19 @@
         </Panel>
         
         <Panel Text="Facturación" Tag="PAN_CONS_FACTURACION">
-  <LargeButton Text="Facturas con Detalle" 
-               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InvoiceDetail_32.png" 
-               Clicked="ue_ribbon_click" 
-               Tag="BTN_CONS_FACT_DETALLE" />
-  <LargeButton Text="Existencias" 
-               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockQuery_32.png" 
-               Clicked="ue_ribbon_click" 
-               Tag="BTN_CONS_EXISTENCIAS" />
-  <LargeButton Text="Existencias (Con Especificación)" 
-               PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockQuerySpec_32.png" 
-               Clicked="ue_ribbon_click" 
-               Tag="BTN_CONS_EXISTENCIAS_ESP" />
-</Panel>
+          <LargeButton Text="Facturas con Detalle" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\InvoiceDetail_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_FACT_DETALLE" />
+          <LargeButton Text="Existencias" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockQuery_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_EXISTENCIAS" />
+          <LargeButton Text="Existencias (Con Especificación)" 
+                       PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\StockQuerySpec_32.png" 
+                       Clicked="ue_ribbon_click" 
+                       Tag="BTN_CONS_EXISTENCIAS_ESP" />
+        </Panel>
 
         <Panel Text="Clientes" Tag="PAN_CONS_CLIENTES">
           <LargeButton Text="Facturas" 
@@ -402,7 +468,7 @@
         </Panel>
       </Category>
 
-   <!-- ================================================================= -->
+      <!-- ================================================================= -->
       <!-- 4. REPORTES (Iconos grandes 32x32 reales con menú desplegable)    -->
       <!-- ================================================================= -->
       <Category Text="Reportes" Tag="CAT_REPORTES">
@@ -421,10 +487,10 @@
               <Item Text="Pedidos Sin Empaque" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersNoPack_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PED_SIN_EMPAQUE" />
               <Item Type="1" />
               <Item Text="Proformas Pendientes" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_ProformasPending_16.png" Clicked="ue_menu_click" Tag="BTN_REP_PROFORMAS_PEND" />
-              <Item Text="Mercancías Agotadas" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutOfStock_16.png" Tag="BTN_REP_MERC_AGOTADAS">  
-			  <Item Text="Mercancía Agotada" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutOfStock_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MERC_AGOTADA" />
-			  <Item Text="Por Pedidos" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutStock_Orders_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MERC_AGOT_POR_PED" />
-			  </Item>
+              <Item Text="Mercancías Agotadas" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutOfStock_16.png" Tag="BTN_REP_MERC_AGOTADAS">
+                <Item Text="Mercancía Agotada" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutOfStock_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MERC_AGOTADA" />
+                <Item Text="Por Pedidos" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OutStock_Orders_16.png" Clicked="ue_menu_click" Tag="BTN_REP_MERC_AGOT_POR_PED" />
+              </Item>
               <Item Text="Verificación de Pedidos vs Lista de Empaque" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_OrdersVsPack_16.png" Clicked="ue_menu_click" Tag="BTN_REP_VERIF_PED_VS_EMP" />
               <Item Type="1" />
               <Item Text="Ventas Diarias" PictureName="C:\Sistemas\Hymsoft\Images\Ribbon\Rep_DailySales_16.png" Clicked="ue_menu_click" Tag="BTN_REP_VENTAS_DIARIAS" />

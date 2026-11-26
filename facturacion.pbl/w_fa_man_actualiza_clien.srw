@@ -380,7 +380,10 @@ Else
 End If
 end event
 
-event open;call super::open;This.SetRedraw(False)
+event open;call super::open;IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+This.SetRedraw(False)
 wf_botones()
 This.SetRedraw(True)
 end event
@@ -403,6 +406,9 @@ event closequery;constant int SW_HIDE = 0
 ShowWindow(Handle(this), SW_HIDE)
 
 This.SetRedraw(false)
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_actualiza_clien

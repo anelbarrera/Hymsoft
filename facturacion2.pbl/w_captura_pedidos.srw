@@ -1148,12 +1148,13 @@ end event
 
 event close;Window lw_frame
 
+setredraw(false)
 lw_frame = ParentWindow()
-
 If IsValid(lw_frame) Then
-   lw_frame.PostEvent("ue_sheet_closed")
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
  End If
 if isvalid(this) then close(this)
+ 
 end event
 
 event ue_hay_data;//Override
@@ -1174,6 +1175,10 @@ dw_7.y = newheight - 520
 end event
 
 event open;//override
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+
 this.y = 0
 this.x = 805
 integer  i
@@ -1834,6 +1839,9 @@ end if
 end event
 
 event activate;call super::activate;long ll_cliente, ll_fila
+
+gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
+
 if dw_1.rowcount() > 0 then 
 	ll_cliente = dw_1.getitemnumber(1,'pedi_cliente')
 end if
@@ -1847,6 +1855,11 @@ ll_fila = idwc_cliente.find('terc_tercero = '+string(ll_cliente),1,idwc_cliente.
 	end if
 end if
 
+end event
+
+event closequery;call super::closequery;setredraw(false)
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_captura_pedidos

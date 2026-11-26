@@ -1,4 +1,10 @@
-*.zip
+*.pbl
+*.pbd
 *.exe
+*.dll
+*.bak
+*.log
+*.dbg
+*.opt
 Hymsoft_cloud/*.zip
 Hymsoft_cloud/*.exe

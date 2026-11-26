@@ -329,6 +329,11 @@ end choose
 end event
 
 event open;//override
+
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+
 sqlca.autocommit = true
 THIS.SetToolbar(1, true, alignattop!)
 THIS.SetToolbarPos(1, 1, 50, false)
@@ -346,11 +351,16 @@ end event
 
 event close;call super::close;Window lw_frame
 
+setredraw(false)
 lw_frame = ParentWindow()
-
 If IsValid(lw_frame) Then
-   lw_frame.PostEvent("ue_sheet_closed")
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
  End If
+ if isvalid(this) then close(this)
+
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_ayuda from w_cc_padre_reporte`st_ayuda within w_generar_cargos_por_mora

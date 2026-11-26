@@ -1458,17 +1458,30 @@ end if
 this.setredraw(true)
 end event
 
-event open;call super::open;
+event open;call super::open;IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
 dw = dw_2
 end event
 
 event close;call super::close;Window lw_frame
 
+setredraw(false)
 lw_frame = ParentWindow()
-
 If IsValid(lw_frame) Then
-   lw_frame.PostEvent("ue_sheet_closed")
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
  End If
+ 
+if isvalid(this) then close(this)
+
+end event
+
+event closequery;call super::closequery;setredraw(false)
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+end event
+
+event activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_transacciones

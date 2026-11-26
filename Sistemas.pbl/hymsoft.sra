@@ -14,6 +14,7 @@ global variables
 str_general str
 Environment ge_Environment
 Boolean gb_expand = True
+nvo_seguridad_ribbon gnv_seg
 
 end variables
 
@@ -277,7 +278,8 @@ destroy(error)
 destroy(message)
 end on
 
-event close;DISCONNECT USING SQLCA;
+event close;IF IsValid(gnv_seg) THEN DESTROY gnv_seg
+DISCONNECT USING SQLCA;
 //
  
 
@@ -333,7 +335,8 @@ if sqlca.sqlcode <> 0 then
 	MessageBox ("Fallo durante la conexion a la Base de Datos ( "+sqlca.DBMS+" )",&
 	"Debido a un problema se recibio el sig. mensaje:~r~n~n"+sqlca.sqlerrtext,StopSign!)
 else
-
+	gnv_seg = CREATE nvo_seguridad_ribbon
+	
 	is_frame  = "w_fa_frame"
 	str.frame = w_fa_frame
 	

@@ -2547,6 +2547,9 @@ destroy(this.dw_5)
 end on
 
 event open;//override
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
 This.SetToolbar(1,true,AlignatTop!)
 This.SetToolbarPos(1,1,50,false)
 str.frame.SetRedraw ( True )
@@ -2803,7 +2806,10 @@ IF lb_dw_modify and ib_preguntar  THEN
 		Return(1)
 	End If
 END IF
-Close(this)
+setredraw(false)
+constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+ 
 end event
 
 event ue_print;call super::ue_print;// Para 	la impresión de la factura
@@ -3179,10 +3185,20 @@ dw_1.setitem(dw_1.getrow(),"fact_no_pedido",is_pedido_nc)
 dw_1.setItemStatus(dw_1.getrow(), "fact_no_pedido",Primary!, NotModified!);
 end event
 
-event close;//Override
-// Destruyendo el Objeto Desglose
-if isvalid(iuo_desglose) then destroy iuo_desglose
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(iuo_desglose) then destroy iuo_desglose 
 if isvalid(this) then close(this)
+
+ 
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_3 from w_fa_padre_maest_det`st_3 within w_fa_man_devolucion

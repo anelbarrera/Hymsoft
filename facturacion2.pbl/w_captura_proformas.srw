@@ -1410,12 +1410,12 @@ end event
 
 event close;Window lw_frame
 
+setredraw(false)
 lw_frame = ParentWindow()
-
 If IsValid(lw_frame) Then
-   lw_frame.PostEvent("ue_sheet_closed")
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
  End If
-if isvalid(this) then close(this)
+if isvalid(this) then close(this) 
 if isvalid(w_foto_producto) then close(w_foto_producto)
 if isvalid(w_ventas_producto) then close(w_ventas_producto)
 end event
@@ -1444,6 +1444,11 @@ dw_7.y = newheight - 520
 end event
 
 event open;//override
+
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+
 this.y = 0
 this.x = 805
 integer  i
@@ -2124,6 +2129,9 @@ end if
 end event
 
 event activate;call super::activate;long ll_cliente, ll_fila
+
+gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
+
 if dw_1.rowcount() > 0 then 
 	ll_cliente = dw_1.getitemnumber(1,'prof_cliente')
 end if
@@ -2141,7 +2149,6 @@ end event
 
 event closequery;//override
 long respuesta
-constant int SW_HIDE = 0
 dwItemStatus l_status
 l_status = dw_1.GetItemStatus(1, 0, Primary!)
 
@@ -2162,11 +2169,9 @@ if dw.accepttext() = 1 then
 		end choose
 	end if
 end if
+setredraw(false)
+constant int SW_HIDE = 0
 ShowWindow(Handle(this), SW_HIDE)
-//Para que al salir de la ventana libere las paginas
-commit ;
-
-gf_win_used_by_user(is_nombre, false)
 end event
 
 event ue_save_as;//override

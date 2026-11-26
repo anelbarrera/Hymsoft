@@ -24,10 +24,13 @@ String  is_ultima_, is_orden_
 
 boolean ib_aceptar
 n_cst_winsrv_shell32	nv_f
+String is_tag_modulo = ""
 end variables
 
 forward prototypes
 public subroutine wf_valida_menu ()
+public subroutine of_set_tag_modulo (string as_tag)
+public function string of_get_tag_modulo ()
 end prototypes
 
 event ue_save_as();integer li_respuesta
@@ -51,6 +54,12 @@ public subroutine wf_valida_menu ();If not IsValid(m_fa_principal) Then
 	ChangeMenu(m_fa_principal)
 End If
 end subroutine
+
+public subroutine of_set_tag_modulo (string as_tag);is_tag_modulo = Trim(as_tag)
+end subroutine
+
+public function string of_get_tag_modulo ();RETURN is_tag_modulo
+end function
 
 on w_fa_padre.create
 int iCurrent
@@ -106,7 +115,9 @@ event close;// Oculta la ventana instantáneamente (0 ms) antes de que Windows c
 // a destruir los controles hijos uno a uno en pantalla.
 this.Hide()
 this.SetRedraw(False)
-
+If NOT IsValid(w_hs_frame.GetActiveSheet()) then
+	gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, "")
+End If
 end event
 
 event ue_aceptar;call super::ue_aceptar;//override
@@ -143,6 +154,9 @@ end event
 
 event closequery;call super::closequery;constant int SW_HIDE = 0
 ShowWindow(Handle(this), SW_HIDE)
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, is_tag_modulo)
 end event
 
 type st_nom_ventana from w_granpa`st_nom_ventana within w_fa_padre

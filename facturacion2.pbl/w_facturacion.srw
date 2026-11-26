@@ -5003,11 +5003,13 @@ this.x = 805
 integer  i, li_existe
 string ls_cadena
 dw = dw_1
- 
-ii_metal_pendiente = message.doubleparm
-if ii_metal_pendiente = 1 then
-	this.title = 'Facturas - Metal Pendiente'
-end if
+ IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+//ii_metal_pendiente = message.doubleparm
+//if ii_metal_pendiente = 1 then
+//	this.title = 'Facturas - Metal Pendiente'
+//end if
 
 This.Icon = str.icono
 
@@ -5959,6 +5961,9 @@ end if
 end event
 
 event activate;call super::activate;long ll_cliente, ll_fila
+
+gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
+
 if dw_1.rowcount() > 0 then 
 	ll_cliente = dw_1.getitemnumber(1,'fact_cliente')
 end if

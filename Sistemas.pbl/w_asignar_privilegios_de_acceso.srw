@@ -12,7 +12,8 @@ global type w_asignar_privilegios_de_acceso from w_cc_padre_reporte
 integer width = 4457
 integer height = 2552
 string title = "Privilegios de Acceso al Sistema"
-string menuname = "m_cc_principal_listados"
+string menuname = "m_hs"
+boolean controlmenu = false
 boolean resizable = true
 windowtype windowtype = main!
 long backcolor = 12639424
@@ -30,7 +31,7 @@ end variables
 on w_asignar_privilegios_de_acceso.create
 int iCurrent
 call super::create
-if this.MenuName = "m_cc_principal_listados" then this.MenuID = create m_cc_principal_listados
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.cb_1=create cb_1
 this.cb_2=create cb_2
 iCurrent=UpperBound(this.Control)

@@ -403,7 +403,9 @@ event open;//This.SetRedraw(False)
 ////wf_botones()
 
 //This.SetRedraw(True)
-
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
 dw = dw_1
 this.postevent("ue_post_open")
 
@@ -427,6 +429,9 @@ event closequery;constant int SW_HIDE = 0
 ShowWindow(Handle(this), SW_HIDE)
 
 This.SetRedraw(false)
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_reactiva_clien

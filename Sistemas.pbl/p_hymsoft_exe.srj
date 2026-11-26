@@ -51,6 +51,8 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_division_check,d
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,w_reporte_ajustes,w
 OBJ:C:\Fuentes\HymsoftZL\contabilidad.pbl,w_recalcula_mayor_general,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,d_calendar,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_mercancia_agotada,w
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_transitos_pend,w
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,dw_impresion_clientes_generales,d
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,u_external_function_win32,u
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,gf_acelerador,f
@@ -68,6 +70,7 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_rotacion_del_inventario,d
 OBJ:C:\Fuentes\HymsoftZL\contabilidad.pbl,dw_imprimir_conta,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,gf_fa_copia_identica_doc,f
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_pedidos_registrados,w
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_valor_facturas,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_fa_rep_actualiza_inventario,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_external_copiar_factura,d
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,w_fa_man_clave_pedido,w
@@ -82,6 +85,7 @@ OBJ:C:\Fuentes\HymsoftZL\contabilidad.pbl,w_reporte_estados_financieros,w
 OBJ:C:\Fuentes\HymsoftZL\cuentasxpagar.pbl,dw_ext_hasta,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,w_fa_man_modi_dev_num,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,u_pb_editar,u
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,str_fa_pedfac_vs_imp,s
 OBJ:C:\Fuentes\HymsoftZL\entradas.pbl,w_transito,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,w_dashboard,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,gf_mensaje,f
@@ -100,6 +104,7 @@ OBJ:C:\Fuentes\HymsoftZL\entradas.pbl,dw_reporte_ordenes,d
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,gf_co_mascara_de_cuentas,f
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,str_fa_desglose,s
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_man_separar_futuros,w
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_co_tran_pasa_fact,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,w_error,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,w_dw_print_options,w
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,w_cc_padre_rango_fecha,w
@@ -114,6 +119,7 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,w_filtrar_rep_referencias,w
 OBJ:C:\Fuentes\HymsoftZL\contabilidad.pbl,gf_saldo_anterior_co,f
 OBJ:C:\Fuentes\HymsoftZL\cuentasxpagar.pbl,w_antiguedad_cxp,w
 OBJ:C:\Fuentes\HymsoftZL\cuentasxpagar.pbl,w_reasignar_saldos_cxp,w
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_imp_pedid_vs_emp,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_ma_fa_proforma_a_restaurar,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_fa_rep_reserva_priview,d
 OBJ:C:\Fuentes\HymsoftZL\entradas.pbl,dw_cambio_de_codigo_producto,d
@@ -222,6 +228,7 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,w_reporte_antiguedad_inventario,w
 OBJ:C:\Fuentes\HymsoftZL\contabilidad.pbl,gf_mes_de_proceso,f
 OBJ:C:\Fuentes\HymsoftZL\contabilidad.pbl,w_reporte_balance_de_prueba,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,mf_accesos,f
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_ma_fa_enca_pedi_emp,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_pasar_entradas,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion2.pbl,w_pases_adicionales,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,w_grampa_frame,w
@@ -276,6 +283,7 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,w_estructura_de_catalogo,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,gf_fa_pro_servi,f
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_ma_fa_tdevol,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_co_productos_packing_cb,w
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_ped_vs_emp,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,dw_external_pedido,d
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,gf_mandb,f
 OBJ:C:\Fuentes\HymsoftZL\dw2xls.pbl,n_xls_subroutines_v5,u
@@ -297,6 +305,7 @@ OBJ:C:\Fuentes\HymsoftZL\cuentasxpagar.pbl,gf_cp_saldo_anterior,f
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,dw_transacciones_aplicadas,d
 OBJ:C:\Fuentes\HymsoftZL\entradas.pbl,w_reporte_entradas,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_ma_fa_modifica_detalle,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_fa_rep_valor_factura,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_detalle_factura,d
 OBJ:C:\Fuentes\HymsoftZL\entradas.pbl,w_entrada,w
 OBJ:C:\Fuentes\HymsoftZL\entradas.pbl,dw_activar_entrada_encab_contabilidad,d
@@ -304,6 +313,8 @@ OBJ:C:\Fuentes\HymsoftZL\entradas.pbl,w_marcas_x_sexo,w
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,w_directorio_telefonico,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_ma_fa_enca_packing,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_pr_fa_seleccion_pedido,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_fa_rep_proformas_pend_fact,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_fa_rep_agotada_pedido,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion2.pbl,w_fa_co_prof_pasa_ped_futuro,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,n_cst_calculatorattrib,u
 OBJ:C:\Fuentes\HymsoftZL\dw2xls.pbl,n_dwr_worksheet,u
@@ -316,6 +327,7 @@ OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,w_consulta_transacciones,w
 OBJ:C:\Fuentes\HymsoftZL\cuentasxpagar.pbl,dw_external_doc,d
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,dw_documentos_aplicados_por_pago,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_ma_fa_ddevol,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_fa_rep_mercres_agotada_new,d
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,gf_fa_convert_cant,f
 OBJ:C:\Fuentes\HymsoftZL\facturacion2.pbl,dw_activar_factura_encab_factura,d
 OBJ:C:\Fuentes\HymsoftZL\entradas2.pbl,str_tr_param,s
@@ -484,6 +496,7 @@ OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,w_historial_cliente,w
 OBJ:C:\Fuentes\HymsoftZL\bancos.pbl,dw_doc_circulacion_print,d
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_external_cantidades,d
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,uo_ds_desglose,u
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_proforma_pend_fact,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion2.pbl,dw_co_fa_pedapasar,d
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_external_empresa_origen,d
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,w_asigna_fecha_salida,w
@@ -498,6 +511,7 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_cuenta_descuento_compras,d
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,w_analisis_de_compras,w
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_external_grupo,d
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,w_catalogos,w
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_fa_rep_prod_tran,d
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_transferencia_detalle,d
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,str_kardex,s
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,dw_external_empresa,d
@@ -585,6 +599,8 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_antiguedad_inventario_producto_mes,d
 OBJ:C:\Fuentes\HymsoftZL\cuentasxpagar.pbl,dw_transacciones_pagos_aplicados_cxp,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_electronica_mensajes,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_change_key_pedido,w
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_ma_fa_pedvsempag,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_informe_facturas,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_dd_fa_clientes2,d
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,gf_ini_get,f
 OBJ:C:\Fuentes\HymsoftZL\dw2xls.pbl,st_rect,s
@@ -594,6 +610,7 @@ OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,w_cc_ranf_cobros,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,w_fa_man_busqueda,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_man_desglose_pack_textiles,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_change_pedido_ped,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_proformas_pend,w
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,w_transferencia,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,u_external_function,u
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,u_sle_find_filter,u
@@ -651,6 +668,7 @@ OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_ventas_productos_detallados_piezas,d
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,dw_reporte_de_pagos,d
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,w_sugerido_de_compras,w
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,dw_reporte_comision_tarjeta,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_reporte_de_tipo_de_factura,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion3.pbl,w_fa_man_actualiza_facturas,w
 OBJ:C:\Fuentes\HymsoftZL\dw2xls.pbl,uf_save_dw_as_excel_parm,f
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,u_buscar_producto,u
@@ -662,6 +680,7 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_marca_check,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_ma_fa_tdevol_modi,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,u_animate,u
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_aprobacion,w
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,gf_logo_empr_foto_chica_fa,f
 OBJ:C:\Fuentes\HymsoftZL\facturacion2.pbl,dw_pr_fa_pedidos_cliente,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_fa_recupera_asignado_lemp_pedido,d
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,dw_clientes_a_generar_est_cuenta,d
@@ -686,6 +705,7 @@ OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,str_dynamic_find,s
 OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,m_na_principal,m
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_nivel5_check,d
 OBJ:C:\Fuentes\HymsoftZL\contabilidad.pbl,dw_calcula_saldos_plan_cuentas,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_imp_mercancia_agotada,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,w_fa_man_secped,w
 OBJ:C:\Fuentes\HymsoftZL\bancos.pbl,dw_external_reporte_tran_cuentas,d
 OBJ:C:\Fuentes\HymsoftZL\bancos.pbl,dw_reporte_saldos_cuenta_impresion,d
@@ -762,6 +782,7 @@ OBJ:C:\Fuentes\HymsoftZL\cuentasxcobrar.pbl,w_foto_cliente,w
 OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_estructura_producto,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,w_fa_man_fac_sec,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas.pbl,dw_texto,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_productos_agotados,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion2.pbl,dw_co_fa_proapasar_futuro,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,gf_clean_desc_prof_pedi,f
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,dw_external_pedidos_fac,d
@@ -875,6 +896,7 @@ OBJ:C:\Fuentes\HymsoftZL\entradas.pbl,dw_external_generales,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_change_key,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_ma_modificar_detalle,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_ma_fa_pedido_aprobado,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_rep_factura_rango,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion3.pbl,w_fa_man_actualiza_inventario,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,gf_fa_verifica_sec,f
 OBJ:C:\Fuentes\HymsoftZL\facturacion2.pbl,w_fa_co_adicionar_pase_cb,w
@@ -895,6 +917,7 @@ OBJ:C:\Fuentes\HymsoftZL\inventario.pbl,dw_grupos_check,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion4.pbl,w_fa_man_selec_formatos,w
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_fa_change_key,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_fa_rep_pck_fact_transito_imp,d
+OBJ:C:\Fuentes\HymsoftZL\facturacion_dw.pbl,dw_dd_fa_pedido_agotado,d
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,w_clave_autorizada_venta,w
 OBJ:C:\Fuentes\HymsoftZL\Sistemas2.pbl,gf_in_formato_decimal,f
 OBJ:C:\Fuentes\HymsoftZL\facturacion.pbl,str_pase_entradas,s

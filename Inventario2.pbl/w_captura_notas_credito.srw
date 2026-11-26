@@ -940,7 +940,10 @@ event closequery;	long respuesta
 			end choose
 		end if
 	end if
- 
+ constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
 
 gf_win_used_by_user(is_nombre, false)
 end event
@@ -1030,6 +1033,17 @@ If Message.DoubleParm = -1 Then Return
 SetPointer(Hourglass!)
 dw_3.print(true)
 
+end event
+
+event close;call super::close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
+ 
 end event
 
 type st_nom_ventana from w_in_padre`st_nom_ventana within w_captura_notas_credito

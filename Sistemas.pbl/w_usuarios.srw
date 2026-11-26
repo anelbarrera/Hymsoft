@@ -214,8 +214,18 @@ st_nom_ventana.x = 28
 st_nom_ventana.y = this.height - 180
 end event
 
-event open;//override
-//gf_center_win(This)
+event open;IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+Boolean lb_ver, lb_ejec
+
+// Puedes validar contra BTN_MANT_ROLES_PERMISOS (si lo registraste) o contra BTN_MANT_USUARIOS
+IF gnv_seg.of_get_permiso("BTN_MANT_USUARIOS", lb_ver, lb_ejec) THEN
+	pb_1.Visible = lb_ver
+	pb_1.Enabled = lb_ejec
+ELSE
+	pb_1.Visible = FALSE
+END IF
 gf_acelerador()
 dw = dw_1
 This.SetToolbar(1,true,AlignatTop!)
@@ -226,13 +236,7 @@ this.y = 0
 this.x = 805
 this.postevent("ue_post_open")
 
-//m_fa_principal.m_edicin.m_primerregistro.toolbaritemvisible= false
-//m_fa_principal.m_edicin.m_registroanterior.toolbaritemvisible= false
-//m_fa_principal.m_edicin.m_siguienteregistro.toolbaritemvisible= false
-//m_fa_principal.m_edicin.m_ultimoregistro.toolbaritemvisible= false
-//m_fa_principal.m_archivo.m_imprimir.toolbaritemvisible= false
-
-//w_hs_frame.Post Event ue_evaluar_panel_acciones()
+ 
 end event
 
 event ue_aceptar;//override
@@ -243,7 +247,7 @@ if dw_1.update() = -1 then
 end if
 
 	ls_user = dw_1.getitemstring(dw_1.getrow(),'usua_id')
-	select count(*) into :li_encontro
+	select count(1) into :li_encontro
 	from usuarios_accesos where priv_g_financiero = :str.g_financiero and
 										   priv_empresa 	  = :str.empresa and
 										   priv_usuario 		  = :ls_user;
@@ -270,6 +274,10 @@ end event
 event closequery;call super::closequery;setredraw(false)
 constant int SW_HIDE = 0
 ShowWindow(Handle(this), SW_HIDE)
+end event
+
+event activate;
+gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_usuarios
@@ -619,49 +627,70 @@ fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Arial"
 string pointer = "HyperLink!"
-boolean originalsize = true
 string picturename = "CreateForeignKey!"
 alignment htextalign = left!
 string powertiptext = "Privilegios de acceso..."
 end type
 
-event clicked;string ls_user
-integer li_encontro
+event clicked;//string ls_user
+//integer li_encontro
 
-ls_user = dw_1.getitemstring(dw_1.getrow(),'usua_id')
+//ls_user = dw_1.getitemstring(dw_1.getrow(),'usua_id')
 
-  SELECT isnull(count(*)  ,0)
-    INTO :li_encontro  
-    FROM usuarios  
-   WHERE usuarios.usua_id = :ls_user   ;
+//  SELECT isnull(count(*)  ,0)
+//    INTO :li_encontro  
+//    FROM usuarios  
+//   WHERE usuarios.usua_id = :ls_user   ;
 
-if li_encontro = 0 then return
+//if li_encontro = 0 then return
 
-	select count(*) into :li_encontro
-	from usuarios_accesos where priv_g_financiero = :str.g_financiero and
-										   priv_empresa 	  = :str.empresa and
-										   priv_usuario 		  = :ls_user;
-			if sqlca.sqlcode = -1 then
-				gf_mensaje('','Error al validar existencia de accesos '+sqlca.sqlerrtext,1,1,'E')
-				return
-			end if
-	if li_encontro = 0 then
-		  INSERT INTO usuarios_accesos  
-					( priv_g_financiero,   
-					  priv_empresa,   
-					  priv_usuario    )  
-		  VALUES ( :str.g_financiero,   
-					  :str.empresa,   
-					  :ls_user )  ;
-			if sqlca.sqlcode = -1 then
-				gf_mensaje('','Error al insertar accesos '+sqlca.sqlerrtext,1,1,'E')
-				return
-			end if
+//	select count(*) into :li_encontro
+//	from usuarios_accesos where priv_g_financiero = :str.g_financiero and
+//										   priv_empresa 	  = :str.empresa and
+//										   priv_usuario 		  = :ls_user;
+//			if sqlca.sqlcode = -1 then
+//				gf_mensaje('','Error al validar existencia de accesos '+sqlca.sqlerrtext,1,1,'E')
+//				return
+//			end if
+//	if li_encontro = 0 then
+//		  INSERT INTO usuarios_accesos  
+//					( priv_g_financiero,   
+//					  priv_empresa,   
+//					  priv_usuario    )  
+//		  VALUES ( :str.g_financiero,   
+//					  :str.empresa,   
+//					  :ls_user )  ;
+//			if sqlca.sqlcode = -1 then
+//				gf_mensaje('','Error al insertar accesos '+sqlca.sqlerrtext,1,1,'E')
+//				return
+//			end if
 
-	end if
+//	end if
 
 
-OpenSheetwithparm(w_asignar_privilegios_de_acceso,ls_user,w_fa_fondo,2, Original!)
+//OpenSheetwithparm(w_asignar_privilegios_de_acceso,ls_user,w_hs_frame,2, Original!)
+
+Long   ll_row
+String ls_usr, ls_nom
+
+// Ajusta dw_usuarios y los nombres de columnas a los de tu DataWindow real
+ll_row = dw_1.GetRow()
+IF ll_row <= 0 THEN
+	MessageBox("Asignar Roles", "Seleccione un usuario primero.", Information!)
+	RETURN
+END IF
+
+ls_usr = Trim(dw_1.GetItemString(ll_row, "usua_id"))
+ls_nom = Trim(dw_1.GetItemString(ll_row, "usua_nombre"))
+
+IF IsNull(ls_usr) OR ls_usr = "" THEN
+	MessageBox("Asignar Roles", "Debe grabar el usuario antes de asignarle roles.", Exclamation!)
+	RETURN
+END IF
+
+IF IsNull(ls_nom) THEN ls_nom = ""
+
+OpenWithParm(w_seg_usuario_roles, ls_usr + "|" + ls_nom)
 end event
 
 type st_2 from statictext within w_usuarios
