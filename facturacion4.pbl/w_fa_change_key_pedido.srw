@@ -255,7 +255,11 @@ ShowWindow(Handle(this), SW_HIDE)
 This.SetRedraw(false)
 end event
 
-event open;call super::open;//dw_1.enabled = false
+event open;call super::open;IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+
+//dw_1.enabled = false
 dw_3.visible = false
 //sle_anio.enabled = false
 //sle_anio.visible = false
@@ -276,6 +280,9 @@ If IsValid(lw_frame) Then
  End If
 if isvalid(this) then close(this)
  
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_change_key_pedido

@@ -20,7 +20,8 @@ global type w_fa_man_cambiar_de_oc_a_existencias from w_fa_padre
 integer width = 1426
 integer height = 720
 string title = "(FA) Actualizar Reserva de Productos en Existencias"
-string menuname = "m_fa_principal"
+string menuname = "m_hs"
+boolean controlmenu = false
 long backcolor = 79741120
 event ue_enter pbm_dwndragenter
 gb_anio gb_anio
@@ -220,7 +221,7 @@ end subroutine
 on w_fa_man_cambiar_de_oc_a_existencias.create
 int iCurrent
 call super::create
-if this.MenuName = "m_fa_principal" then this.MenuID = create m_fa_principal
+if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.gb_anio=create gb_anio
 this.cb_1=create cb_1
 this.cb_2=create cb_2
@@ -292,6 +293,14 @@ If IsValid(lw_frame) Then
  End If
 if isvalid(this) then close(this)
  
+end event
+
+event open;call super::open;IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+end event
+
+event activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_cambiar_de_oc_a_existencias

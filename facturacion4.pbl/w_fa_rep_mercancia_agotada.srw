@@ -24,6 +24,10 @@ end variables
 
 event open;call super::open;String ls_dato
 date ldt_fecha_ser
+
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
 //If IsValid(m_fa_principal) then 
 //	m_fa_principal.m_edicin.enabled = false
 //	this.settoolbar(1,False)
@@ -110,6 +114,9 @@ If IsValid(lw_frame) Then
    lw_frame.PostEvent("ue_evaluar_panel_acciones")
  End If
 if isvalid(this) then close(this)
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_rep_rango_fecha`st_nom_ventana within w_fa_rep_mercancia_agotada

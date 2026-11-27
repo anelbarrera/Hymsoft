@@ -298,12 +298,18 @@ end event
 
 event open;//gf_center_win(This)
 //gf_acelerador()
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
 dw = dw_1
 
 This.Icon = str.icono
 
 this.postevent("ue_post_open")
 
+end event
+
+event activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_separar_futuros

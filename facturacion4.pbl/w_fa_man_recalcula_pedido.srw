@@ -218,6 +218,14 @@ if isvalid(this) then close(this)
  
 end event
 
+event open;call super::open;IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
+end event
+
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_recalcula_pedido
 boolean visible = false
 integer x = 27

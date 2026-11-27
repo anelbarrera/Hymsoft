@@ -53,6 +53,9 @@ If Message.DoubleParm = -1 Then Return
 dw_1.Print(True)
 end event
 
+event ue_imprimir();This.Triggerevent('ue_print')
+end event
+
 public subroutine wf_imprime_vendedor ();integer li_hay, li_codigo, i=0, li_vienede
 long	  ll_ann
 string  ls_nombre, ls_resultado, ls_nombre_imp, ls_cod_imp, ls_dataobject, ls_pedido, ls_tipo
@@ -199,7 +202,9 @@ destroy(this.sle_1)
 end on
 
 event open;string is_nombre
-
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
 this.width  = 1381
 this.height = 360
 
@@ -238,7 +243,7 @@ ShowWindow(Handle(this), SW_HIDE)
 This.SetRedraw(false)
 end event
 
-event ue_imprimir();This.Triggerevent('ue_print')
+event activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_2 from statictext within w_fa_rep_productos_agotados

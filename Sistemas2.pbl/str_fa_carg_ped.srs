@@ -23,5 +23,6 @@ global type str_fa_carg_ped from structure
 	boolean		directo_al_printer
 	string		estado
 	string		factura
+	string		tag
 end type
 

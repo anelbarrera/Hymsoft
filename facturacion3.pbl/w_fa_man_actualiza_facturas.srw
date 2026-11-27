@@ -761,7 +761,9 @@ If dw.RowCount() > 0 Then
 End If
 end event
 
-event open;
+event open;IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
   
 dw = dw_1
  
@@ -907,6 +909,9 @@ ShowWindow(Handle(this), SW_HIDE)
 This.SetRedraw(false)
 end event
 
+event activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
+end event
+
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_actualiza_facturas
 boolean visible = false
 integer x = 27
@@ -980,6 +985,10 @@ If ls_campo = "fatdiari_fact_act_inventario" Then
 	
 //	This.TriggerEvent("ue_postitemchanged")
 End If
+end event
+
+event dw_1::ue_microayuda;//Override
+
 end event
 
 type st_ayuda from w_fa_padre`st_ayuda within w_fa_man_actualiza_facturas

@@ -176,6 +176,18 @@ if isvalid(this) then close(this)
  
 end event
 
+event open;call super::open;str_fa_carg_ped lstr_parm
+If IsValid(Message.PowerObjectParm) And Not IsNull(Message.PowerObjectParm) Then
+	lstr_parm = Message.PowerObjectParm
+	IF Trim(lstr_parm.tag) <> "" THEN
+		This.Tag = Trim(lstr_parm.tag)
+	END IF
+End If
+end event
+
+event activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
+end event
+
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_rep_aprobacion
 boolean visible = false
 integer x = 37

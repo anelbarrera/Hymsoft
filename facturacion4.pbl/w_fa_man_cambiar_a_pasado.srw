@@ -19,8 +19,6 @@ string title = "Actualizar como Pasado un Pedido"
 string menuname = "m_hs"
 boolean controlmenu = false
 long backcolor = 79741120
-boolean ib_modify = false
-boolean ib_aceptar = false
 event ue_enter pbm_dwndragenter
 gb_anio gb_anio
 cb_1 cb_1
@@ -302,6 +300,9 @@ event open;call super::open; call super::open;
 // Evita que cualquier cambio del padre se pinte prematuramente
 this.visible = false
 This.SetRedraw(False)
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
 
 is_nombre = This.ClassName()
 st_nom_ventana.text = is_nombre
@@ -315,6 +316,9 @@ if dw_1.RowCount() = 0 then
 	dw_1.InsertRow(0)
 end if
  
+end event
+
+event activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_cambiar_a_pasado

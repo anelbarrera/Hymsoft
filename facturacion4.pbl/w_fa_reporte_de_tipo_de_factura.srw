@@ -116,6 +116,9 @@ end event
 event ue_save_as();dw.saveas()
 end event
 
+event ue_imprimir();This.triggerevent('ue_print')
+end event
+
 on w_fa_reporte_de_tipo_de_factura.create
 if this.MenuName = "m_hs" then this.MenuID = create m_hs
 this.st_2=create st_2
@@ -142,7 +145,11 @@ destroy(this.em_inicio)
 destroy(this.dw_1)
 end on
 
-event open;dw_1.settransobject(sqlca)
+event open;IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+
+dw_1.settransobject(sqlca)
 //dw_1.retrieve(1,1,)
 //
 dw_1.insertrow(1)
@@ -197,7 +204,7 @@ If IsValid(lw_frame) Then
 if isvalid(this) then close(this)
 end event
 
-event ue_imprimir();This.triggerevent('ue_print')
+event activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_2 from statictext within w_fa_reporte_de_tipo_de_factura

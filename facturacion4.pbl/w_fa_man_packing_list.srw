@@ -1803,6 +1803,9 @@ event open;//Centrea la Ventana
 str_fa_carg_ped lstr_parm
 If IsValid(Message.PowerObjectParm) And Not IsNull(Message.PowerObjectParm) Then
 	lstr_parm = Message.PowerObjectParm
+	IF Trim(lstr_parm.tag) <> "" THEN
+		This.Tag = Trim(lstr_parm.tag)
+	END IF
 End If
 call super::open
 
@@ -2551,6 +2554,9 @@ if isvalid(this) then close(this)
 end event
 
 event deactivate;//
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type tab_1 from w_fa_padre_tab`tab_1 within w_fa_man_packing_list

@@ -229,6 +229,9 @@ event open;call super::open;//dw_1.enabled = false
 //sle_anio.visible = false
 //sle_new_no_pedido.enabled = false
 //sle_new_no_pedido.visible = false
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
 em_ann.text = string(year(date(gf_fecha_serv())))
 ii_ann = integer(em_ann.text)
 dw_2.DataObject = 'dw_change_factura_copia_identica'
@@ -258,6 +261,9 @@ If IsValid(lw_frame) Then
  End If
 if isvalid(this) then close(this)
  
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_copia_identica_fapepro

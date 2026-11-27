@@ -368,6 +368,9 @@ event open;//dw_1.x = 75
 
 If IsValid(Message.PowerObjectParm) And Not IsNull(Message.PowerObjectParm) Then
 	str_pedi = Message.PowerObjectParm
+	IF Trim(str_pedi.tag) <> "" THEN
+		This.Tag = Trim(str_pedi.tag)
+	END IF
 End If
 
 call super::open;
@@ -493,6 +496,9 @@ event closequery;constant int SW_HIDE = 0
 ShowWindow(Handle(this), SW_HIDE)
 
 This.SetRedraw(false)
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
 end event
 
 type st_nom_ventana from w_fa_padre`st_nom_ventana within w_fa_man_selec_formatos

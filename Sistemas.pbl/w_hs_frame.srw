@@ -485,11 +485,7 @@ lw_activa = Parent.GetActiveSheet()
 SetCurrentDirectory(is_app_path)
 
  
-//If rbb_1.GetLargeButton(al_handle, lrbb_large) = 1 Then
-//    ls_tag = lrbb_large.Tag
-//ElseIf rbb_1.GetSmallButton(al_handle, lrbb_small) = 1 Then
-//    ls_tag = lrbb_small.Tag
-//End If
+ 
 // 1. Identificar si el clic provino de una opción del submenú
 If this.GetItem(al_handle, lr_item) = 1 Then
     ls_tag = Trim(lr_item.Tag)
@@ -831,6 +827,7 @@ Choose Case ls_tag
 		str_formato.reporte_o_para ='CAP'
 		str_formato.tipo_formato   ='LEM'	//Formato de Lista de Empaque
 		str_formato.cod_formato		='LEMPQ'	//Captura de Lista de Empaque
+		str_formato.tag = ls_tag
 		wf_selec_formato(li_existe,lb_aceptar,str_formato.tipo_formato,str_formato.cod_formato)
 
 		If lb_aceptar = false then
@@ -845,19 +842,35 @@ Choose Case ls_tag
 
 		If li_existe > 1 then
 				OpenSheetWithParm(w_fa_man_selec_formatos, str_formato, str.frame,9,Original!)
+    			IF IsValid(w_fa_man_selec_formatos) THEN
+					w_fa_man_selec_formatos.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+				END IF				
 		else
 				OpenSheetWithParm(w_fa_man_packing_list,str_formato, str.frame,9, Layered!)		
+    			IF IsValid(w_fa_man_packing_list) THEN
+					w_fa_man_packing_list.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+				END IF				
 		end If
 
 		Parent.SetRedraw ( True )
 		
 	Case 'BTN_PROC_CAMBIAR_TIPO'
 		Parent.SetRedraw ( false )
-		OpenSheet(w_fa_change_key,Parent, 0, Original!)
+		OpenSheetWithParm(w_fa_change_key,ls_tag,Parent, 0, Original!)
+    	IF IsValid(w_fa_change_key) THEN
+			w_fa_change_key.Tag = ls_tag
+			gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF			
 		Parent.SetRedraw ( True )
 	Case 'BTN_PROC_PEDIDOS_CAMBIO'
 		Parent.SetRedraw ( false )
-		OpenSheet(w_fa_change_key_pedido,Parent, 0, Original!)
+		OpenSheetWithParm(w_fa_change_key_pedido,ls_tag,Parent, 0, Original!)
+    	IF IsValid(w_fa_change_key_pedido) THEN
+			w_fa_change_key_pedido.Tag = ls_tag
+			gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF			
 		Parent.SetRedraw ( True )
 	Case "BTN_ACCION_INSERTAR"
         lw_activa = parent.GetActiveSheet()
@@ -891,7 +904,11 @@ Choose Case ls_tag
 		  // --- SUB-OPCIONES DE PROCESOS PENDIENTES ---
 	 Case 'BTN_PROC_COPIAR_PROFORMA'
 		 Parent.SetRedraw ( false )
-		 OpenSheet(w_fa_copia_identica_fapepro,Parent, 0, Original!)
+		 OpenSheetWithParm(w_fa_copia_identica_fapepro,ls_tag,Parent, 0, Original!)
+		IF IsValid(w_fa_copia_identica_fapepro) THEN
+			w_fa_copia_identica_fapepro.Tag = ls_tag
+			gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF		 
 		 Parent.SetRedraw ( True )
 	 Case 'BTN_PROC_MODIF_DET_FACT'
 		 Parent.SetRedraw ( false )
@@ -899,7 +916,11 @@ Choose Case ls_tag
 		 Parent.SetRedraw ( True )
 	 Case 'BTN_PROC_SEPARAR_REFS'
 		Parent.SetRedraw ( false )
-		OpenSheet(w_fa_man_separar_futuros,Parent, 0, Original!)
+		OpenSheetWithParm(w_fa_man_separar_futuros,ls_tag,Parent, 0, Original!)
+		IF IsValid(w_fa_man_separar_futuros) THEN
+			w_fa_man_separar_futuros.Tag = ls_tag
+			gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF			
 		Parent.SetRedraw ( True )
     Case "BTN_PEND_REACTIVAR_FACT"
 		 messagebox('','Reactivar Factura')
@@ -1037,93 +1058,146 @@ Choose Case ls_tag
 						str_pedi.ano = 0			
 				end if		
 			end if
-
+			str_pedi.tag = ls_tag
 			//OpenSheetWithParm ( w_fa_rep_packing_geren, str_pedi , parentwindow ,9,Original!)
-			wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", True)		
+//			wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", True)		
 			OpenSheetWithParm ( w_fa_rep_aprobacion, str_pedi , Parent ,9,Original!)
+			IF IsValid(w_fa_rep_aprobacion) THEN
+					w_fa_rep_aprobacion.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF
 			parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_REP_LISTA_EMP_VERIF'
 		str_pedi.tipo_formato   ='PIK'
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		str_pedi.tag = ls_tag
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
 		OpenSheetWithParm ( w_fa_rep_picking_list, str_pedi , Parent ,9,Original!)
+		IF IsValid(w_fa_rep_picking_list) THEN
+					w_fa_rep_picking_list.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF		
 		parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_REP_PED_REGISTRADOS'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)			
-		Opensheet(w_fa_rep_pedidos_registrados,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)			
+		OpensheetWithParm(w_fa_rep_pedidos_registrados,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_pedidos_registrados) THEN
+					w_fa_rep_pedidos_registrados.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF	
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_REP_PED_RESERVADOS'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_rep_pedidos_pend,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_rep_pedidos_pend,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_pedidos_pend) THEN
+					w_fa_rep_pedidos_pend.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF			
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_REP_PED_RES_TRANS_CONF'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_rep_pedidos_pend_transito,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_rep_pedidos_pend_transito,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_pedidos_pend_transito) THEN
+					w_fa_rep_pedidos_pend_transito.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF			
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()		
 	Case 'BTN_REP_PED_SIN_EMPAQUE'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_rep_rango_pedido_sin_empaque,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_rep_rango_pedido_sin_empaque,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_rango_pedido_sin_empaque) THEN
+					w_fa_rep_rango_pedido_sin_empaque.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF			
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()	
 	Case 'BTN_REP_PROFORMAS_PEND'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_rep_proformas_pend,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_rep_proformas_pend,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_proformas_pend) THEN
+					w_fa_rep_proformas_pend.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF		
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()	
 	Case 'BTN_REP_MERC_AGOTADA'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_rep_mercancia_agotada,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_rep_mercancia_agotada,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_mercancia_agotada) THEN
+					w_fa_rep_mercancia_agotada.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF			
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()	
 	Case 'BTN_REP_MERC_AGOT_POR_PED'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_rep_productos_agotados,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_rep_productos_agotados,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_productos_agotados) THEN
+					w_fa_rep_productos_agotados.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF		
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()		
 	Case 'BTN_REP_VERIF_PED_VS_EMP'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_rep_ped_vs_emp,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_rep_ped_vs_emp,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_ped_vs_emp) THEN
+					w_fa_rep_ped_vs_emp.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF		
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()
 	Case 'BTN_REP_VENTAS_DIARIAS'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_rep_factura_rango,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_rep_factura_rango,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_rep_factura_rango) THEN
+					w_fa_rep_factura_rango.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF		
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()	
 	Case 'BTN_REP_PROD_RES_TRANSITO'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_co_tran_pasa_fact,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_co_tran_pasa_fact,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_co_tran_pasa_fact) THEN
+					w_fa_co_tran_pasa_fact.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF		
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()			
 	Case 'BTN_REP_TIPO_FACTURAS'
 		Parent.SetRedraw (false)
-		wf_set_panel_visible("PAN_ACC_EDICION", False)
-		wf_set_panel_visible("PAN_ACC_DOC", True)	
-		Opensheet(w_fa_reporte_de_tipo_de_factura,Parent,9,Original!)
+//		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		wf_set_panel_visible("PAN_ACC_DOC", True)	
+		OpensheetWithParm(w_fa_reporte_de_tipo_de_factura,ls_tag,Parent,9,Original!)
+		IF IsValid(w_fa_reporte_de_tipo_de_factura) THEN
+					w_fa_reporte_de_tipo_de_factura.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+		END IF			
 		Parent.SetRedraw (true)
 		parent.Post Event ue_evaluar_panel_acciones()			
     // --- PROCESOS PENDIENTES ---
@@ -1147,133 +1221,215 @@ Choose Case ls_tag
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PEND_ACT_INVENTARIO"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)		 
-        OpenSheet(w_fa_man_actualiza_inventario, parent, 0, Layered!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)		 
+        	OpenSheetWithparm(w_fa_man_actualiza_inventario,ls_tag, parent, 0, Layered!)
+		  	IF IsValid(w_fa_man_actualiza_inventario) THEN
+					w_fa_man_actualiza_inventario.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PEND_ACT_FACTURAS"
-		 wf_set_panel_visible("PAN_ACC_EDICION", False)
-		 wf_set_panel_visible("PAN_ACC_DOC", False)		 
-       OpenSheet(w_fa_man_actualiza_facturas, parent, 0, Layered!)
-       parent.Post Event ue_evaluar_panel_acciones()
+//		 wf_set_panel_visible("PAN_ACC_EDICION", False)
+//		 wf_set_panel_visible("PAN_ACC_DOC", False)		 
+      	 OpenSheetWithParm(w_fa_man_actualiza_facturas,ls_tag, parent, 0, Layered!)
+		  	IF IsValid(w_fa_man_actualiza_facturas) THEN
+					w_fa_man_actualiza_facturas.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF		 
+       	parent.Post Event ue_evaluar_panel_acciones()
 
     // --- PASES ---
     Case "BTN_PASE_PROF_A_PED_COMP"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", true)
-			 OpenSheet(w_fa_co_prof_pasa_ped_directo, parent, 0, Layered!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", true)
+			OpenSheetWithParm(w_fa_co_prof_pasa_ped_directo,ls_tag, parent, 0, Layered!)
+		  	IF IsValid(w_fa_co_prof_pasa_ped_directo) THEN
+					w_fa_co_prof_pasa_ped_directo.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF			 
        	parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PROF_A_PED"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)
-			 OpenSheet(w_fa_co_prof_pasa_ped, parent, 0, Layered!)
-        	 parent.Post Event ue_evaluar_panel_acciones()
-
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)
+			OpenSheetWithParm(w_fa_co_prof_pasa_ped, ls_tag,parent, 0, Layered!)
+		  	IF IsValid(w_fa_co_prof_pasa_ped) THEN
+					w_fa_co_prof_pasa_ped.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF				 
+        	parent.Post Event ue_evaluar_panel_acciones()
     Case "BTN_PASE_PED_A_FACT"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)
-
-			OpenSheet(w_fa_co_ped_pasa_fact, parent, 0, Layered!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)
+			OpenSheetWithParm(w_fa_co_ped_pasa_fact,ls_tag, parent, 0, Layered!)
+		  	IF IsValid(w_fa_co_ped_pasa_fact) THEN
+					w_fa_co_ped_pasa_fact.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF			
 	      parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_A_FACT_COMP"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)
 
-			  OpenSheet(w_fa_co_ped_pasa_fact_directo, parent, 0, Original!)
-	        parent.Post Event ue_evaluar_panel_acciones()
+			OpenSheetWithParm(w_fa_co_ped_pasa_fact_directo,ls_tag, parent, 0, Original!)
+		  	IF IsValid(w_fa_co_ped_pasa_fact_directo) THEN
+					w_fa_co_ped_pasa_fact_directo.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF			  
+	      parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_LISTA_A_FACT"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)		 
-        OpenSheet(w_fa_co_pak_pase_fact, parent, 0, Original!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)		 
+        OpenSheetWithParm(w_fa_co_pak_pase_fact,ls_tag, parent, 0, Original!)
+		  	IF IsValid(w_fa_co_pak_pase_fact) THEN
+					w_fa_co_pak_pase_fact.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF		  
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_ADICIONALES"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)
-        OpenSheet(w_fa_co_adicionar_pase_cb, parent, 0, Layered!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)
+        OpenSheetWithParm(w_fa_co_adicionar_pase_cb,ls_tag, parent, 0, Layered!)
+		  	IF IsValid(w_fa_co_adicionar_pase_cb) THEN
+					w_fa_co_adicionar_pase_cb.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF		  
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PROF_A_PED_FUT"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)
-   		OpenSheet(w_fa_co_prof_pasa_ped_futuro, parent, 0, Layered!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)
+   		OpenSheetWithParm(w_fa_co_prof_pasa_ped_futuro,ls_tag, parent, 0, Layered!)
+			IF IsValid(w_fa_co_prof_pasa_ped_futuro) THEN
+					w_fa_co_prof_pasa_ped_futuro.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF
    		parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_FUT_A_PROF"
-		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
-			wf_set_panel_visible("PAN_ACC_DOC", False)
-			OpenSheet(w_fa_co_ped_pasa_prof, parent, 0, Layered!)
+//		 	wf_set_panel_visible("PAN_ACC_EDICION", False)
+//			wf_set_panel_visible("PAN_ACC_DOC", False)
+			OpenSheetWithParm(w_fa_co_ped_pasa_prof,ls_tag, parent, 0, Layered!)
+			IF IsValid(w_fa_co_ped_pasa_prof) THEN
+					w_fa_co_ped_pasa_prof.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF			
         parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_PED_ZIZHAKET"
-				wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-			  OpenSheet(w_fa_man_pasar_facturas, parent, 0, Layered!)
+//				wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+			  OpenSheetWithParm(w_fa_man_pasar_facturas,ls_tag, parent, 0, Layered!)
+			IF IsValid(w_fa_man_pasar_facturas) THEN
+					w_fa_man_pasar_facturas.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			END IF			  
 	        parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_PASE_FACT_ZIZHAKET"
-		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-			  	OpenSheet(w_fa_man_pasar_facturas_a_empresa, parent, 0, Layered!)
+//		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+			  	OpenSheetWithParm(w_fa_man_pasar_facturas_a_empresa,ls_tag, parent, 0, Layered!)
+				IF IsValid(w_fa_man_pasar_facturas_a_empresa) THEN
+					w_fa_man_pasar_facturas_a_empresa.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+				END IF	
 	        	parent.Post Event ue_evaluar_panel_acciones()
 
     // --- ESPECIALES ---  
     Case "BTN_ESP_REST_PASE_PROF"			
-		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-				OpenSheet(w_fa_man_restaurar_pase_prof, parent, 0, Layered!)
+//		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheetWithParm(w_fa_man_restaurar_pase_prof,ls_tag, parent, 0, Layered!)
+				IF IsValid(w_fa_man_restaurar_pase_prof) THEN
+					w_fa_man_restaurar_pase_prof.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+				END IF					
 	        	parent.Post Event ue_evaluar_panel_acciones()
     Case "BTN_ESP_REST_PASE_PED"
-				wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-				OpenSheet(w_fa_man_restaurar_pase, parent, 0, Layered!)
+//				wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheetWithParm(w_fa_man_restaurar_pase,ls_tag,  parent, 0, Layered!)
+				IF IsValid(w_fa_man_restaurar_pase) THEN
+					w_fa_man_restaurar_pase.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+				END IF				
 	        	parent.Post Event ue_evaluar_panel_acciones()
     Case "BTN_ESP_PED_A_PASADO"		 
-		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-				OpenSheet(w_fa_man_cambiar_a_pasado, parent, 0, Original!)
+//		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheetWithParm(w_fa_man_cambiar_a_pasado,ls_tag,parent, 0, Original!)
+				IF IsValid(w_fa_man_cambiar_a_pasado) THEN
+					w_fa_man_cambiar_a_pasado.Tag = ls_tag
+					gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+				END IF				
 	        	parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_ESP_ACTIVAR_FACT"
-				wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
+//				wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
 				If wf_habilitar_factura() Then
-					wf_set_panel_visible("PAN_ACC_EDICION", False)
-					wf_set_panel_visible("PAN_ACC_DOC", False)
-					OpenSheet(w_fa_habilitar_factura, parent, 0, Original!)
+//					wf_set_panel_visible("PAN_ACC_EDICION", False)
+//					wf_set_panel_visible("PAN_ACC_DOC", False)
+					OpenSheetWithParm(w_fa_habilitar_factura,ls_tag, parent, 0, Original!)
+					IF IsValid(w_fa_habilitar_factura) THEN
+						w_fa_habilitar_factura.Tag = ls_tag
+						gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			 		END IF					
 	        		parent.Post Event ue_evaluar_panel_acciones()
 				Else
 					Return
 				End If
     Case "BTN_ESP_CAMBIAR_NUM_FACT" 
-		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
+//		 		wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
 				OpenSheet(w_fa_cambio_num_factura, parent, 0, Original!)
+				IF IsValid(w_fa_cambio_num_factura) THEN
+						w_fa_cambio_num_factura.Tag = ls_tag
+						gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			 	END IF				
 	        	parent.Post Event ue_evaluar_panel_acciones()
     Case "BTN_ESP_ACT_PESO_CUBIC" 
-				wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-				OpenSheet(w_fa_man_recalcula_factura, parent, 0, Original!)
+//				wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheetWithParm(w_fa_man_recalcula_factura,ls_tag, parent, 0, Original!)
+				IF IsValid(w_fa_man_recalcula_factura) THEN
+						w_fa_man_recalcula_factura.Tag = ls_tag
+						gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			 	END IF					
 	        	parent.Post Event ue_evaluar_panel_acciones()
     Case "BTN_ESP_ACT_PESO_CUBIC_PED" 
-				wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-				OpenSheet(w_fa_man_recalcula_pedido, parent, 0, Original!)
+//				wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheetWithParm(w_fa_man_recalcula_pedido,ls_tag, parent, 0, Original!)
+				IF IsValid(w_fa_man_recalcula_pedido) THEN
+						w_fa_man_recalcula_pedido.Tag = ls_tag
+						gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			 	END IF					
 	        	parent.Post Event ue_evaluar_panel_acciones()
 
     Case "BTN_ESP_REST_LISTA_EMP" 
-				wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-				OpenSheet(w_fa_man_restaurar_lista_empaque, parent, 0, Original!)
+//				wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheetWithParm(w_fa_man_restaurar_lista_empaque,ls_tag, parent, 0, Original!)
+				IF IsValid(w_fa_man_restaurar_lista_empaque) THEN
+						w_fa_man_restaurar_lista_empaque.Tag = ls_tag
+						gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			 	END IF					
 	        	parent.Post Event ue_evaluar_panel_acciones()
     Case "BTN_ESP_CAMBIAR_RES_PED_FUT"		 
-				wf_set_panel_visible("PAN_ACC_EDICION", False)
-				wf_set_panel_visible("PAN_ACC_DOC", False)
-				OpenSheet(w_fa_man_cambiar_de_oc_a_existencias, parent, 0, Original!)
+//				wf_set_panel_visible("PAN_ACC_EDICION", False)
+//				wf_set_panel_visible("PAN_ACC_DOC", False)
+				OpenSheetWithParm(w_fa_man_cambiar_de_oc_a_existencias,ls_tag, parent, 0, Original!)
+				IF IsValid(w_fa_man_cambiar_de_oc_a_existencias) THEN
+						w_fa_man_cambiar_de_oc_a_existencias.Tag = ls_tag
+						gnv_seg.of_aplicar_acciones_ventana(This, ls_tag)
+			 	END IF					
 	        	parent.Post Event ue_evaluar_panel_acciones()
 End Choose
 end event

@@ -829,6 +829,10 @@ end if
 end event
 
 event open;///***************************/
+IF Trim(Message.StringParm) <> "" THEN
+	This.Tag = Trim(Message.StringParm)
+END IF
+
 gf_center_win(This)
 dw = dw_1
 dw.settransobject(sqlca)
@@ -848,6 +852,25 @@ OpenWithParm(w_dw_print_options, dw)
 If Message.DoubleParm = -1 Then Return
 dw.Print(True)
 
+end event
+
+event activate;call super::activate;gnv_seg.of_aplicar_acciones_ventana(w_hs_frame.rbb_1, this.tag)
+end event
+
+event closequery;call super::closequery;constant int SW_HIDE = 0
+ShowWindow(Handle(this), SW_HIDE)
+
+This.SetRedraw(false)
+end event
+
+event close;Window lw_frame
+
+setredraw(false)
+lw_frame = ParentWindow()
+If IsValid(lw_frame) Then
+   lw_frame.PostEvent("ue_evaluar_panel_acciones")
+ End If
+if isvalid(this) then close(this)
 end event
 
 type st_nom_ventana from w_fa_padre_reportes`st_nom_ventana within w_fa_man_pasar_facturas
@@ -893,6 +916,10 @@ end event
 
 event dw_1::clicked;call super::clicked;//str_pedi.cliente = dwc_cliente.GetItemNumber(dwc_cliente.GetRow(),"terc_tercero")
 //dw_4.Retrieve(str.g_financiero, str.empresa,str_pedi.cliente) 
+
+end event
+
+event dw_1::ue_microayuda;//Override
 
 end event
 
